@@ -18252,6 +18252,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.items.whistle_triple_t.name': '트리플 T의 호루라기',
   'entities.items.whistle_trollface.name': '트롤페이스의 호루라기',
   'entities.items.whistle_tuskhorn_boar.name': '엄니뿔 멧돼지의 호루라기',
+  'hudChrome.buddyMenu.rename': '버디 이름 변경',
+  'hudChrome.buddyMenu.nameLabel': '버디 이름',
   'hudChrome.buddyMenu.autolootEnable': '자동 전리품 켜기',
   'hudChrome.buddyMenu.autolootDisable': '자동 전리품 끄기',
   'hudChrome.buddyMenu.autolootHint':
@@ -19071,6 +19073,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.tabMounts': '탈것',
   'hudChrome.cosmetics.tabSkins': '스킨',
   'hudChrome.cosmetics.tabMech': '메카',
+  'hudChrome.cosmetics.buddyActive': '소환됨',
+  'hudChrome.cosmetics.buddyDrag': '행동 단축바로 끌기',
   'hudChrome.cosmetics.legend': '계정: 모든 캐릭터가 공유. 캐릭터: 이 캐릭터만.',
   'hudChrome.cosmetics.scopeAccount': '계정',
   'hudChrome.cosmetics.scopeCharacter': '캐릭터',

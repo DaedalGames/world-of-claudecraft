@@ -18296,6 +18296,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.items.whistle_triple_t.name': 'トリプルTの笛',
   'entities.items.whistle_trollface.name': 'トロールフェイスの笛',
   'entities.items.whistle_tuskhorn_boar.name': 'タスクホーン・ボアの笛',
+  'hudChrome.buddyMenu.rename': 'バディの名前を変更',
+  'hudChrome.buddyMenu.nameLabel': 'バディの名前',
   'hudChrome.buddyMenu.autolootEnable': '自動収集を有効化',
   'hudChrome.buddyMenu.autolootDisable': '自動収集を無効化',
   'hudChrome.buddyMenu.autolootHint':
@@ -19109,6 +19111,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.tabMounts': 'マウント',
   'hudChrome.cosmetics.tabSkins': 'スキン',
   'hudChrome.cosmetics.tabMech': 'メカ',
+  'hudChrome.cosmetics.buddyActive': '呼び出し中',
+  'hudChrome.cosmetics.buddyDrag': 'アクションバーへドラッグ',
   'hudChrome.cosmetics.legend':
     'アカウント：全キャラクターで共有。キャラクター：このキャラクターのみ。',
   'hudChrome.cosmetics.scopeAccount': 'アカウント',

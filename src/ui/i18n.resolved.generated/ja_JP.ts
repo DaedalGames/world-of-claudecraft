@@ -3586,8 +3586,8 @@ export const ja_JP: EnTranslations = {
       "streamerBadgeTitle": "認証済み配信者"
     },
     "buddyMenu": {
-      "rename": "Rename Buddy",
-      "nameLabel": "Buddy name",
+      "rename": "バディの名前を変更",
+      "nameLabel": "バディの名前",
       "autolootEnable": "自動収集を有効化",
       "autolootDisable": "自動収集を無効化",
       "autolootHint": "バディが30ヤード以内にあるあなた自身の死体から戦利品を回収します。",
@@ -6207,8 +6207,8 @@ export const ja_JP: EnTranslations = {
       "tabMounts": "マウント",
       "tabSkins": "スキン",
       "tabMech": "メカ",
-      "buddyActive": "Summoned",
-      "buddyDrag": "Drag to action bar",
+      "buddyActive": "呼び出し中",
+      "buddyDrag": "アクションバーへドラッグ",
       "legend": "アカウント：全キャラクターで共有。キャラクター：このキャラクターのみ。",
       "scopeAccount": "アカウント",
       "scopeCharacter": "キャラクター",

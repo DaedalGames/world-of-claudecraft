@@ -3586,8 +3586,8 @@ export const zh_CN: EnTranslations = {
       "streamerBadgeTitle": "认证主播"
     },
     "buddyMenu": {
-      "rename": "Rename Buddy",
-      "nameLabel": "Buddy name",
+      "rename": "重命名伙伴",
+      "nameLabel": "伙伴名称",
       "autolootEnable": "开启自动拾取",
       "autolootDisable": "关闭自动拾取",
       "autolootHint": "你的伙伴会去拾取 30 码内属于你自己的尸体上的战利品。",
@@ -6207,8 +6207,8 @@ export const zh_CN: EnTranslations = {
       "tabMounts": "坐骑",
       "tabSkins": "皮肤",
       "tabMech": "机甲",
-      "buddyActive": "Summoned",
-      "buddyDrag": "Drag to action bar",
+      "buddyActive": "已召唤",
+      "buddyDrag": "拖到动作条",
       "legend": "账号：所有角色共享。角色：仅此角色。",
       "scopeAccount": "账号",
       "scopeCharacter": "角色",

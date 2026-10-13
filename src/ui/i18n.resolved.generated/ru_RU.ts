@@ -3586,8 +3586,8 @@ export const ru_RU: EnTranslations = {
       "streamerBadgeTitle": "Проверенный стример"
     },
     "buddyMenu": {
-      "rename": "Rename Buddy",
-      "nameLabel": "Buddy name",
+      "rename": "Переименовать спутника",
+      "nameLabel": "Имя спутника",
       "autolootEnable": "Включить автосбор",
       "autolootDisable": "Выключить автосбор",
       "autolootHint": "Спутник соберёт добычу с ваших собственных трупов в радиусе 30 ярдов.",
@@ -6207,8 +6207,8 @@ export const ru_RU: EnTranslations = {
       "tabMounts": "Ездовые животные",
       "tabSkins": "Облики",
       "tabMech": "Мех",
-      "buddyActive": "Summoned",
-      "buddyDrag": "Drag to action bar",
+      "buddyActive": "Призван",
+      "buddyDrag": "Перетащите на панель действий",
       "legend": "Аккаунт: общее для всех персонажей. Персонаж: только этот персонаж.",
       "scopeAccount": "Аккаунт",
       "scopeCharacter": "Персонаж",

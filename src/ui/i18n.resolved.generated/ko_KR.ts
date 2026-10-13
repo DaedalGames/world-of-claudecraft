@@ -3586,8 +3586,8 @@ export const ko_KR: EnTranslations = {
       "streamerBadgeTitle": "인증된 스트리머"
     },
     "buddyMenu": {
-      "rename": "Rename Buddy",
-      "nameLabel": "Buddy name",
+      "rename": "버디 이름 변경",
+      "nameLabel": "버디 이름",
       "autolootEnable": "자동 전리품 켜기",
       "autolootDisable": "자동 전리품 끄기",
       "autolootHint": "버디가 30야드 이내에 있는 당신 소유의 시체에서 전리품을 가져옵니다.",
@@ -6207,8 +6207,8 @@ export const ko_KR: EnTranslations = {
       "tabMounts": "탈것",
       "tabSkins": "스킨",
       "tabMech": "메카",
-      "buddyActive": "Summoned",
-      "buddyDrag": "Drag to action bar",
+      "buddyActive": "소환됨",
+      "buddyDrag": "행동 단축바로 끌기",
       "legend": "계정: 모든 캐릭터가 공유. 캐릭터: 이 캐릭터만.",
       "scopeAccount": "계정",
       "scopeCharacter": "캐릭터",

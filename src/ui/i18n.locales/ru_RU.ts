@@ -18607,6 +18607,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.items.whistle_triple_t.name': 'Свисток: Тройное Т',
   'entities.items.whistle_trollface.name': 'Свисток: Тролльфейс',
   'entities.items.whistle_tuskhorn_boar.name': 'Свисток: Клыкорогий вепрь',
+  'hudChrome.buddyMenu.rename': 'Переименовать спутника',
+  'hudChrome.buddyMenu.nameLabel': 'Имя спутника',
   'hudChrome.buddyMenu.autolootEnable': 'Включить автосбор',
   'hudChrome.buddyMenu.autolootDisable': 'Выключить автосбор',
   'hudChrome.buddyMenu.autolootHint':
@@ -19429,6 +19431,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.tabMounts': 'Ездовые животные',
   'hudChrome.cosmetics.tabSkins': 'Облики',
   'hudChrome.cosmetics.tabMech': 'Мех',
+  'hudChrome.cosmetics.buddyActive': 'Призван',
+  'hudChrome.cosmetics.buddyDrag': 'Перетащите на панель действий',
   'hudChrome.cosmetics.legend':
     'Аккаунт: общее для всех персонажей. Персонаж: только этот персонаж.',
   'hudChrome.cosmetics.scopeAccount': 'Аккаунт',
