@@ -52,19 +52,22 @@ function run(binary, args, options = {}) {
 // Async twin of run(..., { capture: true }) for callers that inspect many files
 // at once: process creation dominates a short probe (about 25 ms per spawn on
 // Windows), so serial spawnSync calls, not the analysis, set the wall clock.
+// A tool that exits nonzero fails with the same message as run(); a binary that
+// cannot start (ENOENT, EACCES) has no stderr, so both report Node's own launch
+// error, which names spawn here and spawnSync there.
 function runCaptureAsync(binary, args) {
   return new Promise((resolve, reject) => {
-    execFile(
+    const child = execFile(
       binary,
       args,
       { encoding: 'utf8', maxBuffer: MAX_TOOL_OUTPUT },
       (error, stdout, stderr) => {
         if (!error) return resolve(stdout);
-        // A spawn failure (ENOENT, EACCES) has no stderr; mirror execFileSync,
-        // whose thrown error then carries only its message.
         reject(toolError(binary, typeof error.code === 'string' ? error.message : stderr));
       },
     );
+    // run() gives the tool no stdin; close it so nothing can wait on input.
+    child.stdin?.end();
   });
 }
 
@@ -122,11 +125,13 @@ function captureFfmpegReportAsync(file, filter, ffmpegPath) {
       stdio: ['ignore', 'ignore', 'pipe'],
     });
     let stderr = '';
+    let stderrBytes = 0;
     let overflow = null;
     child.stderr.setEncoding('utf8');
     child.stderr.on('data', (chunk) => {
       stderr += chunk;
-      if (!overflow && stderr.length > MAX_TOOL_OUTPUT) {
+      stderrBytes += Buffer.byteLength(chunk);
+      if (!overflow && stderrBytes > MAX_TOOL_OUTPUT) {
         overflow = new Error(`${basename(ffmpegPath)} stderr maxBuffer length exceeded`);
         child.kill();
       }

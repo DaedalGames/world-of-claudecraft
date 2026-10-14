@@ -440,11 +440,15 @@ export async function analyzeLoopContinuity(path, channels) {
   };
 }
 
-function publishedInventory(repoRoot) {
+function publishedSfxRoot(repoRoot) {
   const repo = realpathSync(repoRoot);
   const publicRoot = existingPlainDirectory(join(repo, 'public'), repo);
   const audioRoot = existingPlainDirectory(join(publicRoot, 'audio'), publicRoot);
-  const sfxRoot = existingPlainDirectory(join(audioRoot, 'sfx'), audioRoot);
+  return existingPlainDirectory(join(audioRoot, 'sfx'), audioRoot);
+}
+
+function publishedInventory(repoRoot) {
+  const sfxRoot = publishedSfxRoot(repoRoot);
   return { sfxRoot, discovered: discoverSfxTracks([...CATALOG.values()], sfxRoot) };
 }
 
@@ -463,11 +467,19 @@ function publicPath(key, repoRoot = REPO_ROOT) {
 }
 
 /** publishedPath for many keys at once: discovery walks the whole SFX
- *  directory, so a catalog build resolves the inventory once instead of once
- *  per key. Every returned path is still containment-checked on its own. */
+ *  directory, so a catalog build takes that inventory once instead of once per
+ *  key. Each call still checks the key, re-verifies the plain public/audio/sfx
+ *  directory chain against the one the inventory was taken from, and
+ *  containment-checks the returned file. */
 export function publishedPathResolver(repoRoot = REPO_ROOT) {
   const inventory = publishedInventory(repoRoot);
-  return (key) => inventoryPath(inventory, assertSfxKey(key));
+  return (key) => {
+    assertSfxKey(key);
+    if (publishedSfxRoot(repoRoot) !== inventory.sfxRoot) {
+      throw new Error('published SFX directory changed during the catalog build');
+    }
+    return inventoryPath(inventory, key);
+  };
 }
 
 function draftPath(key) {
@@ -1969,6 +1981,10 @@ export function publishedUrl(key) {
 }
 
 export function publishedUrlForHash(key, hash) {
+  assertSfxKey(key);
+  if (typeof hash !== 'string' || !/^[a-f0-9]{64}$/.test(hash)) {
+    throw new Error('published audio hash must be a full SHA-256 digest');
+  }
   return `/audio/${key}.mp3?v=${hash.slice(0, 12)}`;
 }
 

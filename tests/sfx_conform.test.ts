@@ -340,6 +340,21 @@ describe('one ebur128 pass and the async inspection', () => {
     }
   });
 
+  it('fails a report pass that exits nonzero with the synchronous error', async () => {
+    // ffprobe stands in for ffmpeg: the file probes fine, then the ebur128
+    // report invocation exits nonzero with real stderr, the async spawn arm.
+    const file = published('ui_click.mp3');
+    const options = { ffmpegPath: ffprobePath, ffprobePath };
+    let expected = '';
+    try {
+      inspectSfxConformance(file, options);
+    } catch (error) {
+      expected = (error as Error).message;
+    }
+    expect(expected.length).toBeGreaterThan(0);
+    await expect(inspectSfxConformanceAsync(file, options)).rejects.toThrow(new Error(expected));
+  });
+
   it('fails an undecodable file with the synchronous error', async () => {
     if (!ffmpegPath) throw new Error('ffmpeg-static is unavailable');
     const directory = mkdtempSync(join(tmpdir(), 'wocc-sfx-async-undecodable-'));

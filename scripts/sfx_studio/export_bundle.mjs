@@ -14,7 +14,7 @@ import {
 } from 'node:fs';
 import { availableParallelism, tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
-import { inspectSfxConformance, inspectSfxConformanceAsync } from '../sfx/conform_audio.mjs';
+import { inspectSfxConformanceAsync } from '../sfx/conform_audio.mjs';
 import { SFX_CONFORMANCE_FFMPEG_PATH, SFX_CONFORMANCE_FFPROBE_PATH } from '../sfx/ffmpeg_paths.mjs';
 import {
   buildSfxManifestData,
@@ -41,8 +41,12 @@ const MAX_CONFORMANCE_CACHE_ENTRIES = 1024;
 const conformanceCache = new Set();
 // Every published track is validated by spawning ffprobe and ffmpeg. Process
 // creation, not the analysis, dominates those short runs (about 25 ms per spawn
-// on Windows), so an export validates tracks concurrently, bounded by the host.
-export const CONFORMANCE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
+// on Windows), so an export validates tracks concurrently. Half the host's cores
+// leaves room for the bounded test workers that run beside it in the gate.
+export const CONFORMANCE_CONCURRENCY = Math.max(
+  1,
+  Math.min(8, Math.floor(availableParallelism() / 2)),
+);
 
 // isCustomMaster only actually depends on the catalog itself (see
 // sfx_conform_inventory.mjs), so a cheap policy built with no discovered
@@ -111,9 +115,9 @@ function assertConformingReport(path, report, preserveLoudness) {
   if (expectedBranch === 'peak' && !Number.isFinite(report.peakDb)) {
     errors.push('peak loudness must be measurable');
   }
-  // A preserveLoudness (custom, hand-mastered) key deliberately skips LUFS
-  // measurement entirely (see inspectSfxConformance): peak safety is the
-  // only thing enforced for it, so a null lufs here is correct, not a defect.
+  // A preserveLoudness (custom, hand-mastered) key is never re-targeted to the
+  // LUFS target (see inspectSfxConformance): peak safety is the only thing
+  // enforced for it, so a missing lufs figure is not a defect.
   if (expectedBranch === 'lufs' && !preserveLoudness && !Number.isFinite(report.lufs)) {
     errors.push('integrated loudness must be measurable');
   }
@@ -125,32 +129,27 @@ function assertConformingReport(path, report, preserveLoudness) {
   }
 }
 
-function rememberConformingTrack(identity) {
+function rememberConformingTrack(verdictKey) {
   if (conformanceCache.size >= MAX_CONFORMANCE_CACHE_ENTRIES) conformanceCache.clear();
-  conformanceCache.add(identity);
+  conformanceCache.add(verdictKey);
 }
 
-function validateProductionTrack(path, identity, bytes) {
-  if (conformanceCache.has(identity)) return;
-  const validationPath = validationFilePath();
+// The verdict depends on the bytes AND on the custom-master policy, which comes
+// from the filename: identical bytes published under a custom and a generic key
+// are two verdicts, never one cached answer.
+function exportTrack({ path, identity, bytes }) {
   const preserveLoudness = customMasterPolicy.isCustomMaster(basename(path));
-  let report;
-  try {
-    writeFileSync(validationPath, bytes, { flag: 'wx', mode: 0o600 });
-    report = inspectSfxConformance(validationPath, conformanceOptions(preserveLoudness));
-  } catch (error) {
-    throw undecodableTrack(path, error);
-  } finally {
-    rmSync(validationPath, { force: true });
-  }
-  assertConformingReport(path, report, preserveLoudness);
-  rememberConformingTrack(identity);
+  return {
+    path,
+    bytes,
+    preserveLoudness,
+    verdictKey: `${identity}:${preserveLoudness ? 'preserve' : 'target'}`,
+  };
 }
 
-async function validateProductionTrackAsync(path, identity, bytes) {
-  if (conformanceCache.has(identity)) return;
+async function validateProductionTrack({ path, bytes, preserveLoudness, verdictKey }) {
+  if (conformanceCache.has(verdictKey)) return;
   const validationPath = validationFilePath();
-  const preserveLoudness = customMasterPolicy.isCustomMaster(basename(path));
   let report;
   try {
     writeFileSync(validationPath, bytes, { flag: 'wx', mode: 0o600 });
@@ -161,13 +160,17 @@ async function validateProductionTrackAsync(path, identity, bytes) {
     rmSync(validationPath, { force: true });
   }
   assertConformingReport(path, report, preserveLoudness);
-  rememberConformingTrack(identity);
+  rememberConformingTrack(verdictKey);
 }
 
 /** Validate tracks concurrently and throw exactly what a serial pass in track
  *  order would: the first failing track's error. Tracks after a known failure
- *  are not started, and a blob shared by several tracks is inspected once. */
+ *  are not started, and a blob shared by several tracks under the same policy
+ *  is inspected once. */
 export async function validateProductionTracks(tracks, concurrency = CONFORMANCE_CONCURRENCY) {
+  if (!Number.isInteger(concurrency) || concurrency < 1) {
+    throw new RangeError(`conformance concurrency must be a positive integer: ${concurrency}`);
+  }
   const inFlight = new Map();
   const failures = new Map();
   let firstFailure = tracks.length;
@@ -176,11 +179,11 @@ export async function validateProductionTracks(tracks, concurrency = CONFORMANCE
     for (;;) {
       const index = cursor++;
       if (index >= tracks.length || index > firstFailure) return;
-      const { path, identity, bytes } = tracks[index];
-      let pending = inFlight.get(identity);
+      const track = exportTrack(tracks[index]);
+      let pending = inFlight.get(track.verdictKey);
       if (!pending) {
-        pending = validateProductionTrackAsync(path, identity, bytes);
-        inFlight.set(identity, pending);
+        pending = validateProductionTrack(track);
+        inFlight.set(track.verdictKey, pending);
       }
       try {
         await pending;
@@ -190,15 +193,15 @@ export async function validateProductionTracks(tracks, concurrency = CONFORMANCE
       }
     }
   }
-  const workers = Math.max(1, Math.min(concurrency, tracks.length));
+  const workers = Math.min(concurrency, Math.max(1, tracks.length));
   await Promise.all(Array.from({ length: workers }, worker));
   if (failures.has(firstFailure)) throw failures.get(firstFailure);
 }
 
-export function assertExportableSfxTrack(path) {
+export async function assertExportableSfxTrack(path) {
   const bytes = readFileSync(path);
   const identity = sha256(bytes);
-  validateProductionTrack(path, identity, bytes);
+  await validateProductionTracks([{ path, identity, bytes }], 1);
   return identity;
 }
 
@@ -449,7 +452,7 @@ function readPublishedTracks(repoRoot, entries) {
   return { tracks, failure: null };
 }
 
-async function uniqueBlobEntries(repoRoot, entries) {
+export async function uniqueBlobEntries(repoRoot, entries) {
   // Read every track first, then validate them concurrently. A serial pass
   // validated each track straight after reading it, so a read failure only
   // surfaces when every earlier track conformed: validate the tracks read

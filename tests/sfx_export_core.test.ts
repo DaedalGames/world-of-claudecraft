@@ -21,8 +21,12 @@ import * as exportBundleModule from '../scripts/sfx_studio/export_bundle.mjs';
 import { buildDeterministicZip } from '../scripts/sfx_studio/zip.mjs';
 import { SFX_CLIPS } from '../src/game/sfx_manifest.generated';
 
-const { assertExportableSfxTrack, buildSfxProductionBundle, validateProductionTracks } =
-  exportBundleModule;
+const {
+  assertExportableSfxTrack,
+  buildSfxProductionBundle,
+  uniqueBlobEntries,
+  validateProductionTracks,
+} = exportBundleModule;
 
 const ROOT = process.cwd();
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -98,7 +102,7 @@ async function settleAll(runs: Promise<unknown>[]): Promise<void> {
 
 describe('SFX production bundle', () => {
   it('requires every exported blob to decode and pass the fixed production spec', async () => {
-    expect(assertExportableSfxTrack(join(ROOT, 'public/audio/sfx/ui_click.mp3'))).toMatch(
+    expect(await assertExportableSfxTrack(join(ROOT, 'public/audio/sfx/ui_click.mp3'))).toMatch(
       /^[a-f0-9]{64}$/,
     );
 
@@ -107,7 +111,7 @@ describe('SFX production bundle', () => {
     try {
       const malformed = join(fixture, 'malformed.mp3');
       writeFileSync(malformed, 'not audio');
-      expect(() => assertExportableSfxTrack(malformed)).toThrow(
+      await expect(assertExportableSfxTrack(malformed)).rejects.toThrow(
         'published SFX is not decodable: malformed.mp3',
       );
 
@@ -128,7 +132,7 @@ describe('SFX production bundle', () => {
         '128k',
         unconformed,
       ]);
-      expect(() => assertExportableSfxTrack(unconformed)).toThrow(
+      await expect(assertExportableSfxTrack(unconformed)).rejects.toThrow(
         'published SFX is not production-conforming: unconformed.mp3',
       );
 
@@ -149,7 +153,7 @@ describe('SFX production bundle', () => {
         'wav',
         wrongCodec,
       ]);
-      expect(() => assertExportableSfxTrack(wrongCodec)).toThrow('codec must be MP3');
+      await expect(assertExportableSfxTrack(wrongCodec)).rejects.toThrow('codec must be MP3');
 
       const repository = join(fixture, 'repository');
       const audioDirectory = join(repository, 'public/audio/sfx');
@@ -241,13 +245,68 @@ describe('SFX production bundle', () => {
       await expect(validateProductionTracks([tracks[0], tracks[2]], 2)).rejects.toThrow(
         'published SFX is not decodable: fast_failure.mp3',
       );
-      await expect(validateProductionTracks([tracks[0], tracks[0]], 2)).resolves.toBeUndefined();
+      // One failing blob at two positions shares a verdict; the error names the
+      // earlier of the two tracks.
+      const garbage = Buffer.from('shared garbage take');
+      await expect(
+        validateProductionTracks(
+          [
+            tracks[0],
+            track(join(fixture, 'first_copy.mp3'), garbage),
+            track(join(fixture, 'second_copy.mp3'), garbage),
+          ],
+          3,
+        ),
+      ).rejects.toThrow('published SFX is not decodable: first_copy.mp3');
+      await expect(validateProductionTracks(tracks, 0)).rejects.toThrow(RangeError);
+      await expect(validateProductionTracks(tracks, Number.NaN)).rejects.toThrow(RangeError);
     } finally {
       rmSync(fixture, { recursive: true, force: true });
     }
   });
 
-  it('measures the production-conformance verdict with the shared SFX conformance toolchain', () => {
+  it('reports a read failure only after every earlier track validated', async () => {
+    if (!ffmpegPath) throw new Error('ffmpeg-static is unavailable');
+    const repository = mkdtempSync(join(tmpdir(), 'woc-sfx-export-read-order-'));
+    try {
+      const audioDirectory = join(repository, 'public/audio/sfx');
+      mkdirSync(audioDirectory, { recursive: true });
+      const conforming = readFileSync(join(ROOT, 'public/audio/sfx/ui_click.mp3'));
+      writeFileSync(join(audioDirectory, 'conforming.mp3'), conforming);
+      writeFileSync(join(audioDirectory, 'garbage.mp3'), 'not audio');
+      writeFileSync(join(audioDirectory, 'changed.mp3'), conforming);
+      const variant = (filename: string, bytes: Buffer, sha256 = hash(bytes)) => ({
+        url: `/audio/sfx/${filename}?v=${sha256.slice(0, 12)}`,
+        bytes: bytes.length,
+        sha256,
+      });
+      // changed.mp3 is listed under a digest its bytes do not have: the read
+      // pass fails on it as a file that changed while exporting.
+      const changed = variant('changed.mp3', conforming, 'f'.repeat(64));
+      const entries = (...variants: ReturnType<typeof variant>[]) => ({
+        cue: { variants },
+      });
+      const garbage = variant('garbage.mp3', Buffer.from('not audio'));
+      const good = variant('conforming.mp3', conforming);
+
+      // A nonconforming track before the read failure wins, as in a serial pass.
+      await expect(uniqueBlobEntries(repository, entries(good, garbage, changed))).rejects.toThrow(
+        'published SFX is not decodable: garbage.mp3',
+      );
+      // With every earlier track conforming, the read failure itself surfaces.
+      await expect(uniqueBlobEntries(repository, entries(good, changed, garbage))).rejects.toThrow(
+        'published SFX changed while exporting: changed.mp3',
+      );
+      const ok = await uniqueBlobEntries(repository, entries(good, good));
+      expect(ok.trackCount).toBe(2);
+      expect(ok.totalAudioBytes).toBe(2 * conforming.length);
+      expect([...ok.blobs.keys()]).toEqual([hash(conforming)]);
+    } finally {
+      rmSync(repository, { recursive: true, force: true });
+    }
+  });
+
+  it('measures the production-conformance verdict with the shared SFX conformance toolchain', async () => {
     // The export validator must resolve the same binaries that gate the checked-in
     // assets (scripts/sfx_conform.mjs / npm run sfx:check), not the PATH ffmpeg
     // the Studio spawns for playback. A newer PATH ffmpeg measures MP3 duration a
@@ -271,9 +330,10 @@ describe('SFX production bundle', () => {
       'mob_troll_hurt',
       'mob_reptile_death_2',
     ]) {
-      expect(assertExportableSfxTrack(join(ROOT, `public/audio/sfx/${clip}.mp3`)), clip).toMatch(
-        /^[a-f0-9]{64}$/,
-      );
+      expect(
+        await assertExportableSfxTrack(join(ROOT, `public/audio/sfx/${clip}.mp3`)),
+        clip,
+      ).toMatch(/^[a-f0-9]{64}$/);
     }
   });
 
@@ -320,6 +380,7 @@ describe('SFX production bundle', () => {
     expect(files.has('SHA256SUMS')).toBe(true);
 
     const installFixture = mkdtempSync(join(tmpdir(), 'woc-sfx-install-'));
+    const runs: Promise<void>[] = [];
     try {
       const artifactRoot = join(installFixture, 'artifact');
       writeArtifact(artifactRoot, files);
@@ -328,7 +389,6 @@ describe('SFX production bundle', () => {
         { name: 'POSIX', command: 'sh', script: join(artifactRoot, 'install.sh') },
         { name: 'Node', command: process.execPath, script: join(artifactRoot, 'install.mjs') },
       ];
-      const runs: Promise<void>[] = [];
       for (const installer of installers) {
         const staticRoot = join(installFixture, `static-${installer.name.toLowerCase()}`);
         runs.push(
@@ -460,6 +520,9 @@ describe('SFX production bundle', () => {
       }
       await settleAll(runs);
     } finally {
+      // A failing setup step can throw while installers still write into the
+      // fixture; let them finish before removing it.
+      await Promise.allSettled(runs);
       rmSync(installFixture, { recursive: true, force: true });
     }
     // Two full bundle builds (the first ffprobe-validating every published track,
