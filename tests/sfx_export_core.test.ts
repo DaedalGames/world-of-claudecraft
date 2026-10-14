@@ -21,7 +21,8 @@ import * as exportBundleModule from '../scripts/sfx_studio/export_bundle.mjs';
 import { buildDeterministicZip } from '../scripts/sfx_studio/zip.mjs';
 import { SFX_CLIPS } from '../src/game/sfx_manifest.generated';
 
-const { assertExportableSfxTrack, buildSfxProductionBundle } = exportBundleModule;
+const { assertExportableSfxTrack, buildSfxProductionBundle, validateProductionTracks } =
+  exportBundleModule;
 
 const ROOT = process.cwd();
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -68,7 +69,7 @@ function snapshotDirectory(root: string, relative = ''): Record<string, string> 
 }
 
 describe('SFX production bundle', () => {
-  it('requires every exported blob to decode and pass the fixed production spec', () => {
+  it('requires every exported blob to decode and pass the fixed production spec', async () => {
     expect(assertExportableSfxTrack(join(ROOT, 'public/audio/sfx/ui_click.mp3'))).toMatch(
       /^[a-f0-9]{64}$/,
     );
@@ -142,7 +143,7 @@ describe('SFX production bundle', () => {
       // never look at.
       const published = join(audioDirectory, 'foot_grass_1.mp3');
       writeFileSync(published, 'not audio');
-      expect(() => buildSfxProductionBundle(repository)).toThrow(
+      await expect(buildSfxProductionBundle(repository)).rejects.toThrow(
         'published SFX is not decodable: foot_grass_1.mp3',
       );
       execFileSync(ffmpegPath, [
@@ -162,13 +163,61 @@ describe('SFX production bundle', () => {
         '128k',
         published,
       ]);
-      expect(() => buildSfxProductionBundle(repository)).toThrow(
+      await expect(buildSfxProductionBundle(repository)).rejects.toThrow(
         'published SFX is not production-conforming: foot_grass_1.mp3',
       );
     } finally {
       rmSync(fixture, { recursive: true, force: true });
     }
   }, 30_000);
+
+  it('reports the first failing track in export order when validating concurrently', async () => {
+    if (!ffmpegPath) throw new Error('ffmpeg-static is unavailable');
+    const fixture = mkdtempSync(join(tmpdir(), 'woc-sfx-export-order-'));
+    try {
+      // The decodable-but-nonconforming take fails only after ffprobe AND the
+      // ebur128 pass; the garbage take fails at ffprobe. Run side by side, the
+      // later track finishes failing first, and a serial pass would still have
+      // reported the earlier one.
+      const slowFailure = join(fixture, 'slow_failure.mp3');
+      execFileSync(ffmpegPath, [
+        '-hide_banner',
+        '-loglevel',
+        'error',
+        '-y',
+        '-f',
+        'lavfi',
+        '-i',
+        'sine=frequency=440:sample_rate=48000:duration=3',
+        '-ac',
+        '1',
+        '-codec:a',
+        'libmp3lame',
+        '-b:a',
+        '128k',
+        slowFailure,
+      ]);
+      const track = (path: string, bytes: Buffer) => ({ path, identity: hash(bytes), bytes });
+      const conforming = readFileSync(join(ROOT, 'public/audio/sfx/ui_click.mp3'));
+      const tracks = [
+        track(join(ROOT, 'public/audio/sfx/ui_click.mp3'), conforming),
+        track(slowFailure, readFileSync(slowFailure)),
+        track(join(fixture, 'fast_failure.mp3'), Buffer.from('not audio')),
+      ];
+      for (const concurrency of [1, 3]) {
+        await expect(
+          validateProductionTracks(tracks, concurrency),
+          `x${concurrency}`,
+        ).rejects.toThrow('published SFX is not production-conforming: slow_failure.mp3');
+      }
+      await expect(validateProductionTracks([tracks[0], tracks[2]], 2)).rejects.toThrow(
+        'published SFX is not decodable: fast_failure.mp3',
+      );
+      await expect(validateProductionTracks([tracks[0], tracks[0]], 2)).resolves.toBeUndefined();
+    } finally {
+      rmSync(fixture, { recursive: true, force: true });
+    }
+  });
 
   it('measures the production-conformance verdict with the shared SFX conformance toolchain', () => {
     // The export validator must resolve the same binaries that gate the checked-in
@@ -200,9 +249,9 @@ describe('SFX production bundle', () => {
     }
   });
 
-  it('is byte deterministic and includes the exact published runtime state', () => {
-    const first = buildSfxProductionBundle(ROOT);
-    const second = buildSfxProductionBundle(ROOT);
+  it('is byte deterministic and includes the exact published runtime state', async () => {
+    const first = await buildSfxProductionBundle(ROOT);
+    const second = await buildSfxProductionBundle(ROOT);
     expect(first.sha256).toBe(second.sha256);
     expect(first.zip.equals(second.zip)).toBe(true);
     expect(first.metadata.keyCount).toBe(Object.keys(SFX_CLIPS).length);
@@ -378,7 +427,7 @@ describe('SFX production bundle', () => {
     // re-flaking on a busy runner.
   }, 180_000);
 
-  it('exports numbered takes in exact round-robin order with runtime mix values', () => {
+  it('exports numbered takes in exact round-robin order with runtime mix values', async () => {
     const fixture = mkdtempSync(join(tmpdir(), 'woc-sfx-export-round-robin-'));
     try {
       const audioDirectory = join(fixture, 'public/audio/sfx');
@@ -400,7 +449,7 @@ describe('SFX production bundle', () => {
       // to synthesize a 2-take scenario from); the loop above already copied
       // every real variant, so this demonstrates round-robin ordering on
       // real, not synthetic, multi-take data.
-      const bundle = buildSfxProductionBundle(fixture);
+      const bundle = await buildSfxProductionBundle(fixture);
       expect(
         bundle.runtimePack.clips.foot_grass.variants.map(({ id }: { id: string }) => id),
       ).toEqual(SFX_CLIPS.foot_grass.variants.map(({ id }) => id));
@@ -419,7 +468,7 @@ describe('SFX production bundle', () => {
         join(audioDirectory, 'foot_grass_3.mp3'),
       );
       rmSync(join(audioDirectory, 'foot_grass_2.mp3'));
-      expect(() => buildSfxProductionBundle(fixture)).toThrow(
+      await expect(buildSfxProductionBundle(fixture)).rejects.toThrow(
         'noncontiguous SFX variants for foot_grass',
       );
     } finally {

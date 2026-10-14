@@ -1593,7 +1593,7 @@ export async function exportProductionBundle(expectedProfileHash, expectedWorksp
       runtimePack: _runtimePack,
       metadata,
       ...bundle
-    } = writeSfxProductionBundle(REPO_ROOT, exportRoot);
+    } = await writeSfxProductionBundle(REPO_ROOT, exportRoot);
     return { ...bundle, ...metadata };
   });
 }
