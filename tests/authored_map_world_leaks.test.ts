@@ -27,13 +27,21 @@
 
 import { describe, expect, it } from 'vitest';
 import { customMapToWorldContent, newFlatCustomMap } from '../src/editor/custom_map';
+import type { Collider } from '../src/sim/colliders';
 import {
   activeGatherNodes,
   BUILTIN_WORLD,
+  DUNGEONS,
   GATHER_NODES,
   setActiveWorldContent,
 } from '../src/sim/data';
 import { buildDeepglassWorld } from '../src/sim/deepglass/world';
+import { DROWNED_TEMPLE_ENTRANCE_DUNGEON_ID } from '../src/sim/drowned_temple_entrance';
+import { dungeonDoorJambColliders } from '../src/sim/dungeon_door_jambs';
+import { HOLLOW_CRYPT_ENTRANCE_DUNGEON_ID } from '../src/sim/hollow_crypt_entrance';
+import { DOOR_ARCH_JAMB_HD, DOOR_ARCH_JAMB_HW } from '../src/sim/prop_layout';
+import { SUNKEN_BASTION_ENTRANCE_DUNGEON_ID } from '../src/sim/sunken_bastion_entrance';
+import { WILDHEART_BASIN_ENTRANCE_DUNGEON_ID } from '../src/sim/wildheart_basin_entrance';
 import { groundHeight, terrainHeight } from '../src/sim/world';
 
 describe("authored maps: the shipped world's gather veins do not appear", () => {
@@ -100,5 +108,50 @@ describe("authored maps: the shipped world's level pads and walk lifts do not ap
     expect(terrainHeight(PAD.x, PAD.z, seed)).toBeCloseTo(beside - 6, 6);
     // No invisible wall walk either: the feet stand on the drawn ground.
     expect(groundHeight(WALL.x, WALL.z, seed)).toBe(terrainHeight(WALL.x, WALL.z, seed));
+  });
+});
+
+describe('authored maps: the four built dungeon entrances keep to the shipped world', () => {
+  // The Drowned Gate Tower, the Fallen Chapel, the Moon Stair and the Jaguar
+  // Maw stand at their dungeons' fixed overworld doors. On the Deepglass the
+  // Drowned Gate Tower's curtain wall came up as an invisible full-height wall
+  // across Castle B's east wall-walk flight (tests/tidehold_castle_b_flights).
+  // An authored map keeps the plain door jambs it always had, and the renderer
+  // builds none of the four (render/static_world_features.ts).
+  const BUILT = [
+    SUNKEN_BASTION_ENTRANCE_DUNGEON_ID,
+    HOLLOW_CRYPT_ENTRANCE_DUNGEON_ID,
+    DROWNED_TEMPLE_ENTRANCE_DUNGEON_ID,
+    WILDHEART_BASIN_ENTRANCE_DUNGEON_ID,
+  ];
+  const flatTop = (_seed: number, _x: number, _z: number, h: number): number => h;
+  const isPlainJamb = (c: Collider): boolean =>
+    c.type === 'obb' && c.hw === DOOR_ARCH_JAMB_HW && c.hd === DOOR_ARCH_JAMB_HD && c.rot === 0;
+  const near = (cs: Collider[], d: { x: number; z: number }): Collider[] =>
+    cs.filter((c) => Math.hypot(c.x - d.x, c.z - d.z) < 40);
+
+  it('collides with each set piece on the shipped world', () => {
+    setActiveWorldContent(BUILTIN_WORLD);
+    const cs = dungeonDoorJambColliders(1, flatTop);
+    for (const id of BUILT) {
+      expect(
+        near(cs, DUNGEONS[id].doorPos).some((c) => !isPlainJamb(c)),
+        id,
+      ).toBe(true);
+    }
+  });
+
+  it('keeps only the plain jambs at those doors in the Deepglass', () => {
+    setActiveWorldContent(buildDeepglassWorld());
+    const cs = dungeonDoorJambColliders(1, flatTop);
+    for (const id of BUILT) {
+      const around = near(cs, DUNGEONS[id].doorPos);
+      expect(around.length, id).toBeGreaterThan(0);
+      expect(
+        around.filter((c) => !isPlainJamb(c)),
+        id,
+      ).toEqual([]);
+    }
+    setActiveWorldContent(BUILTIN_WORLD);
   });
 });

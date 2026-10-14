@@ -6388,7 +6388,18 @@ export interface ZonePropsDef {
   crates: [number, number, number?][];
   campfires: [number, number][];
   mudHuts: [number, number][];
-  ruinRings: { x: number; z: number; ringR: number; columns: number }[];
+  /** `omit` drops columns by index (prop_layout.ts ruinRingColumns); a `bare`
+   *  ring, or one with `columns: 0`, draws and collides nothing (a set piece
+   *  dresses its site) and stays in the table only for its terrain pad and
+   *  clearings. */
+  ruinRings: {
+    x: number;
+    z: number;
+    ringR: number;
+    columns: number;
+    omit?: readonly number[];
+    bare?: boolean;
+  }[];
   // kind 'stone': the low scalloped KayKit stone wall (garden/path walls);
   // kind 'palisade': the spiked KayKit log wall (raider camps); both keep
   // the wood rail's run geometry and the same jumpable OBB
@@ -12277,6 +12288,12 @@ export interface PromotedScenery {
    *  the town views' building loops and the record colliders stand down;
    *  wells, stalls, fences, streets and the harbor stay town-drawn. */
   authoredTowns?: boolean;
+  /** The Eastbrook Weekly Vault (render/eastbrook_weekly_vault.ts draws it
+   *  from EASTBROOK_LAYOUT.weeklyVault, and its record collider rides the
+   *  same flag). Its own family, not part of authoredTowns: a document
+   *  promoted before the vault had a placeable model keeps the town-drawn
+   *  hall until this family promotes too. */
+  eastbrookVault?: boolean;
 }
 
 /** The resolved storage price tables every sim price read consumes: bank slot

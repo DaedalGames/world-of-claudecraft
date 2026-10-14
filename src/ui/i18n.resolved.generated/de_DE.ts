@@ -79,6 +79,13 @@ export const de_DE: EnTranslations = {
     "friendTier": "Friends helped: {count}",
     "awarded": "Awarded",
     "pending": "Not yet awarded",
+    "celebration": {
+      "earned": "Adventure rewarded",
+      "title": "Reward claimed!",
+      "titleReward": "Title unlocked: {title}",
+      "together": "Earned together with {friend}.",
+      "continue": "Keep adventuring"
+    },
     "milestones": {
       "tutorial": "Tutorial Island final quest",
       "hollow": "Into the Hollow",
@@ -2459,6 +2466,8 @@ export const de_DE: EnTranslations = {
       "groundReticle": "Bodenziel-Fadenkreuz",
       "mouseoverCast": "Mouseover-Wirken auf Gruppenfenstern",
       "stickyTarget": "Ziel bei Bodenklick behalten",
+      "showDungeonHints": "Dungeon mechanic hints",
+      "showDungeonHintsNote": "Shows the tip panel that explains a dungeon mechanic and what to do about it. Turning this off hides only those tips: ground warnings, cast bars and debuffs stay. Prompts you act on always show: a cage to break out of, a chain to break, an object to use.",
       "showItemLevel": "Gegenstandsstufe anzeigen",
       "showReliquaryTracker": "Reliquiar-Tracker anzeigen",
       "confirmVendorSell": "Vor dem Verkauf bestätigen",
@@ -22854,10 +22863,10 @@ export const de_DE: EnTranslations = {
         "name": "Friendship Satchel"
       },
       "referral_hollow_charm": {
-        "name": "Hollow Friendship Charm"
+        "name": "Oathkeeper's Heart"
       },
       "referral_fog_charm": {
-        "name": "Fogbound Friendship Charm"
+        "name": "Awakened Oathkeeper's Heart"
       },
       "reins_referral_tank": {
         "name": "Friendship Tank Reins"

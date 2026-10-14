@@ -79,6 +79,13 @@ export const en_XA: EnTranslations = {
     "friendTier": "[Ƒŕíéñðš ĥéļþéð: {count}]",
     "awarded": "[Áŵáŕðéð]",
     "pending": "[Ñóţ ýéţ áŵáŕðéð]",
+    "celebration": {
+      "earned": "[Áðʋéñţúŕé ŕéŵáŕðéð]",
+      "title": "[Ŕéŵáŕð çļáíɱéð!]",
+      "titleReward": "[Ţíţļé úñļóçķéð: {title}]",
+      "together": "[Éáŕñéð ţóĝéţĥéŕ ŵíţĥ {friend}.]",
+      "continue": "[Ķééþ áðʋéñţúŕíñĝ]"
+    },
     "milestones": {
       "tutorial": "[Ţúţóŕíáļ Íšļáñð ƒíñáļ ɋúéšţ]",
       "hollow": "[Íñţó ţĥé Ĥóļļóŵ]",
@@ -2459,6 +2466,8 @@ export const en_XA: EnTranslations = {
       "groundReticle": "[Ĝŕóúñð-Ţáŕĝéţíñĝ Ŕéţíçļé]",
       "mouseoverCast": "[Ɱóúšéóʋéŕ Çášţ óñ Úñíţ Ƒŕáɱéš]",
       "stickyTarget": "[Ķééþ Ţáŕĝéţ óñ Ĝŕóúñð Çļíçķ]",
+      "showDungeonHints": "[Ðúñĝéóñ ɱéçĥáñíç ĥíñţš]",
+      "showDungeonHintsNote": "[Šĥóŵš ţĥé ţíþ þáñéļ ţĥáţ éẋþļáíñš á ðúñĝéóñ ɱéçĥáñíç áñð ŵĥáţ ţó ðó áƀóúţ íţ. Ţúŕñíñĝ ţĥíš óƒƒ ĥíðéš óñļý ţĥóšé ţíþš: ĝŕóúñð ŵáŕñíñĝš, çášţ ƀáŕš áñð ðéƀúƒƒš šţáý. Þŕóɱþţš ýóú áçţ óñ áļŵáýš šĥóŵ: á çáĝé ţó ƀŕéáķ óúţ óƒ, á çĥáíñ ţó ƀŕéáķ, áñ óƀĵéçţ ţó úšé.]",
       "showItemLevel": "[Šĥóŵ Íţéɱ Ļéʋéļ]",
       "showReliquaryTracker": "[Šĥóŵ Ŕéļíɋúáŕý Ţŕáçķéŕ]",
       "confirmVendorSell": "[Çóñƒíŕɱ Ɓéƒóŕé Šéļļíñĝ]",
@@ -22854,10 +22863,10 @@ export const en_XA: EnTranslations = {
         "name": "[Ƒŕíéñðšĥíþ Šáţçĥéļ]"
       },
       "referral_hollow_charm": {
-        "name": "[Ĥóļļóŵ Ƒŕíéñðšĥíþ Çĥáŕɱ]"
+        "name": "[Óáţĥķééþéŕ'š Ĥéáŕţ]"
       },
       "referral_fog_charm": {
-        "name": "[Ƒóĝƀóúñð Ƒŕíéñðšĥíþ Çĥáŕɱ]"
+        "name": "[Áŵáķéñéð Óáţĥķééþéŕ'š Ĥéáŕţ]"
       },
       "reins_referral_tank": {
         "name": "[Ƒŕíéñðšĥíþ Ţáñķ Ŕéíñš]"

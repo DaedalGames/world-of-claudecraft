@@ -79,6 +79,13 @@ export const zh_TW: EnTranslations = {
     "friendTier": "已幫助好友：{count}",
     "awarded": "已發放",
     "pending": "尚未發放",
+    "celebration": {
+      "earned": "冒險有回報",
+      "title": "獎勵已領取！",
+      "titleReward": "已解鎖頭銜：{title}",
+      "together": "與{friend}共同贏得。",
+      "continue": "繼續冒險"
+    },
     "milestones": {
       "tutorial": "新手島最終任務",
       "hollow": "進入空洞",
@@ -2459,6 +2466,8 @@ export const zh_TW: EnTranslations = {
       "groundReticle": "地面瞄準指示圈",
       "mouseoverCast": "對隊伍框架滑鼠指向施法",
       "stickyTarget": "點擊地面時保留目標",
+      "showDungeonHints": "地城機制提示",
+      "showDungeonHintsNote": "顯示提示面板，說明地城機制以及應對方法。關閉後只隱藏這些提示：地面警示、施法條和減益效果仍會顯示。需要你操作的提示一律顯示：需要掙脫的牢籠、需要打斷的鎖鏈、可以使用的物體。",
       "showItemLevel": "顯示物品等級",
       "showReliquaryTracker": "顯示聖物庫追蹤器",
       "confirmVendorSell": "出售前確認",
@@ -22854,10 +22863,10 @@ export const zh_TW: EnTranslations = {
         "name": "友誼背袋"
       },
       "referral_hollow_charm": {
-        "name": "空洞友誼護符"
+        "name": "守誓者之心"
       },
       "referral_fog_charm": {
-        "name": "縛霧友誼護符"
+        "name": "覺醒的守誓者之心"
       },
       "reins_referral_tank": {
         "name": "友誼坦克韁繩"

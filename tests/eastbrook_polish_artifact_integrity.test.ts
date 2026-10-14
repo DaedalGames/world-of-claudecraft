@@ -1403,7 +1403,11 @@ const ACCEPTED_POLISH_V2_METADATA_SHA256 =
   // Re-minted at the v0.45.0 integration merge of #4479 head f0af7aa5f4
   // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
   // Re-minted for merging #4466 (Gloamveil) and #4470 (dungeon playtest fixes) into the v0.45.0 integration: both moved the renderer leaf. No capture was retaken.
-  'ca333dea723ba5371f65bb8db690b2e236be5fd0d97a84596e64fcf176eaab60';
+  // Re-minted at the v0.45.0 integration merge of #4479 head 670ca2a1e7
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  // Re-minted at the merge of feature/v045-integration into the Deepglass PR
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  'e0eb8934af5db62a54f13419879da05027b4587cd9733ff52306f64e398f2dd6';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
   // Re-minted for the release/v0.44.0 base merges into PR 4193 (Buried Hoards), the second after PR 3847 landed. No capture was retaken.
   // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
@@ -1432,7 +1436,11 @@ const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
   // Re-minted at the v0.45.0 integration merge of #4479 head f0af7aa5f4
   // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
   // Re-minted for merging #4466 (Gloamveil) and #4470 (dungeon playtest fixes) into the v0.45.0 integration: both moved the renderer leaf. No capture was retaken.
-  '2d5185609692b2ebe06229653c9848b0b5ff119fb79f636ca7e9d5cab30b9db9';
+  // Re-minted at the v0.45.0 integration merge of #4479 head 670ca2a1e7
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  // Re-minted at the merge of feature/v045-integration into the Deepglass PR
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  'fc80ae593fe1c0491bdcd5da21988cbc9263b4f6963684502acbe9ca2ce6c136';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -2821,7 +2829,7 @@ describe('Eastbrook polish performance and contact evidence', () => {
       // capture was retaken.
       // Merging #4466 and #4470 into the v0.45.0 integration: recomputed LAST again
       // over the re-swept evidence. No capture was retaken.
-    ).toBe('dcc71f45b05ee2f175485204c701e96cb8efd5e07bd57a40c9b6886e25a5ce6d');
+    ).toBe('b98f87aedc510520a3935575155419ca342b2b8ba1d4b3c1b230f991476dacfa');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

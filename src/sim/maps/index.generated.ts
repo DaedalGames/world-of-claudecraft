@@ -19,6 +19,12 @@ export const PUBLISHED_MAPS: readonly PublishedMapEntry[] = [
     load: async () => (await import('./deepglass.generated')).loadPublishedMap(),
   },
   {
+    slug: "eastbrook_rebuild",
+    name: "Eastbrook Rebuild",
+    seed: 20061,
+    load: async () => (await import('./eastbrook_rebuild.generated')).loadPublishedMap(),
+  },
+  {
     slug: "world_of_claudecraft_with_goldcrest",
     name: "World of ClaudeCraft with Goldcrest",
     seed: 20061,

@@ -709,7 +709,11 @@ const PINNED_POLISH_COMPOSITE_FINGERPRINT =
   // Re-minted at the v0.45.0 integration merge of #4479 head f0af7aa5f4
   // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
   // Re-minted for merging #4466 (Gloamveil) and #4470 (dungeon playtest fixes) into the v0.45.0 integration: both moved the renderer leaf. No capture was retaken.
-  '2d5185609692b2ebe06229653c9848b0b5ff119fb79f636ca7e9d5cab30b9db9';
+  // Re-minted at the v0.45.0 integration merge of #4479 head 670ca2a1e7
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  // Re-minted at the merge of feature/v045-integration into the Deepglass PR
+  // (remint_polish_provenance.mjs on the merged tree, no capture was retaken).
+  'fc80ae593fe1c0491bdcd5da21988cbc9263b4f6963684502acbe9ca2ce6c136';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [

@@ -209,6 +209,7 @@ describe('live graphics profile architecture', () => {
 // import), so it is registered here even though it lives in src/game. Paths are
 // repo-relative for the failure messages.
 const UI_PURE_CORES = [
+  'src/ui/hud/referral_cards/referral_reward_core.ts',
   'src/ui/hud/courier/courier_core.ts',
   'src/ui/hud/referral_cards/referral_cards_view.ts',
   'src/ui/frame_presets_core.ts',
@@ -672,6 +673,9 @@ const UI_PURE_CORES = [
   'src/ui/hud/dungeon/crypt_alert_scene_core.ts',
   // The trash engine's use prompt (a Soul Brazier to topple) and its scene scan.
   'src/ui/hud/dungeon/kit_use_prompt_view.ts',
+  // Which dungeon prompt the "Dungeon mechanic hints" setting governs, and who
+  // holds the prompts' shared slot.
+  'src/ui/hud/dungeon/dungeon_prompt_policy_core.ts',
   // The dungeon objectives tracker (the plate and its boss rows): what it
   // shows, and which rows a kill just lit.
   'src/ui/hud/dungeon/dungeon_tracker_view.ts',
@@ -1018,6 +1022,21 @@ const RENDER_PURE_CORES = [
   'src/render/hoard_entrance_core.ts',
   // The Gravewyrm Sanctum Seal Gate's cosmetic plan (mist flow, rime fan).
   'src/render/sanctum_seal_gate_core.ts',
+  // The Sunken Bastion's Drowned Gate Tower: the Fogbeacon's turn, the flooded
+  // passage's trace, the marsh fog's puffs and the gate sprites.
+  'src/render/sunken_bastion_entrance_core.ts',
+  // What a built set piece puts between the chase camera and the character:
+  // one occluder box per collider row, tested with the fade family's own test.
+  'src/render/set_piece_occluders_core.ts',
+  // The Hollow Crypt's Fallen Chapel: the virtual stair trace, the grave
+  // mist's puffs and the spirit sprites (flames, motes, wisps, rose glow).
+  'src/render/hollow_crypt_entrance_core.ts',
+  // The Drowned Temple's Moon Stair: the moonrise's clock, the pool's moon and
+  // its parallax, the mirror's sight of the gate, the mist and the sprites.
+  'src/render/drowned_temple_entrance_core.ts',
+  // The Wildheart Basin's Jaguar Maw: the idol's breath, the flooded throat's
+  // trace, the mist's puffs and the maw's sprites.
+  'src/render/wildheart_basin_entrance_core.ts',
   'src/render/hoard_valley_core.ts',
   'src/render/hoard_cavern_core.ts',
   'src/render/hoard_cavern_ground_core.ts',
@@ -1374,6 +1393,7 @@ const RENDER_PURE_CORES = [
   'src/render/deepglass_scene/deepglass_cue_core.ts',
   'src/render/deepglass_scene/deepglass_pose_core.ts',
   'src/render/placed_batch_core.ts',
+  'src/render/placed_texture_tier_core.ts',
   'src/render/city_clutter_core.ts',
   'src/render/terrain_cut_clip_core.ts',
   'src/render/terrain_cut_rim_core.ts',
@@ -2916,6 +2936,7 @@ const UI_PAINTER_HELPERS = [
 // the English catalog, it is a maintainer fix during the release locale fill:
 // contributors do not edit those files.
 const UI_DOM_MODULES = [
+  'src/ui/hud/referral_cards/referral_reward_celebration_window.ts',
   'src/ui/hud/referral_cards/referral_cards_controller.ts',
   'src/ui/hud/referral_cards/referral_cards_hud_controller.ts',
   'src/ui/error_toast_controller.ts',

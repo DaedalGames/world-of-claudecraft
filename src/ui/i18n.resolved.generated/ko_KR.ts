@@ -79,6 +79,13 @@ export const ko_KR: EnTranslations = {
     "friendTier": "도움을 준 친구: {count}명",
     "awarded": "지급됨",
     "pending": "아직 지급되지 않음",
+    "celebration": {
+      "earned": "모험의 결실",
+      "title": "보상 획득!",
+      "titleReward": "칭호 잠금 해제: {title}",
+      "together": "{friend} 님과 함께 획득했습니다.",
+      "continue": "모험 계속하기"
+    },
     "milestones": {
       "tutorial": "튜토리얼 섬 마지막 퀘스트",
       "hollow": "공허 속으로",
@@ -2459,6 +2466,8 @@ export const ko_KR: EnTranslations = {
       "groundReticle": "지면 조준 표시기",
       "mouseoverCast": "파티 창에서 마우스오버 시전",
       "stickyTarget": "지면 클릭 시 대상 유지",
+      "showDungeonHints": "던전 기믹 도움말",
+      "showDungeonHintsNote": "던전 기믹과 대처 방법을 설명하는 도움말 패널을 표시합니다. 이 설정을 끄면 해당 도움말만 숨겨지며, 바닥 경고, 시전 막대, 디버프는 그대로 표시됩니다. 직접 조작해야 하는 안내는 항상 표시됩니다: 탈출해야 하는 우리, 끊어야 하는 사슬, 사용할 수 있는 물체.",
       "showItemLevel": "아이템 레벨 표시",
       "showReliquaryTracker": "성물고 추적기 표시",
       "confirmVendorSell": "판매 전 확인",
@@ -22854,10 +22863,10 @@ export const ko_KR: EnTranslations = {
         "name": "우정 가방"
       },
       "referral_hollow_charm": {
-        "name": "공허의 우정 부적"
+        "name": "맹세 수호자의 심장"
       },
       "referral_fog_charm": {
-        "name": "안개에 싸인 우정 부적"
+        "name": "각성한 맹세 수호자의 심장"
       },
       "reins_referral_tank": {
         "name": "우정 전차 고삐"

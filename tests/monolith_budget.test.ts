@@ -1016,6 +1016,16 @@ const MONOLITHS: MonolithRow[] = [
     // the Studio's own delta (12675 - 12688 = -13) gives 12585; re-measure with wc -l.
     // Integration merge of #4479 (ClaudeCraft Studio): exact merged count, within
     // the release/v0.45.0 ceiling both merged PRs were held to.
+    // LOWERED to 12425 at the v0.45.0 integration merge of #4479's head that moved
+    // Deepglass and the Tidehold city out of the Studio import: the integration pin
+    // 12671 minus that removal. Exact merged count (wc -l), zero slack.
+    // Merge of the four dungeon entrances (#4478): both parents' additions combine
+    // (ours is the one updateSetPieceOccluders call), exact merged count, within
+    // the release/v0.45.0 ceiling the branch was held to.
+    // Merge of the Deepglass / Tidehold city branch (#4490) back onto the
+    // integration: its Deepglass and Tidehold-city renderer hooks return on top
+    // of the integration's set piece occluder call. Exact merged count (wc -l),
+    // within the release/v0.45.0 ceiling (12688).
     ceiling: 12671,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
@@ -1489,7 +1499,16 @@ const MONOLITHS: MonolithRow[] = [
     // the Studio's own delta (11036 - 11140 = -104) gives 10862; re-measure with wc -l.
     // Integration merge of #4479 (ClaudeCraft Studio): exact merged count, within
     // the release/v0.45.0 ceiling both merged PRs were held to.
-    ceiling: 11037,
+    // LOWERED to 11003 at the v0.45.0 integration merge of #4479's head that moved
+    // Deepglass and the Tidehold city out of the Studio import: the integration pin
+    // 11037 minus that removal. Exact merged count (wc -l), zero slack.
+    // LOWERED to 11001 when the offline Play click (its audio start and its world
+    // choice) moved into src/game/studio_boot.ts bootOfflinePlay.
+    // Merge of the Deepglass / Tidehold city branch (#4490) back onto the
+    // integration: its portal handoff boot and the arena's session tail return
+    // beside the integration's bootOfflinePlay click. Exact merged count (wc -l),
+    // within the release/v0.45.0 ceiling (11140).
+    ceiling: 11035,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -2005,7 +2024,10 @@ const MONOLITHS: MonolithRow[] = [
     // sibling modules (v0.45.0); exact count.
     // Integration merge of #4479 (ClaudeCraft Studio): exact merged count, within
     // the release/v0.45.0 ceiling both merged PRs were held to.
-    ceiling: 5132,
+    // Merge of the four dungeon entrances (#4478): both parents' additions combine
+    // (ours is the palm scatter's decoration exclusion check), exact merged count,
+    // within the release/v0.45.0 ceiling the branch was held to.
+    ceiling: 5133,
     seam: 'zone/terrain data as content records; logic as sim sibling modules',
   },
   {
@@ -2205,7 +2227,10 @@ const MONOLITHS: MonolithRow[] = [
     // into src/render/tree_hide_fade.ts.
     // Lowered after the ClaudeCraft Studio merge moved its inline code into
     // sibling modules (v0.45.0); exact count.
-    ceiling: 3863,
+    // Merge of the four dungeon entrances (#4478): both parents' additions combine
+    // (ours is the paved causeway import), exact merged count, within the
+    // release/v0.45.0 ceiling the branch was held to.
+    ceiling: 3864,
     seam: 'a new src/render/<thing>.ts module (src/render/CLAUDE.md)',
   },
   {
@@ -2292,7 +2317,11 @@ const MONOLITHS: MonolithRow[] = [
     // Integration merge of #4479 (ClaudeCraft Studio): exact merged count, within
     // the release/v0.45.0 ceiling both merged PRs were held to (Studio moved
     // crossesFence to fence_crossing.ts).
-    ceiling: 2352,
+    // LOWERED 2352 -> 2336 with the Fallen Chapel: the ruin ring's column
+    // layout moved to prop_layout.ts ruinRingColumns (shared with the
+    // renderer, and able to omit a column); a bare ring skips its loop.
+    // wc -l. Exact merged count.
+    ceiling: 2336,
     seam: 'per-zone collider data beside the zone content; shared logic stays here',
   },
   {

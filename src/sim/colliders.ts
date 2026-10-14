@@ -92,7 +92,7 @@ export { FENCE_HALF_DEPTH } from './fence_dims';
 // consumer, so only it is imported (not re-exported) for internal use here.
 export { allocRiftCollisionToken, clearRiftRegion, setRiftRegion } from './rift_regions';
 
-import { isAuthoredTownBuildingDef } from './authored_town_buildings';
+import { promotedTownBuildingStandsDown } from './authored_town_buildings';
 import { pushOut, resolveAgainst } from './collider_pushout';
 import {
   DAWNHOLD_PARAPET_HALF,
@@ -143,6 +143,7 @@ import {
   MAILBOX_HW,
   MINE_CART,
   propPlacementRoll,
+  ruinRingColumns,
   SMITHY_DRESSING,
   STALL_DRESSING,
   TOWN_WALL_PARAPET_FRAC,
@@ -268,9 +269,8 @@ function staticWorldColliders(seed: number): Collider[] {
   // A document that owns the authored towns' buildings as placements carries
   // their (baked) collision itself, without this gate a moved town hall
   // leaves an invisible record collider standing on the square.
-  const townBuildingsPromoted = content.promotedScenery?.authoredTowns === true;
   for (const b of PROPS.buildings) {
-    if (townBuildingsPromoted && isAuthoredTownBuildingDef(b)) continue;
+    if (promotedTownBuildingStandsDown(content.promotedScenery, b)) continue;
     if (b.kind === 'chapel' && b.assetId === undefined) {
       // The legacy procedural chapel is COMPOSED (render/props.ts): full-height
       // bell tower at the rear, squat entry hall in front. Collide the two
@@ -923,40 +923,23 @@ function staticWorldColliders(seed: number): Collider[] {
       underY: topY(seed, x, z, 0),
     });
   for (const ruin of PROPS.ruinRings) {
-    for (let i = 0; i < ruin.columns; i++) {
-      const ang = (i / ruin.columns) * Math.PI * 2;
-      const x = ruin.x + Math.sin(ang) * ruin.ringR,
-        z = ruin.z + Math.cos(ang) * ruin.ringR;
-      // The renderer keeps every fourth column intact (a tall monolith) and
-      // breaks the rest into STUMPS of three deterministic heights. A stump
-      // is a standable pillar a jump can grab, not an infinite wall: top =
-      // column_broken's 0.65 native top x the render's y-scale, minus the
-      // 0.1 the group sinks.
-      const intact = i % 4 === 1;
-      if (intact) {
-        const sy = 3.5 + (i % 2) * 0.5;
-        out.push({
-          type: 'circle',
-          x,
-          z,
-          r: 0.6,
-          cameraTopY: topY(seed, x, z, sy - 0.1),
-          underY: topY(seed, x, z, 0),
-        });
-      } else {
-        const sy = 1.7 + (i % 3) * 0.85;
-        const top = topY(seed, x, z, 0.65 * sy - 0.1);
-        out.push({
-          type: 'circle',
-          x,
-          z,
-          r: 0.6,
-          cameraTopY: top,
-          moveTopY: top,
-          standable: true,
-          underY: topY(seed, x, z, 0),
-        });
-      }
+    if (ruin.bare || ruin.columns <= 0) continue;
+    // The renderer keeps every fourth column intact (a tall monolith) and
+    // breaks the rest into STUMPS of three deterministic heights
+    // (prop_layout.ts ruinRingColumns, the shared layout). A stump is a
+    // standable pillar a jump can grab, not an infinite wall.
+    for (const col of ruinRingColumns(ruin)) {
+      const top = topY(seed, col.x, col.z, col.top);
+      const stump = col.intact ? {} : { moveTopY: top, standable: true as const };
+      out.push({
+        type: 'circle',
+        x: col.x,
+        z: col.z,
+        r: 0.6,
+        cameraTopY: top,
+        underY: topY(seed, col.x, col.z, 0),
+        ...stump,
+      });
     }
     // Toppled relics at the ring's heart (render offsets from props.ts): the
     // half-buried statue head, the carved block, and the fallen column lying

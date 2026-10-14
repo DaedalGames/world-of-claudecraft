@@ -79,6 +79,13 @@ export const ja_JP: EnTranslations = {
     "friendTier": "手伝ったフレンド：{count}人",
     "awarded": "付与済み",
     "pending": "未付与",
+    "celebration": {
+      "earned": "冒険の成果",
+      "title": "報酬を獲得！",
+      "titleReward": "称号を獲得：{title}",
+      "together": "{friend}と共に獲得しました。",
+      "continue": "冒険を続ける"
+    },
     "milestones": {
       "tutorial": "チュートリアル島の最終クエスト",
       "hollow": "虚ろへ",
@@ -2459,6 +2466,8 @@ export const ja_JP: EnTranslations = {
       "groundReticle": "地面ターゲットのレティクル",
       "mouseoverCast": "パーティフレームでマウスオーバーキャスト",
       "stickyTarget": "地面クリックでターゲットを維持",
+      "showDungeonHints": "ダンジョンのギミックヒント",
+      "showDungeonHintsNote": "ダンジョンのギミックとその対処法を説明するヒントパネルを表示します。オフにするとこのヒントだけが非表示になり、地面の警告、詠唱バー、デバフはそのまま表示されます。操作が必要なプロンプトは常に表示されます：脱出する檻、壊す鎖、使用するオブジェクト。",
       "showItemLevel": "アイテムレベルを表示",
       "showReliquaryTracker": "聖遺物庫トラッカーを表示",
       "confirmVendorSell": "売却前に確認する",
@@ -22854,10 +22863,10 @@ export const ja_JP: EnTranslations = {
         "name": "友情のサッチェル"
       },
       "referral_hollow_charm": {
-        "name": "虚ろの友情のお守り"
+        "name": "誓いを守る者の心"
       },
       "referral_fog_charm": {
-        "name": "霧に包まれた友情のお守り"
+        "name": "覚醒した誓いを守る者の心"
       },
       "reins_referral_tank": {
         "name": "友情タンクの手綱"

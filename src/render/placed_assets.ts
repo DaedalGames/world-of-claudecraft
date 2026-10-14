@@ -36,6 +36,7 @@ import { terrainHeight } from '../sim/world';
 import { attachArenaWater } from './arena_water';
 import { authoredGroundLine, targetHeightFor } from './asset_scale';
 import { loadGltf } from './assets/loader';
+import { mediaAssetExists } from './assets/media';
 import { registerPreload } from './assets/preload';
 import { buildCampfireFlame, CAMPFIRE_FLAME_HEIGHT, campfireFlameScale } from './campfire_flame';
 import { foliageFarPlacementsActive } from './foliage_editor_scope';
@@ -64,6 +65,7 @@ import {
 import { type BatchSub, disposeOwnedSubs, PlacedBatches, templateSubs } from './placed_batches';
 import { PlacedImposters } from './placed_imposters';
 import { type MoverHit, type MoverUpdate, PlacedMovers } from './placed_movers';
+import { placedTextureTierPath } from './placed_texture_tier_core';
 import { adoptDynamicBudgetLight } from './point_light_budget';
 import { buildRockChainModel, buildRockModel, rockSeed } from './rock_gen';
 import { attachShipMotion } from './ship_motion';
@@ -2020,7 +2022,10 @@ export class PlacedAssetsView {
     if (!cached) {
       // Re-read the nearest waiting placement when a loader slot opens, so
       // camera movement can promote an asset already parked in the queue.
-      cached = loadGltf(path, () => this.streamPriority(path))
+      // Only the FILE follows the profile's texture tier (a town building's
+      // half or quarter set); everything keyed on `path` keeps the model's own.
+      const file = placedTextureTierPath(path, GFX.placedTextureTier, mediaAssetExists);
+      cached = loadGltf(file, () => this.streamPriority(path))
         .then((gltf) => {
           const object = gltf.scene;
           // Weakly authored emissive channels never cross the bloom threshold;
@@ -2681,7 +2686,7 @@ export class PlacedAssetsView {
     const known = this.twinSubs.get(twin);
     if (known !== undefined) return known;
     this.twinSubs.set(twin, null);
-    loadGltf(twin, () => 1e9)
+    loadGltf(placedTextureTierPath(twin, GFX.placedTextureTier, mediaAssetExists), () => 1e9)
       .then((gltf) => {
         this.twinSubs.set(twin, templateSubs(gltf.scene));
       })
