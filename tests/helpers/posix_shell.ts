@@ -20,15 +20,14 @@ function gitForWindowsShell(name: 'bash' | 'sh'): string | null {
   return existsSync(shell) ? shell : null;
 }
 
-function resolveShell(name: 'bash' | 'sh'): string | null {
-  return process.platform === 'win32' ? gitForWindowsShell(name) : name;
+// Without Git for Windows this falls back to the bare name, so a suite fails
+// loudly there instead of skipping.
+function resolveShell(name: 'bash' | 'sh'): string {
+  return (process.platform === 'win32' && gitForWindowsShell(name)) || name;
 }
 
-/** The bash to spawn, or null on a Windows machine without Git for Windows. */
+/** The bash to spawn. */
 export const BASH = resolveShell('bash');
 
-/** The POSIX sh to spawn, or null on a Windows machine without Git for Windows. */
+/** The POSIX sh to spawn. */
 export const POSIX_SH = resolveShell('sh');
-
-/** The skip reason a case names when its shell is null. */
-export const NO_POSIX_SHELL = 'needs a POSIX shell; on Windows that is Git for Windows bash/sh';

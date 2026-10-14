@@ -18,6 +18,9 @@ import {
 import { remoteLockCommand, runProcess } from '../scripts/prod_cpu_monitor_process.mjs';
 
 const WIN32 = process.platform === 'win32';
+// The monitor proves ownership through uids and mode bits, which Windows does not have
+// (process.getuid is undefined there, so the monitor fails closed by design).
+const POSIX_OWNERSHIP = 'needs POSIX uid ownership and mode bits';
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -211,14 +214,16 @@ describe('production CPU monitor configuration', () => {
       ['--out-dir', '/var/lib/woc-prod-cpu-monitor', '--profile-sample-micros', '5000'],
       {},
     );
-    expect(path.relative('/var/lib/woc-prod-cpu-monitor', options.outDir)).toBe('');
+    // path.normalize spells the same absolute path natively on Windows.
+    expect(options.outDir).toBe(
+      WIN32 ? '\\var\\lib\\woc-prod-cpu-monitor' : '/var/lib/woc-prod-cpu-monitor',
+    );
     expect(options.profileSampleIntervalUs).toBe(5000);
     expect(() => parseMonitorOptions(['--out-dir', 'relative/path'], {})).toThrow('absolute path');
   });
 
-  // POSIX only: the monitor proves ownership through uids and mode bits, which
-  // Windows does not have (process.getuid is undefined there, so it fails closed).
-  it.skipIf(WIN32)('initializes a securely pre-created service state directory', async () => {
+  it('initializes a securely pre-created service state directory', async ({ skip }) => {
+    skip(WIN32, POSIX_OWNERSHIP);
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-monitor-'));
     const secure = path.join(parent, 'secure');
     const exposed = path.join(parent, 'exposed');
@@ -235,9 +240,8 @@ describe('production CPU monitor configuration', () => {
     }
   });
 
-  // POSIX only: the monitor proves ownership through uids and mode bits, which
-  // Windows does not have (process.getuid is undefined there, so it fails closed).
-  it.skipIf(WIN32)('loads an owner-only token but refuses a symlinked credential', async () => {
+  it('loads an owner-only token but refuses a symlinked credential', async ({ skip }) => {
+    skip(WIN32, POSIX_OWNERSHIP);
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-token-'));
     const tokenFile = path.join(parent, 'ops.token');
     const tokenLink = path.join(parent, 'ops-link.token');
@@ -252,9 +256,8 @@ describe('production CPU monitor configuration', () => {
     }
   });
 
-  // POSIX only: the monitor proves ownership through uids and mode bits, which
-  // Windows does not have (process.getuid is undefined there, so it fails closed).
-  it.skipIf(WIN32)('age-prunes a monitor-owned capture left incomplete by a crash', async () => {
+  it('age-prunes a monitor-owned capture left incomplete by a crash', async ({ skip }) => {
+    skip(WIN32, POSIX_OWNERSHIP);
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-incomplete-'));
     const capture = path.join(parent, 'capture-20260712T002746168Z');
     try {
@@ -582,44 +585,41 @@ describe('production CPU polling orchestration', () => {
 });
 
 describe('container-local V8 profile client', () => {
-  // Windows has no SIGUSR1, the signal that opens a running process's inspector.
-  it.skipIf(WIN32)(
-    'verifies the target PID, captures a profile, and closes the inspector',
-    async () => {
-      const target = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
-        stdio: 'ignore',
+  it('verifies the target PID, captures a profile, and closes the inspector', async () => {
+    const target = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
+      stdio: 'ignore',
+    });
+    try {
+      await wait(300);
+      // Windows has no SIGUSR1; process._debugProcess opens the inspector there.
+      if (WIN32) process._debugProcess(target.pid);
+      else process.kill(target.pid, 'SIGUSR1');
+      await inspectorOpen(true);
+
+      const wrongTarget = await runProfileClient({
+        WOC_PROFILE_MS: '1000',
+        WOC_EXPECTED_PID: String(target.pid + 1),
+        WOC_CLOSE_INSPECTOR: '0',
       });
-      try {
-        await wait(300);
-        process.kill(target.pid, 'SIGUSR1');
-        await inspectorOpen(true);
+      expect(wrongTarget.code).not.toBe(0);
+      expect(wrongTarget.stderr).toContain('unexpected inspector PID');
+      await inspectorOpen(true);
 
-        const wrongTarget = await runProfileClient({
-          WOC_PROFILE_MS: '1000',
-          WOC_EXPECTED_PID: String(target.pid + 1),
-          WOC_CLOSE_INSPECTOR: '0',
-        });
-        expect(wrongTarget.code).not.toBe(0);
-        expect(wrongTarget.stderr).toContain('unexpected inspector PID');
-        await inspectorOpen(true);
-
-        const captured = await runProfileClient({
-          WOC_PROFILE_MS: '1000',
-          WOC_EXPECTED_PID: String(target.pid),
-          WOC_CLOSE_INSPECTOR: '1',
-        });
-        expect(captured.code, captured.stderr).toBe(0);
-        expect(captured.stderr).toContain('WOC_PROFILE_STARTED');
-        expect(captured.stderr).toContain('WOC_PROFILE_STOPPED');
-        const profile = JSON.parse(captured.stdout);
-        expect(profile.nodes.length).toBeGreaterThan(0);
-        expect(profile.samples.length).toBeGreaterThan(0);
-        await inspectorOpen(false);
-      } finally {
-        target.kill('SIGTERM');
-        await new Promise((resolve) => target.once('close', resolve));
-      }
-    },
-    15_000,
-  );
+      const captured = await runProfileClient({
+        WOC_PROFILE_MS: '1000',
+        WOC_EXPECTED_PID: String(target.pid),
+        WOC_CLOSE_INSPECTOR: '1',
+      });
+      expect(captured.code, captured.stderr).toBe(0);
+      expect(captured.stderr).toContain('WOC_PROFILE_STARTED');
+      expect(captured.stderr).toContain('WOC_PROFILE_STOPPED');
+      const profile = JSON.parse(captured.stdout);
+      expect(profile.nodes.length).toBeGreaterThan(0);
+      expect(profile.samples.length).toBeGreaterThan(0);
+      await inspectorOpen(false);
+    } finally {
+      target.kill('SIGTERM');
+      await new Promise((resolve) => target.once('close', resolve));
+    }
+  }, 15_000);
 });

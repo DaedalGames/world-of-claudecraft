@@ -70,7 +70,7 @@ describe('Codex project configuration', () => {
       fs.writeFileSync(agent, 'name = "clean"\n');
 
       const run = (active: boolean) =>
-        spawnSync(BASH ?? 'bash', [path.join(fixture, '.codex/hooks/qa-stop.sh')], {
+        spawnSync(BASH, [path.join(fixture, '.codex/hooks/qa-stop.sh')], {
           cwd: fixture,
           input: JSON.stringify({ stop_hook_active: active }),
           encoding: 'utf8',
