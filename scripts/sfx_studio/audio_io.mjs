@@ -440,19 +440,34 @@ export async function analyzeLoopContinuity(path, channels) {
   };
 }
 
-function publicPath(key, repoRoot = REPO_ROOT) {
-  assertSfxKey(key);
+function publishedInventory(repoRoot) {
   const repo = realpathSync(repoRoot);
   const publicRoot = existingPlainDirectory(join(repo, 'public'), repo);
   const audioRoot = existingPlainDirectory(join(publicRoot, 'audio'), publicRoot);
   const sfxRoot = existingPlainDirectory(join(audioRoot, 'sfx'), audioRoot);
-  const discovered = discoverSfxTracks([...CATALOG.values()], sfxRoot);
+  return { sfxRoot, discovered: discoverSfxTracks([...CATALOG.values()], sfxRoot) };
+}
+
+function inventoryPath({ sfxRoot, discovered }, key) {
   if (discovered.errors.length) {
     throw new Error(`invalid published SFX inventory for ${key}: ${discovered.errors.join('; ')}`);
   }
   const filename = discovered.entries[key]?.tracks[0]?.filename;
   if (!filename) throw new Error(`published SFX is missing for ${key}`);
   return safeRegularFile(sfxRoot, filename);
+}
+
+function publicPath(key, repoRoot = REPO_ROOT) {
+  assertSfxKey(key);
+  return inventoryPath(publishedInventory(repoRoot), key);
+}
+
+/** publishedPath for many keys at once: discovery walks the whole SFX
+ *  directory, so a catalog build resolves the inventory once instead of once
+ *  per key. Every returned path is still containment-checked on its own. */
+export function publishedPathResolver(repoRoot = REPO_ROOT) {
+  const inventory = publishedInventory(repoRoot);
+  return (key) => inventoryPath(inventory, assertSfxKey(key));
 }
 
 function draftPath(key) {
@@ -1950,8 +1965,11 @@ export function sourceUrl(key, sourceId) {
 }
 
 export function publishedUrl(key) {
-  const hash = hashFile(publicPath(key)).slice(0, 12);
-  return `/audio/${key}.mp3?v=${hash}`;
+  return publishedUrlForHash(key, hashFile(publicPath(key)));
+}
+
+export function publishedUrlForHash(key, hash) {
+  return `/audio/${key}.mp3?v=${hash.slice(0, 12)}`;
 }
 
 export function publishedPath(key, repoRoot = REPO_ROOT) {
