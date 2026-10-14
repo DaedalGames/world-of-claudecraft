@@ -16,6 +16,7 @@ import {
   PRODUCT_NAME,
   registerLinuxUrlHandler,
 } from '../electron/linux_url_handler.cjs';
+import { FILE_SYMLINKS, NO_FILE_SYMLINKS } from './helpers/symlink_fixture';
 
 const PKG = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
@@ -830,62 +831,68 @@ describe('registerLinuxUrlHandler', () => {
   });
 });
 
-describe('installDesktopEntry against a REAL filesystem', () => {
-  // Everything above injects fs, so the production default layer (desktopEntryDir from
-  // XDG_DATA_HOME, real mkdir/write/rename) is otherwise never executed. This exercises it end
-  // to end with only the subprocesses faked.
-  const root = mkdtempSync(path.join(tmpdir(), 'woc-urlhandler-'));
-  afterAll(() => rmSync(root, { recursive: true, force: true }));
+// Skipped on Windows: the module does POSIX path math (it only ever runs on Linux), and a
+// Windows temp dir is not an absolute POSIX XDG_DATA_HOME.
+describe.skipIf(process.platform === 'win32')(
+  'installDesktopEntry against a REAL filesystem',
+  () => {
+    // Everything above injects fs, so the production default layer (desktopEntryDir from
+    // XDG_DATA_HOME, real mkdir/write/rename) is otherwise never executed. This exercises it end
+    // to end with only the subprocesses faked.
+    const root = mkdtempSync(path.join(tmpdir(), 'woc-urlhandler-'));
+    afterAll(() => rmSync(root, { recursive: true, force: true }));
 
-  const ran: Ran[] = [];
-  const deps = {
-    platform: 'linux',
-    scheme: SCHEME,
-    env: { APPIMAGE, XDG_DATA_HOME: root },
-    runCommand: (command: string, args: string[]) => ran.push({ command, args }),
-    log: { info: vi.fn(), warn: vi.fn() },
-  };
-  const expectedFile = path.join(root, 'applications', APPIMAGE_ENTRY_NAME);
+    const ran: Ran[] = [];
+    const deps = {
+      platform: 'linux',
+      scheme: SCHEME,
+      env: { APPIMAGE, XDG_DATA_HOME: root },
+      runCommand: (command: string, args: string[]) => ran.push({ command, args }),
+      log: { info: vi.fn(), warn: vi.fn() },
+    };
+    const expectedFile = path.join(root, 'applications', APPIMAGE_ENTRY_NAME);
 
-  it('derives the path from XDG_DATA_HOME and really creates the file', () => {
-    const result = installDesktopEntry(deps);
+    it('derives the path from XDG_DATA_HOME and really creates the file', () => {
+      const result = installDesktopEntry(deps);
 
-    expect(result.status).toBe('installed');
-    expect(result.file).toBe(expectedFile);
-    expect(existsSync(expectedFile)).toBe(true);
-    expect(readFileSync(expectedFile, 'utf8')).toContain(`Exec=${APPIMAGE} %u`);
-    // The default productName, which main.cjs never passes, reaches the real file.
-    expect(readFileSync(expectedFile, 'utf8')).toContain(`Name=${PRODUCT_NAME}`);
-  });
+      expect(result.status).toBe('installed');
+      expect(result.file).toBe(expectedFile);
+      expect(existsSync(expectedFile)).toBe(true);
+      expect(readFileSync(expectedFile, 'utf8')).toContain(`Exec=${APPIMAGE} %u`);
+      // The default productName, which main.cjs never passes, reaches the real file.
+      expect(readFileSync(expectedFile, 'utf8')).toContain(`Name=${PRODUCT_NAME}`);
+    });
 
-  it('leaves no temp file behind', () => {
-    const { readdirSync } = require('node:fs');
-    expect(
-      readdirSync(path.join(root, 'applications')).filter((f: string) => f.endsWith('.tmp')),
-    ).toEqual([]);
-  });
+    it('leaves no temp file behind', () => {
+      const { readdirSync } = require('node:fs');
+      expect(
+        readdirSync(path.join(root, 'applications')).filter((f: string) => f.endsWith('.tmp')),
+      ).toEqual([]);
+    });
 
-  it('is idempotent on a second run against the file it just wrote', () => {
-    ran.length = 0;
-    const result = installDesktopEntry(deps);
+    it('is idempotent on a second run against the file it just wrote', () => {
+      ran.length = 0;
+      const result = installDesktopEntry(deps);
 
-    expect(result.status).toBe('unchanged');
-    result.associate();
-    // Still re-asserts the association (the self-heal path), but only the part that asserts
-    // anything: the bytes are unchanged, so the MIME cache already describes this entry.
-    expect(ran.map((r) => r.command)).toEqual(['xdg-mime']);
-  });
+      expect(result.status).toBe('unchanged');
+      result.associate();
+      // Still re-asserts the association (the self-heal path), but only the part that asserts
+      // anything: the bytes are unchanged, so the MIME cache already describes this entry.
+      expect(ran.map((r) => r.command)).toEqual(['xdg-mime']);
+    });
 
-  it('REPLACES a symlink at the destination instead of writing through it', () => {
-    // A same-uid process could plant a symlink here; a plain write would truncate its target.
-    const { symlinkSync, unlinkSync } = require('node:fs');
-    const victim = path.join(root, 'victim.txt');
-    writeFileSync(victim, 'untouched', 'utf8');
-    unlinkSync(expectedFile);
-    symlinkSync(victim, expectedFile);
+    it('REPLACES a symlink at the destination instead of writing through it', ({ skip }) => {
+      skip(!FILE_SYMLINKS, NO_FILE_SYMLINKS);
+      // A same-uid process could plant a symlink here; a plain write would truncate its target.
+      const { symlinkSync, unlinkSync } = require('node:fs');
+      const victim = path.join(root, 'victim.txt');
+      writeFileSync(victim, 'untouched', 'utf8');
+      unlinkSync(expectedFile);
+      symlinkSync(victim, expectedFile);
 
-    expect(installDesktopEntry(deps).status).toBe('installed');
-    expect(readFileSync(victim, 'utf8')).toBe('untouched');
-    expect(readFileSync(expectedFile, 'utf8')).toContain('[Desktop Entry]');
-  });
-});
+      expect(installDesktopEntry(deps).status).toBe('installed');
+      expect(readFileSync(victim, 'utf8')).toBe('untouched');
+      expect(readFileSync(expectedFile, 'utf8')).toContain('[Desktop Entry]');
+    });
+  },
+);
