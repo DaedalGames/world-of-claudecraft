@@ -1,8 +1,9 @@
 import { spawnSync } from 'node:child_process';
 import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { delimiter, join } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
+import { BASH } from './helpers/posix_shell';
 
 const watchdog = readFileSync('deploy/game_watchdog.sh', 'utf8');
 const userData = readFileSync('deploy/user-data.sh', 'utf8');
@@ -320,11 +321,11 @@ function runWatchdog(
   h: Harness,
   opts: { inspect: string; args?: string[]; env?: Record<string, string> },
 ): RunResult {
-  const res = spawnSync('bash', [WATCHDOG_SCRIPT, ...(opts.args ?? [])], {
+  const res = spawnSync(BASH ?? 'bash', [WATCHDOG_SCRIPT, ...(opts.args ?? [])], {
     encoding: 'utf8',
     env: {
       ...process.env,
-      PATH: `${h.dir}:${process.env.PATH ?? ''}`,
+      PATH: `${h.dir}${delimiter}${process.env.PATH ?? ''}`,
       WATCHDOG_CONTAINER: CONTAINER,
       WATCHDOG_STATE_FILE: h.stateFile,
       WATCHDOG_LOCK_FILE: h.lockFile,
@@ -347,7 +348,8 @@ afterAll(() => {
   for (const dir of harnessDirs) rmSync(dir, { recursive: true, force: true });
 });
 
-describe('game watchdog behavior (executed against a fake docker)', () => {
+// Skipped only on a Windows machine without Git for Windows (no POSIX bash to run it).
+describe.skipIf(BASH === null)('game watchdog behavior (executed against a fake docker)', () => {
   // The harness must be able to observe a REAL restart, or every negative case below
   // passes vacuously. An unhealthy, running container is the one case the watchdog
   // exists for: if this stops restarting, a wedged world never recovers on its own.
@@ -556,7 +558,7 @@ describe('game watchdog behavior (executed against a fake docker)', () => {
   // A syntax error anywhere in the script would ship green through every string-grep
   // pin above; parsing it (and the executed cases) is what actually catches one.
   it('parses without a syntax error', () => {
-    const res = spawnSync('bash', ['-n', WATCHDOG_SCRIPT], { encoding: 'utf8' });
+    const res = spawnSync(BASH ?? 'bash', ['-n', WATCHDOG_SCRIPT], { encoding: 'utf8' });
     expect(res.status).toBe(0);
   });
 });
