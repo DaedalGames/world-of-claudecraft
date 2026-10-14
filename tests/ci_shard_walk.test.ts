@@ -14,6 +14,7 @@ import {
   walkShardTestFiles,
 } from '../scripts/lib/ci_shard_walk.mjs';
 import { stripComments } from './helpers/strip_comments';
+import { FILE_SYMLINKS, symlinkDir } from './helpers/symlink_fixture';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
@@ -48,11 +49,13 @@ describe('walkShardTestFiles: the predicate, one entry class per arm', () => {
     // so it is collected (withFileTypes never follows it, and the pin's bare
     // else never re-stats it); a symlink to a directory is neither a directory
     // entry nor a matching name, so it is not walked.
-    symlinkSync(join(tmp, 'tests/a.test.ts'), join(tmp, 'tests/link.test.ts'));
-    symlinkSync(join(tmp, 'tests/nested'), join(tmp, 'tests/linkdir'));
+    // (The file link needs Developer Mode on Windows; the directory link is a
+    // junction there, which Dirent reports as a symlink just the same.)
+    if (FILE_SYMLINKS) symlinkSync(join(tmp, 'tests/a.test.ts'), join(tmp, 'tests/link.test.ts'));
+    symlinkDir(join(tmp, 'tests/nested'), join(tmp, 'tests/linkdir'));
     expect(walkShardTestFiles(tmp)).toEqual([
       'tests/a.test.ts',
-      'tests/link.test.ts',
+      ...(FILE_SYMLINKS ? ['tests/link.test.ts'] : []),
       'tests/nested/deep/e.test.ts',
     ]);
   });
