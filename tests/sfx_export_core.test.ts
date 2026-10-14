@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
   copyFileSync,
@@ -66,6 +66,34 @@ function snapshotDirectory(root: string, relative = ''): Record<string, string> 
     }
   }
   return snapshot;
+}
+
+type InstallerResult = { error?: Error; status: number | null; stderr: string };
+
+// The installer cases are independent processes over separate fixture roots.
+// Under Git for Windows sh, a POSIX install forks several tools per blob (about
+// 100 s for the full catalog), so the cases run side by side: the wall clock is
+// the slowest case instead of the sum. Every case still runs on every platform.
+function runInstaller(command: string, args: string[]): Promise<InstallerResult> {
+  return new Promise((resolve) => {
+    const child = spawn(command, args, { stdio: ['ignore', 'ignore', 'pipe'] });
+    let stderr = '';
+    child.stderr.setEncoding('utf8');
+    child.stderr.on('data', (chunk: string) => {
+      stderr += chunk;
+    });
+    child.on('error', (error) => resolve({ error, status: null, stderr }));
+    child.on('close', (status) => resolve({ status, stderr }));
+  });
+}
+
+// Waits for every installer before the fixture is removed, then fails with the
+// first failing case.
+async function settleAll(runs: Promise<unknown>[]): Promise<void> {
+  const failed = (await Promise.allSettled(runs)).find(
+    (result): result is PromiseRejectedResult => result.status === 'rejected',
+  );
+  if (failed) throw failed.reason;
 }
 
 describe('SFX production bundle', () => {
@@ -300,19 +328,25 @@ describe('SFX production bundle', () => {
         { name: 'POSIX', command: 'sh', script: join(artifactRoot, 'install.sh') },
         { name: 'Node', command: process.execPath, script: join(artifactRoot, 'install.mjs') },
       ];
+      const runs: Promise<void>[] = [];
       for (const installer of installers) {
         const staticRoot = join(installFixture, `static-${installer.name.toLowerCase()}`);
-        execFileSync(installer.command, [installer.script, staticRoot]);
-        expect(readFileSync(join(staticRoot, 'audio/sfx/runtime-pack.json'))).toEqual(
-          files.get('activate/audio/sfx/runtime-pack.json'),
+        runs.push(
+          runInstaller(installer.command, [installer.script, staticRoot]).then((result) => {
+            expect(result.error, `${installer.name} installer failed to execute`).toBeUndefined();
+            expect(result.status, `${installer.name} installer: ${result.stderr}`).toBe(0);
+            expect(readFileSync(join(staticRoot, 'audio/sfx/runtime-pack.json'))).toEqual(
+              files.get('activate/audio/sfx/runtime-pack.json'),
+            );
+            for (const clip of Object.values(runtime.clips) as {
+              variants: { url: string; sha256: string }[];
+            }[]) {
+              for (const variant of clip.variants) {
+                expect(hash(readFileSync(join(staticRoot, variant.url)))).toBe(variant.sha256);
+              }
+            }
+          }),
         );
-        for (const clip of Object.values(runtime.clips) as {
-          variants: { url: string; sha256: string }[];
-        }[]) {
-          for (const variant of clip.variants) {
-            expect(hash(readFileSync(join(staticRoot, variant.url)))).toBe(variant.sha256);
-          }
-        }
       }
 
       const corruptArtifactRoot = join(installFixture, 'artifact-corrupt');
@@ -347,13 +381,16 @@ describe('SFX production bundle', () => {
         mkdirSync(staticRoot);
         writeFileSync(join(staticRoot, 'sentinel.txt'), 'production stays untouched\n');
         const before = snapshotDirectory(staticRoot);
-        const result = spawnSync(installer.command, [installer.script, staticRoot], {
-          encoding: 'utf8',
-        });
-        expect(result.error, `${installer.name} installer failed to execute`).toBeUndefined();
-        expect(result.status, `${installer.name} installer accepted a corrupt blob`).not.toBe(0);
-        expect(result.stderr).toContain('artifact audio checksum failed');
-        expect(snapshotDirectory(staticRoot)).toEqual(before);
+        runs.push(
+          runInstaller(installer.command, [installer.script, staticRoot]).then((result) => {
+            expect(result.error, `${installer.name} installer failed to execute`).toBeUndefined();
+            expect(result.status, `${installer.name} installer accepted a corrupt blob`).not.toBe(
+              0,
+            );
+            expect(result.stderr).toContain('artifact audio checksum failed');
+            expect(snapshotDirectory(staticRoot)).toEqual(before);
+          }),
+        );
       }
 
       const lastRuntimeVariant = (
@@ -372,13 +409,16 @@ describe('SFX production bundle', () => {
         writeFileSync(corruptTarget, 'corrupt production blob');
         writeFileSync(join(staticRoot, 'sentinel.txt'), 'production stays untouched\n');
         const before = snapshotDirectory(staticRoot);
-        const result = spawnSync(installer.command, [installer.script, staticRoot], {
-          encoding: 'utf8',
-        });
-        expect(result.error, `${installer.name} installer failed to execute`).toBeUndefined();
-        expect(result.status, `${installer.name} installer accepted a corrupt target`).not.toBe(0);
-        expect(result.stderr).toContain('existing audio blob checksum failed');
-        expect(snapshotDirectory(staticRoot)).toEqual(before);
+        runs.push(
+          runInstaller(installer.command, [installer.script, staticRoot]).then((result) => {
+            expect(result.error, `${installer.name} installer failed to execute`).toBeUndefined();
+            expect(result.status, `${installer.name} installer accepted a corrupt target`).not.toBe(
+              0,
+            );
+            expect(result.stderr).toContain('existing audio blob checksum failed');
+            expect(snapshotDirectory(staticRoot)).toEqual(before);
+          }),
+        );
       }
 
       const originalList = files.get('install-blobs.txt');
@@ -409,22 +449,25 @@ describe('SFX production bundle', () => {
         writeFileSync(join(staticRoot, 'audio/sfx/runtime-pack.json'), 'old manifest\n');
         writeFileSync(join(staticRoot, 'sentinel.txt'), 'production stays untouched\n');
         const before = snapshotDirectory(staticRoot);
-        const result = spawnSync('sh', [join(artifact, 'install.sh'), staticRoot], {
-          encoding: 'utf8',
-        });
-        expect(result.error, `${failure.name} list test failed to execute`).toBeUndefined();
-        expect(result.status, `${failure.name} list was accepted`).not.toBe(0);
-        expect(result.stderr).toContain('artifact audio list checksum failed');
-        expect(snapshotDirectory(staticRoot)).toEqual(before);
+        runs.push(
+          runInstaller('sh', [join(artifact, 'install.sh'), staticRoot]).then((result) => {
+            expect(result.error, `${failure.name} list test failed to execute`).toBeUndefined();
+            expect(result.status, `${failure.name} list was accepted`).not.toBe(0);
+            expect(result.stderr).toContain('artifact audio list checksum failed');
+            expect(snapshotDirectory(staticRoot)).toEqual(before);
+          }),
+        );
       }
+      await settleAll(runs);
     } finally {
       rmSync(installFixture, { recursive: true, force: true });
     }
-    // Two full bundle builds (each ffprobe-validating every published track)
-    // plus the installer spawns measure ~63s solo on an M-class laptop; under
-    // bounded-worker gate contention the old 90s budget flaked while the SFX
-    // set itself was untouched. 180s keeps a genuine hang loud without
-    // re-flaking on a busy runner.
+    // Two full bundle builds (the first ffprobe-validating every published track,
+    // the second answered from the in-process verdict cache) plus the installer
+    // spawns measured ~63s solo on an M-class laptop while both still ran
+    // serially; under bounded-worker gate contention the old 90s budget flaked
+    // while the SFX set itself was untouched. 180s keeps a genuine hang loud
+    // without re-flaking on a busy runner.
   }, 180_000);
 
   it('exports numbered takes in exact round-robin order with runtime mix values', async () => {
