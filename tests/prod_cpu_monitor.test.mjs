@@ -17,6 +17,8 @@ import {
 } from '../scripts/prod_cpu_monitor_commands.mjs';
 import { remoteLockCommand, runProcess } from '../scripts/prod_cpu_monitor_process.mjs';
 
+const WIN32 = process.platform === 'win32';
+
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function inspectorOpen(expected, timeoutMs = 5_000) {
@@ -209,12 +211,14 @@ describe('production CPU monitor configuration', () => {
       ['--out-dir', '/var/lib/woc-prod-cpu-monitor', '--profile-sample-micros', '5000'],
       {},
     );
-    expect(options.outDir).toBe('/var/lib/woc-prod-cpu-monitor');
+    expect(path.relative('/var/lib/woc-prod-cpu-monitor', options.outDir)).toBe('');
     expect(options.profileSampleIntervalUs).toBe(5000);
     expect(() => parseMonitorOptions(['--out-dir', 'relative/path'], {})).toThrow('absolute path');
   });
 
-  it('initializes a securely pre-created service state directory', async () => {
+  // POSIX only: the monitor proves ownership through uids and mode bits, which
+  // Windows does not have (process.getuid is undefined there, so it fails closed).
+  it.skipIf(WIN32)('initializes a securely pre-created service state directory', async () => {
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-monitor-'));
     const secure = path.join(parent, 'secure');
     const exposed = path.join(parent, 'exposed');
@@ -231,7 +235,9 @@ describe('production CPU monitor configuration', () => {
     }
   });
 
-  it('loads an owner-only token but refuses a symlinked credential', async () => {
+  // POSIX only: the monitor proves ownership through uids and mode bits, which
+  // Windows does not have (process.getuid is undefined there, so it fails closed).
+  it.skipIf(WIN32)('loads an owner-only token but refuses a symlinked credential', async () => {
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-token-'));
     const tokenFile = path.join(parent, 'ops.token');
     const tokenLink = path.join(parent, 'ops-link.token');
@@ -246,7 +252,9 @@ describe('production CPU monitor configuration', () => {
     }
   });
 
-  it('age-prunes a monitor-owned capture left incomplete by a crash', async () => {
+  // POSIX only: the monitor proves ownership through uids and mode bits, which
+  // Windows does not have (process.getuid is undefined there, so it fails closed).
+  it.skipIf(WIN32)('age-prunes a monitor-owned capture left incomplete by a crash', async () => {
     const parent = await mkdtemp(path.join(tmpdir(), 'woc-cpu-incomplete-'));
     const capture = path.join(parent, 'capture-20260712T002746168Z');
     try {
@@ -574,39 +582,44 @@ describe('production CPU polling orchestration', () => {
 });
 
 describe('container-local V8 profile client', () => {
-  it('verifies the target PID, captures a profile, and closes the inspector', async () => {
-    const target = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
-      stdio: 'ignore',
-    });
-    try {
-      await wait(300);
-      process.kill(target.pid, 'SIGUSR1');
-      await inspectorOpen(true);
-
-      const wrongTarget = await runProfileClient({
-        WOC_PROFILE_MS: '1000',
-        WOC_EXPECTED_PID: String(target.pid + 1),
-        WOC_CLOSE_INSPECTOR: '0',
+  // Windows has no SIGUSR1, the signal that opens a running process's inspector.
+  it.skipIf(WIN32)(
+    'verifies the target PID, captures a profile, and closes the inspector',
+    async () => {
+      const target = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
+        stdio: 'ignore',
       });
-      expect(wrongTarget.code).not.toBe(0);
-      expect(wrongTarget.stderr).toContain('unexpected inspector PID');
-      await inspectorOpen(true);
+      try {
+        await wait(300);
+        process.kill(target.pid, 'SIGUSR1');
+        await inspectorOpen(true);
 
-      const captured = await runProfileClient({
-        WOC_PROFILE_MS: '1000',
-        WOC_EXPECTED_PID: String(target.pid),
-        WOC_CLOSE_INSPECTOR: '1',
-      });
-      expect(captured.code, captured.stderr).toBe(0);
-      expect(captured.stderr).toContain('WOC_PROFILE_STARTED');
-      expect(captured.stderr).toContain('WOC_PROFILE_STOPPED');
-      const profile = JSON.parse(captured.stdout);
-      expect(profile.nodes.length).toBeGreaterThan(0);
-      expect(profile.samples.length).toBeGreaterThan(0);
-      await inspectorOpen(false);
-    } finally {
-      target.kill('SIGTERM');
-      await new Promise((resolve) => target.once('close', resolve));
-    }
-  }, 15_000);
+        const wrongTarget = await runProfileClient({
+          WOC_PROFILE_MS: '1000',
+          WOC_EXPECTED_PID: String(target.pid + 1),
+          WOC_CLOSE_INSPECTOR: '0',
+        });
+        expect(wrongTarget.code).not.toBe(0);
+        expect(wrongTarget.stderr).toContain('unexpected inspector PID');
+        await inspectorOpen(true);
+
+        const captured = await runProfileClient({
+          WOC_PROFILE_MS: '1000',
+          WOC_EXPECTED_PID: String(target.pid),
+          WOC_CLOSE_INSPECTOR: '1',
+        });
+        expect(captured.code, captured.stderr).toBe(0);
+        expect(captured.stderr).toContain('WOC_PROFILE_STARTED');
+        expect(captured.stderr).toContain('WOC_PROFILE_STOPPED');
+        const profile = JSON.parse(captured.stdout);
+        expect(profile.nodes.length).toBeGreaterThan(0);
+        expect(profile.samples.length).toBeGreaterThan(0);
+        await inspectorOpen(false);
+      } finally {
+        target.kill('SIGTERM');
+        await new Promise((resolve) => target.once('close', resolve));
+      }
+    },
+    15_000,
+  );
 });
