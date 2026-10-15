@@ -223,7 +223,12 @@ console.log('Activated SFX bundle ' + runtime.bundleId + ' in ' + targetSfx);
 `);
 }
 
-function posixInstallScript({ runtimeManifestSha256, runtimeBundleId, installBlobsSha256 }) {
+export function posixInstallScript({ runtimeManifestSha256, runtimeBundleId, installBlobsSha256 }) {
+  // Per-blob work runs in bulk: one checksum pass over the artifact blobs, one
+  // over the existing target blobs, and batched cp and mv calls. Each external
+  // command costs tens of milliseconds to start under Git for Windows sh, so
+  // the old loop of several commands per blob took minutes for a full catalog.
+  // The per-blob loops left run shell builtins only.
   return Buffer.from(`#!/bin/sh
 set -eu
 
@@ -234,31 +239,55 @@ if [ -z "$static_root" ]; then
   exit 2
 fi
 
-hash_file() {
-  if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "$1" | awk '{print $1}'
-  elif command -v shasum >/dev/null 2>&1; then
-    shasum -a 256 "$1" | awk '{print $1}'
+if command -v sha256sum >/dev/null 2>&1; then
+  sha256_tool=sha256sum
+elif command -v shasum >/dev/null 2>&1; then
+  sha256_tool=shasum
+else
+  echo "install.sh requires sha256sum or shasum" >&2
+  exit 1
+fi
+
+sha256() {
+  if [ "$sha256_tool" = sha256sum ]; then
+    sha256sum "$@"
   else
-    echo "install.sh requires sha256sum or shasum" >&2
-    exit 1
+    shasum -a 256 "$@"
   fi
 }
 
-temporary=
+hash_file() {
+  sha256 "$1" | awk '{print $1}'
+}
+
+# Reads <identity>.mp3 names on stdin and checks every file in directory $1
+# against the identity in its own name in one checksum pass. On a mismatch it
+# prints the first failing identity and returns 1.
+check_named_blobs() {
+  if report=$(cd "$1" && awk '{print substr($0, 1, 64) "  " $0}' | sha256 -c - 2>&1); then
+    return 0
+  fi
+  printf '%s\n' "$report" | awk '/: FAILED/ { print substr($0, 1, 64); exit }'
+  return 1
+}
+
+# Copies the named files from directory $1 into directory $2, batched by xargs.
+copy_named() {
+  (cd "$1" && xargs sh -c 'dest=$1; shift; cp -- "$@" "$dest"' sh "$2")
+}
+
+# Renames the named files from directory $1 into directory $2, batched by xargs.
+move_named() {
+  (cd "$1" && xargs sh -c 'dest=$1; shift; mv -f -- "$@" "$dest"' sh "$2")
+}
+
+blob_staging=
+manifest_staging=
 cleanup() {
-  if [ -n "$temporary" ]; then rm -f "$temporary"; fi
+  if [ -n "$blob_staging" ]; then rm -rf "$blob_staging"; fi
+  if [ -n "$manifest_staging" ]; then rm -rf "$manifest_staging"; fi
 }
 trap cleanup 0 HUP INT TERM
-
-install_atomic() {
-  source_file=$1
-  target_file=$2
-  temporary=$(mktemp "\${target_file}.tmp.XXXXXX")
-  cp "$source_file" "$temporary"
-  mv -f "$temporary" "$target_file"
-  temporary=
-}
 
 runtime_source="$source_root/activate/audio/sfx/runtime-pack.json"
 if [ "$(hash_file "$runtime_source")" != "${runtimeManifestSha256}" ]; then
@@ -272,6 +301,10 @@ if [ ! -f "$install_blobs" ] || [ "$(hash_file "$install_blobs")" != "${installB
   exit 1
 fi
 
+# Shell builtins only. Every identity is 64 lowercase hex digits, so the blob
+# names collected here are safe unquoted in checksum lists and xargs input.
+source_blobs="$source_root/payload/audio/sfx/blobs"
+names=
 identity_count=0
 while IFS= read -r identity || [ -n "$identity" ]; do
   case "$identity" in
@@ -281,39 +314,63 @@ while IFS= read -r identity || [ -n "$identity" ]; do
     echo "artifact audio identity failed" >&2
     exit 1
   fi
-  source_file="$source_root/payload/audio/sfx/blobs/\${identity}.mp3"
-  if [ ! -f "$source_file" ] || [ "$(hash_file "$source_file")" != "$identity" ]; then
+  if [ ! -f "$source_blobs/\${identity}.mp3" ]; then
     echo "artifact audio checksum failed: $identity" >&2
     exit 1
   fi
+  names="$names\${identity}.mp3
+"
   identity_count=$((identity_count + 1))
 done < "$install_blobs"
 if [ "$identity_count" -eq 0 ]; then
   echo "artifact audio list is empty" >&2
   exit 1
 fi
+if ! failed=$(printf '%s' "$names" | check_named_blobs "$source_blobs"); then
+  echo "artifact audio checksum failed: $failed" >&2
+  exit 1
+fi
 
 target_sfx="$static_root/audio/sfx"
-while IFS= read -r identity || [ -n "$identity" ]; do
-  target_file="$target_sfx/blobs/\${identity}.mp3"
+existing=
+missing=
+for name in $names; do
+  target_file="$target_sfx/blobs/$name"
   if [ -e "$target_file" ]; then
-    if [ ! -f "$target_file" ] || [ "$(hash_file "$target_file")" != "$identity" ]; then
-      echo "existing audio blob checksum failed: $identity" >&2
+    if [ ! -f "$target_file" ]; then
+      echo "existing audio blob checksum failed: \${name%.mp3}" >&2
       exit 1
     fi
+    existing="$existing$name
+"
+  else
+    missing="$missing$name
+"
   fi
-done < "$install_blobs"
+done
+if [ -n "$existing" ] &&
+  ! failed=$(printf '%s' "$existing" | check_named_blobs "$target_sfx/blobs"); then
+  echo "existing audio blob checksum failed: $failed" >&2
+  exit 1
+fi
 
+# Copies land in private staging directories beside their targets, and each
+# finished file is renamed into place, so readers never see a partial file.
 mkdir -p "$target_sfx/blobs"
-while IFS= read -r identity || [ -n "$identity" ]; do
-  if [ ! -e "$target_sfx/blobs/\${identity}.mp3" ]; then
-    source_file="$source_root/payload/audio/sfx/blobs/\${identity}.mp3"
-    target_file="$target_sfx/blobs/\${identity}.mp3"
-    install_atomic "$source_file" "$target_file"
-  fi
-done < "$install_blobs"
+live_sfx=$(CDPATH= cd "$target_sfx" && pwd)
+if [ -n "$missing" ]; then
+  blob_staging=$(mktemp -d "$live_sfx/blobs/.install.XXXXXX")
+  printf '%s' "$missing" | copy_named "$source_blobs" "$blob_staging"
+  printf '%s' "$missing" | move_named "$blob_staging" "$live_sfx/blobs"
+  rmdir "$blob_staging"
+  blob_staging=
+fi
 
-install_atomic "$runtime_source" "$target_sfx/runtime-pack.json"
+manifest_staging=$(mktemp -d "$live_sfx/.install.XXXXXX")
+cp -- "$runtime_source" "$manifest_staging/runtime-pack.json"
+mv -f -- "$manifest_staging/runtime-pack.json" "$live_sfx/runtime-pack.json"
+rmdir "$manifest_staging"
+manifest_staging=
 echo "Activated SFX bundle ${runtimeBundleId} in $target_sfx"
 `);
 }
