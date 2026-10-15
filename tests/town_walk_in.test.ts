@@ -5,8 +5,10 @@ import { authoredRampsForPath } from '../src/sim/asset_collision';
 import { buildingRecordColliders } from '../src/sim/authored_town_buildings';
 import { type Collider, rotY } from '../src/sim/collider_shapes';
 import { pushPlacementColliders } from '../src/sim/colliders_authored/placement_colliders';
+import { ZONE1_PROPS } from '../src/sim/content/zone1';
 import { ZONE2_PROPS } from '../src/sim/content/zone2';
 import { BUILTIN_WORLD } from '../src/sim/data';
+import { EASTBROOK_LAYOUT } from '../src/sim/eastbrook_layout';
 import { FENBRIDGE_LAYOUT } from '../src/sim/fenbridge_layout';
 import { loadPublishedMap } from '../src/sim/maps/eastbrook_rebuild.generated';
 import { decksMayStand } from '../src/sim/placement_ramps';
@@ -18,15 +20,34 @@ import { WORLD_SEED } from '../src/sim/world_seed';
 // walk-in record resolves to, which its walls (authored_town_buildings.ts)
 // and its floors (placement_ramps.ts) are both built from.
 
-const WALK_IN = FENBRIDGE_LAYOUT.buildings.filter((building) => building.walkIn);
+const TOWN_BUILDINGS = [...EASTBROOK_LAYOUT.buildings, ...FENBRIDGE_LAYOUT.buildings];
+const WALK_IN = TOWN_BUILDINGS.filter((building) => building.walkIn);
 
 function recordOf(id: string): BuildingDef {
-  const record = ZONE2_PROPS.buildings.find((candidate) => candidate.id === id);
+  const record = [...ZONE1_PROPS.buildings, ...ZONE2_PROPS.buildings].find(
+    (candidate) => candidate.id === id,
+  );
   if (!record) throw new Error(`no props record for ${id}`);
   return record;
 }
 
 describe('the walk-in town placement', () => {
+  it('walks into every town building whose model bakes an open doorway', () => {
+    // the shut-door models (Fenbridge's warden house, Eastbrook's quay
+    // cottage) stay sealed; every other placed building in both towns is open
+    expect(WALK_IN.map((building) => building.id)).toEqual([
+      'eastbrook_bank',
+      'eastbrook_smithy',
+      'eastbrook_inn',
+      'eastbrook_chapel',
+      'eastbrook_apothecary',
+      'fenbridge_crooked_reed_inn',
+      'fenbridge_lantern_chapel',
+      'fenbridge_moonwort_apothecary',
+      'fenbridge_gilded_strongbox',
+    ]);
+  });
+
   it('stands each walk-in model at its layout anchor, at the size Studio places it', () => {
     const studio = authoredTownBuildingPlacements(WORLD_SEED);
     expect(WALK_IN.length).toBeGreaterThan(0);
@@ -52,7 +73,7 @@ describe('the walk-in town placement', () => {
   });
 
   it('gives a sealed record, and one a custom world moved, turned or resized, nothing', () => {
-    const sealed = FENBRIDGE_LAYOUT.buildings.filter((building) => !building.walkIn);
+    const sealed = TOWN_BUILDINGS.filter((building) => !building.walkIn);
     expect(sealed.length).toBeGreaterThan(0);
     for (const building of sealed) expect(walkInPlacementFor(recordOf(building.id))).toBeNull();
     const inn = recordOf(WALK_IN[0].id);
@@ -126,12 +147,16 @@ describe('the walk-in town placement', () => {
         }
       }
     }
-    // away from the town the built-in world asks for no deck at all
+    // away from the towns the built-in world asks for no deck at all, and that
+    // includes the country between Eastbrook and Fenbridge, which one box
+    // round both towns' buildings would have swallowed
     for (const [x, z] of [
       [0, 0],
       [-14, -100],
       [120, 300],
       [0, 420],
+      [0, 100],
+      [-10, 200],
     ]) {
       expect(decksMayStand(BUILTIN_WORLD, x, z), `${x}, ${z}`).toBe(false);
     }

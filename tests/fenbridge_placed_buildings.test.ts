@@ -499,7 +499,12 @@ describe('walking into the walk-in Fenbridge buildings', () => {
   });
 
   it('leaves the floors of a Studio document to its own placements', () => {
-    expect(townWalkInPlacements(BUILTIN_WORLD)).toHaveLength(4);
+    // Fenbridge's four (Eastbrook's walk-in buildings stand theirs beside them)
+    expect(
+      townWalkInPlacements(BUILTIN_WORLD).filter((placement) =>
+        placement.path.startsWith('/models/tidehold/fenrire/'),
+      ),
+    ).toHaveLength(4);
     expect(townWalkInPlacements(loadPublishedMap())).toEqual([]);
   });
 });

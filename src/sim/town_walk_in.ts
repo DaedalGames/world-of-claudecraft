@@ -1,12 +1,14 @@
 // Walk-in town buildings. A placed painted building whose model bakes an open
-// doorway (fenbridge_layout.ts `walkIn`) is entered the way the same model is
-// as a Studio placement: its record collides on the model's own baked walls
+// doorway (`walkIn` in eastbrook_layout.ts and fenbridge_layout.ts) is
+// entered the way the same model is as a Studio placement: its record
+// collides on the model's own baked walls
 // and furniture (authored_town_buildings.ts buildingRecordColliders) instead
 // of one sealed box, and the floor and entry step it bakes are walkable
 // ground (placement_ramps.ts, beside the placements' decks). Both come from
 // the ONE placement this leaf resolves, so the walls, the floor and the drawn
 // model cannot drift apart. Pure leaf: no rng, no clock, no SimContext.
 
+import { EASTBROOK_LAYOUT } from './eastbrook_layout';
 import { FENBRIDGE_LAYOUT } from './fenbridge_layout';
 import type { BuildingDef, PlacedAsset, WorldContent } from './types';
 
@@ -16,35 +18,33 @@ import type { BuildingDef, PlacedAsset, WorldContent } from './types';
 const PLACED_TARGET_HEIGHT = 2.2;
 const EPSILON = 1e-6;
 
-const WALK_IN_BUILDINGS = FENBRIDGE_LAYOUT.buildings.filter((building) => building.walkIn);
+const WALK_IN_BUILDINGS = [...EASTBROOK_LAYOUT.buildings, ...FENBRIDGE_LAYOUT.buildings].filter(
+  (building) => building.walkIn,
+);
 
-/** One world box round every walk-in building's whole model (its reach, with
- *  a yard to spare), where its floor and entry step can stand. */
-const WALK_IN_BOUNDS = (() => {
-  let minX = Number.POSITIVE_INFINITY;
-  let maxX = Number.NEGATIVE_INFINITY;
-  let minZ = Number.POSITIVE_INFINITY;
-  let maxZ = Number.NEGATIVE_INFINITY;
-  for (const building of WALK_IN_BUILDINGS) {
-    const reach = building.reach;
-    const radius = Math.hypot(reach.halfWidth, reach.halfDepth) + 1;
-    minX = Math.min(minX, reach.center.x - radius);
-    maxX = Math.max(maxX, reach.center.x + radius);
-    minZ = Math.min(minZ, reach.center.z - radius);
-    maxZ = Math.max(maxZ, reach.center.z + radius);
-  }
-  return { minX, maxX, minZ, maxZ };
-})();
+/** One world box round each walk-in building's whole model (its reach, with
+ *  a yard to spare), where its floor and entry step can stand. One box per
+ *  building, never one round them all: the towns are hundreds of yards apart,
+ *  and a box spanning both would send the ground between them to the deck
+ *  table. */
+const WALK_IN_BOUNDS = WALK_IN_BUILDINGS.map((building) => {
+  const reach = building.reach;
+  const radius = Math.hypot(reach.halfWidth, reach.halfDepth) + 1;
+  return {
+    minX: reach.center.x - radius,
+    maxX: reach.center.x + radius,
+    minZ: reach.center.z - radius,
+    maxZ: reach.center.z + radius,
+  };
+});
 
 /** Whether (x, z) lies where a walk-in town floor could stand: the cheap test
  *  that lets a world with no placements skip the deck table everywhere else. */
 export function nearTownWalkIn(x: number, z: number): boolean {
-  return (
-    x >= WALK_IN_BOUNDS.minX &&
-    x <= WALK_IN_BOUNDS.maxX &&
-    z >= WALK_IN_BOUNDS.minZ &&
-    z <= WALK_IN_BOUNDS.maxZ
-  );
+  for (const box of WALK_IN_BOUNDS) {
+    if (x >= box.minX && x <= box.maxX && z >= box.minZ && z <= box.maxZ) return true;
+  }
+  return false;
 }
 
 function sameNumber(a: number, b: number): boolean {
