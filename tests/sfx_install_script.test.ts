@@ -35,6 +35,8 @@ let fixture = '';
 let shimPath = '';
 let toolLog = '';
 let caseCount = 0;
+// The checksum tool the installer detects: GNU sha256sum first, else shasum.
+let shaTool = 'sha256sum';
 
 function installScript(list: Buffer = LIST, runtime: Buffer = RUNTIME): string {
   return posixInstallScript({
@@ -92,17 +94,22 @@ function snapshot(root: string, relative = ''): Record<string, string> {
   return result;
 }
 
-function install(artifactRoot: string, target: string, cwd?: string) {
+function install(
+  artifactRoot: string,
+  target: string,
+  options: { cwd?: string; env?: Record<string, string> } = {},
+) {
   writeFileSync(toolLog, '');
   // Windows spells the key Path and separates entries with ';'.
   const pathKey = Object.keys(process.env).find((key) => key.toUpperCase() === 'PATH') ?? 'PATH';
   const result = spawnSync('sh', [join(artifactRoot, 'install.sh'), target], {
-    cwd,
+    cwd: options.cwd,
     encoding: 'utf8',
     env: {
       ...process.env,
       [pathKey]: `${shimPath}${delimiter}${process.env[pathKey] ?? ''}`,
       WOC_TOOL_LOG: toolLog,
+      ...options.env,
     },
   });
   expect(result.error, 'installer failed to execute').toBeUndefined();
@@ -113,6 +120,9 @@ function install(artifactRoot: string, target: string, cwd?: string) {
     count: (tool: string) => calls.filter((call) => call.startsWith(`${tool} `)).length,
   };
 }
+
+// The last argument of a logged tool call: the destination of a cp or mv.
+const destination = (call: string | undefined) => call?.split(' ').at(-1) ?? '';
 
 function expectInstalled(target: string, extra: Record<string, string> = {}): void {
   const expected: Record<string, string> = {
@@ -147,7 +157,10 @@ beforeAll(() => {
   // Logging wrappers ahead of the real tools on PATH count every invocation.
   for (const tool of ['sha256sum', 'shasum', 'cp', 'mv']) {
     const real = spawnSync('sh', ['-c', `command -v ${tool}`], { encoding: 'utf8' }).stdout.trim();
-    if (!real) continue;
+    if (!real) {
+      if (tool === 'sha256sum') shaTool = 'shasum';
+      continue;
+    }
     writeFileSync(
       join(shimPath, tool),
       `#!/bin/sh\nprintf '%s\\n' "${tool} $*" >> "$WOC_TOOL_LOG"\nexec '${real}' "$@"\n`,
@@ -175,14 +188,23 @@ describe('SFX production bundle POSIX installer', () => {
     expectInstalled(target);
     // Runtime manifest, blob list, and ONE pass over every source blob; one cp
     // and one mv batch for the blobs, then the runtime manifest last.
-    expect(result.count('sha256sum')).toBe(3);
+    expect(result.count(shaTool)).toBe(3);
     expect(result.count('cp')).toBe(2);
     expect(result.count('mv')).toBe(2);
+    const copies = result.calls.filter((call) => call.startsWith('cp '));
     const moves = result.calls.filter((call) => call.startsWith('mv '));
     expect(moves[0]).toContain(`${IDS[0]}.mp3`);
     expect(moves[0]).toContain(`${LAST}.mp3`);
     expect(moves[1]).toMatch(/runtime-pack\.json$/);
     expect(result.calls.at(-1)).toBe(moves[1]);
+    // Each staging directory sits inside the directory its files are renamed
+    // into, so every rename stays on one filesystem and is atomic.
+    const blobsDir = destination(moves[0]);
+    expect(blobsDir).toMatch(/\/audio\/sfx\/blobs$/);
+    expect(destination(copies[0]).startsWith(`${blobsDir}/.install.`)).toBe(true);
+    const manifestStaging = destination(copies[1]);
+    expect(manifestStaging).toMatch(/\/\.install\.[^/]+\/runtime-pack\.json$/);
+    expect(dirname(dirname(manifestStaging))).toBe(dirname(destination(moves[1])));
   });
 
   it('re-installs over its own result with one pass over the existing blobs', () => {
@@ -192,7 +214,7 @@ describe('SFX production bundle POSIX installer', () => {
     const result = install(root, target);
     expect(result.status, result.stderr).toBe(0);
     expectInstalled(target);
-    expect(result.count('sha256sum')).toBe(4);
+    expect(result.count(shaTool)).toBe(4);
     expect(result.count('cp')).toBe(1);
     expect(result.count('mv')).toBe(1);
   });
@@ -216,10 +238,43 @@ describe('SFX production bundle POSIX installer', () => {
   it('resolves a relative static root against the working directory', () => {
     const root = artifact();
     const cwd = staticRoot();
-    const result = install(root, 'relative-root', cwd);
+    for (const relative of ['relative-root', '-dash-root']) {
+      const result = install(root, relative, { cwd });
+      expect(result.status, result.stderr).toBe(0);
+      const target = join(cwd, relative);
+      writeFileSync(join(target, 'sentinel.txt'), 'production stays untouched\n');
+      expectInstalled(target);
+    }
+  });
+
+  it('ignores an inherited CDPATH when checking a relative static root', () => {
+    const root = artifact();
+    // A decoy tree with the same relative layout and valid blobs: a CDPATH cd
+    // would check it instead of the real target and miss the corrupt blob.
+    const decoy = staticRoot(
+      Object.fromEntries(
+        IDS.map((id) => [`relative-root/audio/sfx/blobs/${id}.mp3`, BLOB_BY_ID.get(id) as Buffer]),
+      ),
+    );
+    const cwd = staticRoot({
+      [`relative-root/audio/sfx/blobs/${IDS[0]}.mp3`]: BLOB_BY_ID.get(IDS[0]) as Buffer,
+      [`relative-root/audio/sfx/blobs/${LAST}.mp3`]: 'corrupt production blob',
+    });
+    const before = snapshot(cwd);
+    expectRefused(
+      install(root, 'relative-root', { cwd, env: { CDPATH: decoy } }),
+      cwd,
+      before,
+      `existing audio blob checksum failed: ${LAST}`,
+    );
+  });
+
+  it('installs a list that repeats an identity', () => {
+    const list = Buffer.from([...IDS, IDS[2]].sort().join('\n'));
+    const root = artifact({ list });
+    const target = staticRoot();
+    const result = install(root, target);
     expect(result.status, result.stderr).toBe(0);
-    const target = join(cwd, 'relative-root');
-    writeFileSync(join(target, 'sentinel.txt'), 'production stays untouched\n');
     expectInstalled(target);
   });
 
@@ -231,7 +286,7 @@ describe('SFX production bundle POSIX installer', () => {
     const before = snapshot(target);
     const result = install(root, target);
     expectRefused(result, target, before, `artifact audio checksum failed: ${LAST}`);
-    expect(result.count('sha256sum')).toBe(3);
+    expect(result.count(shaTool)).toBe(3);
   });
 
   it('refuses a missing source blob', () => {
@@ -318,6 +373,16 @@ describe('SFX production bundle POSIX installer', () => {
       before,
       'artifact runtime manifest checksum failed',
     );
+  });
+
+  it('refuses to run without sha256sum or shasum', () => {
+    const script = installScript()
+      .replaceAll('command -v sha256sum', 'command -v woc-no-sha256sum')
+      .replaceAll('command -v shasum', 'command -v woc-no-shasum');
+    const root = artifact({ script });
+    const target = staticRoot();
+    const before = snapshot(target);
+    expectRefused(install(root, target), target, before, 'install.sh requires sha256sum or shasum');
   });
 
   it('falls back to shasum when sha256sum is unavailable', (context) => {

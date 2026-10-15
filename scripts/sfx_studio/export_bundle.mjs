@@ -231,13 +231,21 @@ export function posixInstallScript({ runtimeManifestSha256, runtimeBundleId, ins
   // The per-blob loops left run shell builtins only.
   return Buffer.from(`#!/bin/sh
 set -eu
+# A fixed locale keeps the hex pattern and the checksum report text stable,
+# and an inherited CDPATH must never redirect a relative cd below.
+LC_ALL=C
+export LC_ALL
+unset CDPATH
 
-source_root=$(CDPATH= cd -P "$(dirname "$0")" && pwd)
+source_root=$(cd -P "$(dirname "$0")" && pwd)
 static_root=\${1:-}
 if [ -z "$static_root" ]; then
   echo "usage: sh install.sh <production-static-root>" >&2
   exit 2
 fi
+case "$static_root" in
+  -*) static_root="./$static_root" ;;
+esac
 
 if command -v sha256sum >/dev/null 2>&1; then
   sha256_tool=sha256sum
@@ -267,7 +275,7 @@ check_named_blobs() {
   if report=$(cd "$1" && awk '{print substr($0, 1, 64) "  " $0}' | sha256 -c - 2>&1); then
     return 0
   fi
-  printf '%s\n' "$report" | awk '/: FAILED/ { print substr($0, 1, 64); exit }'
+  printf '%s\\n' "$report" | awk '/: FAILED/ { print substr($0, 1, 64); exit }'
   return 1
 }
 
@@ -287,7 +295,10 @@ cleanup() {
   if [ -n "$blob_staging" ]; then rm -rf "$blob_staging"; fi
   if [ -n "$manifest_staging" ]; then rm -rf "$manifest_staging"; fi
 }
-trap cleanup 0 HUP INT TERM
+trap cleanup 0
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 runtime_source="$source_root/activate/audio/sfx/runtime-pack.json"
 if [ "$(hash_file "$runtime_source")" != "${runtimeManifestSha256}" ]; then
@@ -301,55 +312,52 @@ if [ ! -f "$install_blobs" ] || [ "$(hash_file "$install_blobs")" != "${installB
   exit 1
 fi
 
-# Shell builtins only. Every identity is 64 lowercase hex digits, so the blob
-# names collected here are safe unquoted in checksum lists and xargs input.
+# Shell builtins only, in one subshell whose output is collected once. Every
+# identity is 64 lowercase hex digits, so the names are safe unquoted below.
 source_blobs="$source_root/payload/audio/sfx/blobs"
-names=
-identity_count=0
-while IFS= read -r identity || [ -n "$identity" ]; do
-  case "$identity" in
-    ''|*[!0-9a-f]*) echo "artifact audio identity failed" >&2; exit 1 ;;
-  esac
-  if [ "\${#identity}" -ne 64 ]; then
-    echo "artifact audio identity failed" >&2
-    exit 1
-  fi
-  if [ ! -f "$source_blobs/\${identity}.mp3" ]; then
-    echo "artifact audio checksum failed: $identity" >&2
-    exit 1
-  fi
-  names="$names\${identity}.mp3
-"
-  identity_count=$((identity_count + 1))
-done < "$install_blobs"
-if [ "$identity_count" -eq 0 ]; then
+names=$(
+  while IFS= read -r identity || [ -n "$identity" ]; do
+    case "$identity" in
+      ''|*[!0-9a-f]*) echo "artifact audio identity failed" >&2; exit 1 ;;
+    esac
+    if [ "\${#identity}" -ne 64 ]; then
+      echo "artifact audio identity failed" >&2
+      exit 1
+    fi
+    if [ ! -f "$source_blobs/\${identity}.mp3" ]; then
+      echo "artifact audio checksum failed: $identity" >&2
+      exit 1
+    fi
+    echo "\${identity}.mp3"
+  done < "$install_blobs"
+) || exit 1
+if [ -z "$names" ]; then
   echo "artifact audio list is empty" >&2
   exit 1
 fi
-if ! failed=$(printf '%s' "$names" | check_named_blobs "$source_blobs"); then
+if ! failed=$(printf '%s\\n' "$names" | check_named_blobs "$source_blobs"); then
   echo "artifact audio checksum failed: $failed" >&2
   exit 1
 fi
 
 target_sfx="$static_root/audio/sfx"
-existing=
-missing=
-for name in $names; do
-  target_file="$target_sfx/blobs/$name"
-  if [ -e "$target_file" ]; then
-    if [ ! -f "$target_file" ]; then
-      echo "existing audio blob checksum failed: \${name%.mp3}" >&2
-      exit 1
+scan=$(
+  for name in $names; do
+    if [ -e "$target_sfx/blobs/$name" ]; then
+      if [ ! -f "$target_sfx/blobs/$name" ]; then
+        echo "existing audio blob checksum failed: \${name%.mp3}" >&2
+        exit 1
+      fi
+      echo "existing $name"
+    else
+      echo "missing $name"
     fi
-    existing="$existing$name
-"
-  else
-    missing="$missing$name
-"
-  fi
-done
+  done
+) || exit 1
+existing=$(printf '%s\\n' "$scan" | awk '$1 == "existing" && !seen[$2]++ { print $2 }')
+missing=$(printf '%s\\n' "$scan" | awk '$1 == "missing" && !seen[$2]++ { print $2 }')
 if [ -n "$existing" ] &&
-  ! failed=$(printf '%s' "$existing" | check_named_blobs "$target_sfx/blobs"); then
+  ! failed=$(printf '%s\\n' "$existing" | check_named_blobs "$target_sfx/blobs"); then
   echo "existing audio blob checksum failed: $failed" >&2
   exit 1
 fi
@@ -357,11 +365,11 @@ fi
 # Copies land in private staging directories beside their targets, and each
 # finished file is renamed into place, so readers never see a partial file.
 mkdir -p "$target_sfx/blobs"
-live_sfx=$(CDPATH= cd "$target_sfx" && pwd)
+live_sfx=$(cd "$target_sfx" && pwd)
 if [ -n "$missing" ]; then
   blob_staging=$(mktemp -d "$live_sfx/blobs/.install.XXXXXX")
-  printf '%s' "$missing" | copy_named "$source_blobs" "$blob_staging"
-  printf '%s' "$missing" | move_named "$blob_staging" "$live_sfx/blobs"
+  printf '%s\\n' "$missing" | copy_named "$source_blobs" "$blob_staging"
+  printf '%s\\n' "$missing" | move_named "$blob_staging" "$live_sfx/blobs"
   rmdir "$blob_staging"
   blob_staging=
 fi
