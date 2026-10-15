@@ -714,7 +714,9 @@ const PINNED_POLISH_COMPOSITE_FINGERPRINT =
   // Re-minted for the painted Tidehold buildings in the built-in town: the
   // authoritative layout's six building rows and the town runtime leaf moved.
   // No capture was retaken.
-  '50fa04a27db4bf416edf4d2e5bbd20c152baef8564527e761e448d6add99ebd5';
+  // Re-minted for the walk-in Eastbrook buildings: the authoritative layout and
+  // the town runtime leaf moved. No capture was retaken.
+  'cd17cd3e2532002575e701c335b6b50d4f2117b4f82600fc8a2ae8c46d24c779';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
