@@ -17,9 +17,19 @@
 // 50 ms; normal jitter and bufferbloat stretch single gaps to hundreds of ms,
 // and the production server's worst event-loop stall over a two-week window
 // measured 2.75 s (nodejs_eventloop_lag_max_seconds; its p99.9 was 0.15 s).
-// 8 s is about three times that worst stall and 160 missed frames, yet still
-// detects a dead path an order of magnitude sooner than TCP or the keepalive.
+// The 8 s floor is about three times that worst stall and 160 missed frames,
+// yet still detects a dead path an order of magnitude sooner than TCP or the
+// keepalive. Each client draws its own window once, uniformly over
+// [STALL_WINDOW_MS, STALL_WINDOW_MS + STALL_WINDOW_SPREAD_MS): a realm-wide
+// silence (a longer server stall, a shutdown drain) then closes clients over a
+// 4 s spread instead of on one 50 ms beat, on top of the reconnect jitter.
 export const STALL_WINDOW_MS = 8_000;
+export const STALL_WINDOW_SPREAD_MS = 4_000;
+
+// rng is injected (ClientWorld passes Math.random) so a test pins the draw.
+export function drawStallWindowMs(rng: () => number): number {
+  return STALL_WINDOW_MS + rng() * STALL_WINDOW_SPREAD_MS;
+}
 
 // A poll gap longer than this means the client itself was frozen (a long main
 // thread task, a suspended mobile WebView, background timer throttling): frames
@@ -39,17 +49,22 @@ export class SocketStallWatchdog {
     private readonly maxPollGapMs = STALL_MAX_POLL_GAP_MS,
   ) {}
 
-  // Any inbound frame proves the path alive and (re)arms the watchdog.
-  noteFrame(nowMs: number): void {
-    this.lastFrameAtMs = nowMs;
+  // Any inbound frame proves the path alive, but only an ARMING frame (a
+  // snapshot: the stream whose cadence the window is sized from) arms a
+  // disarmed watchdog. A server that accepts the socket and sends hello but
+  // never streams snapshots (a session with no world entity, a tick body that
+  // throws every tick) therefore never arms it: firing there would only loop
+  // close, reconnect, hello forever, since hello resets the attempt count.
+  noteFrame(nowMs: number, arms: boolean): void {
+    if (arms || this.lastFrameAtMs !== null) this.lastFrameAtMs = nowMs;
   }
 
   // True exactly once per stall: the caller retires the socket and runs its
-  // close path. `hidden` restarts the window, so time the tab spent in the
-  // background never counts (the visibilitychange zombie-socket path owns that
-  // case). `live` false (the session is not in-world: a close path already ran,
-  // or the handshake has not completed) disarms until the next transport's
-  // first frame, so the watchdog never fires on top of a close already handled.
+  // close path. `hidden` restarts the window, so time the app spent in the
+  // background never counts (the foreground zombie-socket path owns that case).
+  // `live` false (the session is not in-world: a close path already ran, or the
+  // handshake has not completed) disarms until the next transport's first
+  // snapshot, so the watchdog never fires on top of a close already handled.
   poll(nowMs: number, hidden: boolean, live: boolean): boolean {
     const prevPollAtMs = this.lastPollAtMs;
     this.lastPollAtMs = nowMs;

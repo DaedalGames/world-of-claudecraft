@@ -262,7 +262,7 @@ import {
 } from './snapshot_timer_wire';
 import { socialInfoFromFrame } from './social_frame_wire';
 import { applySocialSelfWire } from './social_self_wire';
-import { SocketStallWatchdog } from './socket_stall_watchdog';
+import { drawStallWindowMs, SocketStallWatchdog } from './socket_stall_watchdog';
 import { armTargetEcho, type PendingTargetEcho, resolveSelfTarget } from './target_echo';
 import { applyFerryWire, applyTransportSnapshot, clientFerryView } from './transport_wire';
 import { vaultWithdrawPayload } from './vault_snapshot_wire';
@@ -1631,8 +1631,9 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // see src/net/reconnect_policy.ts
   private timeoutRejections = 0;
   private reconnectTimer: number | undefined;
-  private readonly stallWatchdog = new SocketStallWatchdog();
-  // set by close()and by a server 'error' frame: the session is over for
+  private readonly stallWatchdog = new SocketStallWatchdog(drawStallWindowMs(Math.random));
+  private backgrounded = false; // last foreground/background signal, DOM or native
+  // set by close() and by a server 'error' frame: the session is over for
   // good, so a subsequent socket close must not schedule a reconnect
   private sessionEnded = false;
   // The native app-lifecycle listener handle (see handleAppStateChange below),
@@ -1793,6 +1794,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // 'appStateChange' listener above, so a native app recovers a zombie socket
   // on the native lifecycle signal even when visibilitychange never fires.
   private handleForegroundBackground(visible: boolean): void {
+    this.backgrounded = !visible;
     if (!visible) {
       // Backgrounding (tab switch, tab close, phone lock) is the last reliable
       // beat to get an in-flight debounced layout edit to the server while the
@@ -1833,8 +1835,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // A path that died without a FIN/RST never delivers onclose (see
   // socket_stall_watchdog.ts): retire the socket and take a real drop's path.
   private pollStallWatchdog(now = performance.now()): void {
-    const hidden = typeof document !== 'undefined' && document.visibilityState !== 'visible';
-    if (!this.stallWatchdog.poll(now, hidden, this.connected)) return;
+    if (!this.stallWatchdog.poll(now, this.backgrounded, this.connected)) return;
     this.ws.onclose = null;
     this.ws.close();
     this.socketClosed();
@@ -2235,12 +2236,12 @@ export class ClientWorld extends ReconWireState implements IWorld {
   private onMessage(raw: string): void {
     let msg: LooseJson;
     const parseStart = performance.now();
-    this.stallWatchdog.noteFrame(parseStart);
     try {
       msg = JSON.parse(raw) as LooseJson;
     } catch {
       return;
     }
+    this.stallWatchdog.noteFrame(parseStart, msg.t === 'snap');
     const parseMs = performance.now() - parseStart;
     // A commandOutcome/corpseHarvestInfo reply routes to its owner; anything
     // else falls through unchanged.

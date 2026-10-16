@@ -558,7 +558,11 @@ describe('ClientWorld onConnectionLost contract', () => {
 
   it('fires again with an updated nextRetryAtMs on the mobile-foreground fast-retry path', () => {
     withDomStubs((doc, _harness) => {
-      vi.spyOn(Math, 'random').mockReturnValueOnce(0.5).mockReturnValueOnce(0.75);
+      // the first draw is the ctor's per-client stall window (socket_stall_watchdog.ts)
+      vi.spyOn(Math, 'random')
+        .mockReturnValueOnce(0)
+        .mockReturnValueOnce(0.5)
+        .mockReturnValueOnce(0.75);
       const world = new ClientWorld('t', 1, PROBE_CLASS, 'http://localhost');
       const calls: Array<[number, number, number]> = [];
       world.onConnectionLost = (attempt, maxAttempts, nextRetryAtMs) => {
@@ -853,6 +857,8 @@ describe('ClientWorld silent-stall watchdog', () => {
     vi.restoreAllMocks();
   });
 
+  const SNAP = { t: 'snap', tick: 1, ents: [] };
+
   type StallWire = {
     onMessage(raw: string): void;
     pollStallWatchdog(now: number): void;
@@ -866,12 +872,16 @@ describe('ClientWorld silent-stall watchdog', () => {
   function inWorld(harness: TimerHarness) {
     let nowMs = 0;
     vi.spyOn(performance, 'now').mockImplementation(() => nowMs);
+    // pins the per-client window draw at its floor (STALL_WINDOW_MS)
+    vi.spyOn(Math, 'random').mockReturnValue(0);
     const world = new ClientWorld('t', 1, PROBE_CLASS, 'http://localhost');
     const wire = world as unknown as StallWire;
     const lost: number[] = [];
     world.onConnectionLost = (attempt) => lost.push(attempt);
     const frame = (value: unknown) => wire.onMessage(JSON.stringify(value));
+    // hello, then the first snapshot arms the watchdog
     frame({ t: 'hello', pid: 1, seed: 42 });
+    frame(SNAP);
     const step = (toMs: number, opts: { frames?: boolean } = {}) => {
       while (nowMs < toMs) {
         nowMs = Math.min(toMs, nowMs + 500);
@@ -910,6 +920,7 @@ describe('ClientWorld silent-stall watchdog', () => {
     withDomStubs((_doc, _harness) => {
       let nowMs = 0;
       vi.spyOn(performance, 'now').mockImplementation(() => nowMs);
+      vi.spyOn(Math, 'random').mockReturnValue(0);
       const beats: Array<() => void> = [];
       const win = (globalThis as unknown as { window: { setInterval: unknown } }).window;
       win.setInterval = (cb: () => void) => {
@@ -920,6 +931,7 @@ describe('ClientWorld silent-stall watchdog', () => {
       const lost: number[] = [];
       world.onConnectionLost = (attempt) => lost.push(attempt);
       (world as unknown as StallWire).onMessage(JSON.stringify({ t: 'hello', pid: 1, seed: 42 }));
+      (world as unknown as StallWire).onMessage(JSON.stringify(SNAP));
       expect(beats.length).toBe(1);
       while (nowMs < STALL_WINDOW_MS) {
         nowMs += 50;
@@ -963,6 +975,8 @@ describe('ClientWorld silent-stall watchdog', () => {
     withDomStubs((_doc, harness) => {
       const { world, wire, lost, step } = inWorld(harness);
       const first = StubWebSocket.instances[0];
+      const realClose = first.onclose;
+      const closeSpy = vi.spyOn(first, 'close');
       step(2_000);
       first.readyState = StubWebSocket.CLOSED;
       first.onclose?.();
@@ -973,6 +987,9 @@ describe('ClientWorld silent-stall watchdog', () => {
       expect(wire.reconnectAttempts).toBe(1);
       expect(lost).toEqual([1]);
       expect(harness.timers.length).toBe(1);
+      // the watchdog itself never ran on the already-closed socket
+      expect(closeSpy).not.toHaveBeenCalled();
+      expect(first.onclose).toBe(realClose);
       world.close();
     });
   });
@@ -995,6 +1012,24 @@ describe('ClientWorld silent-stall watchdog', () => {
     });
   });
 
+  it('a server that sends hello but never a snapshot cannot drive a close/reconnect loop', () => {
+    withDomStubs((_doc, harness) => {
+      const { world, lost, step, frame, now } = inWorld(harness);
+      step(STALL_WINDOW_MS);
+      expect(lost).toEqual([1]);
+      harness.fire(harness.timers[0].id);
+      // the resumed transport says hello (resetting the attempt count) but
+      // never streams a snapshot: the watchdog stays disarmed, no second close
+      frame({ t: 'hello', pid: 1, seed: 42 });
+      frame({ t: 'censor', words: [] });
+      step(now() + 10 * STALL_WINDOW_MS);
+      expect(lost).toEqual([1]);
+      expect(StubWebSocket.instances.length).toBe(2);
+      expect(StubWebSocket.instances[1].readyState).toBe(StubWebSocket.OPEN);
+      world.close();
+    });
+  });
+
   it('fires once per stall, and the next transport re-arms only on its own first frame', () => {
     withDomStubs((_doc, harness) => {
       const { world, wire, lost, step, frame, now } = inWorld(harness);
@@ -1011,6 +1046,7 @@ describe('ClientWorld silent-stall watchdog', () => {
       expect(lost).toEqual([1]);
       frame({ t: 'hello', pid: 1, seed: 42 });
       expect(wire.reconnectAttempts).toBe(0);
+      frame(SNAP);
       const helloAt = now();
       step(helloAt + STALL_WINDOW_MS - 500);
       expect(second.readyState).toBe(StubWebSocket.OPEN);

@@ -200,12 +200,16 @@ over for good (retries exhausted, or a fatal server `error` frame).
   call it before a page reload.
 - A silent stall (a dead path that never delivers `onclose`, so the socket still
   reads OPEN) is caught by `socket_stall_watchdog.ts`, polled on the input-send
-  beat: once an in-world transport has gone `STALL_WINDOW_MS` with no frame of any
-  kind, `ClientWorld` detaches the socket's `onclose`, closes it, and runs
-  `socketClosed()`, so the normal jittered backoff starts at once instead of after
-  TCP gives up. Hidden-tab time and client freezes (a poll gap over
-  `STALL_MAX_POLL_GAP_MS`) restart the window rather than count toward it, and it
-  arms only on the transport's first frame, so a slow handshake never trips it.
+  beat: once an in-world transport has gone its window (`STALL_WINDOW_MS` plus a
+  per-client jitter draw up to `STALL_WINDOW_SPREAD_MS`, so a realm-wide silence
+  never closes every client on one beat) with no frame of any kind, `ClientWorld`
+  detaches the socket's `onclose`, closes it, and runs `socketClosed()`, so the
+  normal jittered backoff starts at once instead of after TCP gives up.
+  Backgrounded time (the DOM or native lifecycle signal) and client freezes (a poll
+  gap over `STALL_MAX_POLL_GAP_MS`) restart the window rather than count toward it.
+  It arms only on a transport's first `snap` frame, so a slow handshake never trips
+  it and a server that sends `hello` but no snapshots cannot drive an endless
+  close/reconnect loop (`hello` resets the attempt count).
 Tests: `tests/linkdead.test.ts`, `tests/net_online_visibility_reconnect.test.ts`,
 `tests/entry_watch.test.ts`, `tests/socket_stall_watchdog.test.ts`.
 A reload instead of an in-socket reconnect (the mobile WebView eviction case) is
@@ -301,4 +305,5 @@ failure, kept as stable English that `main.ts` re-localizes.
   release heading remains wire-owned until its input sequence is acknowledged,
   preventing a rounded snapshot from masquerading as an applied final heading.
 - Never read `Math.random`/timing into *gameplay*; `performance.now` here is for
-  render interpolation only (`lastSnapAt`, per-entity `netInterval`), not logic.
+  render interpolation (`lastSnapAt`, per-entity `netInterval`) and transport
+  liveness (the stall watchdog's frame clock), never game logic.

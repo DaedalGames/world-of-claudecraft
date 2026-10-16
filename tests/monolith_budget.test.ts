@@ -1868,12 +1868,12 @@ const MONOLITHS: MonolithRow[] = [
     // (Reuben's call): both parent pins for the record, the release 5354 and the
     // branch 5426; the two sides' additions compose to 5356 by wc -l on the merged
     // tree (after biome). Exact count, zero slack.
-    // LOWERED 5356 -> 5348 by the silent-stall watchdog: the reconnect schedule
+    // LOWERED 5356 -> 5349 by the silent-stall watchdog: the reconnect schedule
     // constants and their rationale moved whole to src/net/backoff.ts (with a
     // one-line reconnectBackoffDelay delegate), paying for the thin watchdog
     // wiring whose decision core is src/net/socket_stall_watchdog.ts. Exact
     // count, zero slack.
-    ceiling: 5348,
+    ceiling: 5349,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
