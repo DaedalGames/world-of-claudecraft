@@ -1631,7 +1631,10 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // see src/net/reconnect_policy.ts
   private timeoutRejections = 0;
   private reconnectTimer: number | undefined;
-  private readonly stallWatchdog = new SocketStallWatchdog(drawStallWindowMs(Math.random));
+  // undefined on Object.create(ClientWorld.prototype) fixtures (no initializers run)
+  private readonly stallWatchdog: SocketStallWatchdog | undefined = new SocketStallWatchdog(
+    drawStallWindowMs(Math.random),
+  );
   private backgrounded = false; // last foreground/background signal, DOM or native
   // set by close() and by a server 'error' frame: the session is over for
   // good, so a subsequent socket close must not schedule a reconnect
@@ -1835,7 +1838,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // A path that died without a FIN/RST never delivers onclose (see
   // socket_stall_watchdog.ts): retire the socket and take a real drop's path.
   private pollStallWatchdog(now = performance.now()): void {
-    if (!this.stallWatchdog.poll(now, this.backgrounded, this.connected)) return;
+    if (!this.stallWatchdog?.poll(now, this.backgrounded, this.connected)) return;
     this.ws.onclose = null;
     this.ws.close();
     this.socketClosed();
@@ -2241,7 +2244,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
     } catch {
       return;
     }
-    this.stallWatchdog.noteFrame(parseStart, msg.t === 'snap');
+    this.stallWatchdog?.noteFrame(parseStart, msg.t === 'snap');
     const parseMs = performance.now() - parseStart;
     // A commandOutcome/corpseHarvestInfo reply routes to its owner; anything
     // else falls through unchanged.
