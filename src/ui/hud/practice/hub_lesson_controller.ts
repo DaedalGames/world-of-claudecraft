@@ -48,7 +48,7 @@ import {
 } from '../../../sim/content/practice_dummies';
 import { isOnProvingShore } from '../../../sim/content/proving_shore';
 import { getActiveWorldContent } from '../../../sim/data';
-import { practiceDummyPos } from '../../../sim/moved_objects';
+import { practiceDummyPos, practiceDummyRemoved } from '../../../sim/moved_objects';
 import { hubHealingAbilityId } from '../../../sim/tutorial/hub_healing_lesson';
 import { startingAttackFor } from '../../../sim/tutorial/starting_attack';
 import type { IWorld } from '../../../world_api';
@@ -149,9 +149,16 @@ const BUBBLE_VISIBLE_CLASS = 'hlc-bubble-visible';
 const HUB_LESSON_RANGE = 45;
 /** Midway between the two yard dummies, wherever this world stands them: a
  *  Studio map can move either one (sim/moved_objects.ts), and the coach
- *  follows the yard. The shipped marks otherwise. */
-export function hubLessonCenter(): { x: number; z: number } {
+ *  follows the yard. The shipped marks otherwise. Null when the map deleted
+ *  either dummy: the drills need both, so the coach stays quiet. */
+export function hubLessonCenter(): { x: number; z: number } | null {
   const moves = getActiveWorldContent().objectMoves;
+  if (
+    practiceDummyRemoved(moves, HUB_TRAINING_DUMMY_ID) ||
+    practiceDummyRemoved(moves, HUB_HEALING_DUMMY_ID)
+  ) {
+    return null;
+  }
   const damage = practiceDummyPos(moves, HUB_TRAINING_DUMMY_ID, HUB_TRAINING_DUMMY_POS);
   const healing = practiceDummyPos(moves, HUB_HEALING_DUMMY_ID, HUB_HEALING_DUMMY_POS);
   return { x: (damage.x + healing.x) / 2, z: (damage.z + healing.z) / 2 };
@@ -305,7 +312,7 @@ export class HubLessonController {
     // more expensive than one Math.hypot to find that out.
     const p = this.deps.world.player.pos;
     const center = hubLessonCenter();
-    const inRange = planar(p.x, p.z, center.x, center.z) <= HUB_LESSON_RANGE;
+    const inRange = center !== null && planar(p.x, p.z, center.x, center.z) <= HUB_LESSON_RANGE;
     if (!inRange || isOnProvingShore(p.x, p.z)) {
       this.bindHistoryListener(null);
       this.historyViewedKeyNow = null;

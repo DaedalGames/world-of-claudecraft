@@ -24,6 +24,14 @@
 // (editor playtest, published maps) activates that same world first, so the
 // two agree; the server only ever runs the built-in world.
 //
+// A map may also REMOVE a farm bed, a practice dummy or a gather node: its
+// entry carries `removed: true` (with the spot it last stood on, so Restore
+// puts it back there). The farm and gather tables simply leave it out, the
+// dummy spawners skip it while keeping its entity id slot, and every by-id
+// lookup answers undefined, which the plant, harvest and gather commands
+// already refuse. Dungeon doors cannot be removed: a dungeon without its door
+// could never be entered.
+//
 // Terrain stays put: the calm pads under these objects
 // (terrain_calm_anchors.ts) are cached per seed from the built-in tables, the
 // same as an authored NPC move today, so moving an object never reshapes the
@@ -38,6 +46,9 @@ import type { DungeonDef, GatherNodeDef } from './types';
 export interface ObjectMove {
   readonly x: number;
   readonly z: number;
+  /** The map removed this object (removable kinds only). x/z keep the spot
+   *  it last stood on, so restoring it puts it back there. */
+  readonly removed?: true;
 }
 
 /** Moved objects keyed `<kind>:<id>` (objectMoveKey). Only moved entries are
@@ -56,6 +67,17 @@ export const MOVABLE_OBJECT_KINDS: readonly MovableObjectKind[] = [
 /** A document carries at most this many moves (every movable object in the
  *  built-in world is a few hundred; the cap only bounds a hostile document). */
 export const MAX_OBJECT_MOVES = 1024;
+
+/** The kinds a map may remove outright (a door must stay: see above). */
+export const REMOVABLE_OBJECT_KINDS: readonly MovableObjectKind[] = [
+  'farmBed',
+  'practiceDummy',
+  'gatherNode',
+];
+
+export function objectKindRemovable(kind: MovableObjectKind): boolean {
+  return REMOVABLE_OBJECT_KINDS.includes(kind);
+}
 
 const KEY_PATTERN = /^(farmBed|practiceDummy|gatherNode|dungeonDoor):([a-z0-9_]{1,64})$/;
 
@@ -81,12 +103,17 @@ export function sanitizeObjectMoves(raw: unknown, bound: number): ObjectMoves | 
   let count = 0;
   for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
     if (count >= MAX_OBJECT_MOVES) break;
-    if (!parseObjectMoveKey(key) || !value || typeof value !== 'object') continue;
-    const { x, z } = value as { x?: unknown; z?: unknown };
+    const parsed = parseObjectMoveKey(key);
+    if (!parsed || !value || typeof value !== 'object') continue;
+    const { x, z, removed } = value as { x?: unknown; z?: unknown; removed?: unknown };
     if (typeof x !== 'number' || typeof z !== 'number') continue;
     if (!Number.isFinite(x) || !Number.isFinite(z)) continue;
     if (Math.abs(x) > bound || Math.abs(z) > bound) continue;
-    out[key] = Object.freeze({ x, z });
+    // A removal on a kind that cannot be removed (a door) reads as a move.
+    out[key] =
+      removed === true && objectKindRemovable(parsed.kind)
+        ? Object.freeze({ x, z, removed: true as const })
+        : Object.freeze({ x, z });
     count++;
   }
   return count > 0 ? Object.freeze(out) : undefined;
@@ -103,7 +130,10 @@ export function freezeObjectMoves(
   if (keys.length === 0) return undefined;
   if (Object.isFrozen(moves) && keys.every((key) => Object.isFrozen(moves[key]))) return moves;
   const out: Record<string, ObjectMove> = {};
-  for (const key of keys) out[key] = Object.freeze({ x: moves[key].x, z: moves[key].z });
+  for (const key of keys) {
+    const { x, z, removed } = moves[key];
+    out[key] = removed ? Object.freeze({ x, z, removed }) : Object.freeze({ x, z });
+  }
   return Object.freeze(out);
 }
 
@@ -116,6 +146,15 @@ export function movesKind(moves: ObjectMoves | undefined, kind: MovableObjectKin
 }
 
 const hasKind = movesKind;
+
+/** Whether this map removed the object. */
+export function objectRemoved(
+  moves: ObjectMoves | undefined,
+  kind: MovableObjectKind,
+  id: string,
+): boolean {
+  return moves?.[objectMoveKey(kind, id)]?.removed === true;
+}
 
 // Records proven frozen through and through (outer object and every entry),
 // the only ones a memo may key on: an unfrozen entry could change under it.
@@ -157,7 +196,9 @@ const GATHER_MEMO: Memo<GatherNodeDef[]> = new WeakMap();
  * The garden-bed geography with this world's moved beds. A patch with a moved
  * bed re-centres its anchor (the map pin) on its beds, and the compost bin,
  * derived from the beds (render/farm_patches_core.ts), follows them; every
- * other patch is the shared built-in row. Deep-frozen, like the table.
+ * other patch is the shared built-in row. A removed bed is left out, and a
+ * patch whose beds are all removed is left out with them. Deep-frozen, like
+ * the table.
  */
 export function farmPatchesFor(
   moves: ObjectMoves | undefined,
@@ -166,30 +207,40 @@ export function farmPatchesFor(
   if (!moves || !hasKind(moves, 'farmBed')) return patches;
   return memoized(FARM_MEMO, moves, patches, () =>
     Object.freeze(
-      patches.map((patch) => {
-        if (!patch.beds.some((bed) => moves[objectMoveKey('farmBed', bed.id)])) return patch;
+      patches.flatMap((patch) => {
+        if (!patch.beds.some((bed) => moves[objectMoveKey('farmBed', bed.id)])) return [patch];
         const beds = Object.freeze(
-          patch.beds.map((bed) => {
+          patch.beds.flatMap((bed) => {
             const move = moves[objectMoveKey('farmBed', bed.id)];
-            return move ? Object.freeze({ id: bed.id, x: move.x, z: move.z }) : bed;
+            if (move?.removed) return [];
+            return [move ? Object.freeze({ id: bed.id, x: move.x, z: move.z }) : bed];
           }),
         );
+        if (beds.length === 0) return [];
         const x = beds.reduce((sum, bed) => sum + bed.x, 0) / beds.length;
         const z = beds.reduce((sum, bed) => sum + bed.z, 0) / beds.length;
-        return Object.freeze({ ...patch, x, z, beds });
+        return [Object.freeze({ ...patch, x, z, beds })];
       }),
     ),
   );
 }
 
 /** A bed's row in this world (the plant/harvest range check): the built-in
- *  row, or a frozen copy at its moved position. Undefined stays undefined. */
+ *  row, or a frozen copy at its moved position. A removed bed, like an
+ *  unknown one, is undefined (the commands refuse it as a bad bed). */
 export function farmBedFor(
   moves: ObjectMoves | undefined,
   bed: FarmBedDef | undefined,
 ): FarmBedDef | undefined {
   const move = bed && moves?.[objectMoveKey('farmBed', bed.id)];
+  if (move?.removed) return undefined;
   return move && bed ? Object.freeze({ id: bed.id, x: move.x, z: move.z }) : bed;
+}
+
+/** Whether this map removed the practice dummy (keyed by its template id):
+ *  its spawner skips it, keeping the entity id slot. */
+export function practiceDummyRemoved(moves: ObjectMoves | undefined, mobId: string): boolean {
+  return objectRemoved(moves, 'practiceDummy', mobId);
 }
 
 /** A practice dummy's spawn mark (keyed by its mob template id). */
@@ -202,7 +253,8 @@ export function practiceDummyPos(
 }
 
 /** The gather-node table with this world's moved nodes (same order, same
- *  rows except the moved ones, which are fresh copies at the new pos). */
+ *  rows except the moved ones, which are fresh copies at the new pos, and the
+ *  removed ones, which are left out). */
 export function gatherNodesFor(
   moves: ObjectMoves | undefined,
   nodes: GatherNodeDef[],
@@ -214,11 +266,12 @@ export function gatherNodesFor(
     nodes,
     () =>
       Object.freeze(
-        nodes.map((node) => {
+        nodes.flatMap((node) => {
           const move = moves[objectMoveKey('gatherNode', node.id)];
-          return move
-            ? Object.freeze({ ...node, pos: Object.freeze({ x: move.x, z: move.z }) })
-            : node;
+          if (move?.removed) return [];
+          return [
+            move ? Object.freeze({ ...node, pos: Object.freeze({ x: move.x, z: move.z }) }) : node,
+          ];
         }),
       ) as GatherNodeDef[],
   );

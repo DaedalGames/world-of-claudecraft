@@ -10893,7 +10893,14 @@ export const zh_TW: EnTranslations = {
       "moved": "已在此地圖中移動。",
       "original": "位於原始位置。",
       "hint": "拖曳它，或用方向鍵微調。移動只作用於此地圖，物件保留原有身分，因此已儲存的進度仍能找到它。",
-      "reset": "重設到原始位置"
+      "reset": "重設到原始位置",
+      "delete": "從此地圖刪除",
+      "deleteHint": "僅從此地圖移除（按 Delete 或 X 也一樣）。復原，或在已刪除物件清單中點擊「還原」，即可將其找回。",
+      "doorNoDelete": "地城入口可以移動但不能刪除：沒有入口就無法進入地城。",
+      "removedTitle": "已刪除的玩法物件",
+      "removedHint": "僅從此地圖刪除。「還原」會把它放回最後所在的位置。",
+      "removedRow": "{kind}: {name}",
+      "restore": "還原"
     },
     "lightTool": {
       "title": "Point Lights",

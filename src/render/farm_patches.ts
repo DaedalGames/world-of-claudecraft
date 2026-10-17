@@ -285,14 +285,21 @@ export function buildFarmPatchProps(
       holder.compose(pos, quat, one);
       bedMatrices.push(holder.clone());
     }
+    const bedName = `farmPatches:bed:${patch.id}`;
     addInstancedParts(
       group,
-      `farmPatches:bed:${patch.id}`,
+      bedName,
       templateParts(FARM_BED_MODEL_URL, BED_HEIGHT, 0x8a6a4a),
       bedMatrices,
       matrix,
       tint.setHex(palette.soil),
     );
+    // Instance i is bed i of THIS build's patch, which leaves out any bed the
+    // map removed: the editor's live preview finds a bed's instance by id.
+    const bedIds = patch.beds.map((bed) => bed.id);
+    for (const child of group.children) {
+      if (child.name === bedName) child.userData.farmBedIds = bedIds;
+    }
 
     // One compost bin per patch, just outside the west edge of the grid.
     const bin = farmCompostBinPosition(patch);

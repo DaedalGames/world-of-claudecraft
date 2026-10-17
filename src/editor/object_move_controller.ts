@@ -1,6 +1,7 @@
 // Select-mode moving of the built-in gameplay objects a map can move (farm
 // beds, practice dummies, gather nodes, dungeon doors): the selection, the
-// drag, the arrow-key nudge volley, Reset, and one undo step per gesture.
+// drag, the arrow-key nudge volley, Reset, Delete and Restore (beds, dummies
+// and nodes only), and one undo step per gesture.
 // DOM-free; app.ts composes it over the document and the 3D viewport, and
 // object_move_panel.ts paints the inspector half.
 //
@@ -9,7 +10,14 @@
 // resolvers (sim/moved_objects.ts) never read a stale memo.
 
 import type { ObjectMove, ObjectMoves } from '../sim/moved_objects';
-import { movableObjectByKey, objectPosition, withObjectMovedTo } from './object_moves_core';
+import {
+  movableObjectByKey,
+  objectIsRemoved,
+  objectPosition,
+  objectRemovable,
+  withObjectMovedTo,
+  withObjectRemoved,
+} from './object_moves_core';
 
 export interface ObjectMoveUndoEntry {
   label: string;
@@ -95,8 +103,33 @@ export class ObjectMoveController {
     this.commitPending();
   }
 
+  /** Delete the selected object from this map (one undo step) and clear the
+   *  selection. False when nothing deletable is selected (a dungeon door). */
+  removeSelected(): boolean {
+    const key = this.selected;
+    const object = key ? movableObjectByKey(key) : undefined;
+    if (!key || !object || !objectRemovable(object)) return false;
+    this.commitPending();
+    this.base = { key, before: this.deps.getMoves() };
+    this.applyRecord(key, withObjectRemoved(this.deps.getMoves(), key, true));
+    // Deselect before the commit, so its inspector refresh shows no object.
+    this.selected = null;
+    this.deps.showSelection(null);
+    this.commitPending('remove-object');
+    return true;
+  }
+
+  /** Put a deleted object back where it last stood (one undo step). */
+  restore(key: string): void {
+    if (!objectIsRemoved(this.deps.getMoves(), key)) return;
+    this.commitPending();
+    this.base = { key, before: this.deps.getMoves() };
+    this.applyRecord(key, withObjectRemoved(this.deps.getMoves(), key, false));
+    this.commitPending('restore-object');
+  }
+
   /** Close the open gesture as ONE undo step (a no-op when nothing moved). */
-  commitPending(): void {
+  commitPending(label = 'move-object'): void {
     const base = this.base;
     this.base = null;
     if (!base) return;
@@ -109,7 +142,7 @@ export class ObjectMoveController {
       this.deps.committed();
     };
     this.deps.pushUndo({
-      label: 'move-object',
+      label,
       undo: () => restore(this.deps.getMoves(), before),
       redo: () => restore(this.deps.getMoves(), after),
     });
@@ -117,8 +150,11 @@ export class ObjectMoveController {
   }
 
   private apply(key: string, to: ObjectMove): void {
+    this.applyRecord(key, withObjectMovedTo(this.deps.getMoves(), key, to));
+  }
+
+  private applyRecord(key: string, after: ObjectMoves | undefined): void {
     const before = this.deps.getMoves();
-    const after = withObjectMovedTo(before, key, to);
     if (after === before) return;
     this.deps.setMoves(after);
     this.deps.moveLive(key, before, after);

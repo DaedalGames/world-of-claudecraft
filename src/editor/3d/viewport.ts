@@ -5328,6 +5328,7 @@ export class Editor3DViewport {
   // a reload during boot can never leave two engines running.
   async reload(map: CustomMap): Promise<void> {
     this.generation++;
+    this.objects.resetLive();
     this.buildingPlane = null;
     this.buildingFloorFilter = { id: null, level: 0, hideAbove: false };
     this.map = map;

@@ -10893,7 +10893,14 @@ export const zh_CN: EnTranslations = {
       "moved": "已在此地图中移动。",
       "original": "位于原始位置。",
       "hint": "拖动它，或用方向键微调。移动只作用于此地图，物件保持原有身份，因此已保存的进度仍能找到它。",
-      "reset": "重置到原始位置"
+      "reset": "重置到原始位置",
+      "delete": "从此地图删除",
+      "deleteHint": "仅从此地图移除（按 Delete 或 X 也一样）。撤销，或在已删除对象列表中点击“恢复”，即可将其找回。",
+      "doorNoDelete": "地下城入口可以移动但不能删除：没有入口就无法进入地下城。",
+      "removedTitle": "已删除的玩法对象",
+      "removedHint": "仅从此地图删除。“恢复”会把它放回最后所在的位置。",
+      "removedRow": "{kind}: {name}",
+      "restore": "恢复"
     },
     "lightTool": {
       "title": "Point Lights",

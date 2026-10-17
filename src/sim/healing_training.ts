@@ -6,7 +6,7 @@ import { HUB_SPARRING_MASTER_ID } from './content/practice_dummies';
 import { MOBS } from './data';
 import { createMob } from './entity';
 import { playerDummyRestHp } from './mob/practice_dummies';
-import { practiceDummyPos } from './moved_objects';
+import { practiceDummyPos, practiceDummyRemoved } from './moved_objects';
 import type { SimContext } from './sim_context';
 import type { WorldContent } from './types';
 
@@ -26,6 +26,8 @@ export function spawnHealingTrainingGround(ctx: SimContext, world: WorldContent)
     if (!template) continue;
     const entityId = HEALING_TRAINING_ENTITY_IDS[spawn.mobId];
     if (ctx.entities.has(entityId)) continue;
+    // A Studio map may remove a dummy outright; its reserved id stays unused.
+    if (practiceDummyRemoved(world.objectMoves, spawn.mobId)) continue;
     // A Studio map may move a dummy (moved_objects.ts); its reserved id stays.
     const pos = practiceDummyPos(world.objectMoves, spawn.mobId, spawn.pos);
     const dummy = createMob(entityId, template, template.maxLevel, ctx.groundPos(pos.x, pos.z));

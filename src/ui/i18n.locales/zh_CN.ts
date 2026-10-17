@@ -2423,6 +2423,13 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'editor.objectMove.hint':
     '拖动它，或用方向键微调。移动只作用于此地图，物件保持原有身份，因此已保存的进度仍能找到它。',
   'editor.objectMove.reset': '重置到原始位置',
+  'editor.objectMove.delete': '从此地图删除',
+  'editor.objectMove.deleteHint':
+    '仅从此地图移除（按 Delete 或 X 也一样）。撤销，或在已删除对象列表中点击“恢复”，即可将其找回。',
+  'editor.objectMove.doorNoDelete': '地下城入口可以移动但不能删除：没有入口就无法进入地下城。',
+  'editor.objectMove.removedTitle': '已删除的玩法对象',
+  'editor.objectMove.removedHint': '仅从此地图删除。“恢复”会把它放回最后所在的位置。',
+  'editor.objectMove.restore': '恢复',
   'editor.topbar.undo': '撤销',
   'hudChrome.bags.bagSocketAria': '{name}：{slots}',
   'hudChrome.bags.capacity': '{used}/{total}',

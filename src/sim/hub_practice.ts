@@ -29,7 +29,7 @@ import {
 import { MOBS } from './data';
 import { createMob, createNpc } from './entity';
 import { playerDummyRestHp } from './mob/practice_dummies';
-import { practiceDummyPos } from './moved_objects';
+import { practiceDummyPos, practiceDummyRemoved } from './moved_objects';
 import type { SimContext } from './sim_context';
 import type { WorldContent } from './types';
 
@@ -49,15 +49,20 @@ export function spawnHubPractice(ctx: SimContext, world: WorldContent): void {
     HUB_TRAINING_DUMMY_POS,
   );
   const dummyTemplate = MOBS[HUB_TRAINING_DUMMY_ID];
-  const dummy = createMob(
-    ctx.nextId++,
-    dummyTemplate,
-    dummyTemplate.maxLevel,
-    ctx.groundPos(dummyPos.x, dummyPos.z),
-  );
-  dummy.facing = 0;
-  dummy.prevFacing = 0;
-  ctx.addEntity(dummy);
+  // A removed dummy (moved_objects.ts) still takes its id, so every entity
+  // spawned after it keeps the id it has on a map that kept the dummy.
+  const dummyId = ctx.nextId++;
+  if (!practiceDummyRemoved(world.objectMoves, HUB_TRAINING_DUMMY_ID)) {
+    const dummy = createMob(
+      dummyId,
+      dummyTemplate,
+      dummyTemplate.maxLevel,
+      ctx.groundPos(dummyPos.x, dummyPos.z),
+    );
+    dummy.facing = 0;
+    dummy.prevFacing = 0;
+    ctx.addEntity(dummy);
+  }
   const def = world.npcs[HUB_SPARRING_MASTER_ID];
   const hale = createNpc(ctx.nextId++, def, ctx.groundPos(def.pos.x, def.pos.z));
   ctx.addEntity(hale);
@@ -67,8 +72,10 @@ export function spawnHubPractice(ctx: SimContext, world: WorldContent): void {
     HUB_HEALING_DUMMY_POS,
   );
   const healingTemplate = MOBS[HUB_HEALING_DUMMY_ID];
+  const healingId = ctx.nextId++;
+  if (practiceDummyRemoved(world.objectMoves, HUB_HEALING_DUMMY_ID)) return;
   const healingDummy = createMob(
-    ctx.nextId++,
+    healingId,
     healingTemplate,
     healingTemplate.maxLevel,
     ctx.groundPos(healingPos.x, healingPos.z),

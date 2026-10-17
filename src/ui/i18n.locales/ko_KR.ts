@@ -2492,6 +2492,15 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'editor.objectMove.hint':
     '드래그하거나 화살표 키로 미세 조정하세요. 이동은 이 맵에만 적용되며 오브젝트의 식별자는 그대로이므로 저장된 진행 상황에서도 찾을 수 있습니다.',
   'editor.objectMove.reset': '원래 위치로 되돌리기',
+  'editor.objectMove.delete': '이 맵에서 삭제',
+  'editor.objectMove.deleteHint':
+    '이 맵에서만 제거합니다(Delete 또는 X도 같음). 실행 취소하거나 삭제된 오브젝트 목록의 복원으로 되돌릴 수 있습니다.',
+  'editor.objectMove.doorNoDelete':
+    '던전 문은 옮길 수 있지만 삭제할 수는 없습니다. 문이 없으면 던전에 들어갈 수 없습니다.',
+  'editor.objectMove.removedTitle': '삭제된 게임플레이 오브젝트',
+  'editor.objectMove.removedHint':
+    '이 맵에서만 삭제되었습니다. 복원하면 마지막에 있던 자리로 돌아갑니다.',
+  'editor.objectMove.restore': '복원',
   'editor.topbar.undo': '실행 취소',
   'hudChrome.bags.bagSocketAria': '{name}: {slots}',
   'hudChrome.bags.capacity': '{used}/{total}',

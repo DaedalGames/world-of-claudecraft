@@ -969,6 +969,15 @@ export const editorStrings = {
     original: 'At its original spot.',
     hint: 'Drag it, or nudge it with the arrow keys. The move applies to this map only and the object keeps its identity, so saved progress still finds it.',
     reset: 'Reset to original spot',
+    delete: 'Delete from this map',
+    deleteHint:
+      'Removes it from this map only (Delete or X does the same). Undo, or Restore in the deleted objects list, brings it back.',
+    doorNoDelete:
+      'Dungeon doors can be moved but not deleted: without its door the dungeon could not be entered.',
+    removedTitle: 'Deleted Gameplay Objects',
+    removedHint: 'Deleted from this map only. Restore puts one back where it last stood.',
+    removedRow: '{kind}: {name}',
+    restore: 'Restore',
   },
 
   lightTool: {

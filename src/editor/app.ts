@@ -497,7 +497,7 @@ import {
 import { EditorApiError, forkMap, type MapFullWire, signedIn, uploadAsset } from './net';
 import { newMapSizeDialog } from './new_map_dialog';
 import { ObjectMoveController } from './object_move_controller';
-import { buildObjectMovePanel } from './object_move_panel';
+import { buildObjectMovePanel, buildRemovedObjectsPanel } from './object_move_panel';
 import { parseMap, serializeMapCompact } from './persist';
 import { applyScaleEqualize, type EqualizePlan, planScaleEqualize } from './placement_scale_core';
 import {
@@ -1205,7 +1205,9 @@ export class EditorApp {
     },
     moveLive: (key, before, after) => {
       this.viewport3d?.setSimObjectMoves(after);
-      this.viewport3d?.objects.moveLive(key, before, after);
+      // A restore of something this build never drew (it was deleted when
+      // the map loaded): rebuild the world from the document to show it.
+      if (this.viewport3d?.objects.moveLive(key, before, after)) this.reload3dWorld();
     },
     showSelection: (key) => this.viewport3d?.objects.setSelected(key),
     pushUndo: (entry) => this.pushUndo(entry),
@@ -14464,6 +14466,24 @@ export class EditorApp {
   }
 
   /** Rebuild authored NPC/mob entities after a structural paste or undo. */
+  /** Delete the selected gameplay object; a dungeon door explains why not. */
+  private removeSelectedObject(): void {
+    if (!this.objectMoves.removeSelected()) {
+      this.toasts.info(t('editor.objectMove.doorNoDelete'));
+    }
+  }
+
+  /** Rebuild the 3D world from the current document (Sim and renderer),
+   *  keeping the edit history. */
+  private reload3dWorld(): void {
+    if (!this.viewport3d) return;
+    this.show3dLoading();
+    void this.viewport3d.reload(this.map).then(() => {
+      this.hide3dLoading();
+      this.syncFootprintOverlay();
+    });
+  }
+
   private refreshEntityWorld(): void {
     this.entities = buildEntities(this.content);
     this.base = snapshot(this.entities);
@@ -16792,7 +16812,8 @@ export class EditorApp {
       // delete target, Delete/X only ever remove collision boxes there.
       else if (this.selectedPlacement !== null && !this.meshEditActive()) {
         this.removeSelectedPlacements();
-      } else if (this.selectedLight !== null) this.deleteMapLight(this.selectedLight);
+      } else if (this.objectMoves.selectedKey !== null) this.removeSelectedObject();
+      else if (this.selectedLight !== null) this.deleteMapLight(this.selectedLight);
       else if (this.selectedDecal !== null) this.deleteMapDecal(this.selectedDecal);
       else if (this.selectedMusicArea !== null) this.deleteMusicArea(this.selectedMusicArea);
       else if (this.selectedCamp !== null) this.deleteSelectedCamp();
@@ -16861,7 +16882,8 @@ export class EditorApp {
       if (this.hitboxEdit && this.hitboxEdit.selected.size > 0) this.deleteSelectedHitboxes();
       else if (this.selectedPlacement !== null && !this.meshEditActive()) {
         this.removeSelectedPlacements();
-      } else if (this.selectedLight !== null) this.deleteMapLight(this.selectedLight);
+      } else if (this.objectMoves.selectedKey !== null) this.removeSelectedObject();
+      else if (this.selectedLight !== null) this.deleteMapLight(this.selectedLight);
       else if (this.selectedMusicArea !== null) this.deleteMusicArea(this.selectedMusicArea);
       else if (this.selectedCamp !== null) this.deleteSelectedCamp();
       // The Mob tool's own picks (individual mobs first, then NPCs) delete with
@@ -17267,6 +17289,12 @@ export class EditorApp {
           selectedKey: () => this.objectMoves.selectedKey,
           moves: () => this.map.objectMoves,
           reset: () => this.objectMoves.resetSelected(),
+          remove: () => this.removeSelectedObject(),
+        }),
+      removedObjectsPanel: () =>
+        buildRemovedObjectsPanel({
+          moves: () => this.map.objectMoves,
+          restore: (key) => this.objectMoves.restore(key),
         }),
       setSelectedLight: (index) => this.setSelectedLight(index),
       updateMapLight: (index, change) => {

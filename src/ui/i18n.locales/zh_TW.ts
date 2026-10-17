@@ -2423,6 +2423,13 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'editor.objectMove.hint':
     '拖曳它，或用方向鍵微調。移動只作用於此地圖，物件保留原有身分，因此已儲存的進度仍能找到它。',
   'editor.objectMove.reset': '重設到原始位置',
+  'editor.objectMove.delete': '從此地圖刪除',
+  'editor.objectMove.deleteHint':
+    '僅從此地圖移除（按 Delete 或 X 也一樣）。復原，或在已刪除物件清單中點擊「還原」，即可將其找回。',
+  'editor.objectMove.doorNoDelete': '地城入口可以移動但不能刪除：沒有入口就無法進入地城。',
+  'editor.objectMove.removedTitle': '已刪除的玩法物件',
+  'editor.objectMove.removedHint': '僅從此地圖刪除。「還原」會把它放回最後所在的位置。',
+  'editor.objectMove.restore': '還原',
   'editor.topbar.undo': '復原',
   'hudChrome.bags.bagSocketAria': '{name}：{slots}',
   'hudChrome.bags.capacity': '{used}/{total}',

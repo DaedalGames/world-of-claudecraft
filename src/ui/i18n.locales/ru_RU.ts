@@ -2524,6 +2524,15 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'editor.objectMove.hint':
     'Перетащите его или сдвиньте стрелками. Перемещение действует только на этой карте, а объект сохраняет свой идентификатор, поэтому сохранённый прогресс его по-прежнему находит.',
   'editor.objectMove.reset': 'Вернуть на исходное место',
+  'editor.objectMove.delete': 'Удалить с этой карты',
+  'editor.objectMove.deleteHint':
+    'Убирает объект только с этой карты (Delete или X делают то же). Отмена или «Восстановить» в списке удалённых объектов возвращает его.',
+  'editor.objectMove.doorNoDelete':
+    'Вход в подземелье можно перемещать, но не удалять: без него в подземелье нельзя попасть.',
+  'editor.objectMove.removedTitle': 'Удалённые игровые объекты',
+  'editor.objectMove.removedHint':
+    'Удалены только с этой карты. «Восстановить» возвращает объект туда, где он стоял в последний раз.',
+  'editor.objectMove.restore': 'Восстановить',
   'editor.topbar.undo': 'Отменить',
   'hudChrome.bags.bagSocketAria': '{name}: {slots}',
   'hudChrome.bags.capacity': '{used}/{total}',

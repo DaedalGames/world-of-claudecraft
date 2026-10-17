@@ -48,7 +48,11 @@ import { freezeStaticMatrices, freezeStaticSubtreeMatrices } from '../static_mat
 import { buildTerrain, type TerrainView } from '../terrain';
 import { buildWater, type WaterView } from '../water';
 import { MIN_OUTDOOR_FOG_FAR } from '../zone_streaming';
-import { type MovedObjectPreview, shiftMovedObjectInScene } from './moved_object_preview';
+import {
+  type MovedObjectPreview,
+  setMovedObjectHidden,
+  shiftMovedObjectInScene,
+} from './moved_object_preview';
 
 /** Editor visibility can extend beyond the shipped fog ceiling, but the
  *  prepared-zone guard still prevents unloaded terrain from being exposed. */
@@ -320,6 +324,15 @@ export class RendererEditorApi {
     );
     if (moved > 0) this.invalidateShadows();
     return moved;
+  }
+
+  /** Live preview of a deleted (or restored) built-in gameplay object: hide
+   *  or show what was drawn (moved_object_preview.ts). Returns how many
+   *  changed. */
+  setObjectHidden(target: MovedObjectPreview, hidden: boolean): number {
+    const changed = setMovedObjectHidden(this.host.scene(), target, hidden);
+    if (changed > 0) this.invalidateShadows();
+    return changed;
   }
 
   /** Re-read the authored ground decals (`list` = the editor's live document). */

@@ -10893,7 +10893,14 @@ export const ko_KR: EnTranslations = {
       "moved": "이 맵에서 이동되었습니다.",
       "original": "원래 위치에 있습니다.",
       "hint": "드래그하거나 화살표 키로 미세 조정하세요. 이동은 이 맵에만 적용되며 오브젝트의 식별자는 그대로이므로 저장된 진행 상황에서도 찾을 수 있습니다.",
-      "reset": "원래 위치로 되돌리기"
+      "reset": "원래 위치로 되돌리기",
+      "delete": "이 맵에서 삭제",
+      "deleteHint": "이 맵에서만 제거합니다(Delete 또는 X도 같음). 실행 취소하거나 삭제된 오브젝트 목록의 복원으로 되돌릴 수 있습니다.",
+      "doorNoDelete": "던전 문은 옮길 수 있지만 삭제할 수는 없습니다. 문이 없으면 던전에 들어갈 수 없습니다.",
+      "removedTitle": "삭제된 게임플레이 오브젝트",
+      "removedHint": "이 맵에서만 삭제되었습니다. 복원하면 마지막에 있던 자리로 돌아갑니다.",
+      "removedRow": "{kind}: {name}",
+      "restore": "복원"
     },
     "lightTool": {
       "title": "Point Lights",

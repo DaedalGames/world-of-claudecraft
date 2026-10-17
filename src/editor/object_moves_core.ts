@@ -23,6 +23,7 @@ import {
   type MovableObjectKind,
   type ObjectMove,
   type ObjectMoves,
+  objectKindRemovable,
   objectMoveKey,
 } from '../sim/moved_objects';
 
@@ -107,9 +108,25 @@ export function objectPosition(moves: ObjectMoves | undefined, object: MovableOb
   return moves?.[object.key] ?? object.builtin;
 }
 
-/** Whether the map moved the object at all. */
+/** Whether the map moved the object (a removed one reads as not moved). */
 export function objectIsMoved(moves: ObjectMoves | undefined, key: string): boolean {
-  return moves?.[key] !== undefined;
+  const move = moves?.[key];
+  return move !== undefined && move.removed !== true;
+}
+
+/** Whether the map deleted the object. */
+export function objectIsRemoved(moves: ObjectMoves | undefined, key: string): boolean {
+  return moves?.[key]?.removed === true;
+}
+
+/** Whether this kind of object may be deleted (a dungeon door may not). */
+export function objectRemovable(object: MovableObject): boolean {
+  return objectKindRemovable(object.kind);
+}
+
+/** The objects this map deleted, in roster order. */
+export function removedObjects(moves: ObjectMoves | undefined): MovableObject[] {
+  return moves ? MOVABLE_OBJECTS.filter((object) => moves[object.key]?.removed === true) : [];
 }
 
 const SAME_SPOT_YD = 1e-6;
@@ -127,13 +144,40 @@ export function withObjectMovedTo(
   to: ObjectMove,
 ): ObjectMoves | undefined {
   const object = BY_KEY.get(key);
-  if (!object) return moves;
+  // A deleted object stays deleted until it is restored, never moved.
+  if (!object || moves?.[key]?.removed) return moves;
   const next: Record<string, ObjectMove> = { ...(moves ?? {}) };
   const home =
     Math.abs(to.x - object.builtin.x) <= SAME_SPOT_YD &&
     Math.abs(to.z - object.builtin.z) <= SAME_SPOT_YD;
   if (home) delete next[key];
   else next[key] = { x: to.x, z: to.z };
+  return freezeObjectMoves(next);
+}
+
+/**
+ * The document's record with one object deleted (`removed` true) or restored.
+ * A deletion keeps the spot the object stood on, so a restore puts it back
+ * there; restoring onto the built-in spot drops the entry. Kinds that cannot
+ * be deleted (a dungeon door) return the record unchanged. Always a fresh
+ * frozen record, like withObjectMovedTo.
+ */
+export function withObjectRemoved(
+  moves: ObjectMoves | undefined,
+  key: string,
+  removed: boolean,
+): ObjectMoves | undefined {
+  const object = BY_KEY.get(key);
+  if (!object || !objectKindRemovable(object.kind)) return moves;
+  if ((moves?.[key]?.removed === true) === removed) return moves;
+  const at = objectPosition(moves, object);
+  const next: Record<string, ObjectMove> = { ...(moves ?? {}) };
+  const home =
+    Math.abs(at.x - object.builtin.x) <= SAME_SPOT_YD &&
+    Math.abs(at.z - object.builtin.z) <= SAME_SPOT_YD;
+  if (removed) next[key] = { x: at.x, z: at.z, removed: true };
+  else if (home) delete next[key];
+  else next[key] = { x: at.x, z: at.z };
   return freezeObjectMoves(next);
 }
 
@@ -157,7 +201,7 @@ export function nearestMovableObject(
   let best: MovableObject | null = null;
   let bestPx = maxPx;
   for (const object of MOVABLE_OBJECTS) {
-    if (!include(object)) continue;
+    if (!include(object) || moves?.[object.key]?.removed) continue;
     const pos = objectPosition(moves, object);
     const screen = project(pos.x, pos.z);
     if (!screen) continue;

@@ -2496,6 +2496,15 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'editor.objectMove.hint':
     'ドラッグするか、矢印キーで微調整します。移動はこのマップにだけ適用され、オブジェクトの識別子は変わらないため、保存された進行状況からも見つかります。',
   'editor.objectMove.reset': '元の位置に戻す',
+  'editor.objectMove.delete': 'このマップから削除',
+  'editor.objectMove.deleteHint':
+    'このマップからのみ取り除きます（Delete または X でも同じ）。元に戻すか、削除済みオブジェクト一覧の「復元」で戻せます。',
+  'editor.objectMove.doorNoDelete':
+    'ダンジョンの扉は移動できますが削除はできません。扉がないとダンジョンに入れなくなります。',
+  'editor.objectMove.removedTitle': '削除したゲームプレイオブジェクト',
+  'editor.objectMove.removedHint':
+    'このマップからのみ削除されています。「復元」で最後にあった場所に戻ります。',
+  'editor.objectMove.restore': '復元',
   'editor.topbar.undo': '元に戻す',
   'hudChrome.bags.bagSocketAria': '{name}: {slots}',
   'hudChrome.bags.capacity': '{used}/{total}',
