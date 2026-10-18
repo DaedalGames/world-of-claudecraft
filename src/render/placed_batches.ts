@@ -206,7 +206,7 @@ export class PlacedBatches {
       // an emptied batch (every copy culled or tiered away) leaves the render
       // list entirely instead of costing a zero-instance draw
       batch.mesh.visible = batch.mesh.count > 0;
-      batch.mesh.instanceMatrix.needsUpdate = true;
+      this.matricesChanged(batch);
       this.writeFade(batch, slot, fade);
       keys.push(key);
     }
@@ -223,6 +223,17 @@ export class PlacedBatches {
       if (!batch || slot === undefined) continue;
       this.writeFade(batch, slot, fade);
     }
+  }
+
+  /** Upload the instance buffer and drop the cached raycast bounds. three's
+   *  InstancedMesh computes its bounding sphere on the first raycast and never
+   *  refreshes it, so without the reset an instance attached or moved outside
+   *  that sphere can never be picked. Rendering never reads it (the batch is
+   *  not frustum-culled); the next raycast recomputes it lazily. */
+  private matricesChanged(batch: Batch): void {
+    batch.mesh.instanceMatrix.needsUpdate = true;
+    batch.mesh.boundingSphere = null;
+    batch.mesh.boundingBox = null;
   }
 
   private writeFade(batch: Batch, slot: number, fade: number): void {
@@ -243,7 +254,7 @@ export class PlacedBatches {
       if (!batch || slot === undefined) continue;
       this.scratch.multiplyMatrices(world, batch.local);
       batch.mesh.setMatrixAt(slot, this.scratch);
-      batch.mesh.instanceMatrix.needsUpdate = true;
+      this.matricesChanged(batch);
     }
   }
 
@@ -278,7 +289,7 @@ export class PlacedBatches {
       // an emptied batch (every copy culled or tiered away) leaves the render
       // list entirely instead of costing a zero-instance draw
       batch.mesh.visible = batch.mesh.count > 0;
-      batch.mesh.instanceMatrix.needsUpdate = true;
+      this.matricesChanged(batch);
     }
   }
 
