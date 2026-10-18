@@ -46,6 +46,8 @@ interface Batch {
   slots: SlotTable;
   local: THREE.Matrix4;
   capacity: number;
+  /** An instance moved or arrived since the raycast bounds were computed. */
+  boundsDirty: boolean;
 }
 
 const INITIAL_CAPACITY = 8;
@@ -225,15 +227,29 @@ export class PlacedBatches {
     }
   }
 
-  /** Upload the instance buffer and drop the cached raycast bounds. three's
-   *  InstancedMesh computes its bounding sphere on the first raycast and never
-   *  refreshes it, so without the reset an instance attached or moved outside
-   *  that sphere can never be picked. Rendering never reads it (the batch is
-   *  not frustum-culled); the next raycast recomputes it lazily. */
+  /** Upload the instance buffer and mark the raycast bounds stale (see
+   *  pickableRaycast). An instance placed or moved may now sit outside them. */
   private matricesChanged(batch: Batch): void {
     batch.mesh.instanceMatrix.needsUpdate = true;
-    batch.mesh.boundingSphere = null;
-    batch.mesh.boundingBox = null;
+    batch.boundsDirty = true;
+  }
+
+  /**
+   * three's InstancedMesh computes its bounding sphere once (the first render
+   * or raycast) and its raycast culls against it, so an instance attached or
+   * moved outside that sphere could never be picked. Nulling the sphere is no
+   * fix: the renderer recomputes a null one on every frame it sorts, which an
+   * LOD sweep or a gizmo drag would pay per frame. Recompute here instead,
+   * only on a raycast that follows a change, refilling the sphere in place.
+   */
+  private pickableRaycast(batch: Batch, mesh: THREE.InstancedMesh): void {
+    mesh.raycast = (raycaster, intersects) => {
+      if (batch.boundsDirty) {
+        mesh.computeBoundingSphere();
+        batch.boundsDirty = false;
+      }
+      THREE.InstancedMesh.prototype.raycast.call(mesh, raycaster, intersects);
+    };
   }
 
   private writeFade(batch: Batch, slot: number, fade: number): void {
@@ -289,7 +305,9 @@ export class PlacedBatches {
       // an emptied batch (every copy culled or tiered away) leaves the render
       // list entirely instead of costing a zero-instance draw
       batch.mesh.visible = batch.mesh.count > 0;
-      this.matricesChanged(batch);
+      // Every live instance stood inside the bounds before the swap, so they
+      // stay valid: upload only.
+      batch.mesh.instanceMatrix.needsUpdate = true;
     }
   }
 
@@ -333,7 +351,14 @@ export class PlacedBatches {
     // negative risk. Per-instance culling is the LOD slot release instead.
     mesh.frustumCulled = false;
     this.group.add(mesh);
-    batch = { mesh, slots: new SlotTable(), local: sub.local, capacity: INITIAL_CAPACITY };
+    batch = {
+      mesh,
+      slots: new SlotTable(),
+      local: sub.local,
+      capacity: INITIAL_CAPACITY,
+      boundsDirty: false,
+    };
+    this.pickableRaycast(batch, mesh);
     this.batches.set(key, batch);
     return batch;
   }
@@ -351,6 +376,7 @@ export class PlacedBatches {
     next.matrixAutoUpdate = false;
     next.updateMatrix();
     next.frustumCulled = false;
+    this.pickableRaycast(batch, next);
     (next.instanceMatrix.array as Float32Array).set(old.instanceMatrix.array as Float32Array);
     next.count = old.count;
     next.instanceMatrix.needsUpdate = true;

@@ -1,9 +1,10 @@
 // Picking batched placements (render/placed_batches.ts). three's InstancedMesh
-// raycast culls against a bounding sphere it computes ONCE on the first
-// raycast and never refreshes, so a batch that gained, moved or regrew its
-// instances after that first click kept testing the old sphere: every copy
-// outside it (a tree streamed in later, a rock dragged elsewhere) became
-// unclickable in the Studio, whose exact-hit picking has no loose fallback.
+// raycast culls against a bounding sphere computed ONCE (the first rendered
+// frame or raycast) and never refreshed, so a batch that gained or moved
+// instances afterwards kept testing the old sphere: every copy outside it (a
+// tree streamed in later, a rock dragged elsewhere) became unclickable in the
+// Studio, whose exact-hit picking has no loose fallback. The fix must also
+// never null the sphere, which the renderer would recompute every frame.
 
 import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
@@ -34,6 +35,10 @@ function pickAt(batches: PlacedBatches, x: number, z = 0): number | null {
   }
   return null;
 }
+
+/** The batch's one InstancedMesh (every test uses a single-sub template). */
+const meshOf = (batches: PlacedBatches): THREE.InstancedMesh =>
+  batches.group.children[0] as THREE.InstancedMesh;
 
 describe('PlacedBatches raycast bounds', () => {
   it('picks an instance attached after an earlier raycast', () => {
@@ -69,12 +74,40 @@ describe('PlacedBatches raycast bounds', () => {
     expect(pickAt(batches, 80)).toBe(3);
   });
 
-  it('picks every copy after the batch grew past its initial capacity', () => {
+  it('picks copies attached into a grown batch after an earlier raycast', () => {
     const subs = boxSubs();
     const batches = new PlacedBatches();
-    batches.attach(0, PATH, subs, at(0));
+    // Nine copies outgrow the initial capacity of 8; the raycast then
+    // computes the grown mesh's bounds, and the next copies still fit in it.
+    for (let id = 0; id < 9; id++) batches.attach(id, PATH, subs, at(id * 10));
     expect(pickAt(batches, 0)).toBe(0);
-    for (let id = 1; id < 20; id++) batches.attach(id, PATH, subs, at(id * 10));
-    for (let id = 0; id < 20; id++) expect(pickAt(batches, id * 10)).toBe(id);
+    for (let id = 9; id < 16; id++) batches.attach(id, PATH, subs, at(id * 10));
+    for (let id = 0; id < 16; id++) expect(pickAt(batches, id * 10)).toBe(id);
+  });
+
+  it('picks past bounds the renderer froze, as a rendered frame does', () => {
+    const subs = boxSubs();
+    const batches = new PlacedBatches();
+    batches.attach(1, PATH, subs, at(0));
+    // WebGLRenderer computes a sorted object's sphere on its first frame.
+    meshOf(batches).computeBoundingSphere();
+    batches.attach(2, PATH, subs, at(60, -60));
+    expect(pickAt(batches, 60, -60)).toBe(2);
+  });
+
+  it('never nulls the sphere on a write, so a frame never pays a recompute', () => {
+    const subs = boxSubs();
+    const batches = new PlacedBatches();
+    batches.attach(1, PATH, subs, at(0));
+    const mesh = meshOf(batches);
+    mesh.computeBoundingSphere();
+    const sphere = mesh.boundingSphere;
+    batches.attach(2, PATH, subs, at(40));
+    batches.setMatrix(1, at(-40));
+    batches.detach(2);
+    expect(mesh.boundingSphere).toBe(sphere);
+    // the pick-time recompute refills that same sphere in place
+    expect(pickAt(batches, -40)).toBe(1);
+    expect(mesh.boundingSphere).toBe(sphere);
   });
 });
