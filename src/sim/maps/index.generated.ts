@@ -19,6 +19,12 @@ export const PUBLISHED_MAPS: readonly PublishedMapEntry[] = [
     load: async () => (await import('./eastbrook_rebuild.generated')).loadPublishedMap(),
   },
   {
+    slug: "mirefen_changes",
+    name: "Mirefen changes",
+    seed: 20061,
+    load: async () => (await import('./mirefen_changes.generated')).loadPublishedMap(),
+  },
+  {
     slug: "world_of_claudecraft",
     name: "World of ClaudeCraft",
     seed: 20061,
