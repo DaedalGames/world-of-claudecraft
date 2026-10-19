@@ -7,7 +7,7 @@
 // never null the sphere, which the renderer would recompute every frame.
 
 import * as THREE from 'three';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { type BatchSub, PlacedBatches } from '../src/render/placed_batches';
 
 const PATH = 'models/test_tree.glb';
@@ -109,5 +109,35 @@ describe('PlacedBatches raycast bounds', () => {
     // the pick-time recompute refills that same sphere in place
     expect(pickAt(batches, -40)).toBe(1);
     expect(mesh.boundingSphere).toBe(sphere);
+  });
+
+  it('recomputes only on the first raycast after a write, never after a detach', () => {
+    const subs = boxSubs();
+    const batches = new PlacedBatches();
+    batches.attach(1, PATH, subs, at(0));
+    batches.attach(2, PATH, subs, at(5));
+    const recompute = vi.spyOn(meshOf(batches), 'computeBoundingSphere');
+    expect(pickAt(batches, 0)).toBe(1);
+    expect(recompute).toHaveBeenCalledTimes(1);
+    expect(pickAt(batches, 5)).toBe(2); // no write since: no recompute
+    expect(recompute).toHaveBeenCalledTimes(1);
+    batches.setMatrix(2, at(30));
+    expect(pickAt(batches, 30)).toBe(2);
+    expect(recompute).toHaveBeenCalledTimes(2);
+    batches.detach(1);
+    expect(pickAt(batches, 30)).toBe(2);
+    expect(recompute).toHaveBeenCalledTimes(2);
+  });
+
+  it('picks a copy whose attach grew the batch after an earlier raycast', () => {
+    const subs = boxSubs();
+    const batches = new PlacedBatches();
+    for (let id = 0; id < 8; id++) batches.attach(id, PATH, subs, at(id * 10));
+    const before = meshOf(batches);
+    expect(pickAt(batches, 70)).toBe(7); // bounds of the full capacity-8 mesh
+    batches.attach(8, PATH, subs, at(-90, 90)); // the ninth copy grows it
+    expect(meshOf(batches)).not.toBe(before);
+    expect(pickAt(batches, -90, 90)).toBe(8);
+    expect(pickAt(batches, 0)).toBe(0);
   });
 });

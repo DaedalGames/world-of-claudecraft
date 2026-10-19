@@ -244,7 +244,8 @@ export class PlacedBatches {
    */
   private pickableRaycast(batch: Batch, mesh: THREE.InstancedMesh): void {
     mesh.raycast = (raycaster, intersects) => {
-      if (batch.boundsDirty) {
+      // A mesh grow() replaced must never clear the live mesh's flag.
+      if (batch.boundsDirty && batch.mesh === mesh) {
         mesh.computeBoundingSphere();
         batch.boundsDirty = false;
       }
