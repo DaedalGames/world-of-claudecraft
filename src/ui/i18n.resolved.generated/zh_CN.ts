@@ -9835,7 +9835,10 @@ export const zh_CN: EnTranslations = {
     "guideBest": "Best MMORPGs",
     "guideNew": "New MMORPGs",
     "guideBrowser": "浏览器 MMORPG",
-    "guideGamesLikeDiablo": "类似《暗黑破坏神》的游戏"
+    "guideGamesLikeDiablo": "类似《暗黑破坏神》的游戏",
+    "guideAllLists": "全部 MMORPG 榜单",
+    "guideAllGamesLike": "全部同类游戏指南",
+    "guideAllBrowser": "全部浏览器检查"
   },
   "settings": {
     "languageLoading": "正在加载语言...",

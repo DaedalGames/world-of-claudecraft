@@ -9835,7 +9835,10 @@ export const en: EnTranslations = {
     "guideBest": "Best MMORPGs",
     "guideNew": "New MMORPGs",
     "guideBrowser": "Browser MMORPGs",
-    "guideGamesLikeDiablo": "Games like Diablo"
+    "guideGamesLikeDiablo": "Games like Diablo",
+    "guideAllLists": "All MMORPG lists",
+    "guideAllGamesLike": "All games-like guides",
+    "guideAllBrowser": "All browser checks"
   },
   "settings": {
     "languageLoading": "Loading language...",

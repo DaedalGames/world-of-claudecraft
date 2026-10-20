@@ -19,6 +19,9 @@ const GUIDES = [
   '/mmorpgs/browser',
   '/games-like/diablo',
 ];
+// The homepage footer also links the three section hubs, each listing every guide in its
+// section, so every guide is two clicks from the game's own pages.
+const HUBS = ['/mmorpgs/all', '/games-like/all', '/browser/all'];
 
 describe('player-guide footer links', () => {
   let footer: HTMLElement;
@@ -62,13 +65,13 @@ describe('player-guide footer links', () => {
 
   // index.html (/) and play.html (/play) carry the same homepage footer, and both are indexed.
   it.each(['index.html', 'play.html'])(
-    'ships the same six links in the %s footer HTML, not injected by script',
+    'ships the six links and the three hubs in the %s footer HTML, not injected by script',
     (shell) => {
       const html = readFileSync(path.resolve(process.cwd(), shell), 'utf8');
       const row = html.match(/<nav class="footer-guides-row"[\s\S]*?<\/nav>/)?.[0] ?? '';
       expect(row).toContain('aria-label="Player guides"');
       expect(row).toContain('data-i18n-aria="footer.guidesLabel"');
-      expect([...row.matchAll(/href="([^"]+)"/g)].map((m) => m[1])).toEqual(GUIDES);
+      expect([...row.matchAll(/href="([^"]+)"/g)].map((m) => m[1])).toEqual([...GUIDES, ...HUBS]);
     },
   );
 });

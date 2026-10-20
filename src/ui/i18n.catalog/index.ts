@@ -323,6 +323,10 @@ export const en = {
     guideNew: 'New MMORPGs',
     guideBrowser: 'Browser MMORPGs',
     guideGamesLikeDiablo: 'Games like Diablo',
+    // The section hubs on the guides site, each listing every page in its section.
+    guideAllLists: 'All MMORPG lists',
+    guideAllGamesLike: 'All games-like guides',
+    guideAllBrowser: 'All browser checks',
   },
   settings: {
     languageLoading: 'Loading language...',

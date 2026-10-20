@@ -9835,7 +9835,10 @@ export const ja_JP: EnTranslations = {
     "guideBest": "Best MMORPGs",
     "guideNew": "New MMORPGs",
     "guideBrowser": "ブラウザMMORPG",
-    "guideGamesLikeDiablo": "ディアブロに似たゲーム"
+    "guideGamesLikeDiablo": "ディアブロに似たゲーム",
+    "guideAllLists": "MMORPGリスト一覧",
+    "guideAllGamesLike": "似たゲームガイド一覧",
+    "guideAllBrowser": "ブラウザ対応チェック一覧"
   },
   "settings": {
     "languageLoading": "言語を読み込んでいます...",

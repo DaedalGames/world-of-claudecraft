@@ -9835,7 +9835,10 @@ export const en_XA: EnTranslations = {
     "guideBest": "[Ɓéšţ ⱮⱮÓŔÞĜš]",
     "guideNew": "[Ñéŵ ⱮⱮÓŔÞĜš]",
     "guideBrowser": "[Ɓŕóŵšéŕ ⱮⱮÓŔÞĜš]",
-    "guideGamesLikeDiablo": "[Ĝáɱéš ļíķé Ðíáƀļó]"
+    "guideGamesLikeDiablo": "[Ĝáɱéš ļíķé Ðíáƀļó]",
+    "guideAllLists": "[Áļļ ⱮⱮÓŔÞĜ ļíšţš]",
+    "guideAllGamesLike": "[Áļļ ĝáɱéš-ļíķé ĝúíðéš]",
+    "guideAllBrowser": "[Áļļ ƀŕóŵšéŕ çĥéçķš]"
   },
   "settings": {
     "languageLoading": "[Ļóáðíñĝ ļáñĝúáĝé...]",

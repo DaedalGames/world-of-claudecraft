@@ -9835,7 +9835,10 @@ export const ko_KR: EnTranslations = {
     "guideBest": "Best MMORPGs",
     "guideNew": "New MMORPGs",
     "guideBrowser": "브라우저 MMORPG",
-    "guideGamesLikeDiablo": "디아블로 같은 게임"
+    "guideGamesLikeDiablo": "디아블로 같은 게임",
+    "guideAllLists": "MMORPG 목록 전체",
+    "guideAllGamesLike": "비슷한 게임 가이드 전체",
+    "guideAllBrowser": "브라우저 확인 전체"
   },
   "settings": {
     "languageLoading": "언어를 불러오는 중...",

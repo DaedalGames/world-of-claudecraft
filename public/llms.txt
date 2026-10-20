@@ -28,6 +28,9 @@ curated, spoiler-light handbook. The community-edited encyclopedia lives at /wik
 Editorial guides for players choosing an MMORPG, published beside the game. Each lists
 other games honestly, with sources, and says where World of ClaudeCraft fits.
 Full list: https://worldofclaudecraft.com/sitemap-marketing.xml
+Every page, by section: [all MMORPG lists](https://worldofclaudecraft.com/mmorpgs/all),
+[all games-like guides](https://worldofclaudecraft.com/games-like/all) and
+[all browser checks](https://worldofclaudecraft.com/browser/all).
 
 - [Best free MMORPGs](https://worldofclaudecraft.com/mmorpgs/free): Free to play MMORPGs ranked by what you can do without paying, and which need no download.
 - [Best MMORPGs in 2026](https://worldofclaudecraft.com/mmorpgs/best): The best MMORPGs of the year, paid and free, ranked honestly.

@@ -10,6 +10,9 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -26,6 +29,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "es_ES": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -42,6 +48,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "fr_FR": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -58,6 +67,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "fr_CA": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -75,6 +87,9 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -91,6 +106,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "de_DE": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -139,6 +157,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guideNew"
   ],
   "pt_BR": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -163,6 +184,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guideNew"
   ],
   "cs_CZ": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -179,6 +203,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "nl_NL": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -195,6 +222,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "pl_PL": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -211,6 +241,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "id_ID": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -227,6 +260,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "tr_TR": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -243,6 +279,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "sv_SE": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -259,6 +298,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "vi_VN": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",
@@ -275,6 +317,9 @@ export const pending: Record<string, readonly string[]> = {
     "guide.footer.guidesLabel"
   ],
   "da_DK": [
+    "footer.guideAllBrowser",
+    "footer.guideAllGamesLike",
+    "footer.guideAllLists",
     "footer.guideBest",
     "footer.guideBrowser",
     "footer.guideFree",

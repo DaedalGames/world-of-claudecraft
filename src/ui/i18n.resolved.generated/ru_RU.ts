@@ -9835,7 +9835,10 @@ export const ru_RU: EnTranslations = {
     "guideBest": "Best MMORPGs",
     "guideNew": "New MMORPGs",
     "guideBrowser": "Браузерные MMORPG",
-    "guideGamesLikeDiablo": "Игры, похожие на Diablo"
+    "guideGamesLikeDiablo": "Игры, похожие на Diablo",
+    "guideAllLists": "Все списки MMORPG",
+    "guideAllGamesLike": "Все подборки похожих игр",
+    "guideAllBrowser": "Все проверки браузерных версий"
   },
   "settings": {
     "languageLoading": "Загрузка языка...",
