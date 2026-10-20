@@ -54,6 +54,19 @@ export const POST_SHED_RUNGS = ['smaa-to-fxaa', 'bloom-mips', 'bloom-off', 'ao-o
 
 export type PostShedRung = (typeof POST_SHED_RUNGS)[number];
 
+/**
+ * The post level a renderer pins, or null to leave it to the governor. The
+ * `?postshed` dev pin always wins; otherwise a host that `holdFullChain`s (the
+ * editor viewport) holds 1. Every rung recolours the whole frame (bloom-off
+ * drops the glow, ao-off sends the sea down its unsampled arm), which a game
+ * session accepts as cosmetic but a maker judging colour by eye reads as the
+ * scene changing under them minutes into a session.
+ */
+export function postShedPinFor(devPin: number | null, holdFullChain: boolean): number | null {
+  if (devPin != null) return devPin;
+  return holdFullChain ? 1 : null;
+}
+
 /** One rung of the level: 1 = the tier's full chain, 0 = every rung applied. */
 export const POST_SHED_STEP = 0.25;
 

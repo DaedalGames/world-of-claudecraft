@@ -626,6 +626,7 @@ import { type RankedPointLight, reconcileViewPointLights } from './point_light_b
 import { attachPointLightCarriers, NO_POINT_LIGHTS } from './point_light_carriers';
 import { markPointLightSource } from './point_light_carriers_core';
 import { buildComposer, type PostPipeline } from './post';
+import { postShedPinFor } from './post_shed_core';
 import { precipBiomeAt } from './precip_shelter';
 import { withSceneHiddenForPresentationPrewarm } from './presentation_prewarm';
 import { createPreviewPrewarmLane } from './preview_prewarm_lane';
@@ -1344,15 +1345,17 @@ export interface RendererCreateOptions extends QuestObjectGateOptions, QuestGuid
   context?: WebGL2RenderingContext;
   initializeGfx?: boolean;
   /** Build the far-vista grid eagerly during construction (macrotask bites,
-   *  accelerateInitialBuild). Correct only behind an opaque curtain: the
-   *  boot and graphics-rebuild paths keep the default; the editor viewport,
-   *  which rebuilds a live Renderer against running frames on every document
-   *  load, passes false to stay on polite idle pacing. */
+   *  accelerateInitialBuild). Correct only behind an opaque curtain: boot,
+   *  graphics rebuild and the editor viewport (its build overlay) all are;
+   *  pass false for a construction against running frames. */
   eagerFarVista?: boolean;
   /** Editor viewport: draw painted ground clutter whatever the tier, so a
    *  maker sees what the Paint Clutter brush lays down (the game keeps the
    *  High-and-up gate). */
   editorClutter?: boolean;
+  /** Hold the post chain whole: the governor never sheds a rung (post_shed_core
+   *  postShedPinFor), so the colour look never changes mid-session. Editor. */
+  holdPostChain?: boolean;
 }
 
 export class Renderer {
@@ -1941,9 +1944,9 @@ export class Renderer {
     forwardZ: 0,
     halfAngle: Math.PI / 2,
   };
-  /** The boot far-grid build, accelerated behind the entry curtain; the
-   *  entry gate (farVistaReady) awaits it. Editor terrain rebuilds mint a
-   *  new view but deliberately keep polite pacing and never re-arm this. */
+  /** The initial far-grid build, accelerated behind the entry curtain (or
+   *  the editor's build overlay); farVistaReady awaits it. Mid-session editor
+   *  terrain rebuilds mint a new view on polite pacing and never re-arm it. */
   private farVistaInitialBuild: Promise<void> = Promise.resolve();
   /** Set by farVistaReady once the grid stands pre-reveal: the next outdoor
    *  environment update settles scene fog at the horizon haze band instead
@@ -2240,7 +2243,7 @@ export class Renderer {
       enabled: GFX.autoGovernor,
       terrainDetail: GFX,
       pinnedDetailLevel: terrainDetailLevelPin(),
-      pinnedPostLevel: postShedLevelPin(),
+      pinnedPostLevel: postShedPinFor(postShedLevelPin(), options.holdPostChain === true),
     });
     this.renderBudgetState = this.renderBudgetGovernor.reset(
       this.effectiveRenderScale,
@@ -2577,12 +2580,11 @@ export class Renderer {
     });
     setRenderCategory(this.farTerrainView.group, 'terrain');
     this.scene.add(this.farTerrainView.group);
-    // The curtained construction paths (boot, graphics rebuild) build the
-    // far grid eagerly: it overlaps the curtain's own asset waits and the
-    // vista stands before the reveal instead of tens of seconds into play
-    // on a loaded production client. The editor viewport constructs live
-    // Renderers with frames running and opts out (eagerFarVista false),
-    // keeping its rebuilds on polite idle pacing.
+    // The curtained construction paths (boot, graphics rebuild, the editor
+    // viewport behind its build overlay) build the far grid eagerly: it
+    // overlaps the curtain's own waits and the vista stands before the reveal
+    // instead of tens of seconds into the session. eagerFarVista false keeps
+    // a construction against live frames on polite idle pacing.
     this.farVistaInitialBuild =
       options.eagerFarVista === false
         ? Promise.resolve()

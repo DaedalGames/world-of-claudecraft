@@ -7349,11 +7349,15 @@ export class EditorApp {
     };
     this.activeWorld.biomePaint = this.map.biomePaint;
     this.paintCreatedGrid = true;
-    // The terrain material is chosen by "does this map carry paint" (a painted
-    // authored map gets the paint-capable splat material instead of the blank
-    // slate). The grid was just born, so the current material predates it and
-    // cannot render the stroke, rebuild once, ever, per map.
-    this.refreshTerrain(null);
+    // An empty grid changes nothing on screen, so nothing rebuilds: built-in
+    // ground paint lands through the chunk vertex tints the stroke's own
+    // region rebuild rewrites, and a textured swatch swaps its layers onto the
+    // live material (addCustomSwatch). A full rebuild here froze
+    // a world-size map for seconds (water refit, asset re-seat) and tore down
+    // the terrain and far vista, so the scene sat in close fog until they
+    // streamed back and then visibly cleared. The off-thread meshers still
+    // need the new content generation to see the grid.
+    touchActiveWorldContent();
   }
 
   /** Maps saved with the old coarse 4yd grid upsample (losslessly, nearest
@@ -7693,9 +7697,10 @@ export class EditorApp {
     // paint-free material into the paint-capable one).
     if (textureSha) {
       refreshCustomGroundTextures();
-      // FORK: the new texture's tile layer goes onto the live material; the
-      // 10-15s full rebuild is now only the FIRST textured swatch of a map
-      // (a material compiled without the paint path).
+      // FORK: the new texture's tile layer goes onto the live material. The
+      // editor compiles the paint path on every map (setPaintPathAlways), so
+      // the 10-15s full rebuild is left to a material without one (the low
+      // tier's Lambert terrain).
       touchActiveWorldContent();
       if (!this.viewport3d?.swapPaintLayers()) this.refreshTerrain(null);
       // Beyond the shader slot budget the extra textured swatches render as

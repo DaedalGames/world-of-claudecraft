@@ -81,9 +81,11 @@ import {
 import { meshTerrainHeight } from './terrain_mesh_height';
 import {
   invalidatePaintLayerRuntime,
+  isDormantPaintTexture,
   PAINT_LAYER_UNIFORMS_GLSL,
   PAINT_NORMAL_GLSL,
   paintLayerRuntime,
+  paintLayerRuntimeForMaterial,
   paintLayerSampleGlsl,
   refreshPaintFieldLive,
 } from './terrain_paint_layers';
@@ -1277,8 +1279,10 @@ interface PaintUniforms {
  * sampling the OLD field with the OLD grid origin, which read as every
  * painted texture on the map going blocky and shifted after the first stroke
  * that grew the grid, until a full rebuild. Returns false when the material
- * was compiled without the paint path (a map that had no textured swatch at
- * build time): that case still needs the full rebuild.
+ * was compiled without the paint path (a game map with no textured swatch at
+ * build time, or the low tier's Lambert material): that case still needs the
+ * full rebuild. The editor compiles the path on every map
+ * (paintLayerRuntimeForMaterial), so there its first textured swatch lands here.
  */
 export function swapPaintLayerRuntime(mat: THREE.Material): boolean {
   const ud = mat.userData as {
@@ -1289,7 +1293,12 @@ export function swapPaintLayerRuntime(mat: THREE.Material): boolean {
   if (!u || !ud.paintState) return false;
   const rt = paintLayerRuntime();
   if (!rt.field || !rt.tiles) return false;
-  const old = [u.uPaintField.value, u.uPaintTiles.value, u.uPaintNormTiles.value];
+  const old = [
+    u.uPaintField.value,
+    u.uPaintTiles.value,
+    u.uPaintNormTiles.value,
+    u.uPaintAoTiles.value,
+  ];
   u.uPaintField.value = rt.field;
   u.uPaintTiles.value = rt.tiles;
   u.uPaintNormTiles.value = rt.normTiles;
@@ -1307,10 +1316,53 @@ export function swapPaintLayerRuntime(mat: THREE.Material): boolean {
   // flag: three re-uploads a MeshStandardMaterial's uniforms on the first
   // draw after any material switch, which every frame has.
   ud.paintState.on = rt.on;
+  const kept = [rt.field, rt.tiles, rt.normTiles, rt.aoTiles];
   for (const t of old) {
-    if (t && t !== rt.field && t !== rt.tiles && t !== rt.normTiles) t.dispose();
+    if (t && !kept.includes(t) && !isDormantPaintTexture(t)) t.dispose();
   }
   return true;
+}
+
+/**
+ * Give a splat material its texture-paint path, or none (null). Resolved from
+ * the active content at material build, so the shipped overworld (no texture
+ * paint) keeps its exact shader; the editor compiles the path on every map
+ * (paintLayerRuntimeForMaterial), so its first textured swatch swaps in live
+ * instead of a full rebuild. See terrain_paint_layers.ts.
+ *
+ * FORK: the paint uniforms live on the material (userData) so a changed paint
+ * grid or texture set can be swapped onto the LIVE material
+ * (swapPaintLayerRuntime) instead of rebuilding every chunk. `uPaintOn` reads
+ * THROUGH to the live runtime's flag: the runtime's async tile loads flip their
+ * own object to 1 once every layer settled, and a swapped-in runtime is a new
+ * object, so the material must follow it by reference rather than hold a copy.
+ */
+export function attachPaintPath(mat: THREE.Material): PaintUniforms | null {
+  const paintLayers = paintLayerRuntimeForMaterial();
+  if (paintLayers.field === null || paintLayers.tiles === null) return null;
+  const paintState = { on: paintLayers.on };
+  const paintUniforms: PaintUniforms = {
+    uPaintField: { value: paintLayers.field },
+    uPaintTiles: { value: paintLayers.tiles },
+    uPaintNormTiles: { value: paintLayers.normTiles },
+    uPaintGrid: { value: paintLayers.grid },
+    uPaintDims: { value: paintLayers.dims },
+    uPaintTileSizes: { value: paintLayers.tileSizes },
+    uPaintTileVar: { value: paintLayers.tileVar },
+    uPaintTileDepth: { value: paintLayers.tileDepth },
+    uPaintAoTiles: { value: paintLayers.aoTiles },
+    uPaintEdge: { value: paintLayers.edge },
+    uPaintAoMean: { value: paintLayers.aoMean },
+    uPaintAoGain: { value: paintLayers.aoGain },
+    uPaintOn: {
+      get value() {
+        return paintState.on.value;
+      },
+    },
+  };
+  mat.userData.paintUniforms = paintUniforms;
+  mat.userData.paintState = paintState;
+  return paintUniforms;
 }
 
 function buildSplatMaterial(
@@ -1390,45 +1442,10 @@ function buildSplatMaterial(
   // normal set packs flat (buildSplatNormalArray).
   const albedo = buildSplatAlbedoArray(t);
   const normals = buildSplatNormalArray(t);
-  // The map's painted ground TEXTURES (cobbles, paving, tiles...): resolved
-  // from the active content at material build, compile-time gated like the
-  // grass bake so the shipped overworld (no texture paint) keeps its exact
-  // shader. See terrain_paint_layers.ts.
-  const paintLayers = paintLayerRuntime();
-  const hasPaint = paintLayers.field !== null && paintLayers.tiles !== null;
-  // FORK: the paint uniforms live on the material (userData) so a changed
-  // paint grid or texture set can be swapped onto the LIVE material
-  // (swapPaintLayerRuntime) instead of rebuilding every chunk.
-  // `uPaintOn` reads THROUGH to the live runtime's flag: the runtime's async
-  // tile loads flip their own object to 1 once every layer settled, and a
-  // swapped-in runtime is a new object, so the material must follow it by
-  // reference rather than hold a copy.
-  const paintState = { on: paintLayers.on };
-  const paintUniforms: PaintUniforms | null = hasPaint
-    ? {
-        uPaintField: { value: paintLayers.field },
-        uPaintTiles: { value: paintLayers.tiles },
-        uPaintNormTiles: { value: paintLayers.normTiles },
-        uPaintGrid: { value: paintLayers.grid },
-        uPaintDims: { value: paintLayers.dims },
-        uPaintTileSizes: { value: paintLayers.tileSizes },
-        uPaintTileVar: { value: paintLayers.tileVar },
-        uPaintTileDepth: { value: paintLayers.tileDepth },
-        uPaintAoTiles: { value: paintLayers.aoTiles },
-        uPaintEdge: { value: paintLayers.edge },
-        uPaintAoMean: { value: paintLayers.aoMean },
-        uPaintAoGain: { value: paintLayers.aoGain },
-        uPaintOn: {
-          get value() {
-            return paintState.on.value;
-          },
-        },
-      }
-    : null;
-  if (paintUniforms) {
-    mat.userData.paintUniforms = paintUniforms;
-    mat.userData.paintState = paintState;
-  }
+  // The map's painted ground TEXTURES (cobbles, paving, tiles...), compile-time
+  // gated like the grass bake; see attachPaintPath.
+  const paintUniforms = attachPaintPath(mat);
+  const hasPaint = paintUniforms !== null;
   mat.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, brush);
     Object.assign(sh.uniforms, {

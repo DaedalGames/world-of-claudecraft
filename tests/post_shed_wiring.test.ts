@@ -16,6 +16,7 @@ const n8aoSource = read('src', 'render', 'post_n8ao.ts');
 const bloomSource = read('src', 'render', 'post_bloom.ts');
 const shedSource = read('src', 'render', 'post_shed.ts');
 const budgetSource = read('src', 'render', 'render_budget.ts');
+const editorViewportSource = read('src', 'editor', '3d', 'viewport.ts');
 
 // The method's own body: from its signature to the first line that closes a
 // two-space-indented member, so a pin cannot pass or fail on a neighbour.
@@ -33,7 +34,7 @@ const stripComments = (source: string) =>
 describe('post shed renderer wiring', () => {
   it('hands the governor the dev pin, and the chain the pipeline ACTUALLY built', () => {
     expect(rendererSource).toMatch(
-      /new RenderBudgetGovernor\(\{[^}]*pinnedPostLevel: postShedLevelPin\(\),[^}]*\}\)/,
+      /new RenderBudgetGovernor\(\{[^}]*pinnedPostLevel: postShedPinFor\(postShedLevelPin\(\), options\.holdPostChain === true\),[^}]*\}\)/,
     );
     // One source of truth: the plan's chain (which honours gradeOnly,
     // ?smaa=off, ?n8ao=off and ?postshed=off), never GFX read a second time.
@@ -160,5 +161,15 @@ describe('post shed fairness and scheduler guards', () => {
     // No clock of its own: the only time inputs in the file are the sample's dt
     // the existing ladder already consumes.
     expect(code).not.toMatch(/performance\.now|Date\.now|setTimeout/);
+  });
+});
+
+describe('post shed: the editor holds its full chain', () => {
+  it('builds its renderer with holdPostChain, so the scene never recolours mid-session', () => {
+    const create = editorViewportSource.slice(
+      editorViewportSource.indexOf('this.renderer = new Renderer('),
+    );
+    const options = create.slice(0, create.indexOf('});'));
+    expect(stripComments(options)).toContain('holdPostChain: true');
   });
 });

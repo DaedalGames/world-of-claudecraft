@@ -8,6 +8,7 @@ import {
   postShedFloor,
   postShedGovernable,
   postShedLadder,
+  postShedPinFor,
   postShedPlan,
   postShedRungApplies,
   postShedRungCount,
@@ -191,6 +192,25 @@ describe('post shed core: the fairness guard', () => {
       'window',
     ]) {
       expect(code, forbidden).not.toContain(forbidden);
+    }
+  });
+});
+
+describe('post shed core: who may hold the post level', () => {
+  it('lets a host hold the full chain, so the image never changes look under load', () => {
+    // The editor viewport: a maker judges colour by eye, and bloom-off and
+    // ao-off (the sea's unsampled arm) recolour the whole frame.
+    expect(postShedPinFor(null, true)).toBe(1);
+  });
+
+  it('leaves the governor free when nothing holds it', () => {
+    expect(postShedPinFor(null, false)).toBeNull();
+  });
+
+  it('lets the ?postshed dev pin win over a held chain, at every value', () => {
+    for (const pin of [0, 0.25, 0.5, 1]) {
+      expect(postShedPinFor(pin, true)).toBe(pin);
+      expect(postShedPinFor(pin, false)).toBe(pin);
     }
   });
 });

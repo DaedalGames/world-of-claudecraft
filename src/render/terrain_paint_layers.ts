@@ -652,6 +652,72 @@ export function paintLayerRuntime(): PaintLayerRuntime {
   return cache.runtime;
 }
 
+let paintPathAlways = false;
+
+/** Host switch (the editor viewport): compile the terrain material's paint
+ *  path even before the map carries texture paint, against a dormant runtime,
+ *  so the first textured swatch swaps onto the live material
+ *  (swapPaintLayerRuntime) instead of forcing a full terrain rebuild. The game
+ *  never sets it and keeps its exact unpainted shader. */
+export function setPaintPathAlways(on: boolean): void {
+  paintPathAlways = on;
+}
+
+let dormant: PaintLayerRuntime | null = null;
+
+/** A paint runtime that compiles the paint path but paints nothing: paint off,
+ *  zero slots, one neutral 1x1 texel per array. One shared set for the page,
+ *  never disposed (a material build would otherwise strand four textures per
+ *  full rebuild): swapPaintLayerRuntime skips it via isDormantPaintTexture. */
+function dormantPaintLayerRuntime(): PaintLayerRuntime {
+  if (dormant) return dormant;
+  const field = new THREE.DataTexture(new Uint8Array(4), 1, 1);
+  field.magFilter = THREE.NearestFilter;
+  field.minFilter = THREE.NearestFilter;
+  field.generateMipmaps = false;
+  field.needsUpdate = true;
+  const layer = (bytes: number[], srgb: boolean): THREE.DataArrayTexture => {
+    const tex = new THREE.DataArrayTexture(new Uint8Array(bytes), 1, 1, 1);
+    if (srgb) tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.magFilter = THREE.LinearFilter;
+    tex.minFilter = THREE.LinearFilter;
+    tex.generateMipmaps = false;
+    tex.needsUpdate = true;
+    return tex;
+  };
+  dormant = {
+    ...EMPTY,
+    field,
+    tiles: layer([140, 140, 140, 0], true),
+    normTiles: layer([128, 128, 255, 255], false),
+    aoTiles: layer([255, 255, 255, 255], false),
+    on: { value: 0 },
+  };
+  return dormant;
+}
+
+/** True for the shared dormant runtime's textures, which nothing disposes. */
+export function isDormantPaintTexture(tex: THREE.Texture | null): boolean {
+  if (!dormant || !tex) return false;
+  return (
+    tex === dormant.field ||
+    tex === dormant.tiles ||
+    tex === dormant.normTiles ||
+    tex === dormant.aoTiles
+  );
+}
+
+/** The runtime a terrain material compiles against: the live one when the map
+ *  carries texture paint, else a dormant one when a host asked for the paint
+ *  path (setPaintPathAlways), else the paint-free runtime (no paint path). */
+export function paintLayerRuntimeForMaterial(): PaintLayerRuntime {
+  const live = paintLayerRuntime();
+  if ((live.field !== null && live.tiles !== null) || !paintPathAlways) return live;
+  return dormantPaintLayerRuntime();
+}
+
 /** Editor hook: forget the cached field so the next terrain build re-reads the
  *  active content's paint (repaints mutate BiomePaint in place). */
 export function invalidatePaintLayerRuntime(): void {

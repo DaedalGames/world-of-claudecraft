@@ -23,6 +23,7 @@ import { gcGroundTextureSets } from '../../render/ground_tex_gc';
 import { setOccluderFadesDisabled } from '../../render/occluder_fade_core';
 import { type SeatRegion, unionRegion } from '../../render/placed_assets';
 import { Renderer } from '../../render/renderer';
+import { setPaintPathAlways } from '../../render/terrain_paint_layers';
 import { setSwayDisabledAssets } from '../../render/tree_sway';
 import { setStudioSnowVisible } from '../../render/weather';
 import type { BakedCollisionBox } from '../../sim/asset_collision';
@@ -1048,15 +1049,25 @@ export class Editor3DViewport {
     // for a horizon a maker rarely studies. Clear any stale set so an editor
     // boot after a same-page game boot cannot inherit one.
     setFoliageFarPlacements([]);
-    // Polite far-vista pacing: this construction happens against live editor
-    // frames on every document load, never behind an opaque curtain, so the
-    // eager macrotask build lane must stay off (see RendererCreateOptions).
+    // The terrain material carries the paint path from the start, so a map's
+    // first textured swatch swaps in live: the full rebuild it needed froze a
+    // world-size map and tore down the terrain and far vista mid-session.
+    setPaintPathAlways(true);
+    // Eager far vista: this construction runs behind the editor's opaque
+    // "Building the world" overlay and before this viewport's frame loop
+    // starts, so the macrotask build lane is the boot curtain's own case. The
+    // polite pacing it replaces stood the vista up tens of seconds AFTER the
+    // reveal, and until then outdoor fog clamped to the nearest unbuilt chunk:
+    // the whole scene sat in pale haze, then visibly cleared and deepened.
     // The editor authors placements over a questless Sim, so the game's
     // quest-collectable view gate would hide every authored crate and sigil here.
     this.renderer = new Renderer(this.sim, this.canvas, this.nameplates, {
-      eagerFarVista: false,
+      eagerFarVista: true,
       editorClutter: true,
       showAllQuestObjects: true,
+      // A maker judges colour by eye: shedding bloom or AO under load
+      // recoloured the whole scene (the sea turned deep blue) mid-session.
+      holdPostChain: true,
     });
     this.hooks.onBuildProgress?.(33, 'engine');
     // Per-asset sway opt-outs BEFORE the first template loads, so a stilled
@@ -1136,6 +1147,11 @@ export class Editor3DViewport {
         this.hooks.onBuildProgress?.(35 + Math.round((done / Math.max(1, total)) * 65), 'zone'),
       { pace: 'fast' },
     );
+    if (this.disposed || gen !== this.generation) return;
+    // Behind the overlay still: let the eager far vista stand (bounded, as on
+    // the game's entry curtain) so the first visible frame already carries
+    // the finished horizon fog instead of easing it out on screen.
+    await this.renderer.farVistaReady();
     if (this.disposed || gen !== this.generation) return;
     this.hooks.onBuildProgress?.(100, 'zone');
     this.attachEvents();
@@ -5445,6 +5461,7 @@ export class Editor3DViewport {
     this.perfOverlay = null;
     this.objects.dispose();
     setOccluderFadesDisabled(false);
+    setPaintPathAlways(false);
   }
 
   // Free the GL context and remove the surfaces. A fresh canvas is needed for a
