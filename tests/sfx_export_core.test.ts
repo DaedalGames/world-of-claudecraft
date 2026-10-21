@@ -20,6 +20,7 @@ import * as exportBundleModule from '../scripts/sfx_studio/export_bundle.mjs';
 // @ts-expect-error untyped zero-dependency authoring tool (scripts/*.mjs convention)
 import { buildDeterministicZip } from '../scripts/sfx_studio/zip.mjs';
 import { SFX_CLIPS } from '../src/game/sfx_manifest.generated';
+import { POSIX_SH } from './helpers/posix_shell';
 
 const {
   assertExportableSfxTrack,
@@ -384,9 +385,9 @@ describe('SFX production bundle', () => {
     try {
       const artifactRoot = join(installFixture, 'artifact');
       writeArtifact(artifactRoot, files);
-      execFileSync('sh', ['-n', join(artifactRoot, 'install.sh')]);
+      execFileSync(POSIX_SH, ['-n', join(artifactRoot, 'install.sh')]);
       const installers = [
-        { name: 'POSIX', command: 'sh', script: join(artifactRoot, 'install.sh') },
+        { name: 'POSIX', command: POSIX_SH, script: join(artifactRoot, 'install.sh') },
         { name: 'Node', command: process.execPath, script: join(artifactRoot, 'install.mjs') },
       ];
       for (const installer of installers) {
@@ -430,7 +431,7 @@ describe('SFX production bundle', () => {
       writeFileSync(corruptBlob, corruptBytes);
 
       for (const installer of [
-        { name: 'POSIX', command: 'sh', script: join(corruptArtifactRoot, 'install.sh') },
+        { name: 'POSIX', command: POSIX_SH, script: join(corruptArtifactRoot, 'install.sh') },
         {
           name: 'Node',
           command: process.execPath,
@@ -510,7 +511,7 @@ describe('SFX production bundle', () => {
         writeFileSync(join(staticRoot, 'sentinel.txt'), 'production stays untouched\n');
         const before = snapshotDirectory(staticRoot);
         runs.push(
-          runInstaller('sh', [join(artifact, 'install.sh'), staticRoot]).then((result) => {
+          runInstaller(POSIX_SH, [join(artifact, 'install.sh'), staticRoot]).then((result) => {
             expect(result.error, `${failure.name} list test failed to execute`).toBeUndefined();
             expect(result.status, `${failure.name} list was accepted`).not.toBe(0);
             expect(result.stderr).toContain('artifact audio list checksum failed');
