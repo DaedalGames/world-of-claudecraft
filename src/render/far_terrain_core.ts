@@ -29,6 +29,7 @@ import {
   WORLD_MIN_X,
   WORLD_MIN_Z,
   ZONES,
+  zoneAt,
 } from '../sim/data';
 import { fbm2 } from '../sim/rng';
 import type { BiomeId } from '../sim/types';
@@ -507,6 +508,7 @@ const stripPalette = (zn: (typeof ZONES)[number]): FarPalette =>
 
 /** The same strip-cascade plus column blend paletteAt uses in terrain.ts,
  *  over linear triples. Writes into the module scratch (hot loop). */
+let authoredFarPaletteVersion = groundPaletteVersion();
 const authoredFarPalettes = new Map<string, FarPalette>();
 
 function farPaletteAt(x: number, z: number): FarPalette {
@@ -516,10 +518,17 @@ function farPaletteAt(x: number, z: number): FarPalette {
   // shipped world's z-band layout and painted a maker's horizon in rainbow
   // bands of built-in realms.
   if (!isBuiltinWorldActive()) {
-    const biome = zoneBiomeAt(x, z);
-    let pal = authoredFarPalettes.get(biome);
+    const v = groundPaletteVersion();
+    if (v !== authoredFarPaletteVersion) {
+      authoredFarPaletteVersion = v;
+      authoredFarPalettes.clear();
+    }
+    const zn = v === 0 ? null : zoneAt(x, z);
+    const biome = zn ? zn.biome : zoneBiomeAt(x, z);
+    const key = zn ? `${zn.id}:${biome}` : biome;
+    let pal = authoredFarPalettes.get(key);
     if (!pal) {
-      const p = BIOME_PALETTE[biome];
+      const p = zn ? groundPaletteFor(zn.id, biome) : BIOME_PALETTE[biome];
       pal = {
         grass: srgbHexToLinear(p.grass),
         grassDark: srgbHexToLinear(p.grassDark),
@@ -527,7 +536,7 @@ function farPaletteAt(x: number, z: number): FarPalette {
         dirt: srgbHexToLinear(p.dirt),
         sand: srgbHexToLinear(p.sand),
       };
-      authoredFarPalettes.set(biome, pal);
+      authoredFarPalettes.set(key, pal);
     }
     copy3(out.grass, pal.grass);
     copy3(out.grassDark, pal.grassDark);

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { buildCanopyDetail } from '../scenery_detail_canopy';
 import { prepareSceneryBandGeometry, SceneryIndexCache, sceneryBandIndices } from './geometry';
 import { addSceneryLocalAttributes } from './material';
 import type { SceneryPart, SceneryPlacement } from './types';
@@ -72,16 +73,31 @@ export async function buildSceneryBand(options: BandBuildOptions): Promise<Scene
         assertActive();
         const source = part.source.geometry;
         const policy = options.reduction(item, part);
-        const key = `${policy.mode}:${policy.triangles}`;
+        const isCanopy = policy.mode === 'coarse' && /^Leaves/.test(part.source.material.name);
+        const key = `${policy.mode}:${policy.triangles}${isCanopy ? ':canopy' : ''}`;
         let indices = reductions.find(source, key);
         if (!indices) {
-          indices = await options.prepare(() => {
+          const reduced = await options.prepare(() => {
             assertActive();
-            return sceneryBandIndices(source, policy.triangles, policy.mode);
+            if (isCanopy) {
+              const canopy = buildCanopyDetail(source, policy.triangles <= 12 ? 5 : 4, false);
+              if (canopy) {
+                return {
+                  indices: canopy.index.array as Uint32Array,
+                  position: canopy.position,
+                };
+              }
+            }
+            return {
+              indices: sceneryBandIndices(source, policy.triangles, policy.mode),
+              position: undefined,
+            };
           }, `scenery-band-reduce:${options.name}`);
-          reductions.store(source, key, indices);
+          indices = reduced.indices;
+          reductions.store(source, key, indices, reduced.position);
         }
         const reducedIndices = indices;
+        const reducedPosition = reductions.findPosition(source, key);
         await options.prepare(() => {
           assertActive();
           // Temporary shell borrows source arrays. toNonIndexed creates owned
@@ -89,6 +105,7 @@ export async function buildSceneryBand(options: BandBuildOptions): Promise<Scene
           const shell = new THREE.BufferGeometry();
           for (const name of ['position', 'normal', 'uv', 'color'])
             if (source.attributes[name]) shell.setAttribute(name, source.attributes[name]);
+          if (reducedPosition) shell.setAttribute('position', reducedPosition);
           shell.setIndex(new THREE.BufferAttribute(reducedIndices, 1));
           const geometry = shell.toNonIndexed();
           owned.add(geometry);

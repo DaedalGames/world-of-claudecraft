@@ -52,6 +52,7 @@ import {
   buildRealmBuilderMonumentFx,
 } from './realm_builder_monument_fx';
 import type { RevealGateCore } from './reveal_gate_core';
+import { LOW_SCENERY_BUDGET } from './scenery_bands/policy_core';
 import { prepareSceneryDetailRoot } from './scenery_detail';
 import {
   newTownPiecewiseReveal,
@@ -73,8 +74,14 @@ const FOUNDATION_COLOR = 0x46505e;
 // authored windows. Panes derived from the real window frames sit exactly in
 // the models' openings; the earlier bounding-box guesses floated off walls.
 const KIT_WINDOW_AMBER = 0xffb45a;
-const TOWN_CULL_RADIUS =
-  EASTBROOK_LAYOUT.wall.radius + EASTBROOK_LAYOUT.wall.maximumSegmentSpan / 2;
+const TOWN_CULL_RADIUS = Math.max(
+  EASTBROOK_LAYOUT.wall.radius + EASTBROOK_LAYOUT.wall.maximumSegmentSpan / 2,
+  ...EASTBROOK_LAYOUT.buildings.map(
+    (building) =>
+      Math.hypot(building.reach.center.x, building.reach.center.z) +
+      Math.hypot(building.reach.halfWidth, building.reach.halfDepth),
+  ),
+);
 /** The one reveal-gate key of the town's static content. */
 const STATIC_REVEAL_KEY = 'eastbrook-town-static';
 
@@ -1378,10 +1385,14 @@ function buildFromTemplates(
       monumentFx.update(reducedMotion, monumentDistance);
       lastCamX = camX;
       lastCamZ = camZ;
+      const cullFogFar =
+        GFX.tier === 'low' && fogFar === LOW_SCENERY_BUDGET.full
+          ? LOW_SCENERY_BUDGET.far
+          : fogFar;
       // Eastbrook is centred on the world origin, so the camera's distance
       // squared to the town centre is camX^2 + camZ^2.
       const reveal = townStaticReveal(
-        eastbrookFogVisible(camX, camZ, 0, 0, fogFar, TOWN_CULL_RADIUS),
+        eastbrookFogVisible(camX, camZ, 0, 0, cullFogFar, TOWN_CULL_RADIUS),
         staticRevealed,
         camX * camX + camZ * camZ,
         TOWN_CULL_RADIUS,
@@ -1413,7 +1424,7 @@ function buildFromTemplates(
           eyeX,
           eyeY,
           eyeZ,
-          fogFar,
+          cullFogFar,
         );
         target.group.visible =
           roofVisibilityPlan.visible &&

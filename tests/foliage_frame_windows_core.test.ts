@@ -148,6 +148,22 @@ describe('foliage frame windows: the detail swap keeps each arm its own law', ()
     expect(resolve({ fogFar: 30 }).out.buildingSwap).toBe(0);
   });
 
+  it('lean arm preserves exact band handoff when fogFar is clamped below atmosFogNear', () => {
+    for (const q of [0, 0.35, 0.72, 1]) {
+      const { out, collapse } = resolve({
+        ...LEAN,
+        modelQuality: q,
+        fogFar: 60,
+        atmosFogNear: 320,
+        atmosFogFar: 560,
+      });
+      expect(out.fogLimit).toBe(60);
+      expect(out.detailFar).toBe(60);
+      expect(collapse.treeMax).toBe(60);
+      expect(collapse.fogCull).toBe(60);
+    }
+  });
+
   it('writes into the caller-owned reused blocks', () => {
     const out = createFoliageFrameWindows();
     const collapse = collapseBlock();

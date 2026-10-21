@@ -76,6 +76,7 @@ import {
   updatePropCullables,
 } from './prop_cull_core';
 import type { RevealGateCore } from './reveal_gate_core';
+import { LOW_SCENERY_BUDGET } from './scenery_bands/policy_core';
 import { prepareSceneryDetailRoot } from './scenery_detail';
 import { shipWakePrewarmParts } from './ship_wake';
 import { mergeBandDepth, mergeStaticMeshes, normalizedStaticGeometry } from './static_merge';
@@ -2665,24 +2666,38 @@ export function buildProps(
       dt: number,
       reducedMotion = false,
     ): void {
-      const fogFarSq = fogFar * fogFar;
+      const cullFogFar =
+        GFX.tier === 'low' && fogFar === LOW_SCENERY_BUDGET.full
+          ? LOW_SCENERY_BUDGET.far
+          : fogFar;
+      const fogFarSq = cullFogFar * cullFogFar;
       scheduledShips?.sync(dt);
       for (let i = 0; i < transportShips.length; i++) {
-        transportShips[i].update(camX, camY, camZ, eyeX, eyeY, eyeZ, fogFar, dt, reducedMotion);
+        transportShips[i].update(
+          camX,
+          camY,
+          camZ,
+          eyeX,
+          eyeY,
+          eyeZ,
+          cullFogFar,
+          dt,
+          reducedMotion,
+        );
       }
-      updateHarborHouseShell(camX, camY, camZ, eyeX, eyeY, eyeZ, dt, reducedMotion, fogFar);
+      updateHarborHouseShell(camX, camY, camZ, eyeX, eyeY, eyeZ, dt, reducedMotion, cullFogFar);
       // Band fog cull (prop_cull_core): a band's first reveal on a walking
       // approach holds until the gate has linked its programs, and an arrival
       // among the bands holds too, with its compiles submitted at the imminent
       // priority and, on a frame where several bands escape at once, nearest
       // to the camera first.
-      updatePropCullables(cullables, camX, camZ, fogFar, fogFarSq, bandRevealGate, cullPass);
+      updatePropCullables(cullables, camX, camZ, cullFogFar, fogFarSq, bandRevealGate, cullPass);
       // Far-cell swap first (prop_cell_core): distant cells draw their merged
       // bake and suppress the members' individual baked meshes; near cells
       // (where the ghost fade can fire) draw the individuals while the bake
       // stays as the shadow-only caster. Pixel-identical both ways.
       for (const cell of farCells) {
-        updatePropCell(cell, camX, camZ, fogFar, undefined, revealGate);
+        updatePropCell(cell, camX, camZ, cullFogFar, undefined, revealGate);
       }
       // Deliberately NO first-sight reveal gate here (unlike the bands): tried
       // and reverted. Gating each hideable's first fog reveal put 116 keys and
@@ -2696,7 +2711,7 @@ export function buildProps(
         const h = hideables[i];
         const dx = camX - h.x,
           dz = camZ - h.z;
-        const reach = fogFar + h.cull;
+        const reach = cullFogFar + h.cull;
         if (dx * dx + dz * dz >= reach * reach) {
           h.group.visible = false; // fully fogged: drop it (shadow is out of range too)
           continue;

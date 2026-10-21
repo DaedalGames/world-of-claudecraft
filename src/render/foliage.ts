@@ -1530,7 +1530,7 @@ function placeSpecies(
     lod: BucketMesh['lod'],
     minDist?: number,
     maxDist?: number,
-    atDetail?: { min?: boolean; max?: boolean },
+    atDetail?: { min?: boolean; max?: boolean; nearEdge?: boolean },
     spriteCategory?: ImpostorCategory,
     shadow?: ShadowCasterRow,
   ) => void,
@@ -1656,7 +1656,10 @@ function placeSpecies(
         if (group.maxDist !== undefined && !impostorsActive()) numericCaps.push(group.maxDist);
         if (cullBark) numericCaps.push(barkFar);
         const maxDist = numericCaps.length > 0 ? Math.min(...numericCaps) : undefined;
-        register(im, group.lod, undefined, maxDist, { max: true });
+        register(im, group.lod, undefined, maxDist, {
+          max: true,
+          nearEdge: maxDist !== undefined && !impostorsActive() ? true : undefined,
+        });
         if (GFX.standardMaterials && !impostorsActive() && !part.isLeaf && spec.farTrunkProxy) {
           const proxyGeo = ghostHideGeometry(farTrunkGeo(part.geometry), n);
           const proxy = cloneInstancedTo(im, proxyGeo, part.material);

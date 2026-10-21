@@ -76,6 +76,7 @@ import {
   fillChunkIndexRow,
   fillChunkVertexRow,
 } from './terrain_chunk_build';
+import { lowCelLambertColorFragmentGlsl } from './terrain_low_cel_core';
 import { meshTerrainHeight } from './terrain_mesh_height';
 import {
   invalidatePaintLayerRuntime,
@@ -2405,6 +2406,10 @@ export const terrainInternalsForTest = {
 
 function buildLambertMaterial(brush: BrushUniforms): THREE.MeshLambertMaterial {
   const detail = groundDetailTexture();
+  applyTextureAnisotropy(detail, 'colour');
+  // Keep 4x anisotropy on the single 256x256 RGBA cel ground texture even on Low
+  // so 15-20deg chase-camera angles do not drop 2 mip levels and wash out pebbles/tufts.
+  detail.anisotropy = Math.max(detail.anisotropy, 4);
   // strip-planar uv: keep the legacy ~2.25u texture period in both axes
   detail.repeat.set(160, 480);
   const mat = new THREE.MeshLambertMaterial({
@@ -2420,8 +2425,9 @@ function buildLambertMaterial(brush: BrushUniforms): THREE.MeshLambertMaterial {
   // no longer renders every sun-averted slope black. The sun term is
   // untouched, night still darkens the fill through the graded hemisphere it
   // multiplies, and it sits at 1 under an interior rig or on the Lambert tier.
-  // The Lambert tier has no world-position varying of its own, so the brush
-  // patch carries one (r165 chunk names; same idiom as the splat patch above).
+  // The Lambert tier also forwards aSplat and world normal to the fragment
+  // shader so lowCelLambertColorFragmentGlsl can sample the 4-channel cel
+  // ground pattern (grass, dirt, rock, sand) and reshape coarse triangle edges.
   mat.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, brush);
     sh.uniforms.uWocFillBoost = sharedUniforms.uTerrainFillBoost;
@@ -2429,21 +2435,38 @@ function buildLambertMaterial(brush: BrushUniforms): THREE.MeshLambertMaterial {
       .replace(
         '#include <common>',
         `#include <common>
-        varying vec3 vWocWPos;`,
+        attribute vec4 aSplat;
+        attribute vec4 aExtra;
+        varying vec3 vWocWPos;
+        varying vec3 vWocWNorm;
+        varying vec4 vWocSplat;
+        varying vec4 vWocExtra;`,
       )
       .replace(
         '#include <begin_vertex>',
         `#include <begin_vertex>
-        vWocWPos = (modelMatrix * vec4(transformed, 1.0)).xyz;`,
+        vWocWPos = (modelMatrix * vec4(transformed, 1.0)).xyz;
+        vWocWNorm = normalize(mat3(modelMatrix) * objectNormal);
+        float wocSplatInitSum = aSplat.x + aSplat.y + aSplat.z + aSplat.w;
+        vWocSplat = wocSplatInitSum > 0.001 ? aSplat / wocSplatInitSum : vec4(1.0, 0.0, 0.0, 0.0);
+        vWocExtra = aExtra;`,
       );
     sh.fragmentShader = sh.fragmentShader
       .replace(
         '#include <common>',
         `#include <common>
         varying vec3 vWocWPos;
+        varying vec3 vWocWNorm;
+        varying vec4 vWocSplat;
+        varying vec4 vWocExtra;
         uniform float uWocFillBoost;
         ${BRUSH_RING_GLSL}`,
       )
+      .replace(
+        '#include <map_fragment>',
+        '// woc low cel ground map sampled in color_fragment below',
+      )
+      .replace('#include <color_fragment>', lowCelLambertColorFragmentGlsl(WATER_LEVEL))
       .replace(
         '#include <lights_fragment_begin>',
         `#include <lights_fragment_begin>
@@ -2974,7 +2997,7 @@ export function buildTerrain(seed: number, priorityPoint?: { x: number; z: numbe
     const palette = groundPaletteVersion();
     attachChunk(
       stampGroundPalette(
-        buildChunkGeometry(x0, z0, size, spacing, seed, !lowGfx, skirtSpan, lowShade),
+        buildChunkGeometry(x0, z0, size, spacing, seed, true, skirtSpan, lowShade),
         palette,
       ),
       x0,
@@ -3021,7 +3044,7 @@ export function buildTerrain(seed: number, priorityPoint?: { x: number; z: numbe
         size,
         spacing,
         seed,
-        withSplat: !lowGfx,
+        withSplat: true,
         skirtSpan,
         lowShade,
         cuts: cutSet?.cuts,
@@ -3064,7 +3087,7 @@ export function buildTerrain(seed: number, priorityPoint?: { x: number; z: numbe
       size,
       spacing,
       seed,
-      !lowGfx,
+      true,
       skirtSpan,
       lowShade,
       yieldSlice,
@@ -3536,7 +3559,7 @@ export function buildTerrain(seed: number, priorityPoint?: { x: number; z: numbe
           chunk.size,
           chunk.spacing,
           seed,
-          !lowGfx,
+          true,
           skirtSpan,
           lowShade,
         );
@@ -3572,7 +3595,7 @@ export function buildTerrain(seed: number, priorityPoint?: { x: number; z: numbe
               size,
               spacing,
               seed,
-              !lowGfx,
+              true,
               skirtSpan,
               lowShade,
             ),

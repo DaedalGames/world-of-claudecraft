@@ -1342,6 +1342,7 @@ const RENDER_PURE_CORES = [
   // The chunk grid's world box (shipped box, or an authored map's own rect
   // plus outskirts): pure arithmetic over the active zones and stamps.
   'src/render/terrain_grid_core.ts',
+  'src/render/terrain_low_cel_core.ts',
   'src/render/texture_prep_core.ts',
   'src/render/terrain_splat_presence_core.ts',
   'src/render/vehicle_exhaust_core.ts',

@@ -1253,6 +1253,19 @@ describe('Eastbrook town renderer', () => {
     expect(staticBatches.every((mesh) => !mesh.visible)).toBe(true);
     view.update(0, 5, 0, 0, 5, 0, 100, 1);
     expect(staticBatches.every((mesh) => mesh.visible)).toBe(true);
+    // Low's 60-yard sceneryFar must keep the harbor town's static batches and
+    // nearby buildings visible when orbiting at (19, -85) or spawning at (-94, -58).
+    view.update(32, 5, -86, 19, 5, -85, 60, 1);
+    expect(staticBatches.every((mesh) => mesh.visible)).toBe(true);
+    expect(view.group.getObjectByName('eastbrookBuilding:eastbrook_apothecary')?.visible).toBe(
+      true,
+    );
+    expect(view.group.getObjectByName('eastbrookBuilding:eastbrook_weekly_vault')?.visible).toBe(
+      true,
+    );
+    const { x: startX, z: startZ } = EASTBROOK_LAYOUT.services.playerStart.position;
+    view.update(startX, 5, startZ, startX, 5, startZ, 60, 1);
+    expect(staticBatches.every((mesh) => mesh.visible)).toBe(true);
   });
 
   it('stands the Weekly Vault down for a document that owns it as a placement', () => {

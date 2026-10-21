@@ -50,6 +50,12 @@ describe('foliage lean near-edge cull renderer wiring', () => {
     expect(foliageSource).toContain('bucketWindow.maxNearEdge = b.maxNearEdge;');
   });
 
+  it('registers lean tree maxDist rows near-edge so 540x240 slabs do not center-cull near-fill trees', () => {
+    expect(foliageSource).toContain(
+      'nearEdge: maxDist !== undefined && !impostorsActive() ? true : undefined,',
+    );
+  });
+
   it('resolves the frame windows through the shared pure core', () => {
     expect(foliageSource).toMatch(
       /import \{[^}]*resolveFoliageFrameWindows[^}]*\} from '\.\/foliage_frame_windows_core';/,

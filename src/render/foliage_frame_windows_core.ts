@@ -78,7 +78,10 @@ export function resolveFoliageFrameWindows(
 ): void {
   const { dists, spritesOn, fogFar, atmosFogNear, atmosFogFar } = input;
   const distanceScale = foliageDistanceScale(input.modelQuality, input.leanFoliage);
-  const fogLimit = foliageFogLimit(fogFar, input.modelQuality);
+  const fogLimit =
+    input.leanFoliage && fogFar < atmosFogNear
+      ? fogFar
+      : foliageFogLimit(fogFar, input.modelQuality);
   // Sprite arm: the handoff follows the budget (sprites are legible in
   // clear air); lean arm: the old fog-blend law, trees end in the murk.
   const detailFar = spritesOn

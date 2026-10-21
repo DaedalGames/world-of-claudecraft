@@ -42,6 +42,7 @@ import {
 import { type PlacedTextureTier, placedTextureTierPath } from './placed_texture_tier_core';
 import { activeWorldPromoted } from './promoted_scenery_gate';
 import type { RevealGateCore } from './reveal_gate_core';
+import { LOW_SCENERY_BUDGET } from './scenery_bands/policy_core';
 import { prepareSceneryDetailRoot } from './scenery_detail';
 import {
   newTownPiecewiseReveal,
@@ -1166,6 +1167,10 @@ function buildFromTemplates(
     ): void {
       lastCamX = camX;
       lastCamZ = camZ;
+      const cullFogFar =
+        GFX.tier === 'low' && fogFar === LOW_SCENERY_BUDGET.full
+          ? LOW_SCENERY_BUDGET.far
+          : fogFar;
       const hubDx = camX - FENBRIDGE_LAYOUT.hub.center.x;
       const hubDz = camZ - FENBRIDGE_LAYOUT.hub.center.z;
       const reveal = townStaticReveal(
@@ -1174,7 +1179,7 @@ function buildFromTemplates(
           camZ,
           FENBRIDGE_LAYOUT.hub.center.x,
           FENBRIDGE_LAYOUT.hub.center.z,
-          fogFar,
+          cullFogFar,
           TOWN_CULL_RADIUS,
         ),
         staticRevealed,
@@ -1208,7 +1213,7 @@ function buildFromTemplates(
           eyeX,
           eyeY,
           eyeZ,
-          fogFar,
+          cullFogFar,
         );
         target.group.visible =
           visibilityPlan.visible &&

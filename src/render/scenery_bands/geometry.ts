@@ -11,6 +11,10 @@ export class SceneryIndexCache {
     Position,
     Map<THREE.BufferAttribute | null, Map<string, Uint32Array>>
   >();
+  private positions = new WeakMap<
+    Position,
+    Map<THREE.BufferAttribute | null, Map<string, THREE.BufferAttribute>>
+  >();
 
   private entries(geometry: THREE.BufferGeometry): Map<string, Uint32Array> {
     const position = geometry.attributes.position;
@@ -26,11 +30,34 @@ export class SceneryIndexCache {
     }
     return entries;
   }
+  private positionEntries(geometry: THREE.BufferGeometry): Map<string, THREE.BufferAttribute> {
+    const position = geometry.attributes.position;
+    let byIndex = this.positions.get(position);
+    if (!byIndex) {
+      byIndex = new Map();
+      this.positions.set(position, byIndex);
+    }
+    let entries = byIndex.get(geometry.index);
+    if (!entries) {
+      entries = new Map();
+      byIndex.set(geometry.index, entries);
+    }
+    return entries;
+  }
   find(geometry: THREE.BufferGeometry, key: string): Uint32Array | undefined {
     return this.entries(geometry).get(key);
   }
-  store(geometry: THREE.BufferGeometry, key: string, indices: Uint32Array): void {
+  findPosition(geometry: THREE.BufferGeometry, key: string): THREE.BufferAttribute | undefined {
+    return this.positionEntries(geometry).get(key);
+  }
+  store(
+    geometry: THREE.BufferGeometry,
+    key: string,
+    indices: Uint32Array,
+    position?: THREE.BufferAttribute,
+  ): void {
     this.entries(geometry).set(key, indices);
+    if (position) this.positionEntries(geometry).set(key, position);
   }
 }
 
@@ -65,7 +92,7 @@ export function sceneryBandIndices(
   }
   const [indices] =
     mode === 'coarse'
-      ? MeshoptSimplifier.simplifySloppy(base, positions, 3, null, target, 1)
+      ? MeshoptSimplifier.simplify(base, positions, 3, target, 0.5, ['Permissive'])
       : MeshoptSimplifier.simplify(
           base,
           positions,
@@ -74,7 +101,7 @@ export function sceneryBandIndices(
           mode === 'palm' ? 0.03 : 0.01,
           mode === 'palm' ? ['Permissive'] : [],
         );
-  if (mode === 'palm' && indices.length > target * 2) {
+  if ((mode === 'palm' || mode === 'coarse') && indices.length > target * 2) {
     const [coarse] = MeshoptSimplifier.simplifySloppy(base, positions, 3, null, target, 1);
     if (coarse.length) return coarse;
     const [fallback] = MeshoptSimplifier.simplify(base, positions, 3, target, 1, ['Permissive']);
@@ -82,6 +109,8 @@ export function sceneryBandIndices(
   }
   if (indices.length) return indices;
   if (mode === 'coarse') {
+    const [sloppy] = MeshoptSimplifier.simplifySloppy(base, positions, 3, null, target, 1);
+    if (sloppy.length) return sloppy;
     const [fallback] = MeshoptSimplifier.simplify(base, positions, 3, target, 1, ['Permissive']);
     if (fallback.length) return fallback;
   }

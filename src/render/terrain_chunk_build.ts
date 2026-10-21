@@ -34,6 +34,7 @@ import {
   WORLD_MAX_Z,
   WORLD_MIN_Z,
   ZONES,
+  zoneAt,
 } from '../sim/data';
 import { fbm2 } from '../sim/rng';
 import { cutBounds, cutsInRect, cutsSdfAt, inTerrainCut } from '../sim/terrain_cuts';
@@ -125,12 +126,35 @@ function syncZonePalettes(): void {
 // on a maker's map it striped their unpainted ground, and all the land past
 // their paint grid, in whatever built-in realm happened to own that z (SPACEY,
 // 2026-09-18: "the terrain beyond the cave ... has bad textures").
+let authoredPaletteVersion = groundPaletteVersion();
 const authoredPalettes = new Map<string, (typeof zonePalettes)[number]>();
 function authoredPalette(x: number, z: number): (typeof zonePalettes)[number] {
-  const biome = zoneBiomeAt(x, z);
-  let pal = authoredPalettes.get(biome);
+  const v = groundPaletteVersion();
+  if (v !== authoredPaletteVersion) {
+    authoredPaletteVersion = v;
+    authoredPalettes.clear();
+  }
+  if (v === 0) {
+    const biome = zoneBiomeAt(x, z);
+    let pal = authoredPalettes.get(biome);
+    if (!pal) {
+      const p = BIOME_PALETTE[biome];
+      pal = {
+        grass: new THREE.Color(p.grass),
+        grassDark: new THREE.Color(p.grassDark),
+        grassYellow: new THREE.Color(p.grassYellow),
+        dirt: new THREE.Color(p.dirt),
+        sand: new THREE.Color(p.sand),
+      };
+      authoredPalettes.set(biome, pal);
+    }
+    return pal;
+  }
+  const zn = zoneAt(x, z);
+  const key = `${zn.id}:${zn.biome}`;
+  let pal = authoredPalettes.get(key);
   if (!pal) {
-    const p = BIOME_PALETTE[biome];
+    const p = groundPaletteFor(zn.id, zn.biome);
     pal = {
       grass: new THREE.Color(p.grass),
       grassDark: new THREE.Color(p.grassDark),
@@ -138,7 +162,7 @@ function authoredPalette(x: number, z: number): (typeof zonePalettes)[number] {
       dirt: new THREE.Color(p.dirt),
       sand: new THREE.Color(p.sand),
     };
-    authoredPalettes.set(biome, pal);
+    authoredPalettes.set(key, pal);
   }
   return pal;
 }
@@ -626,7 +650,9 @@ function sampleVertex(state: ChunkGeometryBuildState, ci: number, cj: number): V
       // around rock-like paint. Colour-only swatches still need the vertex
       // path (it is their whole render), and Snow-family swatches ride the
       // dedicated snow channel either way.
-      if (!fx.textured) {
+      // Low terrain (`lowShade`) has no fragment tile array, so textured
+      // swatches also apply their tint and splat layer at the vertex there.
+      if (!fx.textured || lowShade) {
         paintC.setRGB(fx.r, fx.g, fx.b);
         cTmp.lerp(paintC, Math.min(1, fx.strength));
         const pLayer = fx.layer;
@@ -642,8 +668,9 @@ function sampleVertex(state: ChunkGeometryBuildState, ci: number, cj: number): V
     const ridge = clamp01((slope - 0.22) * 1.6);
     const lowland = clamp01((wl + 7 - h) / 12);
     const upland = clamp01((h - 8) / 22);
-    cTmp.lerp(lowShadeC, 0.07 * ridge + 0.05 * lowland * mud);
-    cTmp.lerp(lowSunC, 0.035 * (1 - shore) + 0.045 * upland);
+    const palActive = groundPaletteVersion() > 0;
+    cTmp.lerp(palActive ? grassDarkC : lowShadeC, 0.07 * ridge + 0.05 * lowland * mud);
+    cTmp.lerp(palActive ? grassYellowC : lowSunC, 0.035 * (1 - shore) + 0.045 * upland);
     cTmp.multiplyScalar(0.98 + upland * 0.04 - ridge * 0.025);
   }
   return {

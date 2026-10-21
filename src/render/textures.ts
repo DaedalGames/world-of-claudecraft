@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { bakeLowCelGroundRgba, LOW_CEL_GROUND_SIZE } from './terrain_low_cel_core';
 
 // Procedurally generated canvas textures — no external assets.
 
@@ -24,31 +25,27 @@ function rnd(): number {
   return seedState / 0x7fffffff;
 }
 
-// Mottled detail texture multiplied over terrain vertex colors.
-export function groundDetailTexture(): THREE.CanvasTexture {
-  return makeCanvas(256, (ctx, s) => {
-    ctx.fillStyle = '#b8b8b8';
-    ctx.fillRect(0, 0, s, s);
-    for (let i = 0; i < 5000; i++) {
-      const v = 150 + Math.floor(rnd() * 105);
-      ctx.fillStyle = `rgba(${v},${v},${v},0.35)`;
-      const x = rnd() * s,
-        y = rnd() * s;
-      const r = 1 + rnd() * 2.5;
-      ctx.fillRect(x, y, r, r);
-    }
-    // blades
-    for (let i = 0; i < 1400; i++) {
-      const v = 120 + Math.floor(rnd() * 100);
-      ctx.strokeStyle = `rgba(${v},${v},${v},0.30)`;
-      const x = rnd() * s,
-        y = rnd() * s;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x + (rnd() - 0.5) * 3, y - 2 - rnd() * 4);
-      ctx.stroke();
-    }
-  });
+// 4-channel RGBA stylized cel-art pattern texture for the Low terrain tier
+// (R: grass brushstrokes/tufts, G: dirt pebbles/clods, B: rock fracture plates,
+// A: wind-swept sand ripples and macro drift). Advances seedState by the legacy
+// 27,000 steps so downstream procedural textures keep their exact LCG stream.
+export function groundDetailTexture(): THREE.Texture {
+  for (let i = 0; i < 27000; i++) rnd();
+  const data = bakeLowCelGroundRgba(LOW_CEL_GROUND_SIZE);
+  const tex = new THREE.DataTexture(
+    data,
+    LOW_CEL_GROUND_SIZE,
+    LOW_CEL_GROUND_SIZE,
+    THREE.RGBAFormat,
+  );
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.magFilter = THREE.LinearFilter;
+  tex.minFilter = THREE.LinearMipmapLinearFilter;
+  tex.generateMipmaps = true;
+  tex.colorSpace = THREE.NoColorSpace;
+  tex.needsUpdate = true;
+  return tex;
 }
 
 export function stoneTexture(): THREE.CanvasTexture {

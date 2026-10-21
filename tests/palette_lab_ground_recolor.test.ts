@@ -67,4 +67,21 @@ describe('palette-lab ground re-bake', () => {
     setGroundPaletteOverrides({ eastbrook_vale: VIVID });
     expect(groundGrassColorAt(-30, -90, 20061, new THREE.Color()).getHex()).not.toBe(before);
   });
+
+  it('recolours authored-map chunks (!isBuiltinWorldActive) when a zone override is active', async () => {
+    const { BUILTIN_WORLD, setActiveWorldContent } = await import('../src/sim/data');
+    setActiveWorldContent({ ...BUILTIN_WORLD });
+    try {
+      const stock = buildChunkArrays({ ...JOB, lowShade: true });
+      setGroundPaletteOverrides({ eastbrook_vale: VIVID });
+      const tinted = buildChunkArrays({ ...JOB, lowShade: true });
+      expect(Array.from(tinted.colors)).not.toEqual(Array.from(stock.colors));
+      setGroundPaletteOverrides(null);
+      expect(Array.from(buildChunkArrays({ ...JOB, lowShade: true }).colors)).toEqual(
+        Array.from(stock.colors),
+      );
+    } finally {
+      setActiveWorldContent(null);
+    }
+  });
 });
