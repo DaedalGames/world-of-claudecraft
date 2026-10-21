@@ -288,7 +288,7 @@ describe('SFX production bundle', () => {
       writeFileSync(corruptBlob, corruptBytes);
 
       for (const installer of [
-        { name: 'POSIX', command: 'sh', script: join(corruptArtifactRoot, 'install.sh') },
+        { name: 'POSIX', command: POSIX_SH, script: join(corruptArtifactRoot, 'install.sh') },
         {
           name: 'Node',
           command: process.execPath,
