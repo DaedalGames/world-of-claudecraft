@@ -181,6 +181,20 @@ describe('the stat rules (the honor discount at item level 35)', () => {
     expect(item.stats?.agi ?? 0).toBe(0);
   });
 
+  // Shaman attack power is 2 per Strength and never reads Agility (entity.ts
+  // recalcPlayerStats), so Galeborn carries Strength like Bloodmane does.
+  it.each([
+    ['helmet', 12],
+    ['shoulder', 10],
+    ['chest', 15],
+    ['legs', 13],
+    ['gloves', 9],
+  ] as const)('gives the enhancement %s Strength instead of Agility', (slot, strength) => {
+    const item = ITEMS[`vanguard_shaman_enhancement_${slot}`];
+    expect(item.stats?.str).toBe(strength);
+    expect(item.stats?.agi ?? 0).toBe(0);
+  });
+
   it('prices the line at 90 percent of the budget, stamina lifted to the full-budget floor', () => {
     expect(SEASON2_STAT_FRACTION).toBe(0.9);
     for (const id of SEASON2_STOCK) {
