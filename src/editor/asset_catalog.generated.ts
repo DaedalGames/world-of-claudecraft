@@ -25803,6 +25803,13 @@ export const ASSET_CATALOG: readonly AssetEntry[] = [
     "path": "/models/tidehold/hall.glb"
   },
   {
+    "id": "tidehold/highwatch/bank",
+    "category": "tidehold",
+    "label": "Bank",
+    "path": "/models/tidehold/highwatch/bank.glb",
+    "subcategory": "highwatch"
+  },
+  {
     "id": "tidehold/highwatch/hall",
     "category": "tidehold",
     "label": "Hall",
