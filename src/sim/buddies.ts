@@ -15,7 +15,6 @@
 
 import { type BuddyNames, normalizeBuddyNames } from './buddy_names';
 import { BUDDY_KEYS, type BuddyKey, buddyDef, normalizeBuddyKey } from './content/buddies';
-import { ITEMS } from './data';
 import { despawnBuddyEntity, spawnBuddyEntity } from './pet/buddy_ai';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
@@ -94,25 +93,6 @@ export function serializeBuddyCollection(c: BuddyCollection): SavedBuddyCollecti
     ...(c.last !== '' ? { last: c.last } : {}),
     ...(hasNames ? { names } : {}),
   };
-}
-
-// The whistle itemId per catalog buddy, derived once from the merged ITEMS
-// table (single source: the item record declares `buddy`, nothing re-lists
-// the map). Static content, so the lazy module-level cache is multi-Sim safe.
-let buddyItemIds: Map<string, string> | null = null;
-
-/** The grant-token item for `key` (null for an unknown key, or a catalog
- *  buddy with no whistle). Used by the admin/mail/vendor channels, never by
- *  ownership. */
-export function buddyItemId(key: string): string | null {
-  if (!buddyDef(key)) return null;
-  if (!buddyItemIds) {
-    buddyItemIds = new Map();
-    for (const def of Object.values(ITEMS)) {
-      if (def.kind === 'buddy') buddyItemIds.set(def.buddy, def.id);
-    }
-  }
-  return buddyItemIds.get(key) ?? null;
 }
 
 /** Whether the player has collected the buddy. Unknown keys are never owned.
@@ -228,8 +208,7 @@ export function revealPendingBuddies(
 
 /** Summon a SPECIFIC owned buddy, or put it away when it is the one out.
  *  Instant: no channel, no gate beyond ownership (re-checked server-side even
- *  when a click proves it). Routed here from the Cosmetics buddy command and
- *  from the grant token's use. */
+ *  when a click proves it). Routed here from the Cosmetics buddy command. */
 export function summonBuddy(ctx: SimContext, pid: number, key: string): boolean {
   const meta = ctx.players.get(pid);
   const e = ctx.entities.get(pid);
@@ -250,23 +229,6 @@ export function summonBuddy(ctx: SimContext, pid: number, key: string): boolean 
   }
   spawnFor(ctx, meta, e, def.key);
   return true;
-}
-
-/** Use a grant token (a whistle item): attach the companion and consume the
- *  token. A token for a companion the player already has is REFUSED without
- *  being consumed, so a duplicate stays a duplicate rather than vanishing. */
-export function useBuddyToken(ctx: SimContext, pid: number, itemId: string): boolean {
-  const meta = ctx.players.get(pid);
-  const item = ITEMS[itemId];
-  if (!meta || !item || item.kind !== 'buddy') return false;
-  const def = buddyDef(item.buddy);
-  if (!def) return false;
-  if (meta.buddies.owned.has(def.key)) {
-    ctx.error(pid, 'You already have that companion.');
-    return false;
-  }
-  ctx.removeItem(itemId, 1, pid);
-  return grantBuddy(ctx, pid, item.buddy);
 }
 
 /** The bare keybind/button toggle: dismiss the active buddy, or bring the last

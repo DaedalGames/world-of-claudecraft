@@ -16956,113 +16956,14 @@ export const zh_TW: EnTranslations = {
       "ps_passing_stone": {
         "name": "往生石"
       },
-      "whistle_ember_fox": {
-        "name": "餘燼狐的哨子"
-      },
-      "whistle_moss_hare": {
-        "name": "苔蘚野兔的哨子"
-      },
-      "whistle_frog": {
-        "name": "青蛙的哨子"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "赤鉗蟹的哨子"
-      },
-      "whistle_golden_sentinel": {
-        "name": "黃金哨兵的哨子"
-      },
-      "whistle_nightfang": {
-        "name": "夜牙的哨子"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "獠角野豬的哨子"
-      },
-      "whistle_emerald_wolf": {
-        "name": "翡翠狼的哨子"
-      },
-      "whistle_tiger": {
-        "name": "猛虎的哨子"
-      },
-      "whistle_cate_coin": {
-        "name": "錢幣貓的哨子"
-      },
-      "whistle_alon": {
-        "name": "阿隆的哨子"
-      },
-      "whistle_trollface": {
-        "name": "巨魔臉的哨子"
-      },
-      "whistle_ansem": {
-        "name": "安塞姆的哨子"
-      },
-      "whistle_triple_t": {
-        "name": "三重T的哨子"
-      },
-      "whistle_kekius": {
-        "name": "凱基烏斯的哨子"
-      },
-      "whistle_solbot": {
-        "name": "索爾機偶的哨子"
-      },
-      "whistle_frostfire": {
-        "name": "霜火的哨子"
-      },
-      "whistle_rocky": {
-        "name": "岩仔的哨子"
-      },
-      "whistle_proud_grunt": {
-        "name": "驕傲步兵的哨子"
-      },
-      "whistle_loot_goblin": {
-        "name": "戰利品哥布林的哨子"
-      },
-      "whistle_penny_goldspark": {
-        "name": "潘妮·金火花的哨子"
-      },
-      "whistle_stag": {
-        "name": "雄鹿的哨子"
-      },
-      "whistle_alpaca": {
-        "name": "羊駝的哨子"
-      },
       "whistle_horse": {
         "name": "馬的哨子"
-      },
-      "whistle_sapling": {
-        "name": "小樹苗的哨子"
-      },
-      "whistle_bull": {
-        "name": "公牛的哨子"
-      },
-      "whistle_spider": {
-        "name": "蜘蛛的哨子"
-      },
-      "whistle_raptor": {
-        "name": "迅猛龍的哨子"
-      },
-      "whistle_skeleton": {
-        "name": "骷髏的哨子"
       },
       "whistle_crystal_lich": {
         "name": "水晶巫妖的哨子"
       },
       "whistle_forgemaw": {
         "name": "熔顎·熔融者的哨子"
-      },
-      "whistle_crystal_tide": {
-        "name": "水晶潮汐的哨子"
-      },
-      "whistle_phantom": {
-        "name": "幻魂的哨子"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "燼落鳳凰的哨子"
-      },
-      "charm_stag_acorn": {
-        "name": "橡果之冠護符"
-      },
-      "charm_stag_gilded": {
-        "name": "鍍金護符"
       },
       "lastflame_core": {
         "name": "末焰之核"

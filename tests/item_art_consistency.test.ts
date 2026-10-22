@@ -854,7 +854,8 @@ describe('item-art consistency accepted-art provenance', () => {
     // treasure_casket): 1,323. The faction ladder rework's 17 new rows
     // (13 periphery pieces + 4 formulas): 1,340. the Viridian Valestrider's reins (release/v0.44.0 base merge): 1,341. the trinket slot's 18 trinkets (PR 4173): 1,359. Warfare Season 2 (release/v0.44.0, second base merge 2026-09-26)'s 139 honor items: 1,498.
     // 1,653 with the buddy companion branch's 36 item definitions (release/v0.45.0 merge).
-    expect(Object.keys(ITEMS)).toHaveLength(1653);
+    // 1,620 after the buddy trim: only the three active whistles stay (-33).
+    expect(Object.keys(ITEMS)).toHaveLength(1620);
     expect(Object.values(verdict.auditScope.groups).reduce((sum, count) => sum + count, 0)).toBe(
       1255,
     );
@@ -1022,9 +1023,12 @@ describe('item-art consistency accepted-art provenance', () => {
     // whistle and charm icons (buddy-whistle-icons-2026-08-28,
     // buddy-charm-icons-2026-09-09) and 36 item definitions (the 34 plus the
     // Horse and Emberfall Phoenix whistles, whose art is enumerated debt).
-    expect(new Set(currentOwnerIds).size).toBe(1498);
-    expect(shippingIds).toHaveLength(1498);
-    expect(Object.keys(ITEMS)).toHaveLength(1653);
+    // The buddy trim keeps the three active whistles (two rendered, Tug's still art debt)
+    // and deletes the never-shipped rest with the charm batch:
+    // 1,466 owners and 1,620 item definitions.
+    expect(new Set(currentOwnerIds).size).toBe(1466);
+    expect(shippingIds).toHaveLength(1466);
+    expect(Object.keys(ITEMS)).toHaveLength(1620);
 
     const datedVerdict = readJson<FinalAuditVerdict>(CURRENT_VERDICT_PATH);
     const oldPassIds = sorted(datedVerdict.visualVerdict.passIds);
@@ -1050,7 +1054,8 @@ describe('item-art consistency accepted-art provenance', () => {
       )
       .flatMap(({ itemIds }) => itemIds);
     // 59 with the buddy companion branch's two batches (34 ids) in the filter above.
-    expect(releaseBatchIds).toHaveLength(59);
+    // 27 after the buddy trim: two whistle renders left, the charm batch gone.
+    expect(releaseBatchIds).toHaveLength(27);
     // The world-quest branch's two batches are additive beyond the dated chain
     // as well (release/v0.43.0 merge into feature/world-quests).
     const worldQuestBatchIds = mapping.generatedBatches
@@ -1359,8 +1364,8 @@ describe('item-art consistency accepted-art provenance', () => {
     // (trinket-slot-icons-2026-09-23) = 37. Warfare Season 2's weapon
     // batch (warfare-season2-weapons-2026-09-25) = 38.
     // The buddy companion branch's two batches (whistles, charms) at its
-    // release/v0.45.0 merge = 43.
-    expect(mapping.generatedBatches).toHaveLength(43);
+    // release/v0.45.0 merge = 43. The buddy trim removes the charm batch = 42.
+    expect(mapping.generatedBatches).toHaveLength(42);
     const batch = mapping.generatedBatches.find(({ batchId }) => batchId === BATCH_ID);
     expect(batch).toBeDefined();
     expect(batch).toMatchObject({
@@ -1431,14 +1436,14 @@ describe('item-art consistency accepted-art provenance', () => {
     // batches (18 faction reward paintings, 5 treasure-map family, 96 hoard boss
     // loot) add 119 at the 2026-09-28 release merge: 934.
     // The buddy companion branch's 34 whistle and charm renders (release/v0.45.0
-    // merge): 968.
-    expect(priorGeneratedIds).toHaveLength(968);
+    // merge): 968. The buddy trim leaves two of them: 936.
+    expect(priorGeneratedIds).toHaveLength(936);
     const allCurrentOwnerIds = [
       ...mapping.entries.map(({ itemId }) => itemId),
       ...mapping.generatedBatches.flatMap(({ itemIds }) => itemIds),
     ];
-    expect(allCurrentOwnerIds).toHaveLength(1498);
-    expect(new Set(allCurrentOwnerIds).size).toBe(1498);
+    expect(allCurrentOwnerIds).toHaveLength(1466);
+    expect(new Set(allCurrentOwnerIds).size).toBe(1466);
     expect({
       entries: mapping.entries.length,
       priorGenerated: priorGeneratedIds.length,
@@ -1453,7 +1458,8 @@ describe('item-art consistency accepted-art provenance', () => {
       // + the 4 Warfare Season 2 weapons = 815.
       // + the Buried Hoards branch's 119 paintings (three batches) = 934.
       // + the buddy companion branch's 34 renders (release/v0.45.0 merge) = 968.
-      priorGenerated: 968,
+      // - the buddy trim's 32 deleted renders = 936.
+      priorGenerated: 936,
       historicalAudit: 274,
       masterwroughtCompletion: 165,
       crucibleProfessions: 46,
@@ -1503,7 +1509,8 @@ describe('item-art consistency accepted-art provenance', () => {
           ['buddy-whistle-icons-2026-08-28', 'buddy-charm-icons-2026-09-09'].includes(batchId),
       )
       .flatMap(({ itemIds }) => itemIds);
-    expect(buddyBatchIdsForCatalog).toHaveLength(34);
+    // Two after the buddy trim: the Crystal Lich and Forgemaw whistle renders.
+    expect(buddyBatchIdsForCatalog).toHaveLength(2);
     expect(
       sorted([
         ...historicalVerdict.visualVerdict.passIds.filter(
@@ -1693,10 +1700,11 @@ describe('item-art consistency accepted-art provenance', () => {
     // Clue Scroll owners = 1305. Plus the 17 faction ladder owners
     // (faction-ladder-icons-2026-09-23) = 1322. Plus the Viridian Valestrider's reins (release/v0.44.0 base merge) = 1323. Plus the 18 trinkets = 1341. Plus the 4 Warfare Season 2 weapons = 1345. Plus the Buried Hoard paintings (release/v0.44.0 merge into feature/buried-hoards (2026-09-28)) = 1464.
     // Plus the buddy companion branch's 34 rendered whistle and charm icons at
-    // its release/v0.45.0 merge = 1498.
-    if (ownerIds.length !== 1498)
-      violations.push(`mapping owner count: ${ownerIds.length} != 1498`);
-    if (fileIds.length !== 1498) violations.push(`shipping WebP count: ${fileIds.length} != 1498`);
+    // its release/v0.45.0 merge = 1498. Minus the buddy trim's 32 deleted
+    // renders = 1466.
+    if (ownerIds.length !== 1466)
+      violations.push(`mapping owner count: ${ownerIds.length} != 1466`);
+    if (fileIds.length !== 1466) violations.push(`shipping WebP count: ${fileIds.length} != 1466`);
     for (const id of ids) {
       const ownerCount = ownerCountById.get(id) ?? 0;
       if (ownerCount !== 1) violations.push(`${id}: current owner count ${ownerCount} != 1`);

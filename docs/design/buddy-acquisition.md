@@ -59,15 +59,10 @@ play has no signed-in account and keeps its local character save.
 With developer commands enabled, enter `/dev buddies` in chat to collect all
 remaining buddies immediately. Open Cosmetics with Shift+Y, select Buddies and choose Summon.
 
-To grant one at a time, enter one of these commands and use the resulting whistle
-from the inventory:
-
-- `/dev give whistle_horse 1`
-- `/dev give whistle_crystal_lich 1`
-- `/dev give whistle_forgemaw 1`
-
-`/dev buddy <key>` instead stages a pending world-source reward at the player's
-feet; walk 80 yards away to reveal it. The keys are `horse`, `crystal_lich` and
+To grant one at a time, enter `/dev buddy <key>`: it stages a pending
+world-source reward at the player's feet; walk 80 yards away to reveal it.
+Whistles are not grant tokens, so `/dev give` on one only puts an unusable item
+in the bags. The keys are `horse`, `crystal_lich` and
 `forgemaw`. Developer commands are restricted to development environments.
 
 The authorized admin endpoint
@@ -88,9 +83,9 @@ this branch's git history.
 
 The live game has no buddy look catalog, unlock/equip actions, challenge tracking,
 look rewards, or Looks interface. Old cosmetic wire fields are ignored and the
-retired wire command is inert. Historical whistle/charm definitions and their
-icons remain solely so existing inventory entries are readable; removed tokens
-cannot unlock content and are not consumed.
+retired wire command is inert. Only the three active buddies keep a whistle
+item, Tug's as the honor vendors' stock row; the retired buddies' whistles and
+both charms never shipped, so they were deleted with their icons.
 
 Loading a character normalizes its collection to the active roster. Retired
 ownership, pending rewards, last selection and old cosmetic unlock/equipment

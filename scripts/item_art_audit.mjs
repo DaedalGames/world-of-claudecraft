@@ -149,14 +149,17 @@ const build = await buildItemArtAudit({
     // whistle and charm icons (two batches, two groups) and the two enumerated
     // art debts (whistle_emberfall_phoenix, whistle_horse): 1498 / 1516 with
     // 137 pending, on 38 sheet pages, measured with the same verifier run.
-    catalogCount: 1498,
-    liveItemCount: 1516,
-    pendingArtCount: 137,
+    // Then the buddy trim keeps three whistles and deletes the never-shipped
+    // rest with both charms (and the charm batch): 1466 / 1484 with 136
+    // pending, 27 groups on 37 sheet pages, measured with the same verifier run.
+    catalogCount: 1466,
+    liveItemCount: 1484,
+    pendingArtCount: 136,
     generatedHeroicDefinitions: 78,
     heroicDefinitionsWithOwnWebp: 59,
     heroicWeaponArtAliases: 19,
-    sheetPageCount: 38,
-    groupCount: 28,
+    sheetPageCount: 37,
+    groupCount: 27,
   },
 });
 assertItemArtAuditPass(build);

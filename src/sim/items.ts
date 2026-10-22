@@ -28,7 +28,6 @@ import {
   equipBag as equipBagCmd,
   stackSizeOf,
 } from './bags';
-import { useBuddyToken } from './buddies';
 import { openTreasureCasket } from './clue_casket';
 import { useClueScroll } from './clue_scrolls';
 import { isWornTrinket, onTrinketEquipped, useWornTrinket } from './combat/trinkets';
@@ -1296,13 +1295,9 @@ export function useItem(
     // first. Reins are never consumed: mountOwned() derives ownership from holding
     // the item, so removing it here would delete the mount.
     summonMountItem(ctx, meta.entityId, def.mount);
-  } else if (def.kind === 'buddy') {
-    // A whistle is a grant TOKEN: using it attaches the companion to the
-    // character and consumes the token (a duplicate is refused unconsumed).
-    // Summoning an owned buddy is a Cosmetics-window command, not an item use.
-    useBuddyToken(ctx, meta.entityId, itemId);
-  } else if (def.kind === 'buddy_cosmetic') {
-    // Historical cosmetic tokens remain readable but are no longer usable.
+  } else if (def.kind === 'buddy' || def.kind === 'buddy_cosmetic') {
+    // Neither is usable: every buddy is granted straight into the collection,
+    // and summoning an owned one is a Cosmetics-window command, not an item use.
   } else if (def.kind === 'recipe') {
     // A pattern teaches the recipe it names and is spent doing so.
     // useRecipePatternItem owns every gate and the consume; it sits here, below

@@ -827,7 +827,10 @@ describe('Masterwrought art completion evidence', () => {
     // The buddy companions branch adds its 32 whistle icons
     // (buddy-whistle-icons-2026-08-28) and two stag charm icons
     // (buddy-charm-icons-2026-09-09): 1,464 to 1,498, likewise outside it.
-    expect(currentOwnerIds).toHaveLength(1498);
+    // The buddy trim then keeps only the active companions' whistles (two
+    // rendered, Tug's still art debt) and deletes the never-shipped rest with
+    // the charm batch: 1,498 to 1,466.
+    expect(currentOwnerIds).toHaveLength(1466);
     for (const id of datedIds) {
       expect(currentOwnerIds.includes(id), `${id} still has a current mapping owner`).toBe(true);
     }
@@ -962,20 +965,17 @@ describe('Masterwrought art completion evidence', () => {
     expect(datedIds.filter((id) => hoardBranchIds.has(id))).toEqual([]);
     expect(currentOwnerIds.filter((id) => hoardBranchIds.has(id))).toHaveLength(119);
 
-    // The buddy companions branch's two batches (32 whistle icons, two stag
-    // charm icons): 34 ids, additive the same way.
-    const buddyBranchBatchIds: readonly (string | undefined)[] = [
-      'buddy-whistle-icons-2026-08-28',
-      'buddy-charm-icons-2026-09-09',
-    ];
+    // The buddy companions branch's whistle batch, trimmed to the two active
+    // raid companions' icons: additive the same way.
+    const buddyBranchBatchIds: readonly (string | undefined)[] = ['buddy-whistle-icons-2026-08-28'];
     const buddyBranchIds = new Set(
       mapping.generatedBatches
         .filter(({ batchId }) => buddyBranchBatchIds.includes(batchId))
         .flatMap(({ itemIds }) => itemIds),
     );
-    expect(buddyBranchIds.size).toBe(34);
+    expect([...buddyBranchIds].sort()).toEqual(['whistle_crystal_lich', 'whistle_forgemaw']);
     expect(datedIds.filter((id) => buddyBranchIds.has(id))).toEqual([]);
-    expect(currentOwnerIds.filter((id) => buddyBranchIds.has(id))).toHaveLength(34);
+    expect(currentOwnerIds.filter((id) => buddyBranchIds.has(id))).toHaveLength(2);
 
     // Strip all six later additive waves (Crucible professions, the Field Kit, the
     // Nythraxis gap-fill weapon renders, Roots' Bramblehide/gap-fill paintings,

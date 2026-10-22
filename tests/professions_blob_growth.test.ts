@@ -2473,8 +2473,11 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
         // whistle and 2 charm ids join deedStats.itemsDiscovered (each
         // `"<id>",`, id length + 3, summed off the catalog: 706), and the
         // explicitly armed retained buddy collection contributes the
-        // independently measured buddyCollectionBytes above (179).
-        706 +
+        // independently measured buddyCollectionBytes above (179). The buddy
+        // trim then deleted the 31 never-shipped whistles and both charms,
+        // leaving the three active whistles (`"whistle_horse",`,
+        // `"whistle_crystal_lich",`, `"whistle_forgemaw",`: 58), -648.
+        58 +
         buddyCollectionBytes,
     );
     const forgeBaseline = {
@@ -2523,8 +2526,9 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
       // merge: Warfare Season 2's 139 item ids (the 13,496 attributed above).
       // deedStats 9427 -> 10133 at the release/v0.45.0 merge into the buddy
       // companions branch: the 34 whistle and 2 charm ids in itemsDiscovered
-      // (+706, attributed in the growth equation above).
-      deedStats: 10133,
+      // (+706, attributed in the growth equation above). 10133 -> 9485 at the
+      // buddy trim: only the three active whistles remain (-648).
+      deedStats: 9485,
       reliquary: 11501,
     });
     // Removing field_kit AND the Bramblehide release content reproduces the
@@ -2565,7 +2569,8 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
       // 231,729 -> 232,614 at the release/v0.45.0 merge into the buddy companions
       // branch (+885: the 706 historical token ids and the 179-byte armed buddy
       // collection, attributed above, both kept here).
-    ).toBe(232614);
+      // 232,614 -> 231,966 at the buddy trim (-648, the deleted token ids).
+    ).toBe(231966);
     // Removing ONLY field_kit (the Bramblehide release content and the two
     // dev-mount reins items still present, current staged tree) reproduces
     // 209,524 plus the 1,548-byte Bramblehide delta plus the 71-byte
@@ -2595,7 +2600,8 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
       // 227,857 -> 233,348 at the 2026-09-28 Buried Hoards merge (+5,491, kept).
       // 233,348 -> 234,233 at the release/v0.45.0 merge into the buddy companions
       // branch (+885, kept).
-    ).toBe(234233);
+      // 234,233 -> 233,585 at the buddy trim (-648, the deleted token ids).
+    ).toBe(233585);
     const priorContent = withoutCrucibleContent(s2);
     const contentDelta = Object.fromEntries(
       (['knownRecipes', 'deedStats', 'reliquary'] as const).map((key) => [
@@ -2692,8 +2698,11 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     // 179-byte armed buddy collection, both attributed in the growth equation).
     // Floor at measurement minus 380, edge at measurement plus one:
     // 233865..234246.
-    expect(bytes, reMint).toBeGreaterThan(233865);
-    expect(bytes, reMint).toBeLessThan(234246);
+    // RE-BASED at the buddy trim: 233,597 bytes, -648 (the 31 deleted whistle
+    // and 2 charm ids leave deedStats.itemsDiscovered). Floor at measurement
+    // minus 380, edge at measurement plus one: 233217..233598.
+    expect(bytes, reMint).toBeGreaterThan(233217);
+    expect(bytes, reMint).toBeLessThan(233598);
 
     // The Crucible database review approved 229,376 bytes (224 KiB), the first
     // 32-KiB step above the corrected 209,261-byte pre-field-kit fixture it was

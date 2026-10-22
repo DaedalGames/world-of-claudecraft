@@ -6,8 +6,8 @@
 // leaves the instance (src/sim/buddy_drops.ts). Horse instead comes from a
 // 100,000-honor direct purchase at both honor vendors (content/pvp_honor.ts).
 //
-// Active whistle items are soulbound grant tokens, consumed on use. Historical
-// tokens remain readable in old inventories but cannot grant retired companions.
+// No buddy is ever an item in the bags: each source grants straight into the
+// collection, and the honor vendors' whistle row is only the offer's handle.
 // The deed reward table is currently empty.
 //
 // `src/sim`-pure, rng-free (the rolls live in buddy_drops.ts).

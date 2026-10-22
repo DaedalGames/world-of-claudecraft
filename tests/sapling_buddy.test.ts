@@ -1,13 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { buddyOwned, summonBuddy } from '../src/sim/buddies';
 import { ITEMS, MOBS } from '../src/sim/data';
-import { useItem } from '../src/sim/items';
 import { buddyOf } from '../src/sim/pet/buddy_ai';
 import { Sim } from '../src/sim/sim';
 import { VENDOR_TEST_WORLD } from './sim_shared';
 
 describe('retired Sapling buddy', () => {
-  it('keeps its saved whistle inert without consuming it or spawning a follower', () => {
+  it('has no whistle, no follower template and cannot be summoned', () => {
     const sim = new Sim({
       seed: 42,
       playerClass: 'warrior',
@@ -16,18 +15,12 @@ describe('retired Sapling buddy', () => {
     });
     const pid = sim.addPlayer('warrior', 'Owner');
     const meta = sim.players.get(pid)!;
-    sim.addItem('whistle_sapling', 1, pid);
-    useItem(sim.ctx, 'whistle_sapling', pid);
-    expect(sim.countItem('whistle_sapling', pid)).toBe(1);
     expect(buddyOwned(meta, 'sapling')).toBe(false);
     expect(summonBuddy(sim.ctx, pid, 'sapling')).toBe(false);
     expect(buddyOf(sim.ctx, pid)).toBeNull();
     expect(MOBS.buddy_sapling).toBeUndefined();
-    expect(ITEMS.whistle_sapling).toMatchObject({
-      kind: 'buddy',
-      buddy: 'sapling',
-      soulbound: true,
-    });
+    // The whistle never shipped, so it was deleted rather than retired.
+    expect(ITEMS.whistle_sapling).toBeUndefined();
   });
 
   it('discards saved Sapling ownership, pending reveals and last selection on login', () => {
