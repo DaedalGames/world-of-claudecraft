@@ -16,6 +16,7 @@ import {
   purchaseAccountBuddy,
   readAccountBuddyBatch,
 } from '../../server/account_buddies_db';
+import { BUDDY_KEYS } from '../../src/sim/content/buddies';
 
 beforeEach(() => {
   db.query.mockReset();
@@ -47,7 +48,7 @@ const snapshot = {
 } as unknown as BuddyPurchaseSnapshot;
 
 describe('account buddy persistence', () => {
-  it('accepts only active unique keys and caps the durable row by the catalog', () => {
+  it('accepts only active unique keys and keeps the roster out of the schema', () => {
     expect(normalizeAccountBuddies(['horse', 'horse', 'sapling', 'forgemaw', 17])).toEqual([
       'forgemaw',
       'horse',
@@ -55,7 +56,12 @@ describe('account buddy persistence', () => {
     expect(ACCOUNT_BUDDIES_SCHEMA).toContain(
       'PRIMARY KEY REFERENCES accounts(id) ON DELETE CASCADE',
     );
-    expect(ACCOUNT_BUDDIES_SCHEMA).toContain('cardinality(owned) <= 3');
+    // A key list in a CHECK would never reach an existing table; the old one
+    // is retired idempotently and the writers filter on BUDDY_KEYS instead.
+    expect(ACCOUNT_BUDDIES_SCHEMA).toContain(
+      'DROP CONSTRAINT IF EXISTS account_buddies_active_keys',
+    );
+    for (const key of BUDDY_KEYS) expect(ACCOUNT_BUDDIES_SCHEMA).not.toContain(`'${key}'`);
   });
 
   it('coalesces concurrent joins, projects legacy keys in SQL, and releases the flight after failure', async () => {
@@ -73,7 +79,7 @@ describe('account buddy persistence', () => {
     expect(sql).toContain('WHERE c.account_id = $1');
     expect(sql).toContain('DELETE FROM character_buddy_grants');
     expect(sql).toContain('ON CONFLICT (account_id) DO UPDATE');
-    expect(values[0]).toBe(7);
+    expect(values).toEqual([7, BUDDY_KEYS]);
     reject(new Error('temporary'));
     await expect(first).rejects.toThrow('temporary');
     db.query.mockResolvedValueOnce({ rows: [{ owned: ['horse'] }] });
