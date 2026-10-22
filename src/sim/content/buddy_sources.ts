@@ -4,7 +4,7 @@
 // Crystal Lich and Forgemaw come from independent per-player boss rolls.
 // A successful roll attaches a pending companion that reveals when the player
 // leaves the instance (src/sim/buddy_drops.ts). Horse instead comes from a
-// 100,000-honor direct purchase at both honor vendors (content/pvp_honor.ts).
+// 10,000-honor direct purchase at both honor vendors (content/pvp_honor.ts).
 //
 // No buddy is ever an item in the bags: each source grants straight into the
 // collection, and the honor vendors' whistle row is only the offer's handle.

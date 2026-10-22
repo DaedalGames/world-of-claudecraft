@@ -440,7 +440,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     buddy: 'horse',
     soulbound: true,
     quality: 'common',
-    priceHonor: 100_000,
+    priceHonor: 10_000,
     sellValue: 0,
     noVendorSell: true,
   },
