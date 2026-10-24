@@ -1,9 +1,18 @@
+import { DESKTOP_API_ORIGIN } from '../client_origin';
+import { runtimeWebSocketUrl } from '../runtime';
 import {
   DUNGEON_ENTRY_FACING_WIRE_VERSION,
   ONLINE_WORLD_AUTH_TYPE,
   PET_SPECIAL_WIRE_VERSION,
 } from '../world_api';
 import { STABLE_TIMER_WIRE_VERSION } from './snapshot_timer_wire';
+
+/** The world socket's URL for this page (moved from online.ts, which
+ *  re-exports it): the desktop shell dials its API origin, every other host
+ *  the page's own. */
+export function buildWebSocketUrl(protocol: string, host: string): string {
+  return runtimeWebSocketUrl(protocol, host, DESKTOP_API_ORIGIN);
+}
 
 // resumeToken is the same-client proof the server minted on this tab's last
 // `hello` (server/resume_token.ts). ClientWorld holds it in memory ONLY, never
@@ -45,16 +54,4 @@ export function buildWebSocketAuthMessage(
     movementWire: 2,
     ...(resumeToken ? { resumeToken } : {}),
   };
-}
-
-// The soft (cosmetic) profanity words a `hello` or `censor` frame carries, string
-// entries only, or null when the field is not a list at all.
-export function softWordList(raw: unknown): string[] | null {
-  return Array.isArray(raw) ? raw.filter((w: unknown): w is string => typeof w === 'string') : null;
-}
-
-// The token a server `hello` frame carries, or null when it carries none (an
-// older server binary mid rolling deploy).
-export function helloResumeToken(hello: { resumeToken?: unknown }): string | null {
-  return typeof hello.resumeToken === 'string' && hello.resumeToken ? hello.resumeToken : null;
 }
