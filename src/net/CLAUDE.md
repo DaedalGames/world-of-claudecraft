@@ -23,8 +23,7 @@ tested sibling module here, never as more methods on `online.ts`. Exemplars
   is fatal or one of the two bounded transient classes (see Reconnect below).
 - `backoff.ts`: pure full-jitter reconnect schedule (`computeBackoffDelay`: 0.5x to
   1.5x of the exponential step, clamped at the max delay AFTER jitter, rng injected
-  so tests pin exact delays), plus the game socket's live schedule constants and
-  `reconnectBackoffDelay` over them (`tests/backoff.test.ts`).
+  so tests pin exact delays; `tests/backoff.test.ts`).
 - `socket_stall_watchdog.ts`: pure, clock-injected silent-stall decision
   (`SocketStallWatchdog`): no frame for `STALL_WINDOW_MS` on an in-world transport
   means the path died without a FIN/RST (see Reconnect below;
@@ -154,7 +153,7 @@ old or future world-layout epochs fail closed BEFORE character admission.
 An unexpectedly dropped socket auto-reconnects with jittered exponential backoff
 (`computeBackoffDelay` in `backoff.ts`: `RECONNECT_BASE_DELAY_MS` doubling to the
 `RECONNECT_MAX_DELAY_MS` cap with 0.5x to 1.5x full jitter, up to
-`RECONNECT_MAX_ATTEMPTS`; constants + rationale in `backoff.ts`). The jitter exists so
+`RECONNECT_MAX_ATTEMPTS`; constants + rationale in `reconnect_policy.ts`). The jitter exists so
 a server restart never gets the whole realm reconnecting in lockstep; do not remove
 it or reintroduce a fixed schedule. The server holds the
 character in-world (linkdead) for five minutes and a re-auth resumes the session;
