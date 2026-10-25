@@ -475,9 +475,24 @@ export const sv_SE: EnTranslations = {
       "returning": "Tar med dina föremål tillbaka",
       "waiting": "Väntar på att lämna tillbaka dina föremål",
       "bags": "Skicka till banken",
+      "bagsVault": "Skicka material till valvet",
       "bank": "Hämta från banken",
+      "vault": "Hämta från valvet. Varje val hämtar hela raden.",
       "inventory": "Inventarium",
       "bankTitle": "Banken",
+      "vaultTitle": "Materialvalv",
+      "storeTabs": "Kurirens förvaring",
+      "vaultCap": "Rymmer {cap} av varje material",
+      "vaultEmpty": "Ditt valv är tomt.",
+      "vaultLocked": "Lås upp Materialvalvet hos en bankir för att använda det med kuriren.",
+      "boundBank": "På väg till banken",
+      "boundVault": "På väg till Materialvalvet",
+      "boundAccount": "På väg till en annan karaktärs bank",
+      "accountTitle": "Andra karaktärer",
+      "accountBank": "Hämta från denna bank. Den karaktären måste vara utloggad när kuriren anländer.",
+      "bagsAccount": "Skicka till {name}s bank",
+      "bagsAccountNone": "Välj en karaktär att skicka föremål till.",
+      "accountPlanned": "Planerat för {name}: {count} staplar. Ett val för en annan karaktär ersätter dem.",
       "capacity": "{used} / {capacity} platser",
       "cargo": "Kurirens packning",
       "empty": "Inga föremål",
@@ -485,7 +500,7 @@ export const sv_SE: EnTranslations = {
       "selected": "{count} / {limit} staplar valda",
       "select": "Välj {item}, {count}",
       "selectedItem": "Avmarkera {item}, {count}",
-      "instructions": "Välj hela staplar. Kuriren sätter in dem först och hämtar sedan de föremål du begärt. Uppdragsföremål kan inte skickas.",
+      "instructions": "Välj hela staplar för din bank, Materialvalvet eller en annan karaktär. Kuriren sätter in dem först och hämtar sedan de föremål du begärt. Uppdragsföremål kan inte skickas.",
       "membership": "Förnya ditt medlemskap för att påbörja en till resa.",
       "cargoSafe": "Återlämnade föremål får plats även om väskorna är fulla. Kuriren försvinner efter leveransen tills den frammanas igen.",
       "unavailable": "Frammana din kurir för att planera en leverans."
@@ -862,7 +877,7 @@ export const sv_SE: EnTranslations = {
       "titleOffer": "Titel: {title}",
       "titlePreview": "Visas som {preview}",
       "mountOffer": "Riddjur: {mount}",
-      "mountPreview": "Markriddjur: +{pct}% rörelsehastighet under ridning. Kräver ridträning.",
+      "mountPreview": "Riddjursutseende för alla karaktärer på ditt konto. Din ridträning bestämmer hastigheten.",
       "skinOffer": "Svärdsutseende: {skin}",
       "skinPreview": "Ändrar ditt utrustade svärds utseende på alla karaktärer på ditt konto. Endast utseende: inga egenskaper.",
       "buy": "Köp",
@@ -2538,7 +2553,7 @@ export const sv_SE: EnTranslations = {
       "riding": "Ridning",
       "mount": "Sitt upp",
       "dismount": "Stig av",
-      "useToRide": "Använd för att frammana detta riddjur.",
+      "useToRide": "Använd för att välja detta utseende och kalla fram ditt riddjur. Behåll föremålet i någon karaktärs väskor eller bank för att dela utseendet på hela kontot. Ridträning bestämmer hastigheten.",
       "emptyTitle": "Inga riddjur insamlade",
       "emptyStableHint": "Nå nivå 20 och ta ridlektioner hos Stallmästare Marla vid Highwatch stall, väster om Highwatch.",
       "emptyDropHint": "Sällsyntare riddjur droppar från hjältemodiga fängelsehålebossar och avklarade revor.",
@@ -2568,9 +2583,9 @@ export const sv_SE: EnTranslations = {
       "name_rickshaw_mount": "Benbunden Rickshaw",
       "name_wobbles_slime": "Slemmet Vickis",
       "name_nightwing_chimera": "Nattvingad chimära",
-      "desc_valorsteed": "En uthållig, säkerfotad stridshäst som ger ökad reshastighet.",
-      "desc_grag_bear": "En uthållig, säkerfotad björn som ger ökad reshastighet.",
-      "desc_stalkglider_snail": "En robust, långsamt brinnande snigel som ger ökad reshastighet.",
+      "desc_valorsteed": "En tålig, stadig häst med lädersadel.",
+      "desc_grag_bear": "En tålig, stadig björn med en tung sadel.",
+      "desc_stalkglider_snail": "En härdig snigel med uthållig energi och ett mossigt skal.",
       "desc_aether_hover_cycle": "En kraftfull magitech-cykel designad för snabb, lågsvävande förflyttning i strid.",
       "desc_shadowjump_toad": "En massiv, säkerfotad jättepadda, tränad i blixtsnabba skuggsprång som täcker all terräng.",
       "desc_stormfeather_griffin": "En kunglig stormgrip som smyger fram på runskodda klor, med vingarna hopfällda.",
@@ -2593,7 +2608,7 @@ export const sv_SE: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Tryck på {key} för att sitta upp på övnings-Tapperhetshästen.",
-      "ownedMountPrompt": "Dina tyglar finns i dina väskor. Använd dem för att rida.",
+      "ownedMountPrompt": "Välj ditt riddjur i Kosmetik. Använd Sitt upp / Sitt av för att rida.",
       "ridePrompt": "Följ den glödande markören till startlinjen, tryck sedan på Starta loppet.",
       "begin": "Börja lektionen",
       "success": "Du har tämjt Tapperhetshästen.",
@@ -2864,6 +2879,10 @@ export const sv_SE: EnTranslations = {
       "actionCamShoulderLeft": "Vänster {pct}",
       "actionCamShoulderRight": "Höger {pct}",
       "actionCamShoulderCenter": "Centrum",
+      "firstPersonMode": "Förstaperson (Helt inzoomat)",
+      "firstPersonOff": "Av",
+      "firstPersonBody": "Visa kropp",
+      "firstPersonNoBody": "Ingen kropp",
       "showAttackButton": "Visa attackknapp",
       "showDailyRewardsChest": "Visa kistan för dagliga belöningar",
       "mobileCameraJoystick": "Kamera joystick",
@@ -3826,6 +3845,12 @@ export const sv_SE: EnTranslations = {
       "linkHint": "Skift-klicka för att länka det här föremålet i chatten."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} tidigare överlåtelse visas inte.",
+        "few": "{count} tidigare överlåtelser visas inte.",
+        "many": "{count} tidigare överlåtelser visas inte.",
+        "other": "{count} tidigare överlåtelser visas inte."
+      },
       "guildBoardShown": {
         "one": "{count} gille visas",
         "few": "{count} gillen visas",
@@ -4278,6 +4303,8 @@ export const sv_SE: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Ställ in fängelsehålans svårighetsgrad: Heroisk",
       "setNormal": "Ställ in fängelsehålans svårighetsgrad: Normal",
+      "unappliedNormal": "Heroisk vald. Nuvarande instanser är fortfarande Normala.",
+      "unappliedHeroic": "Normal vald. Nuvarande instanser är fortfarande Heroiska.",
       "resetAll": "Återställ alla instanser",
       "resetDone": "Alla instanser har återställts.",
       "resetNone": "Du har inga instanser att återställa.",
@@ -4287,10 +4314,11 @@ export const sv_SE: EnTranslations = {
       "resetSameDifficulty": "Ändra fängelsehålans svårighetsgrad innan du återställer dessa instanser. Tomma instanser återställs automatiskt efter 5 minuter.",
       "resetLoot": "Du kan inte återställa instanser medan byte finns kvar inuti.",
       "resetConfirmTitle": "Återställ alla instanser?",
-      "resetConfirmBody": "Detta överger tomma instanser från din tidigare valda svårighetsgrad. Outhämtat byte förhindrar återställningen.",
+      "resetConfirmBody": "Detta överger dina tomma instanser så att nästa runda börjar om på vald svårighetsgrad. Spärrar ändras inte. Någon som är kvar inne eller outhämtat byte förhindrar återställningen.",
       "resetConfirm": "Återställ instanser",
       "resetCooldown": "Instanser kan bara återställas en gång var 5:e minut.",
-      "resetUsage": "Använd /dungeon reset för att överge dina tomma instanser efter att du har ändrat svårighetsgraden.",
+      "resetAlreadyFresh": "Dina instanser är redan nollställda. Ingen har gått in i dem sedan den senaste återställningen.",
+      "resetUsage": "Använd /dungeon reset för att överge dina tomma instanser och börja om från början.",
       "entryMismatchNormal": "Den här instansen är inställd på Normal svårighetsgrad. Använd Återställ alla instanser för att starta en ny Heroisk omgång.",
       "entryMismatchHeroic": "Den här instansen är inställd på Heroisk svårighetsgrad. Använd Återställ alla instanser för att starta en ny Normal omgång."
     },
@@ -4623,7 +4651,17 @@ export const sv_SE: EnTranslations = {
         "pollinated": "Om du rör en frökapsel växer genast ett taggskott ur den. Håll dig borta från fröna och låt en opåverkad spelare trampa sönder dem; en orörd kapsel gror efter {seconds} sek (i heroiskt läge gräver den ned sig efter {heroic} sek och kommer upp bredvid närmaste spelare).",
         "prey": "Zulgar jagar dig. Led honom över en tänd solglyf för att sakta honom med {slow}%. Om han hinner ikapp blir du sargad för {damage} skada ({heroic} i heroiskt läge) och nedslagen i {stun} sek.",
         "avatar": "Rör sig {pct}% snabbare och jagar sitt byte. Saktningar och rotningar fungerar, och bedövningar varar hälften så länge.",
-        "vanished": "Dold och immun mot skada. Han är på väg att kasta sig över den spelare som är längst bort."
+        "vanished": "Dold och immun mot skada. Han är på väg att kasta sig över den spelare som är längst bort.",
+        "sunstruck": "Träffad av en tänd solglyf: rör sig {pct}% långsammare.",
+        "sunstruckExposed": "Träffad av en tänd solglyf: tar {pct}% mer skada.",
+        "sunWary": "Ingen solglyf kan träffa honom tills detta slutar. En tänd glyf han korsar förblir tänd.",
+        "pinned": "Ett Jaktspjut håller dig fast. Du blöder för {bleed} Fysisk skada ({heroicBleed} på Heroisk) var {every} sek, och Vildhjärtats puls träffar dig var du än står för {pulse}% mer skada. En lagkamrat kan dra ut spjutet på {pull} sek. Om ingen annan står fri kan du dra ut det själv på {wrench} sek. Det släpper efter {seconds} sek.",
+        "idolAwake": "Stenjaguaren har vaknat. Var {every} sek andas den över ena halvan av terrassen, sedan den andra, efter en golvvarning på {warning} sek: {min} till {max} Naturskada ({heroicMin} till {heroicMax} på Heroisk) på alla på den halvan. Zulgar förblir Jaguaravataren tills han dör och väljer ett nytt Byte var {seconds} sek ({heroicSeconds} sek på Heroisk)."
+      },
+      "temple": {
+        "scoreWard": "Sjunger partituret: hon tar ingen skada tills det slutar. Kliv på månplattorna i den ordning de ljöd innan versen slutar för att bryta hennes röst. Turas om: efter en ton måste en annan spelare spela nästa rätta ton. En ensam överlevande kan slutföra själv. Om versen slutar först orsakar Missklang {min} till {max} Frostskada ({heroicMin} till {heroicMax} på Heroisk) på alla på gården.",
+        "brokenVoice": "Hennes röst är bruten: hon tar {pct}% mer skada tills detta slutar.",
+        "spentVoice": "Du kan inte spela en annan månplatta förrän en annan spelare spelar nästa rätta ton. Att kliva på en platta under tiden varken återställer svaret eller skadar dig. Kan inte skingras. Försvinner när du är den enda levande spelaren i din instans eller när partituret slutar."
       },
       "bastion": {
         "brineColumn": "Rotad i en havsvattenpelare: du tar {min} till {max} naturskada var {tick}:e sek i upp till {seconds} sek. Avbryt eller bedöva den tidvattensbundna akolyten för att bryta effekten.",
@@ -5256,6 +5294,9 @@ export const sv_SE: EnTranslations = {
       "partyTradeWindow": "Du kan överlåta det här föremålet till spelare som delade bytet i {time} till. Att ta på det avslutar handelsfönstret.",
       "perfectedBadge": "Förfinad",
       "perfectingRank": "Förfining: rang {rank} av {ranks}",
+      "lootedBy": "Plundrat av {name} den {date}",
+      "questRewardTo": "Uppdragsbelöning till {name} den {date}",
+      "obtainedBy": "Erhållet av {name} den {date}",
       "materialSourceGatherer": "{count} × samlad av {name}",
       "trophySkullSource": "{count} × Tagen från {name}",
       "materialSourceGathererSigned": "{count} × samlad av {name}, signerad av {signer}",
@@ -5799,14 +5840,8 @@ export const sv_SE: EnTranslations = {
       "logAdminPurge": "En administratör tog bort {count} {item}"
     },
     "collections": {
-      "title": "Jakt",
-      "close": "Stäng jakten",
-      "keybindLabel": "Jakt",
-      "launcherTitle": "Jakt: följeslagare, riddjur och föremålsset",
       "tabs": {
-        "buddies": "Följeslagare",
-        "mounts": "Riddjur",
-        "sets": "Föremålsset"
+        "buddies": "Följeslagare"
       },
       "state": {
         "owned": "Insamlat",
@@ -5816,7 +5851,6 @@ export const sv_SE: EnTranslations = {
       },
       "presenceDefault": "Du känner en närvaro som iakttar dig.",
       "revealed": "{name} har bestämt sig för att följa dig.",
-      "cosmeticUnlocked": "Nytt utseende för {name}: {look}.",
       "presence": {
         "ember_fox": "Något litet och varmt tassar efter dig.",
         "moss_hare": "Ett prasslande i torven håller jämna steg med dig.",
@@ -5854,134 +5888,9 @@ export const sv_SE: EnTranslations = {
         "phantom": "Luften bakom dig är aningen för stilla.",
         "emberfall_phoenix": "En värme som från en pyrande eld slår sig ned bakom dig."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Frostbunden",
-        "crystal_lich_voltaic": "Elektrisk",
-        "forgemaw_ashen": "Askgrå",
-        "forgemaw_whitehot": "Vitglödande",
-        "stag_acorn": "Ekollonkrona",
-        "stag_gilded": "Förgylld",
-        "moss_hare_verdant": "Grönskande",
-        "proud_grunt_warlord": "Krigsherre",
-        "frog_sapphire": "Safirgroda"
-      },
       "actions": {
         "summon": "Frammana",
-        "dismiss": "Avvisa",
-        "wear": "Bär",
-        "remove": "Ta bort"
-      },
-      "looks": {
-        "title": "Utseenden",
-        "unlocked": "Upplåst",
-        "locked": "Låst",
-        "worn": "Använt",
-        "none": "Inga utseenden har skapats för denna följeslagare ännu"
-      },
-      "source": {
-        "bossLabel": "Bossföljeslagare",
-        "bossDrop": "{mob} ({location}), {chance}% per spelare och dödande",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% per spelare, {heroicChance}% i heroiskt läge",
-        "bossDropHeroicOnly": "{mob} ({location}), endast heroiskt läge, {chance}% per spelare",
-        "rollNote": "Varje spelare slår separat; ingen förlorar sitt slag till en gruppmedlem.",
-        "deedLabel": "Förtjänas genom",
-        "deed": "Bedriften {deed}",
-        "challengeLabel": "Utmaning",
-        "challengeSpeed": "Besegra {mob} inom {seconds} sekunder från stridens början",
-        "challengeDps": "Gör {dps} skada per sekund på {mob} under hela striden",
-        "craftLabel": "Tillverkat",
-        "craft": "{item} (recept för {profession})",
-        "grantLabel": "Tilldelat",
-        "grantOnly": "Säsongsbelöning: den månatliga rankningen och belöningarna för bästa stridsloggar",
-        "tokenLabel": "Pollett",
-        "token": "{item}, används en gång för att knyta följeslagaren till dig"
-      },
-      "buddyLore": {
-        "ember_fox": "En rävhona från häckarna i Östbäcksdalen, döpt efter den kolröda pälsen som syns genom vinterns snår. Fångstmännen där gav upp om ungarna för generationer sedan och började ställa ut mat i stället.",
-        "moss_hare": "En hare från Pilkärret, grönpälsad efter ett liv med sovplats i våt torv. Träskets örtkännare ser dem som lyckobringare och tillåter inte att någon jagar bort dem från en trappa.",
-        "frog": "Dykärrsträsket föder upp dem tjocka och obekymrade, kväkande hela natten i vassen. Träskguiderna svär på att en båt med en sådan ombord aldrig går på grund.",
-        "crimson_claw_crab": "En tidvattenskrabba från Fjärrkusten vars klo förblir röd långt efter att den lämnat vattnet. Hamnarbetarna brukade låta dem tävla längs plankorna om pengar.",
-        "golden_sentinel": "En vaktbagge från Bärnstensfallet, förgylld av kådan den växte upp i. Namnet är äldre än kådan: väktare av något slag vaktade lundarna långt innan någon kom på att tappa saven på flaska.",
-        "nightfang": "En ung jägare från Nattblomstret, tyst även med sitt släktes mått mätt. Den följer med för sällskapets skull och jagar inget större än en nattfjäril.",
-        "tuskhorn_boar": "Ett djur från Törntoppshöjderna, framavlat kortbent av herdar som ville ha ett vildsvin som inte kunde riva ett staket. Humöret behöll det ändå.",
-        "emerald_wolf": "En valp från Vålnadsskogen, vars päls är grön i trädkronornas ljus som aldrig riktigt når skogsmarken. Väktarna föder upp de föräldralösa ungar som skogen lämnar efter sig.",
-        "tiger": "Palmviddens ränder på ett djur som aldrig sett Palmvidden: blodslinjen har hållits i fångenskap sedan de gamla menagerierna stängde. Den lyder en vissling och ingenting annat.",
-        "cate_coin": "En katt som vägrar skiljas från myntet den sitter på, och som ingen någonsin sett äta. Köpmännen i Östbäck grälar fortfarande om vilken av de två som är husdjuret.",
-        "alon": "En resenärs maskot från en väg som ingen karta vill kännas vid, som dyker upp så fort en plan går snett. Den iakttar, den godkänner och den erbjuder ingen som helst hjälp.",
-        "trollface": "En grinande sak som Vålnadsskogen släppte ut och vägrade ta tillbaka. Varje försök att beskriva den slutar med att berättaren skrattar och ger upp.",
-        "ansem": "Den talar om dörrar och mörker och låter sig inte dras in på något av ämnena. Nattblomstrets kultister hävdar att den tillhör dem; den vandrar iväg så fort de håller en rit.",
-        "triple_t": "Tre av någonting, eller en sak tre gånger om. Uppgifterna går isär, och varelsen står inte still tillräckligt länge för att bli räknad.",
-        "kekius": "En skrattande följeslagare av oklart ursprung, anammad som lyckobringare av kapplöpningsstallarna i Stormkammen. Den har överlevt fyra stall som svor vid den.",
-        "solbot": "En liten soldriven automat, uppgrävd halvt begravd i Drakländernas aska och fortfarande tickande. Verkstaden som byggde den lämnade inget märke någonstans på höljet.",
-        "frostfire": "Född i Frostslöjans vidder där en het källa bryter fram genom isfältet, och den har aldrig bestämt sig för vilken hälft den tillhör. Den ångar i kall luft och huttrar i varm.",
-        "rocky": "En stenskalskrypare från Törntoppshöjdernas rasbranter, långsam och fullständigt obekymrad. Gruvarbetare håller dem för deras förmåga att stanna upp strax före ett ras.",
-        "proud_grunt": "En veteran från krigsförråden som behöll honnören och förlorade graden. Krigsmarskalk Draven Kole ger en till varje soldat med nog mycket ära för att veta vad det kostar.",
-        "loot_goblin": "Den följer alla som bär heroiska märken och har aldrig en enda gång ertappats med att stjäla. Kvartermästare Vex vidhåller att det inte bevisar någonting alls.",
-        "penny_goldspark": "En gnomisk uppfinnarlärling som tar betalt per timme och är värd varenda kopparslant. Rustmästare Hode tog sig an henne för att reglera en skuld och säljer nu arrangemanget till alla med tusen guld.",
-        "stag": "En blodslinje från Evighetsträdgården, framavlad ur de stora hjortar väktarna en gång red. Den sänker fortfarande huvudet när en hand höjs, av en vana äldre än djuret självt.",
-        "alpaca": "Hjordarna i Stormkammen håller dem för ullens och humörets skull: inget förblir lugnare i en storm. Den här spottar på exakt en person per resa.",
-        "horse": "En dalponny, framavlad liten för fruktträdgårdarnas stigar och aldrig upplyst om att den inte är en stridshäst. Den håller jämna steg vid din sida och följer vem som helst som en gång gett den ett äpple.",
-        "sapling": "Ett ungt träd med ett leende i barken och en nyfiken lila blick. Dess rötter bär det med glatt vaggande steg vart du än vandrar.",
-        "bull": "En tjur från Dalen, stor som en hund, vilket är det enda skälet till att någon gick med på att ha en inomhus. Humöret krympte inte med resten.",
-        "spider": "En handflatestor vävare från Vålnadsskogen som möblerar om varje packning den bärs i. Spindelväven är starkare än tråden den ersätter.",
-        "raptor": "En unge från Drakländerna, såld vidare innan den lär sig hur fort den kan springa. Varje ny ägare får höra att den måste hållas mätt, och ingen behöver höra det två gånger.",
-        "skeleton": "Det kom upp ur Vålnadsskogens gravhögar, borstade av sig och har följt efter folk sedan dess. Ingen har fastställt vems ben det var.",
-        "crystal_lich": "En skärva av självaste Nythraxis, fortfarande surrande av kylan som formade den. Den lyder den som drog fram den ur raidens spillror, och har inte förlåtit personen för det.",
-        "forgemaw": "Smidd i Den sista källans Smältdegel och aldrig riktigt färdig gick den ut ur Ignivars gjuteri medan hamrarna ännu slog. Bara den heroiska nedstigningen finner den: det smälta väsendet återvänder ständigt till smedjan som skapade det och följer med hem med den som överlever elden två gånger.",
-        "crystal_tide": "Ett tidvattensväsen som rider på sin egen droppe havsglas, uppfiskat ur stilla vatten av fiskare från Dalen till Fjärrkusten som ville fånga middag. Det behåller vattnet det kom upp i och vägrar låta sig övertalas att återvända.",
-        "sprites": "Två små eldväsen, ett gyllene och ett blågrönt, som aldrig riktigt enas om vem som leder. Kom nära nog så förenas de till en grön låga, för att sedan skratta och glida isär igen.",
-        "phantom": "En handflatestor vålnad från Vålnadsskogens gravhögar, bara lakan och inga ben, som dyker upp i en stängd packning och stannar för sällskapets skull. Ingen har kommit på vad den vill, och den har aldrig ens försökt skrämma någon.",
-        "emberfall_phoenix": "Den brinner ned till en glöd varje höst och reser sig ur sin egen aska till våren, vilket är allt någon kan berätta om den. Ingen har någonsin hittat ett bo, och ingen har någonsin fångat en två gånger."
-      },
-      "petKind": {
-        "beast": "Bestar",
-        "elemental": "Elementarer",
-        "humanoid": "Humanoider",
-        "undead": "Odöda",
-        "celebrity": "Kändisar"
-      },
-      "armor": {
-        "cloth": "Tyg",
-        "mail": "Ringbrynja",
-        "leather": "Läder"
-      },
-      "stat": {
-        "intellect": "Intellekt",
-        "agility": "Smidighet",
-        "strength": "Styrka",
-        "mixed": "Blandad"
-      },
-      "set": {
-        "owned": "{owned} av {total} delar",
-        "itemLevel": "föremålsnivå {level}",
-        "bonusLabel": "{pieces} delar"
-      },
-      "detail": {
-        "dropLabel": "Tappas av",
-        "vendorLabel": "Säljs av",
-        "bindLabel": "Bindning",
-        "sellLabel": "Handlaren betalar",
-        "marketLabel": "Världsmarknaden",
-        "exchangeLabel": "$WOC-börsen",
-        "setLabel": "Insamlat",
-        "drop": "{mob} ({location}), {chance}% per dödande",
-        "heroicDrop": "{mob} ({location}), endast heroiskt läge, {chance}% per dödande",
-        "dropWithHeroic": "{mob} ({location}), {chance}% per dödande, {heroicChance}% i heroiskt läge",
-        "globalDrop": "Valfri fiende, {chance}% per dödande, en av {count} med denna sällsynthet",
-        "fishingDrop": "Fiske var som helst, {chance}% per fångst",
-        "vendor": "{npc} ({location}) för {price}",
-        "honorPrice": "{amount} Heder",
-        "marksPrice": "{amount} heroiska märken",
-        "noSource": "Ingen källa i spelet ännu",
-        "noItem": "Inget föremål ger detta ännu",
-        "tradeable": "Kan handlas",
-        "soulbound": "Själsbundet",
-        "noSell": "Kan inte säljas",
-        "marketAtMerchant": "Visas hos köpmannen",
-        "marketChecking": "Kontrollerar...",
-        "marketNone": "Inga annonser",
-        "exchangeNone": "Inga annonser",
-        "exchangeUnavailable": "Inte tillgängligt i denna klient"
+        "dismiss": "Avvisa"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const sv_SE: EnTranslations = {
       "viewSources": "Visa källor",
       "separateByGatherer": "Dela upp efter samlare",
       "takeChosenQuantity": "Ta ut valt antal",
-      "combine": "Slå ihop materialbuntar"
+      "combine": "Slå ihop materialbuntar",
+      "itemHistory": "Föremålshistorik"
+    },
+    "itemHistory": {
+      "title": "{item}: historik",
+      "passedTo": "Överlämnat till {name} den {date}",
+      "noTransfers": "Detta föremål har aldrig bytt ägare.",
+      "close": "Stäng",
+      "openAria": "Föremålshistorik för {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Lär dig formeln innan du använder förtrollningen.",
@@ -7073,6 +6990,7 @@ export const sv_SE: EnTranslations = {
         "summons_adds": "Kallar förstärkningar",
         "lunar_tide": "Månflod (pulserande områdesskada)",
         "chorus_and_solo": "Kör och Solo (samlas på den ena markeringen, sprid ut er från den andra)",
+        "the_score": "Partituret (två gånger sjunger hon en melodi på månplattorna: kliv på dem i den ordning de ljöd för att bryta hennes röst)",
         "tideglass_reflections": "Tidvattensglasets spegelbilder (döda varandras spegelbilder)",
         "hydra_three_elements": "Tre element (vänsterhuvudet andas en frostkon på 18 yard som saktar dig med 70 procent i 4 sekunder, mittenhuvudet spottar gift under upp till 3 spelare som brister efter 1,5 sekunder och bränner där det landar i 6 sekunder, och högerhuvudet skjuter en fors längs en bana på 26 yard som kastar dig 8 yard bakåt: gå ur var och en. När ett huvud faller tar de kvarvarande huvudena över dess attack)",
         "hydra_tsunami": "Flodvåg (huvudena sjunker i 4,5 sekunder och tar 75 procent mindre skada, och en våg rullar över ena halvan av bassängen, den andra halvan nästa gång: 160 till 190 frostskada i normalt läge och en knuff på 10 yard. Ta dig till andra halvan eller stå bakom en kantpelare; i heroiskt läge rullar vågen tillbaka över andra halvan 3,5 sekunder senare. Första flodvågen kommer 24 sekunder in i striden, varje senare våg 40 sekunder efter att den föregående passerat)",
@@ -7197,6 +7115,23 @@ export const sv_SE: EnTranslations = {
       "shadeLine": "Lämna denna skenbild. Attackera den Vael vars lykta flammar i strålen för att bryta slöjan",
       "timeAria": "{seconds} sekunder kvar"
     },
+    "templeAlert": {
+      "melodyTitle": "Partituret",
+      "melodyLine": "Se månplattorna ljuda en efter en. Upprepa ordningen och turas om med en annan spelare",
+      "melodyDarkLine": "Minns ordningen innan plattorna slocknar. Upprepa den och turas om med en annan spelare",
+      "answerTitle": "Besvara partituret!",
+      "answerLine": "Turas om: kliv på månplattan märkt {place}. Spelade: {done} av {total}",
+      "answerDarkLine": "Turas om och upprepa ordningen ur minnet. Kliv av innan du kliver på en platta igen. Spelade: {done} av {total}",
+      "spentTitle": "En annan röst måste svara",
+      "spentLine": "Du kan inte spela en platta förrän en annan spelare spelar nästa rätta ton. Spelade: {done} av {total}",
+      "stepOffTitle": "Kliv av och sedan på igen",
+      "stepOffLine": "En månplatta ljuder bara när någon kliver på den. Kliv av denna platta och på igen",
+      "falseTitle": "Falsk ton!",
+      "falseLine": "Den plattan var i fel ordning. Svaret börjar om från första plattan",
+      "brokenTitle": "Selthes röst är bruten!",
+      "brokenLine": "Hon tar {pct}% mer skada tills detta slutar: använd dina starkaste attacker nu",
+      "timeAria": "{seconds} sekunder kvar"
+    },
     "wildheartAlert": {
       "preyTitle": "Du är bytet!",
       "preyLine": "Locka Zulgar genom tända solglyfer för att sakta honom innan han fångar och sargar dig",
@@ -7207,7 +7142,21 @@ export const sv_SE: EnTranslations = {
       "pollinatedLine": "Undvik frökapslar: rör du dem medan du är pollinerad skapas fiender. Omarkerade bundsförvanter kan trampa sönder dem",
       "bondTitle": "Flockband",
       "bondLine": "Skilj bestmästaren och jaguaren åt för att ta bort deras skademinskning och skadebonus",
-      "timeAria": "{seconds} sekunder kvar"
+      "timeAria": "{seconds} sekunder kvar",
+      "preyAloneLine": "Ingen annan kan tända solglyferna. Stå på en släckt glyf i {seconds} sek för att tända den och locka sedan Zulgar över den",
+      "pinnedTitle": "Fastspjutad!",
+      "pinnedLine": "En lagkamrat måste dra ut Jaktspjutet. Vildhjärtats puls träffar hårdare medan du är fastspjutad",
+      "pinnedSelfLine": "Ingen är fri att hjälpa: dra ut Jaktspjutet själv innan Vildhjärtats puls träffar",
+      "sunstruckTitle": "Zulgar är solträffad!",
+      "sunstruckLine": "Han tar {pct}% mer skada tills detta slutar: använd dina starkaste attacker nu",
+      "spearTitle": "En allierad är fastspjutad!",
+      "spearLine": "Spring till Jaktspjutet och dra ut det innan Vildhjärtats puls träffar",
+      "glyphTitle": "Tänd solglyferna",
+      "glyphLine": "Stå på en släckt solglyf i {seconds} sek för att tända den. När Zulgar korsar den tar han {pct}% mer skada i {duration} sek",
+      "glyphLightingTitle": "Tänder solglyfen",
+      "glyphLightingLine": "Stå kvar på glyfen tills den tänds. Att kliva av börjar om",
+      "breathTitle": "Idolens andedräkt!",
+      "breathLine": "Stenjaguaren ska andas över denna halva av terrassen. Gå till den andra halvan"
     },
     "sanctumAlert": {
       "quenchTitle": "I kylvattnet!",
@@ -7296,6 +7245,13 @@ export const sv_SE: EnTranslations = {
       "relightFar": "Kom inom {range} yard för att tända igen",
       "relightAria": "Tänd {name} igen",
       "relightUsingLine": "Fortsätt kanalisera för att tända ljuset: det dränerar hälsa. Träffar avbryter inte; rörelse eller en bedövning gör det",
+      "freeLine": "Dra upp spjutet ur marken för att befria den fastspjutade. Träffar stoppar dig inte; rörelse eller bedövning gör det",
+      "freeKey": "Dra ut {name}",
+      "freeTap": "Tryck här för att dra ut {name}",
+      "freeClick": "Klicka här för att dra ut {name}",
+      "freeFar": "Gå inom {range} yd för att dra ut det",
+      "freeAria": "Dra ut {name}",
+      "freeUsingLine": "Stå still för att dra ut spjutet: rörelse eller bedövning stoppar dig",
       "timeAria": "{seconds} sekunder kvar"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const sv_SE: EnTranslations = {
       "detach": "Ta loss",
       "applied": "Tillämpad",
       "owned": "Ägs",
+      "notCollected": "Inte insamlat",
       "storeOnly": "Tillgängligt i WOC-butiken",
       "preview": "Förhandsvisning",
       "previewAria": "Förhandsgranska {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Ett riddjursskinn ritas över det riddjur som karaktären rider. Det ändrar aldrig farten.",
-      "mountsNoMount": "Skaffa först ett riddjur: ett skinn behöver något att rida på.",
+      "mountsIntro": "Välj ditt riddjurs utseende här. Ridträning bestämmer hastigheten. Behåll riddjursföremålet i någon karaktärs väskor eller bank för att dela utseendet på hela kontot.",
+      "mountsNoMount": "Lär dig rida hos stallmästare Marla för att kalla fram ett riddjur.",
       "skinsEmpty": "Du äger ännu inga vapenskinn. Besök WOC-butiken.",
       "skinsApplyHint": "Utrusta en {type} för att använda skinnet.",
       "mechIntro": "Stridsmechen ersätter den här karaktärens kropp. En färgvariant bärs åt gången.",
@@ -7430,6 +7387,7 @@ export const sv_SE: EnTranslations = {
       "sourceActivityRiftFirstClear": "Tilldelas varje medlem i gruppen som vinner första klarningen av en rankad Reva",
       "sourceActivityBuriedHoard": "Hittad i belöningskistan i en begravd skatt, valvet som en skattkartan leder till",
       "sourceActivityLanternHall": "Köps för lyktsigill hos Lykthallens kvartermästare",
+      "sourceActivityWeeklyVaultPvp": "Valt från PvP-raden i det veckovisa valvet",
       "cellMissingSourceAria": "{name}, ännu inte funnen, {source}",
       "cellOwnedClearsAria": "{name}, katalogiserad, först funnen vid klarning {count}",
       "searchPlaceholder": "Sök reliker",
@@ -8454,6 +8412,16 @@ export const sv_SE: EnTranslations = {
         "heroicCloud": "Pollenmoln: om du står inom {cloudRadius} yard från en pollinerad spelare i {cloudSeconds} sek pollineras du också."
       },
       "zulgar": {
+        "pulseSummaryRework": "Var {every} sek träffar en besvärjelse med {cast} sek kasttid alla inom {radius} yd för {min} till {max} skada. Fastspjutade spelare tar {pinMult} gånger denna skada oavsett avstånd.",
+        "spearSummary": "En besvärjelse med {cast} sek kasttid spetsar en spelare som inte är tank, eller tanken om ingen annan återstår. Rotningen varar upp till {seconds} sek och orsakar {bleed} skada var {tick} sek.",
+        "spearResponse": "Välj spjutet och interagera inom {range} yd för att dra ut det på {pull} sek. Skada avbryter inte utdragningen. Om ingen annan står fri på terrassen kan offret interagera för att komma loss på {self} sek.",
+        "glyphSummaryRework": "De {count} glyferna börjar släckta. Under jakten tänder en omarkerad spelare en genom att stå på den i {kindle} sek. Om inga omarkerade spelare återstår kan Bytet tända den på {alone} sek. Att gå av återställer framstegen. En tänd glyf saktar ner honom med {slow} och ökar skadan han tar med {vulnerability} i {seconds} sek när han korsar den. Glyfen kan inte tändas igen på {dark} sek; han kan inte träffas av en annan glyf på {wary} sek. Under jakten varar bedövningar hälften så länge.",
+        "glyphResponseRework": "Omarkerade spelare tänder glyfer framför Bytet. Led honom genom dem och attackera sedan under Solträff. Glyferna slocknar när jakten slutar.",
+        "idolSummary": "Vid {health} hälsa förblir han en jaguarande tills han besegras. Tanken kan också bli Byte.",
+        "idolHuntSummary": "Han väljer ett nytt Byte var {every} sek och vänder sig sedan mot det i {turn} sek innan han jagar.",
+        "idolHuntHeroicSummary": "Han markerar ett nytt par var {pair} sek och växlar mellan dem var {switch} sek. Vid varje byte får det nya Bytet {turn} sek innan han börjar jaga.",
+        "breathSummary": "Var {every} sek markeras ena halvan av terrassen i {warning} sek, sedan får alla på den halvan {min} till {max} Naturskada. Andedräkterna växlar halva.",
+        "breathResponse": "Gå till den omarkerade halvan innan varningen slutar. Mittlinjen är säker. På Heroisk släcker andedräkten också tända glyfer på sin halva; de kan tändas igen direkt.",
         "overview": "Bassängens överstepräst. En jämn strid med en förvarnad ring tills han blir en jaguarande och jagar en spelare. Den jagade spelaren håller honom på avstånd över tända solglyfer som saktar honom.",
         "phaseShrineName": "Helgedomen",
         "phaseShrineSummary": "Han slåss i närstrid och pulserar en ring runt sig.",
@@ -8766,6 +8734,14 @@ export const sv_SE: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe rör sig aldrig och gör inga närstridsattacker. Samlas för Kör, lämna gruppen för Solo, avbryt Drunknandets aria och undvik Insjösvall. Vid två hälsogränser ska ni upprepa hennes melodi på månplattorna med sångare som turas om.",
+        "phaseSummaryRework": "Hennes övriga attacker pausas medan gruppen besvarar partituret. Månvattenprojektiler har ingen kastmätare och kan inte avbrytas.",
+        "boltSummaryRework": "Mellan andra besvärjelser träffar en projektil var {every} sek efter en synlig varning på {windup} sek och orsakar Frostskada motsvarande {mult} gånger hennes vapenskada. Att avbryta Drunknandets aria stoppar projektiler och arian i {quiet} sek.",
+        "boltResponseRework": "Håll tanken inom hennes synfält. Spara avbrott till Drunknandets aria.",
+        "tipHealerRework": "Håll koll på arians mål och alla som fångas ensamma av Kör. Hjälp till att sjunga nästa ton under partituret och hela misstag.",
+        "scoreSummary": "Vid {first} och {second} hälsa blir hon immun och spelar {notes}, sedan {finalNotes} toner. Upprepa dem inom {answer}, sedan {finalAnswer} sek. Fel platta orsakar {falseNote} Frostskada och återställer framstegen, men inte tiden. Om tiden tar slut får alla {min} till {max} Frostskada. Vid framgång bedövas hon i {stun} sek och tar {vulnerability} mer skada i {bonusSeconds} sek.",
+        "scoreResponse": "Se melodin och kliv sedan på plattorna i ordning. Turas om med en annan levande spelare att spela rätt toner; en ensam överlevande kan slutföra själv. Blockerade steg är ofarliga. Kliv av och på igen för att spela en platta, även en som var upptagen innan svaret började.",
+        "scoreHeroic": "Under svaret slocknar plattorna. Minns melodin och turas om.",
         "overview": "Körmodern sjunger från sin bassäng och varken rör sig eller slåss i närstrid. Hon markerar spelare för en delad Kör och ett ensamt Solo, riktar en stegrande aria mot en spelare och skickar en våg över gården. Hennes projektiler och aria kan avbrytas.",
         "phaseName": "Körgården",
         "phaseSummary": "En fas med tidsräknare. En mekanik som blir redo under en besvärjelse väntar tills den tar slut.",
@@ -9678,7 +9654,7 @@ export const sv_SE: EnTranslations = {
       "graveyard": "Var din ande skulle återvända till om du föll här.",
       "dungeons": "Varje fängelsehåla med zonen dess dörr ligger i och gruppstorleken den är byggd för, plus svårighetsgraden du för närvarande är inställd på.",
       "dungeonMode": "Växla dina fängelsehålor mellan normal och heroisk svårighetsgrad.",
-      "dungeonReset": "Överge dina egna tomma instanser, vilket är vad du gör efter att ha bytt svårighetsgrad.",
+      "dungeonReset": "Överge dina egna tomma instanser så att nästa runda börjar om på samma eller en ny svårighetsgrad.",
       "groupRecovery": "Återhämtning och närvaro",
       "unstuck": "Vägen ut när världen har fångat dig. Stå stilla genom en kort nedräkning så flyttas du till närmaste kyrkogård, och återupplivas där om du redan hade fallit. Det lämnar dig försvagad av Räddningssjuka ett tag efteråt, så det är en sista utväg snarare än en genväg.",
       "unstuckWindow": "Vägen ut när världen har fångat dig. Stå stille genom en kort nedräkning och du flytas till närmaste kyrkogård, och höjd där om du redan hade fallit. Den första användningen på en timme är gratis. Använd det igen inom en timme från senast och det lämnar dig försvagad av Unstuck sjukdom ett tag efteråt, så det är en räddning snarare än en genväg.",
@@ -10105,27 +10081,27 @@ export const sv_SE: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Riddjur och ridning",
-      "intro": "Ett riddjur är ett snabbare sätt att ta sig fram genom världen, och det är allt det är. Du lär dig rida vid stallet, köper ditt första par tyglar, och varje väg efter det blir kortare.",
+      "intro": "Välj ett riddjursutseende, lär dig rida i stallet och färdas snabbare genom världen. Din träning bestämmer takten; alla riddjursutseenden är kosmetiska.",
       "whatHeading": "Vad ett riddjur är",
-      "whatBody": "Ett riddjur är en best du rider, och det den ger dig är rörlighet. Ingen rustning, ingen skada, inga egenskaper: den bär dig över marken snabbare, och hoppar lite högre när du hoppar, och det är hela affären. Varje riddjur i spelet är marklevande, så det finns ingen flygning, och inget av dem simmar.",
+      "whatBody": "Riddjur är kosmetiska utseenden för din tränade ritt. De ger ingen rustning, skada eller stridsstatistik. Ridträning ökar färdhastigheten på marken och hopp till häst klarar högre hinder. Alla riddjur stannar på marken och inget kan simma.",
       "learnHeading": "Att lära sig rida",
-      "learnBody": "Ridning är en färdighet du köper en gång, och den öppnas vid nivå {level}. Marla Hitchen, stallmästaren, sköter Stormkammens stall ute bland kullarna, och hon säljer Ridträning för 80 guld. Det enda köpet är vad som över huvud taget låter dig sitta upp på ett riddjur, och det stannar hos dig för gott.\n\nNär du har det har Marla ett uppdrag åt dig: Ridlektioner. Ta det, följ markören till den glödande rutan bakom startbågen, och tryck på Starta loppet. Hon lånar dig en övnings-Valorsteed till lektionen, så själva lektionen kostar dig ingenting. Rid banan, avsluta den, och gå tillbaka till henne för ditt guld och din erfarenhet. Det lånade riddjuret går tillbaka till ladan efteråt, så lektionen lär dig sadeln snarare än ger dig en häst.",
+      "learnBody": "Ridning blir tillgänglig på nivå {level}. Stallmästare Marla Hitchen säljer Ridträning för 80 guld i Galecrest-stallet. Grundträningen ger {basicSpeed}% snabbare rörelse till häst. När du har lärt dig den säljer Marla även Avancerad ridträning för {advancedFee} guld, vilket ger {advancedSpeed}% snabbare rörelse till häst. Varje rang tillhör den karaktär som lär sig den.\n\nEfter grundträningen tar du Marlas uppdrag Ridlektioner och följer markören till den lysande rutan bakom startbågen. Tryck på Starta lopp för att låna träningens Tapperhetshäst. Slutför banan och återvänd för dina mynt och erfarenhet. Lånehästen återvänder till stallet när lektionen slutar.",
       "whereHeading": "Var du hittar henne",
       "whereBody": "Stormkammens stall är utmärkt på kartan över Stormkammen, ute bland kullarna mellan Branten och Vrakfälten. Marla står bredvid ladan, vänd mot tävlingsplanen.",
       "firstHeading": "Ditt första riddjur",
-      "firstBody": "Valorsteed är det enda riddjur som säljs någonstans i världen. Så snart du har lärt dig Ridning säljer Marla Tyglar till Valorsteed till dig för 10 guld, och de tyglarna är dina att behålla. Varje annat riddjur förtjänas ute i världen, så hästen är där nästan varje ryttare börjar.",
+      "firstBody": "Marla säljer Tapperhetshästens tyglar för 10 guld när du har lärt dig rida. Att ha tyglarna låser upp hästutseendet i Kosmetik för alla karaktärer på ditt konto. Ridträningen låter dig redan kalla fram ett riddjur utan att bära tyglar, så välj hästen eller ett annat ägt utseende när du vill byta stil.",
       "rideHeading": "Att sitta upp och stiga av",
-      "rideBody": "Det finns inget riddjursfönster och ingen favorit att ställa in, för tyglarna är riddjuret. Använd ett par tyglar från dina väskor eller från en plats i handlingsfältet så rider du det riddjuret. Att frammana tar en stund, ett kort kall snarare än ett omedelbart, så det räddar dig inte från en dålig pull. Att stiga av är omedelbart och blockeras aldrig.\n\nAnvänd tyglarna du redan rider och du ställer undan det riddjuret. Använd ett annat par medan du är beriden och du byter direkt till det, utan något att frammana emellan. Tangenten Sitt upp / Stig av, backquote-tangenten (`) som standard, får dig bara någonsin av: den är vägen ner, inte vägen upp. Det enda undantaget är ridlektionen, där samma tangent kallar på riddjuret Marla lånar dig, eftersom en lånad häst inte har några tyglar att klicka på. På en telefon eller surfplatta fungerar Sitt upp-knappen i Mer-menyn åt båda hållen, även om den kallar på det första paret tyglar som ligger i dina väskor snarare än ett du väljer, så tryck på tyglarna själva när du vill ha ett visst riddjur.",
+      "rideBody": "Öppna Kosmetik och välj ett utseende på fliken Riddjur. Tangenten Sitt upp / Sitt av, som normalt är tangenten för grav accent, kallar fram ditt tränade riddjur med det utseendet. Knappen Riddjur på mobilen gör samma sak. Framkallning kräver en kort kanalisering; avsittning är omedelbar. Du kan byta utseende medan du rider utan att ändra hastigheten.\n\nDu kan även använda tyglar från väskorna eller en handlingsrad för att välja utseendet och kalla fram riddjuret. Använder du det utseende du redan rider på tas riddjuret bort. Tyglar i banken eller på andra karaktärer låser upp samma kosmetik utan att ryttaren behöver bära dem.",
       "breaksHeading": "Vad som sätter dig till fots igen",
       "breaksBody": "Vattnet vinner alltid. Rid ut i något djupt nog att simma i och du stiger av med detsamma, för inget marklevande riddjur simmar, och dör du hamnar du där du faller. Du kan inte kalla på ett riddjur medan du är i strid, medan du är död eller på väg tillbaka som ande, eller när som helst under en match i Törnhålefälten, som utkämpas till fots från den inledande samlingen till den sista striden: var du beriden medan du väntade sätter insättningen i matchen av dig ur sadeln också. Går du in i strid eller ut i vatten mitt under en frammaning avbryts den också.\n\nDet mesta du gör gör att du stiger av också. Att slå till något, börja kasta en besvärjelse, skörda en fyndplats, fiska, tillverka, förtrolla, bärga eller ladda om ett yrkesverktyg får dig alla att stiga av i samma stund du börjar, så räkna med att kliva av vid varje ådra. Att kalla på ett riddjur upphäver också all skepnad du bär: du är aldrig både skiftad och beriden på samma gång.",
-      "speedHeading": "Rörlighet och nivåer",
-      "speedBody": "Rörlighet är det enda som skiljer ett riddjur från ett annat. Valorsteed du köper av Marla sätter grundtempot, och riddjuren du samlar in ute i världen rider förbi det: ju sällsyntare tyglarna är, desto snabbare färd, i några tydliga steg snarare än en jämn glidning. Det finns ingen andra ridgrad att träna och ingen uppgradering att köpa efteråt. Du betalar för Ridning en gång, och därefter avgör tyglarna du använde hur snabbt du färdas.",
+      "speedHeading": "Ridhastighet och träning",
+      "speedBody": "Grundläggande ridträning ger {basicSpeed}% snabbare rörelse till häst. Avancerad ridträning ger {advancedSpeed}% snabbare rörelse till häst och kostar {advancedFee} guld hos Marla. Alla riddjursutseenden använder samma hastighet för karaktärens träningsrang, oavsett sällsynthet eller ursprung. Butiksskins använder också den tränade hastigheten.",
       "collectHeading": "Var de sällsyntare riddjuren kommer ifrån",
       "collectBody": "Bortom Marlas disk hittas tyglar snarare än köps. De faller från de sista bossarna i fängelsehålorna för fem spelare och i raiden på heroiskt, och ur avklarade revor, där ju svårare reva du avslutar desto sällsyntare tyglar den kan lämna efter sig. De är sällsynta fynd med flit, och ingen omgång lovar en, så det snälla sättet att jaga ett riddjur är att ta jakten med på de omgångar du ändå skulle köra. Den här sidan avslöjar inte vilket riddjur som hänger på vilken boss: den delen är din att ta reda på.",
       "raceHeading": "Stallets lopp",
       "raceBody": "Hoppbanan i Marlas hage står öppen för vem som helst, när som helst, inte bara under lektionen. Sitt upp på ett riddjur, stå på den glödande rutan bakom bågen, och tryck på Starta loppet. En nedräkning håller dig stilla, sedan börjar klockan gå: klara alla sju hoppen och rid tillbaka ut genom bågen innan tiden runnit ut.\n\nEtt hopp räknas bara om du verkligen är i luften över ribban, så en enkel genomridning klarar ingenting. Du får ta dem i vilken ordning som helst och från vilken sida som helst, och ett missat hopp är inte världens undergång: sväng tillbaka och ta det igen. Att dö, stiga av eller lämna hagen avslutar försöket, och det gör det också om klockan rinner ut, vilket sätter dig ur sadeln där du står; att avbryta själv stoppar bara klockan. Inget hindrar dig från att starta ett nytt försök. Det finns ingen avgift, ingen nedkylning och inget pris utöver tiden själv, och hur många ryttare som helst kan köra banan samtidigt utan att stå i vägen för varandra.",
       "goodsHeading": "Tyglar är vanliga varor",
-      "goodsBody": "Ett riddjur är ett föremål, vilket gör det till något ekonomin kan flytta på. Du äger ett riddjur så länge dess tyglar ligger i dina väskor eller i din bank, även om bankförvarade tyglar håller riddjuret ditt utan att låta dig rida det: för att kalla på besten måste du bära tyglarna. Spelartyglar är aldrig själsbundna, så de handlas, skickas med post och listas på Världsmarknaden som vilket annat fynd som helst, om inte föremålet självt säger något annat. Två saker är värda att veta innan du skiljer dig från ett: ingen handlare köper någonsin tillbaka ett par tyglar, så ett riddjur är ett köp du behåller eller för vidare snarare än löser in, och om tyglarna lämnar både dina väskor och din bank medan du rider, handlas bort, skickas med post eller säljs på marknaden, följer riddjuret med dem och du sätts ner där du står."
+      "goodsBody": "Insamlade riddjursutseenden är tillgängliga på hela kontot så länge minst ett matchande tygelföremål finns i någon karaktärs väskor eller personliga bank. Om det sista giltiga föremålet byts bort, postas, läggs ut till försäljning, säljs eller tas bort på annat sätt försvinner utseendet från Kosmetik. En ryttare som använder det återgår till standardhästens utseende och förblir uppsutten med sin tränade hastighet.\n\nSpelartyglars föremål kan bytas, postas och läggas ut på Världsmarknaden om inget annat står på föremålet. Hästens tyglar kan också säljas till en handlare för 10 guld. Andra tyglar behåller sina egna försäljningsbegränsningar. Riddjursskins från butiken förblir kontokosmetik oberoende av tygelföremål."
     },
     "worldPage": {
       "heading": "Världen",
@@ -10300,7 +10276,7 @@ export const sv_SE: EnTranslations = {
       "heroicRewardsBody": "Heroiska bossar tappar bytet du känner till, uppgraderat och märkt Heroiskt i informationsrutan, och slutbossen i varje vända lägger till episka föremål som inte finns någon annanstans. Den sista segern lämnar också Heroiska märken till varje deltagare: en valuta som spenderas hos kvartermästare Vex i Highwatch, vars disk är en hylla med ringar och hängen som ingenting utom beviset från de heroiska djupen kan köpa.",
       "heroicLockoutBody": "Vanliga fängelsehålor går att löpa hela dagen. Heroiskt kräver tålamod: slutbossens fall begränsar alla i vändan till en enda heroisk genomgång av den fängelsehålan per dag, och raiden håller en daglig spärr för varje svårighetsgrad. På ett aktivt rike släpper alla dagliga spärrar tillsammans vid rikets egen nattliga återställningstimme, så en genomgång tagen strax före den timmen och en tagen strax efter hamnar på två olika dagar; spela i stället offline i din webbläsare och en spärr löper helt enkelt ut ett dygn efter ditt eget bossfall. En redan klarad vända för fem spelare står kvar öppen för den egna gruppen för likvandringar och byte, så ingen låses ute från det den förtjänat där. Raiden är strängare: när dess seger väl har spärrat dig står dörren stängd till återställningen, och enda vägen tillbaka in är en likvandring av någon som föll i just den vända som spärrade dem, så en levande raidare som går ut har gått ut för dagen. Samla ihop dina byten innan du lämnar arenan. Var och en av dessa spärrar tillhör den rollperson som förtjänade den, så en genomgång på din huvudperson lämnar dina andra rollpersoner fria.",
       "resetTitle": "Återställa dina instanser",
-      "resetBody": "Byt svårighetsgrad medan din grupp fortfarande håller vändor i anspråk och de gamla anspråken dröjer kvar en stund innan de släpper av sig själva. Gruppledaren kan släppa dem på en gång i stället: välj Återställ alla instanser i menyn för det egna porträttet, eller skriv /dungeon reset. En återställning fungerar först efter att svårighetsgraden faktiskt har ändrats, bara så länge ingen, levande eller fallen, är kvar därinne, bara när varje lik därinne har plundrats rent, och en kort nedkylning skiljer en återställning från nästa. Kommer ni till dörren med fel svårighetsgrad säger spelet till innan vändan börjar. Raiden återställs aldrig så; dess egna spärregler står fast.",
+      "resetBody": "Tomma instanser som tagits i anspråk finns kvar en stund innan de släpps automatiskt. Gruppledaren kan släppa dem direkt: välj Återställ alla instanser i menyn för det egna porträttet, eller skriv /dungeon reset, så börjar nästa runda om på aktuell svårighetsgrad. Att byta svårighetsgrad gör samma sak med instanser på den gamla svårighetsgraden. Återställning fungerar bara när ingen, levande eller fallen, är kvar inne och varje lik har plundrats helt. Den förkortar aldrig en spärr: en spärrad Heroisk instans eller raid förblir spärrad tills dess återställning, och en kort nedkylning skiljer återställningarna åt. Om ni anländer till dörren med fel svårighetsgrad säger spelet till innan rundan börjar. Raiden återställs på samma sätt, med sina egna regler för spärrar och återgång till lik fortfarande i kraft. En raid som byter svårighetsgrad hoppar över nedkylningen: en raid som valde fel nivå eller inte klarade Heroisk kan byta tillbaka direkt, eftersom dess egen spärr begränsar upprepade rundor.",
       "templeLoreTitle": "Det dränkta templet, lite djupare",
       "templeLoreBody": "Templet har sin egen legend, äldre än kulten du jagar på andra håll. Vid stranden av Glimmertjärnen, en tjärn som dricker månljuset och ger tillbaka de dränkta, vaktar en ensam väktare en port av blekt ljus. Under ytan löper en trappa av kall sten ner till den. Folket som sjönk där dränktes inte av olyckshändelse: de var Den bleka kören, som gick under i tillbedjan och aldrig slutade sjunga. De gamla väktarna ristade en enda varning i klipporna innan vattnet tog dem, en bön till något de kallade Den dränkta månen, med en stadigare hand som lade till två ord under den: den bara sover.",
       "cryptLeadTitle": "En dörr de döda var menade att hålla stängd",
@@ -11280,7 +11256,7 @@ export const sv_SE: EnTranslations = {
       "prestigeBody": "Erfarenheten räknas vidare även efter taket. Den göder en kosmetisk virtuell nivå, så din erfarenhetsmätare fortsätter klättra, och en långsiktig prestigerang du kan hämta ut från ditt karaktärsblad när du väl är där. Att passera stora milstolpar i livstidserfarenhet förtjänar också bedrifter i din Bedrifternas bok, med kosmetiska titlar och namnskyltsramar som visas på ditt karaktärsblad. Allt är helt valfritt och ger aldrig kraft, bara ett tecken på vägen du har vandrat.",
       "noRush": "Det är ingen brådska. Världen finns där att njuta av i din egen takt, så vandra omkring, ta de uppdrag som fångar din blick och låt din hjälte växa längs vägen.",
       "ridingTitle": "Att lära sig rida",
-      "ridingBody": "Ridning är en av sakerna som väntar vid slutet av klättringen. Vid nivå {level} lär en stallmästare dig färdigheten för en rejäl summa guld, och en lektion ute på träningsbanan ger dig ditt första par tyglar. Ett riddjur ger ingen kraft alls; det gör helt enkelt världen mindre, vilket efter en lång vandring norrut är sin egen sorts belöning."
+      "ridingBody": "På nivå {level} lär stallmästare Marla ut grundläggande ridning för guld och erbjuder sedan en avancerad rang. Träningen bestämmer hastigheten till häst. Välj ditt riddjursutseende i Kosmetik; insamlade utseenden delas så länge tyglarna finns i någon karaktärs väskor eller bank."
     },
     "placeholder": {
       "note": "Den här delen av guiden är på väg."
@@ -16384,6 +16360,8 @@ export const sv_SE: EnTranslations = {
       "temple_moonwater_bolt": "Månvattensprojektil",
       "temple_drowning_aria": "Drunknandets aria",
       "temple_mere_surge": "Insjösvall",
+      "temple_score": "Partituret",
+      "temple_score_answer": "Besvara partituret",
       "temple_tideglass_fracture": "Tidvattensglasets bristning",
       "temple_undertow": "Underström",
       "temple_lunar_tide": "Måntidvatten",
@@ -16421,6 +16399,12 @@ export const sv_SE: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Frossa",
       "wildheart_zulgar_pulse": "Vildhjärtats puls",
       "wildheart_zulgar_spirit_hunt": "Jaktens ande",
+      "wildheart_zulgar_hunting_spear": "Jaktspjut",
+      "wildheart_zulgar_idol_wakes": "Idolen vaknar",
+      "kituse_wildheart_pull_spear": "Dra ut spjutet",
+      "wildheart_idols_breath": "Idolens andedräkt",
+      "wildheart_sun_glyph_kindle": "Tänds",
+      "wildheart_sun_glyph_cold": "Svalnar",
       "sanctum_cinder_breath": "Glödandedräkt",
       "sanctum_warming_rite": "Värmande rit",
       "sanctum_goad": "Spora",
@@ -17053,6 +17037,9 @@ export const sv_SE: EnTranslations = {
       "levelClass": "Nivå {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Ridträning",
+      "advancedRiding": "Avancerad ridträning",
+      "ridingSpeed": "Ökar din rörelsehastighet till häst med {speed}%. Gäller alla riddjur.",
       "goodsTitle": "{name}: Varor",
       "close": "Stäng köpman",
       "hint": "Klicka på ett föremål i dina väskor för att sälja det medan detta fönster är öppet.",
@@ -17263,7 +17250,8 @@ export const sv_SE: EnTranslations = {
       "tooManyOrders": "Du kan ha högst {count} ordrar öppna på samma gång.",
       "orderClosed": "Den ordningen är inte längre öppen.",
       "orderOwn": "Det är din egen order. Avbryt den för att dra tillbaka den.",
-      "orderNotYours": "Det är inte din order."
+      "orderNotYours": "Det är inte din order.",
+      "orderTrackedItem": "Handlaren tar inga beställningar på unik utrustning."
     },
     "loot": {
       "takeAll": "Ta allt",
@@ -21189,117 +21177,6 @@ export const sv_SE: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Övergångssten"
-      },
-      "whistle_ember_fox": {
-        "name": "Glödrävens visselpipa"
-      },
-      "whistle_moss_hare": {
-        "name": "Mossharens visselpipa"
-      },
-      "whistle_frog": {
-        "name": "Grodvisselpipa"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Karmosinkrabbans visselpipa"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Gyllene väktarens visselpipa"
-      },
-      "whistle_nightfang": {
-        "name": "Nattandens visselpipa"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Beteshornsgaltens visselpipa"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Smaragdvargens visselpipa"
-      },
-      "whistle_tiger": {
-        "name": "Tigervisselpipa"
-      },
-      "whistle_cate_coin": {
-        "name": "Myntkattens visselpipa"
-      },
-      "whistle_alon": {
-        "name": "Visselpipa för Alon"
-      },
-      "whistle_trollface": {
-        "name": "Trollansiktets visselpipa"
-      },
-      "whistle_ansem": {
-        "name": "Visselpipa för Ansem"
-      },
-      "whistle_triple_t": {
-        "name": "Trippel-T:s visselpipa"
-      },
-      "whistle_kekius": {
-        "name": "Visselpipa för Kekius"
-      },
-      "whistle_solbot": {
-        "name": "Solbotens visselpipa"
-      },
-      "whistle_frostfire": {
-        "name": "Frosteldens visselpipa"
-      },
-      "whistle_rocky": {
-        "name": "Stenis visselpipa"
-      },
-      "whistle_proud_grunt": {
-        "name": "Stolte soldatens visselpipa"
-      },
-      "whistle_loot_goblin": {
-        "name": "Bytesgoblinens visselpipa"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Penny Guldgnistas visselpipa"
-      },
-      "whistle_stag": {
-        "name": "Hjortvisselpipa"
-      },
-      "whistle_alpaca": {
-        "name": "Alpackavisselpipa"
-      },
-      "whistle_horse": {
-        "name": "Hästvisselpipa"
-      },
-      "whistle_sapling": {
-        "name": "Plantans visselpipa"
-      },
-      "whistle_bull": {
-        "name": "Tjurvisselpipa"
-      },
-      "whistle_spider": {
-        "name": "Spindelvisselpipa"
-      },
-      "whistle_raptor": {
-        "name": "Raptorvisselpipa"
-      },
-      "whistle_skeleton": {
-        "name": "Skelettvisselpipa"
-      },
-      "whistle_crystal_lich": {
-        "name": "Kristalllichens visselpipa"
-      },
-      "whistle_forgemaw": {
-        "name": "Visselpipa för Smältkäften"
-      },
-      "whistle_sprites": {
-        "name": "Flimmer och Glimmers visselpipa"
-      },
-      "whistle_crystal_tide": {
-        "name": "Kristalltidvattnets visselpipa"
-      },
-      "whistle_phantom": {
-        "name": "Vålnadsvisselpipa"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Glödfallsfenixens visselpipa"
-      },
-      "charm_stag_acorn": {
-        "name": "Ekollonkronans amulett"
-      },
-      "charm_stag_gilded": {
-        "name": "Förgylld amulett"
       },
       "lastflame_core": {
         "name": "Den sista lågans kärna"
@@ -26340,6 +26217,9 @@ export const sv_SE: EnTranslations = {
       "thorn_sprout": {
         "name": "Taggskott"
       },
+      "wildheart_hunting_spear": {
+        "name": "Jaktspjut"
+      },
       "buddy_ember_fox": {
         "name": "Glödräv"
       },
@@ -26414,9 +26294,6 @@ export const sv_SE: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Drag, stridshästen"
-      },
-      "buddy_sapling": {
-        "name": "Planta"
       },
       "buddy_bull": {
         "name": "Tjur"

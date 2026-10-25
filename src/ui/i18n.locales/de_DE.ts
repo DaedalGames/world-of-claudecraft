@@ -25,20 +25,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountBagsEmpty': 'Eure Taschen sind leer.',
   'hudChrome.bank.accountRetry': 'Erneut versuchen',
   'hudChrome.buddyMenu.cancel': 'Abbrechen',
-  'hudChrome.collections.actions.remove': 'Entfernen',
   'hudChrome.collections.actions.summon': 'Herbeirufen',
-  'hudChrome.collections.actions.wear': 'Anlegen',
-  'hudChrome.collections.armor.cloth': 'Stoff',
-  'hudChrome.collections.armor.leather': 'Leder',
-  'hudChrome.collections.detail.honorPrice': '{amount} Ehre',
-  'hudChrome.collections.detail.soulbound': 'Seelengebunden',
-  'hudChrome.collections.petKind.beast': 'Wildtiere',
-  'hudChrome.collections.petKind.elemental': 'Elementare',
-  'hudChrome.collections.petKind.humanoid': 'Humanoide',
-  'hudChrome.collections.petKind.undead': 'Untote',
-  'hudChrome.collections.stat.agility': 'Beweglichkeit',
-  'hudChrome.collections.stat.intellect': 'Intelligenz',
-  'hudChrome.collections.tabs.mounts': 'Reittiere',
   'hudChrome.courier.empty': 'Keine Gegenstände',
   'hudChrome.courier.inventory': 'Inventar',
   'hudChrome.expeditions.accept': 'Annehmen',
@@ -3775,7 +3762,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.dungeonMode':
     'Wechsle deine Dungeons zwischen normalem und heroischem Schwierigkeitsgrad.',
   'guide.commandsPage.dungeonReset':
-    'Gib deine eigenen leeren Instanzen auf, was du nach einem Schwierigkeitswechsel tust.',
+    'Gib deine leeren Instanzen auf, damit der nächste Durchlauf auf derselben oder einer neuen Schwierigkeit frisch beginnt.',
   'guide.commandsPage.dungeons':
     'Jeder Dungeon mit der Zone, in der seine Tür liegt, und der Gruppengröße, für die er gebaut ist, dazu der Schwierigkeitsgrad, auf den du aktuell eingestellt bist.',
   'guide.commandsPage.emotesBody':
@@ -4255,29 +4242,14 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     'Jenseits von Marlas Tresen werden Zügel gefunden statt gekauft. Sie fallen von den letzten Bossen der Fünf-Spieler-Dungeons und des Schlachtzugs auf heroisch, sowie aus Riss-Bereinigungen, wobei ein schwererer bereinigter Riss seltenere Zügel hinterlassen kann. Sie sind absichtlich seltene Funde, und kein Durchgang verspricht einen, also besteht die entspannte Art, ein Reittier zu jagen, darin, die Jagd bei den Durchgängen mitzubringen, die du ohnehin gemacht hättest. Diese Seite verrät dir nicht, welches Reittier an welchem Boss hängt: Das herauszufinden bleibt dir überlassen.',
   'guide.mountsPage.collectHeading': 'Woher die selteneren Reittiere kommen',
-  'guide.mountsPage.firstBody':
-    'Das Valorross ist das einzige Reittier, das irgendwo in der Welt verkauft wird. Sobald du Reiten gelernt hast, verkauft dir Marla die Valorross-Zügel für 10 Gold, und diese Zügel gehören dir für immer. Jedes andere Reittier wird draußen in der Welt verdient, das Pferd ist also der Ausgangspunkt für fast jeden Reiter.',
   'guide.mountsPage.firstHeading': 'Dein erstes Reittier',
-  'guide.mountsPage.goodsBody':
-    'Ein Reittier ist ein Gegenstand, was es zu etwas macht, das die Wirtschaft bewegen kann. Du besitzt ein Reittier, solange seine Zügel in deinen Taschen oder deinem Tresor liegen, wobei im Tresor verstaute Zügel das Reittier zwar dein bleiben lassen, dich aber nicht reiten lassen: Um das Tier zu rufen, musst du die Zügel bei dir tragen. Spieler-Zügel tragen keine Seelenbindung, sie lassen sich also handeln, per Post verschicken und auf dem Weltmarkt einstellen wie jeder andere Fund, sofern der Gegenstand selbst nichts anderes vorschreibt. Zwei Dinge solltest du wissen, bevor du dich von einem trennst: Kein Händler kauft ein Paar Zügel je zurück, ein Reittier ist also ein Kauf, den du behältst oder weitergibst, statt ihn zu Geld zu machen, und verlassen die Zügel deine Taschen und deinen Tresor beide, während du reitest, sei es durch Handel, Versand oder Verkauf auf dem Markt, geht das Reittier mit ihnen, und du wirst dort abgesetzt, wo du stehst.',
   'guide.mountsPage.goodsHeading': 'Zügel sind gewöhnliche Waren',
   'guide.mountsPage.heading': 'Reittiere und Reiten',
-  'guide.mountsPage.intro':
-    'Ein Reittier ist ein schnellerer Weg durch die Welt, und das ist alles, was es ist. Du lernst das Reiten in den Ställen, kaufst dein erstes Paar Zügel, und jede Straße danach ist kürzer.',
-  'guide.mountsPage.learnBody':
-    'Reiten ist eine Fertigkeit, die du einmal kaufst, und sie öffnet sich auf Stufe {level}. Marla Hitchen, die Stallmeisterin, hält die Galecrest-Ställe draußen im Hügelland, und sie verkauft die Reitausbildung für 80 Gold. Dieser eine Kauf ist es, der dich überhaupt ein Reittier besteigen lässt, und er bleibt dir für immer erhalten.\n\nSobald du sie hast, hat Marla eine Quest für dich: Reitstunden. Nimm sie an, folge der Markierung zur leuchtenden Fläche hinter dem Startbogen, und drücke Rennen starten. Sie leiht dir für die Lektion ein Übungs-Valorross, die Lektion selbst kostet dich also nichts. Reite den Parcours, schließe ihn ab, und kehre zu ihr zurück für deine Münzen und Erfahrung. Das geliehene Ross geht danach zurück in den Stall, die Lektion lehrt dich also den Sitz im Sattel, statt dir ein Pferd zu schenken.',
   'guide.mountsPage.learnHeading': 'Reiten lernen',
   'guide.mountsPage.raceBody':
     'Der Springparcours in Marlas Koppel steht jedem offen, jederzeit, nicht nur während der Lektion. Besteige ein Reittier, stell dich auf die leuchtende Fläche hinter dem Bogen, und drücke Rennen starten. Ein Countdown hält dich still, dann läuft die Sanduhr: Nimm alle sieben Sprünge und reite durch den Bogen zurück nach draußen, bevor sie leerläuft.\n\nEin Sprung zählt nur, wenn du wirklich über der Stange in der Luft bist, ein einfaches Durchreiten zählt also nichts. Du kannst sie in beliebiger Reihenfolge und von beiden Seiten nehmen, und ein verpasster ist nicht das Ende der Welt: Dreh um und nimm ihn erneut. Sterben, Absitzen oder das Verlassen der Koppel beendet den Versuch, ebenso wie das Leerlaufen der Sanduhr, was dich aus dem Sattel dort absetzt, wo du stehst; brichst du selbst ab, hält das nur die Sanduhr an. Nichts hindert dich daran, gleich noch einmal zu beginnen. Es gibt keine Gebühr, keine Abklingzeit und keinen Preis außer der Zeit selbst, und beliebig viele Reiter können den Parcours gleichzeitig absolvieren, ohne sich gegenseitig zu stören.',
   'guide.mountsPage.raceHeading': 'Das Stallrennen',
-  'guide.mountsPage.rideBody':
-    'Es gibt kein Reittierfenster und keinen Favoriten zum Festlegen, denn die Zügel sind das Reittier. Benutze ein Paar Zügel aus deinen Taschen oder aus einem Aktionsleisten-Platz, und du reitest dieses Reittier. Das Herbeirufen dauert einen Moment, ein kurzer Ruf statt ein sofortiger, es wird dich also nicht vor einem schlechten Pull retten. Das Absitzen ist sofort und niemals blockiert.\n\nBenutze die Zügel, auf denen du bereits reitest, und du verstaust dieses Reittier. Benutze ein anderes Paar, während du beritten bist, und du wechselst direkt dorthin, ohne dass dazwischen etwas herbeigerufen wird. Die Taste zum Auf- und Absitzen, standardmäßig die Gravis-Taste (`), bringt dich immer nur herunter: Sie ist der Weg nach unten, nicht nach oben. Die eine Ausnahme ist die Reitstunde, wo dieselbe Taste das Ross ruft, das Marla dir leiht, da ein geliehenes Pferd keine Zügel zum Anklicken hat. Auf einem Smartphone oder Tablet wirkt die Schaltfläche Aufsitzen im Mehr-Menü in beide Richtungen, ruft dabei allerdings das erste Paar Zügel in deinen Taschen, statt eines, das du auswählst, tippe also die Zügel selbst an, wenn du ein bestimmtes Reittier willst.',
   'guide.mountsPage.rideHeading': 'Auf- und Absitzen',
-  'guide.mountsPage.speedBody':
-    'Geschwindigkeit ist das Einzige, was ein Reittier vom anderen unterscheidet. Das Valorross, das du von Marla kaufst, setzt das Grundtempo, und die Reittiere, die du draußen in der Welt sammelst, reiten darüber: Je seltener die Zügel, desto schneller der Ritt, in ein paar klaren Stufen statt einem sanften Übergang. Es gibt keinen zweiten Rang des Reitens zu erlernen und kein Upgrade, das du danach kaufen kannst. Du zahlst einmal für das Reiten, und von da an entscheiden die Zügel, die du benutzt hast, wie schnell du reist.',
-  'guide.mountsPage.speedHeading': 'Geschwindigkeit und Stufen',
-  'guide.mountsPage.whatBody':
-    'Ein Reittier ist ein Tier, das du reitest, und was es dir gibt, ist Geschwindigkeit. Keine Rüstung, kein Schaden, keine Werte: Es trägt dich schneller über den Boden und springt beim Sprung ein wenig höher, und das ist der ganze Handel. Jedes Reittier im Spiel ist ein Landreittier, es gibt also kein Fliegen, und keines von ihnen schwimmt.',
   'guide.mountsPage.whatHeading': 'Was ein Reittier ist',
   'guide.mountsPage.whereBody':
     'Die Galecrest-Ställe sind auf der Karte des Windkamms eingezeichnet, draußen im Hügelland zwischen dem Abbruch und den Wrackfeldern. Marla steht neben der Scheune, dem Rennhof zugewandt.',
@@ -4314,8 +4286,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
     'Risse sind das Eine, das wirklich auf die Höchststufe wartet. Sie reißen draußen in den Reichen nach ihrem eigenen Zeitplan auf, eingestuft von C bis S, und jede Gruppe der Welt wetteifert darum, wer jeden von ihnen als Erster schließt. Auch die Tiefgang-Tafeln laufen weiter, und ihre schwerere Stufe ist einen erneuten Blick wert, sobald deine Ausrüstung aufgeholt hat.',
   'guide.progression.journeyBodyCount':
     'Die Welt ist ein einziges zusammenhängendes Land aus {zones} Gebieten. Drei davon sind die Straße, auf der du aufsteigst, von Süden nach Norden gereiht: Du beginnst im grünen Tal, kämpfst dich durch das Moor und endest in den kalten, hohen Gipfeln. Folge der Questspur, und das Land trägt dich von einem zum nächsten. Vor der Küste des Tals liegt eine Insel für die frühen Stufen, und der Rest der Reiche öffnet sich von derselben Straße aus, gebaut für Charaktere, die den Aufstieg bereits hinter sich haben.',
-  'guide.progression.ridingBody':
-    'Reiten ist eines der Dinge, die am Ende des Aufstiegs warten. Auf Stufe {level} lehrt dich eine Stallmeisterin die Fertigkeit für eine stattliche Summe Gold, und eine Lektion auf dem Übungsparcours bringt dir dein erstes Paar Zügel ein. Ein Reittier verleiht überhaupt keine Macht; es macht die Welt nur kleiner, was nach einem langen Marsch nach Norden seine eigene Art von Belohnung ist.',
   'guide.progression.ridingTitle': 'Reiten lernen',
   'guide.questsPage.availableBody':
     'Quests kommen in Ketten. Die meisten werden erst angeboten, sobald du die vorherige abgegeben hast, und viele verlangen zusätzlich eine Mindeststufe, ein NSC, der heute nichts für dich hat, kann also nach deinen nächsten paar Stufen oder sobald du die Quest abschließt, die du schon trägst, jede Menge haben. Ein paar haben eine eigene Bedingung, etwa die Reitstunden, die sich erst öffnen, nachdem du die Reitfertigkeit gekauft hast. Gruppenquests sagen das von vornherein, indem sie auflisten, wie viele Spieler sie empfehlen mitzubringen. Manche Aufgaben sind wiederholbar: Du kannst sie nach einer Wartezeit erneut annehmen, und die Markierung über dem Questgeber verrät dir, wann eine zurückgekehrt ist.',
@@ -6806,13 +6776,15 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
     'Du kannst Instanzen nicht zurücksetzen, solange sich noch jemand darin befindet.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'Ändere die Dungeon-Schwierigkeit, bevor du diese Instanzen zurücksetzt. Leere Instanzen werden nach 5 Minuten automatisch zurückgesetzt.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'Deine Instanzen sind bereits frisch. Seit dem letzten Zurücksetzen hat sie niemand betreten.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Verwende /dungeon reset, um deine leeren Instanzen nach einer Schwierigkeitsänderung aufzugeben.',
+    'Nutze /dungeon reset, um deine leeren Instanzen aufzugeben und frisch zu beginnen.',
   'hudChrome.dungeonDifficulty.resetLoot':
     'Du kannst Instanzen nicht zurücksetzen, solange sich noch Beute darin befindet.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'Alle Instanzen zurücksetzen?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Dadurch werden leere Instanzen deiner zuvor gewählten Schwierigkeit aufgegeben. Nicht beanspruchte Beute verhindert das Zurücksetzen.',
+    'Damit gibst du deine leeren Instanzen auf, sodass der nächste Durchlauf auf der gewählten Schwierigkeit frisch beginnt. Sperren bleiben unverändert. Spieler im Inneren oder nicht abgeholte Beute verhindern das Zurücksetzen.',
   'hudChrome.dungeonDifficulty.resetConfirm': 'Instanzen zurücksetzen',
   'hudChrome.dungeonDifficulty.resetCooldown':
     'Instanzen können nur einmal alle 5 Minuten zurückgesetzt werden.',
@@ -13643,12 +13615,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_shadowjump_toad': 'Kama-Kage die Schattensprungkröte',
   'hudChrome.mounts.name_stormfeather_griffin': 'Himmelsgreif Sturmfeder',
   'hudChrome.mounts.name_thunderstrut_gobbler': 'Donnerstolz der Große Puter',
-  'hudChrome.mounts.desc_valorsteed':
-    'Ein robustes, trittsicheres Ross, das die Reisegeschwindigkeit erhöht.',
-  'hudChrome.mounts.desc_grag_bear':
-    'Ein robuster, trittsicherer Bär, der die Reisegeschwindigkeit erhöht.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'Eine herzhafte, ausdauernde Schnecke, die die Reisegeschwindigkeit erhöht.',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'Ein mächtiges Magitech-Rad für schnelles, bodennah schwebendes Kampfmanövrieren.',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -14404,7 +14370,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
     'Deine Gruppe hat die heroische Prüfung gemeistert, während du in der Nachhut gekämpft hast oder bereits am Boden lagst. Auch deine Instanzbindung wurde aktiviert, daher ist dein Anteil an heroischen Marken hier angekommen, statt verloren zu gehen. Setze sie klug ein.\n\n- Heroischer Quartiermeister',
   'guide.dungeonsPage.resetTitle': 'Instanzen zurücksetzen',
   'guide.dungeonsPage.resetBody':
-    'Wenn ihr die Schwierigkeit wechselt, während eure Gruppe noch beanspruchte Läufe hält, bleiben die alten Ansprüche eine Weile bestehen, bevor sie von selbst verfallen. Der Gruppenleiter kann sie stattdessen sofort aufgeben: Wählt im Menü des eigenen Porträts Alle Instanzen zurücksetzen oder gebt /dungeon reset ein. Eine Zurücksetzung funktioniert erst nach einem tatsächlichen Schwierigkeitswechsel, nur solange niemand, ob lebend oder gefallen, drinnen ist, nur wenn jede Leiche dort drinnen sauber geplündert wurde, und zwischen zwei Zurücksetzungen liegt eine kurze Abklingzeit. Kommt ihr mit der falschen Schwierigkeit an die Tür, sagt euch das Spiel das vor dem Start. Der Schlachtzug wird so niemals zurückgesetzt; seine eigenen Sperrregeln bleiben bestehen.',
+    'Leere beanspruchte Durchläufe bleiben eine Weile bestehen, bevor sie von selbst verschwinden. Der Gruppenleiter kann sie sofort aufgeben: Wähle Alle Instanzen zurücksetzen im Menü des eigenen Porträts oder tippe /dungeon reset. Der nächste Durchlauf beginnt auf der aktuellen Schwierigkeit frisch. Ein Schwierigkeitswechsel tut dasselbe für Durchläufe auf der vorherigen Schwierigkeit. Zurücksetzen geht nur, wenn niemand, lebend oder tot, darin bleibt und jede Leiche vollständig geplündert wurde. Es verkürzt niemals eine Sperre: Ein gesperrter heroischer Dungeon oder Schlachtzug bleibt bis zu seiner Freigabe gesperrt. Zwischen Zurücksetzungen liegt eine kurze Abklingzeit. Bei falscher Schwierigkeit meldet sich das Spiel vor dem Betreten. Schlachtzüge werden ebenso zurückgesetzt; ihre Sperren und Regeln zur Leichenrückkehr gelten weiter. Beim Wechsel der Schlachtzugsschwierigkeit entfällt die Abklingzeit: Wer die falsche Stufe gewählt hat oder an Heroisch gescheitert ist, kann sofort zurückwechseln, da die eigene Sperre Wiederholungen begrenzt.',
   'guide.gear.itemLevelBody':
     'Aktiviere Gegenstandsstufe anzeigen in den Optionen, um zwei Ausrüstungsteile schnell zu vergleichen. Ausrüstung bekannter Herkunft, von Gegnern, Quests und Handwerksberufen, zeigt dann eine Gegenstandsstufe: eine einzelne Zahl, die ihre Stärke anhand der Quelle grob angibt und Verbesserungen auch über verschiedene Plätze hinweg vergleichbar macht. Teile ohne solche Herkunft, etwa einfache Händlerware und Startausrüstung, zeigen keine Gegenstandsstufe; eine fehlende Zahl ist normal.',
   'hudChrome.auraEffect.battleStance': 'Kampfhaltung: 10% mehr Wuterzeugung',
@@ -16628,14 +16594,11 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mountRace.toFinish': 'Reite zurück durch den Bogen!',
   'hudChrome.mountTraining.begin': 'Reitstunde beginnen',
   'hudChrome.mountTraining.mountPrompt': 'Drücke {key}, um das Übungs-Valorross zu besteigen.',
-  'hudChrome.mountTraining.ownedMountPrompt':
-    'Deine Zügel sind in deinen Taschen. Benutze sie, um zu reiten.',
   'hudChrome.mountTraining.returnToMarla':
     'Kehre zu Marla in den Ställen zurück, um deine Valorross-Zügel für 10g zu kaufen.',
   'hudChrome.mountTraining.ridePrompt':
     'Folge der leuchtenden Markierung zur Startlinie und drücke dann Rennen starten.',
   'hudChrome.mountTraining.success': 'Du hast das Valorross gezähmt.',
-  'hudChrome.mounts.useToRide': 'Benutzen, um dieses Reittier herbeizurufen.',
   'hudChrome.unstuck.alreadyActive': 'Befreien zählt bereits herunter.',
   'hudChrome.unstuck.alreadySafe':
     'Du befindest dich bereits an einer sicheren, erreichbaren Position.',
@@ -18946,10 +18909,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Noch keine Kampfmech-Chromas im Besitz.',
   'hudChrome.cosmetics.mechIntro':
     'Der Kampfmech ersetzt den Körper dieses Charakters. Es wird immer nur ein Chroma getragen.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Ein Reittier-Skin liegt über dem Reittier, das dieser Charakter reitet. Er verändert niemals das Tempo.',
-  'hudChrome.cosmetics.mountsNoMount':
-    'Besitze zuerst ein Reittier: Ein Skin braucht etwas zum Reiten.',
   'hudChrome.cosmetics.owned': 'Im Besitz',
   'hudChrome.cosmetics.scopeAccount': 'Konto',
   'hudChrome.cosmetics.scopeCharacter': 'Charakter',
@@ -20666,12 +20625,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'auth.wocHead.nose.default': 'Klassisch',
   'auth.wocHead.nose.soft': 'Weich',
   'hudChrome.adventureGuide.lootClass': 'Klasse',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Frostbann',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Kriegsfürst',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Vergoldet',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC-Börse',
-  'hudChrome.collections.looks.locked': 'Gesperrt',
-  'hudChrome.collections.stat.strength': 'Stärke',
   'hudChrome.dungeonTracker.complete': 'Abgeschlossen',
   'hudChrome.guildHall.done': 'Diese Woche abgeschlossen',
   'hudChrome.guildHall.kinds.boss': 'Kopfgeld',
@@ -21230,117 +21183,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.nameLabel': 'Gefährtenname',
   'hudChrome.buddyMenu.rename': 'Gefährten umbenennen',
   'hudChrome.collections.actions.dismiss': 'Wegschicken',
-  'hudChrome.collections.armor.mail': 'Kettenrüstung',
-  'hudChrome.collections.buddyLore.alon':
-    'Das Maskottchen eines Reisenden von einer Straße, die keine Karte zugeben will. Es taucht überall dort auf, wo ein Plan schiefgeht. Es beobachtet, billigt und hilft dabei kein bisschen.',
-  'hudChrome.collections.buddyLore.alpaca':
-    'Die Herden am Windkamm halten sie wegen ihrer Wolle und ihres Gemüts: Nichts bleibt in einem Sturm ruhiger. Dieses spuckt auf jeder Reise genau eine Person an.',
-  'hudChrome.collections.buddyLore.ansem':
-    'Es spricht von Türen und Dunkelheit und lässt sich zu beidem nichts Weiteres entlocken. Die Kultisten der Nachtblüte beanspruchen es für sich; es läuft weg, sobald sie einen Ritus abhalten.',
-  'hudChrome.collections.buddyLore.bull':
-    'Ein Bulle aus dem Tal von der Größe eines Hundes. Nur deshalb hat überhaupt jemand zugestimmt, ihn drinnen zu halten. Sein Temperament ist nicht mitgeschrumpft.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    'Eine Katze, die sich nicht von der Münze trennen lässt, auf der sie sitzt, und die noch niemand beim Fressen gesehen hat. Die Händler von Eastbrook streiten noch immer darüber, welches der beiden das Haustier ist.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    'Eine Gezeitenkrabbe von der Fernküste, deren Schere lange nach dem Verlassen des Wassers rot bleibt. Hafenarbeiter ließen sie früher um Münzen über die Planken laufen.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'Ein Splitter von Nythraxis selbst, der noch immer vor der Kälte summt, die ihn formte. Er gehorcht demjenigen, der ihn aus den Trümmern des Schlachtzugs zog, und hat es ihm nicht verziehen.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    'Ein Gezeitengeist, der seinen eigenen Tropfen Meerglas reitet. Angler vom Tal bis zur Fernküste zogen ihn aus stillem Wasser, als sie ihr Abendessen fangen wollten. Er behält das Wasser, in dem er heraufkam, und lässt sich nicht zur Rückkehr überreden.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'Eine Füchsin aus den Hecken des Eastbrook-Tals, benannt nach dem kohleroten Fell, das durch winterliches Gestrüpp leuchtet. Die Fallensteller dort gaben die Jungtiere vor Generationen auf und begannen stattdessen, Futter auszulegen.',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    'Jeden Herbst verbrennt er bis zur Glut und steigt im Frühling aus seiner eigenen Asche. Mehr kann dir niemand über ihn sagen. Niemand hat je ein Nest gefunden und niemand einen zweimal gefangen.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'Ein Welpe aus dem Gespensterwald, dessen Fell im Licht des Blätterdachs grün schimmert, das den Waldboden nie ganz erreicht. Die Hüter ziehen die Waisen auf, die der Wald zurücklässt.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    'Im Schmelztiegel des Letzten Quells geschmiedet und nie ganz vollendet, verließ es Ignivars Gießerei, während die Hämmer noch fielen. Nur beim heroischen Abstieg findet man es: Das geschmolzene Wesen kehrt immer wieder zu seiner Schmiede zurück und folgt demjenigen nach Hause, der das Feuer zweimal überlebt.',
-  'hudChrome.collections.buddyLore.frog':
-    'Das Mirefen-Moor lässt sie dick und unbekümmert aufwachsen, die ganze Nacht singend im Schilf. Die Moorführer schwören, dass ein Boot mit einem solchen Tier niemals auf Grund läuft.',
-  'hudChrome.collections.buddyLore.frostfire':
-    'Geboren im Frostschleier, wo eine heiße Quelle durch das Eisfeld bricht, hat es sich nie entschieden, welcher Hälfte es angehört. In kalter Luft dampft es, in warmer zittert es.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'Ein Wachkäfer vom Bernsteinfall, vergoldet durch das Harz, in dem er aufwuchs. Sein Name ist älter als das Harz: Solche Wächter bewachten diese Haine lange bevor jemand daran dachte, den Saft abzufüllen.',
-  'hudChrome.collections.buddyLore.horse':
-    'Ein Pony aus dem Tal, klein gezüchtet für Obstgartenwege und nie darüber aufgeklärt, dass es kein Schlachtross ist. Es hält an deiner Schulter Schritt und folgt jedem, der ihm einmal einen Apfel gab.',
-  'hudChrome.collections.buddyLore.kekius':
-    'Ein lachender Gefährte unklarer Herkunft, den die Rennställe des Windkamms als Glücksbringer aufgenommen haben. Er hat vier Ställe überlebt, die auf ihn schworen.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    'Es folgt jedem mit heroischen Marken und wurde noch nie beim Stehlen erwischt. Rüstmeister Vex besteht darauf, dass dies gar nichts beweist.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'Der Hase des Weidenmoors mit grünem Fell von einem Leben im feuchten Torf. Die Kräuterkundigen des Moors halten ihn für einen Glücksbringer und dulden nicht, dass man ihn von einer Türschwelle verjagt.',
-  'hudChrome.collections.buddyLore.nightfang':
-    'Ein junger Jäger aus der Nachtblüte, selbst nach den Maßstäben seiner Art lautlos. Er folgt wegen der Gesellschaft und jagt nichts Größeres als eine Motte.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'Die Lehrlingin eines gnomischen Tüftlers, die stundenweise bezahlt wird und jede Kupfermünze wert ist. Rüstungsschmied Hode nahm sie zur Begleichung einer Schuld auf und verkauft die Vereinbarung nun an jeden mit tausend Gold.',
-  'hudChrome.collections.buddyLore.phantom':
-    'Ein handtellergroßer Spuk aus den Grabhügeln des Gespensterwalds, ganz Tuch und ohne Knochen, der in einem geschlossenen Rucksack auftaucht und wegen der Gesellschaft bleibt. Niemand weiß, was er will, und er hat noch nie versucht, jemanden zu erschrecken.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'Ein Veteran der Kriegsvorräte, der den Gruß behielt und den Rang verlor. Kriegsmarschall Draven Kole übergibt einen jedem Soldaten mit genug Ehre, um den Preis dafür zu kennen.',
-  'hudChrome.collections.buddyLore.raptor':
-    'Ein Jungtier aus den Drakenlanden, verkauft, bevor es lernt, wie schnell es laufen kann. Jedem neuen Besitzer wird geraten, es gut zu füttern. Keiner muss es zweimal hören.',
-  'hudChrome.collections.buddyLore.rocky':
-    'Ein Kriechtier mit Steinpanzer aus dem Geröll von Thornpeak, langsam und völlig unbeeindruckt. Bergleute halten sie, weil sie einen Augenblick vor einem Einsturz still werden.',
-  'hudChrome.collections.buddyLore.sapling':
-    'Ein junger Baum mit einem Lächeln in der Rinde und neugierigem violettem Blick. Seine Wurzeln tragen ihn fröhlich watschelnd überallhin, wohin du wanderst.',
-  'hudChrome.collections.buddyLore.skeleton':
-    'Es stieg aus den Grabhügeln des Gespensterwalds, klopfte sich den Staub ab und folgt seitdem den Leuten. Niemand hat herausgefunden, wem diese Knochen gehörten.',
-  'hudChrome.collections.buddyLore.solbot':
-    'Ein kleiner sonnenbetriebener Automat, halb vergraben aus der Asche der Drakenlande geborgen und noch immer tickend. Welche Werkstatt ihn auch baute, sie hinterließ nirgends am Gehäuse ein Zeichen.',
-  'hudChrome.collections.buddyLore.spider':
-    'Eine handtellergroße Weberin aus dem Gespensterwald, die jeden Rucksack umgestaltet, in dem sie getragen wird. Ihre Spinnseide ist stärker als der Faden, den sie ersetzt.',
-  'hudChrome.collections.buddyLore.sprites':
-    'Zwei kleine Feuergeister, einer golden und einer türkis, die sich nie recht einig sind, wer führt. Kommst du nahe genug, falten sie sich zu einer grünen Flamme zusammen, um dann lachend wieder auseinanderzufließen.',
-  'hudChrome.collections.buddyLore.stag':
-    'Eine Blutlinie aus dem Immergarten, heruntergezüchtet von den großen Hirschen, die die Hüter einst ritten. Noch immer senkt er bei einer erhobenen Hand den Kopf, aus einer Gewohnheit, die älter ist als das Tier.',
-  'hudChrome.collections.buddyLore.tiger':
-    'Streifen aus der Palmenbucht auf einem Tier, das die Palmenbucht nie sah: Die Linie wird seit der Schließung der alten Menagerien in Gefangenschaft gehalten. Es hört auf einen Pfiff und auf nichts sonst.',
-  'hudChrome.collections.buddyLore.triple_t':
-    'Drei von etwas oder ein Ding dreimal. Die Berichte widersprechen sich und die Kreatur hält nie lange genug still, um sie zu zählen.',
-  'hudChrome.collections.buddyLore.trollface':
-    'Ein grinsendes Ding, das der Gespensterwald ausspuckte und nicht zurücknehmen wollte. Jeder Versuch einer Beschreibung endet damit, dass der Beschreibende lacht und aufgibt.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'Ein Tier aus Thornpeak, von Hirten kurzbeinig gezüchtet, die einen Eber wollten, der keinen Zaun umlegen konnte. Das Temperament hat er trotzdem behalten.',
-  'hudChrome.collections.close': 'Jagd schließen',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Voltaisch',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Aschgrau',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Weißglühend',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Saphirfrosch',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Sattgrün',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Eichelkrone',
-  'hudChrome.collections.cosmeticUnlocked': 'Neues Aussehen für {name}: {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Bindung',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% pro Tötung',
-  'hudChrome.collections.detail.dropLabel': 'Beute von',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% pro Tötung, {heroicChance}% auf Heroisch',
-  'hudChrome.collections.detail.exchangeNone': 'Keine Angebote',
-  'hudChrome.collections.detail.exchangeUnavailable': 'Auf diesem Client nicht verfügbar',
-  'hudChrome.collections.detail.fishingDrop': 'Überall angeln, {chance}% pro Fang',
-  'hudChrome.collections.detail.globalDrop':
-    'Jeder Gegner, {chance}% pro Tötung, einer von {count} dieser Seltenheit',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob} ({location}), nur Heroisch, {chance}% pro Tötung',
-  'hudChrome.collections.detail.marketAtMerchant': 'Beim Händler angezeigt',
-  'hudChrome.collections.detail.marketChecking': 'Wird geprüft...',
-  'hudChrome.collections.detail.marketLabel': 'Weltmarkt',
-  'hudChrome.collections.detail.marketNone': 'Keine Angebote',
-  'hudChrome.collections.detail.marksPrice': '{amount} heroische Marken',
-  'hudChrome.collections.detail.noItem': 'Noch kein Gegenstand gewährt dies',
-  'hudChrome.collections.detail.noSell': 'Kann nicht verkauft werden',
-  'hudChrome.collections.detail.noSource': 'Noch keine Quelle im Spiel',
-  'hudChrome.collections.detail.sellLabel': 'Händler zahlt',
-  'hudChrome.collections.detail.setLabel': 'Gesammelt',
-  'hudChrome.collections.detail.tradeable': 'Handelbar',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) für {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Verkauft von',
-  'hudChrome.collections.keybindLabel': 'Jagd',
-  'hudChrome.collections.launcherTitle': 'Jagd: Gefährten, Reittiere und Gegenstandssets',
-  'hudChrome.collections.looks.none': 'Noch kein Aussehen für diesen Gefährten erstellt',
-  'hudChrome.collections.looks.title': 'Aussehen',
-  'hudChrome.collections.looks.unlocked': 'Freigeschaltet',
-  'hudChrome.collections.looks.worn': 'Getragen',
-  'hudChrome.collections.petKind.celebrity': 'Berühmtheiten',
   'hudChrome.collections.presence.alon': 'Du fühlst dich beobachtet und still gebilligt.',
   'hudChrome.collections.presence.alpaca': 'Etwas Wolliges ohne Eile hat beschlossen mitzukommen.',
   'hudChrome.collections.presence.ansem': 'Ein Flüstern von Türen und Dunkelheit folgt dir.',
@@ -21395,39 +21237,11 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
     'Ein Schnauben und ein Stampfen: Etwas Stures folgt dir.',
   'hudChrome.collections.presenceDefault': 'Du spürst, wie dich eine Präsenz beobachtet.',
   'hudChrome.collections.revealed': '{name} hat beschlossen, dir zu folgen.',
-  'hudChrome.collections.set.bonusLabel': '{pieces} Teile',
-  'hudChrome.collections.set.itemLevel': 'Gegenstandsstufe {level}',
-  'hudChrome.collections.set.owned': '{owned} von {total} Teilen',
-  'hudChrome.collections.source.bossDrop': '{mob} ({location}), {chance}% pro Spieler und Tötung',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), nur Heroisch, {chance}% pro Spieler',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% pro Spieler, {heroicChance}% auf Heroisch',
-  'hudChrome.collections.source.bossLabel': 'Bossgefährte',
-  'hudChrome.collections.source.challengeDps':
-    'Verursache im gesamten Kampf {dps} Schaden pro Sekunde an {mob}',
-  'hudChrome.collections.source.challengeLabel': 'Herausforderung',
-  'hudChrome.collections.source.challengeSpeed':
-    'Besiege {mob} innerhalb von {seconds} Sekunden nach Kampfbeginn',
-  'hudChrome.collections.source.craft': '{item} (Rezept für {profession})',
-  'hudChrome.collections.source.craftLabel': 'Hergestellt',
-  'hudChrome.collections.source.deed': 'Die Tat {deed}',
-  'hudChrome.collections.source.deedLabel': 'Verdient durch',
-  'hudChrome.collections.source.grantLabel': 'Verliehen',
-  'hudChrome.collections.source.grantOnly':
-    'Saisonbelohnung: die monatliche Rangliste und Belohnungen für die besten Kampfauswertungen',
-  'hudChrome.collections.source.rollNote':
-    'Jeder Spieler würfelt separat; niemand verliert seinen Wurf an ein Gruppenmitglied.',
-  'hudChrome.collections.source.token': '{item}, einmal verwendet, um den Gefährten zu binden',
-  'hudChrome.collections.source.tokenLabel': 'Marke',
-  'hudChrome.collections.stat.mixed': 'Hybrid',
   'hudChrome.collections.state.notOwned': 'Nicht gesammelt',
   'hudChrome.collections.state.owned': 'Gesammelt',
   'hudChrome.collections.state.pending': 'Eine Präsenz folgt dir',
   'hudChrome.collections.state.unavailable': 'Noch nicht erhältlich',
   'hudChrome.collections.tabs.buddies': 'Gefährten',
-  'hudChrome.collections.tabs.sets': 'Gegenstandssets',
-  'hudChrome.collections.title': 'Jagd',
   'hudChrome.cosmetics.buddyActive': 'Beschworen',
   'hudChrome.cosmetics.buddyDrag': 'Auf die Aktionsleiste ziehen',
   'hudChrome.courier.bags': 'Zur Bank schicken',
@@ -21439,7 +21253,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
     'Zurückgebrachte Gegenstände landen bei vollen Taschen im Überlauf. Nach der Lieferung verschwindet der Kurier bis zur nächsten Beschwörung.',
   'hudChrome.courier.close': 'Kurier schließen',
   'hudChrome.courier.instructions':
-    'Wähle ganze Stapel. Dein Kurier lagert sie zuerst ein und holt dann die gewünschten Gegenstände. Questgegenstände können nicht verschickt werden.',
+    'Wähle ganze Stapel für deine Bank, den Materialtresor oder einen anderen Charakter. Dein Kurier lagert sie zuerst ein und holt dann die angeforderten Gegenstände ab. Questgegenstände können nicht versendet werden.',
   'hudChrome.courier.membership':
     'Erneuere deine Mitgliedschaft, um eine weitere Reise zu beginnen.',
   'hudChrome.courier.outbound': 'Fliegt zur Bank',
@@ -21768,8 +21582,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.kinds.task': 'Ausführung',
   'hudChrome.guildHall.lifetime': 'Abgeschlossene Aufträge: {count}',
   'hudChrome.guildHall.mountOffer': 'Reittier: {mount}',
-  'hudChrome.guildHall.mountPreview':
-    'Bodenreittier: +{pct}% Bewegungsgeschwindigkeit beim Reiten. Reitausbildung erforderlich.',
   'hudChrome.guildHall.needSeals': 'Noch {count} nötig',
   'hudChrome.guildHall.open': 'Öffnen',
   'hudChrome.guildHall.quartermasterIntro':
@@ -25354,8 +25166,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'entities.items.cantors_hymnal.name': 'Gesangbuch des Kantors',
   'entities.items.cantors_stole.name': 'Stola des Kantors',
   'entities.items.cellwatch_belt.name': 'Gürtel der Zellenwache',
-  'entities.items.charm_stag_acorn.name': 'Eichelkronentalisman',
-  'entities.items.charm_stag_gilded.name': 'Vergoldeter Talisman',
   'entities.items.choirward_leggings.name': 'Chorschutzgamaschen',
   'entities.items.choirward_pauldrons.name': 'Chorschutzschulterplatten',
   'entities.items.choristers_gloves.name': 'Handschuhe des Chorsängers',
@@ -25755,41 +25565,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'entities.items.vestments_of_the_waking_rite.name': 'Gewänder des Erweckungsritus',
   'entities.items.warmonger_greaves.name': 'Beinschienen des Kriegstreibers',
   'entities.items.warmonger_treads.name': 'Treter des Kriegstreibers',
-  'entities.items.whistle_alon.name': 'Alon-Pfeife',
-  'entities.items.whistle_alpaca.name': 'Alpaka-Pfeife',
-  'entities.items.whistle_ansem.name': 'Ansem-Pfeife',
-  'entities.items.whistle_bull.name': 'Bullenpfeife',
-  'entities.items.whistle_cate_coin.name': 'Cate-Coin-Pfeife',
-  'entities.items.whistle_crimson_claw_crab.name': 'Pfeife der Scharlachscherenkrabbe',
-  'entities.items.whistle_crystal_lich.name': 'Kristalllich-Pfeife',
-  'entities.items.whistle_crystal_tide.name': 'Kristallflut-Pfeife',
-  'entities.items.whistle_ember_fox.name': 'Glutfuchspfeife',
-  'entities.items.whistle_emberfall_phoenix.name': 'Pfeife des Bernsteinfall-Phönix',
-  'entities.items.whistle_emerald_wolf.name': 'Smaragdwolfpfeife',
-  'entities.items.whistle_forgemaw.name': 'Pfeife von Schmiedeschlund dem Geschmolzenen',
-  'entities.items.whistle_frog.name': 'Froschpfeife',
-  'entities.items.whistle_frostfire.name': 'Frostfeuerpfeife',
-  'entities.items.whistle_golden_sentinel.name': 'Pfeife des goldenen Wächters',
-  'entities.items.whistle_horse.name': 'Pferdepfeife',
-  'entities.items.whistle_kekius.name': 'Kekius-Pfeife',
-  'entities.items.whistle_loot_goblin.name': 'Beutegoblinpfeife',
-  'entities.items.whistle_moss_hare.name': 'Mooshasenpfeife',
-  'entities.items.whistle_nightfang.name': 'Nachtfangpfeife',
-  'entities.items.whistle_penny_goldspark.name': 'Penny-Goldfunken-Pfeife',
-  'entities.items.whistle_phantom.name': 'Phantompfeife',
-  'entities.items.whistle_proud_grunt.name': 'Pfeife des stolzen Grunzers',
-  'entities.items.whistle_raptor.name': 'Raptorpfeife',
-  'entities.items.whistle_rocky.name': 'Rocky-Pfeife',
-  'entities.items.whistle_sapling.name': 'Setzlingspfeife',
-  'entities.items.whistle_skeleton.name': 'Skelettpfeife',
-  'entities.items.whistle_solbot.name': 'Solbot-Pfeife',
-  'entities.items.whistle_spider.name': 'Spinnenpfeife',
-  'entities.items.whistle_sprites.name': 'Pfeife für Flacker und Schimmer',
-  'entities.items.whistle_stag.name': 'Hirschpfeife',
-  'entities.items.whistle_tiger.name': 'Tigerpfeife',
-  'entities.items.whistle_triple_t.name': 'Triple-T-Pfeife',
-  'entities.items.whistle_trollface.name': 'Trollface-Pfeife',
-  'entities.items.whistle_tuskhorn_boar.name': 'Hauerhornkeilerpfeife',
   'entities.items.wyrmshadow_chainmail.name': 'Wyrmschattenkettenhemd',
   'entities.items.wyrmshadow_tunic.name': 'Wyrmschattentunika',
   'entities.items.wyrmshadow_vest.name': 'Wyrmschattenweste',
@@ -25836,7 +25611,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_proud_grunt.name': 'Stolzer Grunzer',
   'entities.mobs.buddy_raptor.name': 'Raptor',
   'entities.mobs.buddy_rocky.name': 'Rocky',
-  'entities.mobs.buddy_sapling.name': 'Setzling',
   'entities.mobs.buddy_skeleton.name': 'Skelett',
   'entities.mobs.buddy_solbot.name': 'Solbot',
   'entities.mobs.buddy_sprites.name': 'Flacker und Schimmer',
@@ -26149,4 +25923,206 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'referralCards.waiting': 'Warte auf die Zustimmung deines verknüpften Freundes.',
   'referralCards.yourCard': 'Stempelkarte von {name}',
   'worldContent.musterRackName': 'Waffenständer des Aufgebots',
+
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Speer herausziehen',
+  'abilityUi.cast.temple_score': 'Die Partitur',
+  'abilityUi.cast.temple_score_answer': 'Die Partitur beantworten',
+  'abilityUi.cast.wildheart_idols_breath': 'Atem des Idols',
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Abkühlen',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Entzünden',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Jagdspeer',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': 'Das Idol erwacht',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Haltet den Tank in ihrer Sichtlinie. Hebt Unterbrechungen für Arie des Ertrinkens auf.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'Zwischen anderen Zaubern trifft alle {every} Sek. nach einer sichtbaren Warnung von {windup} Sek. ein Geschoss und verursacht das {mult}-Fache ihres Waffenschadens als Frostschaden. Das Unterbrechen von Arie des Ertrinkens stoppt Geschosse und Arie für {quiet} Sek.',
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe bewegt sich nie und greift nie im Nahkampf an. Steht für Chor zusammen, verlasst für Solo die Gruppe, unterbrecht Arie des Ertrinkens und weicht Seeschwall aus. Wiederholt bei zwei Gesundheitsschwellen ihre Mondplattenmelodie mit abwechselnden Sängern.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    'Ihre anderen Angriffe pausieren, während die Gruppe die Partitur beantwortet. Mondwassergeschosse haben keinen Zauberbalken und lassen sich nicht unterbrechen.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    'Während der Antwort werden die Platten dunkel. Merkt euch die Melodie und wechselt euch ab.',
+  'bossJournal.temple.selthe.scoreResponse':
+    'Beobachtet die Melodie und betretet die Platten in der richtigen Reihenfolge. Wechselt richtige Noten mit einem anderen lebenden Spieler ab; ein einziger Überlebender kann allein abschließen. Blockierte Schritte sind harmlos. Verlasst eine Platte und betretet sie erneut, damit sie erklingt, auch wenn ihr schon vor Beginn der Antwort darauf standet.',
+  'bossJournal.temple.selthe.scoreSummary':
+    'Bei {first} und {second} Gesundheit wird sie immun und spielt {notes}, dann {finalNotes} Noten. Wiederholt sie innerhalb von {answer}, dann {finalAnswer} Sek. Eine falsche Platte verursacht {falseNote} Frostschaden und setzt den Fortschritt zurück, aber nicht den Timer. Bei Zeitablauf erleiden alle {min} bis {max} Frostschaden. Erfolg betäubt sie für {stun} Sek. und erhöht ihren erlittenen Schaden für {bonusSeconds} Sek. um {vulnerability}.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'Achtet auf das Ziel der Arie und auf Spieler, die bei Chor allein stehen. Helft während der Partitur bei der nächsten Note und heilt Fehler.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    'Wechselt vor Ablauf der Warnung in die unmarkierte Hälfte. Die Mittellinie ist sicher. Auf Heroisch löscht der Atem auch entzündete Glyphen in seiner Hälfte; sie können sofort neu entzündet werden.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    'Alle {every} Sek. wird eine Terrassenhälfte für {warning} Sek. markiert. Danach erleiden alle darin {min} bis {max} Naturschaden. Der Atem wechselt zwischen den Hälften.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    'Unmarkierte Spieler entzünden Glyphen vor der Beute. Führt ihn darüber und greift während Sonnengetroffen an. Die Glyphen erlöschen, wenn die Jagd endet.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    'Die {count} Glyphen sind anfangs dunkel. Während der Jagd entzündet ein unmarkierter Spieler eine Glyphe, indem er {kindle} Sek. darauf steht. Ist niemand unmarkiert, kann die Beute sie in {alone} Sek. entzünden. Heruntergehen setzt den Fortschritt zurück. Eine entzündete Glyphe verlangsamt ihn um {slow} und erhöht seinen erlittenen Schaden für {seconds} Sek. um {vulnerability}. Die Glyphe kann {dark} Sek. lang nicht erneut entzündet werden; eine andere Glyphe kann ihn {wary} Sek. lang nicht treffen. Während der Jagd dauern Betäubungen halb so lang.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Er markiert alle {pair} Sek. ein neues Paar und wechselt alle {switch} Sek. zwischen beiden. Jeder Wechsel gibt der neuen Beute {turn} Sek., bevor er sie verfolgt.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Er wählt alle {every} Sek. neue Beute und dreht sich {turn} Sek. zu ihr, bevor er sie verfolgt.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    'Bei {health} Gesundheit bleibt er bis zu seiner Niederlage ein Jaguargeist. Auch der Tank kann zur Beute werden.',
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Alle {every} Sek. trifft ein Zauber mit {cast} Sek. Zauberzeit alle innerhalb von {radius} m für {min} bis {max} Schaden. Aufgespießte Spieler erleiden in jeder Entfernung das {pinMult}-Fache dieses Schadens.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    'Wählt den Speer als Ziel und interagiert innerhalb von {range} m, um ihn in {pull} Sek. herauszuziehen. Schaden unterbricht das Herausziehen nicht. Ist sonst niemand auf der Terrasse frei, kann das Opfer interagieren und sich in {self} Sek. befreien.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    'Ein Zauber mit {cast} Sek. Zauberzeit spießt einen Spieler außer dem Tank auf, oder den Tank, wenn sonst niemand übrig ist. Die Bewegungsunfähigkeit dauert bis zu {seconds} Sek. und verursacht alle {tick} Sek. {bleed} Schaden.',
+  'entities.mobs.wildheart_hunting_spear.name': 'Jagdspeer',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    'Ihre Stimme ist gebrochen: Sie erleidet bis zum Ende dieses Effekts {pct}% mehr Schaden.',
+  'hudChrome.auraEffect.temple.scoreWard':
+    'Sie singt die Partitur: Bis zum Ende erleidet sie keinen Schaden. Betretet die Mondplatten vor Ende der Strophe in der Reihenfolge ihres Erklingens, um ihre Stimme zu brechen. Wechselt euch ab: Wartet nach einer Note, bis ein anderer Spieler die nächste richtige Note spielt. Ein einziger Überlebender kann allein abschließen. Endet die Strophe vorher, verursacht Dissonanz bei allen im Hof {min} bis {max} Frostschaden ({heroicMin} bis {heroicMax} auf Heroisch).',
+  'hudChrome.auraEffect.temple.spentVoice':
+    'Du kannst keine weitere Mondplatte erklingen lassen, bis ein anderer Spieler die nächste richtige Note spielt. Das Betreten einer Platte während dieses Effekts setzt die Antwort nicht zurück und verletzt dich nicht. Nicht bannbar. Endet, wenn du der einzige lebende Spieler in deiner Instanz bist oder die Partitur endet.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    'Der steinerne Jaguar ist erwacht. Alle {every} Sek. haucht er erst über eine Terrassenhälfte, dann über die andere, nach einer Bodenwarnung von {warning} Sek.: {min} bis {max} Naturschaden ({heroicMin} bis {heroicMax} auf Heroisch) für alle in dieser Hälfte. Zulgar bleibt bis zu seinem Tod der Jaguaravatar und wählt alle {seconds} Sek. neue Beute ({heroicSeconds} Sek. auf Heroisch).',
+  'hudChrome.auraEffect.wildheart.pinned':
+    'Ein Jagdspeer hält dich fest. Du erleidest alle {every} Sek. {bleed} körperlichen Blutungsschaden ({heroicBleed} auf Heroisch), und Wildherzimpuls trifft dich überall für {pulse}% mehr Schaden. Ein Mitspieler kann den Speer in {pull} Sek. herausziehen. Ist sonst niemand frei, ziehe ihn selbst in {wrench} Sek. heraus. Nach {seconds} Sek. lässt er los.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'Bis zum Ende dieses Effekts kann ihn keine Sonnenglyphe treffen. Entzündete Glyphen, die er überquert, bleiben entzündet.',
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Von einer entzündeten Sonnenglyphe getroffen: bewegt sich {pct}% langsamer.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Von einer entzündeten Sonnenglyphe getroffen: erleidet {pct}% mehr Schaden.',
+  'hudChrome.courier.accountBank':
+    'Aus dieser Bank holen. Dieser Charakter muss bei Ankunft des Kuriers abgemeldet sein.',
+  'hudChrome.courier.accountPlanned':
+    'Für {name} geplant: {count} Stapel. Eine Auswahl für einen anderen Charakter ersetzt sie.',
+  'hudChrome.courier.accountTitle': 'Andere Charaktere',
+  'hudChrome.courier.bagsAccount': 'An die Bank von {name} senden',
+  'hudChrome.courier.bagsAccountNone': 'Wähle einen Charakter als Empfänger.',
+  'hudChrome.courier.bagsVault': 'Materialien in den Tresor senden',
+  'hudChrome.courier.boundAccount': 'Unterwegs zur Bank eines anderen Charakters',
+  'hudChrome.courier.boundBank': 'Unterwegs zur Bank',
+  'hudChrome.courier.boundVault': 'Unterwegs zum Materialtresor',
+  'hudChrome.courier.storeTabs': 'Kurierlager',
+  'hudChrome.courier.vault': 'Aus dem Tresor holen. Jede Auswahl holt die gesamte Zeile.',
+  'hudChrome.courier.vaultCap': 'Platz für {cap} von jedem Material',
+  'hudChrome.courier.vaultEmpty': 'Dein Tresor ist leer.',
+  'hudChrome.courier.vaultLocked':
+    'Schalte den Materialtresor bei einem Bankier frei, um ihn mit deinem Kurier zu nutzen.',
+  'hudChrome.courier.vaultTitle': 'Materialtresor',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'Normal ausgewählt. Aktuelle Instanzen sind noch Heroisch.',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'Heroisch ausgewählt. Aktuelle Instanzen sind noch Normal.',
+  'hudChrome.finder.mech.the_score':
+    'Die Partitur (zweimal singt sie eine Melodie auf den Mondplatten: betretet sie in der gespielten Reihenfolge, um ihre Stimme zu brechen)',
+  'hudChrome.itemHistory.close': 'Schließen',
+  'hudChrome.itemHistory.noTransfers': 'Dieser Gegenstand hat noch nie den Besitzer gewechselt.',
+  'hudChrome.itemHistory.openAria': 'Gegenstandsverlauf für {item}',
+  'hudChrome.itemHistory.passedTo': 'Am {date} an {name} übergeben',
+  'hudChrome.itemHistory.title': '{item}: Verlauf',
+  'hudChrome.itemMenu.itemHistory': 'Gegenstandsverlauf',
+  'hudChrome.itemTooltip.lootedBy': 'Am {date} von {name} erbeutet',
+  'hudChrome.itemTooltip.obtainedBy': 'Am {date} von {name} erhalten',
+  'hudChrome.itemTooltip.questRewardTo': 'Questbelohnung für {name} am {date}',
+  'hudChrome.kitUse.freeAria': '{name} herausziehen',
+  'hudChrome.kitUse.freeClick': 'Hier klicken, um {name} herauszuziehen',
+  'hudChrome.kitUse.freeFar': 'Nähere dich auf {range} m, um ihn herauszuziehen',
+  'hudChrome.kitUse.freeKey': '{name} herausziehen',
+  'hudChrome.kitUse.freeLine':
+    'Ziehe den Speer aus dem Boden, um sein Opfer zu befreien. Schaden stoppt dich nicht; Bewegung oder Betäubung schon',
+  'hudChrome.kitUse.freeTap': 'Hier tippen, um {name} herauszuziehen',
+  'hudChrome.kitUse.freeUsingLine':
+    'Bleib zum Herausziehen des Speers stehen: Bewegung oder Betäubung unterbricht dich',
+  'hudChrome.options.firstPersonBody': 'Körper anzeigen',
+  'hudChrome.options.firstPersonMode': 'Egoansicht (vollständig herangezoomt)',
+  'hudChrome.options.firstPersonNoBody': 'Ohne Körper',
+  'hudChrome.options.firstPersonOff': 'Aus',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few':
+    '{count} frühere Übergaben werden nicht angezeigt.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many':
+    '{count} frühere Übergaben werden nicht angezeigt.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one':
+    '{count} frühere Übergabe wird nicht angezeigt.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other':
+    '{count} frühere Übergaben werden nicht angezeigt.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp':
+    'Aus der PvP-Zeile des Wöchentlichen Tresors gewählt',
+  'hudChrome.templeAlert.answerDarkLine':
+    'Wechselt euch ab und wiederholt die Reihenfolge aus dem Gedächtnis. Verlasst eine Platte, bevor ihr sie erneut betretet. Noten: {done} von {total}',
+  'hudChrome.templeAlert.answerLine':
+    'Wechselt euch ab: Betretet die mit {place} markierte Mondplatte. Noten: {done} von {total}',
+  'hudChrome.templeAlert.answerTitle': 'Beantwortet die Partitur!',
+  'hudChrome.templeAlert.brokenLine':
+    'Sie erleidet bis zum Ende {pct}% mehr Schaden: Nutzt jetzt eure stärksten Angriffe',
+  'hudChrome.templeAlert.brokenTitle': 'Selthes Stimme ist gebrochen!',
+  'hudChrome.templeAlert.falseLine':
+    'Diese Platte war nicht an der Reihe. Die Antwort beginnt wieder bei der ersten Platte',
+  'hudChrome.templeAlert.falseTitle': 'Falsche Note!',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'Merkt euch die Reihenfolge, bevor die Platten dunkel werden. Wiederholt sie abwechselnd mit einem anderen Spieler',
+  'hudChrome.templeAlert.melodyLine':
+    'Beobachtet, wie die Mondplatten nacheinander erklingen. Wiederholt die Reihenfolge abwechselnd mit einem anderen Spieler',
+  'hudChrome.templeAlert.melodyTitle': 'Die Partitur',
+  'hudChrome.templeAlert.spentLine':
+    'Du kannst keine Platte erklingen lassen, bis ein anderer Spieler die nächste richtige Note spielt. Noten: {done} von {total}',
+  'hudChrome.templeAlert.spentTitle': 'Eine andere Stimme muss antworten',
+  'hudChrome.templeAlert.stepOffLine':
+    'Eine Mondplatte erklingt nur beim Betreten. Verlasse diese Platte und betritt sie erneut',
+  'hudChrome.templeAlert.stepOffTitle': 'Heruntergehen und erneut betreten',
+  'hudChrome.templeAlert.timeAria': 'Noch {seconds} Sekunden',
+  'hudChrome.wildheartAlert.breathLine':
+    'Der steinerne Jaguar haucht gleich über diese Terrassenhälfte. Wechselt in die andere Hälfte',
+  'hudChrome.wildheartAlert.breathTitle': 'Atem des Idols!',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    'Bleib auf der Glyphe, bis sie leuchtet. Heruntergehen startet den Vorgang neu',
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Sonnenglyphe entzünden',
+  'hudChrome.wildheartAlert.glyphLine':
+    'Stehe {seconds} Sek. auf einer dunklen Sonnenglyphe, um sie zu entzünden. Überquert Zulgar sie, erleidet er {duration} Sek. lang {pct}% mehr Schaden',
+  'hudChrome.wildheartAlert.glyphTitle': 'Entzündet die Sonnenglyphen',
+  'hudChrome.wildheartAlert.pinnedLine':
+    'Ein Mitspieler muss den Jagdspeer herausziehen. Wildherzimpuls trifft dich stärker, solange du aufgespießt bist',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    'Niemand ist frei, um zu helfen: Ziehe den Jagdspeer selbst heraus, bevor Wildherzimpuls trifft',
+  'hudChrome.wildheartAlert.pinnedTitle': 'Aufgespießt!',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    'Niemand sonst kann die Sonnenglyphen entzünden. Stehe {seconds} Sek. auf einer dunklen Glyphe, um sie zu entzünden, und locke Zulgar darüber',
+  'hudChrome.wildheartAlert.spearLine':
+    'Lauf zum Jagdspeer und ziehe ihn heraus, bevor Wildherzimpuls trifft',
+  'hudChrome.wildheartAlert.spearTitle': 'Ein Verbündeter ist aufgespießt!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    'Er erleidet bis zum Ende {pct}% mehr Schaden: Nutzt jetzt eure stärksten Angriffe',
+  'hudChrome.wildheartAlert.sunstruckTitle': 'Zulgar wurde von der Sonne getroffen!',
+  'itemUi.errors.orderTrackedItem':
+    'Der Händler nimmt keine Bestellungen für einzigartige Ausrüstung an.',
+
+  'hudChrome.cosmetics.mountsIntro':
+    'Wähle hier das Aussehen deines Reittiers. Die Reitausbildung bestimmt das Tempo. Bewahre den Reittiergegenstand in den Taschen oder der Bank eines beliebigen Charakters auf, um das Aussehen accountweit zu teilen.',
+  'hudChrome.cosmetics.mountsNoMount':
+    'Lerne Reiten bei Stallmeisterin Marla, um ein Reittier zu beschwören.',
+  'hudChrome.cosmetics.notCollected': 'Nicht gesammelt',
+  'hudChrome.guildHall.mountPreview':
+    'Reittieraussehen für alle Charaktere deines Accounts. Deine Reitausbildung bestimmt das Tempo.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Wähle dein Reittier unter Kosmetik. Nutze Aufsitzen / Absitzen zum Reiten.',
+  'hudChrome.mounts.desc_grag_bear': 'Ein zäher, trittsicherer Bär mit einem schweren Sattel.',
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'Eine robuste, gemächliche Schnecke mit moosigem Gehäuse.',
+  'hudChrome.mounts.desc_valorsteed': 'Ein zähes, trittsicheres Ross mit einem Ledersattel.',
+  'hudChrome.mounts.useToRide':
+    'Benutzen, um dieses Aussehen anzulegen und dein Reittier zu beschwören. Bewahre den Gegenstand in den Taschen oder der Bank eines beliebigen Charakters auf, um das Aussehen accountweit zu teilen. Die Reitausbildung bestimmt das Tempo.',
+  'itemUi.vendor.advancedRiding': 'Fortgeschrittene Reitausbildung',
+  'itemUi.vendor.basicRiding': 'Reitausbildung',
+  'itemUi.vendor.ridingSpeed':
+    'Erhöht dein Bewegungstempo beim Reiten um {speed}%. Gilt für jedes Reittier.',
+  'guide.mountsPage.firstBody':
+    'Marla verkauft die Zügel des Valorrosses für 10 Gold, nachdem du Reiten gelernt hast. Der Besitz der Zügel schaltet das Pferdeaussehen unter Kosmetik für alle Charaktere deines Accounts frei. Die Reitausbildung erlaubt bereits das Beschwören ohne mitgeführte Zügel. Wähle das Pferd oder ein anderes verfügbares Aussehen, wenn du etwas anderes sehen möchtest.',
+  'guide.mountsPage.goodsBody':
+    'Sammelbare Reittieraussehen bleiben accountweit verfügbar, solange mindestens ein passender Zügelgegenstand in den Taschen oder der persönlichen Bank eines beliebigen Charakters liegt. Wird der letzte geeignete Gegenstand gehandelt, verschickt, angeboten, verkauft oder anderweitig entfernt, verschwindet das Aussehen aus Kosmetik. Wer es gerade trägt, erhält das Standardpferdeaussehen zurück und bleibt mit dem erlernten Tempo aufgesessen.\n\nZügel von Spielern können gehandelt, verschickt und auf dem Weltmarkt angeboten werden, sofern der Gegenstand nichts anderes angibt. Die Pferdezügel können außerdem für 10 Gold an einen Händler verkauft werden. Andere Zügel behalten ihre eigenen Verkaufsbeschränkungen. Reittierskins aus dem Shop bleiben von Zügelgegenständen unabhängige Accountkosmetik.',
+  'guide.mountsPage.intro':
+    'Wähle ein Reittieraussehen, lerne Reiten im Stall und reise schneller durch die Welt. Deine Ausbildung bestimmt das Tempo; jedes Reittieraussehen ist rein kosmetisch.',
+  'guide.mountsPage.learnBody':
+    'Reiten wird auf Stufe {level} verfügbar. Stallmeisterin Marla Hitchen verkauft die Reitausbildung für 80 Gold in den Galecrest-Ställen. Die Grundausbildung erhöht das Reittempo um {basicSpeed}%. Danach verkauft Marla die Fortgeschrittene Reitausbildung für {advancedFee} Gold, die den Bonus auf {advancedSpeed}% erhöht. Jeder Rang gehört dem Charakter, der ihn erlernt.\n\nNimm nach der Grundausbildung Marlas Quest Reitstunden an und folge der Markierung zum leuchtenden Quadrat hinter dem Startbogen. Drücke Rennen starten, um das Ausbildungs-Valorross auszuleihen. Beende die Strecke und kehre für Münzen und Erfahrung zurück. Das geliehene Pferd kehrt am Ende der Unterrichtsstunde in den Stall zurück.',
+  'guide.mountsPage.rideBody':
+    'Öffne Kosmetik und wähle im Reittiere-Tab ein Aussehen. Die Taste Aufsitzen / Absitzen, standardmäßig der Gravis, beschwört dein ausgebildetes Reittier mit diesem Aussehen. Die mobile Schaltfläche Aufsitzen tut dasselbe. Das Beschwören erfordert eine kurze Kanalisierung; Absitzen geschieht sofort. Du kannst das Aussehen beim Reiten ändern, ohne dein Tempo zu ändern.\n\nDu kannst auch Zügel aus den Taschen oder einer Aktionsleiste benutzen, um das Aussehen zu wählen und aufzusitzen. Benutzt du das bereits gerittene Aussehen, verschwindet das Reittier. Zügel in der Bank oder bei anderen Charakteren schalten dieselbe Kosmetik frei, ohne dass der Reiter sie mitführen muss.',
+  'guide.mountsPage.speedBody':
+    'Die grundlegende Reitausbildung erhöht das Reittempo um {basicSpeed}%. Die Fortgeschrittene Reitausbildung erhöht es um {advancedSpeed}% und kostet bei Marla {advancedFee} Gold. Jedes Reittieraussehen nutzt das Tempo des Ausbildungsrangs des Charakters, unabhängig von Seltenheit oder Herkunft. Shopskins nutzen ebenfalls dieses Tempo.',
+  'guide.mountsPage.speedHeading': 'Reittempo und Ausbildung',
+  'guide.mountsPage.whatBody':
+    'Reittiere sind kosmetische Aussehen für dein ausgebildetes Reittier. Sie gewähren keine Rüstung, keinen Schaden und keine Kampfwerte. Die Reitausbildung erhöht das Reisetempo am Boden, und berittene Sprünge erreichen mehr Höhe. Jedes Reittier bleibt am Boden und keines kann schwimmen.',
+  'guide.progression.ridingBody':
+    'Auf Stufe {level} lehrt Stallmeisterin Marla grundlegendes Reiten gegen Gold und bietet danach einen fortgeschrittenen Rang an. Die Ausbildung bestimmt das Reittempo. Wähle dein Aussehen unter Kosmetik; sammelbare Aussehen werden geteilt, solange ihre Zügel in den Taschen oder der Bank eines beliebigen Charakters bleiben.',
 };

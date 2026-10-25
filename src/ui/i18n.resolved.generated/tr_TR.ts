@@ -475,9 +475,24 @@ export const tr_TR: EnTranslations = {
       "returning": "Eşyalarını geri getiriyor",
       "waiting": "Eşyalarını döndürmeyi bekliyor",
       "bags": "Bankaya gönder",
+      "bagsVault": "Malzemeleri kasaya gönder",
       "bank": "Bankadan getir",
+      "vault": "Kasadan getir. Her seçim satırın tamamını getirir.",
       "inventory": "Envanter",
       "bankTitle": "Banka",
+      "vaultTitle": "Malzeme Kasası",
+      "storeTabs": "Kurye deposu",
+      "vaultCap": "Her malzemeden {cap} tutar",
+      "vaultEmpty": "Kasan boş.",
+      "vaultLocked": "Kuryenle kullanmak için bir bankacıda Malzeme Kasasını aç.",
+      "boundBank": "Bankaya gidiyor",
+      "boundVault": "Malzeme Kasasına gidiyor",
+      "boundAccount": "Başka bir karakterin bankasına gidiyor",
+      "accountTitle": "Diğer karakterler",
+      "accountBank": "Bu bankadan getir. Kurye geldiğinde o karakterin oturumu kapalı olmalı.",
+      "bagsAccount": "{name} adlı karakterin bankasına gönder",
+      "bagsAccountNone": "Eşya göndermek için bir karakter seç.",
+      "accountPlanned": "{name} için planlanan: {count} yığın. Başka bir karakter için seçim yapmak bunları değiştirir.",
       "capacity": "{used} / {capacity} yuva",
       "cargo": "Kurye envanteri",
       "empty": "Eşya yok",
@@ -485,7 +500,7 @@ export const tr_TR: EnTranslations = {
       "selected": "{count} / {limit} yığın seçili",
       "select": "{item}, {count} seç",
       "selectedItem": "{item}, {count} seçimini kaldır",
-      "instructions": "Tam yığınları seç. Kuryen önce onları yatırır, sonra istediğin eşyaları alır. Görev eşyaları gönderilemez.",
+      "instructions": "Bankan, Malzeme Kasası veya başka bir karakter için tam yığınları seç. Kuryen önce onları yatırır, sonra istediğin eşyaları alır. Görev eşyaları gönderilemez.",
       "membership": "Başka sefer başlatmak için üyeliğini yenile.",
       "cargoSafe": "Çantalar doluysa dönen eşyalar taşan eşyalara gider. Kurye teslimattan sonra yeniden çağrılana kadar kaybolur.",
       "unavailable": "Teslimat planlamak için kuryeni çağır."
@@ -862,7 +877,7 @@ export const tr_TR: EnTranslations = {
       "titleOffer": "Unvan: {title}",
       "titlePreview": "{preview} olarak gösterilir",
       "mountOffer": "Binek: {mount}",
-      "mountPreview": "Kara bineği: binerken +%{pct} hareket hızı. Binicilik eğitimi gerektirir.",
+      "mountPreview": "Hesabındaki tüm karakterler için binek görünümü. Hızını binicilik eğitimin belirler.",
       "skinOffer": "Kılıç görünümü: {skin}",
       "skinPreview": "Hesabındaki her karakterin kuşandığı kılıcın görünümünü değiştirir. Yalnızca görünüm: nitelik yok.",
       "buy": "Satın al",
@@ -2538,7 +2553,7 @@ export const tr_TR: EnTranslations = {
       "riding": "Binicilik",
       "mount": "Bin",
       "dismount": "İn",
-      "useToRide": "Bu bineği çağırmak için kullan.",
+      "useToRide": "Bu görünümü kuşanmak ve bineğini çağırmak için kullan. Görünümü hesabın genelinde paylaşmak için bu eşyayı herhangi bir karakterin çantasında veya bankasında tut. Binicilik eğitimi hızı belirler.",
       "emptyTitle": "Toplanmış binek yok",
       "emptyStableHint": "20. seviyeye ulaş ve Highwatch'ın batısındaki Highwatch Ahırları'nda Ahır Ustası Marla'dan binicilik dersleri al.",
       "emptyDropHint": "Daha nadir binekler, kahramanca zindan patronlarından ve Yarık tamamlamalarından düşer.",
@@ -2568,9 +2583,9 @@ export const tr_TR: EnTranslations = {
       "name_rickshaw_mount": "Kemikbağlı Çekçek",
       "name_wobbles_slime": "Sallantı Balçık",
       "name_nightwing_chimera": "Gece Kanadı Kimera",
-      "desc_valorsteed": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir küheylan.",
-      "desc_grag_bear": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir ayı.",
-      "desc_stalkglider_snail": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve yavaş yanan bir salyangoz.",
+      "desc_valorsteed": "Deri eyerli, dayanıklı ve sağlam adımlı bir küheylan.",
+      "desc_grag_bear": "Ağır eyer takılmış, dayanıklı ve sağlam adımlı bir ayı.",
+      "desc_stalkglider_snail": "Yosunlu kabuğu olan, dayanıklı ve enerjisini yavaş tüketen bir salyangoz.",
       "desc_aether_hover_cycle": "Savaşta hızlı, alçaktan süzülerek hareket etmek için tasarlanmış güçlü bir büyü-teknoloji motosikleti.",
       "desc_shadowjump_toad": "Her arazi türünü aşan, şimşek hızındaki gölgeli sıçramalarla eğitilmiş, dev ve sağlam adımlı bir kurbağa.",
       "desc_stormfeather_griffin": "Rün nallı pençeleriyle yerde süzülen, kanatları katlı, asil bir fırtına grifonu.",
@@ -2593,7 +2608,7 @@ export const tr_TR: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Eğitim Yiğit Küheylanına binmek için {key} tuşuna bas.",
-      "ownedMountPrompt": "Dizginlerin çantalarında. Binmek için onları kullan.",
+      "ownedMountPrompt": "Bineğini Kozmetikler'den seç. Binmek için Bin / İn kullan.",
       "ridePrompt": "Parlayan işareti başlangıç çizgisine kadar takip et, sonra Yarışı Başlat'a bas.",
       "begin": "Derse Başla",
       "success": "Yiğit Küheylanı evcilleştirdin.",
@@ -2864,6 +2879,10 @@ export const tr_TR: EnTranslations = {
       "actionCamShoulderLeft": "Sol {pct}",
       "actionCamShoulderRight": "Sağ {pct}",
       "actionCamShoulderCenter": "Ortada",
+      "firstPersonMode": "Birinci Şahıs (Tam Yakınlaştırma)",
+      "firstPersonOff": "Kapalı",
+      "firstPersonBody": "Gövdeyi Göster",
+      "firstPersonNoBody": "Gövdesiz",
       "showAttackButton": "Saldırı Düğmesini Göster",
       "showDailyRewardsChest": "Günlük Ödül Sandığını Göster",
       "mobileCameraJoystick": "Kamera joystick'i",
@@ -3826,6 +3845,12 @@ export const tr_TR: EnTranslations = {
       "linkHint": "Bu eşyayı sohbete bağlamak için Shift+tıkla."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "Önceki {count} aktarım gösterilmiyor.",
+        "few": "Önceki {count} aktarım gösterilmiyor.",
+        "many": "Önceki {count} aktarım gösterilmiyor.",
+        "other": "Önceki {count} aktarım gösterilmiyor."
+      },
       "guildBoardShown": {
         "one": "{count} lonca gösteriliyor",
         "few": "{count} lonca gösteriliyor",
@@ -4278,6 +4303,8 @@ export const tr_TR: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Zindan Zorluğunu Ayarla: Kahramanca",
       "setNormal": "Zindan Zorluğunu Ayarla: Normal",
+      "unappliedNormal": "Kahramanlık seçildi. Mevcut örnekler hâlâ Normalde.",
+      "unappliedHeroic": "Normal seçildi. Mevcut örnekler hâlâ Kahramanlıkta.",
       "resetAll": "Tüm Örnekleri Sıfırla",
       "resetDone": "Tüm örnekler sıfırlandı.",
       "resetNone": "Sıfırlanacak örneğin yok.",
@@ -4287,10 +4314,11 @@ export const tr_TR: EnTranslations = {
       "resetSameDifficulty": "Bu örnekleri sıfırlamadan önce zindan zorluğunu değiştir. Boş örnekler 5 dakika sonra kendiliğinden sıfırlanır.",
       "resetLoot": "İçeride ganimet kaldığı sürece örnekleri sıfırlayamazsın.",
       "resetConfirmTitle": "Tüm Örnekler Sıfırlansın mı?",
-      "resetConfirmBody": "Bu işlem, daha önce seçtiğin zorluktaki boş örneklerden vazgeçer. Alınmamış ganimet sıfırlamayı engeller.",
+      "resetConfirmBody": "Bu işlem boş örneklerinden vazgeçerek sonraki seferi seçtiğin zorlukta baştan başlatır. Kilitler değişmez. İçeride kalan biri veya alınmamış ganimet sıfırlamayı engeller.",
       "resetConfirm": "Örnekleri Sıfırla",
       "resetCooldown": "Örnekler yalnızca 5 dakikada bir sıfırlanabilir.",
-      "resetUsage": "Zorluğu değiştirdikten sonra boş örneklerinden vazgeçmek için /dungeon reset kullan.",
+      "resetAlreadyFresh": "Zindanların zaten sıfırlanmış durumda. Son sıfırlamadan beri kimse girmedi.",
+      "resetUsage": "Boş örneklerinden vazgeçip baştan başlatmak için /dungeon reset kullan.",
       "entryMismatchNormal": "Bu örnek Normal zorluğa ayarlı. Yeni bir Kahramanca koşu başlatmak için Tüm Örnekleri Sıfırla seçeneğini kullan.",
       "entryMismatchHeroic": "Bu örnek Kahramanca zorluğa ayarlı. Yeni bir Normal koşu başlatmak için Tüm Örnekleri Sıfırla seçeneğini kullan."
     },
@@ -4623,7 +4651,17 @@ export const tr_TR: EnTranslations = {
         "pollinated": "Tohum Kapsülüne dokunmak anında Diken Filizi büyütür. Tohumlardan uzak dur, temiz oyuncu ezsin; dokunulmayan kapsül {seconds} sn sonra filizlenir (Kahramanca'da {heroic} sn sonra kazılıp en yakın oyuncunun yanında çıkar).",
         "prey": "Zulgar seni avlar. %{slow} yavaşlatmak için yanan güneş glifinden geçir. Yakalarsa {damage} hasarla Parçalanırsın (Kahramanca'da {heroic}) ve {stun} sn yere serilirsin.",
         "avatar": "%{pct} daha hızlı hareket edip Avını kovalar. Yavaşlatma ve kökleme işler, sersemletmeler yarı sürer.",
-        "vanished": "Gizli ve hasara bağışık. En uzaktaki oyuncuya atlamak üzere."
+        "vanished": "Gizli ve hasara bağışık. En uzaktaki oyuncuya atlamak üzere.",
+        "sunstruck": "Yanan bir güneş glifi vurdu: {pct}% daha yavaş hareket eder.",
+        "sunstruckExposed": "Yanan bir güneş glifi vurdu: {pct}% daha fazla hasar alır.",
+        "sunWary": "Bu etki bitene kadar hiçbir güneş glifi onu vuramaz. Üzerinden geçtiği yanan glif yanmaya devam eder.",
+        "pinned": "Av Mızrağı seni olduğun yere sapladı. Her {every} sn {bleed} Fiziksel hasar (Kahramanlıkta {heroicBleed}) kanarsın ve Vahşi Yürek Atımı her konumda sana {pulse}% daha fazla hasar verir. Bir takım arkadaşı mızrağı {pull} sn içinde çekebilir. Başka kimse serbest değilse {wrench} sn içinde kendin çek. {seconds} sn sonra serbest bırakır.",
+        "idolAwake": "Taş jaguar uyandı. Her {every} sn, yerde {warning} sn uyarıdan sonra terasın bir yarısına, ardından diğerine nefes üfler: o yarıdaki herkese {min} ile {max} Doğa hasarı (Kahramanlıkta {heroicMin} ile {heroicMax}). Zulgar ölene kadar Jaguar Avatarı olarak kalır ve her {seconds} sn (Kahramanlıkta {heroicSeconds} sn) yeni Av seçer."
+      },
+      "temple": {
+        "scoreWard": "Partisyonu söylüyor: bitene kadar hasar almaz. Dize bitmeden ay karolarına çaldıkları sırayla basarak sesini kır. Sırayla yap: bir nota çaldıktan sonra başka bir oyuncunun sonraki doğru notayı çalmasını bekle. Hayatta kalan tek kişi yalnız tamamlayabilir. Dize önce biterse Uyumsuzluk avludaki herkese {min} ile {max} Don hasarı (Kahramanlıkta {heroicMin} ile {heroicMax}) verir.",
+        "brokenVoice": "Sesi kırıldı: bu etki bitene kadar {pct}% daha fazla hasar alır.",
+        "spentVoice": "Başka bir oyuncu sonraki doğru notayı çalana kadar başka bir ay karosu çalamazsın. Bu etki sürerken karoya basmak yanıtı sıfırlamaz veya sana zarar vermez. Giderilemez. Kendi örneğindeki tek yaşayan oyuncu olduğunda veya Partisyon bittiğinde kalkar."
       },
       "bastion": {
         "brineColumn": "Deniz suyu sütununda köklüsün: en fazla {seconds} sn boyunca her {tick} sn'de {min} ile {max} arası Doğa hasarı alırsın. Kırmak için Gelgite Bağlı Müridi kes veya sersemlet.",
@@ -5256,6 +5294,9 @@ export const tr_TR: EnTranslations = {
       "partyTradeWindow": "Bu eşyayı, düşüşünü paylaşan oyunculara önümüzdeki {time} boyunca takas edebilirsin. Kuşanmak takas penceresini sona erdirir.",
       "perfectedBadge": "Kusursuzlaştırılmış",
       "perfectingRank": "Kusursuzlaştırma: {ranks} içinden {rank}. kademe",
+      "lootedBy": "{date} tarihinde {name} tarafından yağmalandı",
+      "questRewardTo": "{date} tarihinde {name} adlı kişiye görev ödülü",
+      "obtainedBy": "{date} tarihinde {name} tarafından elde edildi",
       "materialSourceGatherer": "{count} × {name} tarafından toplandı",
       "trophySkullSource": "{count} × {name} adlı oyuncudan alındı",
       "materialSourceGathererSigned": "{count} × {name} tarafından toplandı, {signer} imzalı",
@@ -5799,14 +5840,8 @@ export const tr_TR: EnTranslations = {
       "logAdminPurge": "Bir yönetici {count} {item} kaldırdı"
     },
     "collections": {
-      "title": "Avcılık",
-      "close": "Avcılığı kapat",
-      "keybindLabel": "Avcılık",
-      "launcherTitle": "Avcılık: yoldaşlar, binekler ve eşya setleri",
       "tabs": {
-        "buddies": "Yoldaşlar",
-        "mounts": "Binekler",
-        "sets": "Eşya Setleri"
+        "buddies": "Yoldaşlar"
       },
       "state": {
         "owned": "Toplandı",
@@ -5816,7 +5851,6 @@ export const tr_TR: EnTranslations = {
       },
       "presenceDefault": "Seni izleyen bir varlık hissediyorsun.",
       "revealed": "{name} seni izlemeye karar verdi.",
-      "cosmeticUnlocked": "{name} için yeni görünüm: {look}.",
       "presence": {
         "ember_fox": "Küçük, sıcak bir şey arkandan yumuşak adımlarla geliyor.",
         "moss_hare": "Turbadaki hışırtı adımlarına ayak uyduruyor.",
@@ -5854,134 +5888,9 @@ export const tr_TR: EnTranslations = {
         "phantom": "Arkandaki hava biraz fazla durgun.",
         "emberfall_phoenix": "Sırtına, kor hâlindeki ateş gibi bir sıcaklık yerleşiyor."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Buza Bağlı",
-        "crystal_lich_voltaic": "Elektrikli",
-        "forgemaw_ashen": "Küllü",
-        "forgemaw_whitehot": "Akkor",
-        "stag_acorn": "Palamut Tacı",
-        "stag_gilded": "Yaldızlı",
-        "moss_hare_verdant": "Yemyeşil",
-        "proud_grunt_warlord": "Savaş Lordu",
-        "frog_sapphire": "Safir Kurbağa"
-      },
       "actions": {
         "summon": "Çağır",
-        "dismiss": "Kapat",
-        "wear": "Giy",
-        "remove": "Kaldır"
-      },
-      "looks": {
-        "title": "Görünümler",
-        "unlocked": "Açıldı",
-        "locked": "Kilitli",
-        "worn": "Kuşanılmış",
-        "none": "Bu yoldaş için henüz görünüm hazırlanmamış"
-      },
-      "source": {
-        "bossLabel": "Baş düşman yoldaşı",
-        "bossDrop": "{mob} ({location}), öldürme başına oyuncu başına %{chance}",
-        "bossDropWithHeroic": "{mob} ({location}), oyuncu başına %{chance}, Kahramanca'da %{heroicChance}",
-        "bossDropHeroicOnly": "{mob} ({location}), yalnızca Kahramanca, oyuncu başına %{chance}",
-        "rollNote": "Her oyuncu ayrı zar atar; kimse grup üyesi yüzünden zar kaybetmez.",
-        "deedLabel": "Şununla kazanılır",
-        "deed": "{deed} yiğitliği",
-        "challengeLabel": "Meydan okuma",
-        "challengeSpeed": "{mob} hedefini çekişten sonraki {seconds} saniyede yen",
-        "challengeDps": "Savaş boyunca {mob} hedefine saniyede {dps} hasar ver",
-        "craftLabel": "Üretildi",
-        "craft": "{item} ({profession} tarifi)",
-        "grantLabel": "Verildi",
-        "grantOnly": "Sezonluk ödül: aylık sıralama ve en iyi analiz ödülleri",
-        "tokenLabel": "Jeton",
-        "token": "{item}, yoldaşı bağlamak için bir kez kullanılır"
-      },
-      "buddyLore": {
-        "ember_fox": "Doğudere Vadisi çitlerinden dişi tilki; kış çalılığında görünen köz kızılı kürkünden adını alır. Oradaki avcılar nesiller önce yavruları yakalamaktan vazgeçip yiyecek bırakmaya başladı.",
-        "moss_hare": "Ömrünü ıslak turbada geçirip kürkü yeşillenen Söğüt Bataklığı tavşanı. Bataklık otacıları onları uğurlu sayar, kapı eşiğinden kovdurmaz.",
-        "frog": "Mirefen Bataklığı onları şişman, tasasız, bütün gece sazlıklardan şarkı söyler hâlde yetiştirir. Bataklık rehberleri, birini taşıyan teknenin asla karaya oturmadığına yemin eder.",
-        "crimson_claw_crab": "Sudan çıktıktan çok sonra bile kıskacı kırmızı kalan Uzak Kıyı gelgit yengeci. İskele ekipleri eskiden tahtalar boyunca para karşılığı yarıştırırdı.",
-        "golden_sentinel": "Büyüdüğü reçineyle yaldızlanmış Kehribar Vadisi bekçi böceği. Adı reçineden eskidir: bir tür nöbetçi, biri özsuyu şişelemeyi düşünmeden çok önce bu koruları beklerdi.",
-        "nightfang": "Kendi türüne göre bile sessiz genç Gece Çiçeği avcısı. Arkadaşlık için izler, güveden büyük bir şey avlamaz.",
-        "tuskhorn_boar": "Çit deviremeyen domuz isteyen çobanların kısa bacaklı yetiştirdiği Dikenzirve soyu. Yine de huyunu korudu.",
-        "emerald_wolf": "Orman zeminine tam ulaşmayan taç ışığında kürkü yeşil görünen Hayalet Ormanı yavrusu. Muhafızlar ormanın geride bıraktığı yetimleri büyütür.",
-        "tiger": "Palmiye Kıyısını hiç görmemiş hayvanda Palmiye Kıyısı çizgileri: eski hayvanat bahçeleri kapandığından beri soy esarette tutulur. Yalnızca düdüğe yanıt verir.",
-        "cate_coin": "Üzerine oturduğu paradan ayrılmayan, kimsenin yemek yerken görmediği bir kedi. Eastbrook tüccarları ikisinden hangisinin evcil hayvan olduğunu hâlâ tartışır.",
-        "alon": "Hiçbir haritanın kabul etmediği yoldan gelen yolcu maskotu; planların ters gittiği her yerde belirir. İzler, onaylar ve hiçbir yardım sunmaz.",
-        "trollface": "Hayalet Ormanının dışarı atıp geri almadığı sırıtan şey. Onu tarif etmeye çalışan herkes gülerek vazgeçer.",
-        "ansem": "Kapılardan ve karanlıktan söz eder, ikisini de açmaz. Gece Çiçeği tarikatçıları onun kendilerine ait olduğunu söyler; ne zaman ayin yapsalar uzaklaşır.",
-        "triple_t": "Bir şeyden üç tane veya üç kez bir şey. Anlatılar uyuşmaz; yaratık sayılacak kadar uzun süre yerinde durmaz.",
-        "kekius": "Kökeni belirsiz gülen yoldaş, Fırtına Sırtı yarış ahırları tarafından uğur diye benimsenmiş. Ona inanan dört ahırdan uzun yaşadı.",
-        "solbot": "Ejder Toprakları külünden yarı gömülü çıkarılan, hâlâ tıkırdayan küçük güneşle beslenen otomat. Onu yapan atölye kasasının hiçbir yerine işaret bırakmamış.",
-        "frostfire": "Kırağı Diyarında sıcak pınarın buz alanını yardığı yerde doğmuştur; hangi yarıya ait olduğuna hiç karar vermedi. Soğuk havada buhar çıkarır, sıcakta titrer.",
-        "rocky": "Dikenzirve molozlarından taş kabuklu sürüngen; yavaş ve tamamen tasasız. Madenciler, çökmeden hemen önce hareketsiz kalmaları için besler.",
-        "proud_grunt": "Selamını koruyup rütbesini kaybetmiş Savaş stokları gazisi. Savaş Mareşali Draven Kole, bunun bedelini anlayacak kadar onurlu her askere birini verir.",
-        "loot_goblin": "Kahramanlık Nişanı taşıyan herkesi izler ve bir kez bile çalarken yakalanmamıştır. Levazım Subayı Vex bunun hiçbir şeyi kanıtlamadığını söyler.",
-        "penny_goldspark": "Saatlik ücret alan, her bakırına değen cüce tamirci çırağı. Zırhçı Hode borç kapatmak için onu işe aldı; şimdi anlaşmayı bin altını olana satar.",
-        "stag": "Muhafızların bir zamanlar bindiği büyük geyiklerden küçültülerek yetiştirilmiş Sonsuz Bahçe soyu. Hayvandan eski alışkanlıkla, kaldırılan ele hâlâ başını eğer.",
-        "alpaca": "Fırtına Sırtı sürücüleri onları yünleri ve huyları için besler: fırtınada hiçbir şey daha sakin kalmaz. Bu, yolculuk başına tam bir kişiye tükürür.",
-        "horse": "Meyve bahçesi yolları için küçük yetiştirilen Vadi midillisi; savaş atı olmadığı hiç söylenmemiş. Omzunda adım tutar ve bir kez elma veren herkesi izler.",
-        "sapling": "Kabuğunda gülümsemesi, meraklı mor bakışı olan genç ağaç. Nereye gidersen kökleri onu neşeli paytak adımlarla taşır.",
-        "bull": "Köpek boyunda Vadi boğası; birinin evde beslemeyi kabul etmesinin tek nedeni de bu. Huyu geri kalanıyla birlikte küçülmedi.",
-        "spider": "Taşındığı her çantayı yeniden süsleyen avuç boyunda Hayalet Ormanı dokumacısı. Ağı, yerini aldığı iplikten güçlüdür.",
-        "raptor": "Ne kadar hızlı koşabileceğini öğrenmeden satılan Ejder Toprakları yavrusu. Her yeni sahibine tok tutması söylenir; kimseye iki kez söylemek gerekmez.",
-        "skeleton": "Hayalet Ormanı mezarlarından çıktı, tozunu silkti ve o zamandan beri insanları izliyor. Kemiklerin kime ait olduğunu kimse belirleyemedi.",
-        "crystal_lich": "Nythraxis'in kendisinden bir kıymık; onu şekillendiren soğukla hâlâ uğuldar. Baskın enkazından çıkarana itaat eder ve bunun için onu affetmemiştir.",
-        "forgemaw": "Son Pınar Potasında dövülmüş, asla tam bitirilmemiştir; çekiçler hâlâ inerken Ignivar'ın dökümhanesinden yürüyüp çıktı. Yalnızca Kahramanca inişte bulunur: erimiş şey onu yapan ocağa dönüp durur ve ateşten iki kez sağ çıkanın peşinden eve gider.",
-        "crystal_tide": "Kendi deniz camı damlasına binen gelgit perisi; Vadi'den Uzak Kıyı'ya kadar akşam yemeği tutan balıkçılar durgun sudan çıkarır. Çıktığı suyu korur ve geri dönmeye ikna olmaz.",
-        "sprites": "Biri altın, biri petrol mavisi iki küçük ateş perisi; kimin önde olduğunda anlaşamazlar. Yeterince yaklaşınca tek yeşil alevde birleşip gülerek yeniden ayrılırlar.",
-        "phantom": "Hayalet Ormanı mezarlarından avuç boyunda hayalet; tamamen çarşaf, hiç kemik yok. Kapalı çantada belirip arkadaşlık için kalır. Ne istediğini kimse çözemedi; hiç kimseyi korkutmayı da denemedi.",
-        "emberfall_phoenix": "Her sonbaharda köze kadar yanar, ilkbaharda kendi külünden yeniden çıkar; hakkında söylenebilenin tamamı bu. Kimse yuvasını bulmadı, kimse birini iki kez yakalamadı."
-      },
-      "petKind": {
-        "beast": "Canavarlar",
-        "elemental": "Elementaller",
-        "humanoid": "İnsansılar",
-        "undead": "Hortlaklar",
-        "celebrity": "Ünlüler"
-      },
-      "armor": {
-        "cloth": "Kumaş",
-        "mail": "Zincir Zırh",
-        "leather": "Deri"
-      },
-      "stat": {
-        "intellect": "Zeka",
-        "agility": "Çeviklik",
-        "strength": "Güç",
-        "mixed": "Karma"
-      },
-      "set": {
-        "owned": "{total} parçadan {owned}",
-        "itemLevel": "eşya seviyesi {level}",
-        "bonusLabel": "{pieces} parça"
-      },
-      "detail": {
-        "dropLabel": "Şundan düşer",
-        "vendorLabel": "Satan",
-        "bindLabel": "Bağlanma",
-        "sellLabel": "Satıcının ödediği",
-        "marketLabel": "Dünya Pazarı",
-        "exchangeLabel": "$WOC Borsası",
-        "setLabel": "Toplandı",
-        "drop": "{mob} ({location}), öldürme başına %{chance}",
-        "heroicDrop": "{mob} ({location}), yalnızca Kahramanca, öldürme başına %{chance}",
-        "dropWithHeroic": "{mob} ({location}), öldürme başına %{chance}, Kahramanca'da %{heroicChance}",
-        "globalDrop": "Her düşman, öldürme başına %{chance}, bu nadirlikteki {count} seçenekten biri",
-        "fishingDrop": "Her yerde balıkçılık, av başına %{chance}",
-        "vendor": "{npc} ({location}), {price} karşılığında",
-        "honorPrice": "{amount} Onur",
-        "marksPrice": "{amount} Kahramanlık Nişanı",
-        "noSource": "Henüz oyunda kaynak yok",
-        "noItem": "Henüz bunu veren eşya yok",
-        "tradeable": "Takas edilebilir",
-        "soulbound": "Ruha Bağlı",
-        "noSell": "Satılamaz",
-        "marketAtMerchant": "Tüccarda gösterilir",
-        "marketChecking": "Kontrol ediliyor...",
-        "marketNone": "İlan yok",
-        "exchangeNone": "İlan yok",
-        "exchangeUnavailable": "Bu istemcide kullanılamıyor"
+        "dismiss": "Kapat"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const tr_TR: EnTranslations = {
       "viewSources": "Kaynakları görüntüle",
       "separateByGatherer": "Toplayıcıya göre ayır",
       "takeChosenQuantity": "Seçilen miktarı çıkar",
-      "combine": "Malzeme yığınlarını birleştir"
+      "combine": "Malzeme yığınlarını birleştir",
+      "itemHistory": "Eşya geçmişi"
+    },
+    "itemHistory": {
+      "title": "{item}: geçmiş",
+      "passedTo": "{date} tarihinde {name} adlı kişiye verildi",
+      "noTransfers": "Bu eşya hiç el değiştirmedi.",
+      "close": "Kapat",
+      "openAria": "{item} için eşya geçmişi"
     },
     "enchanting": {
       "recipeNotLearned": "Bu büyüyü uygulamadan önce formülü öğren.",
@@ -7073,6 +6990,7 @@ export const tr_TR: EnTranslations = {
         "summons_adds": "Takviye çağırır",
         "lunar_tide": "Ay Dalgası (darbeli alan hasarı)",
         "chorus_and_solo": "Koro ve Tekli Ezgi (bir işarette toplan, diğerinden uzaklaş)",
+        "the_score": "Partisyon (ay karolarında iki kez bir melodi söyler: sesini kırmak için karolara çaldıkları sırayla bas)",
         "tideglass_reflections": "Gelgit Camı Yansımaları (birbirinizin ayna kopyalarını öldürün)",
         "hydra_three_elements": "Üç Element (sol baş 18 yarda buz konisi üfler, 4 saniye yüzde 70 yavaşlatır; orta baş en fazla 3 oyuncunun altına 1.5 saniye sonra patlayıp düştüğü yerde 6 saniye yakan zehir tükürür; sağ baş 26 yarda hatta 8 yarda geri fırlatan sel atar: her birinden çık. Baş düşünce yaşayanlar saldırısını devralır)",
         "hydra_tsunami": "Dev Dalga (başlar 4.5 saniye batarak yüzde 75 az hasar alır; dalga havuzun bir yarısından, sonraki sefer diğerinden geçer: Normal'de 160 ile 190 Buz hasarı ve 10 yarda itiş. Diğer yarıya geç veya kenar sütunu arkasına dur; Kahramanca'da dalga 3.5 saniye sonra diğer yarıdan geri döner. İlk Dev Dalga savaşın 24. saniyesinde, sonrakiler öncekinin geçişinden 40 saniye sonra gelir)",
@@ -7197,6 +7115,23 @@ export const tr_TR: EnTranslations = {
       "shadeLine": "Bu yemi bırak. Perdeyi kırmak için feneri ışında parlayan Vael'e saldır",
       "timeAria": "{seconds} saniye kaldı"
     },
+    "templeAlert": {
+      "melodyTitle": "Partisyon",
+      "melodyLine": "Ay karolarının birer birer çalmasını izle. Başka bir oyuncuyla sırayla diziyi tekrarla",
+      "melodyDarkLine": "Karolar kararmadan sırayı hatırla. Başka bir oyuncuyla sırayla tekrarla",
+      "answerTitle": "Partisyona Yanıt Ver!",
+      "answerLine": "Sırayla: {place} işaretli ay karosuna bas. Çalınan: {done} / {total}",
+      "answerDarkLine": "Sırayla yapıp diziyi hafızandan tekrarla. Karoya tekrar basmadan önce üzerinden çık. Çalınan: {done} / {total}",
+      "spentTitle": "Başka bir ses yanıt vermeli",
+      "spentLine": "Başka bir oyuncu sonraki doğru notayı çalana kadar karo çalamazsın. Çalınan: {done} / {total}",
+      "stepOffTitle": "Çık, sonra tekrar bas",
+      "stepOffLine": "Ay karosu yalnızca biri üzerine basınca çalar. Bu karodan çıkıp tekrar bas",
+      "falseTitle": "Yanlış Nota!",
+      "falseLine": "Bu karo sırada değildi. Yanıt ilk karodan yeniden başlar",
+      "brokenTitle": "Selthe'nin sesi kırıldı!",
+      "brokenLine": "Bu etki bitene kadar {pct}% daha fazla hasar alır: en güçlü saldırılarını şimdi kullan",
+      "timeAria": "{seconds} saniye kaldı"
+    },
     "wildheartAlert": {
       "preyTitle": "Av sensin!",
       "preyLine": "Seni yakalayıp parçalamadan yavaşlatmak için Zulgar'ı yanan güneş gliflerinden geçir",
@@ -7207,7 +7142,21 @@ export const tr_TR: EnTranslations = {
       "pollinatedLine": "Tohum kapsüllerinden kaçın: Polenlenmişken dokunmak düşman yaratır. İşaretsiz müttefikler ezebilir",
       "bondTitle": "Sürü Bağı",
       "bondLine": "Hasar azaltmalarını ve bonuslarını kaldırmak için Canavar Efendisi ile jaguarı ayır",
-      "timeAria": "{seconds} saniye kaldı"
+      "timeAria": "{seconds} saniye kaldı",
+      "preyAloneLine": "Güneş gliflerini yakabilecek başka kimse yok. Karanlık birinde {seconds} sn durup yak, sonra Zulgar'ı üzerinden geçir",
+      "pinnedTitle": "Saplandın!",
+      "pinnedLine": "Bir takım arkadaşı Av Mızrağını çekmeli. Saplanmışken Vahşi Yürek Atımı sana daha sert vurur",
+      "pinnedSelfLine": "Yardım edebilecek kimse yok: Vahşi Yürek Atımı vurmadan Av Mızrağını kendin çek",
+      "sunstruckTitle": "Zulgar'ı Güneş Çarptı!",
+      "sunstruckLine": "Bu etki bitene kadar {pct}% daha fazla hasar alır: en güçlü saldırılarını şimdi kullan",
+      "spearTitle": "Bir dost saplandı!",
+      "spearLine": "Av Mızrağına koş ve Vahşi Yürek Atımı vurmadan çek",
+      "glyphTitle": "Güneş gliflerini yak",
+      "glyphLine": "Yakmak için karanlık bir güneş glifinde {seconds} sn dur. Zulgar üzerinden geçince {duration} sn {pct}% daha fazla hasar alır",
+      "glyphLightingTitle": "Güneş glifi yakılıyor",
+      "glyphLightingLine": "Yanana kadar glifin üzerinde kal. Ayrılmak baştan başlatır",
+      "breathTitle": "Putun Nefesi!",
+      "breathLine": "Taş jaguar terasın bu yarısına nefes üfleyecek. Diğer yarıya geç"
     },
     "sanctumAlert": {
       "quenchTitle": "Soğutma suyundasın!",
@@ -7296,6 +7245,13 @@ export const tr_TR: EnTranslations = {
       "relightFar": "Yeniden yakmak için {range} yarda yakınına gel",
       "relightAria": "{name} yeniden yak",
       "relightUsingLine": "Mumu yakmak için kanal açmayı sürdür: sağlık tüketir. Vuruşlar kesmez; hareket veya sersemletme keser",
+      "freeLine": "Sapladığı kişiyi kurtarmak için mızrağı yerden çek. Darbe almak seni durdurmaz; hareket etmek veya sersemlemek durdurur",
+      "freeKey": "{name} çıkar",
+      "freeTap": "{name} çıkarmak için buraya dokun",
+      "freeClick": "{name} çıkarmak için buraya tıkla",
+      "freeFar": "Çıkarmak için {range} yd yakına gel",
+      "freeAria": "{name} çıkar",
+      "freeUsingLine": "Mızrağı çekmek için hareketsiz kal: hareket etmek veya sersemlemek seni durdurur",
       "timeAria": "{seconds} saniye kaldı"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const tr_TR: EnTranslations = {
       "detach": "Ayır",
       "applied": "Uygulandı",
       "owned": "Sahip olunan",
+      "notCollected": "Toplanmadı",
       "storeOnly": "WOC Mağazasında mevcut",
       "preview": "Önizleme",
       "previewAria": "Önizleme {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Binek görünümü, bu karakterin bindiği bineğin üzerine çizilir. Hızı asla değiştirmez.",
-      "mountsNoMount": "Önce bir binek edin: görünümün üzerine uygulanacağı bir binek gerekir.",
+      "mountsIntro": "Binek görünümünü burada seç. Binicilik eğitimi hızı belirler. Görünümü hesabın genelinde paylaşmak için binek eşyasını herhangi bir karakterin çantasında veya bankasında tut.",
+      "mountsNoMount": "Binek çağırmak için Ahır Ustası Marla'dan binicilik öğren.",
       "skinsEmpty": "Henüz silah görünümün yok. WOC Mağazasını ziyaret et.",
       "skinsApplyHint": "Bu görünümü uygulamak için bir {type} kuşan.",
       "mechIntro": "Combat Mech bu karakterin bedeninin yerini alır. Aynı anda bir renk varyantı giyilir.",
@@ -7430,6 +7387,7 @@ export const tr_TR: EnTranslations = {
       "sourceActivityRiftFirstClear": "Dereceli bir Yarık'ın ilk tamamlamasını kazanan grubun her üyesine verilir",
       "sourceActivityBuriedHoard": "Bir Gizli Hazinen ödül sandığında bulunur, hazine haritasının götürdüğü kasa",
       "sourceActivityLanternHall": "Fener Salonu levazım subayından Fener Mührüyle satın alınır",
+      "sourceActivityWeeklyVaultPvp": "Haftalık Kasanın PvP satırından seçildi",
       "cellMissingSourceAria": "{name}, henüz bulunmadı, {source}",
       "cellOwnedClearsAria": "{name}, kataloglandı, ilk kez {count}. tamamlamada bulundu",
       "searchPlaceholder": "Yadigâr ara",
@@ -8454,6 +8412,16 @@ export const tr_TR: EnTranslations = {
         "heroicCloud": "Polen Bulutu: Polenlenmiş oyuncunun {cloudRadius} yarda yakınında {cloudSeconds} saniye durmak sizi de polenler."
       },
       "zulgar": {
+        "pulseSummaryRework": "Her {every} sn, {cast} sn süren büyü {radius} yd içindeki herkese {min} ile {max} hasar verir. Saplanan oyuncular her mesafeden bu hasarın {pinMult} katını alır.",
+        "spearSummary": "{cast} sn süren büyü tank olmayan bir oyuncuyu, başka kimse kalmadıysa tankı saplar. Sabitleme en fazla {seconds} sn sürer ve her {tick} sn {bleed} hasar verir.",
+        "spearResponse": "Mızrağı hedefle ve {range} yd içinde etkileşerek {pull} sn içinde çek. Hasar çekmeyi kesmez. Terasta başka kimse serbest değilse kurban etkileşerek {self} sn içinde kurtulabilir.",
+        "glyphSummaryRework": "{count} glif başlangıçta karanlıktır. Avlanırken işaretsiz bir oyuncu birinin üzerinde {kindle} sn durarak onu yakar. İşaretsiz oyuncu kalmadıysa Av {alone} sn içinde yakabilir. Üzerinden ayrılmak ilerlemeyi sıfırlar. Yanan gliften geçmek onu {seconds} sn boyunca {slow} yavaşlatır ve aldığı hasarı {vulnerability} artırır. Glif {dark} sn yeniden yakılamaz; başka bir glif onu {wary} sn etkileyemez. Av sırasında sersemletmeler yarı süreyle işler.",
+        "glyphResponseRework": "İşaretsiz oyuncular Avın önündeki glifleri yakar. Onu gliflerden geçir, sonra Güneş Çarpması sırasında saldır. Av bitince glifler kararır.",
+        "idolSummary": "{health} sağlıkta yenilene kadar jaguar ruhu olarak kalır. Tank da Av olabilir.",
+        "idolHuntSummary": "Her {every} sn yeni bir Av seçer, sonra kovalamadan önce {turn} sn ona döner.",
+        "idolHuntHeroicSummary": "Her {pair} sn yeni bir çifti işaretler ve her {switch} sn aralarında geçiş yapar. Her geçiş yeni Ava kovalanmadan önce {turn} sn verir.",
+        "breathSummary": "Her {every} sn, terasın bir yarısı {warning} sn işaretlenir, sonra o yarıdaki herkes {min} ile {max} Doğa hasarı alır. Nefesler iki yarı arasında dönüşümlüdür.",
+        "breathResponse": "Uyarı bitmeden işaretsiz yarıya geç. Orta çizgi güvenlidir. Kahramanlıkta nefes, kendi yarısındaki yanan glifleri de söndürür; hemen yeniden yakılabilirler.",
         "overview": "Havzanın başrahibi. Jaguar ruhuna dönüşüp bir oyuncuyu avlayana kadar önceden gösterilen halkayla düzenli bir savaş sürer. Avlanan oyuncu onu yavaşlatan yanan güneş gliflerinden geçirerek kaçırır.",
         "phaseShrineName": "Tapınak",
         "phaseShrineSummary": "Yakın dövüşür ve çevresine halka şeklinde darbe yayar.",
@@ -8766,6 +8734,14 @@ export const tr_TR: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe asla hareket etmez veya yakın dövüş saldırısı yapmaz. Koro için toplan, Solo için gruptan ayrıl, Boğulma Aryası'yı kes ve Göl Akını'ndan kaç. İki sağlık eşiğinde, ay karolarındaki melodisini sırayla söyleyerek tekrarla.",
+        "phaseSummaryRework": "Grup Partisyona yanıt verirken diğer saldırıları durur. Ay Suyu Oklarının büyü çubuğu yoktur ve kesilemezler.",
+        "boltSummaryRework": "Diğer büyüler arasında, {windup} sn görsel uyarının ardından her {every} sn bir ok isabet eder ve silah hasarının {mult} katı Don hasarı verir. Boğulma Aryası'yı kesmek okları ve Arya'yı {quiet} sn durdurur.",
+        "boltResponseRework": "Tankı onun görüş alanında tut. Kesintileri Boğulma Aryası için sakla.",
+        "tipHealerRework": "Arya hedefini ve Koro'ya yalnız yakalananları izle. Partisyon sırasında sonraki notayı söylemeye yardım et ve hataları iyileştir.",
+        "scoreSummary": "{first} ve {second} sağlıkta bağışıklık kazanıp önce {notes}, sonra {finalNotes} nota çalar. Bunları önce {answer}, sonra {finalAnswer} sn içinde tekrarla. Yanlış karo {falseNote} Don hasarı verir ve ilerlemeyi sıfırlar, süreyi değil. Süre dolarsa herkese {min} ile {max} Don hasarı verir. Başarı onu {stun} sn sersemletir ve {bonusSeconds} sn boyunca aldığı hasarı {vulnerability} artırır.",
+        "scoreResponse": "Melodiyi izle, sonra karolara sırayla bas. Doğru notaları başka bir yaşayan oyuncuyla dönüşümlü çal; hayatta kalan tek kişi yalnız tamamlayabilir. Engellenen adımlar zararsızdır. Yanıt başlamadan önce üzerinde durulan karo dahil, karoyu çalmak için üzerinden çıkıp yeniden gir.",
+        "scoreHeroic": "Yanıt sırasında karolar kararır. Melodiyi hatırla ve sırayla söyle.",
         "overview": "Koroana havuzundan şarkı söyler; asla hareket etmez veya yakın dövüş saldırısı yapmaz. Oyuncuları paylaşılması gereken Koro ve yalnız kalınması gereken Solo ile işaretler, bir oyuncuya güçlenen arya ışını yöneltir ve avlu boyunca dalga gönderir. Okları ve aryası kesilebilir.",
         "phaseName": "Koro Avlusu",
         "phaseSummary": "Zamanlamaya bağlı tek aşama. Bir büyü sırasında zamanı gelen mekanik, büyünün bitmesini bekler.",
@@ -9678,7 +9654,7 @@ export const tr_TR: EnTranslations = {
       "graveyard": "Burada düşersen ruhunun döneceği yer.",
       "dungeons": "Kapısının bulunduğu bölge ve tasarlandığı grup boyutuyla birlikte her zindan, artı şu anda ayarlı olduğun zorluk.",
       "dungeonMode": "Zindanlarını Normal ve Kahramanca zorluk arasında değiştir.",
-      "dungeonReset": "Kendi boş örneklerinden vazgeç, zorluğu değiştirdikten sonra yapılması gereken de budur.",
+      "dungeonReset": "Sonraki seferin aynı veya yeni zorlukta baştan başlaması için kendi boş örneklerinden vazgeç.",
       "groupRecovery": "Toparlanma ve durum",
       "unstuck": "Dünya seni hapsettiğinde çıkış yolu. Kısa bir geri sayım boyunca hareketsiz dur, en yakın mezarlığa taşınırsın, ve zaten düşmüşsen orada diriltilirsin. Ardından bir süre seni Kurtulma Hastalığı ile zayıflatır, bu yüzden bir kestirme değil, son çare olarak kullanılır.",
       "unstuckWindow": "Dünya seni tuzaklayıverdiğinde yolu. Kısa bir sayaç boyunca sabit durun ve en yakın mezarlığa taşınırsınız ve orada zaten düşmüş iseniz yükseltilirsiniz. Bir saat içinde ilk kullanım ücretsizdir. Birden fazla kullanımdan bir saat içinde yeniden kullanırsanız, bir süre sonra Sıkışmış Rahatsızlığı'ndan zayıflanmışsınız kalırsınız, bu nedenle kurtarma yerine bir kısayol değildir.",
@@ -10105,27 +10081,27 @@ export const tr_TR: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Binekler ve binicilik",
-      "intro": "Bir binek, dünyada daha hızlı ilerlemenin bir yoludur, hepsi bu kadar. Binmeyi ahırda öğrenirsin, ilk dizginlerini satın alırsın, ve ondan sonraki her yol kısalır.",
+      "intro": "Bir binek görünümü seç, ahırlarda binicilik öğren ve dünyayı daha hızlı dolaş. Hızı eğitimin belirler; tüm binek görünümleri kozmetiktir.",
       "whatHeading": "Bir binek nedir",
-      "whatBody": "Bir binek, üzerine bindiğin bir yaratıktır ve sana verdiği tek şey hızdır. Zırh yok, hasar yok, nitelik yok: seni yerde daha hızlı taşır, zıpladığında biraz daha yükseğe sıçratır, ve anlaşmanın tamamı budur. Oyundaki her binek bir kara bineğidir, bu yüzden uçma yoktur ve hiçbiri yüzmez.",
+      "whatBody": "Binekler, eğitimli sürüşünün üzerine giyilen kozmetik görünümlerdir. Zırh, hasar veya savaş niteliği sağlamazlar. Binicilik eğitimi yerde yolculuk hızını artırır ve binekteki sıçramalar daha yüksek engelleri aşar. Tüm binekler yerde kalır ve hiçbiri yüzemez.",
       "learnHeading": "Binmeyi öğrenmek",
-      "learnBody": "Binicilik bir kez satın aldığın bir yetenektir ve seviye {level}'de açılır. Ahır Ustası Marla Hitchen, kırlardaki Fırtına Sırtı Ahırları'nı işletir ve Binicilik Eğitimi'ni 80 altına satar. Seni bir bineğe oturtan tek satın alma budur ve kalıcı olarak seninle kalır.\n\nOna sahip olduğunda Marla'nın senin için bir görevi vardır: Binicilik Dersleri. Görevi al, işareti başlangıç kemerinin arkasındaki parlayan kareye kadar takip et ve Yarışı Başlat'a bas. Ders için sana eğitim amaçlı bir Yiğit Küheylan ödünç verir, bu yüzden dersin kendisi sana hiçbir şeye mal olmaz. Parkuru koş, bitir ve altınların ile tecrüben için ona geri dön. Ödünç verilen küheylan dersten sonra ahıra geri döner, bu yüzden ders sana bir at vermek yerine eyerde durmayı öğretir.",
+      "learnBody": "Binicilik {level}. seviyede açılır. Ahır Ustası Marla Hitchen, Galecrest Ahırları'nda Binicilik Eğitimini 80 altına satar. Temel eğitim binekte {basicSpeed}% daha hızlı hareket sağlar. Öğrendikten sonra Marla, {advancedFee} altına İleri Binicilik Eğitimi de satar; bu, binekte hareketi {advancedSpeed}% daha hızlı yapar. Her rütbe onu öğrenen karaktere aittir.\n\nTemel biniciliği öğrendikten sonra Marla'nın Binicilik Dersleri görevini al ve başlangıç kemerinin arkasındaki parlayan kareye giden işareti izle. Eğitim Yiğit Küheylanını ödünç almak için Yarışı Başlat'a bas. Parkuru bitir ve para ile deneyimini almak için geri dön. Ders bittiğinde ödünç at ahıra döner.",
       "whereHeading": "Onu nerede bulabilirsin",
       "whereBody": "Fırtına Sırtı Ahırları, Fırtına Sırtı haritasında, Uçurum ile Enkaz Tarlaları arasındaki kırlarda işaretlidir. Marla ahırın yanında, yarış sahasına bakar şekilde durur.",
       "firstHeading": "İlk bineğin",
-      "firstBody": "Yiğit Küheylan, dünyada herhangi bir yerde satılan tek binektir. Binicilik'i öğrendikten sonra Marla sana Yiğit Küheylan'ın dizginlerini 10 altına satar ve o dizginler senin olarak kalır. Diğer her binek dünyada kazanılır, bu yüzden neredeyse her binicinin başladığı yer bu attır.",
+      "firstBody": "Marla, Binicilik öğrendikten sonra Yiğit Küheylan Dizginlerini 10 altına satar. Dizginleri elinde tutmak, hesabındaki her karakter için Kozmetikler'de at görünümünü açar. Binicilik eğitimi dizgin taşımadan da binek çağırmanı sağlar; farklı bir görünüm istediğinde atı veya sahip olduğun başka bir görünümü seç.",
       "rideHeading": "Binmek ve inmek",
-      "rideBody": "Bir binek penceresi ya da ayarlanacak bir favori yoktur, çünkü binek dizginlerin kendisidir. Çantalarındaki ya da bir eylem çubuğu yuvasındaki bir dizgin takımını kullan, o bineğe binersin. Çağırma bir an sürer, anında değil kısa bir çağrıdır, bu yüzden seni kötü bir çekmeden kurtarmaz. İnmek ise anındadır ve hiçbir zaman engellenmez.\n\nZaten bindiğin dizginleri kullanırsan o bineği geri koyarsın. Binekliyken farklı bir takım kullanırsan arada hiçbir şey çağırmadan doğrudan ona geçersin. Bin / İn tuşu, varsayılan olarak ters tırnak (`) tuşu, seni yalnızca indirir: bu aşağı inme yoludur, yukarı çıkma yolu değil. Tek istisna binicilik dersidir; orada aynı tuş, Marla'nın sana ödünç verdiği küheylanı çağırır, çünkü ödünç bir atın tıklanacak dizgini yoktur. Telefon ya da tablette, Daha Fazla tepsisindeki Bin düğmesi her iki yönde de çalışır, ama seçtiğin bir dizgin yerine çantandaki ilk dizgin takımını çağırır, bu yüzden belirli bir bineği istediğinde dizginlerin kendisine dokun.",
+      "rideBody": "Kozmetikler'i aç ve Binekler sekmesinde bir görünüm seç. Varsayılan olarak ters tırnak tuşu olan Bin / İn tuşu, eğitimli bineğini o görünümle çağırır. Mobil Binek düğmesi de aynısını yapar. Çağırmak kısa bir kanal süresi gerektirir; inmek anlıktır. Binekteyken görünümü değiştirmek binicilik hızını değiştirmez.\n\nGörünümü seçip çağırmak için çantandaki veya eylem çubuğundaki dizginleri de kullanabilirsin. Zaten bindiğin görünümü kullanmak bineği kaldırır. Bankadaki veya başka bir karakterdeki dizginler, binicinin taşıması gerekmeden aynı kozmetiği açar.",
       "breaksHeading": "Seni yeniden ayağa kaldıran şeyler",
       "breaksBody": "Su her zaman kazanır. Yüzülebilecek kadar derin herhangi bir şeye binerek girersin ve anında inersin, çünkü hiçbir kara bineği yüzmez, ve ölmek seni düştüğün yere bırakır. Dövüşteyken, ölüyken ya da bir ruh olarak geri dönerken, ya da bir Dikenvadi Ovası maçının herhangi bir anında bir binek çağıramazsın; bu maç toplanmadan son direnişe kadar yaya oynanır: beklerken binekliysen, maça oturtulman seni de bineğinden indirir. Çağrı sürerken savaşa ya da suya yürümek de onu iptal eder.\n\nYaptığın çoğu şey de seni indirir. Bir şeye vurmak, bir büyü başlatmak, bir düğümü toplamak, balık tutmak, üretmek, büyülemek, hurdaya ayırmak ve bir meslek aletini şarj etmek, başladığın an seni bineğinden indirir, bu yüzden her damarda inmeyi bekle. Bir binek çağırmak ayrıca elindeki herhangi bir şekil değiştirme formunu da bırakır: asla hem şekil değiştirmiş hem binekli olamazsın.",
-      "speedHeading": "Hız ve kademeler",
-      "speedBody": "Hız, bir bineği diğerinden ayıran tek şeydir. Marla'dan satın aldığın Yiğit Küheylan temel hızı belirler, dünyada topladığın binekler ise onun üzerine çıkar: dizginler ne kadar nadirse, biniş o kadar hızlıdır, düz bir kayma yerine birkaç belirgin basamakla. Eğitilecek ikinci bir binicilik rütbesi yoktur ve sonradan satın alınacak bir yükseltme de yoktur. Binicilik için yalnızca bir kez ödersin, ondan sonra kullandığın dizginler ne kadar hızlı seyahat ettiğine karar verir.",
+      "speedHeading": "Binicilik hızı ve eğitimi",
+      "speedBody": "Temel Binicilik Eğitimi binekte {basicSpeed}% daha hızlı hareket sağlar. İleri Binicilik Eğitimi binekte {advancedSpeed}% daha hızlı hareket sağlar ve Marla'da {advancedFee} altın tutar. Nadirliği veya kaynağı ne olursa olsun tüm binek görünümleri karakterin eğitim rütbesine göre aynı hızı kullanır. Mağaza görünümleri de bu eğitim hızını kullanır.",
       "collectHeading": "Daha nadir binekler nereden gelir",
       "collectBody": "Marla'nın tezgahının ötesinde dizginler satın alınmaz, bulunur. Beş oyunculu zindanların ve kahramanca akının son patronlarından, ayrıca yarık temizlemelerinden düşerler; tamamladığın yarık ne kadar zorluysa bırakabileceği dizginler de o kadar nadirdir. Tasarım gereği nadir bulgulardır ve hiçbir koşu bir tane söz vermez, bu yüzden bir binek avlamanın nazik yolu, avı zaten yaptığın koşulara katmaktır. Bu sayfa sana hangi bineğin hangi patrona asılı olduğunu söylemeyecek: o kısmı kendin keşfedeceksin.",
       "raceHeading": "Ahır yarışı",
       "raceBody": "Marla'nın padoğundaki engel atlama parkuru, yalnızca ders sırasında değil, herkese her zaman açıktır. Bir bineğe bin, kemerin arkasındaki parlayan karenin üzerinde dur ve Yarışı Başlat'a bas. Bir geri sayım seni sabit tutar, sonra saat işlemeye başlar: yedi atlayışın hepsini geç ve süre dolmadan kemerden geri çık.\n\nBir atlayış yalnızca gerçekten çitin üzerinde havadaysan sayılır, bu yüzden kolay bir geçiş hiçbir şey saydırmaz. Onları istediğin sırayla ve her iki yandan da alabilirsin, ve kaçırdığın biri dünyanın sonu değildir: geri dön ve tekrar dene. Ölmek, inmek ya da padoktan ayrılmak denemeyi bitirir, süresinin dolmasına izin vermek de öyle; bu seni bulunduğun yerde eyerden indirir, kendin iptal etmek ise yalnızca saati durdurur. Hiçbir şey yeni bir tane başlatmanı engellemez. Ne ücret, ne bekleme süresi, ne de sürenin kendisi dışında bir ödül vardır, ve istediğin kadar binici parkuru aynı anda birbirinin yoluna çıkmadan koşabilir.",
       "goodsHeading": "Dizginler sıradan bir maldır",
-      "goodsBody": "Bir binek bir eşyadır, bu da onu ekonominin taşıyabileceği bir şey yapar. Dizginleri çantalarında ya da bankanda durduğu sürece bir bineğe sahip olursun; bankadaki dizginler ise bineği senin yapmaya devam eder ama binmene izin vermez: yaratığı çağırmak için dizginleri üzerinde taşıman gerekir. Oyuncu dizginleri ruha bağlı değildir, bu yüzden eşyanın kendisi aksini söylemedikçe diğer her bulgu gibi takas edilir, postayla gönderilir ve Dünya Pazarı'nda listelenir. Bir bineği elden çıkarmadan önce bilinmeye değer iki şey vardır: hiçbir tüccar bir dizgin takımını asla geri satın almaz, bu yüzden bir binek nakde çevrilen değil, sakladığın ya da devrettiğin bir satın almadır; ve dizginler binekliyken hem çantalarından hem bankandan ayrılırsa, takas edilir, postalanır ya da pazarda satılırsa, binek de onlarla birlikte gider ve durduğun yerde inersin."
+      "goodsBody": "Koleksiyonluk binek görünümleri, eşleşen en az bir dizgin eşyası herhangi bir karakterin çantasında veya kişisel bankasında kaldığı sürece hesabın genelinde kullanılabilir. Son uygun eşyayı takas etmek, postalamak, satışa koymak, satmak veya başka bir şekilde elden çıkarmak görünümü Kozmetikler'den kaldırır. O görünümü kullanan binici varsayılan at görünümüne döner ve eğitimli hızında binekte kalır.\n\nEşya aksini belirtmedikçe oyuncu dizginleri takas edilebilir, postalanabilir ve Dünya Pazarı'nda listelenebilir. At dizginleri ayrıca bir tüccara 10 altına satılabilir. Diğer dizginler kendi eşya satış kısıtlamalarına tabidir. Mağaza binek görünümleri, dizgin eşyalarından bağımsız hesap kozmetikleri olarak kalır."
     },
     "worldPage": {
       "heading": "Dünya",
@@ -10300,7 +10276,7 @@ export const tr_TR: EnTranslations = {
       "heroicRewardsBody": "Kahramanca patronlar bildiğin ganimeti düşürür, yükseltilmiş ve ipucunda Kahramanca olarak işaretli, ve her seferin son patronu başka hiçbir yerde bulunmayan epikler ekler. O son öldürüş ayrıca her katılımcıya Kahramanca Nişan bırakır: Highwatch'ta levazımcı Vex'te harcanan bir para birimi; onun tezgâhı, kahramanca derinliklerin kanıtından başka hiçbir şeyin satın alamayacağı yüzükler ve kolye uçlarıyla dolu bir raftır.",
       "heroicLockoutBody": "Normal zindanlar gün boyu gezilebilir. Kahramanca sabır ister: son patronun ölümü seferdeki herkesi o zindanın günde tek bir kahramanca temizliğiyle sınırlar ve akın her zorluk için ayrı bir günlük kilit tutar. Canlı bir diyarda tüm günlük kilitler diyarın kendi gecelik sıfırlama saatinde birlikte düşer, dolayısıyla o saatten hemen önce alınan bir temizlik ile hemen sonra alınan biri iki ayrı güne düşer; bunun yerine tarayıcında çevrimdışı oyna, kilit basitçe kendi öldürüşünden bir gün sonra sona erer. Halihazırda temizlenmiş beş kişilik bir sefer, kendi grubuna ceset koşuları ve ganimet için açık kalır, böylece kimse orada kazandığından mahrum kalmaz. Akın daha katıdır: öldürüşü seni bir kez kilitledi mi kapı sıfırlamaya dek kapalı kalır ve içeri dönmenin tek yolu, tam da kendisini kilitleyen o seferde düşmüş birinin ceset koşusudur, dolayısıyla dışarı çıkan canlı bir akıncı o gün için dışarı çıkmıştır. Arenayı terk etmeden önce ganimetini topla. Bu kilitlerin her biri onu kazanan karaktere aittir, dolayısıyla ana karakterindeki bir temizlik diğer karakterlerini serbest bırakır.",
       "resetTitle": "Örneklerini sıfırlama",
-      "resetBody": "Grubun hâlâ üstlenilmiş seferler tutarken zorluğu değiştir, eski üstlenmeler kendiliğinden bırakılmadan önce bir süre asılı kalır. Grup lideri bunun yerine hepsini bir anda bırakabilir: kendi portre menüsünden Tüm Instance'ları Sıfırla'yı seçin ya da /dungeon reset yazın. Sıfırlama yalnızca zorluk gerçekten değiştirildikten sonra, yalnızca içeride canlı ya da düşmüş kimse kalmadığı sürece, yalnızca içerideki her ceset tertemiz yağmalandıktan sonra çalışır ve bir sıfırlamayı diğerinden kısa bir bekleme süresi ayırır. Kapıya yanlış zorlukla gelirseniz oyun bunu sefer başlamadan söyler. Akın bu şekilde asla sıfırlanmaz; kendi kilit kuralları geçerlidir.",
+      "resetBody": "Sahiplenilmiş boş örnekler kendiliğinden bırakılmadan önce bir süre kalır. Grup lideri bunları hemen bırakabilir: kendi portre menüsünde Tüm Instance'ları Sıfırla seçeneğini seç veya /dungeon reset yaz; sonraki sefer mevcut zorlukta baştan başlar. Zorluğu değiştirmek de eski zorluktaki örnekleri bırakır. Sıfırlama yalnızca içeride canlı ya da düşmüş kimse kalmadığında ve her ceset tamamen yağmalandığında çalışır. Kilidi asla kısaltmaz: kilitli Kahramanlık örneği veya akın kendi sıfırlamasına kadar kilitli kalır ve sıfırlamalar arasında kısa bir bekleme süresi vardır. Kapıya yanlış zorlukta gelirsen oyun sefer başlamadan bildirir. Akın da aynı şekilde sıfırlanır; kendi kilit ve cesede dönüş kuralları geçerlidir. Akın zorluğu değiştirilirken bekleme süresi atlanır: yanlış zorluk seçildiyse veya Kahramanlık aşılamadıysa hemen geri dönülebilir, çünkü tekrarları kendi kilidi sınırlar.",
       "templeLoreTitle": "Boğulmuş Tapınak, biraz daha derinde",
       "templeLoreBody": "Tapınağın, başka yerlerde peşine düştüğünüz tarikattan daha eski, kendi efsanesi vardır. Ay ışığını içip boğulmuşları geri veren bir gölet olan Işıltıgöl'ün kıyısında, yalnız bir gözcü solgun ışıktan bir geçidi korur. Yüzeyin altında, soğuk taştan bir merdiven ona doğru iner. Oraya batan halk bir kazayla boğulmadı: ibadet ederek suya gömülen ve şarkı söylemeyi hiç bırakmayan Solgun Koro'ydu onlar. Eski muhafızlar, sular onları almadan önce kayalara tek bir uyarı kazıdılar, Boğulmuş Ay dedikleri bir şeye bir dua; daha sağlam bir el de altına iki kelime ekledi: yalnızca uyuyor.",
       "cryptLeadTitle": "Ölülerin kapalı tutması gereken bir kapı",
@@ -11280,7 +11256,7 @@ export const tr_TR: EnTranslations = {
       "prestigeBody": "Tecrübe, tavandan sonra bile sayılmaya devam eder. Kozmetik bir sanal seviyeyi besler, böylece tecrübe çubuğun tırmanmaya devam eder; ayrıca oraya ulaştığında karakter sayfandan talep edebileceğin uzun vadeli bir prestij rütbesi sağlar. Büyük ömür boyu tecrübe kilometre taşlarını geçmek, Yiğitlikler Kitabı'nda yiğitlikler de kazandırır; karakter sayfanda görünen kozmetik unvanlar ve isim levhası çerçeveleriyle birlikte. Bütün bunlar tamamen isteğe bağlıdır ve asla güç vermez, sadece yürüdüğün yolun bir nişanesidir.",
       "noRush": "Acele etmene gerek yok. Dünya kendi tempoda keyfini çıkarman için orada, o yüzden gez dolaş, gözüne çarpan görevleri al ve kahramanın yol boyunca gelişsin.",
       "ridingTitle": "Binmeyi öğrenmek",
-      "ridingBody": "Binicilik, tırmanışın sonunda seni bekleyen şeylerden biridir. Seviye {level}'de bir ahır ustası sana bu yeteneği ciddi bir miktar altın karşılığında öğretir, ve eğitim parkurundaki bir ders sana ilk dizginlerini kazandırır. Bir binek hiçbir güç vermez; sadece dünyayı küçültür, ki bu da kuzeye uzun bir yürüyüşten sonra kendi başına bir ödüldür."
+      "ridingBody": "{level}. seviyede Ahır Ustası Marla altın karşılığında temel binicilik öğretir ve ardından ileri bir rütbe sunar. Binekteki hızı eğitim belirler. Binek görünümünü Kozmetikler'den seç; koleksiyonluk görünümler, dizginleri herhangi bir karakterin çantasında veya bankasında kaldığı sürece paylaşılır."
     },
     "placeholder": {
       "note": "Rehberin bu bölümü yolda, yakında geliyor."
@@ -16384,6 +16360,8 @@ export const tr_TR: EnTranslations = {
       "temple_moonwater_bolt": "Ay Suyu Oku",
       "temple_drowning_aria": "Boğulma Aryası",
       "temple_mere_surge": "Göl Akını",
+      "temple_score": "Partisyon",
+      "temple_score_answer": "Partisyona Yanıt Ver",
       "temple_tideglass_fracture": "Gelgit Camı Çatlağı",
       "temple_undertow": "Dip Akıntısı",
       "temple_lunar_tide": "Ay Gelgiti",
@@ -16421,6 +16399,12 @@ export const tr_TR: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Tıkınma",
       "wildheart_zulgar_pulse": "Vahşi Yürek Atımı",
       "wildheart_zulgar_spirit_hunt": "Avın Ruhu",
+      "wildheart_zulgar_hunting_spear": "Av Mızrağı",
+      "wildheart_zulgar_idol_wakes": "Put Uyanıyor",
+      "kituse_wildheart_pull_spear": "Mızrağı Çek",
+      "wildheart_idols_breath": "Putun Nefesi",
+      "wildheart_sun_glyph_kindle": "Yanıyor",
+      "wildheart_sun_glyph_cold": "Soğuyor",
       "sanctum_cinder_breath": "Köz Nefesi",
       "sanctum_warming_rite": "Isınma Ayini",
       "sanctum_goad": "Üvendire",
@@ -17053,6 +17037,9 @@ export const tr_TR: EnTranslations = {
       "levelClass": "{level}. seviye {className}"
     },
     "vendor": {
+      "basicRiding": "Binicilik Eğitimi",
+      "advancedRiding": "İleri Binicilik Eğitimi",
+      "ridingSpeed": "Binekteyken hareket hızını {speed}% artırır. Tüm binekler için geçerlidir.",
       "goodsTitle": "{name}: Mallar",
       "close": "Tüccarı kapat",
       "hint": "Bu pencere açıkken satmak için çantalarınızdaki bir eşyaya tıklayın.",
@@ -17263,7 +17250,8 @@ export const tr_TR: EnTranslations = {
       "tooManyOrders": "Aynı anda en fazla {count} sipariş açık tutabilirsin.",
       "orderClosed": "Bu sipariş artık açık değil.",
       "orderOwn": "Bu senin kendi siparişin. Geri çekmek için iptal et.",
-      "orderNotYours": "Bu senin siparişin değil."
+      "orderNotYours": "Bu senin siparişin değil.",
+      "orderTrackedItem": "Tüccar eşsiz teçhizat için sipariş kabul etmez."
     },
     "loot": {
       "takeAll": "Hepsini Al",
@@ -21189,117 +21177,6 @@ export const tr_TR: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Geçiş Taşı"
-      },
-      "whistle_ember_fox": {
-        "name": "Köz Tilkisi Düdüğü"
-      },
-      "whistle_moss_hare": {
-        "name": "Yosun Tavşanı Düdüğü"
-      },
-      "whistle_frog": {
-        "name": "Kurbağa Düdüğü"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Kızıl Kıskaçlı Yengeç Düdüğü"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Altın Nöbetçi Düdüğü"
-      },
-      "whistle_nightfang": {
-        "name": "Gece Dişi Düdüğü"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Azıboynuz Yaban Domuzu Düdüğü"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Zümrüt Kurt Düdüğü"
-      },
-      "whistle_tiger": {
-        "name": "Kaplan Düdüğü"
-      },
-      "whistle_cate_coin": {
-        "name": "Cate Coin Düdüğü"
-      },
-      "whistle_alon": {
-        "name": "Alon Düdüğü"
-      },
-      "whistle_trollface": {
-        "name": "Trollface Düdüğü"
-      },
-      "whistle_ansem": {
-        "name": "Ansem Düdüğü"
-      },
-      "whistle_triple_t": {
-        "name": "Triple T Düdüğü"
-      },
-      "whistle_kekius": {
-        "name": "Kekius Düdüğü"
-      },
-      "whistle_solbot": {
-        "name": "Solbot Düdüğü"
-      },
-      "whistle_frostfire": {
-        "name": "Buz Ateşi Düdüğü"
-      },
-      "whistle_rocky": {
-        "name": "Kayacık Düdüğü"
-      },
-      "whistle_proud_grunt": {
-        "name": "Gururlu Piyade Düdüğü"
-      },
-      "whistle_loot_goblin": {
-        "name": "Ganimet Goblini Düdüğü"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Penny Goldspark Düdüğü"
-      },
-      "whistle_stag": {
-        "name": "Geyik Düdüğü"
-      },
-      "whistle_alpaca": {
-        "name": "Alpaka Düdüğü"
-      },
-      "whistle_horse": {
-        "name": "At Düdüğü"
-      },
-      "whistle_sapling": {
-        "name": "Fidan Düdüğü"
-      },
-      "whistle_bull": {
-        "name": "Boğa Düdüğü"
-      },
-      "whistle_spider": {
-        "name": "Örümcek Düdüğü"
-      },
-      "whistle_raptor": {
-        "name": "Yırtıcı Kertenkele Düdüğü"
-      },
-      "whistle_skeleton": {
-        "name": "İskelet Düdüğü"
-      },
-      "whistle_crystal_lich": {
-        "name": "Kristal Liç Düdüğü"
-      },
-      "whistle_forgemaw": {
-        "name": "Erimiş Ocakçene Düdüğü"
-      },
-      "whistle_sprites": {
-        "name": "Titreşim ve Parıltı Düdüğü"
-      },
-      "whistle_crystal_tide": {
-        "name": "Kristal Gelgit Düdüğü"
-      },
-      "whistle_phantom": {
-        "name": "Hayalet Düdüğü"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Köz Yağışı Anka Düdüğü"
-      },
-      "charm_stag_acorn": {
-        "name": "Palamut Tacı Tılsımı"
-      },
-      "charm_stag_gilded": {
-        "name": "Yaldızlı Tılsım"
       },
       "lastflame_core": {
         "name": "Son Alevin Özü"
@@ -26340,6 +26217,9 @@ export const tr_TR: EnTranslations = {
       "thorn_sprout": {
         "name": "Diken Filizi"
       },
+      "wildheart_hunting_spear": {
+        "name": "Av Mızrağı"
+      },
       "buddy_ember_fox": {
         "name": "Köz Tilkisi"
       },
@@ -26414,9 +26294,6 @@ export const tr_TR: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, Savaş Atı"
-      },
-      "buddy_sapling": {
-        "name": "Fidan"
       },
       "buddy_bull": {
         "name": "Boğa"

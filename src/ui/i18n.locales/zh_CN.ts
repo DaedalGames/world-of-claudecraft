@@ -13,6 +13,40 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const zh_CN: Partial<Record<TranslationKey, string>> = {
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    '每{every}秒施法{cast}秒，对{radius}码内所有玩家造成{min}至{max}点伤害。被钉住的玩家无论距离多远都会受到{pinMult}倍伤害。',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    '施法{cast}秒后钉住一名非坦克玩家；若没有其他玩家，则选择坦克。定身最多持续{seconds}秒，每{tick}秒造成{bleed}点伤害。',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    '选中长矛，在{range}码内交互，花费{pull}秒拔出。受到伤害不会打断。若平台上没有其他自由行动的玩家，被钉住者可自行交互，花费{self}秒脱困。',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    '{count}枚符文最初熄灭。追猎期间，未被标记的玩家站在符文上{kindle}秒即可点亮。若没有未标记者，猎物可在{alone}秒内点亮。离开会重置进度。他经过点亮的符文时，减速{slow}，受到的伤害提高{vulnerability}，持续{seconds}秒。符文在{dark}秒内无法重新点亮；他在{wary}秒内不会再次被符文击中。追猎期间，昏迷持续时间减半。',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    '未被标记者在猎物前方点亮符文。引他经过符文，在日灼期间攻击。追猎结束时，符文全部熄灭。',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    '生命值降至{health}时，他保持猎豹灵体直到被击败。坦克也可能成为猎物。',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    '每{every}秒选择新猎物，先转向目标{turn}秒，再开始追逐。',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    '每{pair}秒标记一对新猎物，每{switch}秒切换目标。每次切换后，新猎物有{turn}秒反应时间。',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    '每{every}秒标记平台的一半，预警{warning}秒后，对该区域所有玩家造成{min}至{max}点自然伤害。两侧交替。',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    '预警结束前移动到未标记的一半。中线安全。英雄难度下，吐息还会熄灭所在半区的符文；这些符文可以立即重新点亮。',
+  'bossJournal.temple.selthe.overviewRework':
+    '塞尔瑟不会移动或近战。合唱时集合，独唱时远离队伍，打断溺亡咏叹调并躲避湖潮涌。到达两次生命值阈值时，轮流踏上月光地砖，重现她的旋律。',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    '队伍回应乐谱时，她暂停其他攻击。月水箭没有施法条，无法打断。',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    '其他施法之间，每{every}秒落下一枚月水箭，提前{windup}秒显示预警，造成武器伤害{mult}倍的冰霜伤害。打断溺亡咏叹调会让箭和咏叹调暂停{quiet}秒。',
+  'bossJournal.temple.selthe.boltResponseRework': '让坦克保持在她的视线内。把打断留给溺亡咏叹调。',
+  'bossJournal.temple.selthe.tipHealerRework':
+    '照看咏叹调目标和独自承受合唱的玩家。乐谱期间帮忙唱出下一音，并治疗失误造成的伤害。',
+  'bossJournal.temple.selthe.scoreSummary':
+    '生命值降至{first}和{second}时，她免疫伤害，依次演奏{notes}音和{finalNotes}音旋律。分别在{answer}秒和{finalAnswer}秒内重现。踩错地砖造成{falseNote}点冰霜伤害并重置进度，但不重置计时。超时对所有人造成{min}至{max}点冰霜伤害。成功使她昏迷{stun}秒，并在{bonusSeconds}秒内受到额外{vulnerability}伤害。',
+  'bossJournal.temple.selthe.scoreResponse':
+    '观察旋律，然后按顺序踏入地砖。与另一名存活玩家轮流奏响正确音符；唯一幸存者可独自完成。被阻止的踩踏无害。离开后重新踏入才能奏响，包括回应开始前已站着的地砖。',
+  'bossJournal.temple.selthe.scoreHeroic': '回应时地砖会变暗。记住旋律，轮流奏响。',
   'editor.buildMode.materialNames.Cliff003': '崎岖岩石',
   'editor.buildMode.materialNames.Cliff004': '风化峭壁',
   'editor.buildMode.materialNames.Cliff005': '层状峭壁',
@@ -59,10 +93,6 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bg.flagNameAzure': '碧蓝旗帜',
   'hudChrome.bg.flagNameCrimson': '绯红旗帜',
   'hudChrome.bg.flagReturnedByLog': '{name}归还了{team}旗帜。',
-  'hudChrome.collections.armor.mail': '锁甲',
-  'hudChrome.collections.detail.vendor': '{npc}（{location}），价格：{price}',
-  'hudChrome.collections.detail.vendorLabel': '出售者',
-  'hudChrome.collections.tabs.sets': '物品套装',
   'hudChrome.dungeonTracker.heroicTitle': '{name}（{difficulty}）',
   'hudChrome.raidBossGuide.dungeonSubtitle': '{dungeon} | {boss} | {difficulty}',
   'hudChrome.shardpike.blindBanner': '石冢之皮已击破',
@@ -1965,9 +1995,24 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.courier.select': '选择{item}，{count}',
   'hudChrome.courier.selectedItem': '取消选择{item}，{count}',
   'hudChrome.courier.instructions':
-    '请选择整组物品。信使会先存入物品，再取出您指定的物品。任务物品无法寄送。',
+    '为你的银行、仓库或其他角色选择整组物品。信使会先存入物品，再取出你指定的物品。任务物品无法寄送。',
   'hudChrome.courier.membership': '续订会员后即可开始新的配送。',
   'hudChrome.courier.unavailable': '召唤信使以安排配送。',
+  'hudChrome.courier.bagsVault': '将材料送入仓库',
+  'hudChrome.courier.vault': '从仓库取回。选中的一行会整行带回。',
+  'hudChrome.courier.vaultTitle': '仓库',
+  'hudChrome.courier.storeTabs': '信使存放处',
+  'hudChrome.courier.vaultCap': '每种材料最多{cap}个',
+  'hudChrome.courier.vaultEmpty': '你的仓库是空的。',
+  'hudChrome.courier.vaultLocked': '在银行家处解锁仓库后，才能通过信使使用它。',
+  'hudChrome.courier.boundBank': '将送往银行',
+  'hudChrome.courier.boundVault': '将送往仓库',
+  'hudChrome.courier.boundAccount': '将送往其他角色的银行',
+  'hudChrome.courier.accountTitle': '其他角色',
+  'hudChrome.courier.accountBank': '从这个银行取回。信使到达时，该角色必须处于下线状态。',
+  'hudChrome.courier.bagsAccount': '送往{name}的银行',
+  'hudChrome.courier.bagsAccountNone': '选择要寄送物品的角色。',
+  'hudChrome.courier.accountPlanned': '已为{name}计划{count}组物品。为其他角色选择会替换它们。',
   'entities.abilities.courier.name': '信使',
   // Membership additions: same-change non-Latin coverage (M16).
   'hudChrome.wocStore.subscription.benefitsTitle': '有效会员权益',
@@ -2370,6 +2415,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.reliquary.sourceActivityBuriedHoard':
     '在埋藏宝藏的奖励宝箱中找到，即藏宝图所指引的宝库',
   'hudChrome.reliquary.sourceActivityLanternHall': '在灯火大厅的军需官处用灯火印章购买',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': '从每周宝库的PvP栏位中选取',
   'clues.hunt_drakelands_gate_ashes.reply.1':
     '风从东边的沙丘吹来，带着灰烬，而空荡荡的沙地不会吹出灰烬。驻军仓库的塞拉记着每一次巡逻。只要有人给她带点吃的，她就会开口。',
   'clues.hunt_drakelands_gate_ashes.reply.2':
@@ -2861,6 +2907,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'itemUi.errors.orderClosed': '该订单已不再开放。',
   'itemUi.errors.orderCountNeeded': '请指定你想要的数量。',
   'itemUi.errors.orderNotYours': '那不是你的订单。',
+  'itemUi.errors.orderTrackedItem': '商人不接受独一无二装备的订单。',
   'itemUi.errors.orderOwn': '那是你自己的订单。取消它即可撤回。',
   'itemUi.errors.tooManyOrders': '你最多只能同时保留 {count} 个待处理订单。',
   'itemUi.logs.orderDelivered':
@@ -5012,6 +5059,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.lootSettings.menuItem': '拾取设置',
   'hudChrome.dungeonDifficulty.setHeroic': '设置地下城难度：英雄',
   'hudChrome.dungeonDifficulty.setNormal': '设置地下城难度：普通',
+  'hudChrome.dungeonDifficulty.unappliedNormal': '已选择英雄难度。当前副本仍为普通难度。',
+  'hudChrome.dungeonDifficulty.unappliedHeroic': '已选择普通难度。当前副本仍为英雄难度。',
   'hudChrome.dungeonDifficulty.resetAll': '重置所有副本',
   'hudChrome.dungeonDifficulty.resetDone': '所有副本已重置。',
   'hudChrome.dungeonDifficulty.resetNone': '你没有可重置的副本。',
@@ -5021,11 +5070,13 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.dungeonDifficulty.queuedCancelled': '由于队伍或队长发生变化，已取消排队中的难度变更。',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     '切换地下城难度后才能重置这些副本。空置副本会在5分钟后自动重置。',
-  'hudChrome.dungeonDifficulty.resetUsage': '切换难度后，使用 /dungeon reset 放弃你的空置副本。',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    '你的副本已经是全新的。自上次重置以来没有人进入过。',
+  'hudChrome.dungeonDifficulty.resetUsage': '使用 /dungeon reset 放弃你的空置副本并重新开始。',
   'hudChrome.dungeonDifficulty.resetLoot': '副本内仍有战利品时无法重置。',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': '重置所有副本？',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    '此操作会放弃先前所选难度下的空置副本。若有未拾取的战利品，则无法重置。',
+    '此操作会放弃你的空置副本，让下一次挑战以所选难度重新开始。锁定不会改变。若仍有人在里面，或有未拾取的战利品，则无法重置。',
   'hudChrome.dungeonDifficulty.resetConfirm': '重置副本',
   'hudChrome.dungeonDifficulty.resetCooldown': '每5分钟只能重置一次副本。',
   'hudChrome.dungeonDifficulty.entryMismatchNormal':
@@ -11040,7 +11091,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'guide.dungeonsPage.templeBody': '沼泽小路旁一座沉没的圣殿，是为好奇者与有备而来者准备的岔路。',
   'guide.dungeonsPage.sanctumName': '墓龙圣所',
   'guide.dungeonsPage.resetBody':
-    '在队伍仍占用着副本时切换难度，旧的占用会滞留一阵，然后自行释放。队长也可以让它们一次性释放：在自己的头像菜单中选择“重置所有副本”，或输入 /dungeon reset。重置只有在难度确实更改之后才生效，只有在里面不再有任何人（无论活着还是倒下）时才生效，只有在里面每具尸体都被拾取干净之后才生效，而且两次重置之间隔着一段短暂的冷却。若你们带着错误的难度来到门口，游戏会在副本开始前告知。团队副本从不以这种方式重置；适用的是它自己的锁定规则。',
+    '已占用的空置副本会保留一段时间，然后自行释放。队长也可以立即释放它们：在自己的头像菜单中选择“重置所有副本”，或输入 /dungeon reset，下一次挑战就会以当前难度重新开始。切换难度也会释放旧难度的副本。重置要求里面没有任何人，无论活着还是倒下，并且所有尸体上的战利品都已拾取干净。重置绝不会缩短锁定时间：已锁定的英雄副本或团队副本仍须等到锁定重置，而且两次重置之间有短暂冷却。若到达入口时难度不符，游戏会在挑战开始前告知。团队副本也以同样方式重置，其自身的锁定和尸体返回规则仍然适用；团队副本切换难度时没有冷却，因此选错难度或无法通过英雄难度的团队可以立即切换回来，重复挑战仍由其自身的锁定限制。',
   'guide.dungeonsPage.resetTitle': '重置你的副本',
   'guide.dungeonsPage.sanctumBody':
     '隐藏在棘峰高处的一座冰川，一条巨龙被封冻在冰中，邪教正焚烧窃取的灵魂将它解冻。从高山隘口一路下行，穿过冰塔、铁匠断裂的锁链与邪教的火堆，直到冰川脚下的冰封湖面。',
@@ -15389,9 +15440,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '一只被驯服上鞍的大蓝史莱姆。它不走路而是蹦跳，在骑手身下晃来晃去，体内还有气泡缓缓上浮。',
   'hudChrome.mounts.name_terrorspark_groundshaker': '骇雷撼地者',
   'hudChrome.mounts.name_rickshaw_mount': '白骨人力车',
-  'hudChrome.mounts.desc_valorsteed': '一匹坚韧稳健的骏马，可提升旅行速度。',
-  'hudChrome.mounts.desc_grag_bear': '一头坚韧稳健的巨熊，可提升旅行速度。',
-  'hudChrome.mounts.desc_stalkglider_snail': '一只坚毅耐久的蜗牛，可提升旅行速度。',
+  'hudChrome.mounts.desc_valorsteed': '一匹坚韧稳健、配有皮革马鞍的骏马。',
+  'hudChrome.mounts.desc_grag_bear': '一头坚韧稳健、配有厚重鞍具的巨熊。',
+  'hudChrome.mounts.desc_stalkglider_snail': '一只坚毅耐久、背负苔藓外壳的蜗牛。',
   'hudChrome.mounts.desc_aether_hover_cycle':
     '一辆强大的魔导机车，专为快速贴地悬浮的战斗穿行而设计。',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -15409,8 +15460,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.emptyDropHint': '较稀有的坐骑由英雄地下城首领掉落或完成裂隙获得。',
   'hudChrome.mounts.clickManage': '点击选择坐骑',
   'hudChrome.mountTraining.mountPrompt': '按 {key} 键骑上训练用英勇战马。',
-  'hudChrome.mountTraining.ownedMountPrompt': '你的缰绳已在背包中，使用它即可骑乘。',
-  'hudChrome.mounts.useToRide': '使用以召唤该坐骑。',
+  'hudChrome.mountTraining.ownedMountPrompt': '在外观菜单中选择坐骑，然后使用骑乘／下骑来骑乘。',
+  'hudChrome.mounts.useToRide':
+    '使用以装备此外观并召唤坐骑。将此物品保留在任意角色的背包或银行中，即可让账号内所有角色使用该外观。骑术训练决定速度。',
   'hudChrome.mountTraining.ridePrompt': '跟随发光的标记前往起点线，然后点击开始比赛。',
   'hudChrome.mountTraining.begin': '开始课程',
   'hudChrome.mountTraining.success': '你已经驯服了英勇战马。',
@@ -17546,6 +17598,19 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '在接下来的{time}内，你可以将此物品交易给共同获得该掉落的玩家。装备后交易期限即告结束。',
   'hudChrome.itemTooltip.perfectedBadge': '臻至完美',
   'hudChrome.itemTooltip.perfectingRank': '完美化：第{rank}阶，共{ranks}阶',
+  'hudChrome.itemTooltip.lootedBy': '{name} 于 {date} 拾取',
+  'hudChrome.itemTooltip.questRewardTo': '{date} 任务奖励予 {name}',
+  'hudChrome.itemTooltip.obtainedBy': '{name} 于 {date} 获得',
+  'hudChrome.itemMenu.itemHistory': '物品历史',
+  'hudChrome.itemHistory.title': '{item}：历史',
+  'hudChrome.itemHistory.passedTo': '{date} 转交给 {name}',
+  'hudChrome.itemHistory.noTransfers': '此物品从未易手。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': '更早的 {count} 次转手未显示。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few': '更早的 {count} 次转手未显示。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many': '更早的 {count} 次转手未显示。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other': '更早的 {count} 次转手未显示。',
+  'hudChrome.itemHistory.close': '关闭',
+  'hudChrome.itemHistory.openAria': '{item}的物品历史',
   'devCommand.actions.kit.description': '为该专精穿上圣所前20级预设装备，背包优先。仅限装备。',
   'devCommand.actions.kit.label': '装备新晋20级预设',
   'devCommand.fields.spec': '专精',
@@ -18018,6 +18083,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.actionCamShoulderLeft': '左 {pct}',
   'hudChrome.options.actionCamShoulderRight': '右 {pct}',
   'hudChrome.options.actionCamShoulderCenter': '居中',
+  'hudChrome.options.firstPersonMode': '第一人称（完全拉近时）',
   'hudChrome.breath.label': '呼吸',
   'hudChrome.breath.drowning': '溺水！',
   'abilityUi.resources.devotion': '虔诚',
@@ -18526,7 +18592,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.dnd': '请勿打扰：与暂离类似，只是发给你的密语会被拦下，而不是送达。',
   'guide.commandsPage.doesHeader': '它的作用',
   'guide.commandsPage.dungeonMode': '在普通与英雄难度之间切换你的地下城。',
-  'guide.commandsPage.dungeonReset': '放弃你自己名下的空副本，也就是改完难度之后要做的那件事。',
+  'guide.commandsPage.dungeonReset': '放弃你自己的空置副本，让下一次挑战以相同或新的难度重新开始。',
   'guide.commandsPage.dungeons':
     '每一座地下城，连同它的门所在的区域、它所设计的队伍人数，以及你当前设定的难度。',
   'guide.commandsPage.emotesBody':
@@ -18946,28 +19012,28 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '除了玛拉的柜台，缰绳是找来的，而不是买来的。它们出自五人地下城和团队副本英雄难度的最终首领，也出自裂隙的完成奖励，而你结束的裂隙越难，它可能留下的缰绳就越稀有。它们按设计就是稀有的收获，没有哪一趟必定给你一副，所以搜寻坐骑的稳妥办法，是把这份搜寻顺路带进你本来就要跑的副本里。本页不会告诉你哪只坐骑挂在哪个首领身上：那一部分留给你自己去弄明白。',
   'guide.mountsPage.collectHeading': '更稀有的坐骑从何而来',
   'guide.mountsPage.firstBody':
-    '英勇战马是全世界唯一一只出售的坐骑。学会骑术之后，玛拉会以 10 金把英勇战马的缰绳卖给你，那副缰绳从此归你所有。其余每一只坐骑都要在世界里赢来，所以几乎每位骑手都是从这匹马开始的。',
+    '学会骑术后，玛拉会以10金币出售英勇战马的缰绳。持有缰绳即可在外观菜单中为账号内所有角色解锁马匹外观。骑术训练已允许你不携带缰绳召唤坐骑；想换个样子时，可以选择马匹或其他已拥有的外观。',
   'guide.mountsPage.firstHeading': '你的第一只坐骑',
   'guide.mountsPage.goodsBody':
-    '坐骑是一件物品，因此它也是经济可以流转的东西。只要缰绳还在你的背包或银行里，这只坐骑就属于你；不过存进银行的缰绳只保住所有权，并不能让你骑：要召唤这头坐骑，你得把缰绳带在身上。玩家的缰绳不带灵魂绑定，因此除非物品本身另有说明，它们可以交易、可以邮寄，也可以像其他任何收获一样在世界市场上架。出手之前有两件事值得先知道：任何商人都不会回购一副缰绳，所以坐骑是一笔你要么留着、要么转手，却无法套现的购买；另外，如果缰绳在你骑乘时离手，坐骑会跟着一起走，而你会被就地放下。',
+    '只要任意角色的背包或个人银行中至少保留一件对应缰绳，账号内所有角色就能使用该收藏坐骑外观。交易、邮寄、上架、出售或以其他方式移走最后一件符合条件的物品，会从外观菜单中移除此项外观。正在使用它的骑乘者会恢复默认马匹外观，继续以训练决定的速度骑乘。\n\n除非物品另有说明，玩家缰绳可以交易、邮寄并在世界市场上架。马匹缰绳还可卖给商人，售价为10金币。其他缰绳保留各自的出售限制。商店坐骑皮肤是独立于缰绳物品的账号外观。',
   'guide.mountsPage.goodsHeading': '缰绳只是寻常货物',
   'guide.mountsPage.heading': '坐骑与骑乘',
   'guide.mountsPage.intro':
-    '坐骑是穿越世界的更快方式，仅此而已。你在马厩学会骑乘，买下第一副缰绳，此后每一条路都会变短。',
+    '选择坐骑外观，在马厩学习骑术，更快地穿越世界。训练决定速度，所有坐骑外观都只改变外观。',
   'guide.mountsPage.learnBody':
-    '骑术是一门只需买一次的技能，它在 {level} 级开启。马厩总管玛拉·希琴在丘陵上经营着疾风崖马厩，她出售骑术训练，价钱是 80 金。正是这一次购买让你得以骑上坐骑，而且它会永远伴着你。\n\n学会之后，玛拉还有一个任务给你：骑术课。接下它，跟着标记走到起始拱门后方那块发光的方砖上，然后按“开始比赛”。她会借给你一匹训练用英勇战马来上这堂课，所以课程本身分文不取。跑完赛道、完成它，再回到她那里领取你的金币和经验。借出的战马课后会回到马厩，所以这堂课教给你的是骑术本身，而不是白送你一匹马。',
+    '达到{level}级后即可学习骑术。玛拉·希钦马厩总管在盖尔克雷斯特马厩以80金币出售骑术训练。基础训练使骑乘移动速度提高{basicSpeed}%。学会后，玛拉还会以{advancedFee}金币出售高级骑术训练，将骑乘移动速度提升至提高{advancedSpeed}%。每个等级的训练仅属于学习它的角色。\n\n学会基础骑术后，接受玛拉的骑术课程任务，跟随标记前往起跑拱门后发光的方格。点击开始比赛，借用训练用的英勇战马。完成赛道后回来领取金币和经验。课程结束时，借来的马匹会返回马厩。',
   'guide.mountsPage.learnHeading': '学习骑乘',
   'guide.mountsPage.raceBody':
     '玛拉围场里的障碍赛道随时向任何人开放，并不只在上课时才能跑。骑上坐骑，站到拱门后方那块发光的方砖上，然后按“开始比赛”。倒计时会让你原地待命，接着计时开始：越过全部七道障碍，并在时间走完之前从拱门骑出去。\n\n只有当你确实凌空越过横杆时，这道障碍才算数，所以轻轻松松从旁边骑过去什么也清不掉。你可以按任意顺序、从任意一侧越过它们，漏掉一道也不是世界末日：绕回来再跳一次就是。死亡、下马或离开围场都会结束这次挑战，而没有什么拦着你再来一次。这里没有费用、没有冷却，除了成绩本身也没有奖品，而且任意多的骑手可以同时跑这条赛道，互不妨碍。',
   'guide.mountsPage.raceHeading': '马厩赛道',
   'guide.mountsPage.rideBody':
-    '这里没有坐骑窗口，也不用设定最爱的坐骑，因为缰绳就是坐骑。从背包里或从动作条格子上使用一副缰绳，你就骑上了那只坐骑。召唤需要一点时间，是一段短短的呼唤而非瞬发，所以它救不了你一次糟糕的拉怪。下马是瞬时的，而且从不会被阻止。\n\n再次使用你正骑着的那副缰绳，就会把这只坐骑收起来。骑乘时使用另一副缰绳，会直接换乘过去，中间不必再召唤一次。“骑乘 / 下骑”键（默认是反引号键）永远只负责让你下来：它是下马的路，不是上马的路。唯一的例外是骑术课，在那里同一个键会召唤玛拉借给你的战马，因为借来的马没有缰绳可点。在手机或平板上，“更多”托盘里的坐骑按钮两个方向都管用。',
+    '打开外观菜单，在坐骑页签选择外观。骑乘／下骑键（默认是反引号键）会召唤使用该外观的坐骑。移动端的骑乘按钮也有相同效果。召唤需要短暂引导，下骑则立即完成。骑乘时可以更换外观，骑术速度不会改变。\n\n也可从背包或动作栏使用缰绳，选用该外观并召唤坐骑。使用当前骑乘的外观会收起坐骑。存放在银行或其他角色身上的缰绳也能解锁相同外观，无需由骑乘者携带。',
   'guide.mountsPage.rideHeading': '上马与下马',
   'guide.mountsPage.speedBody':
-    '速度是坐骑之间唯一的差别。你从玛拉处买来的英勇战马定下了基础脚程，而你在世界里收集到的坐骑都跑得比它快：缰绳越稀有，骑起来越快，并且是分成几个清晰的档位，而不是平滑地往上滑。没有第二阶骑术可以训练，之后也没有升级可以购买。骑术你只付一次钱，从此以后，你用的是哪副缰绳，就决定了你走得多快。',
-  'guide.mountsPage.speedHeading': '速度与档位',
+    '基础骑术训练使骑乘移动速度提高{basicSpeed}%。高级骑术训练使其提高{advancedSpeed}%，玛拉的售价为{advancedFee}金币。所有坐骑外观的速度都由角色的训练等级决定，与稀有度和来源无关。商店皮肤也使用相同的训练速度。',
+  'guide.mountsPage.speedHeading': '骑乘速度与训练',
   'guide.mountsPage.whatBody':
-    '坐骑是你骑乘的野兽，而它给你的东西就是速度。没有护甲，没有伤害，没有属性：它带着你更快地掠过地面，跳跃时也蹦得高一点，这就是这笔交易的全部。游戏里的每一只坐骑都是地面坐骑，所以没有飞行，它们也都不会游泳。',
+    '坐骑是用于已习得骑术的装饰外观，不提供护甲、伤害或战斗属性。骑术训练提高地面旅行速度，骑乘时也能跳得更高。所有坐骑都在地面行动，无法游泳。',
   'guide.mountsPage.whatHeading': '坐骑是什么',
   'guide.mountsPage.whereBody':
     '疾风崖马厩标注在疾风崖的地图上，位于断崖与沉船滩之间的丘陵上。玛拉站在马厩旁，面朝赛场。',
@@ -19024,7 +19090,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '采集工具身上有一个插槽，而制作出来的护符正是嵌进去的东西。采集者储囊会为一次采集的产出多加一个单位；匠人之眼则提升它采上来之物的品级；匠人护符则以同样的方式多加两个单位。前两者是附魔的活计：Eastbrook的工坊宗师Tinker Gizzel会把它们传授给附魔技能达到 25 的附魔师。匠人护符则是工程学的活计，图样由掉落获得，需 100 技能制作；三者都在他的工坊里制作。\n\n新嵌入的护符在普通品质工具上带有 20 次充能，工具稀有度每高一阶再加 10 次，所以同一枚护符嵌在史诗采矿镐上时起始便是 50 次。只有当护符真正改变了结果时才会消耗一次充能，对它没能改善的采集绝不扣减；插槽还可以设成每次使用前询问，让护符一直等到你说“使用一次充能”为止。嵌入一枚新护符，会围绕你当时携带的工具把这个插槽重铸一遍，因此它填到的是那件工具所能容纳的量，而不是退回从前的某个高点；而一次什么都不会改变的重嵌会被挡回来，不会白白吃掉护符。\n\n充能用尽并不会毁掉护符：由工具的主人为插槽补充，每花一份奥术材料补 10 次充能；至于它要哪种材料，取决于你携带的工具与这个插槽历来被填过的最好工具之中更好的那件：普通或优秀工具用铃音之尘，精良工具用铃音精华，史诗工具用铃音碎片。把好工具留在银行并不会换来更便宜的补充，只会在同样价钱下更少；真正降到更便宜一档的老实办法，是带着较差的工具嵌入一枚新护符，把插槽在那里重铸。如果插槽的上限高过你当前工具能填到的量，补充会停在那件工具的上限处，并提醒你带上更好的那一件。若你正是署名这枚护符的制作者，补充只需一半材料；若你还专精该护符所属的行业（采集者储囊与匠人之眼属附魔，匠人护符属工程学），则更少；其他人一律付全价。补充是一段短读条，和这门手艺的其余部分一样。',
   'guide.professions.toolEffectsHeading': '工具效果',
   'guide.progression.ridingBody':
-    '骑术是攀登尽头等着你的东西之一。到了 {level} 级，一位马厩总管会用一笔相当可观的金币把这门技能教给你，而训练赛道上的一堂课会为你挣来第一副缰绳。坐骑不带来任何力量；它只是把世界变小了一些，而在向北长途跋涉之后，这本身就是一种奖赏。',
+    '达到{level}级后，马厩总管玛拉会收费教授基础骑术，之后还提供高级训练。训练决定骑乘速度。在外观菜单中选择坐骑外观；只要缰绳仍在任意角色的背包或银行中，收藏外观就会在账号内共享。',
   'guide.progression.ridingTitle': '学习骑乘',
   'guide.questsPage.availableBody':
     '任务是成串出现的。大多数任务要等你交掉前一个之后才会给出，许多还要求一个最低等级，所以今天没什么可给你的 NPC，等你再升几级、或者结掉手上正做的那个任务之后，也许就有一大堆了。少数任务另有自己的条件，比如骑术课，要买下骑术技能之后才会开启。组队任务会一上来就说明白，列出它建议你带上几名玩家。有些活计可以重复：等上一阵之后可以再接，而任务发布者头顶的标记会告诉你什么时候又轮回来了。',
@@ -20473,11 +20539,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'questUi.worldQuest.traceReaction.elianGold': '描绘得真漂亮！你的脚步赢得了金色的荣耀。',
   'questUi.worldQuest.traceReaction.elianComplete': '符文完成了！用心练习，下次一定会更好。',
   'entities.mobs.buddy_alpaca.name': '羊驼',
-  'entities.mobs.buddy_sapling.name': '小树苗',
-  'entities.items.whistle_sapling.name': '小树苗的哨子',
   'hudChrome.collections.presence.sapling': '细小的树根在你身后轻快地踏过，拨动了落叶。',
-  'hudChrome.collections.buddyLore.sapling':
-    '一株树皮上带着笑容、紫色眼睛里满是好奇的小树。无论你走到哪里，它都会迈着树根，欢快地摇摇摆摆跟上。',
   'entities.mobs.buddy_horse.name': '马',
   'entities.mobs.buddy_ansem.name': '安塞姆',
   'entities.mobs.buddy_crimson_claw_crab.name': '赤钳蟹',
@@ -20504,171 +20566,23 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_triple_t.name': '三重T',
   'entities.mobs.buddy_trollface.name': '巨魔脸',
   'entities.mobs.buddy_tuskhorn_boar.name': '獠角野猪',
-  'entities.items.whistle_alon.name': '阿隆的哨子',
-  'entities.items.whistle_alpaca.name': '羊驼的哨子',
-  'entities.items.whistle_horse.name': '马的哨子',
-  'entities.items.whistle_ansem.name': '安塞姆的哨子',
-  'entities.items.whistle_bull.name': '公牛的哨子',
-  'entities.items.whistle_cate_coin.name': '钱币猫的哨子',
-  'entities.items.whistle_crimson_claw_crab.name': '赤钳蟹的哨子',
-  'entities.items.whistle_crystal_lich.name': '水晶巫妖的哨子',
-  'entities.items.whistle_crystal_tide.name': '水晶潮汐的哨子',
-  'entities.items.whistle_ember_fox.name': '余烬狐的哨子',
-  'entities.items.whistle_emerald_wolf.name': '翡翠狼的哨子',
-  'entities.items.whistle_forgemaw.name': '熔颚·熔融者的哨子',
-  'entities.items.whistle_frog.name': '青蛙的哨子',
-  'entities.items.whistle_frostfire.name': '霜火的哨子',
-  'entities.items.whistle_golden_sentinel.name': '黄金哨兵的哨子',
-  'entities.items.whistle_kekius.name': '凯基乌斯的哨子',
-  'entities.items.whistle_loot_goblin.name': '战利品哥布林的哨子',
-  'entities.items.whistle_moss_hare.name': '苔藓野兔的哨子',
-  'entities.items.whistle_nightfang.name': '夜牙的哨子',
-  'entities.items.whistle_penny_goldspark.name': '潘妮·金火花的哨子',
-  'entities.items.whistle_phantom.name': '幻魂的哨子',
-  'entities.items.whistle_proud_grunt.name': '骄傲步兵的哨子',
-  'entities.items.whistle_raptor.name': '迅猛龙的哨子',
-  'entities.items.whistle_rocky.name': '岩仔的哨子',
-  'entities.items.whistle_skeleton.name': '骷髅的哨子',
-  'entities.items.whistle_solbot.name': '索尔机偶的哨子',
-  'entities.items.whistle_spider.name': '蜘蛛的哨子',
-  'entities.items.whistle_stag.name': '雄鹿的哨子',
-  'entities.items.whistle_tiger.name': '猛虎的哨子',
-  'entities.items.whistle_triple_t.name': '三重T的哨子',
-  'entities.items.whistle_trollface.name': '巨魔脸的哨子',
-  'entities.items.whistle_tuskhorn_boar.name': '獠角野猪的哨子',
-  'entities.items.whistle_sprites.name': '闪烁与微光的哨子',
   'hudChrome.buddyMenu.rename': '重命名伙伴',
   'hudChrome.buddyMenu.nameLabel': '伙伴名字',
   'hudChrome.buddyMenu.autolootEnable': '开启自动拾取',
   'hudChrome.buddyMenu.autolootDisable': '关闭自动拾取',
   'hudChrome.buddyMenu.autolootHint': '你的伙伴会去拾取 30 码内属于你自己的尸体上的战利品。',
   'hudChrome.buddyMenu.cancel': '取消',
-  'hudChrome.collections.title': '狩猎',
-  'hudChrome.collections.close': '关闭狩猎',
-  'hudChrome.collections.keybindLabel': '狩猎',
-  'hudChrome.collections.launcherTitle': '狩猎：伙伴、坐骑与套装',
   'hudChrome.collections.tabs.buddies': '伙伴',
-  'hudChrome.collections.tabs.mounts': '坐骑',
   'hudChrome.collections.state.owned': '已收集',
   'hudChrome.collections.state.notOwned': '未收集',
   'hudChrome.collections.state.unavailable': '尚无法获得',
-  'hudChrome.collections.petKind.beast': '野兽',
-  'hudChrome.collections.petKind.humanoid': '人型生物',
-  'hudChrome.collections.petKind.elemental': '元素生物',
-  'hudChrome.collections.petKind.undead': '亡灵',
-  'hudChrome.collections.petKind.celebrity': '名流',
-  'hudChrome.collections.armor.cloth': '布甲',
-  'hudChrome.collections.armor.leather': '皮甲',
-  'hudChrome.collections.stat.strength': '力量',
-  'hudChrome.collections.stat.agility': '敏捷',
-  'hudChrome.collections.stat.intellect': '智力',
-  'hudChrome.collections.stat.mixed': '混合',
-  'hudChrome.collections.set.owned': '{total} 件中已收集 {owned} 件',
-  'hudChrome.collections.set.bonusLabel': '{pieces} 件套',
-  'hudChrome.collections.set.itemLevel': '装等 {level}',
-  'hudChrome.collections.detail.dropLabel': '掉落自',
-  'hudChrome.collections.detail.drop': '{mob}（{location}），每次击杀 {chance}%',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob}（{location}），每次击杀 {chance}%，英雄难度 {heroicChance}%',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob}（{location}），仅限英雄难度，每次击杀 {chance}%',
-  'hudChrome.collections.detail.globalDrop':
-    '任意敌人，每次击杀 {chance}%，同稀有度 {count} 件中的一件',
-  'hudChrome.collections.detail.fishingDrop': '任意水域钓鱼，每次上钩 {chance}%',
-  'hudChrome.collections.detail.noSource': '游戏中尚无获取途径',
-  'hudChrome.collections.detail.noItem': '尚无物品可以获得',
-  'hudChrome.collections.detail.bindLabel': '绑定',
-  'hudChrome.collections.detail.soulbound': '灵魂绑定',
-  'hudChrome.collections.detail.tradeable': '可交易',
-  'hudChrome.collections.detail.sellLabel': '商人收购价',
-  'hudChrome.collections.detail.noSell': '无法出售',
-  'hudChrome.collections.detail.setLabel': '已收集',
-  'hudChrome.collections.detail.marketLabel': '世界市场',
-  'hudChrome.collections.detail.marketNone': '无上架',
-  'hudChrome.collections.detail.marketChecking': '查询中…',
-  'hudChrome.collections.detail.marketAtMerchant': '在商人处查看',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC 交易所',
-  'hudChrome.collections.detail.exchangeNone': '无上架',
-  'hudChrome.collections.detail.exchangeUnavailable': '此客户端不支持',
-  'hudChrome.collections.detail.honorPrice': '{amount} 荣誉',
-  'hudChrome.collections.detail.marksPrice': '{amount} 英雄徽记',
   'hudChrome.options.showPetNames': '显示宠物名称',
   'hudChrome.warfareShop.companions': '伙伴',
   'itemUi.kind.buddy': '伙伴',
-  'hudChrome.collections.buddyLore.alon':
-    '一位旅人的吉祥物，来自任何地图都不肯承认的道路，总在计划出岔子的地方现身。它看着，它点头，然后什么忙也不帮。',
-  'hudChrome.collections.buddyLore.alpaca':
-    '疾风崖的牧群养它们既为羊毛，也为脾气：暴风雨里没有比它更镇定的。这一只每趟旅程恰好会朝一个人吐口水。',
-  'hudChrome.collections.buddyLore.horse':
-    '东溪谷矮马血统，为果园小径特意培育得矮小，也从没人告诉它自己不是战马。它在你肩旁保持步调，谁曾喂过它一个苹果，它就会跟谁走。',
-  'hudChrome.collections.buddyLore.ansem':
-    '它谈论门扉与黑暗，再问就不肯多说了。夜绽花野的信徒声称它属于他们；可每逢他们举行仪式，它就溜走了。',
-  'hudChrome.collections.buddyLore.bull':
-    '一头狗一般大的东溪谷公牛，这也是唯一让人肯把它养在屋里的理由。可脾气并没跟着一起缩小。',
-  'hudChrome.collections.buddyLore.cate_coin':
-    '一只猫，绝不肯离开自己屁股底下那枚钱币，也从没人见它吃过东西。东溪谷的商人至今还在争论：这两者到底哪一个才是宠物。',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    '远岸的潮间蟹，离水许久之后钳子依旧通红。当年码头工人常让它们在跳板上赛跑赌钱。',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    '尼思拉克西斯本体的一枚碎片，至今仍鸣响着塑成它的那股寒意。谁把它从团队副本的残骸里拽出来，它就听谁的——而且始终没有原谅那个人。',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    '一只乘着自己那滴海玻璃的潮汐精灵，被从东溪谷到远岸只想钓顿晚饭的渔人从静水里勾了上来。它把捞起它的那捧水一直带在身边，怎么劝也不肯回去。',
-  'hudChrome.collections.buddyLore.ember_fox':
-    '出自东溪谷树篱间的母狐，得名于冬日枯丛中透出的炭红皮毛。那里的猎人几代之前就不再打幼崽的主意，改成替它们留下食物。',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    '一只怨灵林的幼狼，皮毛在几乎照不到林底的树冠余光里泛着绿色。守林人会把森林留下的每一只孤儿养大。',
-  'hudChrome.collections.buddyLore.sprites':
-    '两只小小的火精，一金一青，总也说不好谁该打头。靠得够近时，它们会融成一团绿焰，随后又笑着分开。',
-  'hudChrome.collections.buddyLore.forgemaw':
-    '在最后泉源熔炉中锻造，却始终没有真正完工——锤声未歇，它便自己走出了伊格尼瓦的铸场。只有英雄难度的下潜才能找到它：这熔融之物总会回到造出它的那座炉子，然后跟着两度熬过烈火的人回家。',
-  'hudChrome.collections.buddyLore.frog':
-    '泥沼湿地把它们养得肥壮而无忧无虑，整夜在苇丛里高歌。沼泽向导都赌咒说，船上载着一只就绝不会搁浅。',
-  'hudChrome.collections.buddyLore.frostfire':
-    '生于霜幕之境一处温泉涌出冰原的地方，它始终没弄明白自己属于哪一半。冷天里冒着热气，暖处又直打哆嗦。',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    '琥珀秋境的守望甲虫，被自己长大的那片树脂镀成了金色。这名字比树脂更古老：早在有人想到装取树液之前，就已有某种哨兵守着那些林子了。',
-  'hudChrome.collections.buddyLore.kekius':
-    '一位来历不明的欢笑同伴，被疾风崖的赛马场收作吉祥物。发誓靠它转运的马厩换了四家，它还在。',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    '它跟着每一个身上带着英雄徽记的人，却一次也没被抓到偷东西。军需官维克斯坚称，这压根说明不了任何问题。',
-  'hudChrome.collections.buddyLore.moss_hare':
-    '柳泽沼地的野兔，一辈子卧在湿泥炭里，长出了一身绿毛。沼泽的草药师视它们为吉兆，绝不肯把落在门前的赶走。',
-  'hudChrome.collections.buddyLore.nightfang':
-    '夜绽花野的年轻猎手，即便以同类的标准衡量也安静得出奇。它跟着人只为作伴，猎物从不比飞蛾更大。',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    '一位侏儒工匠的学徒，按小时收费，而且每一枚铜板都物有所值。护甲匠霍德当年为抵一笔债收下了她，如今谁揣着一千金，他就把这份差事卖给谁。',
-  'hudChrome.collections.buddyLore.phantom':
-    '来自怨灵林古冢的巴掌大幽魂，只有一层布、没有骨头，会出现在一个明明合好的背包里，然后为了作伴留下来。没人弄清它想要什么，而它一次也没试过吓唬谁。',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    '战备仓库的一名老兵，敬礼保住了，军衔丢了。战帅德拉文·科尔会把这样一位交给任何一个荣誉足以懂得那代价的士兵。',
-  'hudChrome.collections.buddyLore.raptor':
-    '龙裔荒原的雏龙种，还没学会自己能跑多快就被转手卖掉。每一位新主人都被叮嘱要喂饱它，而没有一个需要被叮嘱第二遍。',
-  'hudChrome.collections.buddyLore.rocky':
-    '荆峰高地碎石坡上的石壳爬行者，行动迟缓，且彻底心无挂碍。矿工养着它们，是因为它们总在塌方前一瞬静止不动。',
-  'hudChrome.collections.buddyLore.skeleton':
-    '它从怨灵林的古冢里爬出来，掸了掸自己身上的土，从此就跟着人走。这副骨头当初是谁的，至今没人查清。',
-  'hudChrome.collections.buddyLore.solbot':
-    '一具以阳光为食的小型自动机，从龙裔荒原的火山灰里半埋着挖出来时仍在走动。造它的作坊没在外壳上留下任何印记。',
-  'hudChrome.collections.buddyLore.spider':
-    '怨灵林的织网者，巴掌大小，会把任何装着它的背包重新布置一遍。那些蛛丝比它替换掉的线还结实。',
-  'hudChrome.collections.buddyLore.stag':
-    '常青园的血脉，由守林人昔日骑乘的巨鹿一代代选育而来。有人抬手，它仍会低下头——那是比这头鹿本身更古老的习惯。',
-  'hudChrome.collections.buddyLore.tiger':
-    '一身棕榈湾的斑纹，长在一头从没见过棕榈湾的兽身上：自从旧日兽苑关闭，这一支血脉便一直圈养至今。它只听哨声，此外什么也不应。',
-  'hudChrome.collections.buddyLore.triple_t':
-    '某样东西的三份，或是同一样东西重复三遍。各家说法互相矛盾，而这生物又从不肯老实待着让人数清。',
-  'hudChrome.collections.buddyLore.trollface':
-    '怨灵林放出来、又不肯收回去的一张咧嘴笑脸。每一次试图描述它的尝试，都以描述者自己笑场放弃告终。',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    '荆峰高地的种，被牧人刻意育成短腿，图的是一头拱不倒篱笆的野猪。脾气倒是原封不动地留下来了。',
   'entities.mobs.buddy_emberfall_phoenix.name': '烬落凤凰',
-  'entities.items.whistle_emberfall_phoenix.name': '烬落凤凰的哨子',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    '每逢秋天它便燃尽成一粒余烬，到了春天又从自己的灰里重新升起——关于它，谁也说不出更多了。从没有人找到过它的巢，也从没有人捉到过同一只两次。',
   'hudChrome.collections.state.pending': '有什么在跟着你',
   'hudChrome.collections.presenceDefault': '你感觉到有什么在注视着你。',
   'hudChrome.collections.revealed': '{name}决定跟随你。',
-  'hudChrome.collections.cosmeticUnlocked': '{name}的新外观：{look}。',
   'hudChrome.collections.presence.ember_fox': '有个温暖的小东西正轻手轻脚地跟在你身后。',
   'hudChrome.collections.presence.moss_hare': '泥炭里的一阵窸窣声与你的脚步保持着同步。',
   'hudChrome.collections.presence.frog': '你每走一步，就有一声湿漉漉的蛙鸣回应。',
@@ -20703,45 +20617,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.collections.presence.crystal_tide': '一滴海水拒绝从你的钓线上落下。',
   'hudChrome.collections.presence.phantom': '你身后的空气静得有些过分。',
   'hudChrome.collections.presence.emberfall_phoenix': '一股如同封火般的暖意落在你的背后。',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': '霜缚',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': '雷光',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': '灰烬',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': '白热',
-  'hudChrome.collections.cosmetic.stag_acorn': '橡果之冠',
-  'hudChrome.collections.cosmetic.stag_gilded': '镀金',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': '青翠',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': '战争领主',
   'hudChrome.collections.actions.summon': '召唤',
   'hudChrome.collections.actions.dismiss': '解散',
-  'hudChrome.collections.actions.wear': '穿戴',
-  'hudChrome.collections.actions.remove': '卸下',
-  'hudChrome.collections.looks.title': '外观',
-  'hudChrome.collections.looks.unlocked': '已解锁',
-  'hudChrome.collections.looks.locked': '未解锁',
-  'hudChrome.collections.looks.worn': '穿戴中',
-  'hudChrome.collections.looks.none': '这个伙伴还没有可用的外观',
-  'hudChrome.collections.source.bossLabel': '首领宠物',
-  'hudChrome.collections.source.bossDrop': '{mob}（{location}），每次击杀每位玩家{chance}%',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob}（{location}），每位玩家{chance}%，英雄难度{heroicChance}%',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob}（{location}），仅限英雄难度，每位玩家{chance}%',
-  'hudChrome.collections.source.rollNote': '每位玩家单独掷骰；不会有人因队友而失去机会。',
-  'hudChrome.collections.source.deedLabel': '获取途径',
-  'hudChrome.collections.source.deed': '功绩：{deed}',
-  'hudChrome.collections.source.challengeLabel': '挑战',
-  'hudChrome.collections.source.challengeSpeed': '在开怪后{seconds}秒内击败{mob}',
-  'hudChrome.collections.source.challengeDps': '在整场战斗中对{mob}保持每秒{dps}点伤害',
-  'hudChrome.collections.source.craftLabel': '制作',
-  'hudChrome.collections.source.craft': '{item}（{profession}配方）',
-  'hudChrome.collections.source.grantLabel': '颁发',
-  'hudChrome.collections.source.grantOnly': '赛季奖励：每月天梯与最高战斗记录奖励',
-  'hudChrome.collections.source.tokenLabel': '凭证',
-  'hudChrome.collections.source.token': '{item}，使用一次即可让伙伴跟随',
-  'entities.items.charm_stag_acorn.name': '橡果之冠护符',
-  'entities.items.charm_stag_gilded.name': '镀金护符',
   'itemUi.kind.buddyCosmetic': '伙伴外观',
-  'hudChrome.collections.cosmetic.frog_sapphire': '蓝宝石蛙',
   'hudChrome.deeds.buddiesSection': '伙伴',
   'hudChrome.deeds.buddiesNone': '无伙伴',
   'hudChrome.deeds.buddiesEmpty': '收集一个伙伴，即可从此处召唤。',
@@ -21304,11 +21182,12 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.preview': '预览',
   'hudChrome.cosmetics.previewAria': '预览{name}',
   'hudChrome.cosmetics.cardAria': '{name}，{rarity}',
-  'hudChrome.cosmetics.mountsNoMount': '先拥有一匹坐骑：皮肤需要可骑乘的对象。',
+  'hudChrome.cosmetics.mountsNoMount': '向马厩总管玛拉学习骑术后，即可召唤坐骑。',
   'hudChrome.cosmetics.skinsEmpty': '尚未拥有武器皮肤。请访问 WOC 商店。',
   'hudChrome.cosmetics.skinsApplyHint': '装备一件{type}后即可应用此皮肤。',
   'hudChrome.cosmetics.mechEmpty': '尚未拥有战斗机甲配色。',
-  'hudChrome.cosmetics.mountsIntro': '坐骑皮肤会覆盖在此角色骑乘的任何坐骑上，绝不改变速度。',
+  'hudChrome.cosmetics.mountsIntro':
+    '在这里选择坐骑外观。骑术训练决定速度。将坐骑物品保留在任意角色的背包或银行中，即可让账号内所有角色使用该外观。',
   'hudChrome.cosmetics.mechIntro': '战斗机甲会替换此角色的身体。一次只能穿戴一种配色。',
   'hudChrome.auraTracks.mode': '开启',
   'hudChrome.auraTracks.row': '{aura} 对 {unit} 生效',
@@ -22085,6 +21964,10 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '缠缚根须的施法时间缩短0.5秒。受到伤害不再延迟你的施法。',
   'entities.itemSets.vanguard_druid_balance.bonus4':
     '施放缠缚根须后，你可以在移动中施法，并使移动速度提高20%，持续4秒。每20秒最多触发一次。',
+  'hudChrome.cosmetics.notCollected': '尚未收集',
+  'itemUi.vendor.basicRiding': '骑术训练',
+  'itemUi.vendor.advancedRiding': '高级骑术训练',
+  'itemUi.vendor.ridingSpeed': '骑乘时的移动速度提高{speed}%。适用于所有坐骑。',
   'entities.letters.world_quest_reward.sender': '渡鸦邮局',
   'entities.letters.world_quest_reward.subject': '你的世界任务奖励',
   'entities.letters.world_quest_reward.body':
@@ -23084,8 +22967,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.skinPreview':
     '改变你所装备的剑的样子，适用于账号中的所有角色。仅为外观：没有属性。',
   'hudChrome.guildHall.skinOffer': '剑的外观：{skin}',
-  'hudChrome.guildHall.mountPreview': '地面坐骑：骑乘时移动速度+{pct}%。需要骑术训练。',
   'hudChrome.guildHall.mountOffer': '坐骑：{mount}',
+  'hudChrome.guildHall.mountPreview': '账号内所有角色通用的坐骑外观。移动速度由你的骑术训练决定。',
   'hudChrome.guildHall.refused.range': '站到军需官身边才能交易。',
   'hudChrome.guildHall.reward.one': '{count}枚灯火印章',
   'hudChrome.guildHall.reward.few': '{count}枚灯火印章',
@@ -24114,4 +23997,82 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'bossJournal.temple.ysolei.heroicDrownedMoon':
     '溺月：每{moonEvery}秒，一只月之孽生会从洪水中爬出来。',
   'bossJournal.temple.ysolei.heroicTears': '每波{count}颗月光之泪，坠月的读条时间为{cast}秒。',
+  // Zulgar's hunt rework (the sun glyphs, the Hunting Spear, The Idol Wakes):
+  // the M16 non-Latin fills of its new English.
+  'hudChrome.auraEffect.wildheart.sunstruck': '被点亮的太阳符文灼伤：移动速度降低{pct}%。',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed': '被点亮的太阳符文灼伤：受到的伤害提高{pct}%。',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    '在此效果结束前，任何太阳符文都无法灼伤他。他踏过的已点亮符文会保持点亮。',
+  'hudChrome.auraEffect.wildheart.pinned':
+    '一支狩猎之矛把你钉在原地。你每{every}秒流血，受到{bleed}点物理伤害（英雄难度{heroicBleed}点），并且无论你站在哪里，荒野之心脉冲都会命中你，伤害提高{pulse}%。队友可以用{pull}秒拔出长矛。如果没有其他人能帮忙，你可以用{wrench}秒自己拔出。{seconds}秒后它会自行松脱。',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    '石美洲豹已经苏醒。每{every}秒，它会在地面预警{warning}秒后，轮流向平台的一半吐息：对该半场的所有人造成{min}到{max}点自然伤害（英雄难度{heroicMin}到{heroicMax}点）。祖尔加会保持美洲豹化身直到死亡，并且每{seconds}秒更换猎物（英雄难度{heroicSeconds}秒）。',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    '没有其他人能点亮太阳符文。站在一个熄灭的符文上{seconds}秒将它点亮，再把祖尔加引过去',
+  'hudChrome.wildheartAlert.pinnedTitle': '被钉住了！',
+  'hudChrome.wildheartAlert.pinnedLine':
+    '需要队友拔出狩猎之矛。被钉住时，荒野之心脉冲对你的伤害更高',
+  'hudChrome.wildheartAlert.pinnedSelfLine': '没有人能来帮忙：在荒野之心脉冲落下前自己拔出狩猎之矛',
+  'hudChrome.wildheartAlert.sunstruckTitle': '祖尔加被烈日灼伤了！',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    '在效果结束前他受到的伤害提高{pct}%：现在使用你最强的攻击',
+  'hudChrome.wildheartAlert.spearTitle': '有队友被钉住了！',
+  'hudChrome.wildheartAlert.spearLine': '跑到狩猎之矛旁，在荒野之心脉冲落下前把它拔出来',
+  'hudChrome.wildheartAlert.glyphTitle': '点亮太阳符文',
+  'hudChrome.wildheartAlert.glyphLine':
+    '站在熄灭的太阳符文上{seconds}秒将它点亮。祖尔加踏过它时，会在{duration}秒内受到的伤害提高{pct}%',
+  'hudChrome.wildheartAlert.glyphLightingTitle': '正在点亮太阳符文',
+  'hudChrome.wildheartAlert.glyphLightingLine': '留在符文上直到它被点亮。离开就要重新开始',
+  'hudChrome.wildheartAlert.breathTitle': '神像吐息！',
+  'hudChrome.wildheartAlert.breathLine': '石美洲豹即将向平台的这一半吐息。跑到另一半去',
+  'hudChrome.kitUse.freeLine':
+    '把长矛从地面拔出，解救被钉住的人。受到攻击不会打断你，移动或昏迷会打断',
+  'hudChrome.kitUse.freeKey': '拔出{name}',
+  'hudChrome.kitUse.freeTap': '点击这里拔出{name}',
+  'hudChrome.kitUse.freeClick': '单击这里拔出{name}',
+  'hudChrome.kitUse.freeFar': '靠近到{range}码内才能拔出它',
+  'hudChrome.kitUse.freeAria': '拔出{name}',
+  'hudChrome.kitUse.freeUsingLine': '保持不动以拔出长矛：移动或昏迷会打断',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': '狩猎之矛',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': '神像苏醒',
+  'abilityUi.cast.kituse_wildheart_pull_spear': '拔出长矛',
+  'abilityUi.cast.wildheart_idols_breath': '神像吐息',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': '点亮中',
+  'abilityUi.cast.wildheart_sun_glyph_cold': '冷却中',
+  'entities.mobs.wildheart_hunting_spear.name': '狩猎之矛',
+  // Choirmother Selthe's Score (the Drowned Temple alert, her ward and her
+  // broken voice, her two bars): the M16 non-Latin fills of its new English.
+  'hudChrome.templeAlert.melodyTitle': '乐谱',
+  'hudChrome.templeAlert.melodyLine': '观察月亮地砖依次奏响。与另一名玩家轮流踩出相同顺序',
+  'hudChrome.templeAlert.melodyDarkLine': '在地砖熄灭前记住顺序。与另一名玩家轮流踩出相同顺序',
+  'hudChrome.templeAlert.answerTitle': '回应乐谱！',
+  'hudChrome.templeAlert.answerLine':
+    '轮流踩踏：踩上标记为{place}的月亮地砖。已奏响：{done}/{total}',
+  'hudChrome.templeAlert.answerDarkLine':
+    '轮流凭记忆重复顺序。再次踩同一块地砖前先离开。已奏响：{done}/{total}',
+  'hudChrome.templeAlert.stepOffTitle': '先走下去，再踏上来',
+  'hudChrome.templeAlert.stepOffLine':
+    '月光石板只有在有人踏上时才会奏响。离开这块石板，然后重新踏上去',
+  'hudChrome.templeAlert.falseTitle': '错音！',
+  'hudChrome.templeAlert.falseLine': '那块石板的顺序不对。回应将从第一块石板重新开始',
+  'hudChrome.templeAlert.brokenTitle': '塞尔瑟的嗓音破碎了！',
+  'hudChrome.templeAlert.brokenLine': '在效果结束前，她受到的伤害提高{pct}%：现在使用你最强的攻击',
+  'hudChrome.templeAlert.timeAria': '剩余{seconds}秒',
+  'hudChrome.auraEffect.temple.scoreWard':
+    '正在吟唱乐谱：在结束前不会受到伤害。在乐句结束前，按石板响起的顺序踏上月光石板，即可使她的嗓音破碎。轮流踩踏：奏响音符后，须等待另一名玩家奏响下一个正确音符。唯一的幸存者可以独自完成。如果乐句先结束，不谐之音会对庭院中的所有人造成{min}到{max}点冰霜伤害（英雄难度下为{heroicMin}到{heroicMax}点）。',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    '她的嗓音已破碎：在此效果结束前，她受到的伤害提高{pct}%。',
+  'abilityUi.cast.temple_score': '乐谱',
+  'abilityUi.cast.temple_score_answer': '回应乐谱',
+  // The Dungeon Finder's line for Selthe's Score (M16).
+  'hudChrome.finder.mech.the_score':
+    '乐谱（她会两次在月光石板上吟唱旋律：按石板响起的顺序踏上去，即可使她的嗓音破碎）',
+  'hudChrome.templeAlert.spentTitle': '该由另一道声音应答',
+  'hudChrome.templeAlert.spentLine':
+    '另一名玩家奏响下一个正确音符前，你无法奏响地砖。已奏响：{done}/{total}',
+  'hudChrome.auraEffect.temple.spentVoice':
+    '另一名玩家奏响下一个正确音符前，你无法奏响月亮地砖。在此期间踩上地砖不会重置应答，也不会对你造成伤害。无法驱散。当你成为同一副本内唯一存活的玩家或乐谱结束时移除。',
+  'hudChrome.options.firstPersonBody': '显示身体',
+  'hudChrome.options.firstPersonNoBody': '不显示身体',
+  'hudChrome.options.firstPersonOff': '关闭',
 };

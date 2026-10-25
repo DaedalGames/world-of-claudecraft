@@ -475,9 +475,24 @@ export const pl_PL: EnTranslations = {
       "returning": "Przynosi twoje przedmioty",
       "waiting": "Czeka na zwrot twoich przedmiotów",
       "bags": "Wyślij do banku",
+      "bagsVault": "Wyślij materiały do skarbca",
       "bank": "Przynieś z banku",
+      "vault": "Przynieś ze skarbca. Każdy wybór sprowadza cały wiersz.",
       "inventory": "Ekwipunek",
       "bankTitle": "Bank",
+      "vaultTitle": "Skarbiec Materiałów",
+      "storeTabs": "Magazyn kuriera",
+      "vaultCap": "Mieści {cap} sztuk każdego materiału",
+      "vaultEmpty": "Twój skarbiec jest pusty.",
+      "vaultLocked": "Odblokuj Skarbiec Materiałów u bankiera, by używać go z kurierem.",
+      "boundBank": "W drodze do banku",
+      "boundVault": "W drodze do Skarbca Materiałów",
+      "boundAccount": "W drodze do banku innej postaci",
+      "accountTitle": "Inne postacie",
+      "accountBank": "Przynieś z tego banku. Postać musi być wylogowana, gdy dotrze kurier.",
+      "bagsAccount": "Wyślij do banku postaci {name}",
+      "bagsAccountNone": "Wybierz postać, której chcesz wysłać przedmioty.",
+      "accountPlanned": "Plan dla {name}: {count} stosów. Wybór innej postaci je zastępuje.",
       "capacity": "{used} / {capacity} miejsc",
       "cargo": "Ekwipunek kuriera",
       "empty": "Brak przedmiotów",
@@ -485,7 +500,7 @@ export const pl_PL: EnTranslations = {
       "selected": "Wybrane stosy: {count} / {limit}",
       "select": "Wybierz {item}, {count}",
       "selectedItem": "Odznacz {item}, {count}",
-      "instructions": "Wybierz całe stosy. Kurier najpierw je wpłaca, a potem odbiera zamówione przedmioty. Nie można wysyłać przedmiotów zadań.",
+      "instructions": "Wybierz całe stosy do swojego banku, Skarbca Materiałów lub innej postaci. Kurier najpierw je zdeponuje, a potem odbierze zamówione przedmioty. Przedmiotów zadaniowych nie można wysyłać.",
       "membership": "Odnów członkostwo, aby rozpocząć kolejną podróż.",
       "cargoSafe": "Zwrócone przedmioty trafiają do nadmiaru przy pełnych torbach. Po dostawie kurier znika do ponownego przywołania.",
       "unavailable": "Przywołaj kuriera, aby zaplanować dostawę."
@@ -862,7 +877,7 @@ export const pl_PL: EnTranslations = {
       "titleOffer": "Tytuł: {title}",
       "titlePreview": "Wyświetlane jako {preview}",
       "mountOffer": "Wierzchowiec: {mount}",
-      "mountPreview": "Wierzchowiec naziemny: +{pct}% szybkości ruchu podczas jazdy. Wymaga nauki jeździectwa.",
+      "mountPreview": "Wygląd wierzchowca dla każdej postaci na koncie. Szybkość zależy od nauki jazdy.",
       "skinOffer": "Wygląd miecza: {skin}",
       "skinPreview": "Zmienia wygląd założonego miecza na każdej postaci na twoim koncie. Tylko wygląd: bez statystyk.",
       "buy": "Kup",
@@ -2538,7 +2553,7 @@ export const pl_PL: EnTranslations = {
       "riding": "Jeździectwo",
       "mount": "Dosiądź",
       "dismount": "Zsiądź",
-      "useToRide": "Użyj, aby przywołać tego wierzchowca.",
+      "useToRide": "Użyj, aby założyć ten wygląd i przywołać wierzchowca. Zachowaj przedmiot w torbach lub banku dowolnej postaci, aby udostępnić wygląd całemu kontu. Szybkość zależy od nauki jazdy.",
       "emptyTitle": "Brak zebranych wierzchowców",
       "emptyStableHint": "Osiągnij poziom 20 i weź lekcje jeździectwa u Stajennej Marli w Stajniach Highwatch, na zachód od Highwatch.",
       "emptyDropHint": "Rzadsze wierzchowce wypadają z bossów lochów heroicznych i ukończeń Szczelin.",
@@ -2568,9 +2583,9 @@ export const pl_PL: EnTranslations = {
       "name_rickshaw_mount": "Spętana Kośćmi Riksza",
       "name_wobbles_slime": "Chwiejka, Śluz",
       "name_nightwing_chimera": "Chimera Nocnego Skrzydła",
-      "desc_valorsteed": "Wytrzymały, pewny kroku rumak, który zapewnia zwiększoną prędkość podróżowania.",
-      "desc_grag_bear": "Wytrzymały, pewny kroku niedźwiedź, który zapewnia zwiększoną prędkość podróżowania.",
-      "desc_stalkglider_snail": "Krzepki, powoli, lecz niezmordowanie pełznący ślimak, który zapewnia zwiększoną prędkość podróżowania.",
+      "desc_valorsteed": "Wytrzymały, pewnie stąpający rumak ze skórzanym siodłem.",
+      "desc_grag_bear": "Wytrzymały, pewnie stąpający niedźwiedź z ciężkim siodłem.",
+      "desc_stalkglider_snail": "Krzepki, niespieszny ślimak z omszałą muszlą.",
       "desc_aether_hover_cycle": "Potężny magitechniczny motocykl zaprojektowany do szybkiego, nisko unoszącego się przemieszczania w walce.",
       "desc_shadowjump_toad": "Ogromna, pewna kroku olbrzymia ropucha, wyszkolona w błyskawicznych, cienistych skokach, które pokonują każdy teren.",
       "desc_stormfeather_griffin": "Dostojny gryf burzy, który skrada się po ziemi na szponach okutych runami, ze złożonymi skrzydłami.",
@@ -2593,7 +2608,7 @@ export const pl_PL: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Naciśnij {key}, aby dosiąść treningowego Rumaka Męstwa.",
-      "ownedMountPrompt": "Twoje wodze są w twoich torbach. Użyj ich, aby jeździć.",
+      "ownedMountPrompt": "Wybierz wierzchowca w Kosmetykach. Użyj Dosiądź / Zsiądź, aby jechać.",
       "ridePrompt": "Podążaj za świecącym znacznikiem do linii startu, a następnie naciśnij Rozpocznij wyścig.",
       "begin": "Rozpocznij lekcję",
       "success": "Oswoiłeś Rumaka Męstwa.",
@@ -2864,6 +2879,10 @@ export const pl_PL: EnTranslations = {
       "actionCamShoulderLeft": "Lewo {pct}",
       "actionCamShoulderRight": "Prawo {pct}",
       "actionCamShoulderCenter": "Środek",
+      "firstPersonMode": "Pierwsza osoba (maksymalne przybliżenie)",
+      "firstPersonOff": "Wyłączone",
+      "firstPersonBody": "Pokaż ciało",
+      "firstPersonNoBody": "Bez ciała",
       "showAttackButton": "Pokaż Przycisk Ataku",
       "showDailyRewardsChest": "Pokaż skrzynię codziennych nagród",
       "mobileCameraJoystick": "Joystick aparatu",
@@ -3826,6 +3845,12 @@ export const pl_PL: EnTranslations = {
       "linkHint": "Kliknij z Shift, aby wstawić link do tego przedmiotu na czacie."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "Nie pokazano {count} wcześniejszego przekazania.",
+        "few": "Nie pokazano {count} wcześniejszych przekazań.",
+        "many": "Nie pokazano {count} wcześniejszych przekazań.",
+        "other": "Nie pokazano {count} wcześniejszych przekazań."
+      },
       "guildBoardShown": {
         "one": "{count} gildia",
         "few": "{count} gildie",
@@ -4278,6 +4303,8 @@ export const pl_PL: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Ustaw trudność podziemia: Heroiczna",
       "setNormal": "Ustaw trudność podziemia: Normalna",
+      "unappliedNormal": "Wybrano Heroiczny. Obecne instancje nadal są Normalne.",
+      "unappliedHeroic": "Wybrano Normalny. Obecne instancje nadal są Heroiczne.",
       "resetAll": "Zresetuj wszystkie instancje",
       "resetDone": "Wszystkie instancje zostały zresetowane.",
       "resetNone": "Nie masz żadnych instancji do zresetowania.",
@@ -4287,10 +4314,11 @@ export const pl_PL: EnTranslations = {
       "resetSameDifficulty": "Zmień trudność podziemia przed zresetowaniem tych instancji. Puste instancje resetują się automatycznie po 5 minutach.",
       "resetLoot": "Nie możesz zresetować instancji, dopóki w środku pozostaje łup.",
       "resetConfirmTitle": "Zresetować wszystkie instancje?",
-      "resetConfirmBody": "Spowoduje to porzucenie pustych instancji z poprzednio wybranego poziomu trudności. Nieodebrany łup uniemożliwi reset.",
+      "resetConfirmBody": "Porzucasz swoje puste instancje, aby kolejny przebieg zaczął się od nowa na wybranym poziomie trudności. Blokady się nie zmieniają. Każdy gracz wewnątrz lub nieodebrany łup uniemożliwia reset.",
       "resetConfirm": "Zresetuj instancje",
       "resetCooldown": "Instancje można resetować tylko raz na 5 minut.",
-      "resetUsage": "Po zmianie trudności użyj /dungeon reset, aby porzucić puste instancje.",
+      "resetAlreadyFresh": "Twoje instancje są już odświeżone. Nikt do nich nie wszedł od ostatniego resetu.",
+      "resetUsage": "Użyj /dungeon reset, aby porzucić swoje puste instancje i zacząć je od nowa.",
       "entryMismatchNormal": "Ta instancja ma ustawioną normalną trudność. Użyj opcji Zresetuj wszystkie instancje, aby rozpocząć nowy heroiczny przebieg.",
       "entryMismatchHeroic": "Ta instancja ma ustawioną heroiczną trudność. Użyj opcji Zresetuj wszystkie instancje, aby rozpocząć nowy normalny przebieg."
     },
@@ -4623,7 +4651,17 @@ export const pl_PL: EnTranslations = {
         "pollinated": "Dotknięcie Strąka natychmiast tworzy Ciernisty Pęd. Unikaj nasion i pozwól czystemu graczowi je zdeptać; nietknięty strąk kiełkuje po {seconds} s (na heroicznym zakopuje się po {heroic} s i wyrasta przy najbliższym graczu).",
         "prey": "Zulgar na ciebie poluje. Przeprowadź go przez świecący słoneczny glif, aby spowolnić go o {slow}%. Gdy cię złapie, Poszarpanie zada {damage} obrażeń ({heroic} na heroicznym) i powali cię na {stun} s.",
         "avatar": "Porusza się o {pct}% szybciej i poluje na Zwierzynę. Spowolnienia i unieruchomienia działają, ogłuszenia trwają o połowę krócej.",
-        "vanished": "Ukryty i odporny na obrażenia. Za chwilę skoczy na najdalszego gracza."
+        "vanished": "Ukryty i odporny na obrażenia. Za chwilę skoczy na najdalszego gracza.",
+        "sunstruck": "Trafiony rozświetlonym słonecznym glifem: porusza się o {pct}% wolniej.",
+        "sunstruckExposed": "Trafiony rozświetlonym słonecznym glifem: otrzymuje o {pct}% więcej obrażeń.",
+        "sunWary": "Żaden słoneczny glif nie może go trafić do końca efektu. Rozświetlony glif, przez który przejdzie, pozostaje rozświetlony.",
+        "pinned": "Włócznia łowiecka przytrzymuje cię w miejscu. Krwawisz za {bleed} obrażeń fizycznych ({heroicBleed} na Heroicznym) co {every} s, a Puls Dzikiego Serca trafia cię wszędzie i zadaje o {pulse}% więcej obrażeń. Sojusznik może wyciągnąć włócznię w {pull} s. Jeśli nikt inny nie jest wolny, wyciągnij ją sam w {wrench} s. Puszcza po {seconds} s.",
+        "idolAwake": "Kamienny jaguar się obudził. Co {every} s zionie na jedną połowę tarasu, a potem drugą, po ostrzeżeniu na ziemi trwającym {warning} s: od {min} do {max} obrażeń od natury ({heroicMin} do {heroicMax} na Heroicznym) dla wszystkich w tej połowie. Zulgar pozostaje Awatarem Jaguara do śmierci i wybiera nową Zwierzynę co {seconds} s ({heroicSeconds} s na Heroicznym)."
+      },
+      "temple": {
+        "scoreWard": "Śpiewa partyturę: nie otrzymuje obrażeń, dopóki nie skończy. Wejdź na księżycowe płytki w kolejności, w jakiej zabrzmiały, przed końcem zwrotki, by złamać jej głos. Zmieniajcie się: po nucie zaczekaj, aż inny gracz zagra kolejną poprawną nutę. Jedyny ocalały może skończyć sam. Jeśli zwrotka skończy się wcześniej, Dysonans zadaje wszystkim na dziedzińcu od {min} do {max} obrażeń od mrozu ({heroicMin} do {heroicMax} na Heroicznym).",
+        "brokenVoice": "Jej głos jest złamany: otrzymuje o {pct}% więcej obrażeń do końca efektu.",
+        "spentVoice": "Nie możesz odegrać kolejnej księżycowej płytki, dopóki inny gracz nie zagra następnej poprawnej nuty. Wejście na płytkę podczas efektu nie zeruje odpowiedzi ani cię nie rani. Nie można rozproszyć. Usuwane, gdy jesteś jedynym żywym graczem w instancji lub partytura się kończy."
       },
       "bastion": {
         "brineColumn": "Unieruchomiony w kolumnie morskiej wody: otrzymujesz {min} do {max} obrażeń natury co {tick} s przez maksymalnie {seconds} s. Przerwij lub ogłusz Akolitę Przypływu, aby zakończyć efekt.",
@@ -5256,6 +5294,9 @@ export const pl_PL: EnTranslations = {
       "partyTradeWindow": "Możesz wymienić ten przedmiot z graczami, z którymi wypadł, jeszcze przez {time}. Założenie go kończy okno wymiany.",
       "perfectedBadge": "Udoskonalone",
       "perfectingRank": "Doskonalenie: ranga {rank} z {ranks}",
+      "lootedBy": "Złupiono przez {name} dnia {date}",
+      "questRewardTo": "Nagroda za zadanie dla {name} dnia {date}",
+      "obtainedBy": "Zdobyto przez {name} dnia {date}",
       "materialSourceGatherer": "{count} × zebrane przez {name}",
       "trophySkullSource": "{count} × Zdobyto od {name}",
       "materialSourceGathererSigned": "{count} × zebrane przez {name}, podpisane przez {signer}",
@@ -5799,14 +5840,8 @@ export const pl_PL: EnTranslations = {
       "logAdminPurge": "Administrator usunął {count} {item}"
     },
     "collections": {
-      "title": "Polowanie",
-      "close": "Zamknij polowanie",
-      "keybindLabel": "Polowanie",
-      "launcherTitle": "Polowanie: towarzysze, wierzchowce i zestawy przedmiotów",
       "tabs": {
-        "buddies": "Towarzysze",
-        "mounts": "Wierzchowce",
-        "sets": "Zestawy przedmiotów"
+        "buddies": "Towarzysze"
       },
       "state": {
         "owned": "Zebrane",
@@ -5816,7 +5851,6 @@ export const pl_PL: EnTranslations = {
       },
       "presenceDefault": "Czujesz obecność, która cię obserwuje.",
       "revealed": "{name} postanawia za tobą podążać.",
-      "cosmeticUnlocked": "Nowy wygląd dla {name}: {look}.",
       "presence": {
         "ember_fox": "Coś małego i ciepłego drepcze za tobą.",
         "moss_hare": "Szelest w torfie dotrzymuje kroku twoim stopom.",
@@ -5854,134 +5888,9 @@ export const pl_PL: EnTranslations = {
         "phantom": "Powietrze za tobą jest odrobinę zbyt nieruchome.",
         "emberfall_phoenix": "Za plecami czujesz ciepło jak przy przygaszonym ognisku."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Spętany Mrozem",
-        "crystal_lich_voltaic": "Błyskawiczny",
-        "forgemaw_ashen": "Popielny",
-        "forgemaw_whitehot": "Rozgrzany do Białości",
-        "stag_acorn": "Korona Żołędzi",
-        "stag_gilded": "Złocony",
-        "moss_hare_verdant": "Bujny",
-        "proud_grunt_warlord": "Wódz wojenny",
-        "frog_sapphire": "Szafirowa Żaba"
-      },
       "actions": {
         "summon": "Przywołaj",
-        "dismiss": "Odeślij",
-        "wear": "Załóż",
-        "remove": "Usuń"
-      },
-      "looks": {
-        "title": "Wyglądy",
-        "unlocked": "Odblokowane",
-        "locked": "Zablokowane",
-        "worn": "Założone",
-        "none": "Nie opracowano jeszcze wyglądów tego towarzysza"
-      },
-      "source": {
-        "bossLabel": "Towarzysz z bossa",
-        "bossDrop": "{mob} ({location}), {chance}% na gracza za zabicie",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% na gracza, {heroicChance}% na heroicznym",
-        "bossDropHeroicOnly": "{mob} ({location}), tylko heroiczny, {chance}% na gracza",
-        "rollNote": "Każdy gracz losuje osobno; nikt nie przegrywa losowania z członkiem grupy.",
-        "deedLabel": "Zdobywane przez",
-        "deed": "Czyn {deed}",
-        "challengeLabel": "Wyzwanie",
-        "challengeSpeed": "Pokonaj cel {mob} w ciągu {seconds} sekund od rozpoczęcia walki",
-        "challengeDps": "Zadawaj {dps} obrażeń na sekundę celowi {mob} przez całą walkę",
-        "craftLabel": "Wytworzone",
-        "craft": "{item} (receptura: {profession})",
-        "grantLabel": "Przyznano",
-        "grantOnly": "Nagroda sezonowa: nagrody miesięcznego rankingu i najlepszych wyników",
-        "tokenLabel": "Żeton",
-        "token": "{item}, jednorazowe użycie do przypisania towarzysza"
-      },
-      "buddyLore": {
-        "ember_fox": "Lisica z żywopłotów Doliny Wschodniego Strumienia, nazwana od żarząco czerwonej sierści widocznej w zimowych zaroślach. Tamtejsi traperzy pokolenia temu zrezygnowali z łapania młodych i zamiast tego zaczęli wykładać jedzenie.",
-        "moss_hare": "Zając Wierzbowych Mokradeł, o zielonej sierści od życia w mokrym torfie. Bagienni zielarze uważają je za szczęśliwe i nie pozwalają przeganiać ich z progu.",
-        "frog": "Trzęsawisko Mokrzawia hoduje je tłuste i beztroskie, śpiewające całą noc w trzcinowiskach. Bagienni przewodnicy przysięgają, że łódź z taką żabą nigdy nie osiądzie na mieliźnie.",
-        "crimson_claw_crab": "Krab pływowy z Dalekiego Wybrzeża, którego szczypce pozostają czerwone długo po wyjściu z wody. Załogi doków urządzały ich wyścigi po deskach, obstawiając monety.",
-        "golden_sentinel": "Wartowniczy chrząszcz Bursztynowej Doliny, pozłocony żywicą, w której dorastał. Nazwa jest starsza od żywicy: podobni strażnicy pilnowali tych gajów na długo, zanim ktokolwiek pomyślał o butelkowaniu soku.",
-        "nightfang": "Młody łowca Nocnego Kwiatu, cichy nawet jak na swój gatunek. Podąża dla towarzystwa i nie poluje na nic większego niż ćma.",
-        "tuskhorn_boar": "Ród z Ciernistego Szczytu, hodowany przez pasterzy na krótkie nogi, bo chcieli dzika, który nie zburzy ogrodzenia. Mimo to zachował swój temperament.",
-        "emerald_wolf": "Szczenię z Widmowego Boru, o sierści zielonej w świetle koron, które nigdy nie dociera do leśnego dna. Strażnicy wychowują sieroty pozostawione przez las.",
-        "tiger": "Pasy Palmowego Wybrzeża na zwierzęciu, które nigdy go nie widziało: ród żyje w niewoli od zamknięcia dawnych menażerii. Reaguje na gwizdek i na nic więcej.",
-        "cate_coin": "Kot, który nie rozstaje się z monetą, na której siedzi, i którego nikt nigdy nie widział jedzącego. Kupcy z Eastbrook nadal spierają się, które z tej dwójki jest zwierzakiem.",
-        "alon": "Maskotka podróżnika z drogi, do której nie przyznaje się żadna mapa, pojawiająca się wszędzie tam, gdzie plan się sypie. Obserwuje, aprobuje i w żaden sposób nie pomaga.",
-        "trollface": "Szczerząca zęby istota, którą Widmowy Bór wypuścił i nie chciał przyjąć z powrotem. Każda próba opisu kończy się śmiechem i rezygnacją opisującego.",
-        "ansem": "Mówi o drzwiach i ciemności, ale nie daje się nakłonić do szczegółów. Kultyści Nocnego Kwiatu uznają go za swojego; odchodzi, ilekroć odprawiają rytuał.",
-        "triple_t": "Trzy czegoś lub jedna rzecz potrójnie. Relacje się różnią, a stworzenie nie stoi dość długo, by je policzyć.",
-        "kekius": "Śmiejący się towarzysz niejasnego pochodzenia, przygarnięty jako talizman przez tory wyścigowe Wichrowego Grzbietu. Przeżył cztery stajnie, które pokładały w nim wiarę.",
-        "solbot": "Mały automat zasilany słońcem, wykopany do połowy z popiołów Smoczych Ziem i wciąż tykający. Warsztat, który go stworzył, nie zostawił żadnego znaku na obudowie.",
-        "frostfire": "Zrodzony w Szronowej Krainie, gdzie gorące źródło przebija pole lodowe, nigdy nie zdecydował, do której połowy należy. Paruje na zimnym powietrzu i drży na ciepłym.",
-        "rocky": "Pełzacz o kamiennej skorupie z piargów Ciernistego Szczytu, powolny i zupełnie beztroski. Górnicy trzymają je, bo nieruchomieją na chwilę przed zawałem.",
-        "proud_grunt": "Weteran składów Wojny, który zachował salut, lecz stracił stopień. Marszałek Wojenny Draven Kole przekazuje takiego każdemu żołnierzowi o honorze wystarczającym, by rozumiał cenę.",
-        "loot_goblin": "Podąża za każdym, kto nosi Znaki Heroiczne, i nigdy nie został przyłapany na kradzieży. Kwatermistrz Vex twierdzi, że to absolutnie niczego nie dowodzi.",
-        "penny_goldspark": "Uczennica gnomiego majsterkowicza, pobierająca opłatę za godzinę i warta każdego miedziaka. Płatnerz Hode zatrudnił ją w ramach spłaty długu, a teraz odstępuje umowę każdemu z tysiącem złota.",
-        "stag": "Ród z Wiecznego Ogrodu, wyhodowany z wielkich jeleni, na których dawniej jeździli strażnicy. Nadal pochyla głowę na uniesioną dłoń, z nawyku starszego niż samo zwierzę.",
-        "alpaca": "Hodowcy Wichrowego Grzbietu trzymają je dla wełny i usposobienia: nic nie zachowuje większego spokoju podczas burzy. Ta opluje dokładnie jedną osobę na podróż.",
-        "horse": "Kucyk z Doliny, hodowany na małego do sadowniczych alejek, któremu nikt nie powiedział, że nie jest koniem bojowym. Dotrzymuje kroku przy twoim ramieniu i pójdzie za każdym, kto choć raz dał mu jabłko.",
-        "sapling": "Młode drzewo z uśmiechem w korze i ciekawskim fioletowym spojrzeniem. Korzenie niosą je w wesołym kaczym chodzie wszędzie, gdzie wędrujesz.",
-        "bull": "Byk z Doliny wielkości psa, co jest jedynym powodem, dla którego ktoś zgodził się trzymać go w domu. Usposobienie nie zmalało razem z resztą.",
-        "spider": "Tkacz z Widmowego Boru wielkości dłoni, który przemeblowuje każdy plecak, w którym podróżuje. Pajęczyna jest mocniejsza od zastępowanej nici.",
-        "raptor": "Pisklę ze Smoczych Ziem, sprzedawane, zanim odkryje, jak szybko biega. Każdy nowy właściciel dostaje radę, by dobrze je karmić, i żadnemu nie trzeba powtarzać.",
-        "skeleton": "Wyszedł z kurhanów Widmowego Boru, otrzepał się i od tej pory chodzi za ludźmi. Nikt nie ustalił, czyje to były kości.",
-        "crystal_lich": "Odłamek samego Nythraxis, wciąż brzęczący zimnem, które go ukształtowało. Słucha tego, kto wydobył go ze szczątków rajdu, i jeszcze mu tego nie wybaczył.",
-        "forgemaw": "Wykuty w Tyglu Ostatniego Źródła i nigdy w pełni ukończony, wyszedł z odlewni Ignivara, gdy młoty wciąż uderzały. Można go znaleźć tylko podczas heroicznego zejścia: stopiona istota wciąż wraca do kuźni, która ją stworzyła, i podąża do domu za tym, kto dwa razy przetrwa ogień.",
-        "crystal_tide": "Ognik przypływu podróżujący na własnej kropli morskiego szkła, wyławiany ze spokojnej wody przez wędkarzy od Doliny po Dalekie Wybrzeże, którzy łowili na kolację. Zachowuje wodę, z którą wypłynął, i nie daje się przekonać do powrotu.",
-        "sprites": "Dwa małe ogniki, złoty i morski, które nigdy nie ustalają, który prowadzi. Gdy podejdą blisko, zlewają się w jeden zielony płomień, a potem znów rozdzielają ze śmiechem.",
-        "phantom": "Nawiedzenie wielkości dłoni z kurhanów Widmowego Boru, samo prześcieradło bez kości, pojawiające się w zamkniętym plecaku i zostające dla towarzystwa. Nikt nie ustalił, czego chce, i ani razu nie próbowało nikogo przestraszyć.",
-        "emberfall_phoenix": "Każdej jesieni spala się do żaru, a wiosną odradza z własnego popiołu. To wszystko, co ktokolwiek potrafi o nim powiedzieć. Nikt nigdy nie znalazł gniazda ani nie złapał tego samego dwa razy."
-      },
-      "petKind": {
-        "beast": "Bestie",
-        "elemental": "Żywiołaki",
-        "humanoid": "Humanoidy",
-        "undead": "Nieumarli",
-        "celebrity": "Sławne postacie"
-      },
-      "armor": {
-        "cloth": "Tkanina",
-        "mail": "Kolczuga",
-        "leather": "Skóra"
-      },
-      "stat": {
-        "intellect": "Intelekt",
-        "agility": "Zręczność",
-        "strength": "Siła",
-        "mixed": "Hybryda"
-      },
-      "set": {
-        "owned": "{owned} z {total} elementów",
-        "itemLevel": "poziom przedmiotu {level}",
-        "bonusLabel": "Elementy: {pieces}"
-      },
-      "detail": {
-        "dropLabel": "Wypada z",
-        "vendorLabel": "Sprzedawane przez",
-        "bindLabel": "Związanie",
-        "sellLabel": "Handlarz płaci",
-        "marketLabel": "Rynek Światowy",
-        "exchangeLabel": "Giełda $WOC",
-        "setLabel": "Zebrane",
-        "drop": "{mob} ({location}), {chance}% za zabicie",
-        "heroicDrop": "{mob} ({location}), tylko heroiczny, {chance}% za zabicie",
-        "dropWithHeroic": "{mob} ({location}), {chance}% za zabicie, {heroicChance}% na heroicznym",
-        "globalDrop": "Dowolny wróg, {chance}% za zabicie, jeden z {count} w tej rzadkości",
-        "fishingDrop": "Łowienie wszędzie, {chance}% za połów",
-        "vendor": "{npc} ({location}) za {price}",
-        "honorPrice": "{amount} Honoru",
-        "marksPrice": "{amount} Znaków Heroicznych",
-        "noSource": "Brak źródła w grze",
-        "noItem": "Żaden przedmiot jeszcze tego nie daje",
-        "tradeable": "Zbywalne",
-        "soulbound": "Związany z duszą",
-        "noSell": "Nie można sprzedać",
-        "marketAtMerchant": "Widoczne u Handlarza",
-        "marketChecking": "Sprawdzanie...",
-        "marketNone": "Brak ofert",
-        "exchangeNone": "Brak ofert",
-        "exchangeUnavailable": "Niedostępne w tym kliencie"
+        "dismiss": "Odeślij"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const pl_PL: EnTranslations = {
       "viewSources": "Pokaż źródła",
       "separateByGatherer": "Rozdziel według zbierającego",
       "takeChosenQuantity": "Wyjmij wybraną liczbę",
-      "combine": "Połącz stosy materiałów"
+      "combine": "Połącz stosy materiałów",
+      "itemHistory": "Historia przedmiotu"
+    },
+    "itemHistory": {
+      "title": "{item}: historia",
+      "passedTo": "Przekazano postaci {name} dnia {date}",
+      "noTransfers": "Ten przedmiot nigdy nie zmienił właściciela.",
+      "close": "Zamknij",
+      "openAria": "Historia przedmiotu {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Naucz się formuły przed zastosowaniem tego zaklęcia.",
@@ -7073,6 +6990,7 @@ export const pl_PL: EnTranslations = {
         "summons_adds": "Przywołuje posiłki",
         "lunar_tide": "Księżycowy Odpływ (pulsujące obrażenia obszarowe)",
         "chorus_and_solo": "Chór i Partia solowa (zbierzcie się na jednym znaku, rozproszcie od drugiego)",
+        "the_score": "Partytura (dwukrotnie śpiewa melodię na księżycowych płytkach: wejdź na nie w kolejności, w jakiej zabrzmiały, by złamać jej głos)",
         "tideglass_reflections": "Odbicia Pływowego Szkła (zabijajcie nawzajem swoje lustrzane odbicia)",
         "hydra_three_elements": "Trzy żywioły (lewa głowa zionie stożkiem mrozu na 18 jardów, spowalniając o 70 procent na 4 sekundy; środkowa pluje jadem pod maksymalnie 3 graczy, wybucha on po 1.5 sekundy i pali przez 6 sekund; prawa wystrzeliwuje potok pasem 26 jardów, odrzucając o 8 jardów: wyjdź z każdego ataku. Gdy głowa pada, pozostałe przejmują jej atak)",
         "hydra_tsunami": "Fala tsunami (głowy zanurzają się na 4.5 sekundy, otrzymując o 75 procent mniej obrażeń; fala przetacza się przez połowę basenu, następnym razem przez drugą: 160 do 190 obrażeń mrozu na normalnym poziomie i odrzucenie o 10 jardów. Przejdź na drugą połowę lub stań za filarem brzegu; na heroicznym fala wraca przez drugą połowę po 3.5 sekundy. Pierwsza fala po 24 sekundach walki, kolejne 40 sekund po przejściu poprzedniej)",
@@ -7197,6 +7115,23 @@ export const pl_PL: EnTranslations = {
       "shadeLine": "Zostaw tę przynętę. Atakuj Vaela, którego latarnia rozbłyska w promieniu, aby zerwać zasłonę",
       "timeAria": "Pozostało {seconds} sekund"
     },
+    "templeAlert": {
+      "melodyTitle": "Partytura",
+      "melodyLine": "Obserwuj księżycowe płytki brzmiące jedna po drugiej. Powtórz kolejność na zmianę z innym graczem",
+      "melodyDarkLine": "Zapamiętaj kolejność, zanim płytki zgasną. Powtórz ją na zmianę z innym graczem",
+      "answerTitle": "Odpowiedz na partyturę!",
+      "answerLine": "Zmieniajcie się: wejdź na księżycową płytkę oznaczoną {place}. Nuty: {done} z {total}",
+      "answerDarkLine": "Zmieniajcie się i powtórzcie kolejność z pamięci. Zejdź z płytki przed ponownym wejściem. Nuty: {done} z {total}",
+      "spentTitle": "Musi odpowiedzieć inny głos",
+      "spentLine": "Nie możesz odegrać płytki, dopóki inny gracz nie zagra kolejnej poprawnej nuty. Nuty: {done} z {total}",
+      "stepOffTitle": "Zejdź i wejdź z powrotem",
+      "stepOffLine": "Księżycowa płytka brzmi tylko przy wejściu. Zejdź z tej płytki i wejdź ponownie",
+      "falseTitle": "Fałszywa nuta!",
+      "falseLine": "Ta płytka była poza kolejnością. Odpowiedź zaczyna się od pierwszej płytki",
+      "brokenTitle": "Głos Selthe jest złamany!",
+      "brokenLine": "Otrzymuje o {pct}% więcej obrażeń do końca efektu: użyj teraz najsilniejszych ataków",
+      "timeAria": "Pozostało {seconds} sekund"
+    },
     "wildheartAlert": {
       "preyTitle": "Jesteś Zwierzyną!",
       "preyLine": "Przeprowadź Zulgara przez świecące glify słońca, aby spowolnić go, zanim cię złapie i poszarpie",
@@ -7207,7 +7142,21 @@ export const pl_PL: EnTranslations = {
       "pollinatedLine": "Strzeż się strąków: dotknięcie podczas Zapylania tworzy wrogów. Nienaznaczeni sojusznicy mogą je deptać",
       "bondTitle": "Więź stada",
       "bondLine": "Rozdziel Pogromcę Bestii i jaguara, aby usunąć redukcję obrażeń i premię do obrażeń",
-      "timeAria": "Pozostało {seconds} sekund"
+      "timeAria": "Pozostało {seconds} sekund",
+      "preyAloneLine": "Nikt inny nie może rozpalić słonecznych glifów. Stój na zgaszonym przez {seconds} s, by go rozpalić, a potem zwab na niego Zulgara",
+      "pinnedTitle": "Przebity!",
+      "pinnedLine": "Sojusznik musi wyciągnąć Włócznię łowiecką. Puls Dzikiego Serca trafia cię mocniej, gdy jesteś przebity",
+      "pinnedSelfLine": "Nikt nie jest wolny, by pomóc: wyciągnij Włócznię łowiecką sam, zanim trafi Puls Dzikiego Serca",
+      "sunstruckTitle": "Zulgar został trafiony słońcem!",
+      "sunstruckLine": "Otrzymuje o {pct}% więcej obrażeń do końca efektu: użyj teraz najsilniejszych ataków",
+      "spearTitle": "Sojusznik jest przebity!",
+      "spearLine": "Biegnij do Włóczni łowieckiej i wyciągnij ją, zanim trafi Puls Dzikiego Serca",
+      "glyphTitle": "Rozpal słoneczne glify",
+      "glyphLine": "Stój na zgaszonym słonecznym glifie przez {seconds} s, by go rozpalić. Gdy Zulgar przejdzie, otrzyma o {pct}% więcej obrażeń przez {duration} s",
+      "glyphLightingTitle": "Rozpalanie słonecznego glifu",
+      "glyphLightingLine": "Zostań na glifie, aż się rozpali. Zejście zaczyna od nowa",
+      "breathTitle": "Oddech bożka!",
+      "breathLine": "Kamienny jaguar zaraz zionie na tę połowę tarasu. Przejdź na drugą połowę"
     },
     "sanctumAlert": {
       "quenchTitle": "W wodzie hartowniczej!",
@@ -7296,6 +7245,13 @@ export const pl_PL: EnTranslations = {
       "relightFar": "Zbliż się na {range} jardów, aby ponownie zapalić",
       "relightAria": "Zapal ponownie: {name}",
       "relightUsingLine": "Podtrzymuj, aby zapalić świecę: tracisz zdrowie. Trafienia nie przerywają; ruch lub ogłuszenie tak",
+      "freeLine": "Wyciągnij włócznię z ziemi, by uwolnić przebitą osobę. Otrzymanie obrażeń nie przerywa; ruch lub ogłuszenie tak",
+      "freeKey": "Wyciągnij {name}",
+      "freeTap": "Dotknij tutaj, by wyciągnąć {name}",
+      "freeClick": "Kliknij tutaj, by wyciągnąć {name}",
+      "freeFar": "Podejdź na {range} m, by wyciągnąć",
+      "freeAria": "Wyciągnij {name}",
+      "freeUsingLine": "Stój nieruchomo, by wyciągnąć włócznię: ruch lub ogłuszenie przerywa",
       "timeAria": "Pozostało {seconds} sekund"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const pl_PL: EnTranslations = {
       "detach": "Odczep",
       "applied": "Zastosowano",
       "owned": "Posiadane",
+      "notCollected": "Nie zebrano",
       "storeOnly": "Dostępne w Sklepie WOC",
       "preview": "Zapowiedź",
       "previewAria": "Podgląd {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Skórka wierzchowca jest rysowana na wierzch wierzchowca, na którym jedzie ta postać. Nigdy nie zmienia szybkości.",
-      "mountsNoMount": "Najpierw zdobądź wierzchowca: skórka potrzebuje czegoś do jazdy.",
+      "mountsIntro": "Tutaj wybierz wygląd wierzchowca. Szybkość zależy od nauki jazdy. Zachowaj przedmiot wierzchowca w torbach lub banku dowolnej postaci, aby udostępnić wygląd całemu kontu.",
+      "mountsNoMount": "Naucz się jazdy u stajennej Marli, aby przywołać wierzchowca.",
       "skinsEmpty": "Nie posiadasz jeszcze skórek broni. Odwiedź Sklep WOC.",
       "skinsApplyHint": "Wyposaż {type}, aby zastosować tę skórkę.",
       "mechIntro": "Mech bojowy zastępuje ciało tej postaci. Można nosić jeden kolor naraz.",
@@ -7430,6 +7387,7 @@ export const pl_PL: EnTranslations = {
       "sourceActivityRiftFirstClear": "Przyznawana każdemu członkowi drużyny, która zdobędzie pierwsze przejście rankingowej Szczeliny",
       "sourceActivityBuriedHoard": "Znaleziono w skrzyni nagrody Zakopanych Skarbów, skarbcu do którego prowadzi mapa skarbu",
       "sourceActivityLanternHall": "Kupione za Pieczęcie Latarni u kwatermistrza Sali Latarni",
+      "sourceActivityWeeklyVaultPvp": "Wybrano z wiersza PvP Tygodniowego Skarbca",
       "cellMissingSourceAria": "{name}, jeszcze nieznaleziona, {source}",
       "cellOwnedClearsAria": "{name}, skatalogowana, znaleziona po raz pierwszy przy przejściu {count}",
       "searchPlaceholder": "Szukaj relikwii",
@@ -8454,6 +8412,16 @@ export const pl_PL: EnTranslations = {
         "heroicCloud": "Chmura Pyłku: stanie do {cloudRadius} jardów od Zapylonego gracza przez {cloudSeconds} s zapyla również ciebie."
       },
       "zulgar": {
+        "pulseSummaryRework": "Co {every} s zaklęcie rzucane przez {cast} s trafia wszystkich w promieniu {radius} m za {min} do {max} obrażeń. Przebici gracze otrzymują {pinMult} razy te obrażenia z dowolnej odległości.",
+        "spearSummary": "Zaklęcie rzucane przez {cast} s przebija gracza innego niż tank, albo tanka, jeśli nikt inny nie został. Unieruchomienie trwa do {seconds} s i zadaje {bleed} obrażeń co {tick} s.",
+        "spearResponse": "Wybierz włócznię i użyj interakcji w odległości do {range} m, by wyciągnąć ją w {pull} s. Obrażenia nie przerywają wyciągania. Jeśli nikt inny na tarasie nie jest wolny, ofiara może użyć interakcji, by uciec w {self} s.",
+        "glyphSummaryRework": "Wszystkie glify ({count}) zaczynają zgaszone. Podczas polowania nieoznaczony gracz rozpala glif, stojąc na nim przez {kindle} s. Jeśli nie ma już nieoznaczonych graczy, Zwierzyna może go rozpalić w {alone} s. Zejście zeruje postęp. Przejście przez rozświetlony glif spowalnia go o {slow} i zwiększa otrzymywane obrażenia o {vulnerability} na {seconds} s. Glifu nie można rozpalić ponownie przez {dark} s; inny glif nie może go trafić przez {wary} s. Podczas polowania ogłuszenia trwają o połowę krócej.",
+        "glyphResponseRework": "Nieoznaczeni gracze rozpalają glify przed Zwierzyną. Przeprowadź go przez nie, a potem atakuj podczas efektu Porażony słońcem. Glify gasną, gdy polowanie się kończy.",
+        "idolSummary": "Przy {health} zdrowia pozostaje duchem jaguara aż do pokonania. Tank też może stać się Zwierzyną.",
+        "idolHuntSummary": "Wybiera nową Zwierzynę co {every} s, po czym obraca się ku niej przez {turn} s, zanim ruszy w pościg.",
+        "idolHuntHeroicSummary": "Oznacza nową parę co {pair} s i zmienia cel między nimi co {switch} s. Każda zmiana daje nowej Zwierzynie {turn} s przed pościgiem.",
+        "breathSummary": "Co {every} s połowa tarasu zostaje oznaczona na {warning} s, po czym wszyscy w tej połowie otrzymują od {min} do {max} obrażeń od natury. Oddechy zmieniają połowy.",
+        "breathResponse": "Przejdź do nieoznaczonej połowy przed końcem ostrzeżenia. Linia środkowa jest bezpieczna. Na Heroicznym oddech gasi też rozświetlone glify w swojej połowie; można je natychmiast rozpalić ponownie.",
         "overview": "Arcykapłan kotliny. Spokojna walka z zapowiadanym kręgiem, dopóki nie przemieni się w ducha jaguara i nie zacznie ścigać jednego gracza. Ścigany prowadzi go przez rozświetlone glify słońca, które go spowalniają.",
         "phaseShrineName": "Kapliczka",
         "phaseShrineSummary": "Walczy wręcz i wysyła impuls w kręgu wokół siebie.",
@@ -8766,6 +8734,14 @@ export const pl_PL: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe nigdy się nie rusza ani nie atakuje wręcz. Zbierzcie się na Chór, odejdź od grupy na Solo, przerwij Arię tonięcia i unikaj Naporu jeziora. Przy dwóch progach zdrowia powtórzcie jej melodię na księżycowych płytkach, zmieniając śpiewających.",
+        "phaseSummaryRework": "Jej pozostałe ataki ustają, gdy grupa odpowiada na partyturę. Pociski księżycowej wody nie mają paska rzucania i nie można ich przerwać.",
+        "boltSummaryRework": "Między innymi zaklęciami pocisk trafia co {every} s po ostrzeżeniu wizualnym trwającym {windup} s, zadając {mult} razy obrażenia jej broni jako obrażenia od mrozu. Przerwanie Arii tonięcia zatrzymuje pociski i arię na {quiet} s.",
+        "boltResponseRework": "Utrzymuj tanka w jej polu widzenia. Zachowaj przerwania na Arię tonięcia.",
+        "tipHealerRework": "Obserwuj cel arii i osoby złapane samotnie przez Chór. Podczas partytury pomagaj śpiewać kolejną nutę i lecz błędy.",
+        "scoreSummary": "Przy {first} i {second} zdrowia staje się niewrażliwa i gra {notes}, a potem {finalNotes} nut. Powtórzcie je w ciągu {answer}, a potem {finalAnswer} s. Zła płytka zadaje {falseNote} obrażeń od mrozu i zeruje postęp, ale nie czas. Upływ czasu zadaje wszystkim od {min} do {max} obrażeń od mrozu. Sukces ogłusza ją na {stun} s i zwiększa otrzymywane obrażenia o {vulnerability} na {bonusSeconds} s.",
+        "scoreResponse": "Obserwuj melodię, a potem wchodź na płytki w kolejności. Zmieniaj się z innym żywym graczem przy poprawnych nutach; jedyny ocalały może skończyć sam. Zablokowane kroki są nieszkodliwe. Zejdź z płytki i wejdź ponownie, by zabrzmiała, nawet jeśli stałeś na niej przed początkiem odpowiedzi.",
+        "scoreHeroic": "Podczas odpowiedzi płytki gasną. Zapamiętaj melodię i zmieniajcie się.",
         "overview": "Chórmatka śpiewa ze swojej sadzawki, nigdy się nie rusza ani nie atakuje wręcz. Oznacza graczy wspólnym Chórem i samotnym Solem, kieruje na jednego gracza narastającą arię i wysyła falę przez dziedziniec. Jej pociski i arię można przerywać.",
         "phaseName": "Dziedziniec Chóru",
         "phaseSummary": "Jedna faza ze zdolnościami uruchamianymi w określonych odstępach. Mechanika, której czas nadejdzie podczas rzucania, czeka na jego koniec.",
@@ -9678,7 +9654,7 @@ export const pl_PL: EnTranslations = {
       "graveyard": "Dokąd trafi twój duch, jeśli polegniesz w tym miejscu.",
       "dungeons": "Każdy loch wraz ze strefą, w której znajdują się jego drzwi, rozmiarem drużyny, dla jakiej jest pomyślany, oraz trudnością, na jaką jesteś obecnie ustawiony.",
       "dungeonMode": "Przełącz swoje lochy między trudnością normalną a heroiczną.",
-      "dungeonReset": "Porzuć swoje własne puste instancje: to właśnie robisz po zmianie trudności.",
+      "dungeonReset": "Porzuć swoje puste instancje, aby kolejny przebieg zaczął się od nowa na tym samym lub nowym poziomie trudności.",
       "groupRecovery": "Ratunek i obecność",
       "unstuck": "Wyjście, gdy świat cię uwięzi. Stój nieruchomo przez krótkie odliczanie, a zostaniesz przeniesiony na najbliższy cmentarz i tam wskrzeszony, jeśli już poległeś. Zostawia cię potem na chwilę osłabionym Chorobą Wyzwolenia, więc to ostateczność, a nie skrót.",
       "unstuckWindow": "Droga wyjścia, gdy świat cię uwięzi. Stań nieruchomo przez krótkie odliczanie i jesteś przenoszony do najbliższego cmentarza, i podnoszony tam, jeśli już upadłeś. Pierwsze użycie w godzinę jest bezpłatne. Użyj ponownie w ciągu godziny od ostatniego, a zostaje osłabiony Chorobą Uwolnienia na jakiś czas, więc jest to ratunek zamiast skrótu.",
@@ -10105,27 +10081,27 @@ export const pl_PL: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Wierzchowce i jeździectwo",
-      "intro": "Wierzchowiec to szybszy sposób na pokonywanie świata i tylko tym jest. Jeździectwa uczysz się w stajni, kupujesz swój pierwszy zestaw wodzy, a każda droga od tej pory jest krótsza.",
+      "intro": "Wybierz wygląd wierzchowca, naucz się jazdy w stajni i podróżuj szybciej po świecie. Nauka wyznacza tempo; każdy wygląd wierzchowca jest kosmetyczny.",
       "whatHeading": "Czym jest wierzchowiec",
-      "whatBody": "Wierzchowiec to bestia, na której jeździsz, a to, co ci daje, to prędkość. Żadnego pancerza, żadnych obrażeń, żadnych statystyk: niesie cię po ziemi szybciej i pozwala skoczyć odrobinę wyżej, i to cała umowa. Każdy wierzchowiec w grze to wierzchowiec naziemny, więc nie ma latania, a żaden z nich nie pływa.",
+      "whatBody": "Wierzchowce to kosmetyczne wyglądy nakładane na wyszkolonego wierzchowca. Nie dają pancerza, obrażeń ani statystyk bojowych. Trening Jeździecki zwiększa szybkość podróży lądowej, a skoki w siodle sięgają wyżej. Wszystkie wierzchowce pozostają na ziemi i żaden nie umie pływać.",
       "learnHeading": "Nauka jazdy konnej",
-      "learnBody": "Jeździectwo to umiejętność, którą kupujesz raz, a otwiera się na poziomie {level}. Marla Hitchen, zarządczyni stajni, prowadzi Stajnie Wichrowego Grzbietu na wzgórzach, i sprzedaje Trening Jeździecki za 80 złota. Ten jeden zakup jest tym, co w ogóle pozwala ci dosiąść wierzchowca, i zostaje z tobą na zawsze.\n\nGdy już go masz, Marla ma dla ciebie zadanie: Lekcje jazdy konnej. Podejmij je, podążaj za znacznikiem do świecącego kwadratu za łukiem startowym i naciśnij Rozpocznij wyścig. Marla pożycza ci na tę lekcję treningowego Valorsteeda, więc sama lekcja nic cię nie kosztuje. Przejedź trasę, dokończ ją, a potem wróć do niej po swoje złoto i doświadczenie. Pożyczony rumak wraca potem do stajni, więc ta lekcja uczy cię trzymać się w siodle, a nie daje ci konia.",
+      "learnBody": "Jazda odblokowuje się na poziomie {level}. Stajenna Marla Hitchen sprzedaje Trening Jeździecki za 80 złota w Stajniach Wichrowego Grzbietu. Podstawowa nauka daje o {basicSpeed}% szybszy ruch na wierzchowcu. Po jej poznaniu Marla sprzedaje też Zaawansowaną naukę jazdy za {advancedFee} złota, zwiększając bonus do {advancedSpeed}%. Każdy stopień należy do postaci, która się go nauczy.\n\nPo podstawowej nauce przyjmij od Marli zadanie Lekcje jazdy konnej i podążaj za znacznikiem do świecącego kwadratu za łukiem startowym. Naciśnij Rozpocznij wyścig, aby pożyczyć treningowego Rumaka Męstwa. Ukończ trasę i wróć po monety oraz doświadczenie. Pożyczony koń wraca do stajni po zakończeniu lekcji.",
       "whereHeading": "Gdzie ją znaleźć",
       "whereBody": "Stajnie Wichrowego Grzbietu są zaznaczone na mapie Wichrowego Grzbietu, na wzgórzach między Urwiskiem a Polami Wraków. Marla stoi przy stodole, twarzą do placu wyścigowego.",
       "firstHeading": "Twój pierwszy wierzchowiec",
-      "firstBody": "Valorsteed to jedyny wierzchowiec sprzedawany gdziekolwiek w świecie. Gdy nauczysz się Jeździectwa, Marla sprzeda ci Wodze Valorsteeda za 10 złota, a te wodze zostają twoje na zawsze. Każdego innego wierzchowca zdobywa się w świecie, więc ten koń jest tym, od czego zaczyna niemal każdy jeździec.",
+      "firstBody": "Marla sprzedaje Wodze Rumaka Męstwa za 10 złota po nauce jazdy. Posiadanie wodzy odblokowuje wygląd konia w Kosmetykach dla każdej postaci na koncie. Trening Jeździecki już pozwala przywołać wierzchowca bez noszenia wodzy, więc wybierz konia lub inny posiadany wygląd, gdy chcesz odmiany.",
       "rideHeading": "Wsiadanie i zsiadanie",
-      "rideBody": "Nie ma okna wierzchowców ani ulubionego do ustawienia, bo to wodze są wierzchowcem. Użyj zestawu wodzy z torby albo z miejsca na pasku akcji, a dosiądziesz tego wierzchowca. Przywołanie trwa chwilę, to krótkie wezwanie, a nie natychmiastowe, więc nie uratuje cię przed nieudanym pociągnięciem. Zsiadanie jest natychmiastowe i nigdy nie jest blokowane.\n\nUżyj wodzy, na których już jedziesz, a odstawisz tego wierzchowca. Użyj innego zestawu, będąc już w siodle, a przesiądziesz się na niego bezpośrednio, bez żadnego przywoływania po drodze. Klawisz Dosiądź/Zsiądź, domyślnie klawisz z grawisem, zawsze tylko cię zsadza: to droga w dół, nie w górę. Jedynym wyjątkiem jest lekcja jazdy konnej, gdzie ten sam klawisz przywołuje rumaka pożyczonego przez Marlę, bo pożyczony koń nie ma wodzy do kliknięcia. Na telefonie albo tablecie przycisk Dosiądź w zasobniku Więcej działa w obie strony, choć przywołuje pierwszy zestaw wodzy leżący w twoich torbach, a nie ten, który wybierzesz, więc dotknij samych wodzy, gdy chcesz konkretnego wierzchowca.",
+      "rideBody": "Otwórz Kosmetyki i wybierz wygląd na karcie Wierzchowce. Klawisz Dosiądź / Zsiądź, domyślnie grawis, przywołuje wyszkolonego wierzchowca z tym wyglądem. Mobilny przycisk Dosiądź robi to samo. Przywołanie wymaga krótkiego podtrzymywania; zsiadanie jest natychmiastowe. Możesz zmienić wygląd w siodle bez zmiany szybkości.\n\nMożesz też użyć wodzy z toreb lub paska akcji, aby wybrać wygląd i przywołać wierzchowca. Użycie wyglądu, na którym już jedziesz, odsyła wierzchowca. Wodze w banku lub u innej postaci odblokowują ten sam kosmetyk bez konieczności noszenia ich przez jeźdźca.",
       "breaksHeading": "Co stawia cię z powrotem na nogi",
       "breaksBody": "Woda zawsze wygrywa. Wjedź w cokolwiek wystarczająco głębokiego, by w tym pływać, a natychmiast spadasz z siodła, bo żaden naziemny wierzchowiec nie pływa, a śmierć zrzuca cię tam, gdzie akurat spadłeś. Nie możesz przywołać wierzchowca podczas walki, gdy jesteś martwy albo wracasz jako duch, ani w żadnym momencie meczu na Polach Ciernistej Kotliny, który toczy się pieszo od zbiórki aż po ostatnią chwilę: jeśli jechałeś wierzchem, czekając na start, wejście do meczu zdejmuje cię z siodła razem z nim. Wejście w walkę albo w wodę w trakcie przywoływania również je anuluje.\n\nPrawie wszystko, co robisz, też cię zsadza. Zamachnięcie się na coś, rozpoczęcie rzucenia, zbieranie z węzła, wędkowanie, wytwarzanie, zaklinanie, odzyskiwanie i ładowanie efektu narzędzia profesji zsadzają cię z siodła w chwili, gdy zaczynasz, więc licz się z zeskakiwaniem przy każdej żyle. Przywołanie wierzchowca zrzuca też każdą przybraną postać zmiennokształtną: nigdy nie jesteś jednocześnie przemieniony i dosiadający wierzchowca.",
-      "speedHeading": "Prędkość i poziomy",
-      "speedBody": "Prędkość to jedyna rzecz, która odróżnia jednego wierzchowca od drugiego. Valorsteed, którego kupujesz od Marli, ustala bazowe tempo, a wierzchowce zdobyte w świecie jeżdżą ponad nim: im rzadsze wodze, tym szybsza jazda, w kilku wyraźnych stopniach, a nie płynnym ślizgu. Nie ma drugiego stopnia Jeździectwa do wytrenowania ani ulepszenia do kupienia później. Za Jeździectwo płacisz raz, a od tej pory to wodze, których użyjesz, decydują, jak szybko podróżujesz.",
+      "speedHeading": "Szybkość jazdy i nauka",
+      "speedBody": "Podstawowa nauka jazdy daje o {basicSpeed}% szybszy ruch na wierzchowcu. Zaawansowany trening jeździecki daje o {advancedSpeed}% szybszy ruch i kosztuje u Marli {advancedFee} złota. Każdy wygląd korzysta z tej samej szybkości dla stopnia nauki postaci, niezależnie od rzadkości czy źródła. Skórki ze sklepu też używają tej szybkości.",
       "collectHeading": "Skąd biorą się rzadsze wierzchowce",
       "collectBody": "Poza ladą Marli wodze się znajduje, a nie kupuje. Spadają z ostatnich bossów lochów dla pięciu graczy i rajdu w trybie Heroicznym, a także z ukończeń Szczelin, gdzie im trudniejszą Szczelinę zamkniesz, tym rzadsze wodze może zostawić. Są rzadkimi znaleziskami z założenia i żaden przebieg ich nie gwarantuje, więc uczciwym sposobem polowania na wierzchowca jest zabranie tego polowania na wyprawy, które i tak planowałeś. Ta strona nie powie ci, który wierzchowiec wisi na którym bossie: to musisz odkryć sam.",
       "raceHeading": "Wyścig w stajniach",
       "raceBody": "Parkur w zagrodzie Marli jest otwarty dla każdego i o każdej porze, nie tylko podczas lekcji. Dosiądź wierzchowca, stań na świecącym kwadracie za łukiem i naciśnij Rozpocznij wyścig. Odliczanie trzyma cię w miejscu, a potem rusza zegar: pokonaj wszystkie siedem przeszkód i wróć przez łuk, zanim czas się skończy.\n\nPrzeszkoda liczy się tylko wtedy, gdy naprawdę jesteś w powietrzu nad poprzeczką, więc zwykłe przejechanie pod spodem nic nie daje. Możesz brać je w dowolnej kolejności i z dowolnej strony, a pominięta przeszkoda to nie koniec świata: zawróć i spróbuj jeszcze raz. Śmierć, zsiadanie albo opuszczenie zagrody kończy próbę, podobnie jak upłynięcie czasu, co zrzuca cię z siodła tam, gdzie akurat jesteś; samodzielne anulowanie po prostu zatrzymuje zegar. Nic nie stoi na przeszkodzie, by zacząć od nowa. Nie ma tu opłaty, czasu odnowienia ani nagrody poza samym czasem, a dowolna liczba jeźdźców może jechać po torze naraz, nie wchodząc sobie w drogę.",
       "goodsHeading": "Wodze to zwykły towar",
-      "goodsBody": "Wierzchowiec jest przedmiotem, co czyni go czymś, czym może poruszać gospodarka. Posiadasz wierzchowca, dopóki jego wodze leżą w twoich torbach albo w banku, choć wodze trzymane w banku wciąż są twoje, tylko nie pozwalają ci jeździć: żeby przywołać zwierzę, musisz nosić wodze przy sobie. Wodze zdobyte od gracza nie są z nikim związane, więc idą do wymiany, podróżują pocztą i trafiają na Rynek Świata jak każde inne znalezisko, chyba że sam przedmiot mówi inaczej. Zanim się ich pozbędziesz, warto znać dwie rzeczy: żaden kupiec nigdy nie odkupi zestawu wodzy, więc wierzchowiec to zakup, który zatrzymujesz albo przekazujesz dalej, a nie zamieniasz z powrotem na monety, a jeśli wodze znikną jednocześnie z twoich torb i z banku, bo akurat na nich jeździsz, wymieniasz je, wysyłasz pocztą albo sprzedajesz na rynku, wierzchowiec znika razem z nimi, a ty lądujesz tam, gdzie akurat stałeś."
+      "goodsBody": "Kolekcjonerskie wyglądy wierzchowców pozostają dostępne na całym koncie, dopóki co najmniej jeden odpowiadający im przedmiot wodzy jest w torbach lub osobistym banku dowolnej postaci. Wymiana, wysłanie pocztą, wystawienie, sprzedaż lub inne usunięcie ostatniego pasującego przedmiotu usuwa wygląd z Kosmetyków. Jeździec, który go używa, wraca do domyślnego wyglądu konia i pozostaje w siodle z szybkością wynikającą z nauki.\n\nWodze graczy można wymieniać, wysyłać pocztą i wystawiać na Rynku Światowym, chyba że przedmiot mówi inaczej. Wodze konia można też sprzedać kupcowi za 10 złota. Inne wodze zachowują własne ograniczenia sprzedaży. Skórki wierzchowców ze sklepu pozostają kosmetykami konta niezależnymi od przedmiotów wodzy."
     },
     "worldPage": {
       "heading": "Świat",
@@ -10300,7 +10276,7 @@ export const pl_PL: EnTranslations = {
       "heroicRewardsBody": "Heroiczni bossowie upuszczają łup, który znasz, ulepszony i oznaczony jako Heroiczny w opisie, a końcowy boss każdego przejścia dokłada epiki nie do znalezienia nigdzie indziej. To ostatnie zabicie zostawia też Heroiczne Znaki każdemu uczestnikowi: walutę, którą wydaje się u kwatermistrza Vexa w Highwatch, którego lada to półka pierścieni i wisiorów, jakich nie kupi nic poza dowodem z heroicznych głębin.",
       "heroicLockoutBody": "Zwykłe lochy można przemierzać cały dzień. Heroiczny wymaga cierpliwości: zabicie końcowego bossa ogranicza wszystkich w przejściu do jednego heroicznego ukończenia tego lochu na dzień, a rajd trzyma dzienną blokadę dla każdego poziomu trudności. Na żywym królestwie wszystkie dzienne blokady opadają razem o własnej nocnej godzinie resetu królestwa, więc ukończenie wzięte tuż przed tą godziną i inne tuż po niej wypadają w dwóch różnych dniach; zagraj zamiast tego offline w przeglądarce, a blokada po prostu wygasa dobę po twoim własnym zabiciu. Już ukończone pięcioosobowe przejście pozostaje otwarte dla własnej drużyny na biegi po zwłoki i łup, więc nikt nie zostaje odcięty od tego, na co tam zapracował. Rajd jest surowszy: gdy jego zabicie raz cię zablokuje, drzwi pozostają zamknięte do resetu, a jedyna droga z powrotem do środka to bieg po zwłoki kogoś, kto padł dokładnie w tym przejściu, które go zablokowało, więc żywy rajdowiec, który wychodzi, wyszedł na cały dzień. Zbierz swoje zdobycze, zanim opuścisz arenę. Każda z tych blokad należy do postaci, która na nią zapracowała, więc ukończenie na twojej głównej postaci zostawia pozostałe postacie wolne.",
       "resetTitle": "Resetowanie instancji",
-      "resetBody": "Zmień poziom trudności, gdy twoja drużyna wciąż trzyma zajęte przejścia, a stare zajęcia pozostaną chwilę, zanim same puszczą. Przywódca drużyny może zamiast tego puścić je od razu: wybierzcie Zresetuj wszystkie instancje w menu własnego portretu albo wpiszcie /dungeon reset. Reset działa dopiero po faktycznej zmianie trudności, tylko dopóki nikt, żywy ani poległy, nie został w środku, tylko gdy każde zwłoki tam w środku zostały doszczętnie ograbione, a jeden reset od następnego dzieli krótki czas odnowienia. Przyjdziecie pod drzwi ze złą trudnością, a gra powie o tym, zanim przejście się zacznie. Rajd nigdy nie resetuje się w ten sposób; obowiązują jego własne reguły blokad.",
+      "resetBody": "Puste zajęte przebiegi pozostają przez pewien czas, zanim same znikną. Przywódca grupy może porzucić je od razu: wybierz Zresetuj wszystkie instancje w menu własnego portretu lub wpisz /dungeon reset. Kolejny przebieg zaczyna się od nowa na obecnym poziomie trudności. Zmiana trudności robi to samo z przebiegami na poprzedniej trudności. Reset działa tylko wtedy, gdy nikt żywy ani martwy nie pozostaje wewnątrz i wszystkie zwłoki zostały całkowicie ograbione. Nigdy nie skraca blokady: zablokowany heroiczny loch lub rajd pozostaje zablokowany do swojego odnowienia. Resety dzieli krótki czas oczekiwania. Gdy dotrzesz do wejścia ze złą trudnością, gra ostrzeże przed rozpoczęciem. Rajd resetuje się tak samo, zachowując własne zasady blokad i powrotu do zwłok. Rajd zmieniający trudność pomija czas oczekiwania: grupa, która wybrała zły poziom lub nie poradziła sobie na Heroicznym, może od razu wrócić, bo to własna blokada ogranicza powtórzenia.",
       "templeLoreTitle": "Zatopiona Świątynia, nieco głębiej",
       "templeLoreBody": "Świątynia ma własną legendę, starszą niż kult, którego tropisz gdzie indziej. Na brzegu Migotliwego Stawu, jeziorka, które pije światło księżyca i oddaje utopionych, samotny strażnik pilnuje bramy bladego światła. Pod powierzchnią schody z zimnego kamienia zbiegają w dół do niej. Lud, który tam zatonął, nie utonął przez nieszczęśliwy wypadek: byli to członkowie Bladego Chóru, którzy zeszli pod wodę w modlitwie i nigdy nie przestali śpiewać. Dawni strażnicy wydrapali jedno ostrzeżenie w skałach, zanim woda ich pochłonęła, modlitwę do czegoś, co nazwali Utopionym Księżycem, a pewniejsza ręka dopisała pod nią dwa słowa: ono tylko śpi.",
       "cryptLeadTitle": "Drzwi, które zmarli mieli trzymać zamknięte",
@@ -11280,7 +11256,7 @@ export const pl_PL: EnTranslations = {
       "prestigeBody": "Doświadczenie liczy się dalej nawet po osiągnięciu limitu. Zasila kosmetyczny poziom wirtualny, więc pasek doświadczenia wciąż się wypełnia, oraz długoterminową rangę prestiżu, którą możesz odebrać z karty postaci, gdy już tam dotrzesz. Przekraczanie wielkich kamieni milowych życiowego doświadczenia zdobywa też czyny w twojej Księdze Czynów, z kosmetycznymi tytułami i obramowaniami plakietki z imieniem, które widać na twojej karcie postaci. Wszystko to jest czysto opcjonalne i nigdy nie daje mocy, to jedynie znak przebytej drogi.",
       "noRush": "Nie ma pośpiechu. Świat jest po to, by się nim cieszyć we własnym tempie, więc wędruj, podejmuj zadania, które przykują twoją uwagę, i pozwól bohaterowi rosnąć po drodze.",
       "ridingTitle": "Nauka jazdy konnej",
-      "ridingBody": "Jeździectwo to jedna z rzeczy czekających na końcu tej wspinaczki. Na poziomie {level} zarządczyni stajni nauczy cię tej umiejętności za pokaźną sumę złota, a lekcja na torze treningowym da ci twój pierwszy zestaw wodzy. Wierzchowiec nie daje żadnej mocy; po prostu zmniejsza świat, co po długim marszu na północ jest nagrodą samą w sobie."
+      "ridingBody": "Na poziomie {level} stajenna Marla uczy podstawowej jazdy za złoto, a później oferuje stopień zaawansowany. Nauka określa szybkość jazdy. Wybierz wygląd w Kosmetykach; kolekcjonerskie wyglądy są współdzielone, dopóki ich wodze pozostają w torbach lub banku dowolnej postaci."
     },
     "placeholder": {
       "note": "Ta część przewodnika jest już w drodze."
@@ -16384,6 +16360,8 @@ export const pl_PL: EnTranslations = {
       "temple_moonwater_bolt": "Pocisk księżycowej wody",
       "temple_drowning_aria": "Aria tonięcia",
       "temple_mere_surge": "Napór jeziora",
+      "temple_score": "Partytura",
+      "temple_score_answer": "Odpowiedz na partyturę",
       "temple_tideglass_fracture": "Pęknięcie pływowego szkła",
       "temple_undertow": "Prąd wsteczny",
       "temple_lunar_tide": "Księżycowy przypływ",
@@ -16421,6 +16399,12 @@ export const pl_PL: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Pożarcie",
       "wildheart_zulgar_pulse": "Puls Dzikiego Serca",
       "wildheart_zulgar_spirit_hunt": "Duch łowów",
+      "wildheart_zulgar_hunting_spear": "Włócznia łowiecka",
+      "wildheart_zulgar_idol_wakes": "Bożek się budzi",
+      "kituse_wildheart_pull_spear": "Wyciągnij włócznię",
+      "wildheart_idols_breath": "Oddech bożka",
+      "wildheart_sun_glyph_kindle": "Rozpalanie",
+      "wildheart_sun_glyph_cold": "Stygnięcie",
       "sanctum_cinder_breath": "Żarowy oddech",
       "sanctum_warming_rite": "Rytuał ogrzania",
       "sanctum_goad": "Poganiacz",
@@ -17053,6 +17037,9 @@ export const pl_PL: EnTranslations = {
       "levelClass": "Poziom {level}, {className}"
     },
     "vendor": {
+      "basicRiding": "Trening Jeździecki",
+      "advancedRiding": "Zaawansowany trening jeździecki",
+      "ridingSpeed": "Zwiększa szybkość ruchu na wierzchowcu o {speed}%. Dotyczy każdego wierzchowca.",
       "goodsTitle": "{name}: Towary",
       "close": "Zamknij kupca",
       "hint": "Kliknij przedmiot w swoich torbach, aby go sprzedać, gdy to okno jest otwarte.",
@@ -17263,7 +17250,8 @@ export const pl_PL: EnTranslations = {
       "tooManyOrders": "Możesz mieć jednocześnie otwarte co najwyżej {count} zamówień.",
       "orderClosed": "To wystawienie nie jest już otwarte.",
       "orderOwn": "To jest twoje własne wystawienie. Anuluj je, aby je wycofać.",
-      "orderNotYours": "To nie jest twoje wystawienie."
+      "orderNotYours": "To nie jest twoje wystawienie.",
+      "orderTrackedItem": "Kupiec nie przyjmuje zamówień na unikatowy ekwipunek."
     },
     "loot": {
       "takeAll": "Weź wszystko",
@@ -21189,117 +21177,6 @@ export const pl_PL: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Kamień Przejścia"
-      },
-      "whistle_ember_fox": {
-        "name": "Gwizdek Żarzącego Lisa"
-      },
-      "whistle_moss_hare": {
-        "name": "Gwizdek Omszałego Zająca"
-      },
-      "whistle_frog": {
-        "name": "Gwizdek Żaby"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Gwizdek Kraba Karmazynowego Szczypca"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Gwizdek Złotego Strażnika"
-      },
-      "whistle_nightfang": {
-        "name": "Gwizdek Nocnego Kła"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Gwizdek Odyńca Kłoroga"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Gwizdek Szmaragdowego Wilka"
-      },
-      "whistle_tiger": {
-        "name": "Gwizdek Tygrysa"
-      },
-      "whistle_cate_coin": {
-        "name": "Gwizdek Cate Coin"
-      },
-      "whistle_alon": {
-        "name": "Gwizdek Alona"
-      },
-      "whistle_trollface": {
-        "name": "Gwizdek Trollface'a"
-      },
-      "whistle_ansem": {
-        "name": "Gwizdek Ansema"
-      },
-      "whistle_triple_t": {
-        "name": "Gwizdek Triple T"
-      },
-      "whistle_kekius": {
-        "name": "Gwizdek Kekiusa"
-      },
-      "whistle_solbot": {
-        "name": "Gwizdek Solbota"
-      },
-      "whistle_frostfire": {
-        "name": "Gwizdek Mroźnego Ognia"
-      },
-      "whistle_rocky": {
-        "name": "Gwizdek Skalniaka"
-      },
-      "whistle_proud_grunt": {
-        "name": "Gwizdek Dumnego Piechura"
-      },
-      "whistle_loot_goblin": {
-        "name": "Gwizdek Goblina Łupów"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Gwizdek Penny Goldspark"
-      },
-      "whistle_stag": {
-        "name": "Gwizdek Jelenia"
-      },
-      "whistle_alpaca": {
-        "name": "Gwizdek Alpaki"
-      },
-      "whistle_horse": {
-        "name": "Gwizdek Konia"
-      },
-      "whistle_sapling": {
-        "name": "Gwizdek Sadzonki"
-      },
-      "whistle_bull": {
-        "name": "Gwizdek Byka"
-      },
-      "whistle_spider": {
-        "name": "Gwizdek Pająka"
-      },
-      "whistle_raptor": {
-        "name": "Gwizdek Drapieżnego Jaszczura"
-      },
-      "whistle_skeleton": {
-        "name": "Gwizdek Szkieletu"
-      },
-      "whistle_crystal_lich": {
-        "name": "Gwizdek Kryształowego Licza"
-      },
-      "whistle_forgemaw": {
-        "name": "Gwizdek Kuźniopaszczy Roztopionego"
-      },
-      "whistle_sprites": {
-        "name": "Gwizdek Migotka i Błyska"
-      },
-      "whistle_crystal_tide": {
-        "name": "Gwizdek Kryształowego Przypływu"
-      },
-      "whistle_phantom": {
-        "name": "Gwizdek Widma"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Gwizdek Feniksa Żarospadu"
-      },
-      "charm_stag_acorn": {
-        "name": "Talizman Korony Żołędzi"
-      },
-      "charm_stag_gilded": {
-        "name": "Złocony talizman"
       },
       "lastflame_core": {
         "name": "Rdzeń Ostatniego Płomienia"
@@ -26340,6 +26217,9 @@ export const pl_PL: EnTranslations = {
       "thorn_sprout": {
         "name": "Ciernisty Pęd"
       },
+      "wildheart_hunting_spear": {
+        "name": "Włócznia łowiecka"
+      },
       "buddy_ember_fox": {
         "name": "Żarzący Lis"
       },
@@ -26414,9 +26294,6 @@ export const pl_PL: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, Koń Bojowy"
-      },
-      "buddy_sapling": {
-        "name": "Sadzonka"
       },
       "buddy_bull": {
         "name": "Byk"

@@ -54,6 +54,7 @@ import {
 } from '../sim/account_flair';
 import { isOwnAura } from '../sim/aura_classify';
 import { bagPools } from '../sim/bags';
+import { buddyVendorOffer } from '../sim/content/buddy_offers';
 import { DEEDS } from '../sim/content/deeds';
 import { vendorFactionForNpc } from '../sim/content/faction_vendors';
 import { HEROIC_VENDOR_STOCK } from '../sim/content/heroic_vendor';
@@ -781,7 +782,7 @@ import { bindMobileFrameLongPress as bindMobileFrameLongPressCore } from './mobi
 import { isCompactTouchHud, touchBagsShown } from './mobile_hud_layout';
 import { MobileMoreDialogController } from './mobile_more_dialog';
 import { moneyHtml } from './money_html';
-import { MOUNT_DESC_KEYS, mountSpecLines } from './mount_labels';
+import { MOUNT_DESC_KEYS } from './mount_labels';
 import { MountRaceControls } from './mount_race_controls';
 import { MountRaceStrip } from './mount_race_strip';
 import { type FrameDimension, MovableFrame } from './movable_frame';
@@ -5436,6 +5437,7 @@ export class Hud {
     inventory: () => this.sim.inventory,
     inventoryCapacity: () => this.sim.bagCapacity,
     dispatch: (request) => this.sim.courierDispatch(request),
+    accounts: () => this.sim,
     closeOthers: () => this.closeOtherWindows('#courier-window'),
     hideTooltip: () => this.hideTooltip(),
   });
@@ -6608,10 +6610,6 @@ export class Hud {
       if (mountDef) {
         const descKey = MOUNT_DESC_KEYS[mountDef.key];
         if (descKey) html += `<div class="tt-desc">${esc(t(descKey))}</div>`;
-        for (const line of mountSpecLines({
-          speedPct: Math.round(mountDef.moveSpeedPct * 100),
-        }))
-          html += `<div class="tt-green">${esc(line)}</div>`;
         // No per-mount level gate any more: the only requirement is the riding
         // skill, so the tooltip says how to ride instead of quoting a level.
         html += `<div class="tt-sub">${esc(t('hudChrome.mounts.useToRide'))}</div>`;
@@ -14496,12 +14494,9 @@ export class Hud {
         ITEMS,
         {
           copper: this.sim.copper,
+          ridingTier: this.sim.ridingTrainingTier(),
           honor: this.sim.honor,
-          // The advisory half of the vendor row gate. An IWorld member both
-          // worlds already implement (Sim reads PlayerMeta, ClientWorld mirrors
-          // the self-delta), so the locked state resolves client-side with no
-          // new wire field, exactly as the delve shop resolves its lock badge
-          // from the mirrored clears map.
+          // Both hosts expose authoritative proficiency for advisory vendor gates.
           gatheringProficiency: this.sim.gatheringProficiency,
           factions: this.sim.factions,
           factionCurrencies: this.sim.factionCurrencies,
@@ -14709,6 +14704,7 @@ export class Hud {
       // driven against both world shapes by tests/warfare_vendor_view.test.ts.
       buildWarfareVendorView(npc.vendorItems, ITEMS, ITEM_SETS, {
         ...warfareShopViewer(this.sim),
+        warfareVendor: NPCS[npc.templateId ?? '']?.warfareVendor,
         setMemberCounts: itemSetMemberCounts(),
       }),
       {
@@ -14735,16 +14731,13 @@ export class Hud {
   // (gold vendors are the only buyback source), exactly like Heroic Marks, so
   // the buy command fires ONLY from the confirm callback.
   private requestWarfarePurchase(npcId: number, itemId: string): void {
-    const item = ITEMS[itemId];
+    const item = buddyVendorOffer(itemId) ?? ITEMS[itemId];
     if (!item) return;
     // Shared Heroic shop title/accept/cancel keys must remain currency-neutral.
     this.confirmDialog(
       t('heroicShop.buyConfirmTitle'),
       t('hudChrome.warfareShop.buyConfirmBody', {
-        item:
-          item.kind === 'buddy' && item.buddy
-            ? buddyDisplayName(item.buddy)
-            : itemDisplayName(item),
+        item: item.kind === 'companion' ? buddyDisplayName(item.buddy) : itemDisplayName(item),
         honor: t('hudChrome.warfare.honorAmount', {
           amount: formatNumber(Math.max(0, Math.floor(item.priceHonor ?? 0)), {
             maximumFractionDigits: 0,
@@ -16883,9 +16876,11 @@ export class Hud {
       isRaid: party?.raid ?? false,
       partySize: party?.members.length ?? 1,
       isHeroic: this.sim.dungeonDifficulty() === 'heroic',
+      unappliedDifficulty: this.sim.unappliedDungeonDifficulty(),
     });
     for (const action of actions) {
-      html += `<div class="ctx-item" data-act="${action.id}">${esc(action.label)}</div>`;
+      const attrs = action.inert ? 'aria-disabled="true"' : `data-act="${action.id}"`;
+      html += `<div class="ctx-item" ${attrs}>${esc(action.label)}</div>`;
     }
     el.innerHTML = html;
     hydratePortraits(el);

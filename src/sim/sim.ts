@@ -29,7 +29,7 @@ import { abilityNeedsLineOfSight } from './ability_line_of_sight';
 import { offlineActionBarRestore } from './action_bar_restore';
 import { auraSaveFragment, restorePersistedAuras } from './aura_persist';
 import { playerStartPos, type SpawnSlots, setPlaytestGod } from './authored_world_hooks';
-import { maybeAutoEquip } from './auto_equip';
+import { autoEquipsInstanceGrant, isAutoEquipGearKind, maybeAutoEquip } from './auto_equip';
 import * as bagsMod from './bags';
 import {
   BAG_SOCKETS,
@@ -60,6 +60,7 @@ import type { FactionId } from './factions';
 import {
   type PendingDifficultyChange,
   setDungeonDifficulty as setDungeonDifficultyImpl,
+  unappliedDungeonDifficulty as unappliedDungeonDifficultyImpl,
 } from './instances/difficulty_selection';
 import type { ItemCopyAnchor } from './item_copy_anchor';
 import * as membershipMod from './membership';
@@ -311,11 +312,7 @@ import * as raidReadouts from './ignivar_raid_readouts';
 import * as interaction from './interaction';
 import * as inventoryConsumption from './inventory_consumption';
 import type { ExtractOutcome, ExtractRef } from './inventory_extract';
-import {
-  grantInventoryInstances,
-  grantPlainStack,
-  type InventoryGrantOptions,
-} from './inventory_grant';
+import { grantPlainStack, type InventoryGrantOptions } from './inventory_grant';
 import { emitInventoryReceipt } from './inventory_receipt';
 import { foldNamedSlotTarget, type NamedSlotTarget } from './item_copy_ref';
 import {
@@ -326,6 +323,7 @@ import {
 } from './item_instance_load';
 import { isChargeBearingPayload } from './item_instance_merge';
 import { countRawInSlots, setItemLocked as setItemLockedCmd } from './item_lock';
+import { grantTrackedInstances, isTrackedItemGrant } from './item_tracking';
 import * as items from './items';
 import { applyKnockback as applyKnockbackImpl } from './knockback';
 import { lanceGuidanceFor } from './lance_guidance';
@@ -434,6 +432,7 @@ import {
 } from './mount_race';
 import {
   forceDismount as forceDismountImpl,
+  mountOwned,
   ownedMounts as ownedMountsImpl,
   setMountSkin as setMountSkinImpl,
   toggleMount as toggleMountImpl,
@@ -698,6 +697,11 @@ import {
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
 import type { ResolvedAbility } from './resolved_ability';
 import { freshCounters, type RewardCounters } from './reward_counters';
+import {
+  type RidingPlayerState,
+  restoreRidingTraining,
+  ridingTrainingTier as ridingTierOf,
+} from './riding_training';
 import { Rng } from './rng';
 import { resolveSavedPosExit } from './saved_pos_exit';
 import * as seatingMod from './seating';
@@ -1334,6 +1338,7 @@ export type JoinableChannel = (typeof JOINABLE_CHANNELS)[number];
 export interface PlayerMeta
   extends ReferralRewardState,
     worldQuestState.WorldQuestPlayerState,
+    RidingPlayerState,
     HostArmourAuthority,
     lanceTrialMod.LancePlayerState,
     petCommands.PetOwnerRuntimeState,
@@ -1404,16 +1409,6 @@ export interface PlayerMeta
   // never persisted, and absent/false preserves the classic follow-through
   // default.
   stopAutoAttackOnTargetSwitch?: boolean;
-  // One-time riding-lesson fee (100g), charged when the first lesson race starts
-  // (or through the legacy mount_train_begin command). Optional so absent === false (pre-feature saves and a
-  // fresh character stay byte-equal): never explicitly set to false, only ever
-  // flipped true, mirroring the ridingTrained-omitted-while-false convention in
-  // serializeCharacter below.
-  mountTrainingFeePaid?: boolean;
-  // Riding skill purchased from Marla (80g). Optional and absent until bought,
-  // so pre-feature saves load cleanly as un-trained. Grandfathered: any save
-  // that had mountTrainingFeePaid=true gets ridingTrained=true on load.
-  ridingTrained?: boolean;
   // PBE boost kit version already applied to this character (server/
   // pbe_boost.ts, PBE_BOOST_ACCOUNTS=1 only). Optional and absent outside the
   // PBE so live saves round-trip byte-equal; the world-join top-up re-kits
@@ -2274,6 +2269,7 @@ export class Sim {
       world: cfg.world,
       perfLap: cfg.perfLap,
       idleMobTickRadius: cfg.idleMobTickRadius ?? 0,
+      mintItemGuid: cfg.mintItemGuid,
     };
     const activeWorldContent = getActiveWorldContent();
     this.worldContent = cfg.world ?? activeWorldContent;
@@ -2297,7 +2293,7 @@ export class Sim {
     // S0b seam: the shared SimContext every extracted slice routes through. Built
     // once here (the rng now exists); a live view + bound callbacks, it draws no rng
     // and mutates nothing, so it cannot perturb the construction draws below.
-    this.ctx = this.buildSimContext(cfg.vaultConsumptionAdmission, cfg.courierBankExchange);
+    this.ctx = this.buildSimContext(cfg);
     ferryMod.syncFerryGates(this.ctx); // this world's own deck gates before any placement query
     // Movement-kernel deps (MV1): pure binding, no rng draws, no construction effects.
     this.playerMotionDeps = {
@@ -3273,22 +3269,8 @@ export class Sim {
         healDisplayRoundedProficiency(meta.gatheringProficiency);
       }
       meta.mailWelcomed = s.mailWelcomed === true;
-      // Never explicitly set false: absent stays absent so a pre-feature save
-      // (or one where the fee was never charged) round-trips byte-equal.
-      if (s.mountTrainingFeePaid === true) meta.mountTrainingFeePaid = true;
-      // Grandfather: players who already paid the old 100g fee are riding-trained.
-      if (s.ridingTrained === true || s.mountTrainingFeePaid === true) meta.ridingTrained = true;
+      player.ridingTier = restoreRidingTraining(meta, s);
       if (typeof s.pbeBoostKit === 'number') meta.pbeBoostKit = s.pbeBoostKit;
-      // Grandfather: players who had q_riding_lessons active in a mid-quest save
-      // (state='active' or 'ready') but never received ridingTrained=true are
-      // riding-trained because accepting the quest proves they already paid
-      // the old lesson fee. Also covers done: questsDone.has('q_riding_lessons').
-      if (
-        !meta.ridingTrained &&
-        (meta.questLog.has('q_riding_lessons') || meta.questsDone.has('q_riding_lessons'))
-      ) {
-        meta.ridingTrained = true;
-      }
       meta.guildLetterSent = s.guildLetterSent === true;
       // Work-order cooldowns: clamp every stored availableAt to
       // tickCount + WORK_ORDER_CADENCE_TICKS so a tick-counter reset (fresh
@@ -3998,6 +3980,7 @@ export class Sim {
       ...(meta.mountTrainingFeePaid ? { mountTrainingFeePaid: true } : {}),
       // Absent until riding skill is purchased (back-compat).
       ...(meta.ridingTrained ? { ridingTrained: true } : {}),
+      ...(meta.ridingTier === 2 ? { ridingTier: 2 as const } : {}),
       // Absent outside the PBE (back-compat; server/pbe_boost.ts).
       ...(meta.pbeBoostKit !== undefined ? { pbeBoostKit: meta.pbeBoostKit } : {}),
       craftSkills: { ...meta.craftSkills },
@@ -4138,6 +4121,9 @@ export class Sim {
   ridingTrained(): boolean {
     return this.players.get(this.primaryId)?.ridingTrained === true;
   }
+  ridingTrainingTier(): 0 | 1 | 2 {
+    return ridingTierOf(this.players.get(this.primaryId));
+  }
   toggleMounted(): void {
     this.toggleMountFor(this.primaryId);
   }
@@ -4202,15 +4188,14 @@ export class Sim {
     this.setBuddyAutolootFor(this.primaryId, enabled);
   }
 
-  /** Purchase the riding skill from Marla (80g). Server path; IWorld member rides
-   *  primaryId. Rules live in src/sim/mounts_training.ts. */
-  learnRidingFor(npcId: number, pid: number): void {
-    learnRidingImpl(this.ctx, npcId, pid);
+  /** Purchase a quoted riding rank through the authoritative training module. */
+  learnRidingFor(npcId: number, pid: number, expectedTier: 0 | 1 = 0): void {
+    learnRidingImpl(this.ctx, npcId, pid, expectedTier);
   }
 
   // --- IWorldMounts: learn riding ---
-  learnRiding(npcId: number): void {
-    this.learnRidingFor(npcId, this.primaryId);
+  learnRiding(npcId: number, expectedTier: 0 | 1 = 0): void {
+    this.learnRidingFor(npcId, this.primaryId, expectedTier);
   }
 
   /** Per-pid riding-lesson command surface (the server path); the IWorld member
@@ -4356,7 +4341,14 @@ export class Sim {
   }
 
   changeMountSkin(skinId: string | null): void {
-    if (skinId !== null && !this.accountCosmetics.mountSkinIds.includes(skinId)) return;
+    const meta = this.players.get(this.primaryId);
+    if (
+      skinId !== null &&
+      !this.accountCosmetics.mountSkinIds.includes(skinId) &&
+      !this.accountCosmetics.collectibleMountSkinIds?.includes(skinId) &&
+      !(meta && mountOwned(meta, skinId))
+    )
+      return;
     this.setMountSkin(this.primaryId, skinId);
   }
 
@@ -4963,10 +4955,7 @@ export class Sim {
   // routes straight back to the Sim method of the same name (the callback registry
   // in 02-WORKING-MEMORY.md). As a later slice owns one of these, it reimplements the
   // callback in its own module without renaming it here, so consumers never change.
-  private buildSimContext(
-    reserveVaultConsumption = inertVaultConsumptionAdmission,
-    courierBankExchange?: courierMod.CourierBankExchange,
-  ): SimContext {
+  private buildSimContext(cfg: SimConfig): SimContext {
     const sim = this;
     const host: SimContextHost = {
       get rng() {
@@ -5128,8 +5117,9 @@ export class Sim {
       get storagePrices() {
         return sim.storagePrices;
       },
-      reserveVaultConsumption,
-      courierBankExchange,
+      reserveVaultConsumption: cfg.vaultConsumptionAdmission ?? inertVaultConsumptionAdmission,
+      courierBankExchange: cfg.courierBankExchange,
+      courierAccountExchange: cfg.courierAccountExchange,
       // A2: duel + arena state stays on Sim, exposed as live views (backing fields
       // mutated in place / the queues reassigned by the matchmaker filter).
       get trades() {
@@ -7966,6 +7956,12 @@ export class Sim {
     if (!r) return;
     const { meta } = r;
     const def = ITEMS[itemId];
+    // A tracked (epic or legendary) def takes the instanced arm so every copy
+    // is minted with its guid and provenance (item_tracking.ts).
+    if (isTrackedItemGrant(def)) {
+      this.addItemInstance(itemId, {}, pid, count, opts);
+      return;
+    }
     // Stacks into the bags, or credits a currency counter (Heroic Marks).
     grantPlainStack(meta, itemId, count, opts);
     // Every grant that reaches the hub is an acquisition for the Book of
@@ -7988,12 +7984,7 @@ export class Sim {
     if (!opts?.movement) noteRelicObtain(meta, itemId, count);
     emitInventoryReceipt(this.ctx, meta.entityId, itemId, def?.name ?? itemId, count, opts);
     this.ctx.onInventoryChangedForQuests(meta);
-    if (
-      meta.autoEquip &&
-      (def?.kind === 'weapon' || def?.kind === 'armor' || def?.kind === 'held_offhand')
-    ) {
-      maybeAutoEquip(this.ctx, itemId, meta);
-    }
+    if (meta.autoEquip && isAutoEquipGearKind(def)) maybeAutoEquip(this.ctx, itemId, meta);
   }
 
   // Grant payload-bearing copies. Materials coalesce exact source buckets;
@@ -8001,24 +7992,19 @@ export class Sim {
   // Loot events, discovery and movement accounting match addItem.
   addItemInstance(
     itemId: string,
-    instance: ItemInstancePayload,
+    given: ItemInstancePayload,
     pid?: number,
     count = 1,
     opts?: InventoryGrantOptions,
-  ): void {
+  ): ItemInstancePayload | void {
     const r = this.resolve(pid);
     if (!r) return;
     if (count < 1) return;
     const { meta } = r;
     const def = ITEMS[itemId];
-    grantInventoryInstances(
-      meta.inventory,
-      itemId,
-      count,
-      instance,
-      opts?.craftedRecipeId,
-      opts?.materialSources,
-    );
+    // Tracked copies are stamped (guid + provenance, or a transfer) per copy
+    // on the way in (item_tracking.ts); untracked payloads pack as before.
+    const instance = grantTrackedInstances(this.ctx, meta, itemId, count, given, opts);
     // Discovery ledger: the instance's rolled quality (gathered rares) beats
     // the static def quality for the quality-first marks. `movement` rides
     // along exactly as in addItem above (provenance only, never membership).
@@ -8043,7 +8029,9 @@ export class Sim {
       instance,
     );
     this.ctx.onInventoryChangedForQuests(meta);
-    if (meta.autoEquip && instance.lootQuality) maybeAutoEquip(this.ctx, itemId, meta, instance);
+    if (meta.autoEquip && autoEquipsInstanceGrant(def, given, instance))
+      maybeAutoEquip(this.ctx, itemId, meta, instance);
+    return instance;
   }
 
   // Returns the `instance` payload of every instanced UNIT actually consumed
@@ -10420,6 +10408,14 @@ export class Sim {
     const r = this.resolve(pid),
       claimId = r ? this.instanceClaimIdAt(r.e.pos) : null;
     return this.instances.find((instance) => instance.exitId === claimId)?.difficulty ?? null;
+  }
+
+  unappliedDungeonDifficulty(
+    pid?: number,
+    claims?: ReadonlyMap<string, readonly InstanceSlot[]>,
+  ): DungeonDifficulty | null {
+    const r = this.resolve(pid);
+    return r ? unappliedDungeonDifficultyImpl(this.ctx, r.meta.entityId, claims) : null;
   }
 
   setDungeonDifficulty(difficulty: DungeonDifficulty, pid?: number): void {

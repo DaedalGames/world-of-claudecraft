@@ -26,18 +26,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountRetry': 'Réessayer',
   'hudChrome.buddyMenu.cancel': 'Annuler',
   'hudChrome.collections.actions.summon': 'Invoquer',
-  'hudChrome.collections.actions.wear': 'Équiper',
-  'hudChrome.collections.armor.cloth': 'Tissu',
-  'hudChrome.collections.armor.leather': 'Cuir',
-  'hudChrome.collections.armor.mail': 'Mailles',
-  'hudChrome.collections.detail.honorPrice': '{amount} points d’honneur',
-  'hudChrome.collections.petKind.beast': 'Bêtes',
-  'hudChrome.collections.petKind.elemental': 'Élémentaires',
-  'hudChrome.collections.petKind.humanoid': 'Humanoïdes',
-  'hudChrome.collections.petKind.undead': 'Morts-vivants',
-  'hudChrome.collections.stat.agility': 'Agilité',
-  'hudChrome.collections.stat.intellect': 'Intelligence',
-  'hudChrome.collections.tabs.mounts': 'Montures',
   'hudChrome.courier.bankTitle': 'Banque',
   'hudChrome.courier.empty': 'Aucun objet',
   'hudChrome.courier.inventory': 'Inventaire',
@@ -3824,7 +3812,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': "Ce qu'elle fait",
   'guide.commandsPage.dungeonMode': 'Basculez vos donjons entre la difficulté normale et héroïque.',
   'guide.commandsPage.dungeonReset':
-    'Abandonnez vos propres instances vides, ce que vous faites après avoir changé de difficulté.',
+    'Abandonnez vos instances vides pour recommencer à neuf, à la même difficulté ou à une nouvelle.',
   'guide.commandsPage.dungeons':
     'Chaque donjon avec la zone où se trouve sa porte et la taille de groupe pour laquelle il est conçu, ainsi que la difficulté actuellement sélectionnée.',
   'guide.commandsPage.emotesBody':
@@ -4311,29 +4299,14 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     "Au-delà du comptoir de Marla, les rênes se trouvent plutôt qu'elles ne s'achètent. Elles tombent des derniers boss des donjons à cinq joueurs et du raid en héroïque, ainsi que des failles nettoyées, où plus la faille que vous terminez est difficile, plus les rênes qu'elle peut laisser derrière elle sont rares. Ce sont des trouvailles rares par conception, et aucune expédition n'en garantit une, si bien que la bonne façon de chasser une monture est d'emporter cette quête avec vous sur les expéditions que vous faisiez déjà. Cette page ne vous dira pas quelle monture pend à quel boss : cette part-là est à vous de la découvrir.",
   'guide.mountsPage.collectHeading': "D'où viennent les montures les plus rares",
-  'guide.mountsPage.firstBody':
-    "Le Destrier de Bravoure est la seule monture vendue où que ce soit dans le monde. Une fois l'Équitation apprise, Marla vous vend les Rênes du Destrier de Bravoure pour 10 pièces d'or, et ces rênes sont à vous pour de bon. Toute autre monture se gagne de par le monde, si bien que ce cheval est le point de départ de presque tous les cavaliers.",
   'guide.mountsPage.firstHeading': 'Votre première monture',
-  'guide.mountsPage.goodsBody':
-    "Une monture est un objet, ce qui en fait quelque chose que l'économie peut faire circuler. Vous possédez une monture tant que ses rênes se trouvent dans vos sacs ou votre banque, mais des rênes mises en banque vous laissent la monture sans vous permettre de la chevaucher : pour appeler la bête, il faut porter les rênes sur vous. Les rênes de joueur ne sont jamais liées à l'âme, elles s'échangent donc, voyagent par courrier et s'annoncent sur le Marché mondial comme n'importe quelle autre trouvaille, sauf mention contraire sur l'objet lui-même. Deux choses valent la peine d'être sues avant de vous en séparer : aucun marchand ne rachètera jamais un jeu de rênes, si bien qu'une monture est un achat que vous gardez ou que vous transmettez plutôt qu'un bien à revendre contre pièces, et si les rênes quittent à la fois vos sacs et votre banque pendant que vous êtes en selle, échangées, envoyées par courrier ou vendues sur le marché, la monture part avec elles et vous êtes déposé là où vous vous trouvez.",
   'guide.mountsPage.goodsHeading': 'Les rênes sont des biens ordinaires',
   'guide.mountsPage.heading': 'Montures et équitation',
-  'guide.mountsPage.intro':
-    'Une monture est un moyen plus rapide de traverser le monde, rien de plus. Vous apprenez à monter aux écuries, achetez votre premier jeu de rênes, et toute route est plus courte à partir de là.',
-  'guide.mountsPage.learnBody':
-    "L'Équitation est une compétence que vous achetez une fois pour toutes, et elle s'ouvre au niveau {level}. Marla Hitchen, la Maîtresse d'écurie, tient les Écuries du Galecrest sur les landes, et elle vend l'Entraînement d'équitation pour 80 pièces d'or. Cet unique achat est ce qui vous permet de monter en selle, et il reste acquis pour de bon.\n\nUne fois que vous l'avez, Marla a une quête pour vous : Leçons d'équitation. Acceptez-la, suivez le repère jusqu'au carré lumineux derrière l'arche de départ, et appuyez sur Démarrer la course. Elle vous prête un Destrier de Bravoure d'entraînement pour la leçon, si bien que la leçon elle-même ne vous coûte rien. Faites le parcours, terminez-le, et retournez la voir pour toucher votre pièce et votre expérience. Le destrier prêté retourne à l'écurie ensuite, si bien que la leçon vous apprend la selle plutôt que de vous offrir un cheval.",
   'guide.mountsPage.learnHeading': 'Apprendre à monter',
   'guide.mountsPage.raceBody':
     "Le parcours de saut d'obstacles dans l'enclos de Marla est ouvert à tous, à tout moment, pas seulement pendant la leçon. Montez en selle, tenez-vous sur le carré lumineux derrière l'arche, et appuyez sur Démarrer la course. Un compte à rebours vous immobilise, puis le chronomètre démarre : franchissez les sept obstacles et revenez à cheval par l'arche avant qu'il ne s'écoule.\n\nUn obstacle ne compte que si vous êtes réellement en l'air au-dessus de la barre, un simple passage en dessous ne validant rien. Vous pouvez les prendre dans n'importe quel ordre et par n'importe quel côté, et en rater un n'est pas la fin du monde : faites demi-tour et retentez-le. Mourir, descendre de monture ou quitter l'enclos met fin à la tentative, tout comme laisser le chronomètre s'épuiser, ce qui vous démonte sur place ; l'annuler vous-même se contente d'arrêter le chronomètre. Rien ne vous empêche d'en commencer une autre. Il n'y a ni frais, ni temps de recharge, ni récompense au-delà du temps lui-même, et n'importe quel nombre de cavaliers peut faire le parcours en même temps sans se gêner mutuellement.",
   'guide.mountsPage.raceHeading': 'La course des écuries',
-  'guide.mountsPage.rideBody':
-    "Il n'y a pas de fenêtre de montures ni de favori à définir, car les rênes sont la monture. Utilisez un jeu de rênes depuis vos sacs ou depuis un emplacement de barre d'action, et vous montez cette monture. L'invocation prend un instant, un appel bref plutôt qu'instantané, elle ne vous sauvera donc pas d'un mauvais pull. Descendre est instantané et jamais bloqué.\n\nUtilisez les rênes que vous montez déjà et vous rangez cette monture. Utilisez un autre jeu en étant déjà monté et vous basculez directement dessus, sans rien à invoquer entre les deux. La touche Monter / Descendre, la touche d'accent grave par défaut, ne sert jamais qu'à descendre : c'est le chemin du bas, pas celui du haut. La seule exception est la leçon d'équitation, où cette même touche appelle le destrier que Marla vous prête, puisqu'un cheval emprunté n'a pas de rênes sur lesquelles cliquer. Sur téléphone ou tablette, le bouton Montures du menu Plus fonctionne dans les deux sens, mais il appelle le premier jeu de rênes qui se trouve dans vos sacs plutôt qu'un jeu que vous choisissez, alors touchez les rênes elles-mêmes pour obtenir une monture précise.",
   'guide.mountsPage.rideHeading': 'Monter en selle et en descendre',
-  'guide.mountsPage.speedBody':
-    "La vitesse est la seule chose qui distingue une monture d'une autre. Le Destrier de Bravoure que vous achetez à Marla fixe l'allure de base, et les montures que vous collectez de par le monde vont plus vite que lui : plus les rênes sont rares, plus la monture est rapide, par paliers nets plutôt que par une progression continue. Il n'existe pas de second rang d'Équitation à apprendre, ni de mise à niveau à acheter ensuite. Vous payez l'Équitation une seule fois, et à partir de là, ce sont les rênes que vous utilisez qui décident de votre vitesse de déplacement.",
-  'guide.mountsPage.speedHeading': 'Vitesse et paliers',
-  'guide.mountsPage.whatBody':
-    "Une monture est une bête que vous chevauchez, et ce qu'elle vous offre, c'est de la vitesse. Aucune armure, aucun dégât, aucune caractéristique : elle vous porte plus vite sur le sol, et vous fait bondir un peu plus haut quand vous sautez, et c'est là tout le marché. Toutes les montures du jeu sont des montures terrestres, il n'y a donc pas de vol, et aucune d'elles ne nage.",
   'guide.mountsPage.whatHeading': "Ce qu'est une monture",
   'guide.mountsPage.whereBody':
     "Les Écuries du Galecrest sont indiquées sur la carte de La Crête du Vent, sur les landes entre le Surplomb et les Champs d'Épaves. Marla se tient près de la grange, face au terrain de course.",
@@ -4375,8 +4348,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Les failles sont la seule chose qui attend le plafond lui-même. Elles se déchirent dans les royaumes selon leur propre calendrier, classées de C à S, et chaque groupe du monde se lance dans la course pour être celui qui nettoie chacune d'elles. Les tableaux de plongée continuent eux aussi de tourner, et leur difficulté la plus corsée mérite un nouveau regard une fois votre équipement à niveau.",
   'guide.progression.journeyBodyCount':
     "Le monde est une seule terre continue de {zones} zones. Trois d'entre elles forment la route sur laquelle vous montez en niveau, disposées du sud au nord : vous commencez dans la vallée verdoyante, poursuivez à travers le marais et finissez sur les pics froids et élevés. Suivez le fil des quêtes et la contrée vous porte de l'une à l'autre. Une île se trouve au large des côtes de la vallée pour les premiers niveaux, et le reste des royaumes s'ouvre à partir de cette même route, conçu pour les personnages qui ont déjà achevé cette ascension.",
-  'guide.progression.ridingBody':
-    "L'Équitation fait partie de ce qui vous attend au bout de l'ascension. Au niveau {level}, une Maîtresse d'écurie vous enseigne cette compétence pour une belle somme d'or, et une leçon sur le parcours d'entraînement vous vaut votre premier jeu de rênes. Une monture ne confère aucune puissance : elle rend simplement le monde plus petit, ce qui, après une longue marche vers le nord, est une récompense en soi.",
   'guide.progression.ridingTitle': 'Apprendre à monter',
   'guide.questsPage.availableBody':
     "Les quêtes s'enchaînent. La plupart ne sont proposées qu'une fois que vous avez rendu celle qui les précède, et beaucoup exigent aussi un niveau minimum, si bien qu'un PNJ qui n'a rien pour vous aujourd'hui peut en avoir beaucoup après vos prochains niveaux, ou une fois que vous aurez rendu la quête que vous portez déjà. Quelques-unes ont leur propre condition, comme les Leçons d'équitation, qui ne s'ouvrent qu'une fois l'entraînement d'équitation acheté. Les quêtes de groupe le précisent d'emblée en indiquant combien de joueurs elles vous suggèrent d'amener. Certains travaux sont répétables : vous pouvez les reprendre après un délai, et le marqueur au-dessus du donneur vous indique quand l'un d'eux est revenu.",
@@ -7298,13 +7269,15 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Vous ne pouvez pas réinitialiser les instances tant qu'une personne s'y trouve.",
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     "Changez la difficulté du donjon avant de réinitialiser ces instances. Les instances vides se réinitialisent d'elles-mêmes après 5 minutes.",
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    "Vos instances sont déjà fraîches. Personne n'y est entré depuis la dernière réinitialisation.",
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Utilisez /dungeon reset pour abandonner vos instances vides après avoir changé la difficulté.',
+    'Utilisez /dungeon reset pour abandonner vos instances vides et les recommencer à neuf.',
   'hudChrome.dungeonDifficulty.resetLoot':
     "Vous ne pouvez pas réinitialiser les instances tant qu'il reste du butin à l'intérieur.",
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'Réinitialiser toutes les instances ?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Cette action abandonne les instances vides de la difficulté précédemment sélectionnée. Tout butin non récupéré empêchera la réinitialisation.',
+    "Cela abandonne vos instances vides pour que la prochaine partie reparte à neuf à la difficulté choisie. Les verrouillages ne changent pas. Tout joueur encore à l'intérieur ou butin non récupéré empêche la réinitialisation.",
   'hudChrome.dungeonDifficulty.resetConfirm': 'Réinitialiser les instances',
   'hudChrome.dungeonDifficulty.resetCooldown':
     'Les instances ne peuvent être réinitialisées qu’une fois toutes les 5 minutes.',
@@ -15302,12 +15275,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_shadowjump_toad': 'Kama-Kage, le Crapaud Saute-Ombre',
   'hudChrome.mounts.name_stormfeather_griffin': 'Plume-d’Orage Toise-Ciel',
   'hudChrome.mounts.name_thunderstrut_gobbler': 'Pavane-Tonnerre, le Grand Dindon',
-  'hudChrome.mounts.desc_valorsteed':
-    'Un destrier robuste au pied sûr qui accroît la vitesse de déplacement.',
-  'hudChrome.mounts.desc_grag_bear':
-    'Un ours robuste au pied sûr qui accroît la vitesse de déplacement.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'Un escargot vaillant à combustion lente qui accroît la vitesse de déplacement.',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'Une puissante moto magitech conçue pour des déplacements de combat rapides en vol rasant.',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -15322,12 +15289,9 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.emptyDropHint':
     'Les montures plus rares sont lâchées par les boss de donjon et de raid.',
   'hudChrome.mounts.clickManage': 'Cliquez pour choisir votre monture',
-  'hudChrome.mounts.useToRide': 'Utiliser pour invoquer cette monture.',
   'hudChrome.mountTraining.begin': 'Commencer la leçon',
   'hudChrome.mountTraining.mountPrompt':
     "Appuyez sur {key} pour monter le Valorsteed d'entraînement.",
-  'hudChrome.mountTraining.ownedMountPrompt':
-    'Vos rênes sont dans vos sacs. Utilisez-les pour chevaucher.',
   'hudChrome.mountTraining.returnToMarla':
     'Retournez voir Marla aux écuries pour acheter les rênes de votre Valorsteed pour 10 po.',
   'hudChrome.mountTraining.ridePrompt':
@@ -15762,7 +15726,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     'Votre groupe a triomphé de l’épreuve héroïque pendant que vous combattiez à l’arrière ou gisiez à terre. Votre verrouillage a tout de même été enregistré, alors votre part de Marques héroïques vous est envoyée ici au lieu d’être perdue. Faites-en bon usage.\n\n- Intendant héroïque',
   'guide.dungeonsPage.resetTitle': 'Réinitialiser vos instances',
   'guide.dungeonsPage.resetBody':
-    "Changez de difficulté pendant que votre groupe détient encore des parcours réservés et les anciennes réservations subsistent un moment avant de se libérer d'elles-mêmes. Le chef de groupe peut les lâcher d'un coup à la place : choisissez Réinitialiser toutes les instances dans le menu de son propre portrait, ou tapez /dungeon reset. Une réinitialisation ne fonctionne qu'après un vrai changement de difficulté, seulement tant que personne, vivant ou tombé, ne reste à l'intérieur, seulement une fois que chaque cadavre là-dedans a été entièrement pillé, et un bref temps de recharge sépare une réinitialisation de la suivante. Arrivez à la porte avec la mauvaise difficulté et le jeu vous le dit avant le départ. Le raid ne se réinitialise jamais ainsi ; ses propres règles de verrou tiennent.",
+    "Les parties réservées vides persistent un moment avant de disparaître seules. Le chef de groupe peut les abandonner immédiatement : choisissez Réinitialiser toutes les instances dans le menu de son propre portrait ou saisissez /dungeon reset. La prochaine partie repart à neuf à votre difficulté actuelle. Changer de difficulté fait de même pour les parties de l'ancienne difficulté. Une réinitialisation n'est possible que si personne, vivant ou mort, ne reste à l'intérieur et si tous les cadavres ont été entièrement pillés. Elle ne raccourcit jamais un verrouillage : un donjon héroïque ou raid verrouillé le reste jusqu'à sa remise à zéro. Un court délai sépare les réinitialisations. Si vous arrivez à la porte avec la mauvaise difficulté, le jeu vous prévient avant le début. Le raid se réinitialise de la même façon, avec ses propres règles de verrouillage et de retour au cadavre. Un raid qui change de difficulté ignore le délai : un groupe qui a choisi le mauvais palier ou échoué en Héroïque peut revenir immédiatement, puisque son verrouillage limite déjà les répétitions.",
   'guide.dungeonsPage.wildheartBody':
     'Une caldeira de jungle détrempée par la pluie où deux sentiers de chasse surélevés encerclent un cénote de jade. Traversez tanières de bêtes et ruines ancestrales, puis gravissez la pyramide rituelle pour voir qui vous attend au sommet.',
   'guide.gear.itemLevelBody':
@@ -19516,10 +19480,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Aucun chroma de Méca de combat ne vous appartient encore.',
   'hudChrome.cosmetics.mechIntro':
     'Le Méca de combat remplace le corps de ce personnage. Un seul chroma est équipé à la fois.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Un habillage de monture recouvre la monture chevauchée par ce personnage. Il ne modifie jamais sa vitesse.',
-  'hudChrome.cosmetics.mountsNoMount':
-    'Obtenez d’abord une monture : un habillage a besoin d’une monture à recouvrir.',
   'hudChrome.cosmetics.owned': 'Possédé',
   'hudChrome.cosmetics.scopeAccount': 'Compte',
   'hudChrome.cosmetics.scopeCharacter': 'Personnage',
@@ -20727,12 +20687,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'auth.wocHead.nose.default': 'Classique',
   'auth.wocHead.nose.soft': 'Doux',
   'hudChrome.adventureGuide.lootClass': 'Classe',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Étreinte du givre',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Seigneur de guerre',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Doré',
-  'hudChrome.collections.detail.exchangeLabel': 'Bourse $WOC',
-  'hudChrome.collections.looks.locked': 'Verrouillé',
-  'hudChrome.collections.stat.strength': 'Force',
   'hudChrome.guildHall.done': 'Terminé cette semaine',
   'hudChrome.guildHall.kinds.boss': 'Prime',
   'hudChrome.guildHall.shop.kindTitle': 'Titre',
@@ -21287,118 +21241,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.nameLabel': 'Nom du compagnon',
   'hudChrome.buddyMenu.rename': 'Renommer le compagnon',
   'hudChrome.collections.actions.dismiss': 'Renvoyer',
-  'hudChrome.collections.actions.remove': 'Retirer',
-  'hudChrome.collections.buddyLore.alon':
-    "La mascotte d'un voyageur venu d'une route qu'aucune carte n'admet, qui apparaît partout où un plan tourne mal. Elle observe, elle approuve, et elle n'apporte absolument aucune aide.",
-  'hudChrome.collections.buddyLore.alpaca':
-    'Les troupeaux de la Crête du Vent les élèvent pour leur laine et leur tempérament : rien ne reste plus calme dans une tempête. Celui-ci crache sur une personne, exactement une, à chaque voyage.',
-  'hudChrome.collections.buddyLore.ansem':
-    "Il parle de portes et de ténèbres, et refuse d'en dire davantage sur l'une ou l'autre. Les sectateurs de la Fleur de Nuit le revendiquent ; il s'en va dès qu'ils célèbrent un rite.",
-  'hudChrome.collections.buddyLore.bull':
-    "Un taureau du Val de la taille d'un chien, seule raison pour laquelle on a accepté d'en garder un à l'intérieur. Son caractère, lui, n'a pas rétréci.",
-  'hudChrome.collections.buddyLore.cate_coin':
-    "Un chat qui refuse de quitter la pièce sur laquelle il est assis et que personne n'a jamais vu manger. Les marchands d'Eastbrook débattent encore pour savoir lequel des deux est l'animal de compagnie.",
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    "Un crabe des marées du Rivage Lointain dont la pince reste rouge longtemps après sa sortie de l'eau. Les dockers les faisaient autrefois courir sur les planches pour quelques pièces.",
-  'hudChrome.collections.buddyLore.crystal_lich':
-    "Un éclat de Nythraxis lui-même, vibrant encore du froid qui l'a façonné. Il obéit à la personne qui l'a tiré des décombres du raid, et ne le lui a pas pardonné.",
-  'hudChrome.collections.buddyLore.crystal_tide':
-    "Un esprit des marées chevauchant sa propre goutte de verre marin, pêché dans les eaux calmes par des pêcheurs du Val au Rivage Lointain qui cherchaient leur dîner. Il garde l'eau dans laquelle il a été remonté et refuse qu'on le convainque d'y retourner.",
-  'hudChrome.collections.buddyLore.ember_fox':
-    "Une renarde des haies du Val d'Eastbrook, nommée pour son pelage rouge braise visible à travers les broussailles d'hiver. Les trappeurs du coin ont renoncé aux petits il y a des générations et se sont mis à leur laisser de la nourriture.",
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    "Chaque automne, il se consume jusqu'à n'être qu'une braise et renaît de ses propres cendres au printemps : voilà tout ce que l'on peut en dire. Personne n'a jamais trouvé de nid, ni réussi à en attraper un deux fois.",
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'Un louveteau du Bois des Spectres, au pelage verdi par la lumière de la canopée qui atteint à peine le sol. Les gardiens élèvent les orphelins que le bois laisse derrière lui.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    "Forgé dans le Creuset de la Dernière Source sans jamais être tout à fait achevé, il a quitté la fonderie d'Ignivar alors que les marteaux frappaient encore. Seule la descente héroïque permet de le trouver : cette créature de métal fondu revient sans cesse à la forge qui l'a créée et suit chez elle la personne qui survit deux fois au feu.",
-  'hudChrome.collections.buddyLore.frog':
-    "Le Marais de Mirefen les fait grandir grasses et insouciantes, chantant toute la nuit dans les roseaux. Les guides du marais jurent qu'un bateau qui en transporte une ne s'échoue jamais.",
-  'hudChrome.collections.buddyLore.frostfire':
-    "Né dans le Voile de Givre, là où une source chaude perce la banquise, il n'a jamais choisi à laquelle des deux moitiés il appartient. Il fume dans l'air froid et frissonne dans l'air chaud.",
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    "Un scarabée de guet de la Chute d'Ambre, doré par la résine dans laquelle il a grandi. Son nom est plus ancien que la résine : des sentinelles de ce genre gardaient ces bosquets bien avant que l'on songe à mettre la sève en bouteille.",
-  'hudChrome.collections.buddyLore.horse':
-    "Un poney du Val, élevé petit pour les allées des vergers, à qui l'on n'a jamais dit qu'il n'était pas un destrier. Il suit à votre épaule et accompagne quiconque lui a un jour donné une pomme.",
-  'hudChrome.collections.buddyLore.kekius':
-    "Un compagnon rieur d'origine incertaine, adopté comme porte-bonheur par les écuries de course de la Crête du Vent. Il a survécu à quatre écuries qui ne juraient que par lui.",
-  'hudChrome.collections.buddyLore.loot_goblin':
-    "Il suit quiconque porte des Marques héroïques et n'a jamais été pris à voler. L'Intendant Vex soutient que cela ne prouve strictement rien.",
-  'hudChrome.collections.buddyLore.moss_hare':
-    "Un lièvre du Marais des Saules, à la fourrure verdie par une vie passée dans la tourbe humide. Les herboristes du marais y voient un porte-bonheur et refusent qu'on en chasse un du pas d'une porte.",
-  'hudChrome.collections.buddyLore.nightfang':
-    "Un jeune chasseur de la Fleur de Nuit, silencieux même selon les critères de son espèce. Il suit pour la compagnie et ne chasse rien de plus gros qu'un papillon de nuit.",
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    "L'apprentie d'un bricoleur gnome, payée à l'heure et qui vaut chaque pièce de cuivre. L'Armurier Hode l'a prise à son service pour régler une dette et propose désormais cet arrangement à quiconque possède mille pièces d'or.",
-  'hudChrome.collections.buddyLore.phantom':
-    "Un petit fantôme des tertres du Bois des Spectres, de la taille d'une paume, tout en drap et sans os, qui apparaît dans un sac pourtant fermé et reste pour la compagnie. Personne n'a compris ce qu'il veut, et il n'a jamais tenté d'effrayer qui que ce soit.",
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'Un vétéran des réserves de Guerre qui a gardé le salut et perdu le grade. Le Maréchal de guerre Draven Kole en confie un à tout soldat assez honorable pour en comprendre le prix.',
-  'hudChrome.collections.buddyLore.raptor':
-    "Un jeune raptor des Terres du Dragon, vendu avant d'apprendre à quelle vitesse il peut courir. On recommande à chaque nouveau propriétaire de bien le nourrir, et aucun n'a besoin qu'on le lui répète.",
-  'hudChrome.collections.buddyLore.rocky':
-    "Un rampant à carapace de pierre des éboulis de Thornpeak, lent et parfaitement imperturbable. Les mineurs les gardent parce qu'ils s'immobilisent un instant avant un effondrement.",
-  'hudChrome.collections.buddyLore.sapling':
-    "Un jeune arbre dont l'écorce sourit et dont le regard violet est curieux. Ses racines le portent d'un dandinement joyeux partout où vous allez.",
-  'hudChrome.collections.buddyLore.skeleton':
-    "Il est sorti des tertres du Bois des Spectres, s'est épousseté, et suit les gens depuis. Personne n'a établi à qui appartenaient ces os.",
-  'hudChrome.collections.buddyLore.solbot':
-    "Un petit automate nourri de soleil, déterré à demi enfoui dans les cendres des Terres du Dragon et qui fonctionne encore. L'atelier qui l'a construit n'a laissé aucune marque sur son boîtier.",
-  'hudChrome.collections.buddyLore.spider':
-    "Une tisseuse du Bois des Spectres, de la taille d'une paume, qui redécore tout sac où on la transporte. Sa toile est plus solide que le fil qu'elle remplace.",
-  'hudChrome.collections.buddyLore.sprites':
-    "Deux petits esprits du feu, l'un doré et l'autre bleu-vert, qui ne s'accordent jamais vraiment sur celui qui mène. Approchez assez et ils se fondent en une flamme verte, puis se séparent à nouveau en riant.",
-  'hudChrome.collections.buddyLore.stag':
-    'Une lignée du Jardin Éternel, issue des grands cerfs que montaient autrefois les gardiens. Il baisse encore la tête devant une main levée, par une habitude plus ancienne que lui.',
-  'hudChrome.collections.buddyLore.tiger':
-    "Des rayures de la Baie des Palmes sur un animal qui n'y est jamais allé : la lignée est élevée en captivité depuis la fermeture des anciennes ménageries. Il répond à un sifflement, et à rien d'autre.",
-  'hudChrome.collections.buddyLore.triple_t':
-    "Trois exemplaires d'une chose, ou une seule chose en trois exemplaires. Les récits se contredisent, et la créature ne tient pas assez en place pour qu'on puisse la compter.",
-  'hudChrome.collections.buddyLore.trollface':
-    'Une créature grimaçante que le Bois des Spectres a rejetée et refusé de reprendre. Toute tentative de la décrire se termine par un éclat de rire et un abandon.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    "Une lignée de Thornpeak, élevée courte sur pattes par des bergers qui voulaient un sanglier incapable d'abattre une clôture. Il a tout de même gardé son sale caractère.",
-  'hudChrome.collections.close': 'Fermer la chasse',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Voltaïque',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Cendré',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Chauffé à blanc',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Grenouille saphir',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Verdoyant',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Couronne de glands',
-  'hudChrome.collections.cosmeticUnlocked': 'Nouvelle apparence pour {name} : {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Liaison',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% par victime',
-  'hudChrome.collections.detail.dropLabel': 'Butin de',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% par victime, {heroicChance}% en héroïque',
-  'hudChrome.collections.detail.exchangeNone': 'Aucune offre',
-  'hudChrome.collections.detail.exchangeUnavailable': 'Indisponible sur ce client',
-  'hudChrome.collections.detail.fishingDrop': 'Pêche partout, {chance}% par prise',
-  'hudChrome.collections.detail.globalDrop':
-    'Tout ennemi, {chance}% par victime, un parmi {count} de cette rareté',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob} ({location}), héroïque uniquement, {chance}% par victime',
-  'hudChrome.collections.detail.marketAtMerchant': 'Affiché chez le Marchand',
-  'hudChrome.collections.detail.marketChecking': 'Vérification...',
-  'hudChrome.collections.detail.marketLabel': 'Marché mondial',
-  'hudChrome.collections.detail.marketNone': 'Aucune offre',
-  'hudChrome.collections.detail.marksPrice': '{amount} Marques héroïques',
-  'hudChrome.collections.detail.noItem': "Aucun objet ne l'accorde encore",
-  'hudChrome.collections.detail.noSell': 'Ne peut pas être vendu',
-  'hudChrome.collections.detail.noSource': 'Aucune source dans le jeu pour le moment',
-  'hudChrome.collections.detail.sellLabel': 'Prix de vente au marchand',
-  'hudChrome.collections.detail.setLabel': 'Collectionné',
-  'hudChrome.collections.detail.soulbound': "Lié à l'âme",
-  'hudChrome.collections.detail.tradeable': 'Échangeable',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) pour {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Vendu par',
-  'hudChrome.collections.keybindLabel': 'Chasse',
-  'hudChrome.collections.launcherTitle': "Chasse : compagnons, montures et ensembles d'objets",
-  'hudChrome.collections.looks.none': 'Aucune apparence créée pour ce compagnon pour le moment',
-  'hudChrome.collections.looks.title': 'Apparences',
-  'hudChrome.collections.looks.unlocked': 'Débloqué',
-  'hudChrome.collections.looks.worn': 'Porté',
-  'hudChrome.collections.petKind.celebrity': 'Célébrités',
   'hudChrome.collections.presence.alon': 'Vous vous sentez observé, et discrètement approuvé.',
   'hudChrome.collections.presence.alpaca':
     'Quelque chose de laineux et de paisible a décidé de vous accompagner.',
@@ -21458,40 +21300,11 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Un grognement et un piétinement : quelque chose d'obstiné vous suit.",
   'hudChrome.collections.presenceDefault': 'Vous sentez une présence vous observer.',
   'hudChrome.collections.revealed': '{name} a décidé de vous suivre.',
-  'hudChrome.collections.set.bonusLabel': '{pieces} pièces',
-  'hudChrome.collections.set.itemLevel': "Niveau d'objet {level}",
-  'hudChrome.collections.set.owned': '{owned} pièces sur {total}',
-  'hudChrome.collections.source.bossDrop':
-    '{mob} ({location}), {chance}% par joueur et par victime',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), héroïque uniquement, {chance}% par joueur',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% par joueur, {heroicChance}% en héroïque',
-  'hudChrome.collections.source.bossLabel': 'Compagnon de boss',
-  'hudChrome.collections.source.challengeDps':
-    "Infligez {dps} points de dégâts par seconde à {mob} sur l'ensemble du combat",
-  'hudChrome.collections.source.challengeLabel': 'Défi',
-  'hudChrome.collections.source.challengeSpeed':
-    'Vainquez {mob} dans les {seconds} secondes suivant le début du combat',
-  'hudChrome.collections.source.craft': '{item} (recette de {profession})',
-  'hudChrome.collections.source.craftLabel': 'Fabriqué',
-  'hudChrome.collections.source.deed': 'Le haut fait {deed}',
-  'hudChrome.collections.source.deedLabel': 'Obtenu grâce à',
-  'hudChrome.collections.source.grantLabel': 'Décerné',
-  'hudChrome.collections.source.grantOnly':
-    'Récompense saisonnière : classement mensuel et récompenses des meilleurs relevés de combat',
-  'hudChrome.collections.source.rollNote':
-    "Chaque joueur effectue un tirage séparé ; personne ne perd de tirage au profit d'un membre du groupe.",
-  'hudChrome.collections.source.token': '{item}, utilisé une fois pour attacher le compagnon',
-  'hudChrome.collections.source.tokenLabel': 'Jeton',
-  'hudChrome.collections.stat.mixed': 'Hybride',
   'hudChrome.collections.state.notOwned': 'Non collectionné',
   'hudChrome.collections.state.owned': 'Collectionné',
   'hudChrome.collections.state.pending': 'Une présence vous suit',
   'hudChrome.collections.state.unavailable': 'Pas encore disponible',
   'hudChrome.collections.tabs.buddies': 'Compagnons',
-  'hudChrome.collections.tabs.sets': "Ensembles d'objets",
-  'hudChrome.collections.title': 'Chasse',
   'hudChrome.cosmetics.buddyActive': 'Invoqué',
   'hudChrome.cosmetics.buddyDrag': "Glisser vers la barre d'action",
   'hudChrome.courier.bags': 'Envoyer à la banque',
@@ -21502,7 +21315,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Les objets rapportés débordent des sacs pleins. Le messager disparaît après la livraison jusqu'à sa prochaine invocation.",
   'hudChrome.courier.close': 'Fermer le messager',
   'hudChrome.courier.instructions':
-    "Sélectionnez des piles entières. Votre messager les dépose d'abord, puis récupère les objets demandés. Les objets de quête ne peuvent pas être envoyés.",
+    "Sélectionnez des piles entières pour votre banque, la Réserve de matériaux ou un autre personnage. Votre coursier les dépose d'abord, puis récupère les objets demandés. Les objets de quête ne peuvent pas être envoyés.",
   'hudChrome.courier.membership': 'Renouvelez votre abonnement pour commencer un autre trajet.',
   'hudChrome.courier.outbound': 'En vol vers la banque',
   'hudChrome.courier.ready': 'Prêt pour une livraison',
@@ -21830,8 +21643,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.kinds.task': 'Exécution',
   'hudChrome.guildHall.lifetime': 'Contrats terminés : {count}',
   'hudChrome.guildHall.mountOffer': 'Monture : {mount}',
-  'hudChrome.guildHall.mountPreview':
-    "Monture terrestre : vitesse de déplacement augmentée de +{pct}% en selle. Nécessite l'apprentissage de l'équitation.",
   'hudChrome.guildHall.needSeals': 'Il vous en manque {count}',
   'hudChrome.guildHall.open': 'Ouvrir',
   'hudChrome.guildHall.owned': 'Possédé',
@@ -25449,8 +25260,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'entities.items.cantors_hymnal.name': "Recueil d'hymnes du chantre",
   'entities.items.cantors_stole.name': 'Étole du chantre',
   'entities.items.cellwatch_belt.name': 'Ceinture du Guet des cellules',
-  'entities.items.charm_stag_acorn.name': 'Charme de la Couronne de glands',
-  'entities.items.charm_stag_gilded.name': 'Charme doré',
   'entities.items.choirward_leggings.name': 'Jambières du Gardien du chœur',
   'entities.items.choirward_pauldrons.name': 'Espauliers du Gardien du chœur',
   'entities.items.choristers_gloves.name': 'Gants du choriste',
@@ -25850,41 +25659,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'entities.items.vestments_of_the_waking_rite.name': "Habits du rite de l'éveil",
   'entities.items.warmonger_greaves.name': 'Grèves du fauteur de guerre',
   'entities.items.warmonger_treads.name': 'Bottines du fauteur de guerre',
-  'entities.items.whistle_alon.name': "Sifflet d'Alon",
-  'entities.items.whistle_alpaca.name': "Sifflet d'alpaga",
-  'entities.items.whistle_ansem.name': "Sifflet d'Ansem",
-  'entities.items.whistle_bull.name': 'Sifflet de taureau',
-  'entities.items.whistle_cate_coin.name': 'Sifflet de Cate Coin',
-  'entities.items.whistle_crimson_claw_crab.name': 'Sifflet de crabe à pince cramoisie',
-  'entities.items.whistle_crystal_lich.name': 'Sifflet de liche de cristal',
-  'entities.items.whistle_crystal_tide.name': 'Sifflet de marée cristalline',
-  'entities.items.whistle_ember_fox.name': 'Sifflet de renard de braise',
-  'entities.items.whistle_emberfall_phoenix.name': 'Sifflet de phénix de la Chute des braises',
-  'entities.items.whistle_emerald_wolf.name': 'Sifflet de loup émeraude',
-  'entities.items.whistle_forgemaw.name': 'Sifflet de Gueuleforge le Fondu',
-  'entities.items.whistle_frog.name': 'Sifflet de grenouille',
-  'entities.items.whistle_frostfire.name': 'Sifflet de Feu-de-givre',
-  'entities.items.whistle_golden_sentinel.name': 'Sifflet de sentinelle dorée',
-  'entities.items.whistle_horse.name': 'Sifflet de cheval',
-  'entities.items.whistle_kekius.name': 'Sifflet de Kekius',
-  'entities.items.whistle_loot_goblin.name': 'Sifflet de gobelin du butin',
-  'entities.items.whistle_moss_hare.name': 'Sifflet de lièvre de mousse',
-  'entities.items.whistle_nightfang.name': 'Sifflet de Croc-de-nuit',
-  'entities.items.whistle_penny_goldspark.name': 'Sifflet de Penny Goldspark',
-  'entities.items.whistle_phantom.name': 'Sifflet de fantôme',
-  'entities.items.whistle_proud_grunt.name': 'Sifflet de soldat fier',
-  'entities.items.whistle_raptor.name': 'Sifflet de raptor',
-  'entities.items.whistle_rocky.name': 'Sifflet de Rocky',
-  'entities.items.whistle_sapling.name': "Sifflet d'arbrisseau",
-  'entities.items.whistle_skeleton.name': 'Sifflet de squelette',
-  'entities.items.whistle_solbot.name': 'Sifflet de Solbot',
-  'entities.items.whistle_spider.name': "Sifflet d'araignée",
-  'entities.items.whistle_sprites.name': 'Sifflet de Flammèche et Lueur',
-  'entities.items.whistle_stag.name': 'Sifflet de cerf',
-  'entities.items.whistle_tiger.name': 'Sifflet de tigre',
-  'entities.items.whistle_triple_t.name': 'Sifflet de Triple T',
-  'entities.items.whistle_trollface.name': 'Sifflet de Trollface',
-  'entities.items.whistle_tuskhorn_boar.name': 'Sifflet de sanglier Corne-défense',
   'entities.items.wyrmshadow_chainmail.name': "Cotte de mailles de l'Ombre du wyrm",
   'entities.items.wyrmshadow_tunic.name': "Tunique de l'Ombre du wyrm",
   'entities.items.wyrmshadow_vest.name': "Gilet de l'Ombre du wyrm",
@@ -25928,7 +25702,6 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_proud_grunt.name': 'Soldat fier',
   'entities.mobs.buddy_raptor.name': 'Raptor',
   'entities.mobs.buddy_rocky.name': 'Rocky',
-  'entities.mobs.buddy_sapling.name': 'Arbrisseau',
   'entities.mobs.buddy_skeleton.name': 'Squelette',
   'entities.mobs.buddy_solbot.name': 'Solbot',
   'entities.mobs.buddy_sprites.name': 'Flammèche et Lueur',
@@ -26235,4 +26008,207 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'referralCards.waiting': "En attente de l'acceptation de votre ami lié.",
   'referralCards.yourCard': 'Carte de tampons de {name}',
   'worldContent.musterRackName': "Râtelier d'armes du rassemblement",
+
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Retirer la lance',
+  'abilityUi.cast.temple_score': 'La partition',
+  'abilityUi.cast.temple_score_answer': 'Répondre à la partition',
+  'abilityUi.cast.wildheart_idols_breath': "Souffle de l'idole",
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Refroidissement',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Allumage',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Lance de chasse',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': "L'idole s'éveille",
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Gardez le tank dans sa ligne de vue. Réservez les interruptions à Aria de la noyade.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    "Entre ses autres incantations, un trait frappe toutes les {every} s après un avertissement visuel de {windup} s, infligeant {mult} fois les dégâts de son arme en dégâts de Givre. Interrompre Aria de la noyade arrête les traits et l'aria pendant {quiet} s.",
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe ne se déplace jamais et ne frappe pas en mêlée. Regroupez-vous pour Chœur, quittez le groupe pour Solo, interrompez Aria de la noyade et esquivez Déferlement du lac. À deux seuils de vie, répétez sa mélodie sur les dalles lunaires en alternant les chanteurs.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    "Ses autres attaques s'arrêtent pendant que le groupe répond à la partition. Les traits d'eau lunaire n'ont pas de barre d'incantation et ne peuvent pas être interrompus.",
+  'bossJournal.temple.selthe.scoreHeroic':
+    "Pendant la réponse, les dalles s'éteignent. Mémorisez la mélodie et jouez à tour de rôle.",
+  'bossJournal.temple.selthe.scoreResponse':
+    "Observez la mélodie, puis marchez sur les dalles dans l'ordre. Alternez les notes justes avec un autre joueur vivant ; un unique survivant peut terminer seul. Les pas bloqués sont sans danger. Quittez une dalle et revenez dessus pour la faire sonner, même si vous l'occupiez avant le début de la réponse.",
+  'bossJournal.temple.selthe.scoreSummary':
+    "À {first} et {second} de vie, elle devient insensible et joue {notes}, puis {finalNotes} notes. Répétez-les en {answer}, puis {finalAnswer} s. Une mauvaise dalle inflige {falseNote} dégâts de Givre et réinitialise la progression, mais pas le temps. À l'expiration du délai, tous subissent {min} à {max} dégâts de Givre. Une réussite l'étourdit pendant {stun} s et augmente les dégâts qu'elle subit de {vulnerability} pendant {bonusSeconds} s.",
+  'bossJournal.temple.selthe.tipHealerRework':
+    "Surveillez la cible de l'aria et les joueurs isolés pendant Chœur. Pendant la partition, aidez à chanter la note suivante et soignez les erreurs.",
+  'bossJournal.wildheart.zulgar.breathResponse':
+    "Passez dans la moitié non marquée avant la fin de l'avertissement. La ligne centrale est sûre. En Héroïque, le souffle éteint aussi les glyphes allumés de sa moitié ; ils peuvent être rallumés immédiatement.",
+  'bossJournal.wildheart.zulgar.breathSummary':
+    "Toutes les {every} s, une moitié de la terrasse est marquée pendant {warning} s, puis tous ceux qui s'y trouvent subissent {min} à {max} dégâts de Nature. Le souffle alterne entre les deux moitiés.",
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    "Les joueurs non marqués allument les glyphes devant la Proie. Faites-le passer dessus, puis attaquez pendant l'effet Frappé par le soleil. Les glyphes s'éteignent à la fin de la chasse.",
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    "Les {count} glyphes commencent éteints. Pendant la chasse, un joueur non marqué en allume un en restant dessus {kindle} s. S'il ne reste aucun joueur non marqué, la Proie peut l'allumer en {alone} s. S'éloigner réinitialise la progression. Traverser un glyphe allumé le ralentit de {slow} et augmente les dégâts qu'il subit de {vulnerability} pendant {seconds} s. Le glyphe ne peut pas être rallumé pendant {dark} s ; aucun autre glyphe ne peut le frapper pendant {wary} s. Pendant la chasse, les étourdissements durent moitié moins longtemps.",
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Il marque une nouvelle paire toutes les {pair} s et alterne entre les deux toutes les {switch} s. Chaque changement laisse {turn} s à la nouvelle Proie avant la poursuite.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Il choisit une nouvelle Proie toutes les {every} s, puis se tourne vers elle pendant {turn} s avant de la poursuivre.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    "À {health} de vie, il reste un esprit jaguar jusqu'à sa défaite. Le tank peut aussi devenir la Proie.",
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Toutes les {every} s, une incantation de {cast} s frappe tous les joueurs à moins de {radius} m pour {min} à {max} dégâts. Les joueurs empalés subissent {pinMult} fois ces dégâts, quelle que soit la distance.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    "Ciblez la lance et interagissez à moins de {range} m pour la retirer en {pull} s. Les dégâts n'interrompent pas l'extraction. Si personne d'autre n'est libre sur la terrasse, la victime peut interagir pour se libérer en {self} s.",
+  'bossJournal.wildheart.zulgar.spearSummary':
+    "Une incantation de {cast} s empale un joueur autre que le tank, ou le tank s'il ne reste personne d'autre. L'immobilisation dure jusqu'à {seconds} s et inflige {bleed} dégâts toutes les {tick} s.",
+  'entities.mobs.wildheart_hunting_spear.name': 'Lance de chasse',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    "Sa voix est brisée : elle subit {pct}% de dégâts supplémentaires jusqu'à la fin de cet effet.",
+  'hudChrome.auraEffect.temple.scoreWard':
+    "Elle chante la partition : elle ne subit aucun dégât jusqu'à la fin. Marchez sur les dalles lunaires dans l'ordre où elles ont sonné avant la fin du couplet pour briser sa voix. Jouez à tour de rôle : après une note, attendez qu'un autre joueur joue la prochaine note juste. Un unique survivant peut terminer seul. Si le couplet se termine avant, Discordance inflige {min} à {max} dégâts de Givre ({heroicMin} à {heroicMax} en Héroïque) à tous les joueurs de la cour.",
+  'hudChrome.auraEffect.temple.spentVoice':
+    "Vous ne pouvez pas faire sonner une autre dalle lunaire tant qu'un autre joueur n'a pas joué la prochaine note juste. Marcher sur une dalle pendant cet effet ne réinitialise pas la réponse et ne vous blesse pas. Ne peut pas être dissipé. Prend fin quand vous êtes le seul joueur vivant de votre instance ou que la partition se termine.",
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    "Le jaguar de pierre est éveillé. Toutes les {every} s, il souffle sur une moitié de la terrasse, puis l'autre, après un avertissement au sol de {warning} s : {min} à {max} dégâts de Nature ({heroicMin} à {heroicMax} en Héroïque) à tous les joueurs de cette moitié. Zulgar reste l'Avatar du jaguar jusqu'à sa mort et choisit une nouvelle Proie toutes les {seconds} s ({heroicSeconds} s en Héroïque).",
+  'hudChrome.auraEffect.wildheart.pinned':
+    "Une Lance de chasse vous immobilise. Vous saignez pour {bleed} dégâts physiques ({heroicBleed} en Héroïque) toutes les {every} s et l'Impulsion du Cœur sauvage vous frappe où que vous soyez avec {pulse}% de dégâts supplémentaires. Un allié peut retirer la lance en {pull} s. Si personne d'autre n'est libre, retirez-la vous-même en {wrench} s. Elle se détache après {seconds} s.",
+  'hudChrome.auraEffect.wildheart.sunWary':
+    "Aucun glyphe solaire ne peut le frapper jusqu'à la fin de cet effet. Un glyphe allumé qu'il traverse reste allumé.",
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Frappé par un glyphe solaire allumé : se déplace {pct}% moins vite.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Frappé par un glyphe solaire allumé : subit {pct}% de dégâts supplémentaires.',
+  'hudChrome.courier.accountBank':
+    "Rapporter depuis cette banque. Ce personnage doit être déconnecté à l'arrivée du coursier.",
+  'hudChrome.courier.accountPlanned':
+    'Prévu pour {name} : {count} piles. Choisir un autre personnage les remplace.',
+  'hudChrome.courier.accountTitle': 'Autres personnages',
+  'hudChrome.courier.bagsAccount': 'Envoyer à la banque de {name}',
+  'hudChrome.courier.bagsAccountNone': 'Choisissez un personnage à qui envoyer des objets.',
+  'hudChrome.courier.bagsVault': 'Envoyer les matériaux à la réserve',
+  'hudChrome.courier.boundAccount': "En route vers la banque d'un autre personnage",
+  'hudChrome.courier.boundBank': 'En route vers la banque',
+  'hudChrome.courier.boundVault': 'En route vers la Réserve de matériaux',
+  'hudChrome.courier.storeTabs': 'Stockage du coursier',
+  'hudChrome.courier.vault':
+    'Rapporter depuis la réserve. Chaque sélection rapporte toute la ligne.',
+  'hudChrome.courier.vaultCap': 'Contient {cap} unités de chaque matériau',
+  'hudChrome.courier.vaultEmpty': 'Votre réserve est vide.',
+  'hudChrome.courier.vaultLocked':
+    "Débloquez la Réserve de matériaux auprès d'un banquier pour l'utiliser avec votre coursier.",
+  'hudChrome.courier.vaultTitle': 'Réserve de matériaux',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'Normal sélectionné. Les instances actuelles restent en Héroïque.',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'Héroïque sélectionné. Les instances actuelles restent en Normal.',
+  'hudChrome.finder.mech.the_score':
+    "La partition (elle chante deux fois une mélodie sur les dalles lunaires : marchez dessus dans l'ordre où elles ont sonné pour briser sa voix)",
+  'hudChrome.itemHistory.close': 'Fermer',
+  'hudChrome.itemHistory.noTransfers': "Cet objet n'a jamais changé de mains.",
+  'hudChrome.itemHistory.openAria': 'Historique de {item}',
+  'hudChrome.itemHistory.passedTo': 'Transmis à {name} le {date}',
+  'hudChrome.itemHistory.title': '{item} : historique',
+  'hudChrome.itemMenu.itemHistory': "Historique de l'objet",
+  'hudChrome.itemTooltip.lootedBy': 'Ramassé par {name} le {date}',
+  'hudChrome.itemTooltip.obtainedBy': 'Obtenu par {name} le {date}',
+  'hudChrome.itemTooltip.questRewardTo': 'Récompense de quête pour {name} le {date}',
+  'hudChrome.kitUse.freeAria': 'Retirer {name}',
+  'hudChrome.kitUse.freeClick': 'Cliquez ici pour retirer {name}',
+  'hudChrome.kitUse.freeFar': 'Approchez à moins de {range} m pour la retirer',
+  'hudChrome.kitUse.freeKey': 'Retirer {name}',
+  'hudChrome.kitUse.freeLine':
+    'Retirez la lance du sol pour libérer sa victime. Les dégâts ne vous arrêtent pas ; un déplacement ou un étourdissement vous interrompt',
+  'hudChrome.kitUse.freeTap': 'Touchez ici pour retirer {name}',
+  'hudChrome.kitUse.freeUsingLine':
+    'Restez immobile pour retirer la lance : un déplacement ou un étourdissement vous interrompt',
+  'hudChrome.options.firstPersonBody': 'Afficher le corps',
+  'hudChrome.options.firstPersonMode': 'Première personne (zoom maximal)',
+  'hudChrome.options.firstPersonNoBody': 'Sans corps',
+  'hudChrome.options.firstPersonOff': 'Désactivé',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few':
+    '{count} transferts antérieurs ne sont pas affichés.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many':
+    '{count} transferts antérieurs ne sont pas affichés.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one':
+    "{count} transfert antérieur n'est pas affiché.",
+  'hudChrome.plurals.itemHistoryEarlierHidden.other':
+    '{count} transferts antérieurs ne sont pas affichés.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp':
+    'Choisi dans la ligne JcJ du coffre hebdomadaire',
+  'hudChrome.templeAlert.answerDarkLine':
+    "Répétez l'ordre de mémoire à tour de rôle. Quittez une dalle avant de revenir dessus. Notes : {done} sur {total}",
+  'hudChrome.templeAlert.answerLine':
+    'À tour de rôle : marchez sur la dalle lunaire marquée {place}. Notes : {done} sur {total}',
+  'hudChrome.templeAlert.answerTitle': 'Répondez à la partition !',
+  'hudChrome.templeAlert.brokenLine':
+    "Elle subit {pct}% de dégâts supplémentaires jusqu'à la fin : utilisez vos attaques les plus puissantes maintenant",
+  'hudChrome.templeAlert.brokenTitle': 'La voix de Selthe est brisée !',
+  'hudChrome.templeAlert.falseLine':
+    "Cette dalle n'était pas la suivante. La réponse reprend à la première dalle",
+  'hudChrome.templeAlert.falseTitle': 'Fausse note !',
+  'hudChrome.templeAlert.melodyDarkLine':
+    "Mémorisez l'ordre avant que les dalles s'éteignent. Répétez-le à tour de rôle avec un autre joueur",
+  'hudChrome.templeAlert.melodyLine':
+    "Regardez les dalles lunaires sonner l'une après l'autre. Répétez l'ordre à tour de rôle avec un autre joueur",
+  'hudChrome.templeAlert.melodyTitle': 'La partition',
+  'hudChrome.templeAlert.spentLine':
+    "Vous ne pouvez pas faire sonner une dalle tant qu'un autre joueur n'a pas joué la prochaine note juste. Notes : {done} sur {total}",
+  'hudChrome.templeAlert.spentTitle': 'Une autre voix doit répondre',
+  'hudChrome.templeAlert.stepOffLine':
+    "Une dalle lunaire ne sonne que lorsque quelqu'un y entre. Quittez cette dalle et revenez dessus",
+  'hudChrome.templeAlert.stepOffTitle': 'Éloignez-vous, puis revenez',
+  'hudChrome.templeAlert.timeAria': 'Il reste {seconds} secondes',
+  'hudChrome.wildheartAlert.breathLine':
+    "Le jaguar de pierre va souffler sur cette moitié de la terrasse. Passez dans l'autre moitié",
+  'hudChrome.wildheartAlert.breathTitle': "Souffle de l'idole !",
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    "Restez sur le glyphe jusqu'à son allumage. Le quitter recommence la progression",
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Allumage du glyphe solaire',
+  'hudChrome.wildheartAlert.glyphLine':
+    "Restez sur un glyphe solaire éteint pendant {seconds} s pour l'allumer. Quand Zulgar le traverse, il subit {pct}% de dégâts supplémentaires pendant {duration} s",
+  'hudChrome.wildheartAlert.glyphTitle': 'Allumez les glyphes solaires',
+  'hudChrome.wildheartAlert.pinnedLine':
+    "Un allié doit retirer la Lance de chasse. L'Impulsion du Cœur sauvage vous inflige plus de dégâts quand vous êtes empalé",
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    "Personne n'est libre pour vous aider : retirez la Lance de chasse vous-même avant l'Impulsion du Cœur sauvage",
+  'hudChrome.wildheartAlert.pinnedTitle': 'Empalé !',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    "Personne d'autre ne peut allumer les glyphes solaires. Restez sur un glyphe éteint {seconds} s pour l'allumer, puis attirez Zulgar dessus",
+  'hudChrome.wildheartAlert.spearLine':
+    "Courez vers la Lance de chasse et retirez-la avant l'Impulsion du Cœur sauvage",
+  'hudChrome.wildheartAlert.spearTitle': 'Un allié est empalé !',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    "Il subit {pct}% de dégâts supplémentaires jusqu'à la fin : utilisez vos attaques les plus puissantes maintenant",
+  'hudChrome.wildheartAlert.sunstruckTitle': 'Zulgar est frappé par le soleil !',
+  'itemUi.errors.orderTrackedItem': "Le Marchand n'accepte aucune commande d'équipement unique.",
+
+  'hudChrome.cosmetics.mountsIntro':
+    "Choisissez ici l'apparence de votre monture. L'entraînement à l'équitation détermine la vitesse. Gardez l'objet de monture dans les sacs ou la banque d'un personnage pour partager son apparence sur tout votre compte.",
+  'hudChrome.cosmetics.mountsNoMount':
+    "Apprenez l'équitation auprès de la maîtresse des écuries Marla pour invoquer une monture.",
+  'hudChrome.cosmetics.notCollected': 'Non collectionné',
+  'hudChrome.guildHall.mountPreview':
+    "Apparence de monture pour tous les personnages de votre compte. Votre entraînement à l'équitation détermine votre vitesse.",
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Choisissez votre monture dans Cosmétiques. Utilisez Monter / Descendre pour chevaucher.',
+  'hudChrome.mounts.desc_grag_bear': "Un ours robuste au pied sûr, équipé d'une lourde selle.",
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'Un escargot robuste au rythme paisible, à la coquille moussue.',
+  'hudChrome.mounts.desc_valorsteed':
+    "Un destrier robuste au pied sûr, équipé d'une selle en cuir.",
+  'hudChrome.mounts.useToRide':
+    "Utilisez cet objet pour porter cette apparence et invoquer votre monture. Gardez-le dans les sacs ou la banque d'un personnage pour partager l'apparence sur tout votre compte. L'entraînement à l'équitation détermine la vitesse.",
+  'itemUi.vendor.advancedRiding': "Entraînement avancé d'équitation",
+  'itemUi.vendor.basicRiding': "Entraînement d'équitation",
+  'itemUi.vendor.ridingSpeed':
+    "Augmente votre vitesse de déplacement à monture de {speed}%. S'applique à toutes les montures.",
+  'guide.mountsPage.firstBody':
+    "Marla vend les Rênes du Destrier de Bravoure pour 10 pièces d'or après l'apprentissage de l'équitation. Conserver les rênes débloque l'apparence du cheval dans Cosmétiques pour tous les personnages de votre compte. L'entraînement permet déjà d'invoquer une monture sans porter de rênes : choisissez le cheval ou une autre apparence possédée pour changer d'allure.",
+  'guide.mountsPage.goodsBody':
+    "Les apparences de monture à collectionner restent disponibles sur votre compte tant qu'au moins un objet de rênes correspondant se trouve dans les sacs ou la banque personnelle d'un personnage. Échanger, envoyer par courrier, mettre en vente, vendre ou retirer autrement le dernier objet admissible supprime l'apparence de Cosmétiques. Le cavalier qui la porte retrouve l'apparence du cheval par défaut et reste en selle à la vitesse de son entraînement.\n\nLes rênes des joueurs peuvent être échangées, envoyées par courrier et mises en vente au Marché mondial, sauf indication contraire. Les rênes du cheval peuvent aussi être vendues à un marchand pour 10 pièces d'or. Les autres rênes conservent leurs propres restrictions de vente. Les apparences de monture de la boutique restent des cosmétiques de compte indépendants des objets de rênes.",
+  'guide.mountsPage.intro':
+    "Choisissez une apparence de monture, apprenez l'équitation aux écuries et voyagez plus vite dans le monde. Votre entraînement fixe l'allure ; toutes les apparences de monture sont cosmétiques.",
+  'guide.mountsPage.learnBody':
+    "L'équitation se débloque au niveau {level}. La maîtresse des écuries Marla Hitchen vend l'Entraînement d'équitation pour 80 pièces d'or aux Écuries du Galecrest. L'entraînement de base augmente la vitesse à monture de {basicSpeed}%. Une fois appris, Marla vend aussi l'Entraînement avancé d'équitation pour {advancedFee} pièces d'or, portant le bonus à {advancedSpeed}%. Chaque rang appartient au personnage qui l'apprend.\n\nAprès l'apprentissage de base, acceptez la quête Leçons d'équitation de Marla et suivez le marqueur jusqu'au carré lumineux derrière l'arche de départ. Appuyez sur Démarrer la course pour emprunter le Destrier de Bravoure d'entraînement. Terminez le parcours et revenez chercher vos pièces et votre expérience. Le cheval emprunté retourne à l'écurie à la fin de la leçon.",
+  'guide.mountsPage.rideBody':
+    "Ouvrez Cosmétiques et choisissez une apparence dans l'onglet Montures. La touche Monter / Descendre, l'accent grave par défaut, invoque votre monture entraînée avec cette apparence. Le bouton Monter sur mobile fait de même. L'invocation nécessite une courte canalisation ; descendre est instantané. Vous pouvez changer d'apparence en selle sans changer de vitesse.\n\nVous pouvez aussi utiliser des rênes depuis vos sacs ou une barre d'action pour sélectionner l'apparence et invoquer la monture. Utiliser l'apparence que vous montez déjà range la monture. Les rênes en banque ou sur un autre personnage débloquent le même cosmétique sans que le cavalier ait à les porter.",
+  'guide.mountsPage.speedBody':
+    "L'Entraînement d'équitation de base augmente la vitesse à monture de {basicSpeed}%. L'Entraînement avancé d'équitation l'augmente de {advancedSpeed}% et coûte {advancedFee} pièces d'or auprès de Marla. Toutes les apparences utilisent la même vitesse selon le rang d'entraînement du personnage, quelle que soit leur rareté ou leur origine. Les apparences de la boutique utilisent aussi cette vitesse.",
+  'guide.mountsPage.speedHeading': "Vitesse et entraînement à l'équitation",
+  'guide.mountsPage.whatBody':
+    "Les montures sont des apparences cosmétiques pour votre monture entraînée. Elles ne donnent ni armure, ni dégâts, ni statistiques de combat. L'entraînement à l'équitation augmente la vitesse de déplacement au sol et les sauts à monture montent plus haut. Toutes les montures restent au sol et aucune ne sait nager.",
+  'guide.progression.ridingBody':
+    "Au niveau {level}, la maîtresse des écuries Marla enseigne l'équitation de base contre de l'or, puis propose un rang avancé. L'entraînement détermine la vitesse à monture. Choisissez votre apparence dans Cosmétiques ; les apparences à collectionner sont partagées tant que leurs rênes restent dans les sacs ou la banque d'un personnage.",
 };

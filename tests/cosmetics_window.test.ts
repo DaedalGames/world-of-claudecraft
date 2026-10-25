@@ -158,16 +158,17 @@ describe('CosmeticsWindow', () => {
     const world = fakeWorld();
     const { w, el } = makeWindow(world);
     w.open('buddies');
-    expect(el.querySelectorAll('.cos-card')).toHaveLength(5);
+    expect(el.querySelectorAll('.cos-card')).toHaveLength(4);
     expect(card(el, 'horse').textContent).toContain('Tug, the Warhorse');
-    expect(el.querySelectorAll('.cos-scope-account')).toHaveLength(5);
+    expect(el.querySelectorAll('.cos-scope-account')).toHaveLength(4);
     expect(card(el, 'horse').querySelector('.cos-scope-account')?.textContent).toBe('Account');
     expect(el.querySelector('.cos-scope-character')).toBeNull();
     expect(el.querySelector('[data-buddy-drag], [draggable="true"]')).toBeNull();
     expect(card(el, 'crystal_lich').textContent).toContain('A presence follows you');
     expect(action(el, 'summon-buddy', 'crystal_lich')).toBeNull();
     expect(action(el, 'summon-buddy', 'forgemaw')).toBeNull();
-    expect(action(el, 'summon-buddy', 'sapling')).toBeNull();
+    expect(el.querySelector('[data-id="sapling"]')).toBeNull();
+    expect(action(el, 'summon-buddy', 'sprites')).toBeNull();
     const summon = action(el, 'summon-buddy', 'horse')!;
     summon.focus();
     summon.click();
@@ -345,12 +346,12 @@ describe('CosmeticsWindow', () => {
     expect(el.querySelectorAll('.cos-tab[tabindex="0"]')).toHaveLength(1);
   });
 
-  it('hints when the character owns no mount and skips a repaint on an unchanged snapshot', () => {
+  it('allows cosmetic selection without reins and skips unchanged repaint', () => {
     const world = fakeWorld();
     world.ownedMounts = () => [];
     const { w, el } = makeWindow(world);
     w.open();
-    expect(el.querySelector('.cos-hint')).toBeTruthy();
+    expect(el.querySelector('.cos-hint')).toBeNull();
     const before = el.innerHTML;
     w.refreshIfChanged();
     expect(el.innerHTML).toBe(before);

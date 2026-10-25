@@ -26,18 +26,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountBagsEmpty': 'Tus bolsas están vacías.',
   'hudChrome.buddyMenu.cancel': 'Cancelar',
   'hudChrome.collections.actions.summon': 'Invocar',
-  'hudChrome.collections.actions.wear': 'Equipar',
-  'hudChrome.collections.armor.cloth': 'Tela',
-  'hudChrome.collections.armor.leather': 'Cuero',
-  'hudChrome.collections.detail.honorPrice': '{amount} de Honor',
-  'hudChrome.collections.detail.soulbound': 'Ligado al alma',
-  'hudChrome.collections.petKind.beast': 'Bestias',
-  'hudChrome.collections.petKind.elemental': 'Elementales',
-  'hudChrome.collections.petKind.humanoid': 'Humanoides',
-  'hudChrome.collections.petKind.undead': 'No-muertos',
-  'hudChrome.collections.stat.agility': 'Agilidad',
-  'hudChrome.collections.stat.intellect': 'Intelecto',
-  'hudChrome.collections.tabs.mounts': 'Monturas',
   'hudChrome.courier.bankTitle': 'Banco',
   'hudChrome.courier.empty': 'Sin objetos',
   'hudChrome.courier.inventory': 'Inventario',
@@ -3513,7 +3501,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': 'Qué hace',
   'guide.commandsPage.dungeonMode': 'Cambia tus mazmorras entre la dificultad normal y la heroica.',
   'guide.commandsPage.dungeonReset':
-    'Abandona tus propias instancias vacías, que es lo que haces después de cambiar de dificultad.',
+    'Abandona tus instancias vacías para que la siguiente partida empiece de nuevo, con la misma dificultad o una nueva.',
   'guide.commandsPage.dungeons':
     'Todas las mazmorras, con la zona en la que está su puerta y el tamaño de grupo para el que está pensada, además de la dificultad que tienes seleccionada ahora.',
   'guide.commandsPage.emotesBody':
@@ -3996,29 +3984,14 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     'Más allá del mostrador de Marla, las riendas se encuentran, no se compran. Salen de los últimos jefes de las mazmorras de cinco jugadores y de la banda en heroico, y de brechas despejadas, donde cuanto más difícil sea la brecha que termines, más raras pueden ser las riendas que deje. Son hallazgos raros a propósito y ninguna partida promete una, así que la forma sensata de cazar una montura es llevar esa caza de fondo en las partidas que ibas a hacer de todos modos. Esta página no te dirá qué montura cuelga de qué jefe: esa parte te toca descubrirla a ti.',
   'guide.mountsPage.collectHeading': 'De dónde vienen las monturas más raras',
-  'guide.mountsPage.firstBody':
-    'El Corcel del Valor es la única montura que se vende en cualquier parte del mundo. En cuanto hayas aprendido Equitación, Marla te venderá las Riendas del Corcel del Valor por 10 de oro, y esas riendas son tuyas para quedártelas. Cualquier otra montura se gana ahí fuera, en el mundo, así que el caballo es donde empieza casi cualquier jinete.',
   'guide.mountsPage.firstHeading': 'Tu primera montura',
-  'guide.mountsPage.goodsBody':
-    'Una montura es un objeto, lo que la convierte en algo que la economía puede mover. Eres dueño de una montura mientras sus riendas estén en tus bolsas o en tu bóveda, aunque unas riendas guardadas en la bóveda mantienen la montura como tuya sin dejarte montarla: para invocar a la bestia tienes que llevar las riendas encima. Las riendas de jugador no llevan ningún vínculo, así que se intercambian, viajan por correo y se publican en el Mercado Mundial como cualquier otro hallazgo, salvo que el propio objeto diga lo contrario. Vale la pena saber dos cosas antes de desprenderte de una: ningún vendedor te recomprará jamás un par de riendas, así que una montura es una compra que conservas o regalas, no que conviertes en monedas, y si las riendas salen a la vez de tus bolsas y de tu bóveda mientras estás montado, ya sea porque las intercambias, las envías por correo o las vendes en el mercado, la montura se va con ellas y te deja de pie justo donde estés.',
   'guide.mountsPage.goodsHeading': 'Las riendas son bienes ordinarios',
   'guide.mountsPage.heading': 'Monturas y equitación',
-  'guide.mountsPage.intro':
-    'Una montura es una forma más rápida de cruzar el mundo, y no es más que eso. Aprendes a montar en los establos, compras tu primer par de riendas, y a partir de ahí cada camino se acorta.',
-  'guide.mountsPage.learnBody':
-    'La Equitación es una habilidad que compras una sola vez, y se desbloquea en el nivel {level}. Marla Hitchen, la caballeriza mayor, regenta los Establos del Galecrest en los páramos, y vende el Entrenamiento de Monta por 80 de oro. Esa única compra es lo que te permite montar, sin más, y la conservas para siempre.\n\nEn cuanto la tengas, Marla te ofrece una misión: Lecciones de equitación. Acéptala, sigue el marcador hasta el cuadrado brillante detrás del arco de salida, y pulsa Iniciar Carrera. Ella te presta un Corcel del Valor de entrenamiento para la lección, así que la lección en sí no te cuesta nada. Recorre el circuito, termínalo, y vuelve con ella a por tus monedas y tu experiencia. El corcel prestado vuelve al establo después, así que la lección te enseña a manejarte en la silla, en lugar de regalarte un caballo.',
   'guide.mountsPage.learnHeading': 'Aprender a montar',
   'guide.mountsPage.raceBody':
     'El circuito de salto en el corral de Marla está abierto para cualquiera, en cualquier momento, no solo durante la lección. Monta, ponte de pie sobre el cuadrado brillante detrás del arco, y pulsa Iniciar Carrera. Una cuenta atrás te mantiene inmóvil, y luego el cronómetro corre: supera los siete obstáculos y vuelve a cruzar el arco antes de que se acabe la arena.\n\nUn obstáculo solo cuenta si estás de verdad en el aire por encima de la barra, así que pasar por debajo sin saltar no despeja nada. Puedes tomarlos en cualquier orden y desde cualquiera de los dos lados, y fallar uno no es el fin del mundo: da la vuelta y vuelve a intentarlo. Morir, desmontar o salir del corral termina el intento, y lo mismo pasa si dejas que el cronómetro llegue a cero, lo que te baja de la silla justo donde estés; cancelarlo tú mismo solo detiene el cronómetro. Nada te impide empezar otro intento. No hay tarifa, ni tiempo de reutilización, ni más recompensa que el propio tiempo, y cualquier número de jinetes puede correr el circuito a la vez sin estorbarse entre sí.',
   'guide.mountsPage.raceHeading': 'La carrera de los establos',
-  'guide.mountsPage.rideBody':
-    'No hay ventana de monturas ni favorito que fijar, porque las riendas son la montura. Usa un par de riendas desde tus bolsas o desde una ranura de la barra de acción y montas esa montura. Invocarla lleva un instante, una llamada breve en vez de instantánea, así que no te salvará si atraes mal a un grupo de enemigos. Desmontar es instantáneo y nunca se bloquea.\n\nUsa las riendas que ya estás montando y guardas esa montura. Usa un par distinto mientras estás montado y cambias directamente a ella, sin nada que invocar por en medio. La tecla Montar / Desmontar, la tecla de acento grave (`) de forma predeterminada, solo sirve para bajarte: es el camino de bajada, no el de subida. La única excepción es la lección de equitación, donde esa misma tecla llama al corcel que te presta Marla, ya que un caballo prestado no tiene riendas que pulsar. En un teléfono o una tableta, el botón Monturas de la bandeja Más funciona en ambos sentidos, aunque llama al primer par de riendas que encuentre en tus bolsas en lugar de uno que elijas tú, así que toca las riendas mismas cuando quieras una montura concreta.',
   'guide.mountsPage.rideHeading': 'Montar y desmontar',
-  'guide.mountsPage.speedBody':
-    'La velocidad es lo único que diferencia una montura de otra. El Corcel del Valor que le compras a Marla marca el ritmo base, y las monturas que consigues por el mundo lo superan: cuanto más raras son las riendas, más rápida es la montura, en unos pocos escalones claros en vez de una progresión suave. No hay una segunda categoría de Equitación que entrenar ni una mejora que comprar después. Pagas la Equitación una sola vez, y desde ese momento las riendas que uses deciden lo rápido que viajas.',
-  'guide.mountsPage.speedHeading': 'Velocidad y niveles',
-  'guide.mountsPage.whatBody':
-    'Una montura es una bestia que cabalgas, y lo que te da es velocidad. Sin armadura, sin daño, sin características: te lleva por el terreno más rápido y salta un poco más alto cuando tú saltas, y ahí se acaba el trato. Toda montura del juego es una montura terrestre, así que no hay monturas voladoras, y ninguna de ellas nada.',
   'guide.mountsPage.whatHeading': 'Qué es una montura',
   'guide.mountsPage.whereBody':
     'Los Establos del Galecrest están marcados en el mapa de La Cresta del Vendaval, en los páramos entre el Shear y los Wreckfields. Marla está junto al establo, mirando hacia el corral de carreras.',
@@ -4055,8 +4028,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'Las Brechas son lo único que espera hasta el propio límite de nivel. Se abren en los reinos según su propio calendario, clasificadas de la C a la S, y cada grupo del mundo corre por ser el que cierre cada una. Los tablones de Expediciones también siguen en marcha, y su dificultad Heroica merece otro vistazo en cuanto tu equipo se haya puesto a la altura.',
   'guide.progression.journeyBodyCount':
     'El mundo es una sola tierra continua de {zones} zonas. Tres de ellas son el camino en el que subes de nivel, dispuestas de sur a norte: empiezas en el verde valle, avanzas por la ciénaga y terminas en los fríos picos elevados. Sigue el rastro de misiones y la tierra te lleva de una a la siguiente. Una isla se asienta frente a la costa del valle para los primeros niveles, y el resto de los reinos se abren desde ese mismo camino, hechos para personajes que ya han completado el ascenso.',
-  'guide.progression.ridingBody':
-    'La Equitación es una de las cosas que esperan al final del ascenso. En el nivel {level}, una caballeriza mayor te enseñará la habilidad por una buena suma de oro, y una lección en el circuito de entrenamiento te consigue tu primer par de riendas. Una montura no otorga ningún poder; sin más, hace que el mundo se sienta más pequeño, lo cual, después de una larga caminata hacia el norte, es una recompensa en sí misma.',
   'guide.progression.ridingTitle': 'Aprender a montar',
   'guide.questsPage.availableBody':
     'Las misiones vienen en cadenas. La mayoría solo se ofrecen una vez que has entregado la anterior, y muchas piden también un nivel mínimo, así que un PNJ que hoy no tiene nada para ti puede tener bastante después de tus próximos niveles o en cuanto cierres la misión que ya llevas encima. Unas pocas tienen una condición propia, como las lecciones de equitación, que se abren solo después de haber comprado la habilidad de Equitación. Las misiones de grupo lo avisan desde el principio, indicando cuántos jugadores sugieren llevar. Algunas misiones son repetibles: puedes volver a aceptarlas tras una espera, y el marcador sobre quien te la dio avisa cuando alguna ha vuelto a estar disponible.',
@@ -6587,13 +6558,15 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'No puedes restablecer instancias mientras alguien siga dentro.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'Cambia la dificultad de la mazmorra antes de restablecer estas instancias. Las instancias vacías se restablecen solas después de 5 minutos.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'Tus instancias ya están como nuevas. Nadie ha entrado en ellas desde el último reinicio.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Usa /dungeon reset para abandonar tus instancias vacías después de cambiar la dificultad.',
+    'Usa /dungeon reset para abandonar tus instancias vacías y empezarlas de nuevo.',
   'hudChrome.dungeonDifficulty.resetLoot':
     'No puedes restablecer instancias mientras quede botín dentro.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': '¿Restablecer todas las instancias?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Esto abandona las instancias vacías de la dificultad seleccionada anteriormente. El botín sin reclamar impedirá el restablecimiento.',
+    'Esto abandona tus instancias vacías para que la siguiente partida empiece de nuevo en la dificultad elegida. Los bloqueos no cambian. Cualquier jugador que siga dentro o botín sin recoger impide el restablecimiento.',
   'hudChrome.dungeonDifficulty.resetConfirm': 'Restablecer instancias',
   'hudChrome.dungeonDifficulty.resetCooldown':
     'Las instancias solo se pueden restablecer una vez cada 5 minutos.',
@@ -14611,12 +14584,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_shadowjump_toad': 'Kama-Kage, el Sapo Saltasombras',
   'hudChrome.mounts.name_stormfeather_griffin': 'Plumatormenta Alcanzacielos',
   'hudChrome.mounts.name_thunderstrut_gobbler': 'Pavoneatruenos, el Gran Pavo',
-  'hudChrome.mounts.desc_valorsteed':
-    'Un corcel resistente y de paso firme que aumenta la velocidad de viaje.',
-  'hudChrome.mounts.desc_grag_bear':
-    'Un oso resistente y de paso firme que aumenta la velocidad de viaje.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'Un caracol recio y de combustión lenta que aumenta la velocidad de viaje.',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'Una potente moto magitecnológica diseñada para desplazamientos de combate veloces a baja altura.',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -14631,12 +14598,9 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.emptyDropHint':
     'Las monturas más raras las sueltan los jefes de mazmorras y bandas.',
   'hudChrome.mounts.clickManage': 'Haz clic para elegir tu montura',
-  'hudChrome.mounts.useToRide': 'Usar para invocar esta montura.',
   'hudChrome.mountTraining.begin': 'Comenzar Lección',
   'hudChrome.mountTraining.mountPrompt':
     'Pulsa {key} para montar el Corcel del Valor de entrenamiento.',
-  'hudChrome.mountTraining.ownedMountPrompt':
-    'Tus riendas están en tus bolsas. Úsalas para montar.',
   'hudChrome.mountTraining.returnToMarla':
     'Vuelve con Marla en los establos para comprar tus riendas del Corcel del Valor por 10po.',
   'hudChrome.mountTraining.ridePrompt':
@@ -15457,7 +15421,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'Tu grupo superó la prueba heroica mientras luchabas en la retaguardia o yacías derrotado. Tu bloqueo también quedó registrado, así que tu parte de las Marcas heroicas llegó aquí en vez de perderse. Úsalas bien.\n\n- Intendente heroico',
   'guide.dungeonsPage.resetTitle': 'Restablecer tus instancias',
   'guide.dungeonsPage.resetBody':
-    'Si cambiáis de dificultad mientras vuestro grupo aún mantiene incursiones reclamadas, las reclamaciones antiguas permanecen un rato antes de liberarse solas. El líder del grupo puede soltarlas de golpe en su lugar: elegid Restablecer todas las instancias en el menú de su propio retrato, o escribid /dungeon reset. Un restablecimiento solo funciona después de haber cambiado realmente la dificultad, solo mientras no quede nadie dentro, vivo o caído, solo una vez que todos los cadáveres de ahí dentro hayan sido saqueados por completo, y un breve tiempo de reutilización separa un restablecimiento del siguiente. Si llegáis a la puerta con la dificultad equivocada, el juego os lo dice antes de que empiece la incursión. La banda nunca se restablece así; sus propias reglas de bloqueo se mantienen.',
+    'Las partidas reclamadas vacías tardan un tiempo en desaparecer solas. El líder del grupo puede abandonarlas de inmediato: elige Restablecer todas las instancias en el menú de su propio retrato o escribe /dungeon reset. La siguiente partida empezará de nuevo con tu dificultad actual. Cambiar la dificultad hace lo mismo con las partidas de la dificultad anterior. Solo se puede restablecer cuando no queda nadie dentro, vivo ni muerto, y se ha recogido todo el botín de los cadáveres. Nunca acorta un bloqueo: una mazmorra heroica o banda bloqueada sigue bloqueada hasta su reinicio. Hay un breve tiempo de espera entre restablecimientos. Si llegas a la puerta con la dificultad equivocada, el juego te lo indica antes de empezar. La banda se restablece igual y conserva sus reglas de bloqueo y regreso al cadáver. Al cambiar la dificultad de una banda no hay tiempo de espera: si el grupo eligió mal o no pudo con Heroico, puede volver de inmediato, pues su propio bloqueo limita las repeticiones.',
   'guide.dungeonsPage.wildheartBody':
     'Una caldera selvática empapada de lluvia donde dos senderos de caza elevados rodean un cenote de jade. Cruza guaridas de bestias y ruinas ancestrales, y luego escala la pirámide ritual para ver quién te espera en la cima.',
   'guide.gear.itemLevelBody':
@@ -18777,10 +18741,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Aún no tienes cromas de Mecano de combate.',
   'hudChrome.cosmetics.mechIntro':
     'El Mecano de combate reemplaza el cuerpo de este personaje. Solo se lleva un croma a la vez.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Una apariencia de montura se dibuja sobre la montura que cabalgue este personaje. Nunca cambia la velocidad.',
-  'hudChrome.cosmetics.mountsNoMount':
-    'Consigue primero una montura: una apariencia necesita algo que montar.',
   'hudChrome.cosmetics.owned': 'En propiedad',
   'hudChrome.cosmetics.scopeAccount': 'Cuenta',
   'hudChrome.cosmetics.scopeCharacter': 'Personaje',
@@ -21505,10 +21465,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'editor.sculpt.hardness': 'Dureza del pincel',
   'editor.water.hue': 'Matiz',
   'entities.mobs.thorn_sprout.name': 'Brote Espinoso',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Escarcha Eterna',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Señor de la guerra',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Dorado',
-  'hudChrome.collections.detail.exchangeLabel': 'Bolsa de $WOC',
   'hudChrome.guildHall.done': 'Completado esta semana',
   'hudChrome.guildHall.kinds.boss': 'Recompensa por captura',
   'hudChrome.guildHall.shop.kindTitle': 'Título',
@@ -21539,7 +21495,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'referralCards.milestones.gravewyrm': 'Korzul el Gravewyrm',
   'referralCards.milestones.hollow': 'Dentro del Hueco',
   'referralCards.okay': 'Aceptar',
-  'hudChrome.collections.stat.strength': 'Intensidad',
   'editor.city.kitScale': 'Escala de pieza',
   'editor.city.kitTileSnap': 'Conectar teselas',
   'editor.city.prefabCount': '{n} piezas',
@@ -21834,7 +21789,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'editor.tunnel.cutShape.box': 'Caja',
   'editor.tunnel.width': 'Anchura',
   'editor.weather.clear': 'Despejar',
-  'hudChrome.collections.actions.remove': 'Quitar',
   'hudChrome.expeditions.close': 'Cerrar',
   'editor.flatten.style.sharpen': 'Agudizar',
   'editor.flatten.style.smooth': 'Suavizar',
@@ -22510,8 +22464,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'entities.items.cantors_hymnal.name': 'Himnario del cantor',
   'entities.items.cantors_stole.name': 'Estola del cantor',
   'entities.items.cellwatch_belt.name': 'Cinturón de la guardia de las celdas',
-  'entities.items.charm_stag_acorn.name': 'Amuleto de la corona de bellotas',
-  'entities.items.charm_stag_gilded.name': 'Amuleto dorado',
   'entities.items.choirward_leggings.name': 'Leotardos del resguardo del coro',
   'entities.items.choirward_pauldrons.name': 'Hombreras de placas del resguardo del coro',
   'entities.items.choristers_gloves.name': 'Guantes del corista',
@@ -22910,41 +22862,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'entities.items.vestments_of_the_waking_rite.name': 'Vestimentas del rito que despierta',
   'entities.items.warmonger_greaves.name': 'Grebas del belicista',
   'entities.items.warmonger_treads.name': 'Pisadas del belicista',
-  'entities.items.whistle_alon.name': 'Silbato de Alon',
-  'entities.items.whistle_alpaca.name': 'Silbato de alpaca',
-  'entities.items.whistle_ansem.name': 'Silbato de Ansem',
-  'entities.items.whistle_bull.name': 'Silbato de toro',
-  'entities.items.whistle_cate_coin.name': 'Silbato de Cate Coin',
-  'entities.items.whistle_crimson_claw_crab.name': 'Silbato de cangrejo de pinza carmesí',
-  'entities.items.whistle_crystal_lich.name': 'Silbato de liche de cristal',
-  'entities.items.whistle_crystal_tide.name': 'Silbato de marea de cristal',
-  'entities.items.whistle_ember_fox.name': 'Silbato de zorro de ascuas',
-  'entities.items.whistle_emberfall_phoenix.name': 'Silbato de fénix de lluvia de ascuas',
-  'entities.items.whistle_emerald_wolf.name': 'Silbato de lobo esmeralda',
-  'entities.items.whistle_forgemaw.name': 'Silbato de Fauciforja el Fundido',
-  'entities.items.whistle_frog.name': 'Silbato de rana',
-  'entities.items.whistle_frostfire.name': 'Silbato de fuegoescarcha',
-  'entities.items.whistle_golden_sentinel.name': 'Silbato de centinela dorado',
-  'entities.items.whistle_horse.name': 'Silbato de caballo',
-  'entities.items.whistle_kekius.name': 'Silbato de Kekius',
-  'entities.items.whistle_loot_goblin.name': 'Silbato de goblin del botín',
-  'entities.items.whistle_moss_hare.name': 'Silbato de liebre de musgo',
-  'entities.items.whistle_nightfang.name': 'Silbato de Colmillo Nocturno',
-  'entities.items.whistle_penny_goldspark.name': 'Silbato de Penny Chispa Dorada',
-  'entities.items.whistle_phantom.name': 'Silbato de fantasma',
-  'entities.items.whistle_proud_grunt.name': 'Silbato de bruto orgulloso',
-  'entities.items.whistle_raptor.name': 'Silbato de raptor',
-  'entities.items.whistle_rocky.name': 'Silbato de Rocky',
-  'entities.items.whistle_sapling.name': 'Silbato de retoño',
-  'entities.items.whistle_skeleton.name': 'Silbato de esqueleto',
-  'entities.items.whistle_solbot.name': 'Silbato de Solbot',
-  'entities.items.whistle_spider.name': 'Silbato de araña',
-  'entities.items.whistle_sprites.name': 'Silbato de Parpadeo y Destello',
-  'entities.items.whistle_stag.name': 'Silbato de ciervo',
-  'entities.items.whistle_tiger.name': 'Silbato de tigre',
-  'entities.items.whistle_triple_t.name': 'Silbato de Triple T',
-  'entities.items.whistle_trollface.name': 'Silbato de Trollface',
-  'entities.items.whistle_tuskhorn_boar.name': 'Silbato de jabalí Colmillo Cornudo',
   'entities.items.wyrmshadow_chainmail.name': 'Cota de malla de sombra de vermis',
   'entities.items.wyrmshadow_tunic.name': 'Túnica de sombra de vermis',
   'entities.items.wyrmshadow_vest.name': 'Chaleco de sombra de vermis',
@@ -23023,57 +22940,11 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'hudChrome.buddyMenu.nameLabel': 'Nombre del compañero',
   'hudChrome.buddyMenu.rename': 'Renombrar compañero',
   'hudChrome.collections.actions.dismiss': 'Despedir',
-  'hudChrome.collections.armor.mail': 'Malla',
-  'hudChrome.collections.close': 'Cerrar cacería',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Voltaico',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Ceniciento',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Blanco incandescente',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Rana Zafiro',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Verdoso',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Corona de Bellotas',
-  'hudChrome.collections.cosmeticUnlocked': 'Nueva apariencia para {name}: {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Vinculación',
-  'hudChrome.collections.detail.dropLabel': 'Botín de',
-  'hudChrome.collections.detail.exchangeNone': 'No hay anuncios',
-  'hudChrome.collections.detail.exchangeUnavailable': 'No disponible en este cliente',
-  'hudChrome.collections.detail.marketAtMerchant': 'Se muestra en el mercader',
-  'hudChrome.collections.detail.marketChecking': 'Comprobando...',
-  'hudChrome.collections.detail.marketLabel': 'Mercado mundial',
-  'hudChrome.collections.detail.marketNone': 'No hay anuncios',
-  'hudChrome.collections.detail.marksPrice': '{amount} marcas heroicas',
-  'hudChrome.collections.detail.noItem': 'Aún no lo otorga ningún objeto',
-  'hudChrome.collections.detail.noSell': 'No se puede vender',
-  'hudChrome.collections.detail.noSource': 'Aún no tiene una fuente en el juego',
-  'hudChrome.collections.detail.sellLabel': 'El vendedor paga',
-  'hudChrome.collections.detail.setLabel': 'Conseguido',
-  'hudChrome.collections.detail.tradeable': 'Intercambiable',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) por {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Lo vende',
-  'hudChrome.collections.keybindLabel': 'Cacería',
-  'hudChrome.collections.looks.locked': 'Bloqueado',
-  'hudChrome.collections.looks.title': 'Apariencias',
-  'hudChrome.collections.looks.unlocked': 'Desbloqueado',
-  'hudChrome.collections.looks.worn': 'Equipado',
-  'hudChrome.collections.petKind.celebrity': 'Celebridades',
-  'hudChrome.collections.set.bonusLabel': '{pieces} piezas',
-  'hudChrome.collections.set.itemLevel': 'Nivel de objeto {level}',
-  'hudChrome.collections.set.owned': '{owned} de {total} piezas',
-  'hudChrome.collections.source.bossLabel': 'Mascota de jefe',
-  'hudChrome.collections.source.challengeLabel': 'Desafío',
-  'hudChrome.collections.source.craft': '{item} (receta de {profession})',
-  'hudChrome.collections.source.craftLabel': 'Fabricado',
-  'hudChrome.collections.source.deed': 'La gesta {deed}',
-  'hudChrome.collections.source.deedLabel': 'Se consigue mediante',
-  'hudChrome.collections.source.grantLabel': 'Otorgado',
-  'hudChrome.collections.source.tokenLabel': 'Ficha',
-  'hudChrome.collections.stat.mixed': 'Híbrido',
   'hudChrome.collections.state.notOwned': 'Sin conseguir',
   'hudChrome.collections.state.owned': 'Conseguido',
   'hudChrome.collections.state.pending': 'Una presencia te sigue',
   'hudChrome.collections.state.unavailable': 'Aún no se puede obtener',
   'hudChrome.collections.tabs.buddies': 'Compañeros',
-  'hudChrome.collections.tabs.sets': 'Conjuntos de objetos',
-  'hudChrome.collections.title': 'Cacería',
   'hudChrome.cosmetics.buddyActive': 'Invocado',
   'hudChrome.cosmetics.buddyDrag': 'Arrastrar a la barra de acción',
   'hudChrome.courier.bags': 'Enviar al banco',
@@ -23124,7 +22995,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'entities.mobs.buddy_proud_grunt.name': 'Bruto Orgulloso',
   'entities.mobs.buddy_raptor.name': 'Raptor',
   'entities.mobs.buddy_rocky.name': 'Rocky',
-  'entities.mobs.buddy_sapling.name': 'Retoño',
   'entities.mobs.buddy_skeleton.name': 'Esqueleto',
   'entities.mobs.buddy_solbot.name': 'Solbot',
   'entities.mobs.buddy_spider.name': 'Araña',
@@ -24435,85 +24305,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
     'Acércate a menos de {range} yardas de tu compañero para que la cadena deje de dañaros a ambos',
   'hudChrome.buddyMenu.autolootHint':
     'Tu compañero recoge el botín de los cadáveres que te corresponden a menos de 30 yardas.',
-  'hudChrome.collections.buddyLore.alon':
-    'Una mascota de viajero de un camino que ningún mapa reconoce, que aparece allí donde un plan va mal. Observa, aprueba y no ofrece absolutamente ninguna ayuda.',
-  'hudChrome.collections.buddyLore.alpaca':
-    'En la Cresta del Vendaval los crían por su lana y su temperamento: nada conserva mejor la calma durante una tormenta. Este escupirá a exactamente una persona por viaje.',
-  'hudChrome.collections.buddyLore.ansem':
-    'Habla de puertas y de oscuridad, pero no se le puede sacar nada más sobre ninguna de las dos. Los cultistas de la Flor Nocturna lo reclaman como suyo; se marcha cada vez que celebran un rito.',
-  'hudChrome.collections.buddyLore.bull':
-    'Un toro del Valle del tamaño de un perro, la única razón por la que alguien aceptó tener uno dentro de casa. Su temperamento no se redujo junto con el resto.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    'Un gato que no se separa de la moneda sobre la que se sienta y al que nadie ha visto comer jamás. Los mercaderes de Eastbrook siguen discutiendo cuál de los dos es la mascota.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    'Un cangrejo de marea de la Costa Lejana cuya pinza sigue roja mucho después de salir del agua. Las cuadrillas del muelle solían hacerlos correr sobre los tablones para apostar monedas.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'Una esquirla del propio Nythraxis, que aún zumba con el frío que le dio forma. Obedece a quien la sacó de los restos de la banda y todavía no se lo ha perdonado.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    'Un espíritu de marea que viaja sobre su propia gota de cristal marino, pescado en aguas quietas por pescadores desde el Valle hasta la Costa Lejana que buscaban la cena. Conserva el agua de la que salió y no hay quien lo convenza de volver.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'Una zorra de los setos del Valle de Eastbrook, llamada así por el pelaje rojo como el carbón encendido que asoma entre la maleza invernal. Los tramperos de allí renunciaron a capturar a sus crías hace generaciones y empezaron a dejarles comida.',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    'Se consume hasta quedar en ascuas cada otoño y resurge de sus propias cenizas en primavera; eso es todo lo que se puede contar de él. Nadie ha encontrado un nido y nadie ha atrapado al mismo dos veces.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'Un cachorro del Bosque de los Espectros, con el pelaje verde bajo la luz de las copas que nunca acaba de llegar al suelo. Los guardianes crían a los huérfanos que el bosque deja atrás.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    'Forjado en el Crisol de la Última Fuente y nunca del todo terminado, salió de la fundición de Ignivar mientras los martillos aún golpeaban. Solo el descenso heroico permite encontrarlo: la criatura fundida vuelve una y otra vez a la forja que la creó y sigue a casa a quien sobrevive al fuego dos veces.',
-  'hudChrome.collections.buddyLore.frog':
-    'La Ciénaga de Mirefen los cría gordos y despreocupados, cantando toda la noche entre los juncales. Los guías de la ciénaga juran que una barca que lleve uno nunca encalla.',
-  'hudChrome.collections.buddyLore.frostfire':
-    'Nació en el Velo de Escarcha, donde un manantial caliente emerge entre los hielos, y nunca ha decidido a qué mitad pertenece. Desprende vapor con el aire frío y tiembla con el cálido.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'Un escarabajo centinela de la Cascada de Ámbar, dorado por la resina en la que creció. El nombre es más antiguo que la resina: centinelas de algún tipo custodiaban aquellos bosques mucho antes de que nadie pensara en embotellar su savia.',
-  'hudChrome.collections.buddyLore.horse':
-    'Estirpe de poni del Valle, criada pequeña para los caminos de los huertos y a la que nadie ha dicho que no es un caballo de guerra. Sigue el paso a tu lado y acompañará a cualquiera que le haya dado una manzana una vez.',
-  'hudChrome.collections.buddyLore.kekius':
-    'Un compañero risueño de origen incierto, adoptado como amuleto por las pistas de carreras de la Cresta del Vendaval. Ha sobrevivido a cuatro establos que juraban por su suerte.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    'Sigue a cualquiera que lleve marcas heroicas y jamás lo han sorprendido robando. El Intendente Vex sostiene que eso no demuestra absolutamente nada.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'La liebre del Pantano de los Sauces, de pelaje verde tras una vida durmiendo sobre turba húmeda. Los herboristas del pantano la consideran de buena suerte y no permiten que la espanten de una puerta.',
-  'hudChrome.collections.buddyLore.nightfang':
-    'Un joven cazador de la Flor Nocturna, silencioso incluso para los de su especie. Sigue a otros por compañía y no caza nada más grande que una polilla.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'Una aprendiz de inventora gnoma que cobra por horas y vale cada cobre. El armero Hode la contrató para saldar una deuda y ahora vende el acuerdo a cualquiera que tenga mil monedas de oro.',
-  'hudChrome.collections.buddyLore.phantom':
-    'Un pequeño espectro del tamaño de una palma salido de los túmulos del Bosque de los Espectros, todo sábana y nada de huesos, que aparece en una mochila cerrada y se queda por compañía. Nadie ha averiguado qué quiere y jamás ha intentado asustar a nadie.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'Un veterano de los almacenes de guerra que conservó el saludo y perdió el rango. El Mariscal de Guerra Draven Kole entrega uno a cualquier soldado con honor suficiente para saber lo que cuesta.',
-  'hudChrome.collections.buddyLore.raptor':
-    'Cría de las Tierras del Dragón, vendida antes de aprender lo rápido que puede correr. A todos sus nuevos dueños les dicen que la mantengan alimentada y a ninguno hace falta decírselo dos veces.',
-  'hudChrome.collections.buddyLore.rocky':
-    'Un reptador de caparazón pétreo de las pedreras de Thornpeak, lento y completamente despreocupado. Los mineros los conservan porque se quedan quietos un instante antes de un derrumbe.',
-  'hudChrome.collections.buddyLore.sapling':
-    'Un árbol joven con una sonrisa en la corteza y una mirada violeta curiosa. Sus raíces lo llevan con un alegre contoneo adondequiera que vayas.',
-  'hudChrome.collections.buddyLore.skeleton':
-    'Salió de los túmulos del Bosque de los Espectros, se sacudió el polvo y desde entonces sigue a la gente. Nadie ha establecido a quién pertenecían esos huesos.',
-  'hudChrome.collections.buddyLore.solbot':
-    'Un pequeño autómata alimentado por el sol, desenterrado de las cenizas de las Tierras del Dragón, donde estaba medio sepultado, y aún en marcha. El taller que lo construyó no dejó marca alguna en su carcasa.',
-  'hudChrome.collections.buddyLore.spider':
-    'Una tejedora del Bosque de los Espectros, del tamaño de una palma, que redecora cualquier mochila en la que viaje. Su telaraña es más resistente que el hilo que sustituye.',
-  'hudChrome.collections.buddyLore.sprites':
-    'Dos pequeños espíritus de fuego, uno dorado y otro verde azulado, que nunca se ponen del todo de acuerdo sobre quién guía. Si se acercan lo suficiente, se funden en una llama verde y luego vuelven a separarse entre risas.',
-  'hudChrome.collections.buddyLore.stag':
-    'Linaje del Jardín Eterno, reducido mediante cría a partir de los grandes ciervos que antaño montaban los guardianes. Aún baja la cabeza ante una mano alzada, por una costumbre más antigua que el propio animal.',
-  'hudChrome.collections.buddyLore.tiger':
-    'Rayas de la Bahía de las Palmeras en un animal que nunca la ha visto: el linaje se ha criado en cautividad desde que cerraron las antiguas casas de fieras. Responde a un silbato y a nada más.',
-  'hudChrome.collections.buddyLore.triple_t':
-    'Tres de algo, o una cosa repetida tres veces. Los relatos no coinciden y la criatura no se queda quieta el tiempo suficiente para contarla.',
-  'hudChrome.collections.buddyLore.trollface':
-    'Una cosa sonriente que el Bosque de los Espectros expulsó y se negó a readmitir. Todos los intentos de describirla terminan con quien lo intenta riéndose y dándose por vencido.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'Estirpe de Thornpeak criada con patas cortas por pastores que querían un jabalí incapaz de derribar una valla. Aun así, conservó el temperamento.',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% por muerte, {heroicChance}% en heroico',
-  'hudChrome.collections.detail.fishingDrop': 'Pesca en cualquier lugar, {chance}% por captura',
-  'hudChrome.collections.detail.globalDrop':
-    'Cualquier enemigo, {chance}% por muerte, uno de {count} de esta rareza',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob} ({location}), solo en heroico, {chance}% por muerte',
-  'hudChrome.collections.launcherTitle': 'Cacería: compañeros, monturas y conjuntos de objetos',
-  'hudChrome.collections.looks.none': 'Aún no hay apariencias creadas para este compañero',
   'hudChrome.collections.presence.alon': 'Te sientes observado y aprobado en silencio.',
   'hudChrome.collections.presence.alpaca': 'Algo lanudo y sin prisas ha decidido acompañarte.',
   'hudChrome.collections.presence.ansem': 'Te sigue un susurro de puertas y oscuridad.',
@@ -24566,23 +24357,10 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
     'Un bufido y un pisotón: algo testarudo te sigue.',
   'hudChrome.collections.presenceDefault': 'Sientes una presencia que te observa.',
   'hudChrome.collections.revealed': '{name} ha decidido seguirte.',
-  'hudChrome.collections.source.bossDrop': '{mob} ({location}), {chance}% por jugador y muerte',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), solo en heroico, {chance}% por jugador',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% por jugador, {heroicChance}% en heroico',
-  'hudChrome.collections.source.challengeDps':
-    'Inflige {dps} de daño por segundo a {mob} a lo largo del combate',
-  'hudChrome.collections.source.challengeSpeed':
-    'Derrota a {mob} en los {seconds} segundos siguientes al inicio del combate',
-  'hudChrome.collections.source.grantOnly':
-    'Recompensa de temporada: clasificación mensual y premios a los mejores registros de combate',
-  'hudChrome.collections.source.rollNote':
-    'Cada jugador tira por separado; nadie pierde una tirada frente a un miembro del grupo.',
   'hudChrome.courier.cargoSafe':
     'Los objetos devueltos desbordan las bolsas llenas. El mensajero desaparece tras la entrega hasta que vuelvas a invocarlo.',
   'hudChrome.courier.instructions':
-    'Selecciona pilas completas. Tu mensajero las deposita primero y luego recoge los objetos que has solicitado. No se pueden enviar objetos de misión.',
+    'Selecciona pilas completas para tu banco, la Bóveda de Materiales u otro personaje. Tu mensajero las deposita primero y después recoge los objetos solicitados. No se pueden enviar objetos de misión.',
   'hudChrome.courier.membership': 'Renueva tu membresía para iniciar otro viaje.',
   'hudChrome.courier.unavailable': 'Invoca a tu mensajero para planificar una entrega.',
   'hudChrome.cryptAlert.embracedLine':
@@ -24797,8 +24575,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
     'Derrota a {boss} en {dungeon}, en cualquiera de las dos dificultades.',
   'hudChrome.guildHall.goals.heroic':
     'Completa {dungeon} en heroico: derrota a {boss} en dificultad heroica.',
-  'hudChrome.guildHall.mountPreview':
-    'Montura terrestre: +{pct}% de velocidad de movimiento mientras montas. Requiere entrenamiento de equitación.',
   'hudChrome.guildHall.quartermasterIntro':
     'Garrick cambia sellos del farol solo por honores: títulos para mostrar en el Libro de Gestas, la apariencia de espada de la hermandad y su caballo de guerra. Nada de aquí te hace más fuerte en combate.',
   'hudChrome.guildHall.refused.range': 'Acércate al intendente para comerciar.',
@@ -26120,8 +25896,6 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'hudChrome.adventureGuide.delve': 'Expedición',
   'hudChrome.auraEffect.trinket.quench':
     'Tus siguientes {stacks} golpes de arma infligen {damage} de daño de Escarcha adicional. El último ralentiza los ataques del objetivo un {slow}%.',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% por muerte',
-  'hudChrome.collections.source.token': '{item}, se usa una vez para vincular al compañero',
   'hudChrome.courier.bank': 'Traer del banco',
   'hudChrome.courier.selected': '{count} / {limit} pilas seleccionadas',
   'hudChrome.finder.inspect': 'Inspeccionar',
@@ -26131,4 +25905,204 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
     'Pulsa {key} o haz clic en el armero para tomar una Pica de Fragmentos',
   'referralCards.empty':
     'Invita a un jugador nuevo para empezar juntos vuestra primera tarjeta de sellos.',
+
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Extraer la lanza',
+  'abilityUi.cast.temple_score': 'La partitura',
+  'abilityUi.cast.temple_score_answer': 'Responder a la partitura',
+  'abilityUi.cast.wildheart_idols_breath': 'Aliento del ídolo',
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Enfriamiento',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Encendido',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Lanza de caza',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': 'El ídolo despierta',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Mantén al tanque en su línea de visión. Reserva las interrupciones para Aria de ahogamiento.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'Entre otros lanzamientos, cae una descarga cada {every} s tras un aviso visual de {windup} s e inflige {mult} veces su daño de arma como daño de Escarcha. Interrumpir Aria de ahogamiento detiene las descargas y el aria durante {quiet} s.',
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe nunca se mueve ni ataca cuerpo a cuerpo. Agrupaos para Coro, sal del grupo para Solo, interrumpe Aria de ahogamiento y esquiva Oleada de la laguna. En dos umbrales de salud, repetid su melodía de baldosas lunares alternando cantantes.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    'Sus otros ataques se detienen mientras el grupo responde a la partitura. Las descargas de agua lunar no tienen barra de lanzamiento y no se pueden interrumpir.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    'Durante la respuesta, las baldosas se apagan. Recuerda la melodía y respetad los turnos.',
+  'bossJournal.temple.selthe.scoreResponse':
+    'Observa la melodía y pisa las baldosas en orden. Alterna las notas correctas con otro jugador vivo; el único superviviente puede terminar solo. Los pasos bloqueados son inofensivos. Sal de una baldosa y vuelve a pisarla para hacerla sonar, incluso si ya estabas en ella antes de empezar la respuesta.',
+  'bossJournal.temple.selthe.scoreSummary':
+    'Al llegar a {first} y {second} de salud, se vuelve inmune y toca {notes} notas, y luego {finalNotes}. Repetidlas en {answer} s y luego en {finalAnswer} s. Una baldosa incorrecta inflige {falseNote} de daño de Escarcha y reinicia el progreso, pero no el tiempo. Si se agota el tiempo, todos reciben entre {min} y {max} de daño de Escarcha. Acertar la aturde durante {stun} s y aumenta el daño que recibe en {vulnerability} durante {bonusSeconds} s.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'Vigila al objetivo del aria y a quienes queden solos durante Coro. Durante la partitura, ayuda a cantar la siguiente nota y cura los errores.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    'Cruza a la mitad sin marcar antes de que termine el aviso. La línea central es segura. En Heroico, el aliento también apaga los glifos encendidos de su mitad; se pueden volver a encender inmediatamente.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    'Cada {every} s, una mitad de la terraza queda marcada durante {warning} s; después, todos los que estén en ella reciben entre {min} y {max} de daño de Naturaleza. El aliento alterna entre mitades.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    'Los jugadores sin marcar encienden glifos por delante de la Presa. Haz que los cruce y ataca mientras sufre el estado Golpeado por el sol. Los glifos se apagan cuando termina la cacería.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    'Los {count} glifos empiezan apagados. Durante la cacería, un jugador sin marcar enciende uno permaneciendo encima {kindle} s. Si no queda nadie sin marcar, la Presa puede encenderlo en {alone} s. Salir reinicia el progreso. Cruzar un glifo encendido lo ralentiza en {slow} y aumenta el daño que recibe en {vulnerability} durante {seconds} s. El glifo no se puede encender durante {dark} s; ningún otro glifo puede golpearlo durante {wary} s. Durante la cacería, los aturdimientos duran la mitad.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Marca a una pareja nueva cada {pair} s y alterna entre ambos cada {switch} s. Cada cambio da a la nueva Presa {turn} s antes de perseguirla.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Elige una Presa nueva cada {every} s y se gira hacia ella durante {turn} s antes de perseguirla.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    'Con {health} de salud, permanece como espíritu de jaguar hasta ser derrotado. El tanque también puede ser Presa.',
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Cada {every} s, un lanzamiento de {cast} s golpea a todos en un radio de {radius} m e inflige entre {min} y {max} de daño. Los jugadores ensartados reciben {pinMult} veces ese daño a cualquier distancia.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    'Selecciona la lanza e interactúa a menos de {range} m para extraerla en {pull} s. El daño no interrumpe la extracción. Si nadie más está libre en la terraza, la víctima puede interactuar para escapar en {self} s.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    'Un lanzamiento de {cast} s ensarta a un jugador que no sea el tanque, o al tanque si no queda nadie más. La inmovilización dura hasta {seconds} s e inflige {bleed} de daño cada {tick} s.',
+  'entities.mobs.wildheart_hunting_spear.name': 'Lanza de caza',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    'Su voz está quebrada: recibe un {pct}% más de daño hasta que termine este efecto.',
+  'hudChrome.auraEffect.temple.scoreWard':
+    'Canta la partitura: no recibe daño hasta que termine. Pisa las baldosas lunares en el orden en que sonaron antes de que termine el verso para quebrar su voz. Respetad los turnos: tras tocar una nota, espera a que otro jugador toque la siguiente nota correcta. El único superviviente puede terminar solo. Si el verso termina antes, Discordia inflige entre {min} y {max} de daño de Escarcha ({heroicMin} a {heroicMax} en Heroico) a todos en el patio.',
+  'hudChrome.auraEffect.temple.spentVoice':
+    'No puedes hacer sonar otra baldosa lunar hasta que otro jugador toque la siguiente nota correcta. Pisar una baldosa durante este efecto no reinicia la respuesta ni te daña. No se puede disipar. Se elimina cuando eres el único jugador vivo de tu estancia o termina la partitura.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    'El jaguar de piedra ha despertado. Cada {every} s exhala sobre una mitad de la terraza y luego sobre la otra, tras un aviso de {warning} s en el suelo: entre {min} y {max} de daño de Naturaleza ({heroicMin} a {heroicMax} en Heroico) a todos en esa mitad. Zulgar permanece como Avatar del Jaguar hasta morir y elige una Presa nueva cada {seconds} s ({heroicSeconds} s en Heroico).',
+  'hudChrome.auraEffect.wildheart.pinned':
+    'Una Lanza de caza te inmoviliza. Sangras y recibes {bleed} de daño Físico ({heroicBleed} en Heroico) cada {every} s, y Pulso de Corazón Salvaje te golpea estés donde estés con un {pulse}% más de daño. Un compañero puede extraer la lanza en {pull} s. Si nadie más está libre, extráela tú en {wrench} s. Se suelta tras {seconds} s.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'Ningún glifo solar puede golpearlo hasta que termine este efecto. Los glifos encendidos que cruce permanecen encendidos.',
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Golpeado por un glifo solar encendido: se mueve un {pct}% más despacio.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Golpeado por un glifo solar encendido: recibe un {pct}% más de daño.',
+  'hudChrome.courier.accountBank':
+    'Traer de este banco. Ese personaje debe estar desconectado cuando llegue el mensajero.',
+  'hudChrome.courier.accountPlanned':
+    'Previsto para {name}: {count} pilas. Elegir para otro personaje las sustituye.',
+  'hudChrome.courier.accountTitle': 'Otros personajes',
+  'hudChrome.courier.bagsAccount': 'Enviar al banco de {name}',
+  'hudChrome.courier.bagsAccountNone': 'Elige un personaje al que enviar objetos.',
+  'hudChrome.courier.bagsVault': 'Enviar materiales a la bóveda',
+  'hudChrome.courier.boundAccount': 'De camino al banco de otro personaje',
+  'hudChrome.courier.boundBank': 'De camino al banco',
+  'hudChrome.courier.boundVault': 'De camino a la Bóveda de Materiales',
+  'hudChrome.courier.storeTabs': 'Almacenamiento del mensajero',
+  'hudChrome.courier.vault': 'Traer de la bóveda. Cada selección trae toda la fila.',
+  'hudChrome.courier.vaultCap': 'Almacena {cap} de cada material',
+  'hudChrome.courier.vaultEmpty': 'Tu bóveda está vacía.',
+  'hudChrome.courier.vaultLocked':
+    'Desbloquea la Bóveda de Materiales con un banquero para usarla con tu mensajero.',
+  'hudChrome.courier.vaultTitle': 'Bóveda de Materiales',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'Normal seleccionado. Las estancias actuales siguen en Heroico.',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'Heroico seleccionado. Las estancias actuales siguen en Normal.',
+  'hudChrome.finder.mech.the_score':
+    'La partitura (canta una melodía dos veces en las baldosas lunares: písalas en el orden en que sonaron para quebrar su voz)',
+  'hudChrome.itemHistory.close': 'Cerrar',
+  'hudChrome.itemHistory.noTransfers': 'Este objeto nunca ha cambiado de manos.',
+  'hudChrome.itemHistory.openAria': 'Historial de {item}',
+  'hudChrome.itemHistory.passedTo': 'Entregado a {name} el {date}',
+  'hudChrome.itemHistory.title': '{item}: historial',
+  'hudChrome.itemMenu.itemHistory': 'Historial del objeto',
+  'hudChrome.itemTooltip.lootedBy': 'Despojado por {name} el {date}',
+  'hudChrome.itemTooltip.obtainedBy': 'Obtenido por {name} el {date}',
+  'hudChrome.itemTooltip.questRewardTo': 'Recompensa de misión para {name} el {date}',
+  'hudChrome.kitUse.freeAria': 'Extraer {name}',
+  'hudChrome.kitUse.freeClick': 'Haz clic aquí para extraer {name}',
+  'hudChrome.kitUse.freeFar': 'Acércate a {range} m para extraerla',
+  'hudChrome.kitUse.freeKey': 'Extraer {name}',
+  'hudChrome.kitUse.freeLine':
+    'Extrae la lanza del suelo para liberar a quien inmoviliza. Recibir daño no te detiene; moverte o sufrir un aturdimiento sí',
+  'hudChrome.kitUse.freeTap': 'Toca aquí para extraer {name}',
+  'hudChrome.kitUse.freeUsingLine':
+    'Quédate quieto para extraer la lanza: moverte o sufrir un aturdimiento te detiene',
+  'hudChrome.options.firstPersonBody': 'Mostrar cuerpo',
+  'hudChrome.options.firstPersonMode': 'Primera persona (acercamiento máximo)',
+  'hudChrome.options.firstPersonNoBody': 'Sin cuerpo',
+  'hudChrome.options.firstPersonOff': 'Desactivado',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few':
+    'No se muestran {count} transferencias anteriores.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many':
+    'No se muestran {count} transferencias anteriores.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': 'No se muestra {count} transferencia anterior.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other':
+    'No se muestran {count} transferencias anteriores.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': 'Elegido de la fila JcJ de la Bóveda Semanal',
+  'hudChrome.templeAlert.answerDarkLine':
+    'Respetad los turnos y repetid el orden de memoria. Sal de la baldosa antes de volver a pisarla. Notas: {done} de {total}',
+  'hudChrome.templeAlert.answerLine':
+    'Respetad los turnos: pisa la baldosa lunar marcada con {place}. Notas: {done} de {total}',
+  'hudChrome.templeAlert.answerTitle': '¡Responde a la partitura!',
+  'hudChrome.templeAlert.brokenLine':
+    'Recibe un {pct}% más de daño hasta que termine: usa ahora tus ataques más potentes',
+  'hudChrome.templeAlert.brokenTitle': '¡La voz de Selthe está quebrada!',
+  'hudChrome.templeAlert.falseLine':
+    'Esa baldosa no tocaba. La respuesta vuelve a empezar por la primera baldosa',
+  'hudChrome.templeAlert.falseTitle': '¡Nota falsa!',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'Recuerda el orden antes de que se apaguen las baldosas. Repítelo por turnos con otro jugador',
+  'hudChrome.templeAlert.melodyLine':
+    'Observa cómo suenan las baldosas lunares una tras otra. Repite el orden por turnos con otro jugador',
+  'hudChrome.templeAlert.melodyTitle': 'La partitura',
+  'hudChrome.templeAlert.spentLine':
+    'No puedes hacer sonar una baldosa hasta que otro jugador toque la siguiente nota correcta. Notas: {done} de {total}',
+  'hudChrome.templeAlert.spentTitle': 'Debe responder otra voz',
+  'hudChrome.templeAlert.stepOffLine':
+    'Una baldosa lunar solo suena cuando alguien entra en ella. Sal de esta baldosa y vuelve a pisarla',
+  'hudChrome.templeAlert.stepOffTitle': 'Sal y vuelve a entrar',
+  'hudChrome.templeAlert.timeAria': 'Quedan {seconds} segundos',
+  'hudChrome.wildheartAlert.breathLine':
+    'El jaguar de piedra está a punto de exhalar sobre esta mitad de la terraza. Cruza a la otra mitad',
+  'hudChrome.wildheartAlert.breathTitle': '¡Aliento del ídolo!',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    'Permanece en el glifo hasta que se encienda. Salir reinicia el proceso',
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Encendiendo el glifo solar',
+  'hudChrome.wildheartAlert.glyphLine':
+    'Permanece en un glifo solar apagado {seconds} s para encenderlo. Cuando Zulgar lo cruce, recibirá un {pct}% más de daño durante {duration} s',
+  'hudChrome.wildheartAlert.glyphTitle': 'Enciende los glifos solares',
+  'hudChrome.wildheartAlert.pinnedLine':
+    'Un compañero debe extraer la Lanza de caza. Pulso de Corazón Salvaje te hace más daño mientras estás ensartado',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    'Nadie está libre para ayudarte: extrae tú la Lanza de caza antes de que llegue Pulso de Corazón Salvaje',
+  'hudChrome.wildheartAlert.pinnedTitle': '¡Ensartado!',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    'Nadie más puede encender los glifos solares. Permanece en uno apagado {seconds} s para encenderlo y atrae a Zulgar para que lo cruce',
+  'hudChrome.wildheartAlert.spearLine':
+    'Corre hasta la Lanza de caza y extráela antes de que llegue Pulso de Corazón Salvaje',
+  'hudChrome.wildheartAlert.spearTitle': '¡Un aliado está ensartado!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    'Recibe un {pct}% más de daño hasta que termine: usa ahora tus ataques más potentes',
+  'hudChrome.wildheartAlert.sunstruckTitle': '¡Zulgar sufre el estado Golpeado por el sol!',
+  'itemUi.errors.orderTrackedItem': 'El Mercader no acepta pedidos de equipo único.',
+
+  'hudChrome.cosmetics.mountsIntro':
+    'Elige aquí la apariencia de tu montura. El entrenamiento de equitación determina la velocidad. Conserva el objeto de montura en las bolsas o el banco de cualquier personaje para compartir su apariencia con toda la cuenta.',
+  'hudChrome.cosmetics.mountsNoMount':
+    'Aprende equitación con la caballeriza mayor Marla para invocar una montura.',
+  'hudChrome.cosmetics.notCollected': 'Sin coleccionar',
+  'hudChrome.guildHall.mountPreview':
+    'Apariencia de montura para todos los personajes de tu cuenta. Tu entrenamiento de equitación determina la velocidad.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Elige tu montura en Cosméticos. Usa Montar / Desmontar para cabalgar.',
+  'hudChrome.mounts.desc_grag_bear': 'Un oso resistente y de paso seguro con una silla pesada.',
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'Un caracol robusto y de ritmo tranquilo con un caparazón musgoso.',
+  'hudChrome.mounts.desc_valorsteed':
+    'Un corcel resistente y de paso seguro con una silla de cuero.',
+  'hudChrome.mounts.useToRide':
+    'Úsalo para elegir esta apariencia e invocar tu montura. Conserva este objeto en las bolsas o el banco de cualquier personaje para compartir la apariencia con toda la cuenta. El entrenamiento de equitación determina la velocidad.',
+  'itemUi.vendor.advancedRiding': 'Entrenamiento avanzado de Monta',
+  'itemUi.vendor.basicRiding': 'Entrenamiento de Monta',
+  'itemUi.vendor.ridingSpeed':
+    'Aumenta tu velocidad de movimiento al montar un {speed}%. Se aplica a todas las monturas.',
+  'guide.mountsPage.firstBody':
+    'Marla vende las Riendas del Corcel del Valor por 10 de oro después de aprender equitación. Conservar las riendas desbloquea la apariencia del caballo en Cosméticos para todos los personajes de tu cuenta. El entrenamiento ya permite invocar una montura sin llevar riendas, así que elige el caballo u otra apariencia que poseas cuando quieras cambiar de aspecto.',
+  'guide.mountsPage.goodsBody':
+    'Las apariencias de montura coleccionables están disponibles para toda la cuenta mientras quede al menos un objeto de riendas correspondiente en las bolsas o el banco personal de cualquier personaje. Intercambiar, enviar por correo, poner a la venta, vender o retirar de cualquier otra forma el último objeto válido elimina la apariencia de Cosméticos. Quien la lleve vuelve a la apariencia del caballo predeterminado y sigue montado a la velocidad de su entrenamiento.\n\nLas riendas de los jugadores pueden intercambiarse, enviarse por correo y ponerse a la venta en el Mercado Mundial salvo que el objeto indique lo contrario. Las riendas del caballo también pueden venderse a un mercader por 10 de oro. Las demás riendas mantienen sus propias restricciones de venta. Los aspectos de montura de la tienda siguen siendo cosméticos de cuenta independientes de las riendas.',
+  'guide.mountsPage.intro':
+    'Elige una apariencia de montura, aprende equitación en los establos y viaja más rápido por el mundo. Tu entrenamiento marca el ritmo; todas las apariencias de montura son cosméticas.',
+  'guide.mountsPage.learnBody':
+    'La equitación se desbloquea al nivel {level}. La caballeriza mayor Marla Hitchen vende el Entrenamiento de Monta por 80 de oro en los Establos del Galecrest. El entrenamiento básico permite moverse un {basicSpeed}% más rápido al montar. Después, Marla también vende el Entrenamiento avanzado de Monta por {advancedFee} de oro, que aumenta la bonificación al {advancedSpeed}%. Cada rango pertenece al personaje que lo aprende.\n\nTras aprender equitación básica, acepta la misión Lecciones de equitación de Marla y sigue el marcador hasta el cuadrado luminoso tras el arco de salida. Pulsa Iniciar carrera para tomar prestado el Corcel del Valor de entrenamiento. Termina el recorrido y vuelve para recibir monedas y experiencia. El caballo prestado regresa al establo al terminar la lección.',
+  'guide.mountsPage.rideBody':
+    'Abre Cosméticos y elige una apariencia en la pestaña Monturas. La tecla Montar / Desmontar, por defecto el acento grave, invoca tu montura entrenada con esa apariencia. El botón Montar del móvil hace lo mismo. Invocarla requiere una breve canalización; desmontar es instantáneo. Puedes cambiar de apariencia mientras montas sin cambiar tu velocidad.\n\nTambién puedes usar riendas desde las bolsas o una barra de acción para elegir esa apariencia e invocar la montura. Usar la apariencia que ya llevas al montar guarda la montura. Las riendas en el banco o en otro personaje desbloquean el mismo cosmético sin que el jinete deba llevarlas.',
+  'guide.mountsPage.speedBody':
+    'El Entrenamiento de Monta básico permite moverse un {basicSpeed}% más rápido al montar. El Entrenamiento avanzado de Monta permite un {advancedSpeed}% más de velocidad y cuesta {advancedFee} de oro con Marla. Toda apariencia usa la misma velocidad según el rango de entrenamiento del personaje, independientemente de su rareza u origen. Los aspectos de la tienda también usan esa velocidad.',
+  'guide.mountsPage.speedHeading': 'Velocidad y entrenamiento de equitación',
+  'guide.mountsPage.whatBody':
+    'Las monturas son apariencias cosméticas para tu montura entrenada. No otorgan armadura, daño ni estadísticas de combate. El entrenamiento de equitación aumenta la velocidad por tierra y los saltos montado alcanzan más altura. Todas las monturas permanecen en tierra y ninguna puede nadar.',
+  'guide.progression.ridingBody':
+    'Al nivel {level}, la caballeriza mayor Marla enseña equitación básica por oro y ofrece después un rango avanzado. El entrenamiento determina la velocidad al montar. Elige tu apariencia en Cosméticos; las apariencias coleccionables se comparten mientras sus riendas sigan en las bolsas o el banco de cualquier personaje.',
 };

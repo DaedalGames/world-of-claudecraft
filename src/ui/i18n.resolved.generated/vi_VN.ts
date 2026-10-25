@@ -475,9 +475,24 @@ export const vi_VN: EnTranslations = {
       "returning": "Đang Mang Đồ Của Bạn Về",
       "waiting": "Đang Chờ Trả Đồ Cho Bạn",
       "bags": "Gửi Tới Ngân Hàng",
+      "bagsVault": "Gửi nguyên liệu vào kho",
       "bank": "Lấy Từ Ngân Hàng",
+      "vault": "Lấy từ kho. Mỗi lần chọn lấy về cả hàng.",
       "inventory": "Túi Đồ",
       "bankTitle": "Ngân Hàng",
+      "vaultTitle": "Kho Nguyên Liệu",
+      "storeTabs": "Kho người chuyển đồ",
+      "vaultCap": "Chứa {cap} mỗi loại nguyên liệu",
+      "vaultEmpty": "Kho của bạn trống.",
+      "vaultLocked": "Mở khóa Kho Nguyên Liệu tại nhân viên ngân hàng để dùng cùng người chuyển đồ.",
+      "boundBank": "Đang đến ngân hàng",
+      "boundVault": "Đang đến Kho Nguyên Liệu",
+      "boundAccount": "Đang đến ngân hàng nhân vật khác",
+      "accountTitle": "Nhân vật khác",
+      "accountBank": "Lấy từ ngân hàng này. Nhân vật đó phải đăng xuất khi người chuyển đồ đến.",
+      "bagsAccount": "Gửi đến ngân hàng của {name}",
+      "bagsAccountNone": "Chọn nhân vật để gửi vật phẩm.",
+      "accountPlanned": "Đã lên kế hoạch cho {name}: {count} chồng. Chọn cho nhân vật khác sẽ thay thế chúng.",
       "capacity": "{used} / {capacity} ô",
       "cargo": "Hành Trang Người Chuyển Đồ",
       "empty": "Không có vật phẩm",
@@ -485,7 +500,7 @@ export const vi_VN: EnTranslations = {
       "selected": "Đã chọn {count} / {limit} chồng",
       "select": "Chọn {item}, {count}",
       "selectedItem": "Bỏ chọn {item}, {count}",
-      "instructions": "Chọn cả chồng. Người chuyển đồ gửi chúng trước rồi lấy những vật phẩm bạn yêu cầu. Không thể gửi vật phẩm nhiệm vụ.",
+      "instructions": "Chọn cả chồng cho ngân hàng của bạn, Kho Nguyên Liệu hoặc nhân vật khác. Người chuyển đồ gửi chúng trước rồi lấy những vật phẩm bạn yêu cầu. Không thể gửi vật phẩm nhiệm vụ.",
       "membership": "Gia hạn tư cách thành viên để bắt đầu chuyến khác.",
       "cargoSafe": "Vật phẩm trả về sẽ tràn ra nếu túi đầy. Người chuyển đồ biến mất sau giao hàng cho đến khi được triệu hồi lại.",
       "unavailable": "Triệu hồi người chuyển đồ để lên kế hoạch giao hàng."
@@ -862,7 +877,7 @@ export const vi_VN: EnTranslations = {
       "titleOffer": "Danh hiệu: {title}",
       "titlePreview": "Hiện Dưới Dạng {preview}",
       "mountOffer": "Thú cưỡi: {mount}",
-      "mountPreview": "Thú cưỡi mặt đất: tăng tốc di chuyển +{pct}% khi cưỡi. Cần học cưỡi.",
+      "mountPreview": "Ngoại hình thú cưỡi cho mọi nhân vật trong tài khoản. Huấn luyện cưỡi quyết định tốc độ.",
       "skinOffer": "Diện mạo kiếm: {skin}",
       "skinPreview": "Đổi hình kiếm đang trang bị trên mọi nhân vật trong tài khoản. Chỉ diện mạo: không chỉ số.",
       "buy": "Mua",
@@ -2538,7 +2553,7 @@ export const vi_VN: EnTranslations = {
       "riding": "Đang Cưỡi",
       "mount": "Lên Thú Cưỡi",
       "dismount": "Xuống Thú Cưỡi",
-      "useToRide": "Sử dụng để triệu hồi thú cưỡi này.",
+      "useToRide": "Dùng để chọn ngoại hình này và triệu hồi thú cưỡi. Giữ vật phẩm này trong túi hoặc ngân hàng của bất kỳ nhân vật nào để chia sẻ ngoại hình trên toàn tài khoản. Huấn luyện cưỡi quyết định tốc độ.",
       "emptyTitle": "Chưa Có Thú Cưỡi Nào",
       "emptyStableHint": "Đạt cấp độ 20 và học cưỡi ngựa cùng Trưởng Chuồng Ngựa Marla tại Chuồng Ngựa Highwatch, phía tây Highwatch.",
       "emptyDropHint": "Thú cưỡi hiếm hơn rơi ra từ trùm hầm ngục anh hùng và khi hoàn thành Rạn Nứt.",
@@ -2568,9 +2583,9 @@ export const vi_VN: EnTranslations = {
       "name_rickshaw_mount": "Xe kéo Buộc Xương",
       "name_wobbles_slime": "Slime Lắc Lư",
       "name_nightwing_chimera": "Chimera Cánh Đêm",
-      "desc_valorsteed": "Một con chiến mã khỏe mạnh, bước chân vững chãi, giúp tăng tốc độ di chuyển.",
-      "desc_grag_bear": "Một chú gấu khỏe mạnh, bước chân vững chãi, giúp tăng tốc độ di chuyển.",
-      "desc_stalkglider_snail": "Một chú ốc sên bền bỉ, dẻo dai, giúp tăng tốc độ di chuyển.",
+      "desc_valorsteed": "Một con tuấn mã khỏe, bước vững, mang yên da.",
+      "desc_grag_bear": "Một con gấu khỏe, bước vững, mang yên nặng.",
+      "desc_stalkglider_snail": "Một con ốc sên khỏe, sức bền dẻo dai, có vỏ phủ rêu.",
       "desc_aether_hover_cycle": "Một cỗ xe phép thuật cơ khí mạnh mẽ, được thiết kế để di chuyển nhanh và lướt sát mặt đất trong chiến đấu.",
       "desc_shadowjump_toad": "Một con cóc khổng lồ, bước chân vững chãi, được huấn luyện những cú nhảy bóng tối nhanh như chớp có thể vượt qua mọi địa hình.",
       "desc_stormfeather_griffin": "Một con sư tử đầu chim bão uy nghi, rảo bước trên mặt đất bằng những móng vuốt được bọc rune, đôi cánh xếp gọn.",
@@ -2593,7 +2608,7 @@ export const vi_VN: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Nhấn {key} để cưỡi Valorsteed huấn luyện.",
-      "ownedMountPrompt": "Dây cương của bạn đang ở trong túi đồ. Hãy dùng để cưỡi.",
+      "ownedMountPrompt": "Chọn thú cưỡi trong Mỹ phẩm. Dùng Lên / Xuống Thú Cưỡi để cưỡi.",
       "ridePrompt": "Đi theo điểm đánh dấu phát sáng đến vạch xuất phát, sau đó nhấn Bắt Đầu Đua.",
       "begin": "Bắt Đầu Bài Học",
       "success": "Bạn đã thuần hóa được Valorsteed.",
@@ -2864,6 +2879,10 @@ export const vi_VN: EnTranslations = {
       "actionCamShoulderLeft": "Trái {pct}",
       "actionCamShoulderRight": "Phải {pct}",
       "actionCamShoulderCenter": "Giữa",
+      "firstPersonMode": "Góc Nhìn Thứ Nhất (Phóng To Hết Cỡ)",
+      "firstPersonOff": "Tắt",
+      "firstPersonBody": "Hiện cơ thể",
+      "firstPersonNoBody": "Ẩn cơ thể",
       "showAttackButton": "Hiển Thị Nút Tấn Công",
       "showDailyRewardsChest": "Hiện Rương Phần Thưởng Hằng Ngày",
       "mobileCameraJoystick": "Cần điều khiển máy ảnh",
@@ -3826,6 +3845,12 @@ export const vi_VN: EnTranslations = {
       "linkHint": "Shift-click để chia sẻ vật phẩm này trong khung chat."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} lần chuyển trước đó không được hiển thị.",
+        "few": "{count} lần chuyển trước đó không được hiển thị.",
+        "many": "{count} lần chuyển trước đó không được hiển thị.",
+        "other": "{count} lần chuyển trước đó không được hiển thị."
+      },
       "guildBoardShown": {
         "one": "Đang hiển thị {count} bang hội",
         "few": "Đang hiển thị {count} bang hội",
@@ -4278,6 +4303,8 @@ export const vi_VN: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Đặt Độ Khó Hầm Ngục: Anh Hùng",
       "setNormal": "Đặt Độ Khó Hầm Ngục: Thường",
+      "unappliedNormal": "Đã chọn Anh Hùng. Các phụ bản hiện tại vẫn là Thường.",
+      "unappliedHeroic": "Đã chọn Thường. Các phụ bản hiện tại vẫn là Anh Hùng.",
       "resetAll": "Đặt Lại Tất Cả Phụ Bản",
       "resetDone": "Tất cả phụ bản đã được đặt lại.",
       "resetNone": "Bạn không có phụ bản nào để đặt lại.",
@@ -4287,10 +4314,11 @@ export const vi_VN: EnTranslations = {
       "resetSameDifficulty": "Hãy đổi độ khó hầm ngục trước khi đặt lại các phụ bản này. Phụ bản trống sẽ tự đặt lại sau 5 phút.",
       "resetLoot": "Bạn không thể đặt lại phụ bản khi vẫn còn chiến lợi phẩm bên trong.",
       "resetConfirmTitle": "Đặt Lại Tất Cả Phụ Bản?",
-      "resetConfirmBody": "Thao tác này sẽ từ bỏ các phụ bản trống thuộc độ khó bạn đã chọn trước đó. Chiến lợi phẩm chưa nhận sẽ ngăn việc đặt lại.",
+      "resetConfirmBody": "Thao tác này từ bỏ các phụ bản trống để lượt tiếp theo bắt đầu lại từ đầu ở độ khó đã chọn. Khóa lượt không thay đổi. Có người còn ở trong hoặc chiến lợi phẩm chưa nhận sẽ ngăn đặt lại.",
       "resetConfirm": "Đặt Lại Phụ Bản",
       "resetCooldown": "Chỉ có thể đặt lại phụ bản một lần mỗi 5 phút.",
-      "resetUsage": "Dùng /dungeon reset để từ bỏ các phụ bản trống sau khi đổi độ khó.",
+      "resetAlreadyFresh": "Các phó bản của bạn đã được làm mới. Chưa ai vào kể từ lần đặt lại gần nhất.",
+      "resetUsage": "Dùng /dungeon reset để từ bỏ các phụ bản trống và bắt đầu lại từ đầu.",
       "entryMismatchNormal": "Phụ bản này được đặt ở độ khó Thường. Dùng Đặt Lại Tất Cả Phụ Bản để bắt đầu một lượt Anh Hùng mới.",
       "entryMismatchHeroic": "Phụ bản này được đặt ở độ khó Anh Hùng. Dùng Đặt Lại Tất Cả Phụ Bản để bắt đầu một lượt Thường mới."
     },
@@ -4623,7 +4651,17 @@ export const vi_VN: EnTranslations = {
         "pollinated": "Chạm Túi Hạt khiến nó lập tức mọc Chồi Gai. Tránh hạt và để người chơi sạch giẫm chúng; túi không ai chạm sẽ mọc sau {seconds} giây (ở Anh Hùng, nó chui xuống sau {heroic} giây và trồi cạnh người gần nhất).",
         "prey": "Zulgar săn bạn. Dẫn hắn qua ký hiệu mặt trời sáng để làm chậm hắn {slow}%. Nếu bắt được bạn, bạn bị Vồ Xé chịu {damage} sát thương ({heroic} ở Anh Hùng) và bị quật ngã {stun} giây.",
         "avatar": "Di chuyển nhanh hơn {pct}% và săn Con Mồi. Làm chậm và trói chân có hiệu lực, làm choáng kéo dài bằng nửa.",
-        "vanished": "Ẩn và miễn nhiễm sát thương. Hắn sắp vồ người chơi xa nhất."
+        "vanished": "Ẩn và miễn nhiễm sát thương. Hắn sắp vồ người chơi xa nhất.",
+        "sunstruck": "Trúng ký tự mặt trời sáng: di chuyển chậm hơn {pct}%.",
+        "sunstruckExposed": "Trúng ký tự mặt trời sáng: nhận thêm {pct}% sát thương.",
+        "sunWary": "Không ký tự mặt trời nào có thể đánh hắn đến khi hiệu ứng này kết thúc. Ký tự sáng hắn đi qua vẫn sáng.",
+        "pinned": "Giáo Săn ghim bạn tại chỗ. Bạn chảy máu nhận {bleed} sát thương Vật Lý ({heroicBleed} ở Anh Hùng) mỗi {every} giây, và Nhịp Tim Hoang Dã đánh bạn ở mọi vị trí với thêm {pulse}% sát thương. Đồng đội có thể rút giáo trong {pull} giây. Nếu không còn ai tự do, tự rút trong {wrench} giây. Giáo nhả ra sau {seconds} giây.",
+        "idolAwake": "Báo đốm đá đã thức giấc. Mỗi {every} giây nó thở lên một nửa sân thượng, rồi nửa kia, sau cảnh báo sàn {warning} giây: gây {min} đến {max} sát thương Thiên Nhiên ({heroicMin} đến {heroicMax} ở Anh Hùng) cho mọi người ở nửa đó. Zulgar giữ dạng Hóa Thân Báo Đốm đến khi chết và chọn Con Mồi mới mỗi {seconds} giây ({heroicSeconds} giây ở Anh Hùng)."
+      },
+      "temple": {
+        "scoreWard": "Đang hát Bản Nhạc: cô ta không nhận sát thương đến khi kết thúc. Bước lên các ô trăng theo thứ tự chúng đã vang trước khi câu hát kết thúc để phá giọng cô ta. Thay phiên nhau: sau khi phát một nốt, đợi người khác phát nốt đúng tiếp theo. Người sống sót duy nhất có thể hoàn thành một mình. Nếu câu hát kết thúc trước, Nghịch Âm gây {min} đến {max} sát thương Băng ({heroicMin} đến {heroicMax} ở Anh Hùng) cho mọi người trong sân.",
+        "brokenVoice": "Giọng hát của cô ta đã vỡ: nhận thêm {pct}% sát thương đến khi hiệu ứng kết thúc.",
+        "spentVoice": "Bạn không thể phát tiếng ô trăng khác cho đến khi người khác phát nốt đúng tiếp theo. Bước lên ô trong thời gian này không đặt lại câu trả lời hay gây hại cho bạn. Không thể giải trừ. Bị xóa khi bạn là người chơi còn sống duy nhất trong phụ bản hoặc Bản Nhạc kết thúc."
       },
       "bastion": {
         "brineColumn": "Bị trói chân trong cột nước biển: chịu {min} đến {max} sát thương Thiên Nhiên mỗi {tick} giây, tối đa {seconds} giây. Ngắt phép hoặc làm choáng Tín Đồ Triều Trói để phá.",
@@ -5256,6 +5294,9 @@ export const vi_VN: EnTranslations = {
       "partyTradeWindow": "Bạn có thể giao dịch vật phẩm này cho những người chơi đã cùng nhận nó rơi ra, trong {time} tới. Trang bị nó sẽ kết thúc khoảng thời gian giao dịch này.",
       "perfectedBadge": "Đã hoàn thiện",
       "perfectingRank": "Hoàn thiện: bậc {rank} trên {ranks}",
+      "lootedBy": "Được {name} nhặt vào {date}",
+      "questRewardTo": "Thưởng nhiệm vụ cho {name} vào {date}",
+      "obtainedBy": "Được {name} nhận vào {date}",
       "materialSourceGatherer": "{count} × Được {name} thu thập",
       "trophySkullSource": "{count} × Lấy từ {name}",
       "materialSourceGathererSigned": "{count} × Được {name} thu thập, có chữ ký của {signer}",
@@ -5799,14 +5840,8 @@ export const vi_VN: EnTranslations = {
       "logAdminPurge": "Một quản trị viên đã xóa {count} {item}"
     },
     "collections": {
-      "title": "Săn Tìm",
-      "close": "Đóng Săn Tìm",
-      "keybindLabel": "Săn Tìm",
-      "launcherTitle": "Săn Tìm: bạn đồng hành, thú cưỡi và bộ trang bị",
       "tabs": {
-        "buddies": "Bạn Đồng Hành",
-        "mounts": "Thú Cưỡi",
-        "sets": "Bộ Trang Bị"
+        "buddies": "Bạn Đồng Hành"
       },
       "state": {
         "owned": "Đã Sưu Tầm",
@@ -5816,7 +5851,6 @@ export const vi_VN: EnTranslations = {
       },
       "presenceDefault": "Bạn cảm thấy có thứ hiện diện đang nhìn mình.",
       "revealed": "{name} đã quyết định theo bạn.",
-      "cosmeticUnlocked": "Diện mạo mới cho {name}: {look}.",
       "presence": {
         "ember_fox": "Có thứ nhỏ và ấm đang rón rén theo sau bạn.",
         "moss_hare": "Tiếng xào xạc trong than bùn theo kịp bước chân bạn.",
@@ -5854,134 +5888,9 @@ export const vi_VN: EnTranslations = {
         "phantom": "Không khí sau bạn yên tĩnh hơn mức bình thường một chút.",
         "emberfall_phoenix": "Hơi ấm như lửa ủ lan sau lưng bạn."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Băng Trói",
-        "crystal_lich_voltaic": "Điện Áp",
-        "forgemaw_ashen": "Tro Xám",
-        "forgemaw_whitehot": "Nóng Trắng",
-        "stag_acorn": "Vương Miện Hạt Sồi",
-        "stag_gilded": "Mạ Vàng",
-        "moss_hare_verdant": "Xanh Tươi",
-        "proud_grunt_warlord": "Tướng Quân",
-        "frog_sapphire": "Ếch Lam Ngọc"
-      },
       "actions": {
         "summon": "Triệu Hồi",
-        "dismiss": "Cho Về",
-        "wear": "Mặc",
-        "remove": "Loại Bỏ"
-      },
-      "looks": {
-        "title": "Diện Mạo",
-        "unlocked": "Đã Mở Khóa",
-        "locked": "Đã Khóa",
-        "worn": "Đang mặc",
-        "none": "Chưa có diện mạo được tạo cho bạn đồng hành này"
-      },
-      "source": {
-        "bossLabel": "Thú Cưng Từ Trùm",
-        "bossDrop": "{mob} ({location}), {chance}% mỗi người mỗi lần hạ",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% mỗi người, {heroicChance}% ở Anh Hùng",
-        "bossDropHeroicOnly": "{mob} ({location}), chỉ Anh Hùng, {chance}% mỗi người",
-        "rollNote": "Mỗi người chơi rút riêng; không ai mất lượt rút vì thành viên nhóm.",
-        "deedLabel": "Đạt Bằng",
-        "deed": "Công trạng {deed}",
-        "challengeLabel": "Thử Thách",
-        "challengeSpeed": "Hạ {mob} trong {seconds} giây từ khi bắt đầu giao chiến",
-        "challengeDps": "Gây {dps} sát thương mỗi giây lên {mob} tính suốt trận",
-        "craftLabel": "Chế Tạo",
-        "craft": "{item} (công thức {profession})",
-        "grantLabel": "Được Trao",
-        "grantOnly": "Phần thưởng mùa: bảng xếp hạng hằng tháng và phần thưởng bản ghi chiến đấu hàng đầu",
-        "tokenLabel": "Vật Đổi",
-        "token": "{item}, dùng một lần để gắn bạn đồng hành"
-      },
-      "buddyLore": {
-        "ember_fox": "Một con cáo cái từ hàng giậu Thung Lũng Eastbrook, mang tên bộ lông đỏ than nổi qua bụi cây mùa đông. Những người bẫy thú đã bỏ bắt cáo con từ nhiều đời trước, thay bằng để thức ăn ngoài trời.",
-        "moss_hare": "Thỏ Willowfen, lông xanh vì cả đời nằm trong than bùn ướt. Người hái thuốc đầm lầy coi chúng là điềm lành, không cho ai đuổi khỏi bậc cửa.",
-        "frog": "Đầm Lầy Mirefen nuôi chúng béo tròn, vô lo, hát suốt đêm trong bãi sậy. Người dẫn đường đầm lầy thề rằng thuyền chở một con sẽ chẳng bao giờ mắc cạn.",
-        "crimson_claw_crab": "Một con cua thủy triều Farshore có càng vẫn đỏ rất lâu sau khi rời nước. Thợ bến tàu từng cho chúng đua trên ván để cá cược.",
-        "golden_sentinel": "Một bọ gác của Amberfall, dát vàng bởi nhựa cây nó lớn lên trong đó. Tên gọi còn cổ hơn lớp nhựa: lính gác cùng loại đã trông các lùm cây từ lâu trước khi người ta nghĩ tới việc đóng chai nhựa.",
-        "nightfang": "Một thợ săn Nightbloom trẻ, lặng lẽ ngay cả so với đồng loại. Nó theo chỉ để có bạn, chẳng săn thứ gì to hơn bướm đêm.",
-        "tuskhorn_boar": "Dòng Thornpeak, được mục đồng lai chân ngắn vì muốn con lợn rừng không phá nổi hàng rào. Dù vậy nó vẫn giữ nguyên tính khí.",
-        "emerald_wolf": "Một sói con Wraithwood, lông ánh xanh trong ánh sáng tán rừng hiếm khi chạm sàn rừng. Các hộ vệ nuôi những con mồ côi mà rừng để lại.",
-        "tiger": "Vằn Palmreach trên con vật chưa từng thấy Palmreach: dòng này được nuôi nhốt từ khi các vườn thú cũ đóng cửa. Nó chỉ nghe tiếng huýt sáo, không gì khác.",
-        "cate_coin": "Con mèo không chịu rời đồng xu nó ngồi trên, và chưa ai từng thấy nó ăn. Thương nhân Eastbrook vẫn cãi nhau xem trong hai thứ đó, thứ nào mới là thú cưng.",
-        "alon": "Linh vật của một lữ khách từ con đường không bản đồ nào chịu ghi nhận, cứ xuất hiện khi kế hoạch đang đổ bể. Nó quan sát, tán thành, và tuyệt nhiên không giúp gì.",
-        "trollface": "Một thứ cười toe do Wraithwood đẩy ra và không chịu nhận lại. Ai thử tả nó cuối cùng cũng bật cười rồi bỏ cuộc.",
-        "ansem": "Nó nói về cửa và bóng tối, rồi nhất quyết không nói thêm về cả hai. Giáo đồ Nightbloom nhận nó là của họ; mỗi khi họ làm lễ, nó lại đi lang thang mất.",
-        "triple_t": "Ba thứ gì đó, hoặc một thứ lặp ba lần. Lời kể mâu thuẫn, còn sinh vật chẳng chịu đứng yên đủ lâu để đếm.",
-        "kekius": "Bạn đồng hành hay cười, gốc gác không rõ, được các sân đua Galecrest nhận làm bùa may. Nó đã sống lâu hơn bốn chuồng ngựa từng tin vào nó.",
-        "solbot": "Một máy tự động nhỏ chạy bằng nắng, được đào lên khi nửa thân còn vùi trong tro Drakelands, vẫn tích tắc. Xưởng nào tạo nó cũng không để dấu trên vỏ.",
-        "frostfire": "Sinh ra ở Frostveil Reach, nơi suối nóng xuyên qua bãi băng, nó chưa bao giờ quyết định mình thuộc nửa nào. Nó bốc hơi trong khí lạnh và run rẩy trong khí ấm.",
-        "rocky": "Một sinh vật bò vỏ đá từ sườn đá vụn Thornpeak, chậm rãi và hoàn toàn thản nhiên. Thợ mỏ nuôi chúng vì chúng bất động ngay trước lúc sụp lở.",
-        "proud_grunt": "Cựu binh từ kho Chiến Tranh, còn giữ động tác chào nhưng mất quân hàm. Thống Chế Draven Kole trao một con cho người lính có đủ danh dự để hiểu cái giá đó.",
-        "loot_goblin": "Nó theo bất kỳ ai mang Dấu Ấn Anh Hùng, và chưa từng bị bắt quả tang ăn cắp. Quân nhu Vex khẳng định điều đó chẳng chứng minh được gì.",
-        "penny_goldspark": "Học việc của một thợ máy gnome, tính tiền theo giờ và đáng từng đồng xu. Thợ Giáp Hode nhận cô để trả nợ, giờ bán thỏa thuận đó cho bất cứ ai có một nghìn vàng.",
-        "stag": "Dòng máu Evergarden, lai nhỏ từ những con hươu lớn mà hộ vệ từng cưỡi. Nó vẫn cúi đầu khi thấy bàn tay giơ lên, một thói quen còn xưa hơn chính con vật.",
-        "alpaca": "Các đàn gia súc Galecrest nuôi chúng lấy len và vì tính khí: không gì bình thản hơn trong bão. Con này sẽ nhổ đúng vào một người mỗi chuyến đi.",
-        "horse": "Dòng ngựa con thung lũng, được lai nhỏ để đi lối vườn cây mà chưa từng được bảo mình không phải chiến mã. Nó theo sát vai bạn, và sẽ đi theo bất cứ ai từng cho nó một quả táo.",
-        "sapling": "Cây non có nụ cười trên vỏ và ánh nhìn tím tò mò. Rễ đưa nó lạch bạch vui vẻ tới bất cứ đâu bạn lang thang.",
-        "bull": "Một con bò đực vùng thung lũng chỉ to bằng chó, lý do duy nhất khiến người ta đồng ý nuôi trong nhà. Tính khí chẳng thu nhỏ theo cơ thể.",
-        "spider": "Một nhện dệt Wraithwood cỡ lòng bàn tay, trang trí lại mọi chiếc túi chở nó. Tơ còn bền hơn sợi chỉ nó thay thế.",
-        "raptor": "Dòng con non Drakelands, được bán trước khi biết mình chạy nhanh đến đâu. Chủ mới nào cũng được dặn cho ăn đầy đủ, chẳng ai cần nghe lần hai.",
-        "skeleton": "Nó chui lên từ mộ gò Wraithwood, phủi bụi, rồi theo người ta từ đó. Chưa ai xác định xương này từng thuộc về ai.",
-        "crystal_lich": "Một mảnh của chính Nythraxis, vẫn ngân lên cái lạnh đã tạo hình nó. Nó nghe lời người kéo nó khỏi tàn tích trận đột kích, và chưa hề tha thứ cho họ vì việc đó.",
-        "forgemaw": "Được rèn trong Lò Luyện Suối Cuối nhưng chưa hoàn thiện, nó bước khỏi xưởng đúc Ignivar khi búa vẫn đang nện. Chỉ cuộc xuống sâu Anh Hùng mới tìm thấy nó: sinh vật nóng chảy cứ quay về lò rèn đã tạo ra mình, rồi theo về nhà bất cứ ai sống sót qua lửa hai lần.",
-        "crystal_tide": "Một tinh linh triều cưỡi giọt thủy tinh biển riêng, bị các cần thủ từ thung lũng đến Farshore câu lên khi đang kiếm bữa tối trong nước lặng. Nó giữ lại nước đã theo mình lên, và không ai thuyết phục nổi nó quay về.",
-        "sprites": "Hai tinh linh lửa nhỏ, một vàng và một xanh ngọc, chẳng bao giờ thống nhất ai dẫn đầu. Đến đủ gần, chúng nhập thành ngọn lửa xanh lá rồi lại tách ra, cười vang.",
-        "phantom": "Một bóng ma cỡ lòng bàn tay từ các mộ gò Wraithwood, chỉ có tấm vải, không có xương, xuất hiện trong túi đã đóng rồi ở lại cho có bạn. Chưa ai biết nó muốn gì, và nó chưa từng cố dọa ai.",
-        "emberfall_phoenix": "Mỗi mùa thu nó cháy còn một tàn lửa, rồi mùa xuân lại trỗi từ tro của chính mình; đó là tất cả những gì người ta biết. Chưa ai tìm thấy tổ, và chưa ai bắt được một con hai lần."
-      },
-      "petKind": {
-        "beast": "Mãnh Thú",
-        "elemental": "Nguyên Tố",
-        "humanoid": "Nhân Hình",
-        "undead": "Tử Linh",
-        "celebrity": "Người Nổi Tiếng"
-      },
-      "armor": {
-        "cloth": "Vải",
-        "mail": "Giáp Xích",
-        "leather": "Da"
-      },
-      "stat": {
-        "intellect": "Trí Tuệ",
-        "agility": "Nhanh Nhẹn",
-        "strength": "Cường Độ",
-        "mixed": "Lai"
-      },
-      "set": {
-        "owned": "{owned}/{total} món",
-        "itemLevel": "Cấp vật phẩm {level}",
-        "bonusLabel": "{pieces} món"
-      },
-      "detail": {
-        "dropLabel": "Rơi Từ",
-        "vendorLabel": "Người Bán",
-        "bindLabel": "Ràng Buộc",
-        "sellLabel": "Người Bán Trả",
-        "marketLabel": "Chợ Thế Giới",
-        "exchangeLabel": "Sàn Giao Dịch $WOC",
-        "setLabel": "Đã Sưu Tầm",
-        "drop": "{mob} ({location}), {chance}% mỗi lần hạ",
-        "heroicDrop": "{mob} ({location}), chỉ Anh Hùng, {chance}% mỗi lần hạ",
-        "dropWithHeroic": "{mob} ({location}), {chance}% mỗi lần hạ, {heroicChance}% ở Anh Hùng",
-        "globalDrop": "Mọi kẻ địch, {chance}% mỗi lần hạ, một trong {count} vật phẩm ở độ hiếm này",
-        "fishingDrop": "Câu ở bất kỳ đâu, {chance}% mỗi lần bắt",
-        "vendor": "{npc} ({location}) bán với giá {price}",
-        "honorPrice": "Danh dự {amount}",
-        "marksPrice": "{amount} Dấu Ấn Anh Hùng",
-        "noSource": "Chưa Có Nguồn Trong Trò Chơi",
-        "noItem": "Chưa Có Vật Phẩm Nào Trao Thứ Này",
-        "tradeable": "Giao Dịch Được",
-        "soulbound": "Ràng Buộc Linh Hồn",
-        "noSell": "Không Thể Bán",
-        "marketAtMerchant": "Hiển Thị Tại Thương Nhân",
-        "marketChecking": "Đang kiểm tra...",
-        "marketNone": "Không Có Tin Rao",
-        "exchangeNone": "Không Có Tin Rao",
-        "exchangeUnavailable": "Không Khả Dụng Trên Ứng Dụng Này"
+        "dismiss": "Cho Về"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const vi_VN: EnTranslations = {
       "viewSources": "Xem nguồn",
       "separateByGatherer": "Tách theo người thu thập",
       "takeChosenQuantity": "Lấy số lượng đã chọn",
-      "combine": "Gộp các chồng nguyên liệu"
+      "combine": "Gộp các chồng nguyên liệu",
+      "itemHistory": "Lịch sử vật phẩm"
+    },
+    "itemHistory": {
+      "title": "{item}: lịch sử",
+      "passedTo": "Chuyển cho {name} vào {date}",
+      "noTransfers": "Vật phẩm này chưa bao giờ chuyển chủ.",
+      "close": "Đóng",
+      "openAria": "Lịch sử vật phẩm {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Hãy học công thức trước khi áp dụng phép cường hóa này.",
@@ -7073,6 +6990,7 @@ export const vi_VN: EnTranslations = {
         "summons_adds": "Triệu hồi quân tiếp viện",
         "lunar_tide": "Triều Nguyệt (sát thương vùng theo nhịp)",
         "chorus_and_solo": "Đồng Ca và Đơn Ca (tụ ở một dấu, tản khỏi dấu còn lại)",
+        "the_score": "Bản Nhạc (hai lần cô ta hát giai điệu trên ô trăng: bước lên theo thứ tự chúng vang để phá giọng cô ta)",
         "tideglass_reflections": "Ảnh Phản Chiếu Kính Triều (giết ảnh gương của nhau)",
         "hydra_three_elements": "Ba Nguyên Tố (đầu trái phun hình nón băng 18 thước Anh làm chậm 70 phần trăm trong 4 giây; đầu giữa phun độc dưới tối đa 3 người, nổ sau 1.5 giây rồi đốt 6 giây tại nơi rơi; đầu phải bắn lũ theo làn 26 thước Anh đẩy lùi 8 thước Anh: tránh từng đòn. Khi một đầu gục, các đầu còn lại tiếp quản đòn của nó)",
         "hydra_tsunami": "Sóng Thần (các đầu chìm 4.5 giây, chịu ít hơn 75 phần trăm sát thương; sóng cuộn qua một nửa hồ, lần sau nửa kia: 160 đến 190 sát thương băng ở Thường và đẩy 10 thước Anh. Sang nửa kia hoặc nấp sau trụ viền; ở Anh Hùng, sóng cuộn ngược qua nửa còn lại sau 3.5 giây. Sóng Thần đầu đến 24 giây vào trận, các lần sau đến 40 giây từ khi lần trước đi qua)",
@@ -7197,6 +7115,23 @@ export const vi_VN: EnTranslations = {
       "shadeLine": "Bỏ mồi nhử này. Đánh Vael có đèn bùng sáng trong tia để phá màn",
       "timeAria": "Còn {seconds} giây"
     },
+    "templeAlert": {
+      "melodyTitle": "Bản Nhạc",
+      "melodyLine": "Quan sát các ô trăng lần lượt vang lên. Lặp lại thứ tự, thay phiên với người chơi khác",
+      "melodyDarkLine": "Nhớ thứ tự trước khi các ô tắt. Lặp lại, thay phiên với người chơi khác",
+      "answerTitle": "Đáp Lại Bản Nhạc!",
+      "answerLine": "Thay phiên: bước lên ô trăng đánh dấu {place}. Đã phát: {done} trên {total}",
+      "answerDarkLine": "Thay phiên và lặp lại thứ tự từ trí nhớ. Bước ra trước khi bước lên ô lần nữa. Đã phát: {done} trên {total}",
+      "spentTitle": "Giọng khác phải đáp lại",
+      "spentLine": "Bạn không thể phát tiếng ô cho đến khi người khác phát nốt đúng tiếp theo. Đã phát: {done} trên {total}",
+      "stepOffTitle": "Bước ra, rồi bước vào lại",
+      "stepOffLine": "Ô trăng chỉ phát tiếng khi có người bước lên. Rời ô này rồi bước lên lại",
+      "falseTitle": "Sai Nốt!",
+      "falseLine": "Ô đó sai lượt. Câu trả lời bắt đầu lại từ ô đầu tiên",
+      "brokenTitle": "Giọng hát của Selthe đã vỡ!",
+      "brokenLine": "Cô ta nhận thêm {pct}% sát thương đến khi hiệu ứng kết thúc: dùng đòn mạnh nhất ngay",
+      "timeAria": "Còn {seconds} giây"
+    },
     "wildheartAlert": {
       "preyTitle": "Bạn Là Con Mồi!",
       "preyLine": "Dụ Zulgar qua ký hiệu mặt trời sáng để làm chậm trước khi hắn bắt và vồ xé bạn",
@@ -7207,7 +7142,21 @@ export const vi_VN: EnTranslations = {
       "pollinatedLine": "Tránh túi hạt: chạm khi bị Thụ Phấn sẽ tạo địch. Đồng minh không có dấu có thể giẫm",
       "bondTitle": "Liên Kết Bầy Đàn",
       "bondLine": "Tách Thầy Thú và báo đốm để bỏ giảm sát thương và tăng sát thương của chúng",
-      "timeAria": "Còn {seconds} giây"
+      "timeAria": "Còn {seconds} giây",
+      "preyAloneLine": "Không ai khác thắp được ký tự mặt trời. Đứng trên một ký tự tối {seconds} giây để thắp sáng, rồi dụ Zulgar đi qua",
+      "pinnedTitle": "Bị Ghim!",
+      "pinnedLine": "Đồng đội phải rút Giáo Săn. Nhịp Tim Hoang Dã đánh mạnh hơn khi bạn bị Ghim",
+      "pinnedSelfLine": "Không ai rảnh để giúp: tự rút Giáo Săn trước khi Nhịp Tim Hoang Dã đánh trúng",
+      "sunstruckTitle": "Zulgar Trúng Nắng!",
+      "sunstruckLine": "Hắn nhận thêm {pct}% sát thương đến khi hiệu ứng kết thúc: dùng đòn mạnh nhất ngay",
+      "spearTitle": "Đồng minh bị Ghim!",
+      "spearLine": "Chạy đến Giáo Săn và rút ra trước khi Nhịp Tim Hoang Dã đánh trúng",
+      "glyphTitle": "Thắp các ký tự mặt trời",
+      "glyphLine": "Đứng trên ký tự mặt trời tối {seconds} giây để thắp sáng. Khi Zulgar đi qua, hắn nhận thêm {pct}% sát thương trong {duration} giây",
+      "glyphLightingTitle": "Đang thắp ký tự mặt trời",
+      "glyphLightingLine": "Ở trên ký tự đến khi sáng. Bước ra sẽ bắt đầu lại",
+      "breathTitle": "Hơi Thở Tượng Thần!",
+      "breathLine": "Báo đốm đá sắp thở lên nửa sân thượng này. Sang nửa còn lại"
     },
     "sanctumAlert": {
       "quenchTitle": "Đang Trong Nước Tôi!",
@@ -7296,6 +7245,13 @@ export const vi_VN: EnTranslations = {
       "relightFar": "Đến trong {range} thước Anh để thắp lại",
       "relightAria": "Thắp Lại {name}",
       "relightUsingLine": "Tiếp tục vận để thắp nến: nó rút máu. Đòn trúng không ngắt; di chuyển hoặc choáng sẽ ngắt",
+      "freeLine": "Rút giáo khỏi đất để giải thoát người bị ghim. Trúng đòn không dừng bạn; di chuyển hoặc choáng sẽ dừng",
+      "freeKey": "Rút {name}",
+      "freeTap": "Chạm vào đây để rút {name}",
+      "freeClick": "Nhấp vào đây để rút {name}",
+      "freeFar": "Đến trong {range} thước để rút ra",
+      "freeAria": "Rút {name}",
+      "freeUsingLine": "Đứng yên để rút giáo: di chuyển hoặc choáng sẽ dừng bạn",
       "timeAria": "Còn {seconds} giây"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const vi_VN: EnTranslations = {
       "detach": "Tháo",
       "applied": "Đã áp dụng",
       "owned": "Đã sở hữu",
+      "notCollected": "Chưa sưu tầm",
       "storeOnly": "Có tại Cửa hàng WOC",
       "preview": "Xem trước",
       "previewAria": "Xem trước {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Ngoại hình thú cưỡi phủ lên thú cưỡi mà nhân vật này đang cưỡi. Nó không bao giờ thay đổi tốc độ.",
-      "mountsNoMount": "Trước hết hãy sở hữu một thú cưỡi: ngoại hình cần có thứ để cưỡi.",
+      "mountsIntro": "Chọn ngoại hình thú cưỡi tại đây. Huấn luyện cưỡi quyết định tốc độ. Giữ vật phẩm thú cưỡi trong túi hoặc ngân hàng của bất kỳ nhân vật nào để chia sẻ ngoại hình trên toàn tài khoản.",
+      "mountsNoMount": "Học cưỡi từ Quản Chuồng Marla để triệu hồi thú cưỡi.",
       "skinsEmpty": "Chưa sở hữu ngoại hình vũ khí nào. Hãy ghé Cửa hàng WOC.",
       "skinsApplyHint": "Trang bị {type} để áp dụng ngoại hình này.",
       "mechIntro": "Cỗ máy Chiến đấu thay thế cơ thể nhân vật này. Mỗi lần chỉ mặc một biến thể.",
@@ -7430,6 +7387,7 @@ export const vi_VN: EnTranslations = {
       "sourceActivityRiftFirstClear": "Trao cho mọi thành viên của tổ đội giành lượt hoàn thành đầu tiên của một Rạn Nứt xếp hạng",
       "sourceActivityBuriedHoard": "Hoard Bị Chôn Vùi",
       "sourceActivityLanternHall": "Mua bằng Ấn Đèn Lồng từ quân nhu Sảnh Đèn Lồng",
+      "sourceActivityWeeklyVaultPvp": "Được chọn từ hàng PvP của Kho Tuần",
       "cellMissingSourceAria": "{name}, chưa tìm thấy, {source}",
       "cellOwnedClearsAria": "{name}, đã biên mục, lần đầu tìm thấy ở lượt hoàn thành thứ {count}",
       "searchPlaceholder": "Tìm kỳ trân",
@@ -8454,6 +8412,16 @@ export const vi_VN: EnTranslations = {
         "heroicCloud": "Mây Phấn: đứng trong {cloudRadius} thước Anh quanh người Thụ Phấn {cloudSeconds} giây cũng làm bạn Thụ Phấn."
       },
       "zulgar": {
+        "pulseSummaryRework": "Mỗi {every} giây, chiêu niệm {cast} giây đánh mọi người trong {radius} thước, gây {min} đến {max} sát thương. Người bị Ghim nhận gấp {pinMult} lần sát thương này ở mọi khoảng cách.",
+        "spearSummary": "Chiêu niệm {cast} giây ghim một người không đỡ đòn, hoặc người đỡ đòn nếu không còn ai khác. Trói chân kéo dài tối đa {seconds} giây và gây {bleed} sát thương mỗi {tick} giây.",
+        "spearResponse": "Chọn giáo và tương tác trong {range} thước để rút ra trong {pull} giây. Sát thương không ngắt việc rút. Nếu không còn ai khác đứng tự do trên sân thượng, nạn nhân có thể tương tác để thoát trong {self} giây.",
+        "glyphSummaryRework": "{count} ký tự ban đầu đều tối. Trong cuộc săn, người chơi không bị đánh dấu đứng trên một ký tự {kindle} giây để thắp sáng. Nếu không còn người không bị đánh dấu, Con Mồi có thể thắp trong {alone} giây. Bước ra sẽ đặt lại tiến độ. Đi qua ký tự sáng làm hắn chậm {slow} và tăng sát thương nhận vào thêm {vulnerability} trong {seconds} giây. Không thể thắp lại ký tự trong {dark} giây; hắn không thể trúng ký tự khác trong {wary} giây. Trong cuộc săn, thời gian choáng giảm một nửa.",
+        "glyphResponseRework": "Người chơi không bị đánh dấu thắp ký tự phía trước Con Mồi. Dẫn hắn qua đó, rồi tấn công trong lúc Trúng Nắng. Ký tự tắt khi cuộc săn kết thúc.",
+        "idolSummary": "Ở mức máu {health}, hắn giữ dạng linh hồn báo đốm đến khi bị đánh bại. Người đỡ đòn cũng có thể thành Con Mồi.",
+        "idolHuntSummary": "Hắn chọn Con Mồi mới mỗi {every} giây, rồi quay về phía họ trong {turn} giây trước khi đuổi theo.",
+        "idolHuntHeroicSummary": "Hắn đánh dấu một cặp mới mỗi {pair} giây và đổi giữa họ mỗi {switch} giây. Mỗi lần đổi cho Con Mồi mới {turn} giây trước khi hắn đuổi theo.",
+        "breathSummary": "Mỗi {every} giây, một nửa sân thượng bị đánh dấu trong {warning} giây, sau đó mọi người ở nửa đó nhận {min} đến {max} sát thương Thiên Nhiên. Hơi thở luân phiên hai nửa.",
+        "breathResponse": "Sang nửa không bị đánh dấu trước khi cảnh báo kết thúc. Đường giữa an toàn. Ở Anh Hùng, hơi thở cũng dập tắt các ký tự đang sáng ở nửa đó; có thể thắp lại ngay.",
         "overview": "Đại tư tế vùng trũng. Trận đều với vòng báo trước tới khi hắn hóa tinh linh báo đốm săn một người. Người bị săn nhử hắn qua ký hiệu mặt trời sáng để làm chậm.",
         "phaseShrineName": "Đền Thiêng",
         "phaseShrineSummary": "Hắn cận chiến, phát nhịp vòng quanh mình.",
@@ -8766,6 +8734,14 @@ export const vi_VN: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe không bao giờ di chuyển hay đánh cận chiến. Tụ lại cho Hợp Xướng, rời nhóm cho Đơn Ca, ngắt Khúc Ca Chết Đuối và tránh Hồ Dâng. Ở hai ngưỡng máu, lặp lại giai điệu trên ô trăng của cô ta bằng cách thay phiên hát.",
+        "phaseSummaryRework": "Các đòn khác của cô ta tạm dừng khi nhóm đáp lại Bản Nhạc. Tia Nước Trăng không có thanh niệm và không thể bị ngắt.",
+        "boltSummaryRework": "Giữa các lần dùng phép khác, một tia đánh trúng mỗi {every} giây sau cảnh báo hình ảnh {windup} giây, gây sát thương Băng bằng {mult} lần sát thương vũ khí của cô ta. Ngắt Khúc Ca Chết Đuối sẽ dừng cả tia lẫn Khúc Ca trong {quiet} giây.",
+        "boltResponseRework": "Giữ người đỡ đòn trong tầm nhìn của cô ta. Dành ngắt chiêu cho Khúc Ca Chết Đuối.",
+        "tipHealerRework": "Theo dõi mục tiêu Khúc Ca và ai bị Hợp Xướng bắt trúng khi đứng một mình. Trong Bản Nhạc, giúp hát nốt tiếp theo và hồi máu khi mắc lỗi.",
+        "scoreSummary": "Ở mức máu {first} và {second}, cô ta miễn nhiễm và chơi {notes}, rồi {finalNotes} nốt. Lặp lại trong {answer}, rồi {finalAnswer} giây. Ô sai gây {falseNote} sát thương Băng và đặt lại tiến độ, không đặt lại thời gian. Hết giờ gây {min} đến {max} sát thương Băng cho mọi người. Thành công làm cô ta choáng {stun} giây và tăng sát thương nhận vào thêm {vulnerability} trong {bonusSeconds} giây.",
+        "scoreResponse": "Quan sát giai điệu rồi bước lên các ô theo thứ tự. Thay phiên phát đúng nốt với một người chơi còn sống khác; người sống sót duy nhất có thể hoàn thành một mình. Bước bị chặn không gây hại. Bước ra rồi vào lại để phát tiếng ô, kể cả ô đã có người đứng trước khi bắt đầu đáp lại.",
+        "scoreHeroic": "Khi đáp lại, các ô tắt sáng. Hãy nhớ giai điệu và thay phiên nhau.",
         "overview": "Mẫu Ca hát từ hồ, không di chuyển hay cận chiến. Cô ta đánh dấu Đồng Ca chia sẻ và Đơn Ca riêng, chiếu khúc ca tăng dần vào một người, gửi sóng qua sân. Tia và khúc ca đều ngắt được.",
         "phaseName": "Sân Ca Đoàn",
         "phaseSummary": "Một giai đoạn theo bộ đếm. Cơ chế tới hạn khi đang thi triển sẽ đợi thi triển xong.",
@@ -9678,7 +9654,7 @@ export const vi_VN: EnTranslations = {
       "graveyard": "Nơi linh hồn bạn sẽ trở về nếu bạn gục ngã ở đây.",
       "dungeons": "Mọi hầm ngục cùng vùng đất chứa cửa vào của nó và quy mô tổ đội nó được thiết kế cho, cộng với độ khó bạn đang chọn hiện tại.",
       "dungeonMode": "Chuyển hầm ngục của bạn giữa độ khó thường và Anh Hùng.",
-      "dungeonReset": "Từ bỏ những instance trống của riêng bạn, việc bạn cần làm sau khi đổi độ khó.",
+      "dungeonReset": "Từ bỏ các phụ bản trống của bạn để lượt tiếp theo bắt đầu lại từ đầu ở cùng độ khó hoặc độ khó mới.",
       "groupRecovery": "Hồi Phục Và Hiện Diện",
       "unstuck": "Lối thoát khi thế giới đã nhốt bạn lại. Đứng yên qua một đợt đếm ngược ngắn và bạn sẽ được đưa tới nghĩa trang gần nhất, và được hồi sinh ngay tại đó nếu bạn đã ngã xuống từ trước. Nó khiến bạn suy yếu bởi Hội Chứng Thoát Kẹt trong một khoảng thời gian sau đó, nên đây là phương án cuối cùng chứ không phải một đường tắt.",
       "unstuckWindow": "Cách thoát khi thế giới đã mắc kẹt bạn. Đứng yên qua một bộ đếm ngược ngắn và bạn được di chuyển đến nghĩa trang gần nhất, và nâng lên ở đó nếu bạn đã ngã rồi. Lần sử dụng đầu tiên trong một giờ là miễn phí. Sử dụng nó lại trong một giờ kể từ lần cuối cùng và nó để lại bạn bị suy yếu bởi Unstuck Sickness một thời gian sau đó, vì vậy nó là một cuộc cứu hộ thay vì một phím tắt.",
@@ -10105,27 +10081,27 @@ export const vi_VN: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Thú cưỡi và cưỡi ngựa",
-      "intro": "Thú cưỡi là một cách nhanh hơn để băng qua thế giới, và đó là tất cả những gì nó là. Bạn học cưỡi ngựa tại chuồng ngựa, mua bộ dây cương đầu tiên của mình, và mọi con đường sau đó đều ngắn lại.",
+      "intro": "Chọn ngoại hình thú cưỡi, học cưỡi tại chuồng và đi khắp thế giới nhanh hơn. Huấn luyện quyết định tốc độ; mọi ngoại hình thú cưỡi đều chỉ để làm đẹp.",
       "whatHeading": "Thú cưỡi là gì",
-      "whatBody": "Thú cưỡi là một con thú bạn cưỡi lên, và thứ nó mang lại cho bạn là tốc độ. Không giáp, không sát thương, không chỉ số: nó chở bạn qua mặt đất nhanh hơn, và bật nhảy cao hơn một chút khi bạn nhảy, và đó là toàn bộ thỏa thuận. Mọi thú cưỡi trong trò chơi đều là thú cưỡi trên cạn, nên không có bay, và không con nào trong số chúng biết bơi.",
+      "whatBody": "Thú cưỡi là ngoại hình làm đẹp cho khả năng cưỡi đã được huấn luyện. Chúng không cho giáp, sát thương hay chỉ số chiến đấu. Huấn luyện cưỡi tăng tốc độ đi trên đất và nhảy khi cưỡi vượt được độ cao lớn hơn. Mọi thú cưỡi đều ở trên mặt đất và không con nào bơi được.",
       "learnHeading": "Học cưỡi ngựa",
-      "learnBody": "Cưỡi Ngựa là một kỹ năng bạn mua một lần, và nó mở ra ở cấp {level}. Marla Hitchen, Quản Mã, trông coi Chuồng Ngựa Galecrest ngoài vùng đồi trọc, và bà bán Huấn Luyện Cưỡi Ngựa với giá 80 vàng. Chỉ một lần mua đó là thứ cho phép bạn ngồi lên thú cưỡi, và nó ở lại với bạn mãi mãi.\n\nMột khi bạn đã có nó, Marla có một nhiệm vụ dành cho bạn: Bài Học Cưỡi Ngựa. Hãy nhận lấy, đi theo điểm đánh dấu đến ô vuông phát sáng sau cổng vòm xuất phát, và nhấn Bắt Đầu Đua. Bà cho bạn mượn một con Valorsteed huấn luyện để học, nên bản thân bài học không tốn của bạn gì cả. Cưỡi qua đường đua, hoàn thành nó, rồi quay lại gặp bà để nhận tiền vàng và kinh nghiệm. Con ngựa được mượn sẽ quay về chuồng sau đó, nên bài học dạy bạn cách ngồi vững trên yên chứ không trao cho bạn một con ngựa.",
+      "learnBody": "Kỹ năng cưỡi mở ở cấp {level}. Quản Chuồng Marla Hitchen bán Huấn Luyện Cưỡi với giá 80 vàng tại Chuồng Galecrest. Huấn luyện cơ bản giúp di chuyển khi cưỡi nhanh hơn {basicSpeed}%. Sau khi học, Marla còn bán Huấn Luyện Cưỡi Nâng Cao với giá {advancedFee} vàng, nâng mức tăng tốc khi cưỡi lên {advancedSpeed}%. Mỗi bậc thuộc về nhân vật đã học.\n\nSau khi học cưỡi cơ bản, nhận nhiệm vụ Bài Học Cưỡi của Marla và theo dấu đến ô vuông phát sáng sau cổng vòm xuất phát. Nhấn Bắt Đầu Đua để mượn Valorsteed huấn luyện. Hoàn thành đường đua và quay lại nhận tiền cùng kinh nghiệm. Ngựa mượn trở về chuồng khi bài học kết thúc.",
       "whereHeading": "Tìm bà ở đâu",
       "whereBody": "Chuồng Ngựa Galecrest được đánh dấu trên bản đồ của Đỉnh Gió Lộng, ngoài vùng đồi trọc giữa Vách Đứng và Wreckfields. Marla đứng cạnh chuồng ngựa, quay mặt về phía sân đua.",
       "firstHeading": "Thú cưỡi đầu tiên của bạn",
-      "firstBody": "Valorsteed là thú cưỡi duy nhất được bán ở bất cứ đâu trong thế giới. Một khi bạn đã học Cưỡi Ngựa, Marla sẽ bán cho bạn Dây cương Valorsteed với giá 10 vàng, và dây cương đó là của bạn để giữ mãi. Mọi thú cưỡi khác đều phải kiếm được ngoài thế giới, nên con ngựa này là nơi gần như mọi kỵ sĩ đều bắt đầu.",
+      "firstBody": "Marla bán Dây Cương Valorsteed với giá 10 vàng sau khi bạn học Cưỡi. Giữ dây cương sẽ mở khóa ngoại hình ngựa trong Mỹ phẩm cho mọi nhân vật trong tài khoản. Huấn luyện cưỡi đã cho phép triệu hồi thú cưỡi mà không cần mang dây cương, nên hãy chọn ngựa hoặc ngoại hình khác đã sở hữu khi muốn đổi diện mạo.",
       "rideHeading": "Lên thú và xuống thú",
-      "rideBody": "Không có cửa sổ thú cưỡi và không có mục yêu thích nào để đặt, vì chính dây cương là thú cưỡi. Dùng một bộ dây cương từ túi đồ hoặc từ một ô trên thanh hành động và bạn sẽ cưỡi thú cưỡi đó. Triệu hồi mất một chút thời gian, một lượt gọi ngắn chứ không phải tức thì, nên nó sẽ không cứu bạn khỏi một cú kéo quái tồi tệ. Xuống thú thì tức thì và không bao giờ bị chặn.\n\nDùng chính bộ dây cương bạn đang cưỡi và bạn sẽ cất thú cưỡi đó đi. Dùng một bộ khác trong khi đang cưỡi và bạn sẽ đổi thẳng sang nó, không cần triệu hồi lại từ đầu ở giữa chừng. Phím Cưỡi Thú / Xuống Thú, mặc định là phím dấu huyền (`), chỉ luôn đưa bạn xuống: đó là lối xuống, không phải lối lên. Ngoại lệ duy nhất là bài học cưỡi ngựa, nơi chính phím đó gọi con ngựa Marla cho bạn mượn, vì một con ngựa mượn không có dây cương để nhấp vào. Trên điện thoại hoặc máy tính bảng, nút Thú Cưỡi trong khay Thêm hoạt động theo cả hai chiều, dù nó gọi bộ dây cương đầu tiên nằm trong túi đồ của bạn chứ không phải bộ bạn chọn, nên hãy chạm vào chính dây cương đó khi bạn muốn một thú cưỡi cụ thể.",
+      "rideBody": "Mở Mỹ phẩm và chọn ngoại hình trong thẻ Thú Cưỡi. Phím Lên / Xuống Thú Cưỡi, mặc định là phím dấu huyền ngược, triệu hồi thú cưỡi đã huấn luyện với ngoại hình đó. Nút Thú Cưỡi trên di động cũng làm như vậy. Triệu hồi cần vận sức ngắn; xuống cưỡi diễn ra tức thì. Bạn có thể đổi ngoại hình khi đang cưỡi mà không đổi tốc độ.\n\nBạn cũng có thể dùng dây cương từ túi hoặc thanh hành động để chọn ngoại hình đó và triệu hồi. Dùng ngoại hình đang cưỡi sẽ cất thú cưỡi. Dây cương trong ngân hàng hoặc trên nhân vật khác mở khóa cùng mỹ phẩm mà người cưỡi không cần mang theo.",
       "breaksHeading": "Điều gì khiến bạn xuống thú",
       "breaksBody": "Nước luôn thắng. Cưỡi vào bất cứ nơi nào đủ sâu để bơi và bạn sẽ bị hạ xuống ngay lập tức, vì không thú cưỡi trên cạn nào biết bơi, và chết sẽ đặt bạn xuống ngay nơi bạn ngã. Bạn không thể gọi thú cưỡi khi đang trong chiến đấu, khi đã chết hoặc đang tìm đường quay lại dưới dạng linh hồn, hay vào bất kỳ lúc nào trong một trận Cánh Đồng Trũng Gai, vốn được đấu hoàn toàn trên đôi chân từ lúc tập hợp cho đến hồi chốt cuối cùng: nếu bạn đang cưỡi trong lúc chờ đợi, việc bị đưa vào trận đấu sẽ đặt bạn xuống cùng lúc đó. Đi vào chiến đấu hoặc vào nước giữa chừng một lần triệu hồi cũng sẽ hủy nó.\n\nPhần lớn những gì bạn làm cũng khiến bạn xuống thú. Vung một đòn, bắt đầu niệm chú, thu hoạch một điểm tài nguyên, câu cá, chế tác, pháp khắc, tháo dỡ, và nạp lại một công cụ nghề nghiệp đều khiến bạn xuống thú ngay khoảnh khắc bạn bắt đầu, nên hãy chuẩn bị tinh thần xuống ngựa ở mỗi mạch quặng. Gọi thú cưỡi cũng hủy bỏ bất kỳ hình dạng biến hình nào bạn đang giữ: bạn không bao giờ vừa biến hình vừa cưỡi thú cùng lúc.",
-      "speedHeading": "Tốc độ và các bậc",
-      "speedBody": "Tốc độ là điều duy nhất phân biệt thú cưỡi này với thú cưỡi khác. Valorsteed bạn mua từ Marla đặt ra nhịp độ cơ bản, và những thú cưỡi bạn thu thập được ngoài thế giới cưỡi nhanh hơn thế: dây cương càng hiếm, chuyến đi càng nhanh, theo từng bậc rõ ràng chứ không phải trượt dần đều. Không có bậc Cưỡi Ngựa thứ hai để luyện và không có bản nâng cấp nào để mua sau đó. Bạn trả tiền cho Cưỡi Ngựa một lần, và từ đó trở đi, dây cương bạn dùng sẽ quyết định bạn di chuyển nhanh đến đâu.",
+      "speedHeading": "Tốc độ cưỡi và huấn luyện",
+      "speedBody": "Huấn Luyện Cưỡi Cơ Bản giúp di chuyển khi cưỡi nhanh hơn {basicSpeed}%. Huấn Luyện Cưỡi Nâng Cao giúp di chuyển khi cưỡi nhanh hơn {advancedSpeed}% và có giá {advancedFee} vàng tại Marla. Mọi ngoại hình thú cưỡi dùng cùng tốc độ theo bậc huấn luyện của nhân vật, bất kể độ hiếm hay nguồn gốc. Ngoại hình cửa hàng cũng dùng tốc độ huấn luyện đó.",
       "collectHeading": "Những thú cưỡi hiếm hơn đến từ đâu",
       "collectBody": "Ngoài quầy của Marla ra, dây cương là thứ được tìm thấy chứ không phải mua được. Chúng rơi ra từ trùm cuối của các hầm ngục năm người và của raid ở độ khó Anh Hùng, cũng như từ việc hoàn thành Rạn Nứt, nơi Rạn Nứt càng khó thì dây cương nó có thể để lại càng hiếm. Chúng vốn được thiết kế để là những món hiếm, và không lượt chơi nào hứa hẹn chắc chắn sẽ có, nên cách tử tế nhất để săn thú cưỡi là mang cuộc săn ấy theo cùng những lượt chơi bạn vốn đã đi. Trang này sẽ không cho bạn biết thú cưỡi nào treo trên trùm nào: phần đó là để bạn tự khám phá.",
       "raceHeading": "Cuộc đua ở chuồng ngựa",
       "raceBody": "Đường đua vượt chướng ngại trong bãi quây của Marla mở cho bất kỳ ai, bất cứ lúc nào, không chỉ trong giờ học. Ngồi lên một thú cưỡi, đứng trên ô vuông phát sáng sau cổng vòm, và nhấn Bắt Đầu Đua. Một lượt đếm ngược giữ bạn đứng yên, rồi đồng hồ bắt đầu chạy: vượt qua cả bảy chướng ngại và cưỡi trở ra qua cổng vòm trước khi hết giờ.\n\nMột cú nhảy chỉ được tính nếu bạn thực sự ở trên không trung vượt qua thanh chắn, nên chạy xuyên qua dễ dàng sẽ không vượt qua được gì cả. Bạn có thể vượt các chướng ngại theo bất kỳ thứ tự nào và từ bên nào cũng được, và lỡ một cái cũng không phải là ngày tận thế: quay lại và vượt nó lần nữa. Chết, xuống thú, hoặc rời khỏi bãi quây sẽ kết thúc lượt thử, và để đồng hồ chạy hết giờ cũng vậy, việc đó sẽ đặt bạn xuống khỏi yên ngay nơi bạn đứng; tự mình hủy lượt thử chỉ đơn giản là dừng đồng hồ lại. Không gì ngăn được bạn bắt đầu một lượt khác. Không có phí, không thời gian hồi, và không phần thưởng nào ngoài chính thời gian đạt được, và bất kỳ số lượng kỵ sĩ nào cũng có thể chạy đường đua cùng lúc mà không vướng vào nhau.",
       "goodsHeading": "Dây cương là hàng hóa bình thường",
-      "goodsBody": "Thú cưỡi là một vật phẩm, điều đó khiến nó là thứ mà nền kinh tế có thể lưu chuyển. Bạn sở hữu một thú cưỡi chừng nào dây cương của nó còn nằm trong túi đồ hoặc kho két của bạn, dù dây cương cất trong kho két vẫn giữ thú cưỡi là của bạn mà không cho bạn cưỡi nó: để gọi con thú, bạn phải đang mang theo dây cương. Dây cương của người chơi không mang Ràng Buộc Linh Hồn, nên chúng có thể trao đổi, gửi qua thư, và niêm yết trên Chợ Thế Giới như bất kỳ món đồ nào khác tìm được, trừ khi chính vật phẩm đó ghi rõ điều ngược lại. Có hai điều đáng biết trước khi bạn chia tay một con: không thương nhân nào mua lại một bộ dây cương, nên thú cưỡi là một món bạn mua để giữ hoặc nhượng lại chứ không phải để đổi ra tiền, và nếu dây cương rời khỏi cả túi đồ lẫn kho két của bạn trong lúc bạn đang cưỡi, bị trao đổi đi, gửi qua thư, hay bán trên chợ, thú cưỡi sẽ đi theo chúng và bạn bị đặt xuống ngay nơi bạn đang đứng."
+      "goodsBody": "Ngoại hình thú cưỡi sưu tầm vẫn dùng được trên toàn tài khoản khi còn ít nhất một vật phẩm dây cương tương ứng trong túi hoặc ngân hàng cá nhân của bất kỳ nhân vật nào. Trao đổi, gửi thư, đăng bán, bán hoặc loại bỏ vật phẩm đủ điều kiện cuối cùng sẽ xóa ngoại hình khỏi Mỹ phẩm. Người đang cưỡi ngoại hình đó sẽ trở về ngoại hình ngựa mặc định và vẫn cưỡi ở tốc độ đã huấn luyện.\n\nDây cương của người chơi có thể trao đổi, gửi thư và đăng trên Chợ Thế Giới trừ khi vật phẩm ghi khác. Dây cương ngựa cũng có thể bán cho thương nhân với giá 10 vàng. Dây cương khác vẫn giữ giới hạn bán riêng của vật phẩm. Ngoại hình thú cưỡi cửa hàng vẫn là mỹ phẩm tài khoản, độc lập với vật phẩm dây cương."
     },
     "worldPage": {
       "heading": "Thế giới",
@@ -10300,7 +10276,7 @@ export const vi_VN: EnTranslations = {
       "heroicRewardsBody": "Trùm anh hùng rơi ra chiến lợi phẩm bạn đã biết, được nâng cấp và ghi Anh Hùng trên chú giải, còn trùm cuối của mỗi lượt chạy thêm vào những món sử thi không tìm được ở đâu khác. Cú hạ cuối cùng ấy cũng để lại Huy Hiệu Anh Hùng cho mọi người tham gia: một loại tiền tiêu ở chỗ Quản Nhu Vex tại Highwatch, mà quầy của ông ta là một giá đầy nhẫn và mặt dây chuyền mà không gì ngoài bằng chứng từ những tầng sâu anh hùng mua nổi.",
       "heroicLockoutBody": "Hầm ngục thường có thể chạy cả ngày. Anh hùng đòi kiên nhẫn: cú hạ trùm cuối giới hạn mọi người trong lượt chạy chỉ được một lần dọn sạch anh hùng hầm ngục đó mỗi ngày, và trận đột kích giữ một khóa hằng ngày cho từng độ khó. Trên một máy chủ trực tuyến, mọi khóa hằng ngày đều rơi cùng nhau vào giờ đặt lại ban đêm của chính máy chủ ấy, nên một lượt dọn sạch lấy ngay trước giờ đó và một lượt lấy ngay sau đó rơi vào hai ngày khác nhau; còn nếu chơi ngoại tuyến trong trình duyệt thì một khóa đơn giản hết hạn một ngày sau cú hạ trùm của chính bạn. Một lượt chạy năm người đã dọn xong vẫn mở cho chính nhóm ấy để chạy xác và lấy đồ, nên không ai bị khóa khỏi thứ mình đã giành được ở đó. Trận đột kích khắt khe hơn: một khi cú hạ của nó đã khóa bạn, cánh cửa đóng lại cho tới lần đặt lại, và lối duy nhất trở vào là một lượt chạy xác của người đã ngã xuống đúng trong lượt chạy đã khóa họ, nên một người đột kích còn sống mà bước ra là đã bước ra cho cả ngày. Hãy nhặt hết chiến lợi phẩm trước khi rời đấu trường. Mỗi khóa trong số này thuộc về nhân vật đã giành được nó, nên một lượt dọn sạch trên nhân vật chính để các nhân vật khác của bạn được tự do.",
       "resetTitle": "Đặt lại phụ bản của bạn",
-      "resetBody": "Hãy đổi độ khó khi nhóm bạn vẫn đang giữ những lượt chạy đã nhận, và các lượt nhận cũ còn nấn ná một lúc trước khi tự buông. Nhóm trưởng có thể buông hết ngay lập tức thay vì vậy: chọn Đặt Lại Mọi Thực Thể trong trình đơn chân dung của chính mình, hoặc gõ /dungeon reset. Việc đặt lại chỉ hiệu nghiệm sau khi độ khó đã thực sự đổi, chỉ khi không còn ai, còn sống hay đã ngã, ở bên trong, chỉ khi mọi cái xác trong đó đã bị nhặt sạch, và một thời gian hồi ngắn ngăn cách lần đặt lại này với lần kế tiếp. Đến cửa với sai độ khó thì trò chơi sẽ báo trước khi lượt chạy bắt đầu. Trận đột kích không bao giờ được đặt lại theo cách này; luật khóa của riêng nó vẫn giữ nguyên.",
+      "resetBody": "Các phụ bản trống đã được giữ sẽ tồn tại một lúc trước khi tự giải phóng. Trưởng nhóm có thể giải phóng ngay: chọn Đặt Lại Mọi Phụ Bản trong trình đơn chân dung của mình, hoặc nhập /dungeon reset, và lượt tiếp theo sẽ bắt đầu lại từ đầu ở độ khó hiện tại. Đổi độ khó cũng giải phóng các phụ bản ở độ khó cũ. Chỉ có thể đặt lại khi không còn ai, dù sống hay đã ngã, ở bên trong và mọi xác đều đã được nhặt sạch chiến lợi phẩm. Đặt lại không bao giờ rút ngắn khóa lượt: phụ bản Anh Hùng hoặc đột kích đã khóa vẫn khóa đến giờ đặt lại của nó, và có thời gian hồi ngắn giữa các lần đặt lại. Nếu đến cửa với độ khó sai, trò chơi sẽ thông báo trước khi bắt đầu. Đột kích đặt lại theo cùng cách, vẫn giữ các quy tắc khóa lượt và trở về xác riêng. Đột kích đổi cấp độ sẽ bỏ qua thời gian hồi: nếu chọn sai cấp hoặc không vượt được Anh Hùng thì có thể đổi lại ngay, vì khóa lượt riêng đã giới hạn việc chạy lại.",
       "templeLoreTitle": "Ngôi Đền Chết Chìm, sâu hơn một chút",
       "templeLoreBody": "Ngôi đền có truyền thuyết riêng của nó, cổ xưa hơn cả giáo phái bạn đuổi theo ở nơi khác. Bên bờ Hồ Lung Linh, một hồ băng uống ánh trăng và trả lại những kẻ chết chìm, một người canh gác cô độc giữ một cánh cổng ánh sáng nhợt nhạt. Bên dưới mặt nước, một bậc thang đá lạnh chạy xuống đó. Những kẻ chìm xuống nơi ấy không chết chìm vì tai nạn: họ là Dàn Đồng Ca Nhợt Nhạt, những kẻ chìm xuống trong sự thờ phụng và không bao giờ ngừng ca hát. Những người canh giữ xưa cào một lời cảnh báo duy nhất lên đá trước khi nước nuốt lấy họ, một lời cầu nguyện gửi đến thứ họ gọi là Mặt Trăng Chết Chìm, với một bàn tay vững vàng hơn thêm hai chữ bên dưới: nó chỉ đang ngủ.",
       "cryptLeadTitle": "Một cánh cửa mà người chết được giao nhiệm vụ giữ kín",
@@ -11280,7 +11256,7 @@ export const vi_VN: EnTranslations = {
       "prestigeBody": "Kinh nghiệm vẫn tiếp tục được tính ngay cả sau khi đạt giới hạn. Nó nuôi một cấp độ ảo mang tính trang trí, nên thanh kinh nghiệm của bạn vẫn cứ leo lên, cùng một hạng uy danh dài hạn bạn có thể nhận từ bảng nhân vật một khi đã tới đó. Vượt qua những cột mốc kinh nghiệm trọn đời lớn còn mang về những kỳ công trong Sách Kỳ Công của bạn, kèm những danh hiệu trang trí và viền bảng tên hiển thị trên bảng nhân vật. Tất cả hoàn toàn tùy chọn và không bao giờ ban sức mạnh, chỉ là dấu ấn của con đường bạn đã đi qua.",
       "noRush": "Không cần vội. Thế giới ở đó để bạn tận hưởng theo nhịp độ của riêng mình, vậy nên hãy lang thang, nhận những nhiệm vụ thu hút bạn, và để anh hùng của mình trưởng thành dọc đường đi.",
       "ridingTitle": "Học cưỡi ngựa",
-      "ridingBody": "Cưỡi Ngựa là một trong những thứ đang chờ ở cuối chặng leo dốc đó. Ở cấp {level}, một Quản Mã sẽ dạy bạn kỹ năng này với một khoản tiền vàng không nhỏ, và một bài học trên đường đua huấn luyện sẽ mang lại cho bạn bộ dây cương đầu tiên. Thú cưỡi không ban cho bạn chút sức mạnh nào cả; nó chỉ đơn giản làm thế giới nhỏ lại, và sau một chặng đường dài về phương bắc, đó tự nó đã là một phần thưởng."
+      "ridingBody": "Ở cấp {level}, Quản Chuồng Marla dạy cưỡi cơ bản bằng vàng và cung cấp bậc nâng cao sau đó. Huấn luyện quyết định tốc độ khi cưỡi. Chọn ngoại hình trong Mỹ phẩm; ngoại hình sưu tầm được chia sẻ khi dây cương còn trong túi hoặc ngân hàng của bất kỳ nhân vật nào."
     },
     "placeholder": {
       "note": "Phần này của cẩm nang đang được hoàn thiện."
@@ -16384,6 +16360,8 @@ export const vi_VN: EnTranslations = {
       "temple_moonwater_bolt": "Tia Nước Trăng",
       "temple_drowning_aria": "Khúc Ca Chết Đuối",
       "temple_mere_surge": "Hồ Dâng",
+      "temple_score": "Bản Nhạc",
+      "temple_score_answer": "Đáp Lại Bản Nhạc",
       "temple_tideglass_fracture": "Kính Triều Rạn Vỡ",
       "temple_undertow": "Dòng Nước Ngầm",
       "temple_lunar_tide": "Triều Trăng",
@@ -16421,6 +16399,12 @@ export const vi_VN: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Ngấu Nghiến",
       "wildheart_zulgar_pulse": "Nhịp Tim Hoang Dã",
       "wildheart_zulgar_spirit_hunt": "Linh Hồn Cuộc Săn",
+      "wildheart_zulgar_hunting_spear": "Giáo Săn",
+      "wildheart_zulgar_idol_wakes": "Tượng Thần Thức Giấc",
+      "kituse_wildheart_pull_spear": "Rút Giáo",
+      "wildheart_idols_breath": "Hơi Thở Tượng Thần",
+      "wildheart_sun_glyph_kindle": "Đang thắp",
+      "wildheart_sun_glyph_cold": "Đang nguội",
       "sanctum_cinder_breath": "Hơi Thở Tro Hồng",
       "sanctum_warming_rite": "Nghi Lễ Sưởi Ấm",
       "sanctum_goad": "Chọc Tức",
@@ -17053,6 +17037,9 @@ export const vi_VN: EnTranslations = {
       "levelClass": "{className} cấp {level}"
     },
     "vendor": {
+      "basicRiding": "Huấn Luyện Cưỡi",
+      "advancedRiding": "Huấn Luyện Cưỡi Nâng Cao",
+      "ridingSpeed": "Tăng tốc độ di chuyển khi cưỡi thêm {speed}%. Áp dụng cho mọi thú cưỡi.",
       "goodsTitle": "{name}: Hàng Hóa",
       "close": "Đóng cửa hàng",
       "hint": "Nhấp vào một vật phẩm trong túi để bán khi cửa sổ này đang mở.",
@@ -17263,7 +17250,8 @@ export const vi_VN: EnTranslations = {
       "tooManyOrders": "Bạn có thể giữ tối đa {count} đơn hàng mở cùng lúc.",
       "orderClosed": "Đơn hàng đó không còn mở nữa.",
       "orderOwn": "Đó là đơn hàng của bạn. Hủy nó để rút lại.",
-      "orderNotYours": "Đó không phải là đơn hàng của bạn."
+      "orderNotYours": "Đó không phải là đơn hàng của bạn.",
+      "orderTrackedItem": "Thương Nhân không nhận đặt hàng trang bị độc nhất."
     },
     "loot": {
       "takeAll": "Lấy Tất Cả",
@@ -21189,117 +21177,6 @@ export const vi_VN: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Đá Từ Trần"
-      },
-      "whistle_ember_fox": {
-        "name": "Còi Cáo Than Hồng"
-      },
-      "whistle_moss_hare": {
-        "name": "Còi Thỏ Rêu"
-      },
-      "whistle_frog": {
-        "name": "Còi Ếch"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Còi Cua Càng Đỏ Thẫm"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Còi Vệ Binh Vàng"
-      },
-      "whistle_nightfang": {
-        "name": "Còi Nanh Đêm"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Còi Lợn Rừng Nanh Sừng"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Còi Sói Lục Bảo"
-      },
-      "whistle_tiger": {
-        "name": "Còi Hổ"
-      },
-      "whistle_cate_coin": {
-        "name": "Còi Xu Cate"
-      },
-      "whistle_alon": {
-        "name": "Còi Alon"
-      },
-      "whistle_trollface": {
-        "name": "Còi Mặt Cười Troll"
-      },
-      "whistle_ansem": {
-        "name": "Còi Ansem"
-      },
-      "whistle_triple_t": {
-        "name": "Còi Bộ Ba T"
-      },
-      "whistle_kekius": {
-        "name": "Còi Kekius"
-      },
-      "whistle_solbot": {
-        "name": "Còi Rô-bốt Mặt Trời"
-      },
-      "whistle_frostfire": {
-        "name": "Còi Lửa Băng"
-      },
-      "whistle_rocky": {
-        "name": "Còi Đá Nhỏ"
-      },
-      "whistle_proud_grunt": {
-        "name": "Còi Binh Nhì Kiêu Hãnh"
-      },
-      "whistle_loot_goblin": {
-        "name": "Còi Yêu Tinh Nhặt Đồ"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Còi Penny Tia Vàng"
-      },
-      "whistle_stag": {
-        "name": "Còi Hươu Đực"
-      },
-      "whistle_alpaca": {
-        "name": "Còi Lạc Đà Alpaca"
-      },
-      "whistle_horse": {
-        "name": "Còi Ngựa"
-      },
-      "whistle_sapling": {
-        "name": "Còi Cây Non"
-      },
-      "whistle_bull": {
-        "name": "Còi Bò Đực"
-      },
-      "whistle_spider": {
-        "name": "Còi Nhện"
-      },
-      "whistle_raptor": {
-        "name": "Còi Khủng Long Raptor"
-      },
-      "whistle_skeleton": {
-        "name": "Còi Bộ Xương"
-      },
-      "whistle_crystal_lich": {
-        "name": "Còi Lich Pha Lê"
-      },
-      "whistle_forgemaw": {
-        "name": "Còi Hàm Lò Nóng Chảy"
-      },
-      "whistle_sprites": {
-        "name": "Còi Chập Chờn Và Lung Linh"
-      },
-      "whistle_crystal_tide": {
-        "name": "Còi Triều Pha Lê"
-      },
-      "whistle_phantom": {
-        "name": "Còi Bóng Ma"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Còi Phượng Hoàng Emberfall"
-      },
-      "charm_stag_acorn": {
-        "name": "Bùa Vương Miện Hạt Sồi"
-      },
-      "charm_stag_gilded": {
-        "name": "Bùa Dát Vàng"
       },
       "lastflame_core": {
         "name": "Lõi Ngọn Lửa Cuối Cùng"
@@ -26340,6 +26217,9 @@ export const vi_VN: EnTranslations = {
       "thorn_sprout": {
         "name": "Chồi Gai"
       },
+      "wildheart_hunting_spear": {
+        "name": "Giáo Săn"
+      },
       "buddy_ember_fox": {
         "name": "Cáo Than Hồng"
       },
@@ -26414,9 +26294,6 @@ export const vi_VN: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, Chiến Mã"
-      },
-      "buddy_sapling": {
-        "name": "Cây Non"
       },
       "buddy_bull": {
         "name": "Bò Đực"

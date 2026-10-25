@@ -13,6 +13,41 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const ja_JP: Partial<Record<TranslationKey, string>> = {
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    '{every}秒ごとに{cast}秒詠唱し、{radius}ヤード以内の全員に{min}から{max}ダメージ。串刺しのプレイヤーは距離に関係なく{pinMult}倍のダメージを受ける。',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    '{cast}秒の詠唱でタンク以外の一人を串刺しにする。他に誰もいなければタンクを狙う。最大{seconds}秒間移動不能になり、{tick}秒ごとに{bleed}ダメージを受ける。',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    '槍を選び、{range}ヤード以内で調べると{pull}秒で引き抜ける。ダメージでは中断されない。広場に他の自由な仲間がいなければ、本人が調べて{self}秒で脱出できる。',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    '{count}個の紋様は最初は消えている。狩りの間、獲物でないプレイヤーが{kindle}秒立つと点灯する。獲物以外がいなければ獲物が{alone}秒で点灯できる。離れると進行はリセット。点灯した紋様を彼が通ると{seconds}秒間、移動速度が{slow}低下し、被ダメージが{vulnerability}増える。紋様は{dark}秒間再点灯できず、彼は{wary}秒間ほかの紋様に打たれない。狩りの間、スタン時間は半分になる。',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    '獲物でない仲間が進路の先の紋様を点灯させる。そこへ誘導し、日光に打たれている間に攻撃する。狩りが終わると紋様は消える。',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    '体力が{health}になると、倒されるまでジャガーの霊体を保つ。タンクも獲物に選ばれる。',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    '{every}秒ごとに新しい獲物を選び、{turn}秒間そちらを向いてから追い始める。',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    '{pair}秒ごとに新しい二人を獲物に選び、{switch}秒ごとに追う相手を切り替える。切り替え後、新しい獲物には{turn}秒の猶予がある。',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    '{every}秒ごとに広場の半分を{warning}秒間予告し、その範囲の全員に{min}から{max}の自然ダメージ。左右交互に放つ。',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    '予告が終わる前に印のない半分へ移動する。中央線は安全。ヒロイックでは吐息がその半分の点灯した紋様も消すが、すぐ点灯し直せる。',
+  'bossJournal.temple.selthe.overviewRework':
+    'セルセは移動も近接攻撃もしない。合唱では集まり、独唱では離れ、溺水のアリアを中断し、湖の波を避ける。二度の体力段階で月の床板の旋律を交代で再現する。',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    '一行が楽譜に応える間、ほかの攻撃は止まる。月水の矢には詠唱バーがなく、中断できない。',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'ほかの詠唱の合間に{every}秒ごとに矢が着弾する。{windup}秒前に見た目の予告があり、武器ダメージの{mult}倍を冷気として与える。溺水のアリアを中断すると矢とアリアが{quiet}秒止まる。',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'タンクを彼女の視界内に置く。中断技は溺水のアリアに使う。',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'アリアの標的と合唱を一人で受ける仲間に注意。楽譜では次の音を歌うのを手伝い、失敗の傷を癒す。',
+  'bossJournal.temple.selthe.scoreSummary':
+    '体力{first}と{second}で無敵になり、順に{notes}音と{finalNotes}音の旋律を奏でる。それぞれ{answer}秒と{finalAnswer}秒以内に再現する。誤った床板は{falseNote}の冷気ダメージを与え、進行だけをリセットする。時間切れは全員に{min}から{max}の冷気ダメージ。成功すると{stun}秒スタンし、同時に{bonusSeconds}秒間被ダメージが{vulnerability}増える。',
+  'bossJournal.temple.selthe.scoreResponse':
+    '旋律を見てから床板に順番に入る。生存する別の仲間と正しい音を交代で鳴らす。一人だけ生存していれば単独で完了できる。阻止された踏み込みは無害。答え始める前から立っていた床板も、一度離れて入り直して鳴らす。',
+  'bossJournal.temple.selthe.scoreHeroic': '答える間は床板が暗くなる。旋律を覚えて交代で鳴らす。',
   'auth.wocBuilder.cat.skinTone': '肌の色',
   'auth.wocBuilder.slider.eyeSize': '目の大きさ',
   'hudChrome.raidBossGuide.damageRange': '{min}から{max}',
@@ -349,9 +384,26 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.courier.select': '{item}、{count}を選択',
   'hudChrome.courier.selectedItem': '{item}、{count}の選択を解除',
   'hudChrome.courier.instructions':
-    'スタック全体を選択してください。配達員は預け入れた後、指定したアイテムを引き出します。クエストアイテムは送れません。',
+    '自分の銀行、保管庫、またはほかのキャラクター向けにスタック全体を選択してください。配達員は先に預け入れ、その後で指定のアイテムを引き出します。クエストアイテムは送れません。',
   'hudChrome.courier.membership': '次の配達にはメンバーシップの更新が必要です。',
   'hudChrome.courier.unavailable': '配達員を召喚して配達を計画しましょう。',
+  'hudChrome.courier.bagsVault': '素材を保管庫へ送る',
+  'hudChrome.courier.vault': '保管庫から取り出す。選んだ行はまるごと持ち帰ります。',
+  'hudChrome.courier.vaultTitle': '保管庫',
+  'hudChrome.courier.storeTabs': '配達員の保管先',
+  'hudChrome.courier.vaultCap': '各素材は最大{cap}個まで',
+  'hudChrome.courier.vaultEmpty': '保管庫は空です。',
+  'hudChrome.courier.vaultLocked': '配達員で使うには、銀行員のところで保管庫を解放してください。',
+  'hudChrome.courier.boundBank': '銀行へ送る予定',
+  'hudChrome.courier.boundVault': '保管庫へ送る予定',
+  'hudChrome.courier.boundAccount': 'ほかのキャラクターの銀行へ送る予定',
+  'hudChrome.courier.accountTitle': 'ほかのキャラクター',
+  'hudChrome.courier.accountBank':
+    'この銀行から取り出す。配達員の到着時、そのキャラクターはログアウトしている必要があります。',
+  'hudChrome.courier.bagsAccount': '{name}の銀行へ送る',
+  'hudChrome.courier.bagsAccountNone': 'アイテムを送るキャラクターを選んでください。',
+  'hudChrome.courier.accountPlanned':
+    '{name}向けに{count}スタックを予定中。別のキャラクター向けに選ぶと置き換わります。',
   'entities.abilities.courier.name': '配達員',
   // Membership additions: same-change non-Latin coverage (M16).
   'hudChrome.wocStore.subscription.benefitsTitle': '有効なメンバーシップの特典',
@@ -766,6 +818,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.reliquary.sourceActivityBuriedHoard':
     '宝の地図が導く「埋もれた財宝」の報酬の宝箱から手に入る',
   'hudChrome.reliquary.sourceActivityLanternHall': '燈火の館の補給係から燈火の印章で購入',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': '週間宝物庫のPvP枠から選んで手に入る',
   'clues.hunt_drakelands_gate_ashes.reply.1':
     '風は東の砂丘から灰を運んできた。何もない砂から灰は飛んでこない。駐屯地の倉庫のセラが巡回をすべて記録している。誰かが食べ物を持っていけば話してくれるだろう。',
   'clues.hunt_drakelands_gate_ashes.reply.2':
@@ -1293,6 +1346,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'itemUi.errors.orderClosed': 'その注文はもう受け付けていません。',
   'itemUi.errors.orderCountNeeded': '欲しい数量を指定してください。',
   'itemUi.errors.orderNotYours': 'それはあなたの注文ではありません。',
+  'itemUi.errors.orderTrackedItem': '商人は一点物の装備の注文を受け付けません。',
   'itemUi.errors.orderOwn': 'それは自分の注文です。キャンセルすると回収できます。',
   'itemUi.errors.tooManyOrders': '同時に出せる注文は最大{count}件です。',
   'itemUi.logs.orderDelivered':
@@ -3503,6 +3557,10 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.lootSettings.menuItem': '分配設定',
   'hudChrome.dungeonDifficulty.setHeroic': 'ダンジョン難易度をヒロイックに設定',
   'hudChrome.dungeonDifficulty.setNormal': 'ダンジョン難易度をノーマルに設定',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'ヒロイックを選択中です。現在のインスタンスはまだノーマルです。',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'ノーマルを選択中です。現在のインスタンスはまだヒロイックです。',
   'hudChrome.dungeonDifficulty.resetAll': 'すべてのインスタンスをリセット',
   'hudChrome.dungeonDifficulty.resetDone': 'すべてのインスタンスをリセットしました。',
   'hudChrome.dungeonDifficulty.resetNone': 'リセットできるインスタンスがありません。',
@@ -3514,13 +3572,15 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'パーティーまたはリーダーが変更されたため、予約していた難易度の変更をキャンセルしました。',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'インスタンスをリセットする前にダンジョン難易度を変更してください。空のインスタンスは5分後に自動的にリセットされます。',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'インスタンスはすでにリセット済みです。前回のリセット以降、誰も入っていません。',
   'hudChrome.dungeonDifficulty.resetUsage':
-    '難易度を変更した後、/dungeon reset で空のインスタンスを放棄できます。',
+    '/dungeon reset で空のインスタンスを放棄し、最初から始められます。',
   'hudChrome.dungeonDifficulty.resetLoot':
     '中に戦利品が残っている間はインスタンスをリセットできません。',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'すべてのインスタンスをリセットしますか？',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    '以前選択していた難易度の空のインスタンスを放棄します。未取得の戦利品がある場合はリセットできません。',
+    '空のインスタンスを放棄し、次の攻略を選択した難易度で最初から始めます。ロックアウトは変わりません。中に誰かが残っている場合や未取得の戦利品がある場合はリセットできません。',
   'hudChrome.dungeonDifficulty.resetConfirm': 'インスタンスをリセット',
   'hudChrome.dungeonDifficulty.resetCooldown': 'インスタンスをリセットできるのは5分に1回だけです。',
   'hudChrome.dungeonDifficulty.entryMismatchNormal':
@@ -9788,7 +9848,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '沼地の道から外れた場所に沈む祠。好奇心旺盛で、しっかり備えた者のための寄り道です。',
   'guide.dungeonsPage.sanctumName': '墓守竜の聖域',
   'guide.dungeonsPage.resetBody':
-    'パーティがまだ確保した周回を抱えたまま難易度を切り替えると、古い確保はしばらく居座ってから自然に解けます。パーティリーダーは代わりに一度に手放せます。自分の肖像メニューから「すべてのインスタンスをリセット」を選ぶか、/dungeon reset と入力してください。リセットが働くのは、難易度が実際に変更された後だけ、中に誰も、生者も倒れた者も残っていない間だけ、そして中の亡骸がすべて拾い尽くされた後だけで、リセットの間には短いクールダウンが挟まります。誤った難易度で扉に着けば、周回が始まる前にゲームが知らせます。レイドはこのやり方では決してリセットされません。レイド自身のロックアウト規則が働きます。',
+    '確保した空のインスタンスはしばらく残り、その後自然に解放されます。パーティリーダーは自分の肖像メニューから「すべてのインスタンスをリセット」を選ぶか、/dungeon reset と入力してすぐに解放できます。次の攻略は現在の難易度で最初から始まります。難易度の変更でも以前の難易度のインスタンスが解放されます。リセットには、生者も倒れた者も中に残っておらず、すべての亡骸から戦利品を回収済みであることが必要です。ロックアウトは短縮されません。ロック中のヒロイックやレイドはその解除までロックされたままで、リセットの間には短いクールダウンがあります。誤った難易度で入口に着くと攻略前に通知されます。レイドも同様にリセットでき、固有のロックアウトと亡骸への帰還の規則は引き続き適用されます。レイドの難易度変更ではクールダウンが省かれるため、難易度を間違えたりヒロイックで行き詰まったりした場合はすぐに戻せます。再挑戦を制限するのはレイド自体のロックアウトです。',
   'guide.dungeonsPage.resetTitle': 'インスタンスのリセット',
   'guide.dungeonsPage.sanctumBody':
     'ソーンピークの高みに隠された氷河。一頭の竜が氷の中に囚われ、カルトは盗んだ魂を燃やしてその氷を解かそうとしている。高い峠から氷の塔、鍛冶神の砕けた鎖、カルトの炎を越えて、氷河の麓の凍った湖へと下っていきます。',
@@ -14448,9 +14508,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '鞍を着けられるよう馴らされた大きな青いスライム。歩く代わりに跳ねて進み、乗り手の下でぷるぷると揺れ、体の中を泡がゆっくり昇っていく。',
   'hudChrome.mounts.name_terrorspark_groundshaker': '地揺らしのドレッドスパーク',
   'hudChrome.mounts.name_rickshaw_mount': '骨縛りの人力車',
-  'hudChrome.mounts.desc_valorsteed': '頑健で足取り確かな駿馬。移動速度を高める。',
-  'hudChrome.mounts.desc_grag_bear': '頑健で足取り確かな熊。移動速度を高める。',
-  'hudChrome.mounts.desc_stalkglider_snail': '粘り強くゆっくり燃えるカタツムリ。移動速度を高める。',
+  'hudChrome.mounts.desc_valorsteed': '革の鞍を備えた、丈夫で足取りの確かな馬。',
+  'hudChrome.mounts.desc_grag_bear': '重厚な鞍を備えた、丈夫で足取りの確かな熊。',
+  'hudChrome.mounts.desc_stalkglider_snail': '苔むした殻を背負った、粘り強くたくましいカタツムリ。',
   'hudChrome.mounts.desc_aether_hover_cycle':
     '低空ホバーで戦場を駆け抜けるために設計された強力な魔導バイク。',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -14471,8 +14531,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.clickManage': 'クリックしてマウントを選択',
   'hudChrome.mountTraining.mountPrompt': '{key} キーを押して訓練用ヴァロースティードに騎乗する。',
   'hudChrome.mountTraining.ownedMountPrompt':
-    '手綱はバッグの中にあります。使用すると騎乗できます。',
-  'hudChrome.mounts.useToRide': '使用してこの騎乗生物を呼び出します。',
+    '外見メニューでマウントを選び、騎乗／降りる操作で乗りましょう。',
+  'hudChrome.mounts.useToRide':
+    '使用するとこの外見を適用してマウントを召喚します。いずれかのキャラクターのバッグまたは銀行にこのアイテムを保管すると、アカウント内の全キャラクターが外見を使えます。速度は騎乗訓練で決まります。',
   'hudChrome.mountTraining.ridePrompt':
     '光る目印をたどってスタートラインへ向かい、「レース開始」を押そう。',
   'hudChrome.mountTraining.begin': 'レッスン開始',
@@ -16696,6 +16757,21 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'このアイテムはあと{time}の間、同じドロップを分かち合ったプレイヤーと取引できます。装備すると取引期間は終了します。',
   'hudChrome.itemTooltip.perfectedBadge': '完全化済み',
   'hudChrome.itemTooltip.perfectingRank': '完全化：ランク{rank}／{ranks}',
+  'hudChrome.itemTooltip.lootedBy': '{date} に {name} が獲得',
+  'hudChrome.itemTooltip.questRewardTo': '{date} に {name} がクエスト報酬として入手',
+  'hudChrome.itemTooltip.obtainedBy': '{date} に {name} が入手',
+  'hudChrome.itemMenu.itemHistory': 'アイテム履歴',
+  'hudChrome.itemHistory.title': '{item}：履歴',
+  'hudChrome.itemHistory.passedTo': '{date} に {name} へ譲渡',
+  'hudChrome.itemHistory.noTransfers': 'このアイテムは一度も持ち主が変わっていません。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': 'それ以前の {count} 件の譲渡は表示されません。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few': 'それ以前の {count} 件の譲渡は表示されません。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many':
+    'それ以前の {count} 件の譲渡は表示されません。',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other':
+    'それ以前の {count} 件の譲渡は表示されません。',
+  'hudChrome.itemHistory.close': '閉じる',
+  'hudChrome.itemHistory.openAria': '{item}のアイテム履歴',
   'devCommand.actions.kit.description':
     '指定したスペック向けのSanctum以前レベル20プリセットを装備します (バッグを先に)。装備品のみです。',
   'devCommand.actions.kit.label': '新規20キットを装備',
@@ -17179,6 +17255,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.actionCamShoulderLeft': '左 {pct}',
   'hudChrome.options.actionCamShoulderRight': '右 {pct}',
   'hudChrome.options.actionCamShoulderCenter': '中央',
+  'hudChrome.options.firstPersonMode': '一人称視点（最大ズーム時）',
   'hudChrome.breath.label': '息',
   'hudChrome.breath.drowning': '溺れています！',
   'abilityUi.resources.devotion': '献身',
@@ -17709,7 +17786,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': '働き',
   'guide.commandsPage.dungeonMode': 'ダンジョンの難易度をノーマルとヒロイックで切り替えます。',
   'guide.commandsPage.dungeonReset':
-    '誰も残っていない自分のインスタンスを破棄します。難易度を変えた後にすることです。',
+    '自分の空のインスタンスを放棄し、次の攻略を同じ難易度または新しい難易度で最初から始めます。',
   'guide.commandsPage.dungeons':
     'すべてのダンジョンを、扉のある地方と想定パーティ人数つきで一覧し、今設定している難易度もあわせて表示します。',
   'guide.commandsPage.emotesBody':
@@ -18155,28 +18232,28 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'マーラのカウンターの先では、手綱は買うものではなく見つけるものです。5人用ダンジョンとレイドのヒロイックの最終ボス、そしてリフトの攻略から出てきます。リフトは難しいものを終えるほど、残していく手綱も稀少になります。設計上どれも珍しい掘り出し物で、一度の攻略が必ず一つを約束するわけではありません。ですからマウント探しの穏やかなやり方は、もともと行くつもりだった攻略に、その狩りを重ねることです。どのマウントがどのボスに掛かっているかは、このページでは明かしません。そこはあなた自身が突き止めるところです。',
   'guide.mountsPage.collectHeading': '稀少なマウントの出どころ',
   'guide.mountsPage.firstBody':
-    'この世界のどこかで売られているマウントは、ヴァロースティードただ一頭です。騎乗を習得すれば、マーラが10ゴールドでヴァロースティードの手綱を売ってくれます。その手綱はずっとあなたのものです。ほかのマウントはすべて世界のどこかで勝ち取るものなので、ほとんどの騎手はこの馬から始まります。',
+    '騎乗を学ぶと、マーラからヴァロースティードの手綱を10ゴールドで買えます。手綱を保有すると、外見メニューでアカウント内の全キャラクターに馬の外見が解放されます。騎乗訓練を受けていれば手綱を持ち歩かずに召喚できるので、見た目を変えたいときに馬や他の保有済み外見を選びましょう。',
   'guide.mountsPage.firstHeading': '最初のマウント',
   'guide.mountsPage.goodsBody':
-    'マウントはアイテムですから、経済の中で動かせるものでもあります。手綱がバッグか銀行にある限り、そのマウントはあなたのものです。ただし銀行に預けた手綱は、所有こそ保ちますが乗ることは許してくれません。獣を呼ぶには、手綱を持ち歩いている必要があります。プレイヤー向けの手綱には魂縛がないので、アイテム自体に断りがない限り、ほかの掘り出し物と同じように取引でき、郵送でき、世界市場に出品できます。手放す前に知っておきたいことが二つあります。手綱を買い戻してくれる商人はどこにもいないので、マウントは換金するものではなく、持ち続けるか誰かに譲るものだということ。そして騎乗している最中に手綱が手を離れれば、マウントもそれとともに去り、あなたはその場に降ろされるということです。',
+    'いずれかのキャラクターのバッグまたは個人銀行に対応する手綱が1つ以上ある間、収集したマウント外見はアカウント全体で使えます。最後の対象アイテムを取引、郵送、出品、売却などで手放すと、外見メニューから消えます。使用中の騎乗者は標準の馬の外見に戻り、訓練に応じた速度で騎乗を続けます。\n\nアイテムに別の制限がなければ、手綱は取引、郵送、ワールドマーケットへの出品が可能です。馬の手綱は商人に10ゴールドで売ることもできます。他の手綱にはそれぞれの売却制限が残ります。ストアのマウントスキンは手綱アイテムとは独立したアカウント外見です。',
   'guide.mountsPage.goodsHeading': '手綱はふつうの品物',
   'guide.mountsPage.heading': 'マウントと騎乗',
   'guide.mountsPage.intro':
-    'マウントは世界を速く渡るための手段で、それ以上のものではありません。厩舎で乗り方を習い、最初の手綱を買えば、その後の道はどれも短くなります。',
+    'マウントの外見を選び、厩舎で騎乗を学んで、世界をより速く移動しましょう。速度は訓練で決まり、どのマウントも外見だけを変えます。',
   'guide.mountsPage.learnBody':
-    '騎乗は一度買えば身につくスキルで、レベル{level}で開きます。厩舎長マーラ・ヒッチェンは丘陵に出たゲイルクレストの厩舎を守っており、騎乗訓練を80ゴールドで売っています。この一度の買い物こそが、そもそもマウントにまたがるための条件であり、以後ずっとあなたのもとに残ります。\n\n習得すると、マーラがクエストを用意してくれます。「乗馬の稽古」です。受注してマーカーをたどり、スタートアーチの後ろにある光る区画へ立ち、「レース開始」を押しましょう。稽古のあいだは訓練用のヴァロースティードを貸してくれるので、レッスンそのものにお金はかかりません。コースを走り、走りきったら彼女のもとへ戻って、お金と経験値を受け取ります。借りた馬はそのあと厩へ戻るので、この稽古が授けてくれるのは馬ではなく、鞍の上での身のこなしです。',
+    'レベル{level}で騎乗を学べます。厩舎長マーラ・ヒッチェンはゲイルクレスト厩舎で騎乗訓練を80ゴールドで販売しています。基礎訓練で騎乗中の移動速度が{basicSpeed}%上がります。習得後は上級騎乗訓練を{advancedFee}ゴールドで購入でき、騎乗中の移動速度上昇が{advancedSpeed}%になります。各ランクは習得したキャラクターだけに適用されます。\n\n基礎騎乗の習得後、マーラの騎乗レッスンのクエストを受け、目印に従ってスタートのアーチの後ろにある光る区画へ進みましょう。レース開始を押すと訓練用のヴァロースティードを借りられます。コースを完走して戻り、報酬のゴールドと経験値を受け取りましょう。レッスンが終わると借りた馬は厩舎に戻ります。',
   'guide.mountsPage.learnHeading': '騎乗を習う',
   'guide.mountsPage.raceBody':
     'マーラのパドックにある障害飛越コースは、稽古の最中だけでなく、いつでも誰にでも開かれています。マウントにまたがり、アーチの後ろの光る区画に立ち、「レース開始」を押しましょう。カウントダウンの間はその場に留められ、そのあと時計が動き出します。7つの障害をすべて跳び越え、時間が尽きる前にアーチをくぐって戻ってきてください。\n\n障害が数えられるのは、本当にバーの上を宙に浮いて越えたときだけなので、下をすり抜けるだけでは何も通りません。順番はどれからでもよく、どちら側から跳んでも構いません。一つ失敗しても大ごとではないので、回り込んでもう一度跳べば済みます。死ぬ、降りる、パドックから出る、そのいずれでも挑戦は終わりますが、また始めるのを妨げるものは何もありません。参加料もクールダウンもなく、賞品はその記録そのものだけ。何人の騎手が同時に走っても、互いの邪魔にはなりません。',
   'guide.mountsPage.raceHeading': '厩舎のレース',
   'guide.mountsPage.rideBody':
-    'マウントのウィンドウもお気に入りの設定もありません。手綱そのものがマウントだからです。バッグかアクションバーのスロットから手綱を使えば、そのマウントに乗れます。召喚には一拍かかり、即座ではなく短い呼びかけになるので、まずいプルから逃してはくれません。降りるのは即座で、妨げられることは決してありません。\n\n今乗っているマウントの手綱を使えば、そのマウントをしまいます。騎乗中に別の手綱を使えば、間に召喚を挟まずそのまま乗り換えられます。「騎乗 / 降車」キー（初期設定ではバッククォート）は、いつでも降りるためだけのものです。降りる道であって、乗る道ではありません。唯一の例外が乗馬の稽古で、そこではこの同じキーがマーラの貸してくれる馬を呼びます。借り物の馬には、クリックできる手綱がないからです。スマートフォンやタブレットでは、「その他」のトレイにある「騎乗」ボタンが両方の役目を果たします。',
+    '外見メニューを開き、マウントタブで外見を選びます。騎乗／降りるキー（初期設定はバッククォート）で、その外見のマウントを召喚できます。モバイルの騎乗ボタンも同じ動作です。召喚には短い詠唱が必要ですが、降りる操作は即時です。騎乗中でも速度を変えずに外見を変更できます。\n\nバッグやアクションバーの手綱を使って外見を選び、召喚することもできます。今乗っている外見を使うとマウントをしまいます。銀行や別キャラクターの手綱でも同じ外見が解放され、乗るキャラクターが持ち歩く必要はありません。',
   'guide.mountsPage.rideHeading': '乗り方と降り方',
   'guide.mountsPage.speedBody':
-    '一頭と一頭を分けるのは速さだけです。マーラから買うヴァロースティードが基準の足並みを決め、世界で集めたマウントはそれを上回ります。手綱が稀少なほど走りは速く、なめらかに滑り上がるのではなく、はっきり分かれた数段階で変わります。訓練すべき騎乗の第2段階もなければ、あとから買えるアップグレードもありません。騎乗の代金は一度きりで、以後はどの手綱を使ったかが移動の速さを決めます。',
-  'guide.mountsPage.speedHeading': '速さと段階',
+    '基礎騎乗訓練で騎乗中の移動速度が{basicSpeed}%上がります。上級騎乗訓練では{advancedSpeed}%上がり、マーラから{advancedFee}ゴールドで購入できます。外見の希少度や入手先にかかわらず、速度はキャラクターの訓練ランクで決まります。ストアのスキンも同じ訓練速度を使います。',
+  'guide.mountsPage.speedHeading': '騎乗速度と訓練',
   'guide.mountsPage.whatBody':
-    'マウントはあなたが乗る獣で、与えてくれるのは速さです。防御力もダメージも能力値もありません。地面をより速く運び、跳ぶときにほんの少し高く弾ませてくれる。取り引きはそれだけです。ゲーム内のマウントはすべて地上マウントなので、飛行はできませんし、どれも泳げません。',
+    'マウントは訓練によって乗れるようになった乗り物に適用する外見です。防具、ダメージ、戦闘能力値は得られません。騎乗訓練は地上の移動速度を上げ、騎乗中のジャンプはより高く跳べます。すべて地上用で、泳げません。',
   'guide.mountsPage.whatHeading': 'マウントとは',
   'guide.mountsPage.whereBody':
     'ゲイルクレストの厩舎は、ゲイルクレストの地図に記されています。ザ・シアーとレックフィールズの間、丘陵に出たところです。マーラは厩舎の脇に立ち、レース場のほうを向いています。',
@@ -18233,7 +18310,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '採集道具にはスロットがひとつあり、そこへ収まるのが製作された護符です。「採集者の貯蔵袋」は採取の産出を1つ増やし、「職人の眼」は採れるものの等級を1段上げます。「匠のお守り」は同じ仕組みで産出を2つ増やします。前の二つはエンチャントの仕事で、イーストブルックの工房の主、からくり師ギッゼルが、エンチャントのスキルが25に届いたエンチャンターに教えてくれます。「匠のお守り」のほうは工作の仕事で、ドロップで手に入る設計図をスキル100で作ります。三つとも彼の工房で作ります。\n\n装着したての護符は、コモンの道具なら20回の充填を備え、レア度が1段上がるごとに10回ずつ増えるので、同じ護符をエピックのつるはしに装着すれば50回から始まります。充填が減るのは護符が実際に結果を変えたときだけで、改善しなかった採取では決して減りません。スロットは使うたびに確認する設定にもできるので、あなたが「充填を使う」と言うまで護符は待ってくれます。新しい護符を装着すると、そのとき持っている道具に合わせてスロットが鋳直されるため、以前の最高記録ではなく、その道具が保てる回数まで満たされます。まったく何も変わらない装着し直しは、護符を食べてしまう前に断られます。\n\n充填を使い切っても護符が壊れることはありません。道具の持ち主がスロットを再充填します。秘術素材1個につき10回分で、求められる素材は、持ち歩いている道具と、そのスロットがこれまでに満たされた最上の道具の、より良いほうに従います。コモンかアンコモンの道具なら鈴音の粉塵、レアなら鈴音の精髄、エピックなら鈴音のかけらです。良い道具を銀行に置いてきても、安い再充填が買えるわけではなく、同じ値段で少ない充填になるだけです。安い段へ下りる正直な道は、劣る道具を持った状態で新しい護符を装着し、そこでスロットを鋳直すことです。スロットの上限が今の道具で満たせる量を超えている場合、再充填はその道具の限界で止まり、より良いほうを持ってくるように告げます。護符に署名した製作者本人なら再充填の素材は半分で済み、その護符自身の職（「採集者の貯蔵袋」と「職人の眼」ならエンチャント、「匠のお守り」なら工作）に特化していればさらに少なくなります。それ以外の人は全額です。再充填はこの職のほかの作業と同じく、短い詠唱です。',
   'guide.professions.toolEffectsHeading': '道具効果',
   'guide.progression.ridingBody':
-    '登りの果てに待っているもののひとつが騎乗です。レベル{level}になれば、厩舎長がかなりの金貨と引き換えにこの技を教えてくれ、訓練コースでの稽古が最初の手綱をもたらします。マウントは力を何ひとつ与えませんが、世界を小さくしてくれます。北への長い徒歩のあとでは、それもまた立派なご褒美です。',
+    'レベル{level}で厩舎長マーラから有料の基礎騎乗を学び、その後に上級ランクを購入できます。訓練が騎乗速度を決めます。外見メニューでマウントの外見を選びましょう。収集した外見は、いずれかのキャラクターのバッグや銀行に手綱がある間、アカウント内で共有されます。',
   'guide.progression.ridingTitle': '騎乗を習う',
   'guide.questsPage.availableBody':
     'クエストは連なりになっています。多くは前のクエストを報告して初めて提示され、最低レベルを求めるものも少なくありません。ですから今日はあなたに用のないNPCも、数レベル上げたあとや、今抱えているクエストを片づけたあとには、たくさんの仕事を用意しているかもしれません。乗馬の稽古のように独自の条件を持つものもあり、これは騎乗のスキルを買ったあとにだけ開きます。グループ向けのクエストは、何人で挑むことを勧めるかを明記して、最初から知らせてくれます。繰り返し受けられる仕事もあります。しばらく待てばまた受注でき、依頼主の頭上のマーカーが、また巡ってきたことを教えてくれます。',
@@ -19796,11 +19873,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'questUi.worldQuest.traceReaction.elianComplete':
     'ルーンが完成した！丁寧に練習すれば次はもっと上手くなる。',
   'entities.mobs.buddy_alpaca.name': 'アルパカ',
-  'entities.mobs.buddy_sapling.name': '若木',
-  'entities.items.whistle_sapling.name': '若木の笛',
   'hudChrome.collections.presence.sapling': '小さな根が後ろで軽い足音を立て、落ち葉を揺らす。',
-  'hudChrome.collections.buddyLore.sapling':
-    '樹皮に笑顔を浮かべ、好奇心に満ちた紫の瞳を持つ若木。根を足にして楽しげによちよちと歩き、どこへでもついてくる。',
   'entities.mobs.buddy_horse.name': '馬',
   'entities.mobs.buddy_ansem.name': 'アンセム',
   'entities.mobs.buddy_crimson_claw_crab.name': '紅爪ガニ',
@@ -19827,39 +19900,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_triple_t.name': 'トリプルT',
   'entities.mobs.buddy_trollface.name': 'トロールフェイス',
   'entities.mobs.buddy_tuskhorn_boar.name': 'タスクホーン・ボア',
-  'entities.items.whistle_alon.name': 'アロンの笛',
-  'entities.items.whistle_alpaca.name': 'アルパカの笛',
-  'entities.items.whistle_horse.name': '馬の笛',
-  'entities.items.whistle_ansem.name': 'アンセムの笛',
-  'entities.items.whistle_bull.name': '雄牛の笛',
-  'entities.items.whistle_cate_coin.name': 'ケイトコインの笛',
-  'entities.items.whistle_crimson_claw_crab.name': '紅爪ガニの笛',
-  'entities.items.whistle_crystal_lich.name': 'クリスタルリッチの笛',
-  'entities.items.whistle_crystal_tide.name': 'クリスタルタイドの笛',
-  'entities.items.whistle_ember_fox.name': '燃えさし狐の笛',
-  'entities.items.whistle_emerald_wolf.name': 'エメラルドウルフの笛',
-  'entities.items.whistle_forgemaw.name': '溶けたフォージモウの笛',
-  'entities.items.whistle_frog.name': 'カエルの笛',
-  'entities.items.whistle_frostfire.name': 'フロストファイアの笛',
-  'entities.items.whistle_golden_sentinel.name': '黄金の歩哨の笛',
-  'entities.items.whistle_kekius.name': 'ケキウスの笛',
-  'entities.items.whistle_loot_goblin.name': '戦利品ゴブリンの笛',
-  'entities.items.whistle_moss_hare.name': 'コケウサギの笛',
-  'entities.items.whistle_nightfang.name': 'ナイトファングの笛',
-  'entities.items.whistle_penny_goldspark.name': 'ペニー・ゴールドスパークの笛',
-  'entities.items.whistle_phantom.name': 'ファントムの笛',
-  'entities.items.whistle_proud_grunt.name': '誇り高きグラントの笛',
-  'entities.items.whistle_raptor.name': 'ラプターの笛',
-  'entities.items.whistle_rocky.name': 'ロッキーの笛',
-  'entities.items.whistle_skeleton.name': 'スケルトンの笛',
-  'entities.items.whistle_solbot.name': 'ソルボットの笛',
-  'entities.items.whistle_spider.name': 'クモの笛',
-  'entities.items.whistle_stag.name': '牡鹿の笛',
-  'entities.items.whistle_tiger.name': 'トラの笛',
-  'entities.items.whistle_triple_t.name': 'トリプルTの笛',
-  'entities.items.whistle_trollface.name': 'トロールフェイスの笛',
-  'entities.items.whistle_tuskhorn_boar.name': 'タスクホーン・ボアの笛',
-  'entities.items.whistle_sprites.name': 'チラリとキラリの笛',
   'hudChrome.buddyMenu.rename': 'バディの名前を変更',
   'hudChrome.buddyMenu.nameLabel': 'バディの名前',
   'hudChrome.buddyMenu.autolootEnable': '自動収集を有効化',
@@ -19867,132 +19907,17 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.autolootHint':
     'バディが30ヤード以内にあるあなた自身の死体から戦利品を回収します。',
   'hudChrome.buddyMenu.cancel': 'キャンセル',
-  'hudChrome.collections.title': 'ハンティング',
-  'hudChrome.collections.close': 'ハンティングを閉じる',
-  'hudChrome.collections.keybindLabel': 'ハンティング',
-  'hudChrome.collections.launcherTitle': 'ハンティング：バディ、マウント、装備セット',
   'hudChrome.collections.tabs.buddies': 'バディ',
-  'hudChrome.collections.tabs.mounts': 'マウント',
   'hudChrome.collections.state.owned': '収集済み',
   'hudChrome.collections.state.notOwned': '未収集',
   'hudChrome.collections.state.unavailable': 'まだ入手不可',
-  'hudChrome.collections.petKind.beast': 'ビースト',
-  'hudChrome.collections.petKind.humanoid': 'ヒューマノイド',
-  'hudChrome.collections.petKind.elemental': 'エレメンタル',
-  'hudChrome.collections.petKind.undead': 'アンデッド',
-  'hudChrome.collections.petKind.celebrity': 'セレブリティ',
-  'hudChrome.collections.armor.cloth': '布',
-  'hudChrome.collections.armor.leather': '革',
-  'hudChrome.collections.stat.strength': '筋力',
-  'hudChrome.collections.stat.agility': '敏捷性',
-  'hudChrome.collections.stat.intellect': '知力',
-  'hudChrome.collections.stat.mixed': 'ハイブリッド',
-  'hudChrome.collections.set.owned': '{total}部位中{owned}部位',
-  'hudChrome.collections.set.bonusLabel': '{pieces}部位',
-  'hudChrome.collections.set.itemLevel': 'アイテムレベル {level}',
-  'hudChrome.collections.detail.dropLabel': 'ドロップ元',
-  'hudChrome.collections.detail.drop': '{mob}（{location}）、討伐ごとに{chance}%',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob}（{location}）、討伐ごとに{chance}%、ヒロイックでは{heroicChance}%',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob}（{location}）、ヒロイック限定、討伐ごとに{chance}%',
-  'hudChrome.collections.detail.globalDrop':
-    '任意の敵、討伐ごとに{chance}%、同レアリティ{count}種のうち1つ',
-  'hudChrome.collections.detail.fishingDrop': 'どこでも釣り、釣り上げるごとに{chance}%',
-  'hudChrome.collections.detail.noSource': 'ゲーム内に入手手段はまだありません',
-  'hudChrome.collections.detail.noItem': 'これを与えるアイテムはまだありません',
-  'hudChrome.collections.detail.bindLabel': '装備制限',
-  'hudChrome.collections.detail.soulbound': '魂縛',
-  'hudChrome.collections.detail.tradeable': '取引可能',
-  'hudChrome.collections.detail.sellLabel': '商人の買取額',
-  'hudChrome.collections.detail.noSell': '売却不可',
-  'hudChrome.collections.detail.setLabel': '収集済み',
-  'hudChrome.collections.detail.marketLabel': 'ワールドマーケット',
-  'hudChrome.collections.detail.marketNone': '出品なし',
-  'hudChrome.collections.detail.marketChecking': '確認中…',
-  'hudChrome.collections.detail.marketAtMerchant': '商人のところで表示',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC取引所',
-  'hudChrome.collections.detail.exchangeNone': '出品なし',
-  'hudChrome.collections.detail.exchangeUnavailable': 'このクライアントでは利用できません',
-  'hudChrome.collections.detail.honorPrice': '名誉{amount}',
-  'hudChrome.collections.detail.marksPrice': '英雄の証{amount}',
   'hudChrome.options.showPetNames': 'ペット名を表示',
   'hudChrome.warfareShop.companions': 'コンパニオン',
   'itemUi.kind.buddy': 'バディ',
-  'hudChrome.collections.buddyLore.alon':
-    'どの地図も認めない道から来た旅人のマスコット。計画が狂っている場所に必ず現れる。見て、うなずいて、助けは一切しない。',
-  'hudChrome.collections.buddyLore.alpaca':
-    'ゲイルクレストの群れは羊毛と気性のために飼っている。嵐の中でこれほど落ち着いた家畜はいない。この個体は道中きっかり一人に唾を吐く。',
-  'hudChrome.collections.buddyLore.horse':
-    'イーストブルック渓谷のポニーの血統で、果樹園の小道向けに小さく育てられ、自分が軍馬ではないとは一度も教えられていない。あなたの肩の横で歩調を合わせ、一度でもリンゴをくれた相手なら誰にでもついていく。',
-  'hudChrome.collections.buddyLore.ansem':
-    '扉と闇について語るが、それ以上は決して口を割らない。ナイトブルームの信徒は自分たちのものだと言い張るが、儀式のたびにどこかへ行ってしまう。',
-  'hudChrome.collections.buddyLore.bull':
-    '犬ほどの大きさのイーストブルック渓谷の雄牛。屋内で飼うのを誰もが承知した理由はそれだけだ。気性のほうは小さくならなかった。',
-  'hudChrome.collections.buddyLore.cate_coin':
-    '腰を下ろしたコインから決して離れず、物を食べるところを誰も見たことがない猫。イーストブルックの商人たちは今も、どちらがペットなのかで揉めている。',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    '遠つ岸の潮だまりのカニ。水から上げてしばらく経っても爪は赤いままだ。かつて波止場の連中は板の上でこれを競走させ、小銭を賭けていた。',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'ナイスラクシスそのものの破片で、今なおそれを形づくった冷気を帯びて震えている。レイドの残骸から引き出した者に従うが、そのことをまだ許してはいない。',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    '自分のシーグラスの雫に乗る潮の精。イーストブルック渓谷から遠つ岸まで、夕飯を釣るつもりだった釣り人が静かな水から引き上げた。上がってきた時の水を離さず、戻れと言われても聞かない。',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'イーストブルック渓谷の生け垣から来た雌狐。冬枯れの茂みごしに覗く炭のように赤い毛からその名がついた。土地の罠師たちは何世代も前に子狐を狙うのをやめ、代わりに餌を置くようになった。',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'レイスウッドの子狼。林床までほとんど届かない木漏れ日の下では、その毛は緑に見える。森が残していった孤児は、どれもウォーデンたちが育てる。',
-  'hudChrome.collections.buddyLore.sprites':
-    '金色とティール色、ふたつの小さな火の精。どちらが先頭か、いつまでも決まらない。近づきすぎると緑の炎ひとつに溶け合い、また笑いながら離れていく。',
-  'hudChrome.collections.buddyLore.forgemaw':
-    '最後の泉のるつぼで鍛えられ、ついに完成しなかったもの。槌の音がまだ響くうちにイグニヴァルの鋳場から歩み出た。見つけられるのはヒロイックの踏破だけだ。この溶けたものは自分を作った炉へ戻り続け、二度炎を生き延びた者について家まで来る。',
-  'hudChrome.collections.buddyLore.frog':
-    'マイアフェン湿地はこれを丸々と、のんきに育てる。葦の茂みから一晩じゅう鳴きどおしだ。沼の案内人たちは、これを乗せた舟は決して座礁しないと請け合う。',
-  'hudChrome.collections.buddyLore.frostfire':
-    'フロストヴェイルの果てで、氷原を突いて温泉が湧く場所に生まれた。自分がどちらの側のものなのか、いまだに決めかねている。冷たい空気の中では湯気を立て、暖かい所では震える。',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'アンバーフォールの見張り甲虫。育った樹脂に鍍金されて金色になった。名のほうが樹脂より古い。誰かが樹液を瓶に詰めようと思いつくずっと前から、その種の歩哨がその林を守っていた。',
-  'hudChrome.collections.buddyLore.kekius':
-    '出自不明の笑う相棒。ゲイルクレストの競走場が縁起物として迎え入れた。これを頼みにしていた厩舎を四つ見送っても、まだ健在だ。',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    '英雄の証を持つ者なら誰にでもついていくが、盗みを働くところを一度も押さえられていない。補給係ヴェックスは、それは何の証明にもならないと言い張っている。',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'ウィローフェンの野ウサギ。湿った泥炭に一生寝床を作るうちに毛が緑になった。沼の薬草師たちはこれを縁起物とし、戸口に来たものを追い払わせない。',
-  'hudChrome.collections.buddyLore.nightfang':
-    'ナイトブルームの若い狩人。同族の基準で見てもなお静かだ。連れ立つのは人恋しさからで、蛾より大きな獲物は狩らない。',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'ノームの技師の弟子。時間で料金を取るが、その銅貨一枚ぶんの働きは必ずする。防具師ホードは借りを清算するために彼女を引き取り、今では千金を持つ者なら誰にでもこの取り決めを売っている。',
-  'hudChrome.collections.buddyLore.phantom':
-    'レイスウッドの塚から出た手のひらほどの亡霊。布ばかりで骨はない。閉じたはずの荷袋の中に現れ、人恋しさから居着いてしまう。何を求めているのかは誰にも分からず、これまで一度も誰かを脅かそうとしたことがない。',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    '戦備倉庫の古参兵。敬礼は保ち、階級は失った。戦元帥ドレイヴン・コールは、その代償を知るだけの名誉を持つ兵にこれを託す。',
-  'hudChrome.collections.buddyLore.raptor':
-    'ドレイクランドの孵化個体。自分がどれだけ速く走れるかを覚える前に売りに出される。新しい飼い主は必ず「餌を切らすな」と言われ、二度言われる者はいない。',
-  'hudChrome.collections.buddyLore.rocky':
-    'ソーンピーク高地のガレ場に棲む石殻の這うもの。のろく、そして何ごとにも動じない。落盤の直前に一瞬だけぴたりと止まる、そのために坑夫たちが飼っている。',
-  'hudChrome.collections.buddyLore.skeleton':
-    'レイスウッドの塚から這い出し、自分の埃を払って、それ以来ずっと人についてまわっている。この骨が誰のものだったのかは、まだ誰も突き止めていない。',
-  'hudChrome.collections.buddyLore.solbot':
-    '陽光を糧とする小さな自動機械。ドレイクランドの灰に半ば埋もれたところを掘り出されたが、まだ動いていた。これを造った工房は、筐体のどこにも刻印を残していない。',
-  'hudChrome.collections.buddyLore.spider':
-    'レイスウッドの織り手。手のひらほどの大きさで、入れられた荷袋を必ず模様替えしてしまう。その糸は、置き換えられた縫い糸より丈夫だ。',
-  'hudChrome.collections.buddyLore.stag':
-    'エバーガーデンの血統。かつてウォーデンたちが乗った大鹿から小さく掛け合わされてきた。手を挙げれば今も頭を下げる。この個体より古い習いだ。',
-  'hudChrome.collections.buddyLore.tiger':
-    'パームリーチの縞を持ちながら、パームリーチを見たことのない獣。古い見世物小屋が閉じて以来、この血統はずっと飼育下にある。応じるのは笛の音だけで、ほかには何にも応えない。',
-  'hudChrome.collections.buddyLore.triple_t':
-    '何かが三つなのか、一つのものが三度あるのか。証言はどれも食い違い、当の生き物は数えられるほど長くはじっとしていない。',
-  'hudChrome.collections.buddyLore.trollface':
-    'レイスウッドが世に出し、二度と引き取ろうとしなかった、にやりと笑うもの。これを説明しようとする試みは、いつも説明する側が笑い出して諦めるところで終わる。',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'ソーンピーク高地の血統。柵を倒せない猪が欲しかった羊飼いたちによって、脚を短く掛け合わされた。気性のほうはそのまま残った。',
   'entities.mobs.buddy_emberfall_phoenix.name': 'エンバーフォール・フェニックス',
-  'entities.items.whistle_emberfall_phoenix.name': 'エンバーフォール・フェニックスの笛',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    '秋ごとに燃え尽きて一粒の燃えさしとなり、春には自らの灰から立ち上がってくる。誰に訊いても言えるのはそれだけだ。巣を見つけた者はおらず、同じ個体を二度捕らえた者もいない。',
   'hudChrome.collections.state.pending': '何かが付いてきている',
   'hudChrome.collections.presenceDefault': '何かに見られている気がする。',
   'hudChrome.collections.revealed': '{name}があなたに付いていくことに決めた。',
-  'hudChrome.collections.cosmeticUnlocked': '{name}の新しい姿：{look}。',
   'hudChrome.collections.presence.ember_fox':
     '小さく温かい何かが、あなたの後ろをそっと歩いている。',
   'hudChrome.collections.presence.moss_hare':
@@ -20039,46 +19964,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.collections.presence.phantom': 'あなたの後ろの空気が、ほんの少し静かすぎる。',
   'hudChrome.collections.presence.emberfall_phoenix':
     '埋み火のような温もりが、あなたの背に落ち着く。',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': '霜縛り',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': '雷光',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': '灰燼',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': '白熱',
-  'hudChrome.collections.cosmetic.stag_acorn': 'どんぐりの冠',
-  'hudChrome.collections.cosmetic.stag_gilded': '金箔',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': '新緑',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'ウォーロード',
   'hudChrome.collections.actions.summon': '呼び出す',
   'hudChrome.collections.actions.dismiss': '下がらせる',
-  'hudChrome.collections.actions.wear': '着せる',
-  'hudChrome.collections.actions.remove': '外す',
-  'hudChrome.collections.looks.title': '姿',
-  'hudChrome.collections.looks.unlocked': '解放済み',
-  'hudChrome.collections.looks.locked': '未解放',
-  'hudChrome.collections.looks.worn': '着用中',
-  'hudChrome.collections.looks.none': 'この相棒にはまだ姿が用意されていない',
-  'hudChrome.collections.source.bossLabel': 'ボスのペット',
-  'hudChrome.collections.source.bossDrop': '{mob}（{location}）、討伐ごとにプレイヤー各自{chance}%',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob}（{location}）、プレイヤー各自{chance}%、ヒロイックでは{heroicChance}%',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob}（{location}）、ヒロイック限定、プレイヤー各自{chance}%',
-  'hudChrome.collections.source.rollNote':
-    '判定はプレイヤーごとに別々に行われ、パーティメンバーに機会を奪われることはない。',
-  'hudChrome.collections.source.deedLabel': '入手条件',
-  'hudChrome.collections.source.deed': '功績「{deed}」',
-  'hudChrome.collections.source.challengeLabel': 'チャレンジ',
-  'hudChrome.collections.source.challengeSpeed': '戦闘開始から{seconds}秒以内に{mob}を倒す',
-  'hudChrome.collections.source.challengeDps': '戦闘を通して{mob}に毎秒{dps}のダメージを与える',
-  'hudChrome.collections.source.craftLabel': '製作',
-  'hudChrome.collections.source.craft': '{item}（{profession}のレシピ）',
-  'hudChrome.collections.source.grantLabel': '授与',
-  'hudChrome.collections.source.grantOnly': 'シーズン報酬：月間ラダーとトップパース報酬',
-  'hudChrome.collections.source.tokenLabel': 'トークン',
-  'hudChrome.collections.source.token': '{item}、一度使うと相棒が付いてくる',
-  'entities.items.charm_stag_acorn.name': 'どんぐりの冠のお守り',
-  'entities.items.charm_stag_gilded.name': '金箔のお守り',
   'itemUi.kind.buddyCosmetic': '相棒の姿',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'サファイアの蛙',
   'hudChrome.deeds.buddiesSection': '相棒',
   'hudChrome.deeds.buddiesNone': '相棒なし',
   'hudChrome.deeds.buddiesEmpty': '相棒を集めると、ここから呼び出せる。',
@@ -20662,13 +20550,12 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.preview': 'プレビュー',
   'hudChrome.cosmetics.previewAria': '{name}をプレビュー',
   'hudChrome.cosmetics.cardAria': '{name}、{rarity}',
-  'hudChrome.cosmetics.mountsNoMount':
-    'まずマウントを入手してください。スキンには乗るものが必要です。',
+  'hudChrome.cosmetics.mountsNoMount': '厩舎長マーラから騎乗を学ぶとマウントを召喚できます。',
   'hudChrome.cosmetics.skinsEmpty': '武器スキンをまだ所持していません。WOCストアをご覧ください。',
   'hudChrome.cosmetics.skinsApplyHint': '{type}を装備するとこのスキンを適用できます。',
   'hudChrome.cosmetics.mechEmpty': 'コンバットメカのクロマをまだ所持していません。',
   'hudChrome.cosmetics.mountsIntro':
-    'マウントスキンはこのキャラクターが乗るどのマウントにも重ねて描かれます。速度は変わりません。',
+    'ここでマウントの外見を選びます。速度は騎乗訓練で決まります。いずれかのキャラクターのバッグまたは銀行にマウントアイテムを保管すると、アカウント内の全キャラクターがその外見を使えます。',
   'hudChrome.cosmetics.mechIntro':
     'コンバットメカはこのキャラクターの身体を置き換えます。装着できるクロマは一度に一つです。',
   'hudChrome.auraTracks.mode': 'オン',
@@ -21491,6 +21378,11 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '絡み根の詠唱時間が0.5秒短縮される。被ダメージで詠唱が遅れなくなります。',
   'entities.itemSets.vanguard_druid_balance.bonus4':
     '絡み根を詠唱すると、移動しながら詠唱でき、移動速度が4秒間20%上昇する。20秒に1回しか発生しない。',
+  'hudChrome.cosmetics.notCollected': '未収集',
+  'itemUi.vendor.basicRiding': '騎乗訓練',
+  'itemUi.vendor.advancedRiding': '上級騎乗訓練',
+  'itemUi.vendor.ridingSpeed':
+    '騎乗中の移動速度が{speed}%上昇します。すべてのマウントに適用されます。',
   'entities.letters.world_quest_reward.sender': 'カラス便',
   'entities.letters.world_quest_reward.subject': 'ワールドクエストの報酬',
   'entities.letters.world_quest_reward.body':
@@ -22556,8 +22448,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.skinPreview':
     '装備中の剣の見た目を変える。アカウントのすべてのキャラクターに適用。外見のみで能力値はない。',
   'hudChrome.guildHall.skinOffer': '剣の外見：{skin}',
-  'hudChrome.guildHall.mountPreview': '地上マウント：騎乗中の移動速度+{pct}%。騎乗訓練が必要。',
   'hudChrome.guildHall.mountOffer': 'マウント：{mount}',
+  'hudChrome.guildHall.mountPreview':
+    'アカウントの全キャラクターで使えるマウントの外見。移動速度は騎乗訓練で決まります。',
   'hudChrome.guildHall.refused.range': '取引するには補給係のそばに立つこと。',
   'hudChrome.guildHall.reward.one': '燈火の印章{count}個',
   'hudChrome.guildHall.reward.few': '燈火の印章{count}個',
@@ -23708,10 +23601,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bg.flagNameAzure': '蒼天の旗',
   'hudChrome.bg.flagNameCrimson': '深紅の旗',
   'hudChrome.bg.flagReturnedByLog': '{name}が{team}の旗を返還した。',
-  'hudChrome.collections.armor.mail': '鎖帷子',
-  'hudChrome.collections.detail.vendor': '{npc}（{location}）から{price}で購入',
-  'hudChrome.collections.detail.vendorLabel': '販売者',
-  'hudChrome.collections.tabs.sets': '装備セット',
   'hudChrome.dungeonTracker.heroicTitle': '{name}（{difficulty}）',
   'hudChrome.expeditions.leader': 'リーダー: {name}',
   'hudChrome.expeditions.solo': 'ソロで挑む',
@@ -25419,4 +25308,89 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.zones.goldcrest_harbor.pois.8.label': '黄金の大橋',
   'entities.zones.goldcrest_harbor.welcome':
     'ゴールドクレスト港、世界市場の中心。レルムのすべての道、潮、帳簿がここに集まる。',
+  // Zulgar's hunt rework (the sun glyphs, the Hunting Spear, The Idol Wakes):
+  // the M16 non-Latin fills of its new English.
+  'hudChrome.auraEffect.wildheart.sunstruck': '光る太陽紋に焼かれた：移動速度が{pct}%低下する。',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    '光る太陽紋に焼かれた：受けるダメージが{pct}%増加する。',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'この効果が終わるまで、どの太陽紋も彼を焼けない。その間に踏まれた光る太陽紋は光ったまま残る。',
+  'hudChrome.auraEffect.wildheart.pinned':
+    '狩りの槍があなたをその場に釘付けにしている。{every}秒ごとに{bleed}の物理ダメージ（ヒロイックでは{heroicBleed}）の出血を受け、ワイルドハートの脈動はどこにいても命中してダメージが{pulse}%増加する。仲間は{pull}秒で槍を引き抜ける。他に動ける仲間がいなければ、自分で{wrench}秒かけて引き抜ける。{seconds}秒後には自然に抜ける。',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    '石のジャガーが目覚めた。{every}秒ごとに、床に{warning}秒の予兆を出してからテラスの片側ずつに息を吐く：その側にいる全員に{min}から{max}の自然ダメージ（ヒロイックでは{heroicMin}から{heroicMax}）。ズルガーは倒されるまでジャガーの化身のままで、{seconds}秒ごと（ヒロイックでは{heroicSeconds}秒ごと）に獲物を替える。',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    '太陽紋を灯せる仲間がいない。消えた太陽紋の上に{seconds}秒立って灯し、ズルガーにそこを通らせろ',
+  'hudChrome.wildheartAlert.pinnedTitle': '釘付けにされた！',
+  'hudChrome.wildheartAlert.pinnedLine':
+    '仲間に狩りの槍を引き抜いてもらえ。釘付けの間はワイルドハートの脈動のダメージが増える',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    '助けに来られる仲間がいない：ワイルドハートの脈動が来る前に自分で狩りの槍を引き抜け',
+  'hudChrome.wildheartAlert.sunstruckTitle': 'ズルガーが太陽に焼かれた！',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    '効果が終わるまで受けるダメージが{pct}%増加する：今こそ最強の攻撃を叩き込め',
+  'hudChrome.wildheartAlert.spearTitle': '仲間が釘付けにされた！',
+  'hudChrome.wildheartAlert.spearLine': '狩りの槍まで走り、ワイルドハートの脈動が来る前に引き抜け',
+  'hudChrome.wildheartAlert.glyphTitle': '太陽紋を灯せ',
+  'hudChrome.wildheartAlert.glyphLine':
+    '消えた太陽紋の上に{seconds}秒立つと灯る。ズルガーがそこを通ると、{duration}秒間受けるダメージが{pct}%増加する',
+  'hudChrome.wildheartAlert.glyphLightingTitle': '太陽紋を灯している',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    '灯るまで太陽紋の上にとどまれ。離れるとやり直しになる',
+  'hudChrome.wildheartAlert.breathTitle': '偶像の息吹！',
+  'hudChrome.wildheartAlert.breathLine':
+    '石のジャガーがテラスのこちら側に息を吐こうとしている。反対側へ渡れ',
+  'hudChrome.kitUse.freeLine':
+    '槍を地面から引き抜き、釘付けにされた者を解放する。攻撃を受けても中断されないが、移動やスタンでは中断される',
+  'hudChrome.kitUse.freeKey': '{name}を引き抜く',
+  'hudChrome.kitUse.freeTap': 'ここをタップして{name}を引き抜く',
+  'hudChrome.kitUse.freeClick': 'ここをクリックして{name}を引き抜く',
+  'hudChrome.kitUse.freeFar': '{range}ヤード以内に近づいて引き抜け',
+  'hudChrome.kitUse.freeAria': '{name}を引き抜く',
+  'hudChrome.kitUse.freeUsingLine': '槍を引き抜くまで動くな：移動やスタンで中断される',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': '狩りの槍',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': '偶像の目覚め',
+  'abilityUi.cast.kituse_wildheart_pull_spear': '槍を引き抜く',
+  'abilityUi.cast.wildheart_idols_breath': '偶像の息吹',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': '点灯中',
+  'abilityUi.cast.wildheart_sun_glyph_cold': '冷却中',
+  'entities.mobs.wildheart_hunting_spear.name': '狩りの槍',
+  // Choirmother Selthe's Score (the Drowned Temple alert, her ward and her
+  // broken voice, her two bars): the M16 non-Latin fills of its new English.
+  'hudChrome.templeAlert.melodyTitle': '楽譜',
+  'hudChrome.templeAlert.melodyLine':
+    '月のタイルが順番に鳴るのを見ておけ。仲間と交代しながら同じ順番で踏め',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'タイルが暗くなる前に順番を覚えろ。仲間と交代しながら同じ順番で踏め',
+  'hudChrome.templeAlert.answerTitle': '楽譜に答えろ！',
+  'hudChrome.templeAlert.answerLine':
+    '交代して踏め。{place}の印がある月のタイルに踏み入れ。鳴らした数：{total}枚中{done}枚',
+  'hudChrome.templeAlert.answerDarkLine':
+    '交代しながら覚えた順番どおりに踏め。同じタイルを踏み直すには、一度降りること。鳴らした数：{total}枚中{done}枚',
+  'hudChrome.templeAlert.stepOffTitle': '一度降りて、踏み直せ',
+  'hudChrome.templeAlert.stepOffLine':
+    '月のタイルは誰かが踏み入った時にだけ鳴る。このタイルから降りて、もう一度踏み入れ',
+  'hudChrome.templeAlert.falseTitle': '外れた音！',
+  'hudChrome.templeAlert.falseLine': 'そのタイルは順番が違う。答えは最初のタイルからやり直しになる',
+  'hudChrome.templeAlert.brokenTitle': 'セルセの声が砕けた！',
+  'hudChrome.templeAlert.brokenLine':
+    '効果が終わるまで受けるダメージが{pct}%増加する：今こそ最強の攻撃を叩き込め',
+  'hudChrome.templeAlert.timeAria': '残り{seconds}秒',
+  'hudChrome.auraEffect.temple.scoreWard':
+    '楽譜を歌っている：終わるまでダメージを受けない。歌が終わる前に、鳴った順番どおりに月のタイルへ踏み入ると彼女の声が砕ける。交代して踏むこと。音を鳴らしたら、別のプレイヤーが次の正しい音を鳴らすまで待つ。生存者が一人なら、一人で最後まで答えられる。先に歌が終わると、不協和音が広間の全員に{min}から{max}の冷気ダメージ（ヒロイックでは{heroicMin}から{heroicMax}）を与える。',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    '声が砕けている：この効果が終わるまで受けるダメージが{pct}%増加する。',
+  'abilityUi.cast.temple_score': '楽譜',
+  'abilityUi.cast.temple_score_answer': '楽譜に答えろ',
+  // The Dungeon Finder's line for Selthe's Score (M16).
+  'hudChrome.finder.mech.the_score':
+    '楽譜（彼女は二度、月のタイルで旋律を歌う：鳴った順番どおりに踏み入ると彼女の声が砕ける）',
+  'hudChrome.templeAlert.spentTitle': '次は別の人が答える番',
+  'hudChrome.templeAlert.spentLine':
+    '別のプレイヤーが次の正しい音を鳴らすまで、タイルを鳴らせない。鳴らした数：{total}枚中{done}枚',
+  'hudChrome.auraEffect.temple.spentVoice':
+    '別のプレイヤーが次の正しい音を鳴らすまで、月のタイルを鳴らせない。この間にタイルを踏んでも答えはリセットされず、ダメージも受けない。解除不可。同じインスタンスで生きているプレイヤーが自分だけになるか、楽譜が終了すると解除される。',
+  'hudChrome.options.firstPersonBody': '体を表示',
+  'hudChrome.options.firstPersonNoBody': '体を非表示',
+  'hudChrome.options.firstPersonOff': 'オフ',
 };

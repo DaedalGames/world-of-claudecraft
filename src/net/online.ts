@@ -80,7 +80,6 @@ import {
 } from '../sim/reliquary';
 import type { ResolvedAbility } from '../sim/sim';
 import {
-  cloneItemInstancePayload,
   type DeedStats,
   DUNGEON_GUIDE_STATES,
   type DungeonDifficulty,
@@ -228,6 +227,8 @@ import { dungeonEntrySnapshotFacing } from './dungeon_entry_facing';
 import { decodeEntityFlairWire } from './entity_flair_wire';
 import { reanchorDecision } from './entity_reanchor';
 import { applyEntityStatusWire } from './entity_status_wire';
+import { decodeEquippedInstancesWire } from './equipped_instances_wire';
+import { applyGroundTelegraphSnapshot } from './ground_telegraph_wire';
 import { GuildBankLogMirror } from './guild_bank_log_mirror';
 import { decodeGuildBoardPage, emptyGuildBoardPage, guildBoardPath } from './guild_board_wire';
 import { decodeGuildRoster } from './guild_roster_wire';
@@ -1198,6 +1199,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   partyInfo: PartyInfo | null = null;
   private selectedDungeonDifficulty: DungeonDifficulty = 'normal';
   private activeInstanceDungeonDifficulty: DungeonDifficulty | null = null;
+  private unappliedInstanceDungeonDifficulty: DungeonDifficulty | null = null;
   // --- IWorldTrade: active trade-window state, mirrored from the snapshot self
   // (`s.trade`, delta-omitted). ---
   tradeInfo: TradeInfo | null = null;
@@ -2629,6 +2631,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
         e.level = w.lv;
         e.skin = w.sk ?? 0;
         e.mountKey = w.mnt ?? ''; // active rideable mount ('' dismounted); feeds speed + render
+        e.ridingTier = w.mntTier ?? 0;
         e.buddyKey = w.bud ?? ''; // active cosmetic buddy ('' none); HUD/UI identity only, not read by the renderer (the buddy's own owned mob entity carries the body)
         e.buddyAutoloot = w.budal === true; // buddy autoloot armed; HUD/UI only (the errand itself runs server-side)
         e.mainhandItemId = w.mh ?? null; // equipped mainhand → held weapon model (render-only)
@@ -2636,16 +2639,10 @@ export class ClientWorld extends ReconWireState implements IWorld {
         e.weaponSkinId = w.wsk ?? null; // active weapon-skin cosmetic (render-only)
         e.mountSkinId = w.msk ?? null; // worn mount skin cosmetic (render-only, like wsk)
         e.equippedItems = w.eq ?? {}; // full worn set (render-only), for the inspect window
-        // Worn per-slot instance payloads (masterwork/enchant rolls), for the
-        // inspect window (terse `eqi`, sparse like `eq`: an absent key on a
-        // full record means no worn piece carries one, so it resets to {}).
-        // Deep-cloned per slot: a payload's own rolled.stats map must never
-        // alias wire-parsed JSON a later message could mutate.
-        e.equippedInstances = Object.fromEntries(
-          Object.entries((w.eqi ?? {}) as Record<string, ItemInstancePayload>).map(
-            ([slot, inst]) => [slot, cloneItemInstancePayload(inst)],
-          ),
-        );
+        // Worn per-slot public payloads (terse `eqi`) plus the worn tracked
+        // copies' public history (`eqh`), for the inspect window; both sparse
+        // like `eq` (see equipped_instances_wire.ts).
+        e.equippedInstances = decodeEquippedInstancesWire(w.eqi, w.eqh);
         e.skinCatalog = w.cat === 'mech' ? 'mech' : 'class';
         // The authored modular look (identity-only: set at join, immutable for
         // the session). Untrusted wire JSON on purpose: every consumer runs
@@ -3162,8 +3159,8 @@ export class ClientWorld extends ReconWireState implements IWorld {
           .filter((k): k is MountKey => k !== '');
       }
       if (s.mntRtd !== undefined) this.selfRidingTrained = s.mntRtd === true;
-      // IWorldBuddies self-decode (src/net/buddy_wire.ts): four delta-guarded
-      // keys, omitted keeps the prior mirror, like mntOwn.
+      // IWorldBuddies self-decode (src/net/buddy_wire.ts): the two delta-guarded
+      // keys budOwn and budPend; an omitted key keeps the prior mirror, like mntOwn.
       this.selfBuddies = decodeBuddySelf(s, this.selfBuddies);
       if (s.mntLesson !== undefined) this.mountLessonActiveMirror = s.mntLesson === true;
       if (s.mntRace !== undefined) this.mountRaceMirror = decodeMountRaceView(s.mntRace, now);
@@ -3171,6 +3168,8 @@ export class ClientWorld extends ReconWireState implements IWorld {
       if (s.adiff === 'normal' || s.adiff === 'heroic')
         this.activeInstanceDungeonDifficulty = s.adiff;
       else if (s.adiff === null) this.activeInstanceDungeonDifficulty = null;
+      if (s.udiff === 'normal' || s.udiff === 'heroic' || s.udiff === null)
+        this.unappliedInstanceDungeonDifficulty = s.udiff;
       if (s.qlog !== undefined || s.qdone !== undefined) this.pendingQuestCommands?.clear();
       const restoreSessionPreferences = this.spectateExitPending;
       const arena = s.arena !== undefined ? s.arena : this.arenaInfo;
@@ -3635,13 +3634,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
     });
   }
   buyItem(npcId: number, itemId: string, opts?: VendorBuyOptions): void {
-    // `bulk` and `count` each ride the wire only when non-default (the
-    // craftItem `commission` idiom above): an ordinary buy stays
-    // byte-identical to the pre-#2374 message, and a count of 1 stays
-    // byte-identical to the bulk-era frame. The sender never emits both
-    // fields: bulk's two affordances and the count control row are separate
-    // surfaces, and the server's bulk-wins precedence only ever decides
-    // hand-crafted frames.
+    // Non-default quantity and the captured riding quote ride the command.
     //
     // Facet parity on a HOSTILE count (nothing in this client sends one; the
     // control row emits 5/10 and the prompt floors at 1): a finite non-1
@@ -3650,14 +3643,16 @@ export class ClientWorld extends ReconWireState implements IWorld {
     // ride JSON at all (NaN/Infinity serialize to null and would silently
     // buy 1), so it is dropped here, the one place it can be. Either way a
     // hostile count never becomes a purchase in either world.
+    const quote =
+      opts?.expectedRidingTier === undefined ? {} : { ridingTier: opts.expectedRidingTier };
     if (opts?.bulk === true) {
-      this.cmd({ cmd: 'buy', npc: npcId, item: itemId, bulk: true });
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId, bulk: true, ...quote });
     } else if (opts?.count !== undefined && opts.count !== 1) {
       if (Number.isFinite(opts.count)) {
-        this.cmd({ cmd: 'buy', npc: npcId, item: itemId, count: opts.count });
+        this.cmd({ cmd: 'buy', npc: npcId, item: itemId, count: opts.count, ...quote });
       }
     } else {
-      this.cmd({ cmd: 'buy', npc: npcId, item: itemId });
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId, ...quote });
     }
   }
   // `confirmEffectUse` (R40): the per-use consent for a 'prompt'-mode tool
@@ -3896,15 +3891,15 @@ export class ClientWorld extends ReconWireState implements IWorld {
   ferryView(): TransportFerryView | null {
     return clientFerryView(this);
   }
-  // --- IWorldMounts: collection + dismount. Summoning a specific mount is an
-  // item use, not a mount command, so nothing here sends one. The toggle stays
-  // authoritative because the server's combat gate can refuse it, and the active
-  // identity mirror (mnt) lands on the next snapshot either way. ---
+  // Mount appearance, training, and summon state mirror the authoritative snapshot.
   ownedMounts(): readonly MountKey[] {
     return this.selfOwnedMounts;
   }
   ridingTrained(): boolean {
     return this.selfRidingTrained;
+  }
+  ridingTrainingTier(): 0 | 1 | 2 {
+    return this.player.ridingTier || (this.selfRidingTrained ? 1 : 0);
   }
   toggleMounted(): void {
     this.cmd({ cmd: 'mount_toggle' });
@@ -3933,14 +3928,15 @@ export class ClientWorld extends ReconWireState implements IWorld {
   setBuddyAutoloot(enabled: boolean): void {
     this.cmd({ cmd: 'buddy_autoloot', on: enabled });
   }
-  // --- riding skill purchase: server-authoritative; on success the snapshot
-  // delta (mntRtd=true) confirms the skill was granted. ---
-  learnRiding(npcId: number): void {
-    this.cmd({ cmd: 'learn_riding', npc: npcId });
+  // Training purchases are confirmed by the next authoritative snapshot.
+  learnRiding(npcId: number, expectedTier: 0 | 1 = 0): void {
+    this.cmd({
+      cmd: 'learn_riding',
+      npc: npcId,
+      ridingTier: expectedTier,
+    });
   }
-  // --- riding lesson: fully server-authoritative, no optimistic local nudge;
-  // feedback rides the mountTrain* events straight to the HUD (drainEvents), no
-  // mirrored state. ---
+  // Riding lesson feedback arrives through mountTrain* events.
   mountTrainBegin(): void {
     this.cmd({ cmd: 'mount_train_begin' });
   }
@@ -4842,6 +4838,9 @@ export class ClientWorld extends ReconWireState implements IWorld {
   }
   activeDungeonDifficulty(): DungeonDifficulty | null {
     return this.activeInstanceDungeonDifficulty ?? null;
+  }
+  unappliedDungeonDifficulty(): DungeonDifficulty | null {
+    return this.unappliedInstanceDungeonDifficulty;
   }
   setDungeonDifficulty(difficulty: DungeonDifficulty): void {
     this.selectedDungeonDifficulty = difficulty;

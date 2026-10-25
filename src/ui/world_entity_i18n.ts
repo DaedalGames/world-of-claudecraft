@@ -21,7 +21,6 @@ import { STUDIO_CONTENT } from '../sim/studio_content';
 // Historical name keys remain for maintained locale overlays. They do not
 // register active mobs, rewards or Hunting entries.
 const RETIRED_BUDDY_NAMES = {
-  buddy_sapling: { name: 'Sapling' },
   buddy_ember_fox: { name: 'Ember Fox' },
   buddy_moss_hare: { name: 'Moss Hare' },
   buddy_frog: { name: 'Frog' },
@@ -404,6 +403,9 @@ const MOB_IDS = [
   'sanctum_shackle_bellows',
   // The Gorgebloom's sprouts (encounters/wildheart_basin/gorgebloom.ts).
   'thorn_sprout',
+  // Zulgar's Hunting Spear: the usable body a teammate pulls out
+  // (encounters/wildheart_basin/zulgar_spear.ts).
+  'wildheart_hunting_spear',
   // Cosmetic buddy followers (src/sim/content/buddy_mobs.ts). Their nameplate
   // is off by default (the dedicated "Show Pet Names" option), but the
   // canonical-fallback name still has to resolve in every locale the moment
@@ -433,7 +435,6 @@ const MOB_IDS = [
   'buddy_stag',
   'buddy_alpaca',
   'buddy_horse',
-  'buddy_sapling',
   'buddy_bull',
   'buddy_spider',
   'buddy_raptor',

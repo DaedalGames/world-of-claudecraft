@@ -14,19 +14,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountBagsEmpty': 'Dina väskor är tomma.',
   'hudChrome.bank.accountRetry': 'Försök igen',
   'hudChrome.buddyMenu.cancel': 'Avbryt',
-  'hudChrome.collections.actions.remove': 'Ta bort',
   'hudChrome.collections.actions.summon': 'Frammana',
-  'hudChrome.collections.actions.wear': 'Bär',
-  'hudChrome.collections.armor.cloth': 'Tyg',
-  'hudChrome.collections.armor.leather': 'Läder',
-  'hudChrome.collections.detail.honorPrice': '{amount} Heder',
-  'hudChrome.collections.petKind.beast': 'Bestar',
-  'hudChrome.collections.petKind.elemental': 'Elementarer',
-  'hudChrome.collections.petKind.humanoid': 'Humanoider',
-  'hudChrome.collections.petKind.undead': 'Odöda',
-  'hudChrome.collections.stat.agility': 'Smidighet',
-  'hudChrome.collections.stat.intellect': 'Intellekt',
-  'hudChrome.collections.tabs.mounts': 'Riddjur',
   'hudChrome.courier.empty': 'Inga föremål',
   'hudChrome.courier.inventory': 'Inventarium',
   'hudChrome.expeditions.cancel': 'Avbryt',
@@ -3668,7 +3656,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.dungeonMode':
     'Växla dina fängelsehålor mellan normal och heroisk svårighetsgrad.',
   'guide.commandsPage.dungeonReset':
-    'Överge dina egna tomma instanser, vilket är vad du gör efter att ha bytt svårighetsgrad.',
+    'Överge dina egna tomma instanser så att nästa runda börjar om på samma eller en ny svårighetsgrad.',
   'guide.commandsPage.dungeons':
     'Varje fängelsehåla med zonen dess dörr ligger i och gruppstorleken den är byggd för, plus svårighetsgraden du för närvarande är inställd på.',
   'guide.commandsPage.emotesBody':
@@ -4143,29 +4131,14 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     'Bortom Marlas disk hittas tyglar snarare än köps. De faller från de sista bossarna i fängelsehålorna för fem spelare och i raiden på heroiskt, och ur avklarade revor, där ju svårare reva du avslutar desto sällsyntare tyglar den kan lämna efter sig. De är sällsynta fynd med flit, och ingen omgång lovar en, så det snälla sättet att jaga ett riddjur är att ta jakten med på de omgångar du ändå skulle köra. Den här sidan avslöjar inte vilket riddjur som hänger på vilken boss: den delen är din att ta reda på.',
   'guide.mountsPage.collectHeading': 'Var de sällsyntare riddjuren kommer ifrån',
-  'guide.mountsPage.firstBody':
-    'Valorsteed är det enda riddjur som säljs någonstans i världen. Så snart du har lärt dig Ridning säljer Marla Tyglar till Valorsteed till dig för 10 guld, och de tyglarna är dina att behålla. Varje annat riddjur förtjänas ute i världen, så hästen är där nästan varje ryttare börjar.',
   'guide.mountsPage.firstHeading': 'Ditt första riddjur',
-  'guide.mountsPage.goodsBody':
-    'Ett riddjur är ett föremål, vilket gör det till något ekonomin kan flytta på. Du äger ett riddjur så länge dess tyglar ligger i dina väskor eller i din bank, även om bankförvarade tyglar håller riddjuret ditt utan att låta dig rida det: för att kalla på besten måste du bära tyglarna. Spelartyglar är aldrig själsbundna, så de handlas, skickas med post och listas på Världsmarknaden som vilket annat fynd som helst, om inte föremålet självt säger något annat. Två saker är värda att veta innan du skiljer dig från ett: ingen handlare köper någonsin tillbaka ett par tyglar, så ett riddjur är ett köp du behåller eller för vidare snarare än löser in, och om tyglarna lämnar både dina väskor och din bank medan du rider, handlas bort, skickas med post eller säljs på marknaden, följer riddjuret med dem och du sätts ner där du står.',
   'guide.mountsPage.goodsHeading': 'Tyglar är vanliga varor',
   'guide.mountsPage.heading': 'Riddjur och ridning',
-  'guide.mountsPage.intro':
-    'Ett riddjur är ett snabbare sätt att ta sig fram genom världen, och det är allt det är. Du lär dig rida vid stallet, köper ditt första par tyglar, och varje väg efter det blir kortare.',
-  'guide.mountsPage.learnBody':
-    'Ridning är en färdighet du köper en gång, och den öppnas vid nivå {level}. Marla Hitchen, stallmästaren, sköter Stormkammens stall ute bland kullarna, och hon säljer Ridträning för 80 guld. Det enda köpet är vad som över huvud taget låter dig sitta upp på ett riddjur, och det stannar hos dig för gott.\n\nNär du har det har Marla ett uppdrag åt dig: Ridlektioner. Ta det, följ markören till den glödande rutan bakom startbågen, och tryck på Starta loppet. Hon lånar dig en övnings-Valorsteed till lektionen, så själva lektionen kostar dig ingenting. Rid banan, avsluta den, och gå tillbaka till henne för ditt guld och din erfarenhet. Det lånade riddjuret går tillbaka till ladan efteråt, så lektionen lär dig sadeln snarare än ger dig en häst.',
   'guide.mountsPage.learnHeading': 'Att lära sig rida',
   'guide.mountsPage.raceBody':
     'Hoppbanan i Marlas hage står öppen för vem som helst, när som helst, inte bara under lektionen. Sitt upp på ett riddjur, stå på den glödande rutan bakom bågen, och tryck på Starta loppet. En nedräkning håller dig stilla, sedan börjar klockan gå: klara alla sju hoppen och rid tillbaka ut genom bågen innan tiden runnit ut.\n\nEtt hopp räknas bara om du verkligen är i luften över ribban, så en enkel genomridning klarar ingenting. Du får ta dem i vilken ordning som helst och från vilken sida som helst, och ett missat hopp är inte världens undergång: sväng tillbaka och ta det igen. Att dö, stiga av eller lämna hagen avslutar försöket, och det gör det också om klockan rinner ut, vilket sätter dig ur sadeln där du står; att avbryta själv stoppar bara klockan. Inget hindrar dig från att starta ett nytt försök. Det finns ingen avgift, ingen nedkylning och inget pris utöver tiden själv, och hur många ryttare som helst kan köra banan samtidigt utan att stå i vägen för varandra.',
   'guide.mountsPage.raceHeading': 'Stallets lopp',
-  'guide.mountsPage.rideBody':
-    'Det finns inget riddjursfönster och ingen favorit att ställa in, för tyglarna är riddjuret. Använd ett par tyglar från dina väskor eller från en plats i handlingsfältet så rider du det riddjuret. Att frammana tar en stund, ett kort kall snarare än ett omedelbart, så det räddar dig inte från en dålig pull. Att stiga av är omedelbart och blockeras aldrig.\n\nAnvänd tyglarna du redan rider och du ställer undan det riddjuret. Använd ett annat par medan du är beriden och du byter direkt till det, utan något att frammana emellan. Tangenten Sitt upp / Stig av, backquote-tangenten (`) som standard, får dig bara någonsin av: den är vägen ner, inte vägen upp. Det enda undantaget är ridlektionen, där samma tangent kallar på riddjuret Marla lånar dig, eftersom en lånad häst inte har några tyglar att klicka på. På en telefon eller surfplatta fungerar Sitt upp-knappen i Mer-menyn åt båda hållen, även om den kallar på det första paret tyglar som ligger i dina väskor snarare än ett du väljer, så tryck på tyglarna själva när du vill ha ett visst riddjur.',
   'guide.mountsPage.rideHeading': 'Att sitta upp och stiga av',
-  'guide.mountsPage.speedBody':
-    'Rörlighet är det enda som skiljer ett riddjur från ett annat. Valorsteed du köper av Marla sätter grundtempot, och riddjuren du samlar in ute i världen rider förbi det: ju sällsyntare tyglarna är, desto snabbare färd, i några tydliga steg snarare än en jämn glidning. Det finns ingen andra ridgrad att träna och ingen uppgradering att köpa efteråt. Du betalar för Ridning en gång, och därefter avgör tyglarna du använde hur snabbt du färdas.',
-  'guide.mountsPage.speedHeading': 'Rörlighet och nivåer',
-  'guide.mountsPage.whatBody':
-    'Ett riddjur är en best du rider, och det den ger dig är rörlighet. Ingen rustning, ingen skada, inga egenskaper: den bär dig över marken snabbare, och hoppar lite högre när du hoppar, och det är hela affären. Varje riddjur i spelet är marklevande, så det finns ingen flygning, och inget av dem simmar.',
   'guide.mountsPage.whatHeading': 'Vad ett riddjur är',
   'guide.mountsPage.whereBody':
     'Stormkammens stall är utmärkt på kartan över Stormkammen, ute bland kullarna mellan Branten och Vrakfälten. Marla står bredvid ladan, vänd mot tävlingsplanen.',
@@ -4202,8 +4175,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Revor är det enda som väntar på själva taket. De river upp sig ute i riket efter eget schema, rankade från C till S, och varje grupp i världen kapplöper om att vara den som stänger var och en av dem. Delvetavlorna fortsätter också, och deras svårare grad är värd en ny titt när din utrustning väl har hunnit ikapp.',
   'guide.progression.journeyBodyCount':
     'Världen är ett enda sammanhängande land av {zones} zoner. Tre av dem är vägen du levlar på, lagda från söder till norr: du börjar i den gröna dalen, tränger på genom träsket och avslutar i de kalla höga topparna. Följ uppdragsspåret så bär landet dig från den ena till den nästa. En ö ligger utanför dalens kust för de tidiga nivåerna, och resten av riket öppnas från samma väg, byggt för karaktärer som redan har klarat klättringen.',
-  'guide.progression.ridingBody':
-    'Ridning är en av sakerna som väntar vid slutet av klättringen. Vid nivå {level} lär en stallmästare dig färdigheten för en rejäl summa guld, och en lektion ute på träningsbanan ger dig ditt första par tyglar. Ett riddjur ger ingen kraft alls; det gör helt enkelt världen mindre, vilket efter en lång vandring norrut är sin egen sorts belöning.',
   'guide.progression.ridingTitle': 'Att lära sig rida',
   'guide.questsPage.availableBody':
     'Uppdrag kommer i kedjor. De flesta erbjuds bara sedan du har lämnat in det som kom före dem, och många kräver också en lägsta nivå, så en NPC som inte har något åt dig i dag kan ha gott om det efter dina nästa nivåer eller så snart du avslutar uppdraget du redan bär på. Ett fåtal har ett eget villkor, som ridlektionerna, vilka öppnas först sedan du har köpt ridfärdigheten. Gruppuppdrag säger det rakt ut i förväg genom att lista hur många spelare de föreslår att du tar med. Vissa uppdrag är repeterbara: du kan ta dem igen efter en väntetid, och markören över givaren talar om när ett har kommit tillbaka.',
@@ -6566,13 +6537,15 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Du kan inte återställa instanser medan någon fortfarande är kvar inuti.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'Ändra fängelsehålans svårighetsgrad innan du återställer dessa instanser. Tomma instanser återställs automatiskt efter 5 minuter.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'Dina instanser är redan nollställda. Ingen har gått in i dem sedan den senaste återställningen.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Använd /dungeon reset för att överge dina tomma instanser efter att du har ändrat svårighetsgraden.',
+    'Använd /dungeon reset för att överge dina tomma instanser och börja om från början.',
   'hudChrome.dungeonDifficulty.resetLoot':
     'Du kan inte återställa instanser medan byte finns kvar inuti.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'Återställ alla instanser?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Detta överger tomma instanser från din tidigare valda svårighetsgrad. Outhämtat byte förhindrar återställningen.',
+    'Detta överger dina tomma instanser så att nästa runda börjar om på vald svårighetsgrad. Spärrar ändras inte. Någon som är kvar inne eller outhämtat byte förhindrar återställningen.',
   'hudChrome.dungeonDifficulty.resetConfirm': 'Återställ instanser',
   'hudChrome.dungeonDifficulty.resetCooldown':
     'Instanser kan bara återställas en gång var 5:e minut.',
@@ -15097,7 +15070,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Din grupp klarade den heroiska prövningen medan du kämpade i eftertruppen eller låg fallen. Din låsning registrerades ändå, så din andel heroiska märken skickades hit i stället för att gå förlorad. Använd dem väl.\n\n- Heroisk kvartermästare',
   'guide.dungeonsPage.resetTitle': 'Återställa dina instanser',
   'guide.dungeonsPage.resetBody':
-    'Byt svårighetsgrad medan din grupp fortfarande håller vändor i anspråk och de gamla anspråken dröjer kvar en stund innan de släpper av sig själva. Gruppledaren kan släppa dem på en gång i stället: välj Återställ alla instanser i menyn för det egna porträttet, eller skriv /dungeon reset. En återställning fungerar först efter att svårighetsgraden faktiskt har ändrats, bara så länge ingen, levande eller fallen, är kvar därinne, bara när varje lik därinne har plundrats rent, och en kort nedkylning skiljer en återställning från nästa. Kommer ni till dörren med fel svårighetsgrad säger spelet till innan vändan börjar. Raiden återställs aldrig så; dess egna spärregler står fast.',
+    'Tomma instanser som tagits i anspråk finns kvar en stund innan de släpps automatiskt. Gruppledaren kan släppa dem direkt: välj Återställ alla instanser i menyn för det egna porträttet, eller skriv /dungeon reset, så börjar nästa runda om på aktuell svårighetsgrad. Att byta svårighetsgrad gör samma sak med instanser på den gamla svårighetsgraden. Återställning fungerar bara när ingen, levande eller fallen, är kvar inne och varje lik har plundrats helt. Den förkortar aldrig en spärr: en spärrad Heroisk instans eller raid förblir spärrad tills dess återställning, och en kort nedkylning skiljer återställningarna åt. Om ni anländer till dörren med fel svårighetsgrad säger spelet till innan rundan börjar. Raiden återställs på samma sätt, med sina egna regler för spärrar och återgång till lik fortfarande i kraft. En raid som byter svårighetsgrad hoppar över nedkylningen: en raid som valde fel nivå eller inte klarade Heroisk kan byta tillbaka direkt, eftersom dess egen spärr begränsar upprepade rundor.',
   'guide.dungeonsPage.wildheartBody':
     'En regnvåt djungelkaldera där två upphöjda jaktstigar cirklar en jadegrön cenot. Korsa bestars lyor och förfädersruiner, klättra sedan upp för ritualpyramiden för att se vem som väntar på toppen.',
   'guide.gear.itemLevelBody':
@@ -16312,17 +16285,12 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.close': 'Stäng',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'En kraftfull magitech-cykel designad för snabb, lågsvävande förflyttning i strid.',
-  'hudChrome.mounts.desc_grag_bear': 'En uthållig, säkerfotad björn som ger ökad reshastighet.',
   'hudChrome.mounts.desc_shadowjump_toad':
     'En massiv, säkerfotad jättepadda, tränad i blixtsnabba skuggsprång som täcker all terräng.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'En robust, långsamt brinnande snigel som ger ökad reshastighet.',
   'hudChrome.mounts.desc_stormfeather_griffin':
     'En kunglig stormgrip som smyger fram på runskodda klor, med vingarna hopfällda.',
   'hudChrome.mounts.desc_thunderstrut_gobbler':
     'En kolossal stormkläckt kalkon som stoltserar ner från Den vaknande toppen, med stjärten spretande som ett åskmoln.',
-  'hudChrome.mounts.desc_valorsteed':
-    'En uthållig, säkerfotad stridshäst som ger ökad reshastighet.',
   'hudChrome.mounts.dismount': 'Stig av',
   'hudChrome.mounts.emptyDropHint':
     'Sällsyntare riddjur droppar från hjältemodiga fängelsehålebossar och avklarade revor.',
@@ -16345,12 +16313,9 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.selected': 'Vald',
   'hudChrome.mounts.spec_speed': '+{pct}% extra rörlighet',
   'hudChrome.mounts.title': 'Riddjur',
-  'hudChrome.mounts.useToRide': 'Använd för att frammana detta riddjur.',
   'hudChrome.mountTraining.begin': 'Börja lektionen',
   'hudChrome.mountTraining.mountPrompt':
     'Tryck på {key} för att sitta upp på övnings-Tapperhetshästen.',
-  'hudChrome.mountTraining.ownedMountPrompt':
-    'Dina tyglar finns i dina väskor. Använd dem för att rida.',
   'hudChrome.mountTraining.returnToMarla':
     'Återvänd till Marla vid stallet för att köpa dina Tapperhetshäst-tyglar för 10g.',
   'hudChrome.mountTraining.ridePrompt':
@@ -18548,10 +18513,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Du äger ännu inga färgvarianter för stridsmechen.',
   'hudChrome.cosmetics.mechIntro':
     'Stridsmechen ersätter den här karaktärens kropp. En färgvariant bärs åt gången.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Ett riddjursskinn ritas över det riddjur som karaktären rider. Det ändrar aldrig farten.',
-  'hudChrome.cosmetics.mountsNoMount':
-    'Skaffa först ett riddjur: ett skinn behöver något att rida på.',
   'hudChrome.cosmetics.owned': 'Ägs',
   'hudChrome.cosmetics.scopeAccount': 'Konto',
   'hudChrome.cosmetics.scopeCharacter': 'Karaktär',
@@ -20729,123 +20690,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.nameLabel': 'Följeslagarens namn',
   'hudChrome.buddyMenu.rename': 'Byt namn på följeslagaren',
   'hudChrome.collections.actions.dismiss': 'Avvisa',
-  'hudChrome.collections.armor.mail': 'Ringbrynja',
-  'hudChrome.collections.buddyLore.alon':
-    'En resenärs maskot från en väg som ingen karta vill kännas vid, som dyker upp så fort en plan går snett. Den iakttar, den godkänner och den erbjuder ingen som helst hjälp.',
-  'hudChrome.collections.buddyLore.alpaca':
-    'Hjordarna i Stormkammen håller dem för ullens och humörets skull: inget förblir lugnare i en storm. Den här spottar på exakt en person per resa.',
-  'hudChrome.collections.buddyLore.ansem':
-    'Den talar om dörrar och mörker och låter sig inte dras in på något av ämnena. Nattblomstrets kultister hävdar att den tillhör dem; den vandrar iväg så fort de håller en rit.',
-  'hudChrome.collections.buddyLore.bull':
-    'En tjur från Dalen, stor som en hund, vilket är det enda skälet till att någon gick med på att ha en inomhus. Humöret krympte inte med resten.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    'En katt som vägrar skiljas från myntet den sitter på, och som ingen någonsin sett äta. Köpmännen i Östbäck grälar fortfarande om vilken av de två som är husdjuret.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    'En tidvattenskrabba från Fjärrkusten vars klo förblir röd långt efter att den lämnat vattnet. Hamnarbetarna brukade låta dem tävla längs plankorna om pengar.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'En skärva av självaste Nythraxis, fortfarande surrande av kylan som formade den. Den lyder den som drog fram den ur raidens spillror, och har inte förlåtit personen för det.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    'Ett tidvattensväsen som rider på sin egen droppe havsglas, uppfiskat ur stilla vatten av fiskare från Dalen till Fjärrkusten som ville fånga middag. Det behåller vattnet det kom upp i och vägrar låta sig övertalas att återvända.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'En rävhona från häckarna i Östbäcksdalen, döpt efter den kolröda pälsen som syns genom vinterns snår. Fångstmännen där gav upp om ungarna för generationer sedan och började ställa ut mat i stället.',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    'Den brinner ned till en glöd varje höst och reser sig ur sin egen aska till våren, vilket är allt någon kan berätta om den. Ingen har någonsin hittat ett bo, och ingen har någonsin fångat en två gånger.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'En valp från Vålnadsskogen, vars päls är grön i trädkronornas ljus som aldrig riktigt når skogsmarken. Väktarna föder upp de föräldralösa ungar som skogen lämnar efter sig.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    'Smidd i Den sista källans Smältdegel och aldrig riktigt färdig gick den ut ur Ignivars gjuteri medan hamrarna ännu slog. Bara den heroiska nedstigningen finner den: det smälta väsendet återvänder ständigt till smedjan som skapade det och följer med hem med den som överlever elden två gånger.',
-  'hudChrome.collections.buddyLore.frog':
-    'Dykärrsträsket föder upp dem tjocka och obekymrade, kväkande hela natten i vassen. Träskguiderna svär på att en båt med en sådan ombord aldrig går på grund.',
-  'hudChrome.collections.buddyLore.frostfire':
-    'Född i Frostslöjans vidder där en het källa bryter fram genom isfältet, och den har aldrig bestämt sig för vilken hälft den tillhör. Den ångar i kall luft och huttrar i varm.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'En vaktbagge från Bärnstensfallet, förgylld av kådan den växte upp i. Namnet är äldre än kådan: väktare av något slag vaktade lundarna långt innan någon kom på att tappa saven på flaska.',
-  'hudChrome.collections.buddyLore.horse':
-    'En dalponny, framavlad liten för fruktträdgårdarnas stigar och aldrig upplyst om att den inte är en stridshäst. Den håller jämna steg vid din sida och följer vem som helst som en gång gett den ett äpple.',
-  'hudChrome.collections.buddyLore.kekius':
-    'En skrattande följeslagare av oklart ursprung, anammad som lyckobringare av kapplöpningsstallarna i Stormkammen. Den har överlevt fyra stall som svor vid den.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    'Den följer alla som bär heroiska märken och har aldrig en enda gång ertappats med att stjäla. Kvartermästare Vex vidhåller att det inte bevisar någonting alls.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'En hare från Pilkärret, grönpälsad efter ett liv med sovplats i våt torv. Träskets örtkännare ser dem som lyckobringare och tillåter inte att någon jagar bort dem från en trappa.',
-  'hudChrome.collections.buddyLore.nightfang':
-    'En ung jägare från Nattblomstret, tyst även med sitt släktes mått mätt. Den följer med för sällskapets skull och jagar inget större än en nattfjäril.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'En gnomisk uppfinnarlärling som tar betalt per timme och är värd varenda kopparslant. Rustmästare Hode tog sig an henne för att reglera en skuld och säljer nu arrangemanget till alla med tusen guld.',
-  'hudChrome.collections.buddyLore.phantom':
-    'En handflatestor vålnad från Vålnadsskogens gravhögar, bara lakan och inga ben, som dyker upp i en stängd packning och stannar för sällskapets skull. Ingen har kommit på vad den vill, och den har aldrig ens försökt skrämma någon.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'En veteran från krigsförråden som behöll honnören och förlorade graden. Krigsmarskalk Draven Kole ger en till varje soldat med nog mycket ära för att veta vad det kostar.',
-  'hudChrome.collections.buddyLore.raptor':
-    'En unge från Drakländerna, såld vidare innan den lär sig hur fort den kan springa. Varje ny ägare får höra att den måste hållas mätt, och ingen behöver höra det två gånger.',
-  'hudChrome.collections.buddyLore.rocky':
-    'En stenskalskrypare från Törntoppshöjdernas rasbranter, långsam och fullständigt obekymrad. Gruvarbetare håller dem för deras förmåga att stanna upp strax före ett ras.',
-  'hudChrome.collections.buddyLore.sapling':
-    'Ett ungt träd med ett leende i barken och en nyfiken lila blick. Dess rötter bär det med glatt vaggande steg vart du än vandrar.',
-  'hudChrome.collections.buddyLore.skeleton':
-    'Det kom upp ur Vålnadsskogens gravhögar, borstade av sig och har följt efter folk sedan dess. Ingen har fastställt vems ben det var.',
-  'hudChrome.collections.buddyLore.solbot':
-    'En liten soldriven automat, uppgrävd halvt begravd i Drakländernas aska och fortfarande tickande. Verkstaden som byggde den lämnade inget märke någonstans på höljet.',
-  'hudChrome.collections.buddyLore.spider':
-    'En handflatestor vävare från Vålnadsskogen som möblerar om varje packning den bärs i. Spindelväven är starkare än tråden den ersätter.',
-  'hudChrome.collections.buddyLore.sprites':
-    'Två små eldväsen, ett gyllene och ett blågrönt, som aldrig riktigt enas om vem som leder. Kom nära nog så förenas de till en grön låga, för att sedan skratta och glida isär igen.',
-  'hudChrome.collections.buddyLore.stag':
-    'En blodslinje från Evighetsträdgården, framavlad ur de stora hjortar väktarna en gång red. Den sänker fortfarande huvudet när en hand höjs, av en vana äldre än djuret självt.',
-  'hudChrome.collections.buddyLore.tiger':
-    'Palmviddens ränder på ett djur som aldrig sett Palmvidden: blodslinjen har hållits i fångenskap sedan de gamla menagerierna stängde. Den lyder en vissling och ingenting annat.',
-  'hudChrome.collections.buddyLore.triple_t':
-    'Tre av någonting, eller en sak tre gånger om. Uppgifterna går isär, och varelsen står inte still tillräckligt länge för att bli räknad.',
-  'hudChrome.collections.buddyLore.trollface':
-    'En grinande sak som Vålnadsskogen släppte ut och vägrade ta tillbaka. Varje försök att beskriva den slutar med att berättaren skrattar och ger upp.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'Ett djur från Törntoppshöjderna, framavlat kortbent av herdar som ville ha ett vildsvin som inte kunde riva ett staket. Humöret behöll det ändå.',
-  'hudChrome.collections.close': 'Stäng jakten',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Frostbunden',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Elektrisk',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Askgrå',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Vitglödande',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Safirgroda',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Grönskande',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Krigsherre',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Ekollonkrona',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Förgylld',
-  'hudChrome.collections.cosmeticUnlocked': 'Nytt utseende för {name}: {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Bindning',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% per dödande',
-  'hudChrome.collections.detail.dropLabel': 'Tappas av',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% per dödande, {heroicChance}% i heroiskt läge',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC-börsen',
-  'hudChrome.collections.detail.exchangeNone': 'Inga annonser',
-  'hudChrome.collections.detail.exchangeUnavailable': 'Inte tillgängligt i denna klient',
-  'hudChrome.collections.detail.fishingDrop': 'Fiske var som helst, {chance}% per fångst',
-  'hudChrome.collections.detail.globalDrop':
-    'Valfri fiende, {chance}% per dödande, en av {count} med denna sällsynthet',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob} ({location}), endast heroiskt läge, {chance}% per dödande',
-  'hudChrome.collections.detail.marketAtMerchant': 'Visas hos köpmannen',
-  'hudChrome.collections.detail.marketChecking': 'Kontrollerar...',
-  'hudChrome.collections.detail.marketLabel': 'Världsmarknaden',
-  'hudChrome.collections.detail.marketNone': 'Inga annonser',
-  'hudChrome.collections.detail.marksPrice': '{amount} heroiska märken',
-  'hudChrome.collections.detail.noItem': 'Inget föremål ger detta ännu',
-  'hudChrome.collections.detail.noSell': 'Kan inte säljas',
-  'hudChrome.collections.detail.noSource': 'Ingen källa i spelet ännu',
-  'hudChrome.collections.detail.sellLabel': 'Handlaren betalar',
-  'hudChrome.collections.detail.setLabel': 'Insamlat',
-  'hudChrome.collections.detail.soulbound': 'Själsbundet',
-  'hudChrome.collections.detail.tradeable': 'Kan handlas',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) för {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Säljs av',
-  'hudChrome.collections.keybindLabel': 'Jakt',
-  'hudChrome.collections.launcherTitle': 'Jakt: följeslagare, riddjur och föremålsset',
-  'hudChrome.collections.looks.locked': 'Låst',
-  'hudChrome.collections.looks.none': 'Inga utseenden har skapats för denna följeslagare ännu',
-  'hudChrome.collections.looks.title': 'Utseenden',
-  'hudChrome.collections.looks.unlocked': 'Upplåst',
-  'hudChrome.collections.looks.worn': 'Använt',
-  'hudChrome.collections.petKind.celebrity': 'Kändisar',
   'hudChrome.collections.presence.alon': 'Du känner dig iakttagen och stillsamt godkänd.',
   'hudChrome.collections.presence.alpaca':
     'Något ulligt och makligt har bestämt sig för att följa med.',
@@ -20896,41 +20740,11 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'En grymtning och en stampning: något envist följer dig.',
   'hudChrome.collections.presenceDefault': 'Du känner en närvaro som iakttar dig.',
   'hudChrome.collections.revealed': '{name} har bestämt sig för att följa dig.',
-  'hudChrome.collections.set.bonusLabel': '{pieces} delar',
-  'hudChrome.collections.set.itemLevel': 'föremålsnivå {level}',
-  'hudChrome.collections.set.owned': '{owned} av {total} delar',
-  'hudChrome.collections.source.bossDrop': '{mob} ({location}), {chance}% per spelare och dödande',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), endast heroiskt läge, {chance}% per spelare',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% per spelare, {heroicChance}% i heroiskt läge',
-  'hudChrome.collections.source.bossLabel': 'Bossföljeslagare',
-  'hudChrome.collections.source.challengeDps':
-    'Gör {dps} skada per sekund på {mob} under hela striden',
-  'hudChrome.collections.source.challengeLabel': 'Utmaning',
-  'hudChrome.collections.source.challengeSpeed':
-    'Besegra {mob} inom {seconds} sekunder från stridens början',
-  'hudChrome.collections.source.craft': '{item} (recept för {profession})',
-  'hudChrome.collections.source.craftLabel': 'Tillverkat',
-  'hudChrome.collections.source.deed': 'Bedriften {deed}',
-  'hudChrome.collections.source.deedLabel': 'Förtjänas genom',
-  'hudChrome.collections.source.grantLabel': 'Tilldelat',
-  'hudChrome.collections.source.grantOnly':
-    'Säsongsbelöning: den månatliga rankningen och belöningarna för bästa stridsloggar',
-  'hudChrome.collections.source.rollNote':
-    'Varje spelare slår separat; ingen förlorar sitt slag till en gruppmedlem.',
-  'hudChrome.collections.source.token':
-    '{item}, används en gång för att knyta följeslagaren till dig',
-  'hudChrome.collections.source.tokenLabel': 'Pollett',
-  'hudChrome.collections.stat.mixed': 'Blandad',
-  'hudChrome.collections.stat.strength': 'Styrka',
   'hudChrome.collections.state.notOwned': 'Inte insamlat',
   'hudChrome.collections.state.owned': 'Insamlat',
   'hudChrome.collections.state.pending': 'En närvaro följer dig',
   'hudChrome.collections.state.unavailable': 'Kan inte fås ännu',
   'hudChrome.collections.tabs.buddies': 'Följeslagare',
-  'hudChrome.collections.tabs.sets': 'Föremålsset',
-  'hudChrome.collections.title': 'Jakt',
   'hudChrome.cosmetics.buddyActive': 'Frammanad',
   'hudChrome.cosmetics.buddyDrag': 'Dra till handlingsfältet',
   'hudChrome.courier.bags': 'Skicka till banken',
@@ -20942,7 +20756,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Återlämnade föremål får plats även om väskorna är fulla. Kuriren försvinner efter leveransen tills den frammanas igen.',
   'hudChrome.courier.close': 'Stäng kuriren',
   'hudChrome.courier.instructions':
-    'Välj hela staplar. Kuriren sätter in dem först och hämtar sedan de föremål du begärt. Uppdragsföremål kan inte skickas.',
+    'Välj hela staplar för din bank, Materialvalvet eller en annan karaktär. Kuriren sätter in dem först och hämtar sedan de föremål du begärt. Uppdragsföremål kan inte skickas.',
   'hudChrome.courier.membership': 'Förnya ditt medlemskap för att påbörja en till resa.',
   'hudChrome.courier.outbound': 'Flyger till banken',
   'hudChrome.courier.ready': 'Redo för en leverans',
@@ -21261,8 +21075,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.kinds.task': 'Utförande',
   'hudChrome.guildHall.lifetime': 'Slutförda kontrakt: {count}',
   'hudChrome.guildHall.mountOffer': 'Riddjur: {mount}',
-  'hudChrome.guildHall.mountPreview':
-    'Markriddjur: +{pct}% rörelsehastighet under ridning. Kräver ridträning.',
   'hudChrome.guildHall.needSeals': 'Behöver {count} till',
   'hudChrome.guildHall.open': 'Öppna',
   'hudChrome.guildHall.owned': 'Ägd',
@@ -24483,8 +24295,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.cantors_hymnal.name': 'Kantorns psalmbok',
   'entities.items.cantors_stole.name': 'Kantorns stola',
   'entities.items.cellwatch_belt.name': 'Cellvaktens bälte',
-  'entities.items.charm_stag_acorn.name': 'Ekollonkronans amulett',
-  'entities.items.charm_stag_gilded.name': 'Förgylld amulett',
   'entities.items.choristers_gloves.name': 'Koristens handskar',
   'entities.items.choristers_spaulders.name': 'Koristens axelskenor',
   'entities.items.chorus_conch.name': 'Körsnäcka',
@@ -24568,41 +24378,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.turnkeys_shank.name': 'Fängelsevaktens stickkniv',
   'entities.items.unquiet_stalkers_hood.name': 'Den orolige smygarens huva',
   'entities.items.vestments_of_the_waking_rite.name': 'Uppvaknandets rits skrud',
-  'entities.items.whistle_alon.name': 'Visselpipa för Alon',
-  'entities.items.whistle_alpaca.name': 'Alpackavisselpipa',
-  'entities.items.whistle_ansem.name': 'Visselpipa för Ansem',
-  'entities.items.whistle_bull.name': 'Tjurvisselpipa',
-  'entities.items.whistle_cate_coin.name': 'Myntkattens visselpipa',
-  'entities.items.whistle_crimson_claw_crab.name': 'Karmosinkrabbans visselpipa',
-  'entities.items.whistle_crystal_lich.name': 'Kristalllichens visselpipa',
-  'entities.items.whistle_crystal_tide.name': 'Kristalltidvattnets visselpipa',
-  'entities.items.whistle_ember_fox.name': 'Glödrävens visselpipa',
-  'entities.items.whistle_emberfall_phoenix.name': 'Glödfallsfenixens visselpipa',
-  'entities.items.whistle_emerald_wolf.name': 'Smaragdvargens visselpipa',
-  'entities.items.whistle_forgemaw.name': 'Visselpipa för Smältkäften',
-  'entities.items.whistle_frog.name': 'Grodvisselpipa',
-  'entities.items.whistle_frostfire.name': 'Frosteldens visselpipa',
-  'entities.items.whistle_golden_sentinel.name': 'Gyllene väktarens visselpipa',
-  'entities.items.whistle_horse.name': 'Hästvisselpipa',
-  'entities.items.whistle_kekius.name': 'Visselpipa för Kekius',
-  'entities.items.whistle_loot_goblin.name': 'Bytesgoblinens visselpipa',
-  'entities.items.whistle_moss_hare.name': 'Mossharens visselpipa',
-  'entities.items.whistle_nightfang.name': 'Nattandens visselpipa',
-  'entities.items.whistle_penny_goldspark.name': 'Penny Guldgnistas visselpipa',
-  'entities.items.whistle_phantom.name': 'Vålnadsvisselpipa',
-  'entities.items.whistle_proud_grunt.name': 'Stolte soldatens visselpipa',
-  'entities.items.whistle_raptor.name': 'Raptorvisselpipa',
-  'entities.items.whistle_rocky.name': 'Stenis visselpipa',
-  'entities.items.whistle_sapling.name': 'Plantans visselpipa',
-  'entities.items.whistle_skeleton.name': 'Skelettvisselpipa',
-  'entities.items.whistle_solbot.name': 'Solbotens visselpipa',
-  'entities.items.whistle_spider.name': 'Spindelvisselpipa',
-  'entities.items.whistle_sprites.name': 'Flimmer och Glimmers visselpipa',
-  'entities.items.whistle_stag.name': 'Hjortvisselpipa',
-  'entities.items.whistle_tiger.name': 'Tigervisselpipa',
-  'entities.items.whistle_triple_t.name': 'Trippel-T:s visselpipa',
-  'entities.items.whistle_trollface.name': 'Trollansiktets visselpipa',
-  'entities.items.whistle_tuskhorn_boar.name': 'Beteshornsgaltens visselpipa',
   'entities.mobs.balgath_cyclops.name': 'Balgath, den enögde förmannen',
   'entities.mobs.barnacle_crawler.name': 'Vrakbunden sjöman',
   'entities.mobs.basin_raptor.name': 'Bassängraptor',
@@ -24634,7 +24409,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_phantom.name': 'Vålnad',
   'entities.mobs.buddy_proud_grunt.name': 'Stolt soldat',
   'entities.mobs.buddy_rocky.name': 'Stenis',
-  'entities.mobs.buddy_sapling.name': 'Planta',
   'entities.mobs.buddy_skeleton.name': 'Skelett',
   'entities.mobs.buddy_solbot.name': 'Solboten',
   'entities.mobs.buddy_spider.name': 'Spindel',
@@ -25616,4 +25390,198 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.npcs.socketwright_skerrit.name': 'Maben Skerrit',
   'entities.zones.goldcrest_harbor.name': 'Goldcrest Harbor',
   'referralCards.okay': 'OK',
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Dra ut spjutet',
+  'abilityUi.cast.temple_score': 'Partituret',
+  'abilityUi.cast.temple_score_answer': 'Besvara partituret',
+  'abilityUi.cast.wildheart_idols_breath': 'Idolens andedräkt',
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Svalnar',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Tänds',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Jaktspjut',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': 'Idolen vaknar',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Håll tanken inom hennes synfält. Spara avbrott till Drunknandets aria.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'Mellan andra besvärjelser träffar en projektil var {every} sek efter en synlig varning på {windup} sek och orsakar Frostskada motsvarande {mult} gånger hennes vapenskada. Att avbryta Drunknandets aria stoppar projektiler och arian i {quiet} sek.',
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe rör sig aldrig och gör inga närstridsattacker. Samlas för Kör, lämna gruppen för Solo, avbryt Drunknandets aria och undvik Insjösvall. Vid två hälsogränser ska ni upprepa hennes melodi på månplattorna med sångare som turas om.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    'Hennes övriga attacker pausas medan gruppen besvarar partituret. Månvattenprojektiler har ingen kastmätare och kan inte avbrytas.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    'Under svaret slocknar plattorna. Minns melodin och turas om.',
+  'bossJournal.temple.selthe.scoreResponse':
+    'Se melodin och kliv sedan på plattorna i ordning. Turas om med en annan levande spelare att spela rätt toner; en ensam överlevande kan slutföra själv. Blockerade steg är ofarliga. Kliv av och på igen för att spela en platta, även en som var upptagen innan svaret började.',
+  'bossJournal.temple.selthe.scoreSummary':
+    'Vid {first} och {second} hälsa blir hon immun och spelar {notes}, sedan {finalNotes} toner. Upprepa dem inom {answer}, sedan {finalAnswer} sek. Fel platta orsakar {falseNote} Frostskada och återställer framstegen, men inte tiden. Om tiden tar slut får alla {min} till {max} Frostskada. Vid framgång bedövas hon i {stun} sek och tar {vulnerability} mer skada i {bonusSeconds} sek.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'Håll koll på arians mål och alla som fångas ensamma av Kör. Hjälp till att sjunga nästa ton under partituret och hela misstag.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    'Gå till den omarkerade halvan innan varningen slutar. Mittlinjen är säker. På Heroisk släcker andedräkten också tända glyfer på sin halva; de kan tändas igen direkt.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    'Var {every} sek markeras ena halvan av terrassen i {warning} sek, sedan får alla på den halvan {min} till {max} Naturskada. Andedräkterna växlar halva.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    'Omarkerade spelare tänder glyfer framför Bytet. Led honom genom dem och attackera sedan under Solträff. Glyferna slocknar när jakten slutar.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    'De {count} glyferna börjar släckta. Under jakten tänder en omarkerad spelare en genom att stå på den i {kindle} sek. Om inga omarkerade spelare återstår kan Bytet tända den på {alone} sek. Att gå av återställer framstegen. En tänd glyf saktar ner honom med {slow} och ökar skadan han tar med {vulnerability} i {seconds} sek när han korsar den. Glyfen kan inte tändas igen på {dark} sek; han kan inte träffas av en annan glyf på {wary} sek. Under jakten varar bedövningar hälften så länge.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Han markerar ett nytt par var {pair} sek och växlar mellan dem var {switch} sek. Vid varje byte får det nya Bytet {turn} sek innan han börjar jaga.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Han väljer ett nytt Byte var {every} sek och vänder sig sedan mot det i {turn} sek innan han jagar.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    'Vid {health} hälsa förblir han en jaguarande tills han besegras. Tanken kan också bli Byte.',
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Var {every} sek träffar en besvärjelse med {cast} sek kasttid alla inom {radius} yd för {min} till {max} skada. Fastspjutade spelare tar {pinMult} gånger denna skada oavsett avstånd.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    'Välj spjutet och interagera inom {range} yd för att dra ut det på {pull} sek. Skada avbryter inte utdragningen. Om ingen annan står fri på terrassen kan offret interagera för att komma loss på {self} sek.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    'En besvärjelse med {cast} sek kasttid spetsar en spelare som inte är tank, eller tanken om ingen annan återstår. Rotningen varar upp till {seconds} sek och orsakar {bleed} skada var {tick} sek.',
+  'entities.mobs.wildheart_hunting_spear.name': 'Jaktspjut',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    'Hennes röst är bruten: hon tar {pct}% mer skada tills detta slutar.',
+  'hudChrome.auraEffect.temple.scoreWard':
+    'Sjunger partituret: hon tar ingen skada tills det slutar. Kliv på månplattorna i den ordning de ljöd innan versen slutar för att bryta hennes röst. Turas om: efter en ton måste en annan spelare spela nästa rätta ton. En ensam överlevande kan slutföra själv. Om versen slutar först orsakar Missklang {min} till {max} Frostskada ({heroicMin} till {heroicMax} på Heroisk) på alla på gården.',
+  'hudChrome.auraEffect.temple.spentVoice':
+    'Du kan inte spela en annan månplatta förrän en annan spelare spelar nästa rätta ton. Att kliva på en platta under tiden varken återställer svaret eller skadar dig. Kan inte skingras. Försvinner när du är den enda levande spelaren i din instans eller när partituret slutar.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    'Stenjaguaren har vaknat. Var {every} sek andas den över ena halvan av terrassen, sedan den andra, efter en golvvarning på {warning} sek: {min} till {max} Naturskada ({heroicMin} till {heroicMax} på Heroisk) på alla på den halvan. Zulgar förblir Jaguaravataren tills han dör och väljer ett nytt Byte var {seconds} sek ({heroicSeconds} sek på Heroisk).',
+  'hudChrome.auraEffect.wildheart.pinned':
+    'Ett Jaktspjut håller dig fast. Du blöder för {bleed} Fysisk skada ({heroicBleed} på Heroisk) var {every} sek, och Vildhjärtats puls träffar dig var du än står för {pulse}% mer skada. En lagkamrat kan dra ut spjutet på {pull} sek. Om ingen annan står fri kan du dra ut det själv på {wrench} sek. Det släpper efter {seconds} sek.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'Ingen solglyf kan träffa honom tills detta slutar. En tänd glyf han korsar förblir tänd.',
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Träffad av en tänd solglyf: rör sig {pct}% långsammare.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Träffad av en tänd solglyf: tar {pct}% mer skada.',
+  'hudChrome.courier.accountBank':
+    'Hämta från denna bank. Den karaktären måste vara utloggad när kuriren anländer.',
+  'hudChrome.courier.accountPlanned':
+    'Planerat för {name}: {count} staplar. Ett val för en annan karaktär ersätter dem.',
+  'hudChrome.courier.accountTitle': 'Andra karaktärer',
+  'hudChrome.courier.bagsAccount': 'Skicka till {name}s bank',
+  'hudChrome.courier.bagsAccountNone': 'Välj en karaktär att skicka föremål till.',
+  'hudChrome.courier.bagsVault': 'Skicka material till valvet',
+  'hudChrome.courier.boundAccount': 'På väg till en annan karaktärs bank',
+  'hudChrome.courier.boundBank': 'På väg till banken',
+  'hudChrome.courier.boundVault': 'På väg till Materialvalvet',
+  'hudChrome.courier.storeTabs': 'Kurirens förvaring',
+  'hudChrome.courier.vault': 'Hämta från valvet. Varje val hämtar hela raden.',
+  'hudChrome.courier.vaultCap': 'Rymmer {cap} av varje material',
+  'hudChrome.courier.vaultEmpty': 'Ditt valv är tomt.',
+  'hudChrome.courier.vaultLocked':
+    'Lås upp Materialvalvet hos en bankir för att använda det med kuriren.',
+  'hudChrome.courier.vaultTitle': 'Materialvalv',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'Normal vald. Nuvarande instanser är fortfarande Heroiska.',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'Heroisk vald. Nuvarande instanser är fortfarande Normala.',
+  'hudChrome.finder.mech.the_score':
+    'Partituret (två gånger sjunger hon en melodi på månplattorna: kliv på dem i den ordning de ljöd för att bryta hennes röst)',
+  'hudChrome.itemHistory.close': 'Stäng',
+  'hudChrome.itemHistory.noTransfers': 'Detta föremål har aldrig bytt ägare.',
+  'hudChrome.itemHistory.openAria': 'Föremålshistorik för {item}',
+  'hudChrome.itemHistory.passedTo': 'Överlämnat till {name} den {date}',
+  'hudChrome.itemHistory.title': '{item}: historik',
+  'hudChrome.itemMenu.itemHistory': 'Föremålshistorik',
+  'hudChrome.itemTooltip.lootedBy': 'Plundrat av {name} den {date}',
+  'hudChrome.itemTooltip.obtainedBy': 'Erhållet av {name} den {date}',
+  'hudChrome.itemTooltip.questRewardTo': 'Uppdragsbelöning till {name} den {date}',
+  'hudChrome.kitUse.freeAria': 'Dra ut {name}',
+  'hudChrome.kitUse.freeClick': 'Klicka här för att dra ut {name}',
+  'hudChrome.kitUse.freeFar': 'Gå inom {range} yd för att dra ut det',
+  'hudChrome.kitUse.freeKey': 'Dra ut {name}',
+  'hudChrome.kitUse.freeLine':
+    'Dra upp spjutet ur marken för att befria den fastspjutade. Träffar stoppar dig inte; rörelse eller bedövning gör det',
+  'hudChrome.kitUse.freeTap': 'Tryck här för att dra ut {name}',
+  'hudChrome.kitUse.freeUsingLine':
+    'Stå still för att dra ut spjutet: rörelse eller bedövning stoppar dig',
+  'hudChrome.options.firstPersonBody': 'Visa kropp',
+  'hudChrome.options.firstPersonMode': 'Förstaperson (Helt inzoomat)',
+  'hudChrome.options.firstPersonNoBody': 'Ingen kropp',
+  'hudChrome.options.firstPersonOff': 'Av',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few': '{count} tidigare överlåtelser visas inte.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many': '{count} tidigare överlåtelser visas inte.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': '{count} tidigare överlåtelse visas inte.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other': '{count} tidigare överlåtelser visas inte.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': 'Valt från PvP-raden i det veckovisa valvet',
+  'hudChrome.templeAlert.answerDarkLine':
+    'Turas om och upprepa ordningen ur minnet. Kliv av innan du kliver på en platta igen. Spelade: {done} av {total}',
+  'hudChrome.templeAlert.answerLine':
+    'Turas om: kliv på månplattan märkt {place}. Spelade: {done} av {total}',
+  'hudChrome.templeAlert.answerTitle': 'Besvara partituret!',
+  'hudChrome.templeAlert.brokenLine':
+    'Hon tar {pct}% mer skada tills detta slutar: använd dina starkaste attacker nu',
+  'hudChrome.templeAlert.brokenTitle': 'Selthes röst är bruten!',
+  'hudChrome.templeAlert.falseLine':
+    'Den plattan var i fel ordning. Svaret börjar om från första plattan',
+  'hudChrome.templeAlert.falseTitle': 'Falsk ton!',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'Minns ordningen innan plattorna slocknar. Upprepa den och turas om med en annan spelare',
+  'hudChrome.templeAlert.melodyLine':
+    'Se månplattorna ljuda en efter en. Upprepa ordningen och turas om med en annan spelare',
+  'hudChrome.templeAlert.melodyTitle': 'Partituret',
+  'hudChrome.templeAlert.spentLine':
+    'Du kan inte spela en platta förrän en annan spelare spelar nästa rätta ton. Spelade: {done} av {total}',
+  'hudChrome.templeAlert.spentTitle': 'En annan röst måste svara',
+  'hudChrome.templeAlert.stepOffLine':
+    'En månplatta ljuder bara när någon kliver på den. Kliv av denna platta och på igen',
+  'hudChrome.templeAlert.stepOffTitle': 'Kliv av och sedan på igen',
+  'hudChrome.templeAlert.timeAria': '{seconds} sekunder kvar',
+  'hudChrome.wildheartAlert.breathLine':
+    'Stenjaguaren ska andas över denna halva av terrassen. Gå till den andra halvan',
+  'hudChrome.wildheartAlert.breathTitle': 'Idolens andedräkt!',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    'Stå kvar på glyfen tills den tänds. Att kliva av börjar om',
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Tänder solglyfen',
+  'hudChrome.wildheartAlert.glyphLine':
+    'Stå på en släckt solglyf i {seconds} sek för att tända den. När Zulgar korsar den tar han {pct}% mer skada i {duration} sek',
+  'hudChrome.wildheartAlert.glyphTitle': 'Tänd solglyferna',
+  'hudChrome.wildheartAlert.pinnedLine':
+    'En lagkamrat måste dra ut Jaktspjutet. Vildhjärtats puls träffar hårdare medan du är fastspjutad',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    'Ingen är fri att hjälpa: dra ut Jaktspjutet själv innan Vildhjärtats puls träffar',
+  'hudChrome.wildheartAlert.pinnedTitle': 'Fastspjutad!',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    'Ingen annan kan tända solglyferna. Stå på en släckt glyf i {seconds} sek för att tända den och locka sedan Zulgar över den',
+  'hudChrome.wildheartAlert.spearLine':
+    'Spring till Jaktspjutet och dra ut det innan Vildhjärtats puls träffar',
+  'hudChrome.wildheartAlert.spearTitle': 'En allierad är fastspjutad!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    'Han tar {pct}% mer skada tills detta slutar: använd dina starkaste attacker nu',
+  'hudChrome.wildheartAlert.sunstruckTitle': 'Zulgar är solträffad!',
+  'itemUi.errors.orderTrackedItem': 'Handlaren tar inga beställningar på unik utrustning.',
+  'hudChrome.cosmetics.mountsIntro':
+    'Välj ditt riddjurs utseende här. Ridträning bestämmer hastigheten. Behåll riddjursföremålet i någon karaktärs väskor eller bank för att dela utseendet på hela kontot.',
+  'hudChrome.cosmetics.mountsNoMount':
+    'Lär dig rida hos stallmästare Marla för att kalla fram ett riddjur.',
+  'hudChrome.cosmetics.notCollected': 'Inte insamlat',
+  'hudChrome.guildHall.mountPreview':
+    'Riddjursutseende för alla karaktärer på ditt konto. Din ridträning bestämmer hastigheten.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Välj ditt riddjur i Kosmetik. Använd Sitt upp / Sitt av för att rida.',
+  'hudChrome.mounts.desc_grag_bear': 'En tålig, stadig björn med en tung sadel.',
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'En härdig snigel med uthållig energi och ett mossigt skal.',
+  'hudChrome.mounts.desc_valorsteed': 'En tålig, stadig häst med lädersadel.',
+  'hudChrome.mounts.useToRide':
+    'Använd för att välja detta utseende och kalla fram ditt riddjur. Behåll föremålet i någon karaktärs väskor eller bank för att dela utseendet på hela kontot. Ridträning bestämmer hastigheten.',
+  'itemUi.vendor.advancedRiding': 'Avancerad ridträning',
+  'itemUi.vendor.basicRiding': 'Ridträning',
+  'itemUi.vendor.ridingSpeed':
+    'Ökar din rörelsehastighet till häst med {speed}%. Gäller alla riddjur.',
+  'guide.mountsPage.firstBody':
+    'Marla säljer Tapperhetshästens tyglar för 10 guld när du har lärt dig rida. Att ha tyglarna låser upp hästutseendet i Kosmetik för alla karaktärer på ditt konto. Ridträningen låter dig redan kalla fram ett riddjur utan att bära tyglar, så välj hästen eller ett annat ägt utseende när du vill byta stil.',
+  'guide.mountsPage.goodsBody':
+    'Insamlade riddjursutseenden är tillgängliga på hela kontot så länge minst ett matchande tygelföremål finns i någon karaktärs väskor eller personliga bank. Om det sista giltiga föremålet byts bort, postas, läggs ut till försäljning, säljs eller tas bort på annat sätt försvinner utseendet från Kosmetik. En ryttare som använder det återgår till standardhästens utseende och förblir uppsutten med sin tränade hastighet.\n\nSpelartyglars föremål kan bytas, postas och läggas ut på Världsmarknaden om inget annat står på föremålet. Hästens tyglar kan också säljas till en handlare för 10 guld. Andra tyglar behåller sina egna försäljningsbegränsningar. Riddjursskins från butiken förblir kontokosmetik oberoende av tygelföremål.',
+  'guide.mountsPage.intro':
+    'Välj ett riddjursutseende, lär dig rida i stallet och färdas snabbare genom världen. Din träning bestämmer takten; alla riddjursutseenden är kosmetiska.',
+  'guide.mountsPage.learnBody':
+    'Ridning blir tillgänglig på nivå {level}. Stallmästare Marla Hitchen säljer Ridträning för 80 guld i Galecrest-stallet. Grundträningen ger {basicSpeed}% snabbare rörelse till häst. När du har lärt dig den säljer Marla även Avancerad ridträning för {advancedFee} guld, vilket ger {advancedSpeed}% snabbare rörelse till häst. Varje rang tillhör den karaktär som lär sig den.\n\nEfter grundträningen tar du Marlas uppdrag Ridlektioner och följer markören till den lysande rutan bakom startbågen. Tryck på Starta lopp för att låna träningens Tapperhetshäst. Slutför banan och återvänd för dina mynt och erfarenhet. Lånehästen återvänder till stallet när lektionen slutar.',
+  'guide.mountsPage.rideBody':
+    'Öppna Kosmetik och välj ett utseende på fliken Riddjur. Tangenten Sitt upp / Sitt av, som normalt är tangenten för grav accent, kallar fram ditt tränade riddjur med det utseendet. Knappen Riddjur på mobilen gör samma sak. Framkallning kräver en kort kanalisering; avsittning är omedelbar. Du kan byta utseende medan du rider utan att ändra hastigheten.\n\nDu kan även använda tyglar från väskorna eller en handlingsrad för att välja utseendet och kalla fram riddjuret. Använder du det utseende du redan rider på tas riddjuret bort. Tyglar i banken eller på andra karaktärer låser upp samma kosmetik utan att ryttaren behöver bära dem.',
+  'guide.mountsPage.speedBody':
+    'Grundläggande ridträning ger {basicSpeed}% snabbare rörelse till häst. Avancerad ridträning ger {advancedSpeed}% snabbare rörelse till häst och kostar {advancedFee} guld hos Marla. Alla riddjursutseenden använder samma hastighet för karaktärens träningsrang, oavsett sällsynthet eller ursprung. Butiksskins använder också den tränade hastigheten.',
+  'guide.mountsPage.speedHeading': 'Ridhastighet och träning',
+  'guide.mountsPage.whatBody':
+    'Riddjur är kosmetiska utseenden för din tränade ritt. De ger ingen rustning, skada eller stridsstatistik. Ridträning ökar färdhastigheten på marken och hopp till häst klarar högre hinder. Alla riddjur stannar på marken och inget kan simma.',
+  'guide.progression.ridingBody':
+    'På nivå {level} lär stallmästare Marla ut grundläggande ridning för guld och erbjuder sedan en avancerad rang. Träningen bestämmer hastigheten till häst. Välj ditt riddjursutseende i Kosmetik; insamlade utseenden delas så länge tyglarna finns i någon karaktärs väskor eller bank.',
 };

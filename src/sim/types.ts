@@ -1,4 +1,5 @@
-import type { CourierBankExchange } from './courier';
+import type { CourierAccountExchange, CourierBankExchange } from './courier';
+import { cloneItemProvenance, type ItemTrackedKind } from './item_provenance';
 import { cloneLootQuality, type LootQualityDescriptor } from './loot_quality/types';
 import type { LocalGathererIdentity } from './material_gatherer';
 import { cloneMaterialData, cloneMaterialPayload } from './material_payload_identity';
@@ -7,7 +8,7 @@ import type { MaterialComposition } from './material_sources';
 
 import type { ChatSenderFlair, StreamerLinks } from './account_flair';
 import type { ClutterStamp } from './city_clutter';
-import type { BuddyTokenKey } from './content/buddies';
+import type { BuddyKey } from './content/buddies';
 import type { MountKey } from './content/mounts';
 import type { CraftDef, GatheringProfessionId, ToolEffectId } from './content/professions';
 import type { RealmBuilderHonour } from './content/realm_builders';
@@ -1679,15 +1680,10 @@ export interface MountItemDef extends BaseItemDef {
   weapon?: never;
 }
 
-// A buddy GRANT TOKEN (a whistle). Using it attaches the named companion to
-// the character (src/sim/buddies.ts useBuddyToken) and consumes the token;
-// ownership is the per-character collection flag, never the item. Soulbound
-// and never listed by any loot table: a whistle is the channel a vendor, a
-// letter or an admin grant uses to hand a companion over, nothing more. A
-// token for a companion the player already has is refused unconsumed.
+// Historical item shape only. No buddy items exist in the live catalog.
 export interface BuddyItemDef extends BaseItemDef {
   kind: 'buddy';
-  buddy: BuddyTokenKey;
+  buddy: BuddyKey;
   armorType?: never;
   weapon?: never;
 }
@@ -1743,6 +1739,36 @@ export type ItemDef =
   | BuddyItemDef
   | BuddyCosmeticItemDef;
 
+/** One hand a tracked copy passed through: the character (display name plus
+ *  the stable character id where the host knows one) and the host epoch ms.
+ *  The origin record and every entry of the owner chain share this shape. */
+export interface ItemOwnerRecord {
+  at: number;
+  by: string;
+  byId?: number;
+}
+
+/** The provenance record on a tracked copy (item_provenance.ts owns the
+ *  bounds and the transfer rule). `source` is a sim-composed id
+ *  ("mob:<templateId>", "quest:<questId>", "craft:<recipeId>", "vendor",
+ *  "dev", "world", "legacy", "promotion", "restore", "boost"), never
+ *  player text; `zone` is the zone or dungeon id where the origin grant
+ *  landed. `owners` is the most
+ *  recent MAX_ITEM_OWNER_HISTORY holders after the origin, oldest first;
+ *  `transfers` is the true count of hands it changed, which keeps counting
+ *  after the chain rolls. */
+export interface ItemProvenance extends ItemOwnerRecord {
+  source: string;
+  zone?: string;
+  /** The guid of the copy this one was made from, when it was derived from
+   *  another tracked copy (an upgrade recipe that consumes one, an admin
+   *  restore of a lost copy, a duplicate-guid split): the parent's ledger
+   *  carries the matching consume row. */
+  derivedFrom?: string;
+  owners?: ItemOwnerRecord[];
+  transfers?: number;
+}
+
 // Per-instance item payload (#1165). Additive and OPTIONAL: most items stay plain
 // {itemId, count} with no instance payload (fungible, market-listable). A slot
 // carrying `instance` is non-fungible (signed, has rolled stats, or is
@@ -1751,6 +1777,25 @@ export type ItemDef =
 // time, see market.ts marketList); #1146 wires real market handling for
 // instanced items later.
 export interface ItemInstancePayload {
+  /** Per-copy identity for a TRACKED copy (an epic or legendary item,
+   *  item_provenance.ts TRACKED_ITEM_QUALITIES): one canonical UUID, minted
+   *  once at the inventory hub (item_tracking.ts) from the host's randomness
+   *  (SimConfig.mintItemGuid, the server's crypto.randomUUID) or the
+   *  deterministic fallback, and never rewritten afterwards. Two copies never
+   *  share one, so a tracked copy is one-per-slot by construction (the merge
+   *  predicate compares every key). Owner-only on the wire: the eqi peer
+   *  allowlist and publicInstanceView leave it out. */
+  guid?: string;
+  /** The tracked copy's provenance record (item_provenance.ts): who first
+   *  obtained it, when (host epoch ms), from what source and where, plus the
+   *  bounded chain of later holders the hub appends on every grant that
+   *  changes hands (`movement` grants to a different character). Stamped
+   *  beside `guid` and judged atomically on load. The full record is
+   *  owner-only; other players read its publicProvenanceView: beside the
+   *  payload on a market row (`history`) and the inspect `eqh` key, inside
+   *  the slot on the guild bank member wire (guildBankMemberWireView), never
+   *  inside publicInstanceView, so no payload equality moves. */
+  provenance?: ItemProvenance;
   /** Exact referral-card provenance for a movable trinket; bags remain fungible. */
   referralLinkId?: number;
   /** Permanent loot quality (enemy drops and other earned rewards), independent of rarity, enchants and upgrades. */
@@ -1887,6 +1932,9 @@ export function cloneItemInstancePayload(src: ItemInstancePayload): ItemInstance
   const lootQuality = cloneLootQuality(src.lootQuality);
   if (lootQuality) instance.lootQuality = lootQuality;
   if (src.charges) instance.charges = { ...src.charges };
+  // The owner chain is a mutable array on the provenance record (item_provenance.ts).
+  if (src.provenance && typeof src.provenance === 'object')
+    instance.provenance = cloneItemProvenance(src.provenance);
   if (
     src.perfectingBonus &&
     typeof src.perfectingBonus === 'object' &&
@@ -2095,14 +2143,6 @@ export interface LootEntry {
   // always rides a truthy `copper` (the roller's money arm gates on copper).
   heroicCopper?: number;
   chance: number; // 0..1
-  // Heroic-claim drop rate for THIS row, substituted for `chance` exactly the
-  // way heroicCopper substitutes for `copper`: a value swap on the same single
-  // draw, never an extra one, so the per-kill draw count (and every parity
-  // golden riding it) is identical on both difficulties. Authored where one
-  // item is meant to drop from the same boss at two rates rather than living
-  // on two tables (the Crystal Lich whistle: 0.5% normal, 1% heroic). Ignored
-  // on a rollGroup row, where the group's partition owns the odds.
-  heroicChance?: number;
   questId?: string; // only drops while this quest is active and not complete
   // Entries sharing a rollGroup are exclusive: one rng draw is partitioned by
   // their chances, so at most one matching entry drops.
@@ -5302,10 +5342,14 @@ export interface KitUseDef {
    *  from the user. 'relight': the body's dungeon module reads the completion
    *  off the body (`Entity.kitUseCompletedBy`) and decides what it lights
    *  (the Hollow Crypt's Remembrance Candles, encounters/hollow_crypt/
-   *  morthen_candles.ts). */
+   *  morthen_candles.ts). 'free': the same hand-off to the dungeon module,
+   *  for a body that holds a player (the Wildheart Basin's Hunting Spear,
+   *  encounters/wildheart_basin/zulgar_spear.ts); only the prompt's copy
+   *  differs. */
   effect:
     | { kind: 'topple'; ahead: number; hazard: KitHazardDef }
-    | { kind: 'relight'; school: Aura['school'] };
+    | { kind: 'relight'; school: Aura['school'] }
+    | { kind: 'free'; school: Aura['school'] };
   /** The use is NOT broken by a hit that lands on the user (a step, a stun,
    *  death or drifting out of reach still break it): the candle's channel
    *  drains its lighter's health and the healer heals them through it. */
@@ -5661,15 +5705,16 @@ export interface SeltheFightState {
   kind: 'selthe';
   chorusTimer: number;
   soloTimer: number;
-  songTimer: number;
   /** Seconds to the next Mere Surge and the next Drowning Aria. */
   surgeTimer: number;
   ariaTimer: number;
-  /** The breath she takes after a bar before her next Moonwater Bolt. */
-  boltGap: number;
-  /** After a kick: seconds she casts neither bolt nor aria. */
+  /** Seconds to her next Moonwater Bolt (it runs only while she sings no
+   *  bar), and whether its gather cue has gone out. */
+  boltTimer: number;
+  boltCued: boolean;
+  /** After a kick: seconds she throws no bolt and sings no aria. */
   quiet: number;
-  /** The kickable bar she began (a bolt or the aria), so a cut one is seen. */
+  /** The kickable bar she began (the aria), so a cut one is seen. */
   kickable: string | null;
   /** The Mere Surge's locked aim while its bar runs. */
   surgeYaw: number | null;
@@ -5694,6 +5739,41 @@ export interface SeltheFightState {
   casts: number;
   /** Someone took a Chorus alone or a Solo caught a second player (the deed). */
   flubbed: boolean;
+  /** The moon tiles round her pool (selthe_score.ts): their spots
+   *  (instance-local) and their encounter objects, in tile order. */
+  tiles: { x: number; z: number; objectId: number }[];
+  /** Scores begun this fight, and whether the next one is owed (her health
+   *  crossed its mark and she is waiting for her bar and her marks to end). */
+  scores: number;
+  scoreQueued: boolean;
+  /** The Score in flight. */
+  score: SeltheScoreState | null;
+}
+
+/** One Score (encounters/drowned_temple/selthe_score.ts): she sings the
+ *  melody on the tiles, then the group steps on them in that order. */
+export interface SeltheScoreState {
+  phase: 'melody' | 'answer';
+  /** Which Score of the fight this is (0 the first): its notes and its clock. */
+  index: number;
+  /** The melody: tile indices in the order they ring. */
+  order: number[];
+  /** Heroic: the tiles go dark for the answer. */
+  hidden: boolean;
+  /** Seconds left in this phase (it mirrors her bar). */
+  timer: number;
+  /** Melody: notes rung so far and the seconds to the next. */
+  rung: number;
+  noteIn: number;
+  /** Answer: tiles sounded in order so far. */
+  progress: number;
+  /** Last correct singer, independent of the display aura and wrong notes. */
+  lastSingerId: number | null;
+  /** Who stands on each tile (player ids, by tile), so a step counts once,
+   *  on the way in. */
+  inside: number[][];
+  /** Tiles a wrong step soured, and the seconds until each clears. */
+  sour: { tile: number; remaining: number }[];
 }
 
 /** The Mere Hydra's fight, SHARED by its three heads (one object referenced
@@ -5915,12 +5995,51 @@ export interface GorgebloomFightState {
 }
 
 /** Zulgar's pull (encounters/wildheart_basin/zulgar.ts). */
+/** One sun glyph of Zulgar's terrace (zulgar_glyphs.ts). */
+export interface ZulgarGlyphState {
+  /** Its encounter object (the look: lit or dark, and its clocks). */
+  objectId: number;
+  lit: boolean;
+  /** Seconds a player has stood lighting it (0 when nobody does). */
+  kindle: number;
+  /** Seconds left before a spent glyph can be lit again. */
+  cold: number;
+}
+
+/** A Hunting Spear standing in the terrace (zulgar_spear.ts). */
+export interface ZulgarSpearState {
+  /** The spear's usable body and the player it pins. */
+  bodyId: number;
+  victimId: number;
+  /** Seconds it has stood, and bleeds dealt. */
+  age: number;
+  bleeds: number;
+  /** Where it pinned its victim (world): a shove never drags them off it. */
+  x: number;
+  y: number;
+  z: number;
+}
+
+/** The Idol's Breath of the final phase (zulgar_idol.ts). */
+export interface ZulgarIdolState {
+  /** Seconds to the next warning. */
+  timer: number;
+  /** The half the next exhale marks (+1 east, -1 west). */
+  side: 1 | -1;
+  /** The exhale in flight: its object, its half, and the seconds left of
+   *  its warning (then of its pour). */
+  breath: { objectId: number; side: 1 | -1; left: number; landed: boolean } | null;
+}
+
 export interface ZulgarFightState {
   kind: 'zulgar';
-  phase: 'fight' | 'hunt' | 'ambush';
+  /** `final`: The Idol Wakes (30 percent): the avatar hunts until he dies. */
+  phase: 'fight' | 'hunt' | 'ambush' | 'final';
   pulseTimer: number;
   /** Spirit of the Hunt thresholds fired (70 and 40 percent). */
   huntsFired: number;
+  /** The Idol Wakes has begun (its 30 percent threshold fires once a pull). */
+  idolFired: boolean;
   /** Seconds left of the hunt (or of the ambush). */
   huntLeft: number;
   /** The prey marks (two on heroic Twin Prey) and which one he chases. */
@@ -5936,9 +6055,20 @@ export interface ZulgarFightState {
   respite: { id: number; left: number }[];
   /** He roared over the kill, waiting out a respite with nobody to hunt. */
   waiting: boolean;
-  /** Seconds each sun glyph stays dark (0 = lit), and its object. */
-  glyphDark: number[];
-  glyphIds: number[];
+  /** The six sun glyphs, in SUN_GLYPHS order. */
+  glyphs: ZulgarGlyphState[];
+  /** Seconds a Sunstruck avatar is still wary of the sun: no glyph strikes
+   *  him again until it runs out. */
+  sunWary: number;
+  /** Seconds to the next Hunting Spear, the pick its bar is aimed at, and
+   *  the spears standing. */
+  spearTimer: number;
+  spearTargetId: number | null;
+  spears: ZulgarSpearState[];
+  /** The final phase's Prey clock (seconds to the next switch) and the
+   *  idol's breath; null until the idol wakes. */
+  markClock: number;
+  idol: ZulgarIdolState | null;
   /** Heroic Ambush: the marked spot (instance-local) and its circle. */
   ambushAt: { x: number; z: number } | null;
   ambushMarkId: number | null;
@@ -8229,7 +8359,7 @@ export interface Entity extends ClientMirroredEntityFields {
    *  Sexton Marrow, the Lady of the Bonechill, Cantor Ilvane). Sim authority
    *  only; the client reads casts, auras and the encounter objects. */
   cryptBossFight?: CryptBossFightState;
-  /** A 'relight' G3 use completed on this body (mob/trash_kit/encounter_use.ts):
+  /** A 'relight' or 'free' G3 use completed on this body (mob/trash_kit/encounter_use.ts):
    *  the user's entity id, read and cleared by the dungeon module that owns
    *  the body on its next pass. Sim authority only. */
   kitUseCompletedBy?: number;
@@ -8477,6 +8607,8 @@ export interface Entity extends ClientMirroredEntityFields {
   // online self-extrapolator predicts mounted speed in lockstep. The persisted
   // selection lives on PlayerMeta.selectedMount (src/sim/content/mounts.ts).
   mountKey: string;
+  // Character training controls movement for every cosmetic mount model.
+  ridingTier: 0 | 1 | 2;
   // Mount summon/dismount transition (players only; 0 = idle). Seconds left in the
   // call-the-mount summon or the dismount, driven per tick by updateMountTransition
   // (src/sim/mounts.ts). The sim READS it: player_motion.stepPlayerMotion roots the
@@ -10596,6 +10728,31 @@ export type SimEvent = { pid?: number } & (
       rankBefore?: number;
       rankAfter?: number;
     }
+  // Tracked-item ledger event (item_tracking.ts): one per lifecycle step of
+  // an epic or legendary copy (ITEM_TRACKED_KINDS, item_provenance.ts): the
+  // guid mint, each recorded change of hands, each in-place modification,
+  // the end of its life, and the mint of a copy derived from another. Server-
+  // only (server/event_frame.ts SERVER_ONLY_EVENT_TYPES): the authoritative
+  // server mirrors it into item_ledger (server/item_ledger.ts), no client ever
+  // receives it. The pid is the character the step happened to; by/byId name
+  // that character (display name plus the stable character id online). The
+  // at field is host epoch ms. `detail` is a short sim-composed note (a rank,
+  // an enchant id, what the copy became) and `relatedGuid` the other copy a
+  // swap or derivation names. Draw-free by construction.
+  | {
+      type: 'itemTracked';
+      kind: ItemTrackedKind;
+      guid: string;
+      itemId: string;
+      quality: string;
+      by: string;
+      byId?: number;
+      source: string;
+      zone?: string;
+      detail?: string;
+      relatedGuid?: string;
+      at: number;
+    }
   // Masterwork zone broadcast (Professions 2.0): the soft zone-wide
   // copy of a masterwork proc, one per overworld player currently in the
   // crafter's zone INCLUDING the crafter, `pid` being the RECIPIENT (the
@@ -12456,6 +12613,11 @@ export interface SimConfig {
   devCommands?: boolean; // local dev: /dev level|tp|give chat cheats
   worldPvpDisabled?: boolean; // realm kill switch for the /pvp flag (server env WORLD_PVP_DISABLED=1)
   lockoutNowMs?: () => number; // host wall-clock for persisted raid lockouts
+  // Host randomness for the per-copy guid of a tracked (epic or legendary)
+  // item (item_tracking.ts): the server binds crypto.randomUUID, the offline
+  // client its own crypto. Unset (tests, headless) falls back to the
+  // deterministic mint in item_provenance.ts, which never touches the rng.
+  mintItemGuid?: () => string;
   // Host wall clock the day/night cycle is anchored to (src/sim/day_night.ts): the
   // server's Date.now, the offline client's Date.now (or its /daynight override), so
   // a boss who sleeps at night sleeps under the sky the renderer actually draws.
@@ -12530,6 +12692,9 @@ export interface SimConfig {
   // headless hosts omit it and receive an inert successful reservation.
   vaultConsumptionAdmission?: VaultConsumptionAdmission;
   courierBankExchange?: CourierBankExchange;
+  // The courier's other-character leg (server membership services); offline
+  // hosts omit it and a courier there has no other characters to visit.
+  courierAccountExchange?: CourierAccountExchange;
   // The material-gatherer identity for the player this constructor MINTS (the
   // primary offline/headless character), allocated by the HOST outside the sim
   // and passed in whole (src/sim/material_gatherer.ts). A VALUE, never a

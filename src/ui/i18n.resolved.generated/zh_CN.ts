@@ -475,9 +475,24 @@ export const zh_CN: EnTranslations = {
       "returning": "正带着物品返回",
       "waiting": "等待归还物品",
       "bags": "存入银行",
+      "bagsVault": "将材料送入仓库",
       "bank": "从银行取出",
+      "vault": "从仓库取回。选中的一行会整行带回。",
       "inventory": "背包",
       "bankTitle": "银行",
+      "vaultTitle": "仓库",
+      "storeTabs": "信使存放处",
+      "vaultCap": "每种材料最多{cap}个",
+      "vaultEmpty": "你的仓库是空的。",
+      "vaultLocked": "在银行家处解锁仓库后，才能通过信使使用它。",
+      "boundBank": "将送往银行",
+      "boundVault": "将送往仓库",
+      "boundAccount": "将送往其他角色的银行",
+      "accountTitle": "其他角色",
+      "accountBank": "从这个银行取回。信使到达时，该角色必须处于下线状态。",
+      "bagsAccount": "送往{name}的银行",
+      "bagsAccountNone": "选择要寄送物品的角色。",
+      "accountPlanned": "已为{name}计划{count}组物品。为其他角色选择会替换它们。",
       "capacity": "{used} / {capacity} 栏位",
       "cargo": "信使背包",
       "empty": "没有物品",
@@ -485,7 +500,7 @@ export const zh_CN: EnTranslations = {
       "selected": "已选 {count} / {limit} 组",
       "select": "选择{item}，{count}",
       "selectedItem": "取消选择{item}，{count}",
-      "instructions": "请选择整组物品。信使会先存入物品，再取出您指定的物品。任务物品无法寄送。",
+      "instructions": "为你的银行、仓库或其他角色选择整组物品。信使会先存入物品，再取出你指定的物品。任务物品无法寄送。",
       "membership": "续订会员后即可开始新的配送。",
       "cargoSafe": "送回的物品会在背包已满时存为溢出物品。送达后信使会消失，直到再次召唤。",
       "unavailable": "召唤信使以安排配送。"
@@ -862,7 +877,7 @@ export const zh_CN: EnTranslations = {
       "titleOffer": "头衔：{title}",
       "titlePreview": "显示为{preview}",
       "mountOffer": "坐骑：{mount}",
-      "mountPreview": "地面坐骑：骑乘时移动速度+{pct}%。需要骑术训练。",
+      "mountPreview": "账号内所有角色通用的坐骑外观。移动速度由你的骑术训练决定。",
       "skinOffer": "剑的外观：{skin}",
       "skinPreview": "改变你所装备的剑的样子，适用于账号中的所有角色。仅为外观：没有属性。",
       "buy": "购买",
@@ -2538,7 +2553,7 @@ export const zh_CN: EnTranslations = {
       "riding": "骑乘中",
       "mount": "骑乘",
       "dismount": "下骑",
-      "useToRide": "使用以召唤该坐骑。",
+      "useToRide": "使用以装备此外观并召唤坐骑。将此物品保留在任意角色的背包或银行中，即可让账号内所有角色使用该外观。骑术训练决定速度。",
       "emptyTitle": "尚未收集坐骑",
       "emptyStableHint": "升到20级，前往高望以西的马厩，向马厩总管玛拉学习骑术。",
       "emptyDropHint": "较稀有的坐骑由英雄地下城首领掉落或完成裂隙获得。",
@@ -2568,9 +2583,9 @@ export const zh_CN: EnTranslations = {
       "name_rickshaw_mount": "白骨人力车",
       "name_wobbles_slime": "晃晃史莱姆",
       "name_nightwing_chimera": "夜翼奇美拉",
-      "desc_valorsteed": "一匹坚韧稳健的骏马，可提升旅行速度。",
-      "desc_grag_bear": "一头坚韧稳健的巨熊，可提升旅行速度。",
-      "desc_stalkglider_snail": "一只坚毅耐久的蜗牛，可提升旅行速度。",
+      "desc_valorsteed": "一匹坚韧稳健、配有皮革马鞍的骏马。",
+      "desc_grag_bear": "一头坚韧稳健、配有厚重鞍具的巨熊。",
+      "desc_stalkglider_snail": "一只坚毅耐久、背负苔藓外壳的蜗牛。",
       "desc_aether_hover_cycle": "一辆强大的魔导机车，专为快速贴地悬浮的战斗穿行而设计。",
       "desc_shadowjump_toad": "一只体型庞大、步伐稳健的巨蟾，受训于闪电般的暗影跳跃，可跨越任何地形。",
       "desc_stormfeather_griffin": "一头威严的风暴狮鹫，收拢双翼，以符文利爪行走于大地。",
@@ -2593,7 +2608,7 @@ export const zh_CN: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "按 {key} 键骑上训练用英勇战马。",
-      "ownedMountPrompt": "你的缰绳已在背包中，使用它即可骑乘。",
+      "ownedMountPrompt": "在外观菜单中选择坐骑，然后使用骑乘／下骑来骑乘。",
       "ridePrompt": "跟随发光的标记前往起点线，然后点击开始比赛。",
       "begin": "开始课程",
       "success": "你已经驯服了英勇战马。",
@@ -2864,6 +2879,10 @@ export const zh_CN: EnTranslations = {
       "actionCamShoulderLeft": "左 {pct}",
       "actionCamShoulderRight": "右 {pct}",
       "actionCamShoulderCenter": "居中",
+      "firstPersonMode": "第一人称（完全拉近时）",
+      "firstPersonOff": "关闭",
+      "firstPersonBody": "显示身体",
+      "firstPersonNoBody": "不显示身体",
       "showAttackButton": "显示攻击按钮",
       "showDailyRewardsChest": "显示每日奖励宝箱",
       "mobileCameraJoystick": "摄像机摇杆",
@@ -3826,6 +3845,12 @@ export const zh_CN: EnTranslations = {
       "linkHint": "Shift + 点击可在聊天中链接该物品。"
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "更早的 {count} 次转手未显示。",
+        "few": "更早的 {count} 次转手未显示。",
+        "many": "更早的 {count} 次转手未显示。",
+        "other": "更早的 {count} 次转手未显示。"
+      },
       "guildBoardShown": {
         "one": "显示 {count} 个公会",
         "few": "显示 {count} 个公会",
@@ -4278,6 +4303,8 @@ export const zh_CN: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "设置地下城难度：英雄",
       "setNormal": "设置地下城难度：普通",
+      "unappliedNormal": "已选择英雄难度。当前副本仍为普通难度。",
+      "unappliedHeroic": "已选择普通难度。当前副本仍为英雄难度。",
       "resetAll": "重置所有副本",
       "resetDone": "所有副本已重置。",
       "resetNone": "你没有可重置的副本。",
@@ -4287,10 +4314,11 @@ export const zh_CN: EnTranslations = {
       "resetSameDifficulty": "切换地下城难度后才能重置这些副本。空置副本会在5分钟后自动重置。",
       "resetLoot": "副本内仍有战利品时无法重置。",
       "resetConfirmTitle": "重置所有副本？",
-      "resetConfirmBody": "此操作会放弃先前所选难度下的空置副本。若有未拾取的战利品，则无法重置。",
+      "resetConfirmBody": "此操作会放弃你的空置副本，让下一次挑战以所选难度重新开始。锁定不会改变。若仍有人在里面，或有未拾取的战利品，则无法重置。",
       "resetConfirm": "重置副本",
       "resetCooldown": "每5分钟只能重置一次副本。",
-      "resetUsage": "切换难度后，使用 /dungeon reset 放弃你的空置副本。",
+      "resetAlreadyFresh": "你的副本已经是全新的。自上次重置以来没有人进入过。",
+      "resetUsage": "使用 /dungeon reset 放弃你的空置副本并重新开始。",
       "entryMismatchNormal": "此副本的难度为普通。使用“重置所有副本”以开始全新的英雄难度副本。",
       "entryMismatchHeroic": "此副本的难度为英雄。使用“重置所有副本”以开始全新的普通难度副本。"
     },
@@ -4623,7 +4651,17 @@ export const zh_CN: EnTranslations = {
         "pollinated": "触碰种荚会使其立刻长出荆棘幼芽。远离种子，让未授粉的玩家去踩碎它们；无人触碰的种荚会在{seconds}秒后发芽（英雄难度下它会在{heroic}秒后钻入地下，在最近的玩家身旁破土而出）。",
         "prey": "祖尔加在追猎你。引他踏过点亮的太阳符文，使他减速{slow}%。若被他追上，你会被撕咬，受到{damage}点伤害（英雄难度{heroic}点）并被击倒{stun}秒。",
         "avatar": "移动速度提高{pct}%，追猎它的猎物。减速和定身可以生效，击晕的持续时间减半。",
-        "vanished": "隐匿且免疫伤害。他即将扑向最远的玩家。"
+        "vanished": "隐匿且免疫伤害。他即将扑向最远的玩家。",
+        "sunstruck": "被点亮的太阳符文灼伤：移动速度降低{pct}%。",
+        "sunstruckExposed": "被点亮的太阳符文灼伤：受到的伤害提高{pct}%。",
+        "sunWary": "在此效果结束前，任何太阳符文都无法灼伤他。他踏过的已点亮符文会保持点亮。",
+        "pinned": "一支狩猎之矛把你钉在原地。你每{every}秒流血，受到{bleed}点物理伤害（英雄难度{heroicBleed}点），并且无论你站在哪里，荒野之心脉冲都会命中你，伤害提高{pulse}%。队友可以用{pull}秒拔出长矛。如果没有其他人能帮忙，你可以用{wrench}秒自己拔出。{seconds}秒后它会自行松脱。",
+        "idolAwake": "石美洲豹已经苏醒。每{every}秒，它会在地面预警{warning}秒后，轮流向平台的一半吐息：对该半场的所有人造成{min}到{max}点自然伤害（英雄难度{heroicMin}到{heroicMax}点）。祖尔加会保持美洲豹化身直到死亡，并且每{seconds}秒更换猎物（英雄难度{heroicSeconds}秒）。"
+      },
+      "temple": {
+        "scoreWard": "正在吟唱乐谱：在结束前不会受到伤害。在乐句结束前，按石板响起的顺序踏上月光石板，即可使她的嗓音破碎。轮流踩踏：奏响音符后，须等待另一名玩家奏响下一个正确音符。唯一的幸存者可以独自完成。如果乐句先结束，不谐之音会对庭院中的所有人造成{min}到{max}点冰霜伤害（英雄难度下为{heroicMin}到{heroicMax}点）。",
+        "brokenVoice": "她的嗓音已破碎：在此效果结束前，她受到的伤害提高{pct}%。",
+        "spentVoice": "另一名玩家奏响下一个正确音符前，你无法奏响月亮地砖。在此期间踩上地砖不会重置应答，也不会对你造成伤害。无法驱散。当你成为同一副本内唯一存活的玩家或乐谱结束时移除。"
       },
       "bastion": {
         "brineColumn": "你被困在海水之柱中：每{tick}秒受到{min}到{max}点自然伤害，最多持续{seconds}秒。打断或击晕潮缚侍僧即可挣脱。",
@@ -5256,6 +5294,9 @@ export const zh_CN: EnTranslations = {
       "partyTradeWindow": "在接下来的{time}内，你可以将此物品交易给共同获得该掉落的玩家。装备后交易期限即告结束。",
       "perfectedBadge": "臻至完美",
       "perfectingRank": "完美化：第{rank}阶，共{ranks}阶",
+      "lootedBy": "{name} 于 {date} 拾取",
+      "questRewardTo": "{date} 任务奖励予 {name}",
+      "obtainedBy": "{name} 于 {date} 获得",
       "materialSourceGatherer": "{count} × 由{name}采集",
       "trophySkullSource": "{count} × 取自{name}",
       "materialSourceGathererSigned": "{count} × 由{name}采集，由{signer}签名",
@@ -5799,14 +5840,8 @@ export const zh_CN: EnTranslations = {
       "logAdminPurge": "管理员移除了 {count} 个 {item}"
     },
     "collections": {
-      "title": "狩猎",
-      "close": "关闭狩猎",
-      "keybindLabel": "狩猎",
-      "launcherTitle": "狩猎：伙伴、坐骑与套装",
       "tabs": {
-        "buddies": "伙伴",
-        "mounts": "坐骑",
-        "sets": "物品套装"
+        "buddies": "伙伴"
       },
       "state": {
         "owned": "已收集",
@@ -5816,7 +5851,6 @@ export const zh_CN: EnTranslations = {
       },
       "presenceDefault": "你感觉到有什么在注视着你。",
       "revealed": "{name}决定跟随你。",
-      "cosmeticUnlocked": "{name}的新外观：{look}。",
       "presence": {
         "ember_fox": "有个温暖的小东西正轻手轻脚地跟在你身后。",
         "moss_hare": "泥炭里的一阵窸窣声与你的脚步保持着同步。",
@@ -5854,134 +5888,9 @@ export const zh_CN: EnTranslations = {
         "phantom": "你身后的空气静得有些过分。",
         "emberfall_phoenix": "一股如同封火般的暖意落在你的背后。"
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "霜缚",
-        "crystal_lich_voltaic": "雷光",
-        "forgemaw_ashen": "灰烬",
-        "forgemaw_whitehot": "白热",
-        "stag_acorn": "橡果之冠",
-        "stag_gilded": "镀金",
-        "moss_hare_verdant": "青翠",
-        "proud_grunt_warlord": "战争领主",
-        "frog_sapphire": "蓝宝石蛙"
-      },
       "actions": {
         "summon": "召唤",
-        "dismiss": "解散",
-        "wear": "穿戴",
-        "remove": "卸下"
-      },
-      "looks": {
-        "title": "外观",
-        "unlocked": "已解锁",
-        "locked": "未解锁",
-        "worn": "穿戴中",
-        "none": "这个伙伴还没有可用的外观"
-      },
-      "source": {
-        "bossLabel": "首领宠物",
-        "bossDrop": "{mob}（{location}），每次击杀每位玩家{chance}%",
-        "bossDropWithHeroic": "{mob}（{location}），每位玩家{chance}%，英雄难度{heroicChance}%",
-        "bossDropHeroicOnly": "{mob}（{location}），仅限英雄难度，每位玩家{chance}%",
-        "rollNote": "每位玩家单独掷骰；不会有人因队友而失去机会。",
-        "deedLabel": "获取途径",
-        "deed": "功绩：{deed}",
-        "challengeLabel": "挑战",
-        "challengeSpeed": "在开怪后{seconds}秒内击败{mob}",
-        "challengeDps": "在整场战斗中对{mob}保持每秒{dps}点伤害",
-        "craftLabel": "制作",
-        "craft": "{item}（{profession}配方）",
-        "grantLabel": "颁发",
-        "grantOnly": "赛季奖励：每月天梯与最高战斗记录奖励",
-        "tokenLabel": "凭证",
-        "token": "{item}，使用一次即可让伙伴跟随"
-      },
-      "buddyLore": {
-        "ember_fox": "出自东溪谷树篱间的母狐，得名于冬日枯丛中透出的炭红皮毛。那里的猎人几代之前就不再打幼崽的主意，改成替它们留下食物。",
-        "moss_hare": "柳泽沼地的野兔，一辈子卧在湿泥炭里，长出了一身绿毛。沼泽的草药师视它们为吉兆，绝不肯把落在门前的赶走。",
-        "frog": "泥沼湿地把它们养得肥壮而无忧无虑，整夜在苇丛里高歌。沼泽向导都赌咒说，船上载着一只就绝不会搁浅。",
-        "crimson_claw_crab": "远岸的潮间蟹，离水许久之后钳子依旧通红。当年码头工人常让它们在跳板上赛跑赌钱。",
-        "golden_sentinel": "琥珀秋境的守望甲虫，被自己长大的那片树脂镀成了金色。这名字比树脂更古老：早在有人想到装取树液之前，就已有某种哨兵守着那些林子了。",
-        "nightfang": "夜绽花野的年轻猎手，即便以同类的标准衡量也安静得出奇。它跟着人只为作伴，猎物从不比飞蛾更大。",
-        "tuskhorn_boar": "荆峰高地的种，被牧人刻意育成短腿，图的是一头拱不倒篱笆的野猪。脾气倒是原封不动地留下来了。",
-        "emerald_wolf": "一只怨灵林的幼狼，皮毛在几乎照不到林底的树冠余光里泛着绿色。守林人会把森林留下的每一只孤儿养大。",
-        "tiger": "一身棕榈湾的斑纹，长在一头从没见过棕榈湾的兽身上：自从旧日兽苑关闭，这一支血脉便一直圈养至今。它只听哨声，此外什么也不应。",
-        "cate_coin": "一只猫，绝不肯离开自己屁股底下那枚钱币，也从没人见它吃过东西。东溪谷的商人至今还在争论：这两者到底哪一个才是宠物。",
-        "alon": "一位旅人的吉祥物，来自任何地图都不肯承认的道路，总在计划出岔子的地方现身。它看着，它点头，然后什么忙也不帮。",
-        "trollface": "怨灵林放出来、又不肯收回去的一张咧嘴笑脸。每一次试图描述它的尝试，都以描述者自己笑场放弃告终。",
-        "ansem": "它谈论门扉与黑暗，再问就不肯多说了。夜绽花野的信徒声称它属于他们；可每逢他们举行仪式，它就溜走了。",
-        "triple_t": "某样东西的三份，或是同一样东西重复三遍。各家说法互相矛盾，而这生物又从不肯老实待着让人数清。",
-        "kekius": "一位来历不明的欢笑同伴，被疾风崖的赛马场收作吉祥物。发誓靠它转运的马厩换了四家，它还在。",
-        "solbot": "一具以阳光为食的小型自动机，从龙裔荒原的火山灰里半埋着挖出来时仍在走动。造它的作坊没在外壳上留下任何印记。",
-        "frostfire": "生于霜幕之境一处温泉涌出冰原的地方，它始终没弄明白自己属于哪一半。冷天里冒着热气，暖处又直打哆嗦。",
-        "rocky": "荆峰高地碎石坡上的石壳爬行者，行动迟缓，且彻底心无挂碍。矿工养着它们，是因为它们总在塌方前一瞬静止不动。",
-        "proud_grunt": "战备仓库的一名老兵，敬礼保住了，军衔丢了。战帅德拉文·科尔会把这样一位交给任何一个荣誉足以懂得那代价的士兵。",
-        "loot_goblin": "它跟着每一个身上带着英雄徽记的人，却一次也没被抓到偷东西。军需官维克斯坚称，这压根说明不了任何问题。",
-        "penny_goldspark": "一位侏儒工匠的学徒，按小时收费，而且每一枚铜板都物有所值。护甲匠霍德当年为抵一笔债收下了她，如今谁揣着一千金，他就把这份差事卖给谁。",
-        "stag": "常青园的血脉，由守林人昔日骑乘的巨鹿一代代选育而来。有人抬手，它仍会低下头——那是比这头鹿本身更古老的习惯。",
-        "alpaca": "疾风崖的牧群养它们既为羊毛，也为脾气：暴风雨里没有比它更镇定的。这一只每趟旅程恰好会朝一个人吐口水。",
-        "horse": "东溪谷矮马血统，为果园小径特意培育得矮小，也从没人告诉它自己不是战马。它在你肩旁保持步调，谁曾喂过它一个苹果，它就会跟谁走。",
-        "sapling": "一株树皮上带着笑容、紫色眼睛里满是好奇的小树。无论你走到哪里，它都会迈着树根，欢快地摇摇摆摆跟上。",
-        "bull": "一头狗一般大的东溪谷公牛，这也是唯一让人肯把它养在屋里的理由。可脾气并没跟着一起缩小。",
-        "spider": "怨灵林的织网者，巴掌大小，会把任何装着它的背包重新布置一遍。那些蛛丝比它替换掉的线还结实。",
-        "raptor": "龙裔荒原的雏龙种，还没学会自己能跑多快就被转手卖掉。每一位新主人都被叮嘱要喂饱它，而没有一个需要被叮嘱第二遍。",
-        "skeleton": "它从怨灵林的古冢里爬出来，掸了掸自己身上的土，从此就跟着人走。这副骨头当初是谁的，至今没人查清。",
-        "crystal_lich": "尼思拉克西斯本体的一枚碎片，至今仍鸣响着塑成它的那股寒意。谁把它从团队副本的残骸里拽出来，它就听谁的——而且始终没有原谅那个人。",
-        "forgemaw": "在最后泉源熔炉中锻造，却始终没有真正完工——锤声未歇，它便自己走出了伊格尼瓦的铸场。只有英雄难度的下潜才能找到它：这熔融之物总会回到造出它的那座炉子，然后跟着两度熬过烈火的人回家。",
-        "crystal_tide": "一只乘着自己那滴海玻璃的潮汐精灵，被从东溪谷到远岸只想钓顿晚饭的渔人从静水里勾了上来。它把捞起它的那捧水一直带在身边，怎么劝也不肯回去。",
-        "sprites": "两只小小的火精，一金一青，总也说不好谁该打头。靠得够近时，它们会融成一团绿焰，随后又笑着分开。",
-        "phantom": "来自怨灵林古冢的巴掌大幽魂，只有一层布、没有骨头，会出现在一个明明合好的背包里，然后为了作伴留下来。没人弄清它想要什么，而它一次也没试过吓唬谁。",
-        "emberfall_phoenix": "每逢秋天它便燃尽成一粒余烬，到了春天又从自己的灰里重新升起——关于它，谁也说不出更多了。从没有人找到过它的巢，也从没有人捉到过同一只两次。"
-      },
-      "petKind": {
-        "beast": "野兽",
-        "elemental": "元素生物",
-        "humanoid": "人型生物",
-        "undead": "亡灵",
-        "celebrity": "名流"
-      },
-      "armor": {
-        "cloth": "布甲",
-        "mail": "锁甲",
-        "leather": "皮甲"
-      },
-      "stat": {
-        "intellect": "智力",
-        "agility": "敏捷",
-        "strength": "力量",
-        "mixed": "混合"
-      },
-      "set": {
-        "owned": "{total} 件中已收集 {owned} 件",
-        "itemLevel": "装等 {level}",
-        "bonusLabel": "{pieces} 件套"
-      },
-      "detail": {
-        "dropLabel": "掉落自",
-        "vendorLabel": "出售者",
-        "bindLabel": "绑定",
-        "sellLabel": "商人收购价",
-        "marketLabel": "世界市场",
-        "exchangeLabel": "$WOC 交易所",
-        "setLabel": "已收集",
-        "drop": "{mob}（{location}），每次击杀 {chance}%",
-        "heroicDrop": "{mob}（{location}），仅限英雄难度，每次击杀 {chance}%",
-        "dropWithHeroic": "{mob}（{location}），每次击杀 {chance}%，英雄难度 {heroicChance}%",
-        "globalDrop": "任意敌人，每次击杀 {chance}%，同稀有度 {count} 件中的一件",
-        "fishingDrop": "任意水域钓鱼，每次上钩 {chance}%",
-        "vendor": "{npc}（{location}），价格：{price}",
-        "honorPrice": "{amount} 荣誉",
-        "marksPrice": "{amount} 英雄徽记",
-        "noSource": "游戏中尚无获取途径",
-        "noItem": "尚无物品可以获得",
-        "tradeable": "可交易",
-        "soulbound": "灵魂绑定",
-        "noSell": "无法出售",
-        "marketAtMerchant": "在商人处查看",
-        "marketChecking": "查询中…",
-        "marketNone": "无上架",
-        "exchangeNone": "无上架",
-        "exchangeUnavailable": "此客户端不支持"
+        "dismiss": "解散"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const zh_CN: EnTranslations = {
       "viewSources": "查看来源",
       "separateByGatherer": "按采集者拆分",
       "takeChosenQuantity": "取出指定数量",
-      "combine": "合并素材堆叠"
+      "combine": "合并素材堆叠",
+      "itemHistory": "物品历史"
+    },
+    "itemHistory": {
+      "title": "{item}：历史",
+      "passedTo": "{date} 转交给 {name}",
+      "noTransfers": "此物品从未易手。",
+      "close": "关闭",
+      "openAria": "{item}的物品历史"
     },
     "enchanting": {
       "recipeNotLearned": "施加此附魔前，请先学习配方。",
@@ -7073,6 +6990,7 @@ export const zh_CN: EnTranslations = {
         "summons_adds": "召唤增援",
         "lunar_tide": "月潮（周期性范围伤害）",
         "chorus_and_solo": "合唱与独唱（一个标记集合分摊，另一个标记分散）",
+        "the_score": "乐谱（她会两次在月光石板上吟唱旋律：按石板响起的顺序踏上去，即可使她的嗓音破碎）",
         "tideglass_reflections": "潮镜倒影（击杀彼此的镜像）",
         "hydra_three_elements": "三重元素（左侧头颅喷出18码的冰霜锥形吐息，使你减速70%，持续4秒；中间头颅向最多3名玩家脚下喷吐毒液，1.5秒后爆裂，并在落点灼烧6秒；右侧头颅沿一条26码长的直线射出激流，将你击退8码：每一种都要走出去。一个头颅倒下后，仍然存活的头颅会接手它的攻击）",
         "hydra_tsunami": "海啸（头颅沉入水中4.5秒，期间受到的伤害降低75%，一道巨浪席卷水池的一半，下一次换另一半：普通难度下造成160到190点冰霜伤害并把你推开10码。跑到另一半，或站到池边石柱后面；英雄难度下，巨浪会在3.5秒后回卷另一半。第一次海啸在开战24秒后到来，之后每一次都在上一次过去40秒后到来）",
@@ -7197,6 +7115,23 @@ export const zh_CN: EnTranslations = {
       "shadeLine": "光穿透了它：别管它，去找光束照亮的那个",
       "timeAria": "剩余{seconds}秒"
     },
+    "templeAlert": {
+      "melodyTitle": "乐谱",
+      "melodyLine": "观察月亮地砖依次奏响。与另一名玩家轮流踩出相同顺序",
+      "melodyDarkLine": "在地砖熄灭前记住顺序。与另一名玩家轮流踩出相同顺序",
+      "answerTitle": "回应乐谱！",
+      "answerLine": "轮流踩踏：踩上标记为{place}的月亮地砖。已奏响：{done}/{total}",
+      "answerDarkLine": "轮流凭记忆重复顺序。再次踩同一块地砖前先离开。已奏响：{done}/{total}",
+      "spentTitle": "该由另一道声音应答",
+      "spentLine": "另一名玩家奏响下一个正确音符前，你无法奏响地砖。已奏响：{done}/{total}",
+      "stepOffTitle": "先走下去，再踏上来",
+      "stepOffLine": "月光石板只有在有人踏上时才会奏响。离开这块石板，然后重新踏上去",
+      "falseTitle": "错音！",
+      "falseLine": "那块石板的顺序不对。回应将从第一块石板重新开始",
+      "brokenTitle": "塞尔瑟的嗓音破碎了！",
+      "brokenLine": "在效果结束前，她受到的伤害提高{pct}%：现在使用你最强的攻击",
+      "timeAria": "剩余{seconds}秒"
+    },
     "wildheartAlert": {
       "preyTitle": "你是猎物！",
       "preyLine": "祖尔加在追猎你：引他穿过点亮的太阳符文",
@@ -7207,7 +7142,21 @@ export const zh_CN: EnTranslations = {
       "pollinatedLine": "远离种子：你的触碰会让它们发芽",
       "bondTitle": "兽群羁绊",
       "bondLine": "在一起时它们伤害减半：把它们拉开",
-      "timeAria": "剩余{seconds}秒"
+      "timeAria": "剩余{seconds}秒",
+      "preyAloneLine": "没有其他人能点亮太阳符文。站在一个熄灭的符文上{seconds}秒将它点亮，再把祖尔加引过去",
+      "pinnedTitle": "被钉住了！",
+      "pinnedLine": "需要队友拔出狩猎之矛。被钉住时，荒野之心脉冲对你的伤害更高",
+      "pinnedSelfLine": "没有人能来帮忙：在荒野之心脉冲落下前自己拔出狩猎之矛",
+      "sunstruckTitle": "祖尔加被烈日灼伤了！",
+      "sunstruckLine": "在效果结束前他受到的伤害提高{pct}%：现在使用你最强的攻击",
+      "spearTitle": "有队友被钉住了！",
+      "spearLine": "跑到狩猎之矛旁，在荒野之心脉冲落下前把它拔出来",
+      "glyphTitle": "点亮太阳符文",
+      "glyphLine": "站在熄灭的太阳符文上{seconds}秒将它点亮。祖尔加踏过它时，会在{duration}秒内受到的伤害提高{pct}%",
+      "glyphLightingTitle": "正在点亮太阳符文",
+      "glyphLightingLine": "留在符文上直到它被点亮。离开就要重新开始",
+      "breathTitle": "神像吐息！",
+      "breathLine": "石美洲豹即将向平台的这一半吐息。跑到另一半去"
     },
     "sanctumAlert": {
       "quenchTitle": "身陷淬火之水！",
@@ -7296,6 +7245,13 @@ export const zh_CN: EnTranslations = {
       "relightFar": "靠近到{range}码内才能重燃它",
       "relightAria": "重燃{name}",
       "relightUsingLine": "在它吸取你时保持不动：受到攻击不会打断，移动或昏迷会打断",
+      "freeLine": "把长矛从地面拔出，解救被钉住的人。受到攻击不会打断你，移动或昏迷会打断",
+      "freeKey": "拔出{name}",
+      "freeTap": "点击这里拔出{name}",
+      "freeClick": "单击这里拔出{name}",
+      "freeFar": "靠近到{range}码内才能拔出它",
+      "freeAria": "拔出{name}",
+      "freeUsingLine": "保持不动以拔出长矛：移动或昏迷会打断",
       "timeAria": "剩余{seconds}秒"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const zh_CN: EnTranslations = {
       "detach": "解除",
       "applied": "已应用",
       "owned": "已拥有",
+      "notCollected": "尚未收集",
       "storeOnly": "可在 WOC 商店购买",
       "preview": "预览",
       "previewAria": "预览{name}",
       "cardAria": "{name}，{rarity}",
-      "mountsIntro": "坐骑皮肤会覆盖在此角色骑乘的任何坐骑上，绝不改变速度。",
-      "mountsNoMount": "先拥有一匹坐骑：皮肤需要可骑乘的对象。",
+      "mountsIntro": "在这里选择坐骑外观。骑术训练决定速度。将坐骑物品保留在任意角色的背包或银行中，即可让账号内所有角色使用该外观。",
+      "mountsNoMount": "向马厩总管玛拉学习骑术后，即可召唤坐骑。",
       "skinsEmpty": "尚未拥有武器皮肤。请访问 WOC 商店。",
       "skinsApplyHint": "装备一件{type}后即可应用此皮肤。",
       "mechIntro": "战斗机甲会替换此角色的身体。一次只能穿戴一种配色。",
@@ -7430,6 +7387,7 @@ export const zh_CN: EnTranslations = {
       "sourceActivityRiftFirstClear": "授予率先通关分级裂隙的队伍全体成员",
       "sourceActivityBuriedHoard": "在埋藏宝藏的奖励宝箱中找到，即藏宝图所指引的宝库",
       "sourceActivityLanternHall": "在灯火大厅的军需官处用灯火印章购买",
+      "sourceActivityWeeklyVaultPvp": "从每周宝库的PvP栏位中选取",
       "cellMissingSourceAria": "{name}，尚未获得，{source}",
       "cellOwnedClearsAria": "{name}，已收录，首次获得于第 {count} 次通关",
       "searchPlaceholder": "搜索圣物",
@@ -8454,6 +8412,16 @@ export const zh_CN: EnTranslations = {
         "heroicCloud": "花粉云：在已授粉玩家{cloudRadius}码内站立{cloudSeconds}秒，你也会被授粉。"
       },
       "zulgar": {
+        "pulseSummaryRework": "每{every}秒施法{cast}秒，对{radius}码内所有玩家造成{min}至{max}点伤害。被钉住的玩家无论距离多远都会受到{pinMult}倍伤害。",
+        "spearSummary": "施法{cast}秒后钉住一名非坦克玩家；若没有其他玩家，则选择坦克。定身最多持续{seconds}秒，每{tick}秒造成{bleed}点伤害。",
+        "spearResponse": "选中长矛，在{range}码内交互，花费{pull}秒拔出。受到伤害不会打断。若平台上没有其他自由行动的玩家，被钉住者可自行交互，花费{self}秒脱困。",
+        "glyphSummaryRework": "{count}枚符文最初熄灭。追猎期间，未被标记的玩家站在符文上{kindle}秒即可点亮。若没有未标记者，猎物可在{alone}秒内点亮。离开会重置进度。他经过点亮的符文时，减速{slow}，受到的伤害提高{vulnerability}，持续{seconds}秒。符文在{dark}秒内无法重新点亮；他在{wary}秒内不会再次被符文击中。追猎期间，昏迷持续时间减半。",
+        "glyphResponseRework": "未被标记者在猎物前方点亮符文。引他经过符文，在日灼期间攻击。追猎结束时，符文全部熄灭。",
+        "idolSummary": "生命值降至{health}时，他保持猎豹灵体直到被击败。坦克也可能成为猎物。",
+        "idolHuntSummary": "每{every}秒选择新猎物，先转向目标{turn}秒，再开始追逐。",
+        "idolHuntHeroicSummary": "每{pair}秒标记一对新猎物，每{switch}秒切换目标。每次切换后，新猎物有{turn}秒反应时间。",
+        "breathSummary": "每{every}秒标记平台的一半，预警{warning}秒后，对该区域所有玩家造成{min}至{max}点自然伤害。两侧交替。",
+        "breathResponse": "预警结束前移动到未标记的一半。中线安全。英雄难度下，吐息还会熄灭所在半区的符文；这些符文可以立即重新点亮。",
         "overview": "盆地的大祭司。节奏稳定的战斗，带有预警的圆环，直到他化为美洲豹之魂并追猎一名玩家。被追猎的玩家引他穿过点亮的太阳符文，符文会使他减速。",
         "phaseShrineName": "神殿",
         "phaseShrineSummary": "他在近战中战斗，并在自身周围释放脉冲圆环。",
@@ -8766,6 +8734,14 @@ export const zh_CN: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "塞尔瑟不会移动或近战。合唱时集合，独唱时远离队伍，打断溺亡咏叹调并躲避湖潮涌。到达两次生命值阈值时，轮流踏上月光地砖，重现她的旋律。",
+        "phaseSummaryRework": "队伍回应乐谱时，她暂停其他攻击。月水箭没有施法条，无法打断。",
+        "boltSummaryRework": "其他施法之间，每{every}秒落下一枚月水箭，提前{windup}秒显示预警，造成武器伤害{mult}倍的冰霜伤害。打断溺亡咏叹调会让箭和咏叹调暂停{quiet}秒。",
+        "boltResponseRework": "让坦克保持在她的视线内。把打断留给溺亡咏叹调。",
+        "tipHealerRework": "照看咏叹调目标和独自承受合唱的玩家。乐谱期间帮忙唱出下一音，并治疗失误造成的伤害。",
+        "scoreSummary": "生命值降至{first}和{second}时，她免疫伤害，依次演奏{notes}音和{finalNotes}音旋律。分别在{answer}秒和{finalAnswer}秒内重现。踩错地砖造成{falseNote}点冰霜伤害并重置进度，但不重置计时。超时对所有人造成{min}至{max}点冰霜伤害。成功使她昏迷{stun}秒，并在{bonusSeconds}秒内受到额外{vulnerability}伤害。",
+        "scoreResponse": "观察旋律，然后按顺序踏入地砖。与另一名存活玩家轮流奏响正确音符；唯一幸存者可独自完成。被阻止的踩踏无害。离开后重新踏入才能奏响，包括回应开始前已站着的地砖。",
+        "scoreHeroic": "回应时地砖会变暗。记住旋律，轮流奏响。",
         "overview": "唱诗母在她的水池中歌唱，从不移动，也不近战。她会标记玩家，施放需要集合分摊的合唱和需要独自承受的独唱，向一名玩家射出不断增强的咏叹调光束，并向庭院扫出一道波浪。她的箭和咏叹调都可以被打断。",
         "phaseName": "唱诗庭院",
         "phaseSummary": "只有一个阶段，全靠计时。到期时若她正在读条，该机制会等读条结束后再触发。",
@@ -9678,7 +9654,7 @@ export const zh_CN: EnTranslations = {
       "graveyard": "如果你倒在此处，灵魂会回到哪里。",
       "dungeons": "每一座地下城，连同它的门所在的区域、它所设计的队伍人数，以及你当前设定的难度。",
       "dungeonMode": "在普通与英雄难度之间切换你的地下城。",
-      "dungeonReset": "放弃你自己名下的空副本，也就是改完难度之后要做的那件事。",
+      "dungeonReset": "放弃你自己的空置副本，让下一次挑战以相同或新的难度重新开始。",
       "groupRecovery": "脱困与状态",
       "unstuck": "被世界困住时的那条出路。站定不动熬过一段短暂的倒计时，你就会被移动到最近的墓地；若你已经倒下，还会在那里被复活。事后你会带着脱困后遗症虚弱一阵子，因此它是最后的手段，而不是捷径。",
       "unstuckWindow": "被世界困住时的那条出路。站定不动熬过一段短暂的倒计时，你就会被移动到最近的墓地；若你已经倒下，还会在那里被复活。一小时内的首次使用不付代价。若在上次使用后一小时内再次使用，事后你会带着脱困后遗症虚弱一阵子，因此它是救援手段，而不是捷径。",
@@ -10105,27 +10081,27 @@ export const zh_CN: EnTranslations = {
     },
     "mountsPage": {
       "heading": "坐骑与骑乘",
-      "intro": "坐骑是穿越世界的更快方式，仅此而已。你在马厩学会骑乘，买下第一副缰绳，此后每一条路都会变短。",
+      "intro": "选择坐骑外观，在马厩学习骑术，更快地穿越世界。训练决定速度，所有坐骑外观都只改变外观。",
       "whatHeading": "坐骑是什么",
-      "whatBody": "坐骑是你骑乘的野兽，而它给你的东西就是速度。没有护甲，没有伤害，没有属性：它带着你更快地掠过地面，跳跃时也蹦得高一点，这就是这笔交易的全部。游戏里的每一只坐骑都是地面坐骑，所以没有飞行，它们也都不会游泳。",
+      "whatBody": "坐骑是用于已习得骑术的装饰外观，不提供护甲、伤害或战斗属性。骑术训练提高地面旅行速度，骑乘时也能跳得更高。所有坐骑都在地面行动，无法游泳。",
       "learnHeading": "学习骑乘",
-      "learnBody": "骑术是一门只需买一次的技能，它在 {level} 级开启。马厩总管玛拉·希琴在丘陵上经营着疾风崖马厩，她出售骑术训练，价钱是 80 金。正是这一次购买让你得以骑上坐骑，而且它会永远伴着你。\n\n学会之后，玛拉还有一个任务给你：骑术课。接下它，跟着标记走到起始拱门后方那块发光的方砖上，然后按“开始比赛”。她会借给你一匹训练用英勇战马来上这堂课，所以课程本身分文不取。跑完赛道、完成它，再回到她那里领取你的金币和经验。借出的战马课后会回到马厩，所以这堂课教给你的是骑术本身，而不是白送你一匹马。",
+      "learnBody": "达到{level}级后即可学习骑术。玛拉·希钦马厩总管在盖尔克雷斯特马厩以80金币出售骑术训练。基础训练使骑乘移动速度提高{basicSpeed}%。学会后，玛拉还会以{advancedFee}金币出售高级骑术训练，将骑乘移动速度提升至提高{advancedSpeed}%。每个等级的训练仅属于学习它的角色。\n\n学会基础骑术后，接受玛拉的骑术课程任务，跟随标记前往起跑拱门后发光的方格。点击开始比赛，借用训练用的英勇战马。完成赛道后回来领取金币和经验。课程结束时，借来的马匹会返回马厩。",
       "whereHeading": "在哪里找到她",
       "whereBody": "疾风崖马厩标注在疾风崖的地图上，位于断崖与沉船滩之间的丘陵上。玛拉站在马厩旁，面朝赛场。",
       "firstHeading": "你的第一只坐骑",
-      "firstBody": "英勇战马是全世界唯一一只出售的坐骑。学会骑术之后，玛拉会以 10 金把英勇战马的缰绳卖给你，那副缰绳从此归你所有。其余每一只坐骑都要在世界里赢来，所以几乎每位骑手都是从这匹马开始的。",
+      "firstBody": "学会骑术后，玛拉会以10金币出售英勇战马的缰绳。持有缰绳即可在外观菜单中为账号内所有角色解锁马匹外观。骑术训练已允许你不携带缰绳召唤坐骑；想换个样子时，可以选择马匹或其他已拥有的外观。",
       "rideHeading": "上马与下马",
-      "rideBody": "这里没有坐骑窗口，也不用设定最爱的坐骑，因为缰绳就是坐骑。从背包里或从动作条格子上使用一副缰绳，你就骑上了那只坐骑。召唤需要一点时间，是一段短短的呼唤而非瞬发，所以它救不了你一次糟糕的拉怪。下马是瞬时的，而且从不会被阻止。\n\n再次使用你正骑着的那副缰绳，就会把这只坐骑收起来。骑乘时使用另一副缰绳，会直接换乘过去，中间不必再召唤一次。“骑乘 / 下骑”键（默认是反引号键）永远只负责让你下来：它是下马的路，不是上马的路。唯一的例外是骑术课，在那里同一个键会召唤玛拉借给你的战马，因为借来的马没有缰绳可点。在手机或平板上，“更多”托盘里的坐骑按钮两个方向都管用。",
+      "rideBody": "打开外观菜单，在坐骑页签选择外观。骑乘／下骑键（默认是反引号键）会召唤使用该外观的坐骑。移动端的骑乘按钮也有相同效果。召唤需要短暂引导，下骑则立即完成。骑乘时可以更换外观，骑术速度不会改变。\n\n也可从背包或动作栏使用缰绳，选用该外观并召唤坐骑。使用当前骑乘的外观会收起坐骑。存放在银行或其他角色身上的缰绳也能解锁相同外观，无需由骑乘者携带。",
       "breaksHeading": "什么会让你重新落回地上",
       "breaksBody": "水永远赢。骑进任何深到要游泳的地方，你会立刻落地，因为没有哪只地面坐骑会游泳；而死亡会把你摔在原地。战斗中、死亡或以灵魂形态往回赶的路上，以及荆谷原野比赛的任何阶段，你都无法召唤坐骑：那场比赛从集结到最后的据点争夺全程徒步。召唤到一半走进战斗或走进水里，同样会中断召唤。\n\n你做的大多数事情也会把你放下来。挥出攻击、开始施法、采集资源点、钓鱼、制作、附魔和回收，都会在你起手的那一刻让你下马，所以每遇到一处矿脉都要做好跳下来的准备。召唤坐骑还会解除你正维持的任何变形形态：你永远不会既变着形又骑着坐骑。",
-      "speedHeading": "速度与档位",
-      "speedBody": "速度是坐骑之间唯一的差别。你从玛拉处买来的英勇战马定下了基础脚程，而你在世界里收集到的坐骑都跑得比它快：缰绳越稀有，骑起来越快，并且是分成几个清晰的档位，而不是平滑地往上滑。没有第二阶骑术可以训练，之后也没有升级可以购买。骑术你只付一次钱，从此以后，你用的是哪副缰绳，就决定了你走得多快。",
+      "speedHeading": "骑乘速度与训练",
+      "speedBody": "基础骑术训练使骑乘移动速度提高{basicSpeed}%。高级骑术训练使其提高{advancedSpeed}%，玛拉的售价为{advancedFee}金币。所有坐骑外观的速度都由角色的训练等级决定，与稀有度和来源无关。商店皮肤也使用相同的训练速度。",
       "collectHeading": "更稀有的坐骑从何而来",
       "collectBody": "除了玛拉的柜台，缰绳是找来的，而不是买来的。它们出自五人地下城和团队副本英雄难度的最终首领，也出自裂隙的完成奖励，而你结束的裂隙越难，它可能留下的缰绳就越稀有。它们按设计就是稀有的收获，没有哪一趟必定给你一副，所以搜寻坐骑的稳妥办法，是把这份搜寻顺路带进你本来就要跑的副本里。本页不会告诉你哪只坐骑挂在哪个首领身上：那一部分留给你自己去弄明白。",
       "raceHeading": "马厩赛道",
       "raceBody": "玛拉围场里的障碍赛道随时向任何人开放，并不只在上课时才能跑。骑上坐骑，站到拱门后方那块发光的方砖上，然后按“开始比赛”。倒计时会让你原地待命，接着计时开始：越过全部七道障碍，并在时间走完之前从拱门骑出去。\n\n只有当你确实凌空越过横杆时，这道障碍才算数，所以轻轻松松从旁边骑过去什么也清不掉。你可以按任意顺序、从任意一侧越过它们，漏掉一道也不是世界末日：绕回来再跳一次就是。死亡、下马或离开围场都会结束这次挑战，而没有什么拦着你再来一次。这里没有费用、没有冷却，除了成绩本身也没有奖品，而且任意多的骑手可以同时跑这条赛道，互不妨碍。",
       "goodsHeading": "缰绳只是寻常货物",
-      "goodsBody": "坐骑是一件物品，因此它也是经济可以流转的东西。只要缰绳还在你的背包或银行里，这只坐骑就属于你；不过存进银行的缰绳只保住所有权，并不能让你骑：要召唤这头坐骑，你得把缰绳带在身上。玩家的缰绳不带灵魂绑定，因此除非物品本身另有说明，它们可以交易、可以邮寄，也可以像其他任何收获一样在世界市场上架。出手之前有两件事值得先知道：任何商人都不会回购一副缰绳，所以坐骑是一笔你要么留着、要么转手，却无法套现的购买；另外，如果缰绳在你骑乘时离手，坐骑会跟着一起走，而你会被就地放下。"
+      "goodsBody": "只要任意角色的背包或个人银行中至少保留一件对应缰绳，账号内所有角色就能使用该收藏坐骑外观。交易、邮寄、上架、出售或以其他方式移走最后一件符合条件的物品，会从外观菜单中移除此项外观。正在使用它的骑乘者会恢复默认马匹外观，继续以训练决定的速度骑乘。\n\n除非物品另有说明，玩家缰绳可以交易、邮寄并在世界市场上架。马匹缰绳还可卖给商人，售价为10金币。其他缰绳保留各自的出售限制。商店坐骑皮肤是独立于缰绳物品的账号外观。"
     },
     "worldPage": {
       "heading": "世界",
@@ -10300,7 +10276,7 @@ export const zh_CN: EnTranslations = {
       "heroicRewardsBody": "英雄难度的首领掉落你熟悉的战利品，只是经过升级并在提示中标注为“英雄”，而每段副本的最终首领还会额外掉落别处找不到的史诗物品。那最后一次击杀也会为每位参与者留下英雄印记：一种在高瞭的军需官维克斯处使用的货币，他的柜台是一排戒指和吊坠，除了来自英雄深处的证明之外，别无他物能够购得。",
       "heroicLockoutBody": "普通地下城可以整天地跑。英雄难度则要求耐心：最终首领的击杀会把这趟副本中的所有人限制为该地下城每天一次英雄通关，而团队副本对每种难度各保有一份每日锁定。在联机的国度上，所有每日锁定都会在该国度自己的夜间重置时刻一并解除，因此在那个时刻之前不久完成的一趟，与刚过之后完成的一趟，会落在两个不同的日子里；若改在浏览器中离线游玩，锁定则只是在你自己击杀之后一天到期。已经通关的五人副本仍对它自己的队伍开放，可用于跑尸和拾取，因此没有人会被挡在自己在那里挣得的收获之外。团队副本更为严格：一旦它的击杀锁定了你，门便会关闭直到重置，而唯一回到里面的途径，是由恰好在那趟锁定他们的副本中倒下的人跑尸带入，因此活着走出去的团队成员，就是这一天都走出去了。离开竞技场之前请收齐你的战利品。这些锁定各自属于挣得它的那个角色，因此在主力角色上的一次通关，并不妨碍你其他角色的自由。",
       "resetTitle": "重置你的副本",
-      "resetBody": "在队伍仍占用着副本时切换难度，旧的占用会滞留一阵，然后自行释放。队长也可以让它们一次性释放：在自己的头像菜单中选择“重置所有副本”，或输入 /dungeon reset。重置只有在难度确实更改之后才生效，只有在里面不再有任何人（无论活着还是倒下）时才生效，只有在里面每具尸体都被拾取干净之后才生效，而且两次重置之间隔着一段短暂的冷却。若你们带着错误的难度来到门口，游戏会在副本开始前告知。团队副本从不以这种方式重置；适用的是它自己的锁定规则。",
+      "resetBody": "已占用的空置副本会保留一段时间，然后自行释放。队长也可以立即释放它们：在自己的头像菜单中选择“重置所有副本”，或输入 /dungeon reset，下一次挑战就会以当前难度重新开始。切换难度也会释放旧难度的副本。重置要求里面没有任何人，无论活着还是倒下，并且所有尸体上的战利品都已拾取干净。重置绝不会缩短锁定时间：已锁定的英雄副本或团队副本仍须等到锁定重置，而且两次重置之间有短暂冷却。若到达入口时难度不符，游戏会在挑战开始前告知。团队副本也以同样方式重置，其自身的锁定和尸体返回规则仍然适用；团队副本切换难度时没有冷却，因此选错难度或无法通过英雄难度的团队可以立即切换回来，重复挑战仍由其自身的锁定限制。",
       "templeLoreTitle": "沉没神殿，更深一层",
       "templeLoreBody": "这座神殿有着自己的传说，比你在别处追查的邪教更为古老。在饮月之池的岸边，那是一汪饮尽月光、又交还溺亡者的小湖，一名孤独的守望者把守着一道苍白的光之门。水面之下，一道冰冷的石阶通向那里。沉入此处的人并非死于意外：他们是苍白唱诗班，在虔诚的礼拜中没入水底，从未停止歌唱。在湖水将他们吞没之前，古老的守护者在岩石上刻下了唯一一句警示，那是献给一个他们称之为溺月之物的祷词，又有一只更沉稳的手在其下添上了两个字：它只是沉睡。",
       "cryptLeadTitle": "一扇死者本该让它紧闭的门",
@@ -11280,7 +11256,7 @@ export const zh_CN: EnTranslations = {
       "prestigeBody": "即便到了等级上限，经验依然在累积。它会注入一个纯装饰性的虚拟等级，让你的经验条不断攀升，也会注入一个长期的威望等级，只要你到了那一步，就可以从角色面板中领取。跨过累计经验的重大里程碑，还会在你的功绩之书中赢得功绩，并附带会显示在角色面板上的装饰性称号与姓名板边框。这一切都纯属可选，绝不赋予战力，只是你走过这条路的印记。",
       "noRush": "不必着急。这个世界供你按自己的节奏尽情享受，所以尽管漫步，接下吸引你的任务，让你的英雄在旅途中渐渐成长。",
       "ridingTitle": "学习骑乘",
-      "ridingBody": "骑术是攀登尽头等着你的东西之一。到了 {level} 级，一位马厩总管会用一笔相当可观的金币把这门技能教给你，而训练赛道上的一堂课会为你挣来第一副缰绳。坐骑不带来任何力量；它只是把世界变小了一些，而在向北长途跋涉之后，这本身就是一种奖赏。"
+      "ridingBody": "达到{level}级后，马厩总管玛拉会收费教授基础骑术，之后还提供高级训练。训练决定骑乘速度。在外观菜单中选择坐骑外观；只要缰绳仍在任意角色的背包或银行中，收藏外观就会在账号内共享。"
     },
     "placeholder": {
       "note": "本部分指南正在筹备中。"
@@ -16384,6 +16360,8 @@ export const zh_CN: EnTranslations = {
       "temple_moonwater_bolt": "月水箭",
       "temple_drowning_aria": "溺亡咏叹调",
       "temple_mere_surge": "湖涌",
+      "temple_score": "乐谱",
+      "temple_score_answer": "回应乐谱",
       "temple_tideglass_fracture": "潮镜碎裂",
       "temple_undertow": "暗流",
       "temple_lunar_tide": "月潮",
@@ -16421,6 +16399,12 @@ export const zh_CN: EnTranslations = {
       "wildheart_gorgebloom_gorge": "吞噬",
       "wildheart_zulgar_pulse": "荒野之心脉冲",
       "wildheart_zulgar_spirit_hunt": "狩猎之魂",
+      "wildheart_zulgar_hunting_spear": "狩猎之矛",
+      "wildheart_zulgar_idol_wakes": "神像苏醒",
+      "kituse_wildheart_pull_spear": "拔出长矛",
+      "wildheart_idols_breath": "神像吐息",
+      "wildheart_sun_glyph_kindle": "点亮中",
+      "wildheart_sun_glyph_cold": "冷却中",
       "sanctum_cinder_breath": "余烬吐息",
       "sanctum_warming_rite": "回暖仪式",
       "sanctum_goad": "驱策",
@@ -17053,6 +17037,9 @@ export const zh_CN: EnTranslations = {
       "levelClass": "{level} 级 {className}"
     },
     "vendor": {
+      "basicRiding": "骑术训练",
+      "advancedRiding": "高级骑术训练",
+      "ridingSpeed": "骑乘时的移动速度提高{speed}%。适用于所有坐骑。",
       "goodsTitle": "{name}：货物",
       "close": "关闭商人",
       "hint": "此窗口打开时，点击背包中的物品即可出售。",
@@ -17263,7 +17250,8 @@ export const zh_CN: EnTranslations = {
       "tooManyOrders": "你最多只能同时保留 {count} 个待处理订单。",
       "orderClosed": "该订单已不再开放。",
       "orderOwn": "那是你自己的订单。取消它即可撤回。",
-      "orderNotYours": "那不是你的订单。"
+      "orderNotYours": "那不是你的订单。",
+      "orderTrackedItem": "商人不接受独一无二装备的订单。"
     },
     "loot": {
       "takeAll": "全部拾取",
@@ -21189,117 +21177,6 @@ export const zh_CN: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "往生石"
-      },
-      "whistle_ember_fox": {
-        "name": "余烬狐的哨子"
-      },
-      "whistle_moss_hare": {
-        "name": "苔藓野兔的哨子"
-      },
-      "whistle_frog": {
-        "name": "青蛙的哨子"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "赤钳蟹的哨子"
-      },
-      "whistle_golden_sentinel": {
-        "name": "黄金哨兵的哨子"
-      },
-      "whistle_nightfang": {
-        "name": "夜牙的哨子"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "獠角野猪的哨子"
-      },
-      "whistle_emerald_wolf": {
-        "name": "翡翠狼的哨子"
-      },
-      "whistle_tiger": {
-        "name": "猛虎的哨子"
-      },
-      "whistle_cate_coin": {
-        "name": "钱币猫的哨子"
-      },
-      "whistle_alon": {
-        "name": "阿隆的哨子"
-      },
-      "whistle_trollface": {
-        "name": "巨魔脸的哨子"
-      },
-      "whistle_ansem": {
-        "name": "安塞姆的哨子"
-      },
-      "whistle_triple_t": {
-        "name": "三重T的哨子"
-      },
-      "whistle_kekius": {
-        "name": "凯基乌斯的哨子"
-      },
-      "whistle_solbot": {
-        "name": "索尔机偶的哨子"
-      },
-      "whistle_frostfire": {
-        "name": "霜火的哨子"
-      },
-      "whistle_rocky": {
-        "name": "岩仔的哨子"
-      },
-      "whistle_proud_grunt": {
-        "name": "骄傲步兵的哨子"
-      },
-      "whistle_loot_goblin": {
-        "name": "战利品哥布林的哨子"
-      },
-      "whistle_penny_goldspark": {
-        "name": "潘妮·金火花的哨子"
-      },
-      "whistle_stag": {
-        "name": "雄鹿的哨子"
-      },
-      "whistle_alpaca": {
-        "name": "羊驼的哨子"
-      },
-      "whistle_horse": {
-        "name": "马的哨子"
-      },
-      "whistle_sapling": {
-        "name": "小树苗的哨子"
-      },
-      "whistle_bull": {
-        "name": "公牛的哨子"
-      },
-      "whistle_spider": {
-        "name": "蜘蛛的哨子"
-      },
-      "whistle_raptor": {
-        "name": "迅猛龙的哨子"
-      },
-      "whistle_skeleton": {
-        "name": "骷髅的哨子"
-      },
-      "whistle_crystal_lich": {
-        "name": "水晶巫妖的哨子"
-      },
-      "whistle_forgemaw": {
-        "name": "熔颚·熔融者的哨子"
-      },
-      "whistle_sprites": {
-        "name": "闪烁与微光的哨子"
-      },
-      "whistle_crystal_tide": {
-        "name": "水晶潮汐的哨子"
-      },
-      "whistle_phantom": {
-        "name": "幻魂的哨子"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "烬落凤凰的哨子"
-      },
-      "charm_stag_acorn": {
-        "name": "橡果之冠护符"
-      },
-      "charm_stag_gilded": {
-        "name": "镀金护符"
       },
       "lastflame_core": {
         "name": "末焰之核"
@@ -26340,6 +26217,9 @@ export const zh_CN: EnTranslations = {
       "thorn_sprout": {
         "name": "荆棘幼芽"
       },
+      "wildheart_hunting_spear": {
+        "name": "狩猎之矛"
+      },
       "buddy_ember_fox": {
         "name": "余烬狐"
       },
@@ -26414,9 +26294,6 @@ export const zh_CN: EnTranslations = {
       },
       "buddy_horse": {
         "name": "马"
-      },
-      "buddy_sapling": {
-        "name": "小树苗"
       },
       "buddy_bull": {
         "name": "公牛"

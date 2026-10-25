@@ -13,6 +13,7 @@ import { damageTakenWithin } from '../src/sim/combat/damage_history';
 import { wireParkedMana } from '../src/sim/combat/form_auto_unshift';
 import { rewindHealAmount } from '../src/sim/combat/rewind';
 import { DEEDS } from '../src/sim/content/deeds';
+import { mountDef } from '../src/sim/content/mounts';
 import { RELIQUARY_PAGES_BY_ID } from '../src/sim/content/reliquary';
 import { MECH_CHROMAS } from '../src/sim/content/skins';
 import {
@@ -30,6 +31,7 @@ import {
 import { devTierIndexForMergedPrs } from '../src/sim/dev_tier';
 import { gmHiddenFrom } from '../src/sim/gm_presence';
 import type { GuildBankOpDelta } from '../src/sim/guild_bank';
+import { claimsByOwnerKey } from '../src/sim/instances/difficulty_selection';
 import { parseItemCopyAnchor } from '../src/sim/item_copy_anchor';
 import { itemInstancePayloadsEqual } from '../src/sim/item_instance_merge';
 import {
@@ -58,7 +60,7 @@ import type { ToolEffectConfirmMode } from '../src/sim/professions/tools';
 import { selfRelicKeys, syncAccountRelicGrants } from '../src/sim/reliquary';
 import { corpseHasDecayed } from '../src/sim/respawn_policy';
 import { loadRiftWorldState, serializeRiftWorldState } from '../src/sim/rift/persistence';
-import type { CharacterState, MailSave, PetState, PlayerMeta } from '../src/sim/sim';
+import type { CharacterState, InstanceSlot, MailSave, PetState, PlayerMeta } from '../src/sim/sim';
 import { MAX_CHAT_MESSAGE_LEN, Sim } from '../src/sim/sim';
 import { drainBgOutcomes } from '../src/sim/social/battleground_outcomes';
 import { RAID_MAX } from '../src/sim/social/party';
@@ -103,6 +105,8 @@ import { ownedWeaponSkinLoadout } from './account_cosmetics_live';
 import { AccountCosmeticsService } from './account_cosmetics_service';
 import { reconcileAccountRelics, recordRelicFinds } from './account_ledger_records';
 import { AccountLedgerService } from './account_ledger_service';
+import type { AccountMountItemsRow } from './account_mount_items_core';
+import { createRealmMountItemsService } from './account_mount_items_runtime';
 import { addAccountPlayer } from './account_player_join';
 import { type ActivityDetectDeps, detectActivityEvent } from './activity_detect';
 import { recordOnlineSample } from './admin_db';
@@ -259,6 +263,8 @@ import { isUpdateDue } from './entity_update_cadence';
 // every test that partial-mocks the db, the known overlay-mock breakage class.
 // Dual fan-out (D21): Steam and Epic reconcile independently.
 import { reconcileOnLogin as reconcileEpicOnLogin } from './epic/mirror';
+import { equippedHistoryJson } from './equipped_history_wire';
+import { equippedInstanceWire } from './equipped_instance_wire';
 import { eventAnchor, shouldDeliverEventToViewer } from './event_delivery';
 import { assembleEventsFrame, filterRoutableEvents, serializeEventFragments } from './event_frame';
 import { buildEventPidIndex, forEachSelectedEventIndex } from './event_pid_index';
@@ -451,9 +457,10 @@ import {
 import {
   type EntityWireCache,
   type EntityWireView,
-  emptyWireVariant,
+  emptyEntityWireCache,
   fullEntityJson,
   liteEntityJson,
+  splicedIdentityJson,
 } from './entity_wire_cache';
 import { observeEventRecords } from './event_record_observers';
 import { parseGuildPledgeSettingsCommand } from './guild_pledge_settings_cmd';
@@ -482,7 +489,7 @@ import { buildRealmSimConfig } from './sim_boot_config';
 import { feedRealmCalendar } from './sim_calendar_feed';
 import {
   jsonWithField,
-  StableAuraWireCache,
+  type StableAuraWireCache,
   StableSelfTimerWireCache,
   wireAura,
 } from './snapshot_timer_wire';
@@ -1433,6 +1440,12 @@ export class GameServer {
       this.escrowSessionLost(s.pid, s.characterId, 'ambiguous', 'guild weapon purchase'),
     cosmetics: this.cosmetics,
   });
+  private readonly mountItems = createRealmMountItemsService(
+    () => this.sim,
+    this.cosmetics,
+    () => this.backgroundDbGate,
+    (ms) => this.tickProfiler.add('mountItems', ms),
+  );
   private readonly ledger = new AccountLedgerService({
     sim: () => this.sim,
     sessions: () => this.clients.values(),
@@ -1499,6 +1512,9 @@ export class GameServer {
   // rules call a defect. Built once per broadcast pass and handed to every
   // bgInfoFor call in that pass instead.
   private readonly bgLadderReadout = createRealmReadoutMemo<BgLadderEntry[]>();
+  // Live dungeon claims by owner key, one slot pass per tick shared by every
+  // viewer's `udiff` read (src/sim/instances/difficulty_selection.ts).
+  private readonly claimsByKeyReadout = createRealmReadoutMemo<Map<string, InstanceSlot[]>>();
   // The /who roster (chat command and the Who tab), rebuilt at most once per tick.
   private readonly whoRosterReadout = createRealmReadoutMemo<WhoRosterEntry<ClientSession>[]>();
   // When the realm-wide Vale Cup readout is next due, tracked realm-global (not
@@ -1610,6 +1626,7 @@ export class GameServer {
     'antibot',
     'broadcast',
     'bcastGrid',
+    'mountItems',
     'bcastSelf',
     'social',
     'saves',
@@ -1718,6 +1735,9 @@ export class GameServer {
         ...courierWire.storageAdmissionsFor(
           () => this.sim,
           (pid) => this.clients.get(pid),
+          // The courier's other-character leg runs on the membership bank path
+          // (constructed below; the Sim only calls it on a later tick).
+          (pid) => this.membership.courierAccountExchange(pid),
         ),
       ),
     );
@@ -3096,6 +3116,7 @@ export class GameServer {
     meta: RequestMetadata &
       Partial<AccountChatMuteStatus> & {
         accountCosmetics?: AccountCosmetics;
+        accountMountItems?: readonly AccountMountItemsRow[];
         accountBuddyOwned?: readonly string[];
         // Account ledger absent on bare test joins; the sim supplies a fresh one.
         accountLedger?: AccountLedger;
@@ -3201,7 +3222,10 @@ export class GameServer {
     // The worn mount skin rides the character save, ownership rides the
     // account: a saved skin the account does not own comes off here (never
     // healed into ownership; server/mount_skin_reconcile.ts).
-    if (!wornMountSkinAllowed(accountCosmetics, this.sim.meta(pid)?.mountSkinId)) {
+    if (
+      !wornMountSkinAllowed(accountCosmetics, this.sim.meta(pid)?.mountSkinId) &&
+      !mountDef(this.sim.meta(pid)?.mountSkinId ?? '')
+    ) {
       this.sim.setMountSkin(pid, null);
     }
     const sessionIp = meta.ip ?? '';
@@ -3357,6 +3381,7 @@ export class GameServer {
     if (session.jailed) this.teleportJailedSession(session);
     this.ipSessionCounts.set(sessionIp, (this.ipSessionCounts.get(sessionIp) ?? 0) + 1);
     this.clients.set(pid, session);
+    this.mountItems.join(session, meta.accountMountItems);
     this.sessionsByCharacterId.set(characterId, session);
     this.membership.onJoin(session);
     this.referral.attach(session);
@@ -3700,6 +3725,7 @@ export class GameServer {
     // Release only the session binding. The account-keyed token state remains
     // cached until it has naturally refilled, so reconnect cannot reset it.
     session.bankVaultLedgerGuard.release();
+    this.mountItems.leave(session);
     this.clients.delete(session.pid);
     this.membership.onLeave(session);
     this.referral.detach(session);
@@ -3745,6 +3771,7 @@ export class GameServer {
     // otherwise teardown could race the durable guild and fee verdict.
     await session.guildCreateSettlement;
     await this.saveCharacterOnLeave(session);
+    this.mountItems.settledLeave(session.accountId, session.characterId);
     // Whatever book work this session still holds can never commit now: it has
     // no save left. Undo the part whose character half never landed, and
     // record the part whose character half did (an escrow deficit that ran out
@@ -5508,15 +5535,15 @@ export class GameServer {
   }
 
   // R35 GM restore: mint a lost item back onto a LIVE character through the
-  // sim's normal grant hub (grants reaching addItem always land). The count
-  // is re-clamped defensively even though the admin handler validates it
-  // (the dev_give 1..20 clamp); EVERY non-integer (NaN and finite fractions
-  // alike) clamps to 1, deliberately stricter than a Math.floor would be,
+  // sim's grant hub (grants reaching addItem always land). The count is
+  // re-clamped defensively (the dev_give 1..20 clamp); EVERY non-integer
+  // (NaN and fractions alike) clamps to 1, stricter than a Math.floor,
   // because a non-integer here means the validator was bypassed.
   adminRestoreItem(
     characterId: number,
     itemId: string,
     count: number,
+    derivedFrom?: string,
   ): 'ok' | 'offline' | 'invalid_item' {
     const session = this.sessionByCharacterId(characterId);
     if (!session) return 'offline';
@@ -5524,11 +5551,11 @@ export class GameServer {
     const clamped = Number.isInteger(count)
       ? Math.max(1, Math.min(RESTORE_ITEM_MAX_COUNT, count))
       : 1;
-    // movement: a support restore re-mints a copy the player already obtained
-    // once (and already had counted), so crediting it again would inflate a
-    // player-visible number from a support ticket. The safer default for a
-    // verb named restore.
-    this.sim.addItem(itemId, clamped, session.pid, { movement: true });
+    // movement: the player was already credited for this copy once. A tracked
+    // copy gets a NEW guid, source `restore`, minted as a `derive` of the lost
+    // copy when the operator named it (item_tracking.ts).
+    const grant = { movement: true, source: 'restore', derivedFrom };
+    this.sim.addItem(itemId, clamped, session.pid, grant);
     // Close the audit-durability window: the audit row is already committed,
     // so the grant must not wait up to AUTOSAVE_SECONDS to become durable (a
     // crash inside that window would leave a row for a grant that vanished).
@@ -6248,6 +6275,7 @@ export class GameServer {
         }
         break;
       case 'use':
+        this.mountItems.syncAccount(session);
         if (typeof msg.item === 'string') {
           if (msg.item === 'membership_token') {
             void this.membership.redeem(
@@ -6293,10 +6321,18 @@ export class GameServer {
         }
         break;
       case 'buy':
-        if (typeof msg.npc === 'number' && typeof msg.item === 'string') {
+        // The options bag third, pid fourth (the one explicit shape; see
+        // Sim.buyItem). A non-number count is dropped like sell's, a hostile
+        // number reaches the sim's sanitize and denies there.
+        if (
+          typeof msg.npc === 'number' &&
+          typeof msg.item === 'string' &&
+          (msg.ridingTier === undefined || msg.ridingTier === 0 || msg.ridingTier === 1)
+        ) {
           const options = {
             count: typeof msg.count === 'number' ? msg.count : undefined,
             bulk: msg.bulk === true,
+            expectedRidingTier: (msg.ridingTier ?? 0) as 0 | 1,
           };
           if (!this.accountBuddies.buy(session, msg.npc, msg.item, options))
             sim.buyItem(msg.npc, msg.item, options, pid);
@@ -6582,6 +6618,7 @@ export class GameServer {
       // Rideable mounts: the Sim re-validates everything (catalog key, level
       // gate, combat gate); the entity mirror + self `mnt` field carry the result.
       case 'mount_toggle':
+        this.mountItems.syncAccount(session);
         sim.toggleMountFor(pid);
         break;
       case 'buddy_rename':
@@ -6615,8 +6652,12 @@ export class GameServer {
       // Riding skill purchase: player buys Riding from Marla for 80g. The Sim
       // re-validates NPC identity, range, level, and funds.
       case 'learn_riding':
-        if (typeof msg.npc === 'number' && Number.isInteger(msg.npc))
-          sim.learnRidingFor(msg.npc, pid);
+        if (
+          typeof msg.npc === 'number' &&
+          Number.isInteger(msg.npc) &&
+          (msg.ridingTier === undefined || msg.ridingTier === 0 || msg.ridingTier === 1)
+        )
+          sim.learnRidingFor(msg.npc, pid, msg.ridingTier ?? 0);
         break;
       // Show-jumping race: the Sim re-validates the glowing platform, lesson or
       // mount eligibility, and liveness before arming the countdown.
@@ -6645,6 +6686,7 @@ export class GameServer {
       // session's account cosmetics here; the Sim only validates the id.
       case 'change_mount_skin':
         if (!this.consumeCosmeticOp(session, receivedAtMs / 1000)) break;
+        this.mountItems.syncAccount(session);
         this.cosmetics.changeMountSkin(session, msg.skin);
         break;
       // Z-key sheathe toggle: cosmetic, no payload; the Sim owns the dead-gate
@@ -7728,6 +7770,10 @@ export class GameServer {
 
   private broadcastSnapshots(): void {
     if (this.clients.size === 0) return;
+    const mountItemsStarted = performance.now();
+    const mountItemsNow = Date.now();
+    for (const session of this.clients.values()) this.mountItems.probe(session, mountItemsNow);
+    this.tickProfiler.add('mountItems', performance.now() - mountItemsStarted);
     this.partyFrameGlobalsCache = null;
     this.partyFrameProjectionCache.beginBroadcast();
     const tick = this.sim.tickCount;
@@ -7985,18 +8031,7 @@ export class GameServer {
   private entityWireCacheFor(e: Entity): EntityWireCache {
     let cache = this.wireCache.get(e.id);
     if (!cache) {
-      cache = {
-        tick: -1,
-        baseIdJson: '',
-        idJson: '',
-        appJson: null,
-        baseDynJson: '',
-        idVer: 0,
-        baseDynVer: 0,
-        auraCache: new StableAuraWireCache(),
-        legacy: emptyWireVariant(),
-        stable: emptyWireVariant(),
-      };
+      cache = emptyEntityWireCache();
       this.wireCache.set(e.id, cache);
     }
     return cache;
@@ -8034,14 +8069,16 @@ export class GameServer {
       cache.tick = this.sim.tickCount;
       const baseIdJson = JSON.stringify(identityFields(e));
       const baseDynJson = JSON.stringify(dynamicFields(e, false));
-      if (baseIdJson !== cache.baseIdJson) {
+      // The worn history (`eqh`) is memoized per worn set, so this read is O(1).
+      const eqhJson = e.kind === 'player' ? equippedHistoryJson(e) : null;
+      if (baseIdJson !== cache.baseIdJson || eqhJson !== cache.eqhJson) {
         cache.baseIdJson = baseIdJson;
-        // The look is spliced rather than composed into identityFields so the
-        // per-tick stringify above never walks it (see appearanceWireJson).
-        // Splicing here, inside the change arm, means even the concat only runs
-        // when the rest of the identity actually moved.
-        const appJson = this.appearanceWireJson(e);
-        cache.idJson = appJson === null ? baseIdJson : jsonWithField(baseIdJson, 'app', appJson);
+        cache.eqhJson = eqhJson;
+        // The look and the worn history are spliced rather than composed into
+        // identityFields so the per-tick stringify above never walks them (see
+        // appearanceWireJson, equipped_history_wire.ts). Splicing here, inside
+        // the change arm, means even the concat only runs when one moved.
+        cache.idJson = splicedIdentityJson(baseIdJson, this.appearanceWireJson(e), eqhJson);
         cache.idVer++;
       }
       if (baseDynJson !== cache.baseDynJson) {
@@ -8219,6 +8256,12 @@ export class GameServer {
       p,
       this.sim.dungeonDifficulty(anchorSession.pid),
       this.sim.activeDungeonDifficulty(anchorSession.pid),
+      this.sim.unappliedDungeonDifficulty(
+        anchorSession.pid,
+        realmReadoutObject(this.claimsByKeyReadout, this.sim.tickCount, () =>
+          claimsByOwnerKey(this.sim.instances),
+        ),
+      ),
     );
     // The viewer's OWN authored look. It cannot come from the entity list (the
     // broadcast loop skips `e.id === anchorEntity.id`), and it is exactly what
@@ -8614,7 +8657,7 @@ export class GameServer {
       // flag, not the modulo, is what carries correctness here. Wire key
       // `mntOwn`.
       maybe('mntOwn', this.sim.ownedMountsFor(anchorSession.pid));
-      // The buddy collection (IWorldBuddies), four keys (server/buddy_wire.ts).
+      // The buddy collection (IWorldBuddies), budOwn and budPend (server/buddy_wire.ts).
       emitBuddySelfKeys(this.sim, anchorSession.pid, maybe);
       // The viewer's own farm plots (wire key `fplot`): heavy-gated, built by
       // appendFarmPlotsWire in server/farming_commands.ts since the v0.38.0

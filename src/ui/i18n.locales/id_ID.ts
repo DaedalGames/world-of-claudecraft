@@ -12,20 +12,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.adventureGuide.lootSpec': 'Spesialisasi',
   'hudChrome.bank.accountBagsEmpty': 'Tasmu kosong.',
   'hudChrome.bank.accountRetry': 'Coba lagi',
-  'hudChrome.collections.actions.remove': 'Hapus',
   'hudChrome.collections.actions.summon': 'Panggil',
-  'hudChrome.collections.actions.wear': 'Kenakan',
-  'hudChrome.collections.armor.cloth': 'Kain',
-  'hudChrome.collections.armor.leather': 'Kulit',
-  'hudChrome.collections.detail.honorPrice': '{amount} Kehormatan',
-  'hudChrome.collections.detail.soulbound': 'Terikat Jiwa',
-  'hudChrome.collections.petKind.beast': 'Binatang Buas',
-  'hudChrome.collections.petKind.elemental': 'Elemental',
-  'hudChrome.collections.petKind.humanoid': 'Humanoid',
-  'hudChrome.collections.petKind.undead': 'Mayat Hidup',
-  'hudChrome.collections.stat.agility': 'Kegesitan',
-  'hudChrome.collections.stat.intellect': 'Kecerdasan',
-  'hudChrome.collections.tabs.mounts': 'Tunggangan',
   'hudChrome.courier.empty': 'Tidak ada barang',
   'hudChrome.courier.inventory': 'Inventaris',
   'hudChrome.expeditions.accept': 'Terima',
@@ -3700,7 +3687,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': 'Fungsi',
   'guide.commandsPage.dungeonMode': 'Alihkan dungeonmu antara tingkat kesulitan normal dan heroik.',
   'guide.commandsPage.dungeonReset':
-    'Tinggalkan instansi-instansi kosong milikmu sendiri, yang kamu lakukan setelah mengganti kesulitan.',
+    'Tinggalkan instans kosong milikmu agar penjelajahan berikutnya dimulai dari awal pada kesulitan yang sama atau yang baru.',
   'guide.commandsPage.dungeons':
     'Setiap dungeon beserta zona tempat pintunya berada dan ukuran party yang dirancang untuknya, ditambah tingkat kesulitan yang sedang kamu pakai saat ini.',
   'guide.commandsPage.emotesBody':
@@ -4182,29 +4169,14 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     'Di luar konter Marla, tali kekang ditemukan, bukan dibeli. Ia jatuh dari bos terakhir dungeon lima pemain dan raid pada mode heroik, serta dari penuntasan rift, tempat makin sulit rift yang kamu tuntaskan, makin langka tali kekang yang bisa ditinggalkannya. Semuanya sengaja dibuat langka dan tidak ada sesi yang menjaminnya, jadi cara yang bijak untuk memburu tunggangan adalah membawa buruan itu serta pada sesi yang toh sudah kamu jalani. Halaman ini tidak akan memberitahumu tunggangan mana tergantung di bos yang mana: bagian itu adalah milikmu untuk cari tahu sendiri.',
   'guide.mountsPage.collectHeading': 'Dari mana tunggangan yang lebih langka berasal',
-  'guide.mountsPage.firstBody':
-    'Valorsteed adalah satu-satunya tunggangan yang dijual di mana pun di dunia ini. Begitu kamu mempelajari Menunggang, Marla akan menjual Tali Kekang Valorsteed kepadamu seharga 10 emas, dan tali kekang itu menjadi milikmu untuk disimpan. Setiap tunggangan lain didapat di luar sana di dunia, sehingga kuda ini adalah tempat hampir setiap penunggang memulai.',
   'guide.mountsPage.firstHeading': 'Tunggangan pertamamu',
-  'guide.mountsPage.goodsBody':
-    'Tunggangan adalah sebuah item, yang menjadikannya sesuatu yang bisa digerakkan ekonomi. Kamu memiliki sebuah tunggangan selama tali kekangnya berada di tasmu atau di bankmu, meski tali kekang yang disimpan di bank tetap menjadikan tunggangan itu milikmu tanpa membiarkanmu menungganginya: untuk memanggil binatang itu kamu harus membawa tali kekangnya. Tali kekang milik pemain tidak pernah soulbound, sehingga ia bisa diperdagangkan, dikirim lewat surat, dan didaftarkan di Pasar Dunia seperti temuan lainnya, kecuali item itu sendiri menyatakan sebaliknya. Ada dua hal yang layak diketahui sebelum kamu melepaskannya: tidak ada penjaja yang akan pernah membeli kembali sepasang tali kekang, sehingga sebuah tunggangan adalah pembelian yang kamu simpan atau teruskan, bukan sesuatu yang bisa diuangkan, dan jika tali kekang itu meninggalkan tasmu dan bankmu sekaligus saat kamu sedang menungganginya, diperdagangkan, dikirim lewat surat, atau dijual di pasar, tunggangan itu ikut pergi bersamanya dan kamu diturunkan di tempat kamu berdiri.',
   'guide.mountsPage.goodsHeading': 'Tali kekang adalah barang biasa',
   'guide.mountsPage.heading': 'Tunggangan dan menunggang',
-  'guide.mountsPage.intro':
-    'Tunggangan adalah cara yang lebih cepat untuk melintasi dunia, dan itulah keseluruhannya. Kamu belajar menunggang di kandang, membeli tali kekang pertamamu, dan setiap jalan sesudahnya menjadi lebih pendek.',
-  'guide.mountsPage.learnBody':
-    'Menunggang adalah kecakapan yang kamu beli sekali saja, dan ia terbuka pada level {level}. Marla Hitchen, sang Kepala Kandang, menjaga Kandang Galecrest di perbukitan, dan ia menjual Pelatihan Menunggang seharga 80 emas. Pembelian tunggal itulah yang membuatmu bisa duduk di atas tunggangan sama sekali, dan ia tetap menjadi milikmu selamanya.\n\nBegitu kamu memilikinya, Marla punya misi untukmu: Pelajaran Menunggang Kuda. Ambil misi itu, ikuti petunjuk arah menuju kotak bercahaya di belakang gerbang start, dan tekan Mulai Balapan. Ia meminjamkanmu seekor Valorsteed latihan untuk pelajaran ini, sehingga pelajaran itu sendiri tidak membebanimu apa pun. Tunggangi lintasannya, selesaikan, dan kembalilah kepadanya untuk koin dan pengalamanmu. Kuda pinjaman itu kembali ke kandang sesudahnya, sehingga pelajaran itu mengajarkanmu cara duduk di pelana, bukan memberimu seekor kuda.',
   'guide.mountsPage.learnHeading': 'Belajar menunggang',
   'guide.mountsPage.raceBody':
     'Lintasan lompat rintangan di padok Marla terbuka untuk siapa saja, kapan saja, tidak hanya selama pelajaran berlangsung. Duduki sebuah tunggangan, berdirilah di kotak bercahaya di belakang gerbang, dan tekan Mulai Balapan. Sebuah hitungan mundur menahanmu tetap diam, lalu jam mulai berjalan: lewati ketujuh lompatan dan tunggangi kembali keluar melewati gerbang sebelum waktunya habis.\n\nSebuah lompatan hanya dihitung jika kamu benar-benar berada di udara melewati mistar, sehingga sekadar menerobos begitu saja tidak menghitung apa pun. Kamu boleh melewatinya dalam urutan apa pun dan dari sisi mana pun, dan satu yang terlewat bukan akhir dari segalanya: putar balik dan coba lagi. Mati, turun dari tunggangan, atau meninggalkan padok mengakhiri percobaan itu, begitu pula membiarkan waktunya habis, yang menurunkanmu dari pelana di tempat kamu berdiri; membatalkannya sendiri hanya menghentikan hitungan waktu. Tidak ada yang menghalangimu memulai lagi. Tidak ada biaya, tidak ada waktu tunggu, dan tidak ada hadiah selain waktu itu sendiri, dan berapa pun jumlah penunggang bisa menjalani lintasan itu sekaligus tanpa saling menghalangi.',
   'guide.mountsPage.raceHeading': 'Balapan kandang',
-  'guide.mountsPage.rideBody':
-    'Tidak ada jendela tunggangan dan tidak ada favorit yang perlu diatur, karena tali kekanglah tunggangannya. Gunakan satu tali kekang dari tasmu atau dari slot bilah aksi dan kamu menunggangi tunggangan itu. Memanggilnya makan waktu sesaat, panggilan singkat alih-alih instan, sehingga ia tidak akan menyelamatkanmu dari tarikan buruk. Turun dari tunggangan bersifat instan dan tidak pernah terhalang.\n\nGunakan tali kekang yang sedang kamu tunggangi dan kamu menyimpan tunggangan itu kembali. Gunakan tali kekang lain saat sedang menunggang dan kamu langsung berpindah ke tunggangan itu, tanpa ada yang perlu dipanggil di antaranya. Tombol Naiki / Turun, tombol backtick secara bawaan, hanya pernah menurunkanmu: itu jalan turun, bukan jalan naik. Satu pengecualiannya adalah pelajaran menunggang, tempat tombol yang sama memanggil kuda yang dipinjamkan Marla, karena kuda pinjaman tidak punya tali kekang untuk diklik. Di ponsel atau tablet, tombol Naiki di menu Lainnya bekerja dua arah, meski ia memanggil tali kekang pertama yang ada di tasmu alih-alih yang kamu pilih, jadi ketuk tali kekangnya sendiri saat kamu menginginkan tunggangan tertentu.',
   'guide.mountsPage.rideHeading': 'Naik dan turun dari tunggangan',
-  'guide.mountsPage.speedBody':
-    'Kecepatan adalah satu-satunya hal yang membedakan satu tunggangan dari yang lain. Valorsteed yang kamu beli dari Marla menetapkan kecepatan dasarnya, dan tunggangan yang kamu kumpulkan di dunia luar melaju di atasnya: makin langka tali kekangnya, makin cepat larinya, dalam beberapa langkah yang jelas alih-alih peningkatan yang mulus. Tidak ada tingkatan kedua Menunggang untuk dilatih dan tidak ada peningkatan untuk dibeli sesudahnya. Kamu membayar Menunggang satu kali, dan sejak saat itu tali kekang yang kamu pakai menentukan seberapa cepat kamu bepergian.',
-  'guide.mountsPage.speedHeading': 'Kecepatan dan tingkatan',
-  'guide.mountsPage.whatBody':
-    'Tunggangan adalah seekor binatang yang kamu tunggangi, dan yang diberikannya adalah kecepatan. Tanpa zirah, tanpa kerusakan, tanpa statistik: ia membawamu melintasi tanah lebih cepat, dan melompat sedikit lebih tinggi saat kamu melompat, dan itulah keseluruhan kesepakatannya. Setiap tunggangan dalam permainan ini adalah tunggangan darat, sehingga tidak ada yang terbang, dan tidak satu pun dari mereka berenang.',
   'guide.mountsPage.whatHeading': 'Apa itu tunggangan',
   'guide.mountsPage.whereBody':
     'Kandang Galecrest ditandai pada peta Puncak Angin, di perbukitan antara Tebing Curam dan Ladang Bangkai Kapal. Marla berdiri di samping kandang, menghadap arena balap.',
@@ -4241,8 +4213,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Rift adalah satu-satunya hal yang menanti hingga batas akhir itu sendiri. Ia merekah di berbagai penjuru alam ini menurut jadwalnya sendiri, berperingkat dari C sampai S, dan setiap kelompok di dunia ini berlomba menjadi yang menutup masing-masingnya. Papan Delve juga terus berjalan, dan tingkat Heroiknya layak dilirik lagi begitu perlengkapanmu sudah mengejar.',
   'guide.progression.journeyBodyCount':
     'Dunia ini adalah satu hamparan tanah yang menyatu, terdiri dari {zones} zona. Tiga di antaranya adalah jalur tempat kamu naik level, membentang dari selatan ke utara: kamu mulai di lembah hijau, melaju menembus rawa, dan berakhir di puncak tinggi yang dingin. Ikuti jejak misi dan tanah itu akan membawamu dari satu ke berikutnya. Sebuah pulau ada di lepas pantai lembah untuk level-level awal, dan sisa alam ini terbuka dari jalan yang sama, dibangun untuk karakter yang sudah menuntaskan pendakian itu.',
-  'guide.progression.ridingBody':
-    'Menunggang adalah salah satu hal yang menanti di ujung pendakian itu. Pada level {level} seorang kepala kandang akan mengajarkanmu kecakapan itu dengan bayaran emas yang tidak sedikit, dan sebuah pelajaran di lintasan latihan mengganjarmu dengan tali kekang pertamamu. Tunggangan sama sekali tidak memberikan kekuatan; ia hanya membuat dunia terasa lebih kecil, yang setelah berjalan jauh ke utara adalah imbalannya tersendiri.',
   'guide.progression.ridingTitle': 'Belajar menunggang',
   'guide.questsPage.availableBody':
     'Misi datang berantai. Sebagian besar hanya ditawarkan setelah kamu menyerahkan misi sebelumnya, dan banyak juga meminta level minimum, sehingga seorang NPC yang tidak punya apa-apa untukmu hari ini mungkin punya banyak setelah beberapa levelmu berikutnya atau begitu kamu menutup misi yang sedang kamu bawa. Beberapa punya syarat tersendiri, seperti Pelajaran Menunggang Kuda, yang hanya terbuka setelah kamu membeli kecakapan Menunggang. Misi kelompok menyatakannya di depan dengan mencantumkan berapa banyak pemain yang mereka sarankan kamu bawa. Sebagian tugas bisa diulang: kamu bisa mengambilnya lagi setelah masa tunggu, dan penanda di atas pemberinya memberitahumu kapan sebuah misi kembali tersedia.',
@@ -6707,13 +6677,15 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Kamu tidak dapat mereset instans selama masih ada seseorang di dalamnya.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'Ubah kesulitan dungeon sebelum mereset instans ini. Instans kosong akan direset otomatis setelah 5 menit.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'Instance kamu sudah segar. Belum ada yang masuk sejak reset terakhir.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Gunakan /dungeon reset untuk meninggalkan instans kosong setelah mengubah kesulitan.',
+    'Gunakan /dungeon reset untuk meninggalkan instans kosongmu dan memulainya dari awal.',
   'hudChrome.dungeonDifficulty.resetLoot':
     'Kamu tidak dapat mereset instans selama masih ada jarahan di dalamnya.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'Reset Semua Instans?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Tindakan ini meninggalkan instans kosong dari kesulitan yang sebelumnya dipilih. Jarahan yang belum diambil akan mencegah reset.',
+    'Tindakan ini meninggalkan instans kosongmu agar penjelajahan berikutnya dimulai dari awal pada kesulitan pilihanmu. Penguncian tidak berubah. Siapa pun yang masih di dalam, atau jarahan yang belum diambil, akan mencegah reset.',
   'hudChrome.dungeonDifficulty.resetConfirm': 'Reset Instans',
   'hudChrome.dungeonDifficulty.resetCooldown': 'Instans hanya dapat direset sekali setiap 5 menit.',
   'hudChrome.dungeonDifficulty.entryMismatchNormal':
@@ -15076,7 +15048,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Kelompokmu menuntaskan ujian heroik saat kamu bertempur di barisan belakang atau telah tumbang. Penguncianmu juga tercatat, jadi bagian Tanda Heroik milikmu dikirim ke sini alih-alih hilang. Gunakan dengan baik.\n\n- Perbekal heroik',
   'guide.dungeonsPage.resetTitle': 'Mereset instansimu',
   'guide.dungeonsPage.resetBody':
-    'Gantilah kesulitan selagi kelompokmu masih memegang penjelajahan yang diklaim dan klaim lama akan bertahan sejenak sebelum terlepas sendiri. Pemimpin kelompok bisa melepaskannya sekaligus: pilih Setel Ulang Semua Instance di menu potretnya sendiri, atau ketik /dungeon reset. Penyetelan ulang hanya berfungsi setelah kesulitan benar-benar diubah, hanya selagi tidak ada seorang pun, hidup maupun tumbang, tersisa di dalam, hanya setelah setiap mayat di dalam sana dijarah bersih, dan sebuah jeda singkat memisahkan satu penyetelan ulang dari berikutnya. Datanglah ke pintu dengan kesulitan yang keliru dan permainan akan mengatakannya sebelum penjelajahan dimulai. Raid tidak pernah disetel ulang dengan cara ini; aturan kuncinya sendiri yang berlaku.',
+    'Instans kosong yang diklaim bertahan sejenak sebelum dilepas sendiri. Pemimpin kelompok dapat langsung melepasnya: pilih Setel Ulang Semua Instance di menu potretnya sendiri, atau ketik /dungeon reset, dan penjelajahan berikutnya dimulai dari awal pada kesulitan saat ini. Mengganti kesulitan juga melepas instans pada kesulitan lama. Reset hanya bekerja jika tidak ada siapa pun, hidup atau tumbang, di dalam, dan semua mayat telah dijarah bersih. Reset tidak pernah mempersingkat penguncian: Heroik atau raid yang terkunci tetap terkunci sampai waktu resetnya, dan ada jeda singkat antara reset. Jika datang ke pintu pada kesulitan yang salah, permainan memberi tahu sebelum penjelajahan dimulai. Raid direset dengan cara yang sama, dengan aturan penguncian dan kembali ke mayat tetap berlaku. Raid yang mengganti tingkat kesulitan melewati jeda reset: jika memilih tingkat yang salah atau gagal pada Heroik, raid dapat langsung mengganti kembali karena pengunciannya sendiri membatasi pengulangan.',
   'guide.dungeonsPage.wildheartBody':
     'Sebuah kaldera rimba yang basah oleh hujan tempat dua jalur perburuan yang ditinggikan mengelilingi cenote giok. Lintasi sarang-sarang binatang buas dan reruntuhan leluhur, lalu daki piramida ritual untuk melihat siapa yang menunggu di puncaknya.',
   'guide.gear.itemLevelBody':
@@ -16316,8 +16288,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mountRace.toFinish': 'Kembali menunggang melewati gerbang lengkung!',
   'hudChrome.mountTraining.begin': 'Mulai Pelajaran',
   'hudChrome.mountTraining.mountPrompt': 'Tekan {key} untuk menaiki Valorsteed latihan.',
-  'hudChrome.mountTraining.ownedMountPrompt':
-    'Tali kekangmu ada di dalam tasmu. Gunakan untuk menunggang.',
   'hudChrome.mountTraining.returnToMarla':
     'Kembali ke Marla di kandang untuk membeli tali kekang Valorsteed-mu seharga 10 emas.',
   'hudChrome.mountTraining.ridePrompt':
@@ -16327,18 +16297,12 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.close': 'Tutup',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'Sepeda magiteknologi bertenaga besar yang dirancang untuk pergerakan tempur cepat dan melayang rendah.',
-  'hudChrome.mounts.desc_grag_bear':
-    'Beruang tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.',
   'hudChrome.mounts.desc_shadowjump_toad':
     'Kodok raksasa masif berpijakan mantap, terlatih dalam lompatan bayangan secepat kilat yang mampu menjangkau medan apa pun.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'Siput ulet berenergi tahan lama yang memberikan kecepatan perjalanan tambahan.',
   'hudChrome.mounts.desc_stormfeather_griffin':
     'Griffin badai yang anggun, melangkah di tanah dengan cakar bersepatu rune, sayap terlipat rapat.',
   'hudChrome.mounts.desc_thunderstrut_gobbler':
     'Kalkun raksasa tetasan badai yang melenggak-lenggok turun dari Puncak yang Terjaga, ekornya terkembang bagai awan guntur.',
-  'hudChrome.mounts.desc_valorsteed':
-    'Kuda tunggangan tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.',
   'hudChrome.mounts.dismount': 'Turun',
   'hudChrome.mounts.emptyDropHint':
     'Tunggangan yang lebih langka dijatuhkan oleh bos dungeon heroik dan penyelesaian Rift.',
@@ -16361,7 +16325,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.selected': 'Terpilih',
   'hudChrome.mounts.spec_speed': '+{pct}% mobilitas ekstra',
   'hudChrome.mounts.title': 'Tunggangan',
-  'hudChrome.mounts.useToRide': 'Gunakan untuk memanggil tunggangan ini.',
   'hudChrome.unstuck.alreadyActive': 'Lepaskan Diri sedang menghitung mundur.',
   'hudChrome.unstuck.alreadySafe': 'Kamu sudah berada di posisi yang aman dan terjangkau.',
   'hudChrome.unstuck.busy': 'Selesaikan tindakanmu saat ini sebelum menggunakan Lepaskan Diri.',
@@ -18774,10 +18737,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Belum memiliki kroma Mecha Tempur.',
   'hudChrome.cosmetics.mechIntro':
     'Mecha Tempur menggantikan tubuh karakter ini. Satu kroma dipakai pada satu waktu.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Skin tunggangan digambar di atas tunggangan yang dinaiki karakter ini. Skin tidak pernah mengubah kecepatan.',
-  'hudChrome.cosmetics.mountsNoMount':
-    'Miliki tunggangan terlebih dahulu: skin membutuhkan sesuatu untuk ditunggangi.',
   'hudChrome.cosmetics.owned': 'Dimiliki',
   'hudChrome.cosmetics.scopeAccount': 'Akun',
   'hudChrome.cosmetics.scopeCharacter': 'Karakter',
@@ -21162,8 +21121,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.cantors_hymnal.name': 'Buku Himne Kantor',
   'entities.items.cantors_stole.name': 'Stola Kantor',
   'entities.items.cellwatch_belt.name': 'Sabuk Penjaga Sel',
-  'entities.items.charm_stag_acorn.name': 'Jimat Mahkota Biji Ek',
-  'entities.items.charm_stag_gilded.name': 'Jimat Berlapis Emas',
   'entities.items.choristers_gloves.name': 'Sarung Tangan Penyanyi Paduan Suara',
   'entities.items.choristers_spaulders.name': 'Lempeng Bahu Penyanyi Paduan Suara',
   'entities.items.chorus_conch.name': 'Keong Paduan Suara',
@@ -21247,41 +21204,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.turnkeys_shank.name': 'Pisau Tusuk Sipir',
   'entities.items.unquiet_stalkers_hood.name': 'Tudung Pengintai Gelisah',
   'entities.items.vestments_of_the_waking_rite.name': 'Busana Ritual Kebangkitan',
-  'entities.items.whistle_alon.name': 'Peluit Alon',
-  'entities.items.whistle_alpaca.name': 'Peluit Alpaka',
-  'entities.items.whistle_ansem.name': 'Peluit Ansem',
-  'entities.items.whistle_bull.name': 'Peluit Banteng',
-  'entities.items.whistle_cate_coin.name': 'Peluit Kucing Koin',
-  'entities.items.whistle_crimson_claw_crab.name': 'Peluit Kepiting Capit Merah',
-  'entities.items.whistle_crystal_lich.name': 'Peluit Lich Kristal',
-  'entities.items.whistle_crystal_tide.name': 'Peluit Pasang Kristal',
-  'entities.items.whistle_ember_fox.name': 'Peluit Rubah Bara',
-  'entities.items.whistle_emberfall_phoenix.name': 'Peluit Foniks Hujan Bara',
-  'entities.items.whistle_emerald_wolf.name': 'Peluit Serigala Zamrud',
-  'entities.items.whistle_forgemaw.name': 'Peluit Rahang Tempa yang Meleleh',
-  'entities.items.whistle_frog.name': 'Peluit Katak',
-  'entities.items.whistle_frostfire.name': 'Peluit Api Es',
-  'entities.items.whistle_golden_sentinel.name': 'Peluit Penjaga Emas',
-  'entities.items.whistle_horse.name': 'Peluit Kuda',
-  'entities.items.whistle_kekius.name': 'Peluit Kekius',
-  'entities.items.whistle_loot_goblin.name': 'Peluit Goblin Jarahan',
-  'entities.items.whistle_moss_hare.name': 'Peluit Kelinci Lumut',
-  'entities.items.whistle_nightfang.name': 'Peluit Taring Malam',
-  'entities.items.whistle_penny_goldspark.name': 'Peluit Penny Percik Emas',
-  'entities.items.whistle_phantom.name': 'Peluit Hantu',
-  'entities.items.whistle_proud_grunt.name': 'Peluit Prajurit Bangga',
-  'entities.items.whistle_raptor.name': 'Peluit Raptor',
-  'entities.items.whistle_rocky.name': 'Peluit Si Batu',
-  'entities.items.whistle_sapling.name': 'Peluit Anakan Pohon',
-  'entities.items.whistle_skeleton.name': 'Peluit Kerangka',
-  'entities.items.whistle_solbot.name': 'Peluit Robot Surya',
-  'entities.items.whistle_spider.name': 'Peluit Laba-laba',
-  'entities.items.whistle_sprites.name': 'Peluit Kelip dan Kilau',
-  'entities.items.whistle_stag.name': 'Peluit Rusa Jantan',
-  'entities.items.whistle_tiger.name': 'Peluit Harimau',
-  'entities.items.whistle_triple_t.name': 'Peluit Triple T',
-  'entities.items.whistle_trollface.name': 'Peluit Muka Troll',
-  'entities.items.whistle_tuskhorn_boar.name': 'Peluit Babi Hutan Tanduk Gading',
   'entities.mobs.balgath_cyclops.name': 'Balgath, Mandor Bermata Satu',
   'entities.mobs.barnacle_crawler.name': 'Pelaut Terikat Bangkai Kapal',
   'entities.mobs.basin_raptor.name': 'Raptor Cekungan',
@@ -21313,7 +21235,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_phantom.name': 'Hantu',
   'entities.mobs.buddy_proud_grunt.name': 'Prajurit Bangga',
   'entities.mobs.buddy_rocky.name': 'Si Batu',
-  'entities.mobs.buddy_sapling.name': 'Anakan Pohon',
   'entities.mobs.buddy_skeleton.name': 'Kerangka',
   'entities.mobs.buddy_solbot.name': 'Robot Surya',
   'entities.mobs.buddy_spider.name': 'Laba-laba',
@@ -23510,122 +23431,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.nameLabel': 'Nama teman',
   'hudChrome.buddyMenu.rename': 'Ganti Nama Teman',
   'hudChrome.collections.actions.dismiss': 'Panggil pulang',
-  'hudChrome.collections.armor.mail': 'Zirah rantai',
-  'hudChrome.collections.buddyLore.alon':
-    'Maskot pengembara dari jalan yang tak diakui peta mana pun, muncul setiap kali rencana berjalan buruk. Ia mengamati, menyetujui, dan sama sekali tidak membantu.',
-  'hudChrome.collections.buddyLore.alpaca':
-    'Kawanan Galecrest dipelihara untuk wol dan ketenangannya: tak ada yang lebih tenang di tengah badai. Yang ini akan meludahi tepat satu orang per perjalanan.',
-  'hudChrome.collections.buddyLore.ansem':
-    'Ia berbicara tentang pintu dan kegelapan, lalu menolak menjelaskan keduanya. Pemuja Nightbloom mengakuinya sebagai milik mereka; ia pergi setiap kali mereka mengadakan ritus.',
-  'hudChrome.collections.buddyLore.bull':
-    'Banteng Vale sebesar anjing, satu-satunya alasan orang setuju memeliharanya di dalam rumah. Perangainya tidak ikut mengecil.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    'Kucing yang tak mau berpisah dari koin yang didudukinya, dan tak pernah terlihat makan. Pedagang Eastbrook masih berdebat mana di antara keduanya yang merupakan peliharaan.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    'Kepiting pasang Farshore yang capitnya tetap merah lama setelah keluar dari air. Para pekerja dermaga dahulu mengadunya berlomba di papan untuk uang.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'Serpihan Nythraxis sendiri, masih berdengung dengan dingin yang membentuknya. Ia menuruti siapa pun yang menariknya dari puing raid, dan belum memaafkan orang itu.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    'Roh pasang yang menunggangi tetesan kaca lautnya sendiri, terangkat dari air tenang oleh pemancing dari Vale hingga Farshore yang sedang mencari makan malam. Ia mempertahankan air tempatnya berasal dan tak mau dibujuk kembali.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'Rubah betina dari pagar semak Eastbrook Vale, dinamai dari bulu merah bara yang terlihat di sela semak musim dingin. Para penjerat menyerah menangkap anaknya beberapa generasi lalu dan mulai meninggalkan makanan.',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    'Setiap musim gugur ia terbakar menjadi bara, lalu bangkit dari abunya sendiri pada musim semi; hanya itulah yang diketahui orang. Tak ada yang pernah menemukan sarangnya, dan tak ada yang pernah menangkapnya dua kali.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'Anak serigala Wraithwood, bulunya hijau dalam cahaya tajuk yang nyaris tak pernah mencapai lantai hutan. Para penjaga membesarkan anak yatim yang ditinggalkan hutan.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    'Ditempa di Kawah Mata Air Terakhir dan tak pernah benar-benar selesai, ia berjalan keluar dari pengecoran Ignivar saat palu masih berdentang. Hanya penjelajahan Heroik yang menemukannya: makhluk cair itu terus kembali ke tungku pembuatnya, lalu mengikuti pulang siapa pun yang selamat dari api dua kali.',
-  'hudChrome.collections.buddyLore.frog':
-    'Mirefen Marsh membesarkannya gemuk dan santai, bernyanyi semalaman dari rumpun gelagah. Pemandu rawa bersumpah perahu yang membawanya tidak pernah kandas.',
-  'hudChrome.collections.buddyLore.frostfire':
-    'Lahir di Frostveil Reach saat mata air panas menembus hamparan es, dan tak pernah memutuskan bagian mana yang menjadi asalnya. Ia beruap di udara dingin dan menggigil di udara hangat.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'Kumbang penjaga Amberfall, disepuh resin tempatnya tumbuh. Namanya lebih tua dari resin: penjaga sejenis telah menjaga hutan itu jauh sebelum orang terpikir membotolkan getahnya.',
-  'hudChrome.collections.buddyLore.horse':
-    'Keturunan poni Vale, dibiakkan kecil untuk lorong kebun dan tak pernah diberi tahu bahwa ia bukan kuda perang. Ia mengimbangi langkah di sisimu dan mengikuti siapa pun yang pernah memberinya apel.',
-  'hudChrome.collections.buddyLore.kekius':
-    'Teman tertawa yang tak jelas asalnya, diadopsi arena pacuan Galecrest sebagai jimat. Ia hidup lebih lama daripada empat kandang yang bersumpah atas tuahnya.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    'Ia mengikuti siapa pun yang membawa Tanda Heroik dan tak pernah sekalipun tertangkap mencuri. Quartermaster Vex menegaskan bahwa itu sama sekali bukan bukti.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'Terwelu Willowfen, berbulu hijau karena seumur hidup tidur di gambut basah. Ahli herbal rawa menganggapnya pembawa keberuntungan dan tak mengizinkan siapa pun mengusirnya dari ambang pintu.',
-  'hudChrome.collections.buddyLore.nightfang':
-    'Pemburu muda Nightbloom, senyap bahkan menurut ukuran kaumnya. Ia mengikuti demi kebersamaan dan tidak memburu apa pun yang lebih besar dari ngengat.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'Murid perajin gnome yang dibayar per jam dan pantas menerima setiap keping tembaganya. Armorer Hode menerimanya untuk melunasi utang dan kini menjual kesepakatan itu kepada siapa pun yang memiliki seribu emas.',
-  'hudChrome.collections.buddyLore.phantom':
-    'Hantu seukuran telapak tangan dari makam Wraithwood, hanya kain tanpa tulang, muncul dalam tas tertutup dan bertahan demi kebersamaan. Tak ada yang tahu keinginannya, dan ia tak pernah mencoba menakuti siapa pun.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'Veteran dari gudang Warfare yang mempertahankan hormatnya tetapi kehilangan pangkatnya. Warmarshal Draven Kole menyerahkan satu kepada prajurit dengan kehormatan cukup untuk memahami harganya.',
-  'hudChrome.collections.buddyLore.raptor':
-    'Anak raptor Drakelands, dijual sebelum belajar seberapa cepat ia dapat berlari. Setiap pemilik baru diminta memberinya makan, dan tak ada yang perlu diingatkan dua kali.',
-  'hudChrome.collections.buddyLore.rocky':
-    'Makhluk merayap bercangkang batu dari lereng puing Thornpeak, lambat dan sangat santai. Penambang memeliharanya karena ia mendadak diam sesaat sebelum runtuhan.',
-  'hudChrome.collections.buddyLore.sapling':
-    'Pohon muda dengan senyum pada kulit kayunya dan tatapan ungu penuh rasa ingin tahu. Akarnya membawanya berjalan bergoyang ceria ke mana pun kamu mengembara.',
-  'hudChrome.collections.buddyLore.skeleton':
-    'Ia bangkit dari makam Wraithwood, menepuk debu dari tubuhnya, dan sejak itu mengikuti orang ke mana-mana. Tak ada yang memastikan milik siapa tulang-tulang ini dahulu.',
-  'hudChrome.collections.buddyLore.solbot':
-    'Robot kecil bertenaga matahari, digali dari abu Drakelands saat setengah terkubur dan masih berdetak. Bengkel pembuatnya tak meninggalkan tanda apa pun pada cangkang.',
-  'hudChrome.collections.buddyLore.spider':
-    'Penenun Wraithwood seukuran telapak tangan yang menghias ulang tas tempatnya dibawa. Jaringnya lebih kuat daripada benang yang digantikannya.',
-  'hudChrome.collections.buddyLore.sprites':
-    'Dua roh api kecil, satu emas dan satu hijau kebiruan, yang tak pernah sepakat siapa pemimpinnya. Jika cukup dekat, mereka menyatu menjadi satu nyala hijau, lalu terpisah lagi sambil tertawa.',
-  'hudChrome.collections.buddyLore.stag':
-    'Garis keturunan Evergarden, dibiakkan lebih kecil dari rusa besar tunggangan para penjaga dahulu. Ia masih menundukkan kepala pada tangan terangkat, kebiasaan yang lebih tua daripada hewan itu sendiri.',
-  'hudChrome.collections.buddyLore.tiger':
-    'Belang Palmreach pada hewan yang tak pernah melihat Palmreach: keturunannya dipelihara dalam penangkaran sejak kebun binatang lama ditutup. Ia hanya menanggapi siulan.',
-  'hudChrome.collections.buddyLore.triple_t':
-    'Tiga dari sesuatu, atau satu hal sebanyak tiga kali. Kesaksian berbeda-beda, dan makhluk itu tak mau diam cukup lama untuk dihitung.',
-  'hudChrome.collections.buddyLore.trollface':
-    'Makhluk menyeringai yang dikeluarkan Wraithwood dan tak mau diterima kembali. Setiap upaya menggambarkannya berakhir dengan si penggambar tertawa lalu menyerah.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'Keturunan Thornpeak, dibiakkan berkaki pendek oleh penggembala yang menginginkan babi hutan yang tak dapat merobohkan pagar. Perangainya tetap sama.',
-  'hudChrome.collections.close': 'Tutup perburuan',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Terikat Es',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Berlistrik',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Berkelabu Abu',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Pijar Putih',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Katak Safir',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Hijau Subur',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Panglima Perang',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Mahkota Biji Ek',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Bersepuh Emas',
-  'hudChrome.collections.cosmeticUnlocked': 'Tampilan baru untuk {name}: {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Ikatan',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% per pembunuhan',
-  'hudChrome.collections.detail.dropLabel': 'Dijatuhkan oleh',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% per pembunuhan, {heroicChance}% pada Heroik',
-  'hudChrome.collections.detail.exchangeLabel': 'Bursa $WOC',
-  'hudChrome.collections.detail.exchangeNone': 'Tidak ada penawaran',
-  'hudChrome.collections.detail.exchangeUnavailable': 'Tidak tersedia pada klien ini',
-  'hudChrome.collections.detail.fishingDrop': 'Memancing di mana saja, {chance}% per tangkapan',
-  'hudChrome.collections.detail.globalDrop':
-    'Musuh mana pun, {chance}% per pembunuhan, satu dari {count} pada kelangkaan ini',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob} ({location}), hanya Heroik, {chance}% per pembunuhan',
-  'hudChrome.collections.detail.marketAtMerchant': 'Ditampilkan di Pedagang',
-  'hudChrome.collections.detail.marketChecking': 'Memeriksa...',
-  'hudChrome.collections.detail.marketLabel': 'Pasar Dunia',
-  'hudChrome.collections.detail.marketNone': 'Tidak ada penawaran',
-  'hudChrome.collections.detail.marksPrice': '{amount} Tanda Heroik',
-  'hudChrome.collections.detail.noItem': 'Belum ada barang yang memberikannya',
-  'hudChrome.collections.detail.noSell': 'Tidak dapat dijual',
-  'hudChrome.collections.detail.noSource': 'Belum ada sumber dalam gim',
-  'hudChrome.collections.detail.sellLabel': 'Harga beli pedagang',
-  'hudChrome.collections.detail.setLabel': 'Dikumpulkan',
-  'hudChrome.collections.detail.tradeable': 'Dapat diperdagangkan',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) seharga {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Dijual oleh',
-  'hudChrome.collections.keybindLabel': 'Perburuan',
-  'hudChrome.collections.launcherTitle': 'Perburuan: teman, tunggangan, dan set barang',
-  'hudChrome.collections.looks.locked': 'Terkunci',
-  'hudChrome.collections.looks.none': 'Belum ada tampilan yang dibuat untuk teman ini',
-  'hudChrome.collections.looks.title': 'Tampilan',
-  'hudChrome.collections.looks.unlocked': 'Terbuka',
-  'hudChrome.collections.looks.worn': 'Dipakai',
-  'hudChrome.collections.petKind.celebrity': 'Selebritas',
   'hudChrome.collections.presence.alon': 'Kamu merasa diawasi dan diam-diam disetujui.',
   'hudChrome.collections.presence.alpaca': 'Sesuatu yang berbulu wol dan santai memutuskan ikut.',
   'hudChrome.collections.presence.ansem': 'Bisikan tentang pintu dan kegelapan mengikutimu.',
@@ -23675,41 +23480,11 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Dengusan dan hentakan: sesuatu yang keras kepala membuntutimu.',
   'hudChrome.collections.presenceDefault': 'Kamu merasakan sosok yang mengawasimu.',
   'hudChrome.collections.revealed': '{name} memutuskan mengikutimu.',
-  'hudChrome.collections.set.bonusLabel': '{pieces} bagian',
-  'hudChrome.collections.set.itemLevel': 'level barang {level}',
-  'hudChrome.collections.set.owned': '{owned} dari {total} bagian',
-  'hudChrome.collections.source.bossDrop':
-    '{mob} ({location}), {chance}% per pemain per pembunuhan',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), hanya Heroik, {chance}% per pemain',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% per pemain, {heroicChance}% pada Heroik',
-  'hudChrome.collections.source.bossLabel': 'Peliharaan bos',
-  'hudChrome.collections.source.challengeDps':
-    'Berikan {dps} kerusakan per detik kepada {mob} sepanjang pertempuran',
-  'hudChrome.collections.source.challengeLabel': 'Tantangan',
-  'hudChrome.collections.source.challengeSpeed':
-    'Kalahkan {mob} dalam {seconds} detik sejak pertempuran dimulai',
-  'hudChrome.collections.source.craft': '{item} (resep {profession})',
-  'hudChrome.collections.source.craftLabel': 'Dibuat',
-  'hudChrome.collections.source.deed': 'Jasa {deed}',
-  'hudChrome.collections.source.deedLabel': 'Diperoleh melalui',
-  'hudChrome.collections.source.grantLabel': 'Dianugerahkan',
-  'hudChrome.collections.source.grantOnly':
-    'Hadiah musiman: peringkat bulanan dan hadiah catatan tempur terbaik',
-  'hudChrome.collections.source.rollNote':
-    'Setiap pemain mengundi sendiri; tak ada yang kehilangan hasil undian karena anggota kelompok.',
-  'hudChrome.collections.source.token': '{item}, digunakan sekali untuk mengikat teman',
-  'hudChrome.collections.source.tokenLabel': 'Token',
-  'hudChrome.collections.stat.mixed': 'Hibrida',
-  'hudChrome.collections.stat.strength': 'Kekuatan',
   'hudChrome.collections.state.notOwned': 'Belum dikumpulkan',
   'hudChrome.collections.state.owned': 'Dikumpulkan',
   'hudChrome.collections.state.pending': 'Suatu sosok mengikutimu',
   'hudChrome.collections.state.unavailable': 'Belum dapat diperoleh',
   'hudChrome.collections.tabs.buddies': 'Teman',
-  'hudChrome.collections.tabs.sets': 'Set Barang',
-  'hudChrome.collections.title': 'Perburuan',
   'hudChrome.cosmetics.buddyActive': 'Dipanggil',
   'hudChrome.cosmetics.buddyDrag': 'Seret ke bilah aksi',
   'hudChrome.courier.bags': 'Kirim ke bank',
@@ -23721,7 +23496,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Barang yang kembali meluap jika tas penuh. Kurir menghilang setelah pengiriman sampai dipanggil lagi.',
   'hudChrome.courier.close': 'Tutup kurir',
   'hudChrome.courier.instructions':
-    'Pilih tumpukan utuh. Kurirmu menyimpannya dahulu, lalu mengambil barang yang diminta. Barang misi tidak dapat dikirim.',
+    'Pilih tumpukan utuh untuk bankmu, Brankas Material, atau karakter lain. Kurirmu menyimpannya dahulu, lalu mengambil barang yang diminta. Barang misi tidak dapat dikirim.',
   'hudChrome.courier.membership': 'Perbarui keanggotaanmu untuk memulai perjalanan lain.',
   'hudChrome.courier.outbound': 'Terbang ke bank',
   'hudChrome.courier.ready': 'Siap mengantar',
@@ -24052,8 +23827,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.kinds.task': 'Pelaksanaan',
   'hudChrome.guildHall.lifetime': 'Kontrak selesai: {count}',
   'hudChrome.guildHall.mountOffer': 'Tunggangan: {mount}',
-  'hudChrome.guildHall.mountPreview':
-    'Tunggangan darat: +{pct}% kecepatan gerak saat ditunggangi. Memerlukan pelatihan berkuda.',
   'hudChrome.guildHall.needSeals': 'Perlu {count} lagi',
   'hudChrome.guildHall.open': 'Buka',
   'hudChrome.guildHall.quartermasterIntro':
@@ -25866,4 +25639,200 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'referralCards.waiting': 'Menunggu teman terikatmu menerima.',
   'referralCards.yourCard': 'Kartu cap {name}',
   'worldContent.musterRackName': 'Rak Senjata Pasukan',
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Cabut Tombak',
+  'abilityUi.cast.temple_score': 'Partitur',
+  'abilityUi.cast.temple_score_answer': 'Jawab Partitur',
+  'abilityUi.cast.wildheart_idols_breath': 'Napas Berhala',
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Mendingin',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Menyala',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Tombak Pemburu',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': 'Berhala Terbangun',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Pastikan tank tetap dalam pandangannya. Simpan interupsi untuk Aria Penenggelaman.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'Di antara mantra lain, sebuah proyektil menghantam setiap {every} dtk setelah peringatan visual {windup} dtk, menghasilkan kerusakan Es sebesar {mult} kali kerusakan senjatanya. Menginterupsi Aria Penenggelaman menghentikan proyektil dan Aria selama {quiet} dtk.',
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe tidak pernah bergerak atau menyerang jarak dekat. Berkumpullah untuk Paduan Suara, tinggalkan kelompok untuk Solo, interupsi Aria Penenggelaman, dan hindari Gelombang Danau. Pada dua ambang kesehatan, ulangi melodi ubin bulannya dengan penyanyi bergantian.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    'Serangan lainnya berhenti sementara kelompok menjawab Partitur. Proyektil Air Bulan tidak memiliki bilah mantra dan tidak dapat diinterupsi.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    'Saat menjawab, ubin menjadi gelap. Ingat melodinya dan bergiliranlah.',
+  'bossJournal.temple.selthe.scoreResponse':
+    'Perhatikan melodi, lalu injak ubin sesuai urutan. Bergantianlah membunyikan nada yang benar dengan pemain hidup lain; satu-satunya penyintas dapat menyelesaikannya sendiri. Langkah yang terhalang tidak berbahaya. Tinggalkan ubin lalu injak kembali untuk membunyikannya, termasuk ubin yang ditempati sebelum jawaban dimulai.',
+  'bossJournal.temple.selthe.scoreSummary':
+    'Pada kesehatan {first} dan {second}, ia menjadi kebal dan memainkan {notes}, lalu {finalNotes} nada. Ulangi dalam {answer}, lalu {finalAnswer} dtk. Ubin yang salah menghasilkan {falseNote} kerusakan Es dan mengulang progres, bukan waktunya. Waktu habis menghasilkan {min} hingga {max} kerusakan Es kepada semua orang. Keberhasilan membuatnya terkena stun selama {stun} dtk dan meningkatkan kerusakan yang diterima sebesar {vulnerability} selama {bonusSeconds} dtk.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'Awasi target Aria dan siapa pun yang sendirian saat Paduan Suara. Selama Partitur, bantu nyanyikan nada berikutnya dan sembuhkan kesalahan.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    'Seberangi ke separuh yang tidak ditandai sebelum peringatan berakhir. Garis tengah aman. Pada Heroik, napas juga memadamkan glif yang menyala di separuhnya; glif itu dapat langsung dinyalakan kembali.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    'Setiap {every} dtk, satu separuh teras ditandai selama {warning} dtk, lalu semua orang di separuh itu menerima {min} hingga {max} kerusakan Alam. Napas berganti separuh.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    'Pemain tanpa tanda menyalakan glif di depan Mangsa. Pancing dia melewatinya, lalu serang selama Tersengat Matahari. Glif padam saat perburuan berakhir.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    '{count} glif awalnya gelap. Saat ia berburu, pemain tanpa tanda menyalakan satu glif dengan berdiri di atasnya selama {kindle} dtk. Jika tidak ada pemain tanpa tanda yang tersisa, Mangsa dapat menyalakannya dalam {alone} dtk. Meninggalkannya mengulang progres. Melintasi glif menyala memperlambatnya sebesar {slow} dan meningkatkan kerusakan yang diterima sebesar {vulnerability} selama {seconds} dtk. Glif tidak dapat dinyalakan lagi selama {dark} dtk; ia tidak dapat terkena glif lain selama {wary} dtk. Selama perburuan, durasi stun menjadi setengah.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Ia menandai pasangan baru setiap {pair} dtk dan berganti di antara keduanya setiap {switch} dtk. Tiap pergantian memberi Mangsa baru {turn} dtk sebelum ia mengejar.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Ia memilih Mangsa baru setiap {every} dtk, lalu menghadapnya selama {turn} dtk sebelum mengejar.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    'Pada kesehatan {health}, ia tetap menjadi roh jaguar sampai dikalahkan. Tank juga dapat menjadi Mangsa.',
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Setiap {every} dtk, mantra {cast} dtk menghantam semua orang dalam {radius} yd sebesar {min} hingga {max} kerusakan. Pemain yang Tertancap menerima {pinMult} kali kerusakan ini pada jarak berapa pun.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    'Targetkan tombak dan berinteraksi dalam {range} yd untuk mencabutnya dalam {pull} dtk. Kerusakan tidak menginterupsi pencabutan. Jika tidak ada orang lain yang bebas di teras, korban dapat berinteraksi untuk lolos dalam {self} dtk.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    'Mantra {cast} dtk menancapkan pemain bukan tank, atau tank jika tidak ada orang lain. Efek tidak bisa bergerak berlangsung hingga {seconds} dtk dan menghasilkan {bleed} kerusakan setiap {tick} dtk.',
+  'entities.mobs.wildheart_hunting_spear.name': 'Tombak Pemburu',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    'Suaranya pecah: kerusakan yang diterima meningkat {pct}% sampai efek ini berakhir.',
+  'hudChrome.auraEffect.temple.scoreWard':
+    'Menyanyikan Partitur: ia tidak menerima kerusakan hingga selesai. Injak ubin bulan sesuai urutan bunyinya sebelum bait berakhir untuk memecahkan suaranya. Bergiliranlah: setelah membunyikan nada, tunggu pemain lain membunyikan nada benar berikutnya. Penyintas tunggal dapat menyelesaikannya sendiri. Jika bait berakhir lebih dahulu, Ketidakselarasan menghasilkan {min} hingga {max} kerusakan Es ({heroicMin} hingga {heroicMax} pada Heroik) kepada semua orang di pelataran.',
+  'hudChrome.auraEffect.temple.spentVoice':
+    'Kamu tidak dapat membunyikan ubin bulan lain sampai pemain lain membunyikan nada benar berikutnya. Menginjak ubin selama efek ini tidak mengulang jawaban atau melukaimu. Tidak dapat dihilangkan. Dihapus saat kamu satu-satunya pemain hidup di instansmu atau Partitur berakhir.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    'Jaguar batu terbangun. Setiap {every} dtk ia mengembuskan napas ke satu separuh teras, lalu separuh lainnya, setelah peringatan lantai {warning} dtk: {min} hingga {max} kerusakan Alam ({heroicMin} hingga {heroicMax} pada Heroik) kepada semua orang di separuh itu. Zulgar tetap menjadi Avatar Jaguar sampai mati dan memilih Mangsa baru setiap {seconds} dtk ({heroicSeconds} dtk pada Heroik).',
+  'hudChrome.auraEffect.wildheart.pinned':
+    'Tombak Pemburu menancapkanmu di tempat. Kamu berdarah sebesar {bleed} kerusakan Fisik ({heroicBleed} pada Heroik) setiap {every} dtk, dan Denyut Hati Liar menghantammu di mana pun dengan tambahan {pulse}% kerusakan. Rekan dapat mencabut tombak dalam {pull} dtk. Jika tidak ada orang lain yang bebas, cabut sendiri dalam {wrench} dtk. Tombak terlepas setelah {seconds} dtk.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'Tidak ada glif matahari yang dapat mengenainya sampai efek ini berakhir. Glif menyala yang dilintasinya tetap menyala.',
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Terkena glif matahari menyala: bergerak {pct}% lebih lambat.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Terkena glif matahari menyala: menerima {pct}% lebih banyak kerusakan.',
+  'hudChrome.courier.accountBank':
+    'Ambil dari bank ini. Karakter itu harus keluar dari permainan saat kurir tiba.',
+  'hudChrome.courier.accountPlanned':
+    'Rencana untuk {name}: {count} tumpukan. Memilih untuk karakter lain menggantikannya.',
+  'hudChrome.courier.accountTitle': 'Karakter lain',
+  'hudChrome.courier.bagsAccount': 'Kirim ke bank {name}',
+  'hudChrome.courier.bagsAccountNone': 'Pilih karakter tujuan pengiriman barang.',
+  'hudChrome.courier.bagsVault': 'Kirim bahan ke penyimpanan',
+  'hudChrome.courier.boundAccount': 'Menuju bank karakter lain',
+  'hudChrome.courier.boundBank': 'Menuju bank',
+  'hudChrome.courier.boundVault': 'Menuju Brankas Material',
+  'hudChrome.courier.storeTabs': 'Penyimpanan kurir',
+  'hudChrome.courier.vault': 'Ambil dari penyimpanan. Setiap pilihan mengambil seluruh baris.',
+  'hudChrome.courier.vaultCap': 'Menampung {cap} dari setiap bahan',
+  'hudChrome.courier.vaultEmpty': 'Penyimpananmu kosong.',
+  'hudChrome.courier.vaultLocked':
+    'Buka Brankas Material di bankir untuk menggunakannya dengan kurirmu.',
+  'hudChrome.courier.vaultTitle': 'Brankas Material',
+  'hudChrome.dungeonDifficulty.unappliedHeroic': 'Normal dipilih. Instans saat ini masih Heroik.',
+  'hudChrome.dungeonDifficulty.unappliedNormal': 'Heroik dipilih. Instans saat ini masih Normal.',
+  'hudChrome.finder.mech.the_score':
+    'Partitur (dua kali ia menyanyikan melodi pada ubin bulan: injak sesuai urutan bunyinya untuk memecahkan suaranya)',
+  'hudChrome.itemHistory.close': 'Tutup',
+  'hudChrome.itemHistory.noTransfers': 'Barang ini belum pernah berpindah tangan.',
+  'hudChrome.itemHistory.openAria': 'Riwayat barang untuk {item}',
+  'hudChrome.itemHistory.passedTo': 'Diberikan kepada {name} pada {date}',
+  'hudChrome.itemHistory.title': '{item}: riwayat',
+  'hudChrome.itemMenu.itemHistory': 'Riwayat barang',
+  'hudChrome.itemTooltip.lootedBy': 'Dijarah oleh {name} pada {date}',
+  'hudChrome.itemTooltip.obtainedBy': 'Diperoleh oleh {name} pada {date}',
+  'hudChrome.itemTooltip.questRewardTo': 'Hadiah misi kepada {name} pada {date}',
+  'hudChrome.kitUse.freeAria': 'Cabut {name}',
+  'hudChrome.kitUse.freeClick': 'Klik di sini untuk mencabut {name}',
+  'hudChrome.kitUse.freeFar': 'Dekati hingga {range} yd untuk mencabutnya',
+  'hudChrome.kitUse.freeKey': 'Cabut {name}',
+  'hudChrome.kitUse.freeLine':
+    'Cabut tombak dari tanah untuk membebaskan korbannya. Terkena serangan tidak menghentikanmu; bergerak atau stun menghentikanmu',
+  'hudChrome.kitUse.freeTap': 'Ketuk di sini untuk mencabut {name}',
+  'hudChrome.kitUse.freeUsingLine':
+    'Diamlah untuk mencabut tombak: bergerak atau stun menghentikanmu',
+  'hudChrome.options.firstPersonBody': 'Tampilkan Tubuh',
+  'hudChrome.options.firstPersonMode': 'Orang Pertama (Pembesaran Penuh)',
+  'hudChrome.options.firstPersonNoBody': 'Tanpa Tubuh',
+  'hudChrome.options.firstPersonOff': 'Mati',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few':
+    '{count} perpindahan sebelumnya tidak ditampilkan.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many':
+    '{count} perpindahan sebelumnya tidak ditampilkan.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one':
+    '{count} perpindahan sebelumnya tidak ditampilkan.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other':
+    '{count} perpindahan sebelumnya tidak ditampilkan.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': 'Dipilih dari baris PvP Gudang Mingguan',
+  'hudChrome.templeAlert.answerDarkLine':
+    'Bergiliranlah dan ulangi urutan dari ingatan. Tinggalkan ubin sebelum menginjaknya lagi. Dibunyikan: {done} dari {total}',
+  'hudChrome.templeAlert.answerLine':
+    'Bergiliran: injak ubin bulan bertanda {place}. Dibunyikan: {done} dari {total}',
+  'hudChrome.templeAlert.answerTitle': 'Jawab Partitur!',
+  'hudChrome.templeAlert.brokenLine':
+    'Kerusakan yang diterimanya meningkat {pct}% hingga efek berakhir: gunakan serangan terkuatmu sekarang',
+  'hudChrome.templeAlert.brokenTitle': 'Suara Selthe pecah!',
+  'hudChrome.templeAlert.falseLine':
+    'Ubin itu tidak sesuai urutan. Jawaban dimulai lagi dari ubin pertama',
+  'hudChrome.templeAlert.falseTitle': 'Nada Salah!',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'Ingat urutannya sebelum ubin padam. Ulangi bergantian dengan pemain lain',
+  'hudChrome.templeAlert.melodyLine':
+    'Perhatikan ubin bulan berbunyi satu per satu. Ulangi urutannya bergantian dengan pemain lain',
+  'hudChrome.templeAlert.melodyTitle': 'Partitur',
+  'hudChrome.templeAlert.spentLine':
+    'Kamu tidak dapat membunyikan ubin sampai pemain lain membunyikan nada benar berikutnya. Dibunyikan: {done} dari {total}',
+  'hudChrome.templeAlert.spentTitle': 'Suara lain harus menjawab',
+  'hudChrome.templeAlert.stepOffLine':
+    'Ubin bulan hanya berbunyi saat seseorang menginjaknya. Tinggalkan ubin ini lalu injak kembali',
+  'hudChrome.templeAlert.stepOffTitle': 'Tinggalkan lalu injak kembali',
+  'hudChrome.templeAlert.timeAria': 'Sisa {seconds} detik',
+  'hudChrome.wildheartAlert.breathLine':
+    'Jaguar batu akan mengembuskan napas ke separuh teras ini. Seberangi ke separuh lainnya',
+  'hudChrome.wildheartAlert.breathTitle': 'Napas Berhala!',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    'Tetaplah di glif sampai menyala. Meninggalkannya mengulang proses',
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Menyalakan glif matahari',
+  'hudChrome.wildheartAlert.glyphLine':
+    'Berdirilah di glif matahari gelap selama {seconds} dtk untuk menyalakannya. Saat Zulgar melintasinya, ia menerima {pct}% lebih banyak kerusakan selama {duration} dtk',
+  'hudChrome.wildheartAlert.glyphTitle': 'Nyalakan glif matahari',
+  'hudChrome.wildheartAlert.pinnedLine':
+    'Rekan harus mencabut Tombak Pemburu. Denyut Hati Liar menghantammu lebih keras saat Tertancap',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    'Tidak ada yang bebas membantu: cabut Tombak Pemburu sendiri sebelum Denyut Hati Liar menghantam',
+  'hudChrome.wildheartAlert.pinnedTitle': 'Tertancap!',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    'Tidak ada orang lain yang dapat menyalakan glif matahari. Berdirilah di glif gelap selama {seconds} dtk untuk menyalakannya, lalu pancing Zulgar melintasinya',
+  'hudChrome.wildheartAlert.spearLine':
+    'Lari ke Tombak Pemburu dan cabut sebelum Denyut Hati Liar menghantam',
+  'hudChrome.wildheartAlert.spearTitle': 'Rekan Tertancap!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    'Kerusakan yang diterimanya meningkat {pct}% hingga efek berakhir: gunakan serangan terkuatmu sekarang',
+  'hudChrome.wildheartAlert.sunstruckTitle': 'Zulgar Tersengat Matahari!',
+  'itemUi.errors.orderTrackedItem': 'Pedagang tidak menerima pesanan untuk perlengkapan unik.',
+  'hudChrome.cosmetics.mountsIntro':
+    'Pilih penampilan tungganganmu di sini. Pelatihan berkuda menentukan kecepatan. Simpan barang tunggangan di tas atau bank karakter mana pun untuk berbagi penampilannya ke seluruh akun.',
+  'hudChrome.cosmetics.mountsNoMount':
+    'Pelajari berkuda dari Kepala Kandang Marla untuk memanggil tunggangan.',
+  'hudChrome.cosmetics.notCollected': 'Belum dikoleksi',
+  'hudChrome.guildHall.mountPreview':
+    'Penampilan tunggangan untuk setiap karakter di akunmu. Pelatihan berkudamu menentukan kecepatan.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Pilih tungganganmu di Kosmetik. Gunakan Naik / Turun Tunggangan untuk berkendara.',
+  'hudChrome.mounts.desc_grag_bear': 'Beruang tangguh dengan pijakan mantap dan pelana berat.',
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'Siput kuat dengan tenaga tahan lama dan cangkang berlumut.',
+  'hudChrome.mounts.desc_valorsteed': 'Kuda tangguh dengan pijakan mantap dan pelana kulit.',
+  'hudChrome.mounts.useToRide':
+    'Gunakan untuk memakai penampilan ini dan memanggil tungganganmu. Simpan barang ini di tas atau bank karakter mana pun untuk berbagi penampilannya ke seluruh akun. Pelatihan berkuda menentukan kecepatan.',
+  'itemUi.vendor.advancedRiding': 'Pelatihan Berkuda Lanjutan',
+  'itemUi.vendor.basicRiding': 'Pelatihan Berkuda',
+  'itemUi.vendor.ridingSpeed':
+    'Meningkatkan kecepatan gerak saat menunggang sebesar {speed}%. Berlaku untuk semua tunggangan.',
+  'guide.mountsPage.firstBody':
+    'Marla menjual Tali Kekang Valorsteed seharga 10 emas setelah kamu belajar Berkuda. Memiliki tali kekang membuka penampilan kuda di Kosmetik untuk setiap karakter di akunmu. Pelatihan berkuda sudah memungkinkanmu memanggil tunggangan tanpa membawa tali kekang, jadi pilih kuda atau penampilan lain yang dimiliki saat ingin tampilan berbeda.',
+  'guide.mountsPage.goodsBody':
+    'Penampilan tunggangan koleksi tetap tersedia di seluruh akun selama setidaknya satu barang tali kekang yang sesuai berada di tas atau bank pribadi karakter mana pun. Menukar, mengirim lewat surat, memasang penawaran, menjual, atau menghilangkan barang terakhir yang memenuhi syarat akan menghapus penampilannya dari Kosmetik. Penunggang yang memakainya kembali ke penampilan kuda bawaan dan tetap menunggang pada kecepatan hasil pelatihannya.\n\nTali kekang pemain dapat ditukar, dikirim lewat surat, dan ditawarkan di Pasar Dunia kecuali barangnya menyatakan lain. Tali kekang kuda juga dapat dijual ke pedagang seharga 10 emas. Tali kekang lain tetap mengikuti batasan penjualan barangnya sendiri. Skin tunggangan toko tetap menjadi kosmetik akun yang tidak bergantung pada barang tali kekang.',
+  'guide.mountsPage.intro':
+    'Pilih penampilan tunggangan, belajar berkuda di kandang, dan jelajahi dunia lebih cepat. Pelatihanmu menentukan kecepatan; setiap penampilan tunggangan hanya bersifat kosmetik.',
+  'guide.mountsPage.learnBody':
+    'Berkuda terbuka pada level {level}. Kepala Kandang Marla Hitchen menjual Pelatihan Berkuda seharga 80 emas di Kandang Galecrest. Pelatihan dasar memberi gerakan menunggang {basicSpeed}% lebih cepat. Setelah mempelajarinya, Marla juga menjual Pelatihan Berkuda Lanjutan seharga {advancedFee} emas, yang meningkatkan gerakan menunggang menjadi {advancedSpeed}% lebih cepat. Setiap tingkat dimiliki oleh karakter yang mempelajarinya.\n\nSetelah belajar berkuda dasar, ambil misi Pelajaran Berkuda dari Marla dan ikuti penanda ke persegi bercahaya di belakang lengkungan awal. Tekan Mulai Balapan untuk meminjam Valorsteed latihan. Selesaikan lintasan dan kembali untuk menerima uang serta pengalaman. Kuda pinjaman kembali ke kandang saat pelajaran berakhir.',
+  'guide.mountsPage.rideBody':
+    'Buka Kosmetik dan pilih penampilan pada tab Tunggangan. Tombol Naik / Turun Tunggangan, secara bawaan tombol aksen balik, memanggil tunggangan terlatihmu dengan penampilan itu. Tombol Tunggangan di perangkat seluler melakukan hal yang sama. Pemanggilan memerlukan penyaluran singkat; turun berlangsung seketika. Kamu dapat mengganti penampilan saat menunggang tanpa mengubah kecepatan berkuda.\n\nKamu juga dapat menggunakan tali kekang dari tas atau bilah aksi untuk memilih penampilan itu dan memanggil tunggangan. Menggunakan penampilan yang sedang ditunggangi akan menyimpan tunggangan. Tali kekang di bank atau pada karakter lain membuka kosmetik yang sama tanpa harus dibawa penunggang.',
+  'guide.mountsPage.speedBody':
+    'Pelatihan Berkuda Dasar memberi gerakan menunggang {basicSpeed}% lebih cepat. Pelatihan Berkuda Lanjutan memberi gerakan menunggang {advancedSpeed}% lebih cepat dan dibeli dari Marla seharga {advancedFee} emas. Setiap penampilan tunggangan memakai kecepatan yang sama sesuai tingkat pelatihan karakter, apa pun kelangkaan atau asalnya. Skin toko juga memakai kecepatan pelatihan itu.',
+  'guide.mountsPage.speedHeading': 'Kecepatan dan pelatihan berkuda',
+  'guide.mountsPage.whatBody':
+    'Tunggangan adalah penampilan kosmetik untuk tunggangan terlatihmu. Tunggangan tidak memberi zirah, kerusakan, atau statistik tempur. Pelatihan berkuda meningkatkan kecepatan perjalanan darat dan lompatan saat menunggang dapat melewati ketinggian lebih besar. Semua tunggangan tetap di darat dan tidak ada yang bisa berenang.',
+  'guide.progression.ridingBody':
+    'Pada level {level}, Kepala Kandang Marla mengajarkan berkuda dasar dengan bayaran emas dan menawarkan tingkat lanjutan setelahnya. Pelatihan menentukan kecepatan menunggang. Pilih penampilan tungganganmu di Kosmetik; penampilan koleksi dibagikan selama tali kekangnya berada di tas atau bank karakter mana pun.',
 };

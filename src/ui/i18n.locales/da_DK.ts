@@ -13,19 +13,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountBagsEmpty': 'Dine tasker er tomme.',
   'hudChrome.bank.accountRetry': 'Prøv igen',
   'hudChrome.collections.actions.dismiss': 'Afvis',
-  'hudChrome.collections.actions.remove': 'Fjern',
   'hudChrome.collections.actions.summon': 'Tilkald',
-  'hudChrome.collections.actions.wear': 'Bær',
-  'hudChrome.collections.armor.cloth': 'Stof',
-  'hudChrome.collections.armor.leather': 'Læder',
-  'hudChrome.collections.detail.honorPrice': '{amount} Ære',
-  'hudChrome.collections.detail.soulbound': 'Sjælebundet',
-  'hudChrome.collections.petKind.beast': 'Bæster',
-  'hudChrome.collections.petKind.elemental': 'Elementarvæsner',
-  'hudChrome.collections.petKind.humanoid': 'Humanoider',
-  'hudChrome.collections.petKind.undead': 'Udøde',
-  'hudChrome.collections.stat.intellect': 'Intellekt',
-  'hudChrome.collections.tabs.mounts': 'Ridedyr',
   'hudChrome.courier.empty': 'Ingen genstande',
   'hudChrome.courier.inventory': 'Inventar',
   'hudChrome.expeditions.dismiss': 'Afvis',
@@ -3645,7 +3633,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': 'Hvad den gør',
   'guide.commandsPage.dungeonMode': 'Skift dine fangekældre mellem normal og heroisk sværhedsgrad.',
   'guide.commandsPage.dungeonReset':
-    'Opgiv dine egne tomme instanser, hvilket er det, du gør efter at have skiftet sværhedsgrad.',
+    'Opgiv dine egne tomme instanser, så næste tur starter forfra på samme eller en ny sværhedsgrad.',
   'guide.commandsPage.dungeons':
     'Hver fangekælder med den zone, dens dør sidder i, og den gruppestørrelse, den er bygget til, samt den sværhedsgrad, du er indstillet til nu.',
   'guide.commandsPage.emotesBody':
@@ -4120,29 +4108,14 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'guide.mountsPage.collectBody':
     'Ud over Marlas disk findes tøjler snarere end købes. De falder fra de sidste bosser i fangehullerne for fem spillere og raidet på heroisk, og fra Rift-rydninger, hvor jo hårdere den Rift, du fuldfører, desto sjældnere de tøjler, den kan efterlade. De er sjældne fund med vilje, og ingen tur lover én, så den skånsomme måde at jage et ridedyr på er at tage jagten med på de ture, du alligevel skulle på. Denne side fortæller dig ikke, hvilket ridedyr der hænger på hvilken boss: den del må du selv finde ud af.',
   'guide.mountsPage.collectHeading': 'Hvor de sjældnere ridedyr kommer fra',
-  'guide.mountsPage.firstBody':
-    'Valorsteed er det eneste ridedyr, der sælges noget sted i verden. Når du har lært Ridning, sælger Marla dig Tøjler til Valorsteed for 10 guld, og de tøjler er dine at beholde. Ethvert andet ridedyr optjenes ude i verden, så hesten er, hvor næsten enhver rytter starter.',
   'guide.mountsPage.firstHeading': 'Dit første ridedyr',
-  'guide.mountsPage.goodsBody':
-    'Et ridedyr er en genstand, hvilket gør det til noget, økonomien kan flytte rundt på. Du ejer et ridedyr, så længe dets tøjler ligger i dine tasker eller din bank, selvom tøjler i banken holder ridedyret dit uden at lade dig ride det: for at tilkalde dyret skal du bære tøjlerne på dig. Spillertøjler bærer ingen sjælebinding, så de handles, rejser med posten og kan sættes til salg på Verdensmarkedet som ethvert andet fund, medmindre selve genstanden siger andet. To ting er værd at vide, før du skiller dig af med et sæt: ingen handlende køber nogensinde et sæt tøjler tilbage, så et ridedyr er et køb, du beholder eller giver videre snarere end veksler til mønt, og forlader tøjlerne både dine tasker og din bank, mens du rider, handlet væk, sendt med posten eller solgt på markedet, følger ridedyret med, og du bliver sat af, dér hvor du står.',
   'guide.mountsPage.goodsHeading': 'Tøjler er almindelige varer',
   'guide.mountsPage.heading': 'Ridedyr og ridning',
-  'guide.mountsPage.intro':
-    'Et ridedyr er en hurtigere måde at komme rundt i verden på, og det er alt, det er. Du lærer at ride ved staldene, køber dit første sæt tøjler, og enhver vej derefter er kortere.',
-  'guide.mountsPage.learnBody':
-    'Ridning er en færdighed, du køber én gang, og den åbner ved niveau {level}. Marla Hitchen, staldmesteren, holder til på Stormkammens Stalde ude på bakkerne, og hun sælger Ridetræning for 80 guld. Det ene køb er, hvad der overhovedet lader dig sidde på et ridedyr, og det følger dig for altid.\n\nNår du har det, har Marla et opdrag til dig: Ridelektioner. Tag det, følg markøren til det glødende felt bag startbuen, og tryk Start Løb. Hun låner dig en trænings-Valorsteed til lektionen, så selve lektionen koster dig intet. Rid banen, gennemfør den, og gå tilbage til hende for dine mønter og din erfaring. Det lånte dyr går tilbage i stalden bagefter, så lektionen lærer dig sædet snarere end at give dig en hest.',
   'guide.mountsPage.learnHeading': 'At lære at ride',
   'guide.mountsPage.raceBody':
     'Spring-banen i Marlas fold er åben for enhver, når som helst, ikke kun under lektionen. Sæt dig på et ridedyr, stå på det glødende felt bag buen, og tryk Start Løb. En nedtælling holder dig stille, så løber uret: ryd alle syv spring, og rid tilbage ud gennem buen, før tiden løber ud.\n\nEt spring tæller kun, hvis du reelt er i luften over bommen, så en let gennemridning rydder ingenting. Du må tage dem i en hvilken som helst rækkefølge og fra begge sider, og et forbigået spring er ikke verdens undergang: vend om, og tag det igen. At dø, stige af eller forlade folden afslutter forsøget, og det samme gør at lade uret løbe ud, hvilket sætter dig af sadlen, dér hvor du står; annullerer du det selv, stopper det blot uret. Intet forhindrer dig i at starte et nyt. Der er intet gebyr, ingen nedkølingstid og ingen præmie ud over selve tiden, og et vilkårligt antal ryttere kan gennemføre banen samtidig uden at komme i vejen for hinanden.',
   'guide.mountsPage.raceHeading': 'Staldenes løb',
-  'guide.mountsPage.rideBody':
-    'Der er intet ridedyrsvindue og ingen favorit at indstille, for tøjlerne ER ridedyret. Brug et sæt tøjler fra dine tasker eller fra en handlingsbjælkeplads, og du rider det ridedyr. At tilkalde tager et øjeblik, et kort kald snarere end et øjeblikkeligt, så det redder dig ikke fra et dårligt træk. At stige af er øjeblikkeligt og aldrig blokeret.\n\nBrug de tøjler, du allerede rider på, og du sætter det ridedyr væk igen. Brug et andet sæt, mens du er monteret, og du skifter direkte til det, uden noget at tilkalde imellem. Tasten Stig op / Stig af, som standard tasten med accent grave, gør kun én ting: den sætter dig af. Den er vejen ned, ikke vejen op. Den ene undtagelse er ridelektionen, hvor den samme tast tilkalder det dyr, Marla låner dig, da en lånt hest ikke har tøjler at klikke på. På en telefon eller tablet virker Ridedyr-knappen i Mere-bakken begge veje, selvom den tilkalder det første sæt tøjler i dine tasker snarere end et, du selv vælger, så tryk på selve tøjlerne, når du vil have et bestemt ridedyr.',
   'guide.mountsPage.rideHeading': 'At stige op og stige af',
-  'guide.mountsPage.speedBody':
-    'Fart er det eneste, der skiller ét ridedyr fra et andet. Valorsteed, du køber af Marla, sætter grundtempoet, og de ridedyr, du samler ude i verden, ligger over det: jo sjældnere tøjlerne, desto hurtigere ridet, i nogle få tydelige trin snarere end en jævn glidning. Der er intet andet ridetrin at træne og ingen opgradering at købe bagefter. Du betaler for Ridning én gang, og derfra afgør de tøjler, du bruger, hvor hurtigt du rejser.',
-  'guide.mountsPage.speedHeading': 'Fart og trin',
-  'guide.mountsPage.whatBody':
-    'Et ridedyr er et dyr, du rider på, og det, det giver dig, er fart. Ingen rustning, ingen skade, ingen egenskaber: det bærer dig hen over jorden hurtigere og springer en anelse højere, når du hopper, og det er hele handlen. Ethvert ridedyr i spillet er et landridedyr, så der er ingen flyvning, og ingen af dem svømmer.',
   'guide.mountsPage.whatHeading': 'Hvad et ridedyr er',
   'guide.mountsPage.whereBody':
     'Stormkammens Stalde er markeret på kortet over Stormkammen, ude på bakkerne mellem Klippeskæret og Vragmarkerne. Marla står ved siden af laden med front mod løbsbanen.',
@@ -4179,8 +4152,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Rifter er det ene, der venter på selve loftet. De flænger op ude i rigerne efter deres egen tidsplan, rangeret fra C til S, og enhver gruppe i verden kappes om at være den, der lukker hver enkelt af dem. Delve-tavlerne bliver også ved, og deres hårdere sværhedsgrad er et nyt kig værd, når dit udstyr har indhentet dem.',
   'guide.progression.journeyBodyCount':
     'Verden er ét sammenhængende land med {zones} zoner. Tre af dem er den vej, du niveauopstiger på, lagt fra syd til nord: du starter i den grønne dal, presser videre gennem sumpen og slutter i de kolde høje tinder. Følg opdragsstien, og landet bærer dig fra den ene til den næste. En ø ligger ud for dalens kyst til de tidlige niveauer, og resten af rigerne åbner sig fra samme vej, bygget til karakterer, der allerede har klaret opstigningen.',
-  'guide.progression.ridingBody':
-    'Ridning er en af de ting, der venter for enden af opstigningen. Ved niveau {level} lærer en staldmester dig færdigheden for en solid sum guld, og en lektion ude på træningsbanen giver dig dit første sæt tøjler. Et ridedyr giver ingen magt overhovedet; det gør blot verden mindre, hvilket efter en lang vandring mod nord er sin egen slags belønning.',
   'guide.progression.ridingTitle': 'At lære at ride',
   'guide.questsPage.availableBody':
     'Opdrag kommer i kæder. De fleste tilbydes først, når du har afleveret det forudgående, og mange kræver også et minimumsniveau, så en NPC uden noget til dig i dag kan have masser, når du har taget nogle flere niveauer, eller når du afleverer det opdrag, du allerede bærer på. Nogle få har deres eget vilkår, som Ridelektionerne, der først åbner, når du har købt ridefærdigheden. Gruppeopdrag siger det ligeud ved at angive, hvor mange spillere de anbefaler, du tager med. Nogle opgaver er gentagelige: du kan tage dem igen efter en ventetid, og mærket over giveren fortæller dig, når en er kommet tilbage.',
@@ -6549,13 +6520,15 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Du kan ikke nulstille instanser, mens nogen stadig er derinde.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     'Skift fangekældersværhedsgrad, før du nulstiller disse instanser. Tomme instanser nulstilles automatisk efter 5 minutter.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    'Dine instanser er allerede nulstillet. Ingen har været inde i dem siden sidste nulstilling.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    'Brug /dungeon reset til at forlade dine tomme instanser efter at have ændret sværhedsgrad.',
+    'Brug /dungeon reset til at opgive dine tomme instanser og starte dem forfra.',
   'hudChrome.dungeonDifficulty.resetLoot':
     'Du kan ikke nulstille instanser, mens der stadig er bytte derinde.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': 'Nulstil alle instanser?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    'Dette forlader tomme instanser fra din tidligere valgte sværhedsgrad. Uhentet bytte forhindrer nulstillingen.',
+    'Dette opgiver dine tomme instanser, så næste tur starter forfra på den valgte sværhedsgrad. Låsninger ændres ikke. Nogen, der stadig er inde, eller uhentet bytte forhindrer nulstillingen.',
   'hudChrome.dungeonDifficulty.resetConfirm': 'Nulstil instanser',
   'hudChrome.dungeonDifficulty.resetCooldown':
     'Instanser kan kun nulstilles én gang hvert 5. minut.',
@@ -14879,7 +14852,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Din gruppe klarede den heroiske prøve, mens du kæmpede i bagtroppen eller lå faldet. Din låsning blev også registreret, så din andel af de heroiske mærker blev sendt hertil i stedet for at gå tabt. Brug dem godt.\n\n- Heroisk kvartermester',
   'guide.dungeonsPage.resetTitle': 'Nulstilling af dine instanser',
   'guide.dungeonsPage.resetBody':
-    'Skift sværhedsgrad, mens din gruppe stadig holder ture, den har gjort krav på, og de gamle krav bliver hængende et stykke tid, før de slipper af sig selv. Gruppelederen kan slippe dem på én gang i stedet: vælg Nulstil alle instanser i menuen for eget portræt, eller skriv /dungeon reset. En nulstilling virker først, efter sværhedsgraden faktisk er ændret, kun så længe ingen, levende eller faldne, er tilbage derinde, kun når hvert lig derinde er plyndret rent, og en kort nedkølingstid adskiller den ene nulstilling fra den næste. Kommer I til døren med den forkerte sværhedsgrad, siger spillet det, før turen begynder. Raidet nulstilles aldrig sådan; dets egne spærreregler står ved magt.',
+    'Tomme instanser, der er gjort krav på, bliver hængende en stund, før de frigives automatisk. Gruppelederen kan frigive dem straks: vælg Nulstil alle instanser i menuen for eget portræt, eller skriv /dungeon reset, så starter næste tur forfra på den aktuelle sværhedsgrad. Et skift i sværhedsgrad gør det samme for instanser på den gamle sværhedsgrad. En nulstilling virker kun, når ingen, levende eller faldne, er tilbage inde, og hvert lig er plyndret helt. Den forkorter aldrig en låsning: en låst Heroisk instans eller raid forbliver låst indtil sin nulstilling, og en kort nedkøling adskiller nulstillingerne. Kommer I til døren på forkert sværhedsgrad, siger spillet til, før turen starter. Raidet nulstilles på samme måde, mens dets egne regler for låsning og tilbagevenden til lig stadig gælder. Et raid, der skifter sværhedsgrad, springer nedkølingen over: valgte raidet forkert niveau, eller kunne det ikke klare Heroisk, kan det straks skifte tilbage, da dets egen låsning begrænser gentagne ture.',
   'guide.dungeonsPage.wildheartBody':
     'En regnvåd jungle-caldera hvor to hævede jagtstier omkranser en jade-cenote. Kryds bæstenes huler og forfædrenes ruiner, og bestig derefter ritualpyramiden for at se, hvem der venter på toppen.',
   'guide.gear.itemLevelBody':
@@ -16139,16 +16112,12 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.close': 'Luk',
   'hudChrome.mounts.desc_aether_hover_cycle':
     'En kraftfuld magitek-cykel designet til hurtig, lavtsvævende forflytning i kamp.',
-  'hudChrome.mounts.desc_grag_bear': 'En hårdfør, sikker bjørn, der giver øget rejsehastighed.',
   'hudChrome.mounts.desc_shadowjump_toad':
     'En enorm, sikker kæmpetudse, trænet i lynhurtige skyggehop, der dækker ethvert terræn.',
-  'hudChrome.mounts.desc_stalkglider_snail':
-    'En robust, langsomt forbrændende snegl, der giver øget rejsehastighed.',
   'hudChrome.mounts.desc_stormfeather_griffin':
     'En kongelig stormgrif, der bevæger sig hen over jorden på runebeslåede kløer, med sammenfoldede vinger.',
   'hudChrome.mounts.desc_thunderstrut_gobbler':
     'En kolossal, stormudklækket kalkun, der spankulerer ned fra Den Opvågnende Tinde, med halen udfoldet som en tordensky.',
-  'hudChrome.mounts.desc_valorsteed': 'En hårdfør, sikker ganger, der giver øget rejsehastighed.',
   'hudChrome.mounts.dismount': 'Stig af',
   'hudChrome.mounts.emptyDropHint':
     'Sjældnere ridedyr droppes fra heroiske fangehulsbosser og gennemførte Rifter.',
@@ -16171,7 +16140,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.selected': 'Valgt',
   'hudChrome.mounts.spec_speed': '+{pct}% ekstra mobilitet',
   'hudChrome.mounts.title': 'Ridedyr',
-  'hudChrome.mounts.useToRide': 'Brug for at tilkalde dette ridedyr.',
   'hudChrome.mountRace.cancelButton': 'Annuller Løb',
   'hudChrome.mountRace.finished': 'Gennemført på {seconds}s!',
   'hudChrome.mountRace.go': 'AFSTED!',
@@ -16189,7 +16157,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.continentMap.toggleAria': 'Skift mellem verdenskortet, zonekortet og instanskortet',
   'hudChrome.mountTraining.begin': 'Begynd Lektion',
   'hudChrome.mountTraining.mountPrompt': 'Tryk på {key} for at stige op på trænings-Modgangeren.',
-  'hudChrome.mountTraining.ownedMountPrompt': 'Dine tøjler er i dine tasker. Brug dem til at ride.',
   'hudChrome.mountTraining.returnToMarla':
     'Vend tilbage til Marla ved staldene for at købe dine Modganger-tøjler for 10 guld.',
   'hudChrome.mountTraining.ridePrompt':
@@ -18491,9 +18458,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.mechEmpty': 'Du ejer endnu ingen farvevarianter til kampmechen.',
   'hudChrome.cosmetics.mechIntro':
     'Kampmechen erstatter denne figurs krop. Én farvevariant bæres ad gangen.',
-  'hudChrome.cosmetics.mountsIntro':
-    'Et ridedyrsskind tegnes over det ridedyr, denne figur rider på. Det ændrer aldrig hastigheden.',
-  'hudChrome.cosmetics.mountsNoMount': 'Få først et ridedyr: et skind behøver noget at ride på.',
   'hudChrome.cosmetics.owned': 'Ejet',
   'hudChrome.cosmetics.scopeAccount': 'Konto',
   'hudChrome.cosmetics.scopeCharacter': 'Figur',
@@ -20909,8 +20873,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.cantors_hymnal.name': 'Kantorens salmebog',
   'entities.items.cantors_stole.name': 'Kantorens stola',
   'entities.items.cellwatch_belt.name': 'Cellevagtens bælte',
-  'entities.items.charm_stag_acorn.name': 'Agernkransens amulet',
-  'entities.items.charm_stag_gilded.name': 'Forgyldt amulet',
   'entities.items.choristers_gloves.name': 'Korsangerens handsker',
   'entities.items.choristers_spaulders.name': 'Korsangerens skuldreskinner',
   'entities.items.chorus_conch.name': 'Korkonkylie',
@@ -20994,41 +20956,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.turnkeys_shank.name': 'Fængselsvogterens stikkniv',
   'entities.items.unquiet_stalkers_hood.name': 'Den hvileløse jægers hætte',
   'entities.items.vestments_of_the_waking_rite.name': 'Opvågningens rituals klæder',
-  'entities.items.whistle_alon.name': 'Fløjte til Alon',
-  'entities.items.whistle_alpaca.name': 'Alpakafløjte',
-  'entities.items.whistle_ansem.name': 'Fløjte til Ansem',
-  'entities.items.whistle_bull.name': 'Tyrefløjte',
-  'entities.items.whistle_cate_coin.name': 'Møntkattens fløjte',
-  'entities.items.whistle_crimson_claw_crab.name': 'Karmesinkrabbens fløjte',
-  'entities.items.whistle_crystal_lich.name': 'Krystallichens fløjte',
-  'entities.items.whistle_crystal_tide.name': 'Krystaltidevandets fløjte',
-  'entities.items.whistle_ember_fox.name': 'Gløderævens fløjte',
-  'entities.items.whistle_emberfall_phoenix.name': 'Glødefaldsføniksens fløjte',
-  'entities.items.whistle_emerald_wolf.name': 'Smaragdulvens fløjte',
-  'entities.items.whistle_forgemaw.name': 'Fløjte til Smeltekæben',
-  'entities.items.whistle_frog.name': 'Frøfløjte',
-  'entities.items.whistle_frostfire.name': 'Frostildens fløjte',
-  'entities.items.whistle_golden_sentinel.name': 'Den gyldne vogters fløjte',
-  'entities.items.whistle_horse.name': 'Hestefløjte',
-  'entities.items.whistle_kekius.name': 'Fløjte til Kekius',
-  'entities.items.whistle_loot_goblin.name': 'Byttegoblinens fløjte',
-  'entities.items.whistle_moss_hare.name': 'Mosharens fløjte',
-  'entities.items.whistle_nightfang.name': 'Nattandens fløjte',
-  'entities.items.whistle_penny_goldspark.name': 'Penny Guldgnists fløjte',
-  'entities.items.whistle_phantom.name': 'Spøgelsesfløjte',
-  'entities.items.whistle_proud_grunt.name': 'Den stolte soldats fløjte',
-  'entities.items.whistle_raptor.name': 'Raptorfløjte',
-  'entities.items.whistle_rocky.name': 'Stenklumps fløjte',
-  'entities.items.whistle_sapling.name': 'Træspirens fløjte',
-  'entities.items.whistle_skeleton.name': 'Skeletfløjte',
-  'entities.items.whistle_solbot.name': 'Solbottens fløjte',
-  'entities.items.whistle_spider.name': 'Edderkoppefløjte',
-  'entities.items.whistle_sprites.name': 'Flimmer og Glimmers fløjte',
-  'entities.items.whistle_stag.name': 'Hjortefløjte',
-  'entities.items.whistle_tiger.name': 'Tigerfløjte',
-  'entities.items.whistle_triple_t.name': 'Trippel-Ts fløjte',
-  'entities.items.whistle_trollface.name': 'Troldeansigtets fløjte',
-  'entities.items.whistle_tuskhorn_boar.name': 'Stødhornsvinets fløjte',
   'entities.mobs.balgath_cyclops.name': 'Balgath, den enøjede formand',
   'entities.mobs.barnacle_crawler.name': 'Vragbundet sømand',
   'entities.mobs.basin_raptor.name': 'Bassinraptor',
@@ -21060,7 +20987,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_phantom.name': 'Spøgelse',
   'entities.mobs.buddy_proud_grunt.name': 'Stolt soldat',
   'entities.mobs.buddy_rocky.name': 'Stenklump',
-  'entities.mobs.buddy_sapling.name': 'Træspire',
   'entities.mobs.buddy_skeleton.name': 'Skelet',
   'entities.mobs.buddy_solbot.name': 'Solbotten',
   'entities.mobs.buddy_spider.name': 'Edderkop',
@@ -21397,121 +21323,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.cancel': 'Annuller',
   'hudChrome.buddyMenu.nameLabel': 'Ledsagerens navn',
   'hudChrome.buddyMenu.rename': 'Omdøb ledsager',
-  'hudChrome.collections.armor.mail': 'Ringbrynje',
-  'hudChrome.collections.buddyLore.alon':
-    'En rejsendes maskot fra en vej, intet kort vil vedkende sig, som dukker op, hvor en plan går skævt. Den ser til, den billiger, og den tilbyder overhovedet ingen hjælp.',
-  'hudChrome.collections.buddyLore.alpaca':
-    'Hjordene i Stormkammen holder dem for uldens og sindets skyld: intet forbliver roligere i en storm. Denne spytter på præcis én person på hver rejse.',
-  'hudChrome.collections.buddyLore.ansem':
-    'Den taler om døre og mørke og vil ikke uddybe nogen af delene. Natblomstens kultister hævder, at den er deres; den vandrer væk, hver gang de holder et ritual.',
-  'hudChrome.collections.buddyLore.bull':
-    'En tyr fra Dalen på størrelse med en hund, hvilket er den eneste grund til, at nogen gik med til at holde en indendørs. Temperamentet blev ikke mindre sammen med resten.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    'En kat, der ikke vil skilles fra mønten, den sidder på, og som ingen nogensinde har set spise. Købmændene i Østbæk skændes stadig om, hvem af de to der er kæledyret.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    'En tidevandskrabbe fra Fjernkysten, hvis klo forbliver rød længe efter, at den forlader vandet. Havnefolk plejede at lade dem løbe om kap på plankerne om penge.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    'Et skår af selve Nythraxis, stadig summende af kulden, der formede det. Det adlyder den, der trak det ud af raidets vrag, og har ikke tilgivet vedkommende for det.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    'En tidevandsånd, der rider på sin egen dråbe havglas, fisket op af stille vand af lystfiskere fra Dalen til Fjernkysten, som ville fange aftensmad. Den beholder vandet, den kom op i, og vil ikke overtales til at vende tilbage.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    'En hunræv fra Østbæk Dals levende hegn, opkaldt efter den kulrøde pels, der ses gennem vinterskrubbet. Fældefangerne der opgav ungerne for generationer siden og begyndte at sætte mad ud i stedet.',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    'Den brænder ned til en glød hvert efterår og rejser sig af sin egen aske til foråret, hvilket er alt, nogen kan fortælle om den. Ingen har nogensinde fundet en rede, og ingen har nogensinde fanget en to gange.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    'En hvalp fra Genfærdsskoven, hvis pels er grøn i trækronernes lys, som aldrig helt når skovbunden. Vogterne opfostrer de forældreløse unger, skoven efterlader.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    'Smedet i Den Sidste Kildes Digel og aldrig helt færdig gik den ud af Ignivars støberi, mens hamrene stadig faldt. Kun den heroiske nedstigning finder den: det smeltede væsen vender stadig tilbage til smedjen, der skabte det, og følger hjem med den, der overlever ilden to gange.',
-  'hudChrome.collections.buddyLore.frog':
-    'Mosekær Sump opfostrer dem fede og ubekymrede, kvækkende hele natten fra sivene. Moseguiderne sværger på, at en båd med en ombord aldrig går på grund.',
-  'hudChrome.collections.buddyLore.frostfire':
-    'Født i Frostsløret, hvor en varm kilde bryder gennem ismarken, og den har aldrig besluttet, hvilken halvdel den hører til. Den damper i kold luft og ryster i varm.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    'En vagtbille fra Ravfaldet, forgyldt af harpiksen, den voksede op i. Navnet er ældre end harpiksen: vogtere af en slags holdt de lunde, længe før nogen fandt på at tappe saften på flaske.',
-  'hudChrome.collections.buddyLore.horse':
-    'En dalpony, avlet lille til frugthavernes stier og aldrig fortalt, at den ikke er en stridshest. Den holder trit ved din skulder og følger enhver, der engang gav den et æble.',
-  'hudChrome.collections.buddyLore.kekius':
-    'En leende ledsager af uklar oprindelse, taget til sig som lykkebringer af Stormkammens væddeløbsstalde. Den har overlevet fire stalde, der svor til den.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    'Den følger enhver, der bærer heroiske mærker, og er aldrig blevet taget i at stjæle. Kvartermester Vex fastholder, at det overhovedet intet beviser.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    'En hare fra Pilekæret, grønpelset efter et liv med leje i våd tørv. Mosens urtekyndige regner dem for lykkebringere og vil ikke have en jaget væk fra en dørtrappe.',
-  'hudChrome.collections.buddyLore.nightfang':
-    'En ung jæger fra Natblomsten, tavs selv efter sin arts målestok. Den følger med for selskabets skyld og jager intet større end et møl.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    'En gnomopfinders lærling, som tager betaling i timen og er hver kobbermønt værd. Rustningsmager Hode tog hende ind for at afvikle en gæld og sælger nu aftalen til enhver med tusind guld.',
-  'hudChrome.collections.buddyLore.phantom':
-    'Et håndfladestort genfærd fra Genfærdsskovens gravhøje, helt lagen og ingen knogler, som dukker op i en lukket oppakning og bliver for selskabets skyld. Ingen har fundet ud af, hvad det vil, og det har aldrig prøvet at skræmme nogen.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    'En veteran fra krigsforrådene, som beholdt salutten og mistede graden. Krigsmarskal Draven Kole giver en til enhver soldat med ære nok til at vide, hvad det koster.',
-  'hudChrome.collections.buddyLore.raptor':
-    'En unge fra Dragelandet, solgt videre før den lærer, hvor hurtigt den kan løbe. Hver ny ejer får at vide, at den skal holdes mæt, og ingen behøver høre det to gange.',
-  'hudChrome.collections.buddyLore.rocky':
-    'En stenskallet kryber fra Tornetop Højders skråninger, langsom og fuldstændig ubekymret. Minefolk holder dem, fordi de stivner et øjeblik før et sammenstyrt.',
-  'hudChrome.collections.buddyLore.sapling':
-    'Et ungt træ med et smil i barken og et nysgerrigt lilla blik. Dets rødder bærer det i en munter vralt, hvor du end vandrer.',
-  'hudChrome.collections.buddyLore.skeleton':
-    'Det kom op fra Genfærdsskovens gravhøje, støvede sig af og har fulgt efter folk lige siden. Ingen har fastslået, hvis knogler det var.',
-  'hudChrome.collections.buddyLore.solbot':
-    'En lille soldrevet automat, gravet halvt begravet ud af Dragelandets aske og stadig tikkende. Værkstedet, der byggede den, efterlod intet mærke nogetsteds på hylstret.',
-  'hudChrome.collections.buddyLore.spider':
-    'En håndfladestor væver fra Genfærdsskoven, som indretter enhver oppakning, den bæres i, på ny. Spindet er stærkere end tråden, det erstatter.',
-  'hudChrome.collections.buddyLore.sprites':
-    'To små ildånder, én gylden og én blågrøn, som aldrig helt enes om, hvem der fører an. Kom tæt nok på, og de smelter til én grøn flamme, før de igen flyder fra hinanden under latter.',
-  'hudChrome.collections.buddyLore.stag':
-    'En blodlinje fra Evighaven, avlet ned fra de store hjorte, vogterne engang red. Den sænker stadig hovedet for en løftet hånd af en vane, der er ældre end dyret.',
-  'hudChrome.collections.buddyLore.tiger':
-    'Palmebugtens striber på et dyr, der aldrig har set Palmebugten: slægten har været holdt i fangenskab, siden de gamle menagerier lukkede. Den adlyder en fløjten og intet andet.',
-  'hudChrome.collections.buddyLore.triple_t':
-    'Tre af noget eller én ting tre gange. Beretningerne er uenige, og væsenet vil ikke stå stille længe nok til at blive talt.',
-  'hudChrome.collections.buddyLore.trollface':
-    'En grinende ting, Genfærdsskoven sendte ud og nægtede at tage tilbage. Ethvert forsøg på at beskrive den ender med, at fortælleren ler og opgiver.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    'Et dyr fra Tornetop Højder, avlet kortbenet af hyrder, der ville have et vildsvin, som ikke kunne vælte et hegn. Det beholdt temperamentet alligevel.',
-  'hudChrome.collections.close': 'Luk jagt',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': 'Frostbundet',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': 'Elektrisk',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': 'Askegrå',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': 'Hvidglødende',
-  'hudChrome.collections.cosmetic.frog_sapphire': 'Safirfrø',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': 'Grøn frodighed',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': 'Krigsherre',
-  'hudChrome.collections.cosmetic.stag_acorn': 'Agernkrans',
-  'hudChrome.collections.cosmetic.stag_gilded': 'Forgyldt',
-  'hudChrome.collections.cosmeticUnlocked': 'Nyt udseende til {name}: {look}.',
-  'hudChrome.collections.detail.bindLabel': 'Binding',
-  'hudChrome.collections.detail.drop': '{mob} ({location}), {chance}% pr. drab',
-  'hudChrome.collections.detail.dropLabel': 'Bytte fra',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob} ({location}), {chance}% pr. drab, {heroicChance}% på heroisk',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC-børsen',
-  'hudChrome.collections.detail.exchangeNone': 'Ingen annoncer',
-  'hudChrome.collections.detail.exchangeUnavailable': 'Ikke tilgængelig i denne klient',
-  'hudChrome.collections.detail.fishingDrop': 'Fiskeri hvor som helst, {chance}% pr. fangst',
-  'hudChrome.collections.detail.globalDrop':
-    'Enhver fjende, {chance}% pr. drab, en af {count} med denne sjældenhed',
-  'hudChrome.collections.detail.heroicDrop': '{mob} ({location}), kun heroisk, {chance}% pr. drab',
-  'hudChrome.collections.detail.marketAtMerchant': 'Vises hos købmanden',
-  'hudChrome.collections.detail.marketChecking': 'Kontrollerer...',
-  'hudChrome.collections.detail.marketLabel': 'Verdensmarked',
-  'hudChrome.collections.detail.marketNone': 'Ingen annoncer',
-  'hudChrome.collections.detail.marksPrice': '{amount} heroiske mærker',
-  'hudChrome.collections.detail.noItem': 'Ingen genstand giver dette endnu',
-  'hudChrome.collections.detail.noSell': 'Kan ikke sælges',
-  'hudChrome.collections.detail.noSource': 'Ingen kilde i spillet endnu',
-  'hudChrome.collections.detail.sellLabel': 'Handleren betaler',
-  'hudChrome.collections.detail.setLabel': 'Samlet',
-  'hudChrome.collections.detail.tradeable': 'Kan handles',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}) for {price}',
-  'hudChrome.collections.detail.vendorLabel': 'Sælges af',
-  'hudChrome.collections.keybindLabel': 'Jagt',
-  'hudChrome.collections.launcherTitle': 'Jagt: ledsagere, ridedyr og genstandssæt',
-  'hudChrome.collections.looks.locked': 'Låst',
-  'hudChrome.collections.looks.none': 'Ingen udseender er skabt til denne ledsager endnu',
-  'hudChrome.collections.looks.title': 'Udseender',
-  'hudChrome.collections.looks.unlocked': 'Låst op',
-  'hudChrome.collections.looks.worn': 'Båret',
-  'hudChrome.collections.petKind.celebrity': 'Berømtheder',
   'hudChrome.collections.presence.alon': 'Du føler dig iagttaget og stilfærdigt godkendt.',
   'hudChrome.collections.presence.alpaca': 'Noget uldent og sindigt har besluttet at følge med.',
   'hudChrome.collections.presence.ansem': 'En hvisken om døre og mørke følger dig.',
@@ -21558,39 +21369,11 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.collections.presence.tuskhorn_boar': 'Et grynt og et stamp: noget stædigt følger dig.',
   'hudChrome.collections.presenceDefault': 'Du mærker et nærvær iagttage dig.',
   'hudChrome.collections.revealed': '{name} har besluttet at følge dig.',
-  'hudChrome.collections.set.bonusLabel': '{pieces} dele',
-  'hudChrome.collections.set.itemLevel': 'genstandsniveau {level}',
-  'hudChrome.collections.set.owned': '{owned} af {total} dele',
-  'hudChrome.collections.source.bossDrop': '{mob} ({location}), {chance}% pr. spiller pr. drab',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), kun heroisk, {chance}% pr. spiller',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), {chance}% pr. spiller, {heroicChance}% på heroisk',
-  'hudChrome.collections.source.bossLabel': 'Bossledsager',
-  'hudChrome.collections.source.challengeDps': 'Gør {dps} skade i sekundet på {mob} gennem kampen',
-  'hudChrome.collections.source.challengeLabel': 'Udfordring',
-  'hudChrome.collections.source.challengeSpeed':
-    'Besejr {mob} inden for {seconds} sekunder fra kampens start',
-  'hudChrome.collections.source.craft': '{item} (opskrift til {profession})',
-  'hudChrome.collections.source.craftLabel': 'Fremstillet',
-  'hudChrome.collections.source.deed': 'Bedriften {deed}',
-  'hudChrome.collections.source.deedLabel': 'Fortjent gennem',
-  'hudChrome.collections.source.grantLabel': 'Tildelt',
-  'hudChrome.collections.source.grantOnly':
-    'Sæsonbelønning: den månedlige rangliste og belønninger for bedste kamplogge',
-  'hudChrome.collections.source.rollNote':
-    'Hver spiller slår særskilt; ingen mister et slag til et gruppemedlem.',
-  'hudChrome.collections.source.token': '{item}, bruges én gang til at knytte ledsageren til dig',
-  'hudChrome.collections.source.tokenLabel': 'Polet',
-  'hudChrome.collections.stat.mixed': 'Blandet',
-  'hudChrome.collections.stat.strength': 'Styrke',
   'hudChrome.collections.state.notOwned': 'Ikke samlet',
   'hudChrome.collections.state.owned': 'Samlet',
   'hudChrome.collections.state.pending': 'Et nærvær følger dig',
   'hudChrome.collections.state.unavailable': 'Kan ikke fås endnu',
   'hudChrome.collections.tabs.buddies': 'Ledsagere',
-  'hudChrome.collections.tabs.sets': 'Genstandssæt',
-  'hudChrome.collections.title': 'Jagt',
   'hudChrome.cosmetics.buddyActive': 'Fremkaldt',
   'hudChrome.cosmetics.buddyDrag': 'Træk til handlingslinjen',
   'hudChrome.courier.bags': 'Send til banken',
@@ -21602,7 +21385,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Returnerede genstande opbevares som overskud i fulde tasker. Kureren forsvinder efter levering, indtil den fremkaldes igen.',
   'hudChrome.courier.close': 'Luk kureren',
   'hudChrome.courier.instructions':
-    'Vælg hele stakke. Kureren indsætter dem først og henter så de ønskede genstande. Opgavegenstande kan ikke sendes.',
+    'Vælg hele stakke til din bank, Materialehvælvet eller en anden figur. Kureren indsætter dem først og henter så de ønskede genstande. Opgavegenstande kan ikke sendes.',
   'hudChrome.courier.membership': 'Forny dit medlemskab for at starte en ny tur.',
   'hudChrome.courier.outbound': 'Flyver til banken',
   'hudChrome.courier.ready': 'Klar til levering',
@@ -21808,8 +21591,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.kinds.task': 'Udførelse',
   'hudChrome.guildHall.lifetime': 'Fuldførte kontrakter: {count}',
   'hudChrome.guildHall.mountOffer': 'Ridedyr: {mount}',
-  'hudChrome.guildHall.mountPreview':
-    'Landridedyr: +{pct}% bevægelseshastighed under ridning. Kræver ridetræning.',
   'hudChrome.guildHall.needSeals': 'Kræver {count} mere',
   'hudChrome.guildHall.open': 'Åbn',
   'hudChrome.guildHall.owned': 'Ejet',
@@ -25531,7 +25312,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Alle, også nærkampsspillere, løber ud mod tør jord under kanaliseringen; oversvømmelsen sænker dig.',
   'bossJournal.temple.ysolei.undertowSummary':
     'Hver {every} sek. kanaliserer hun i {seconds} sek. og trækker alle mod sig med {pull} yard i sekundet. Så Tidevandsnedslag: {min} til {max} skade inden for {radius} yard.',
-  'hudChrome.collections.stat.agility': 'Smidighed',
   'hudChrome.expeditions.cancel': 'Annuller',
   'hudChrome.expeditions.close': 'Luk',
   'hudChrome.finder.cancelCreate': 'Annuller',
@@ -25581,4 +25361,199 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.npcs.socketwright_skerrit.name': 'Maben Skerrit',
   'entities.zones.goldcrest_harbor.name': 'Goldcrest Harbor',
   'referralCards.okay': 'OK',
+  'abilityUi.cast.kituse_wildheart_pull_spear': 'Træk spyddet ud',
+  'abilityUi.cast.temple_score': 'Partituret',
+  'abilityUi.cast.temple_score_answer': 'Besvar partituret',
+  'abilityUi.cast.wildheart_idols_breath': 'Idolens ånde',
+  'abilityUi.cast.wildheart_sun_glyph_cold': 'Køler af',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': 'Tændes',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': 'Jagtspyd',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': 'Idolet vågner',
+  'bossJournal.temple.selthe.boltResponseRework':
+    'Hold tanken i hendes synsfelt. Gem afbrydelser til Drukningens arie.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    'Mellem andre besværgelser rammer et projektil hvert {every} sek. efter en synlig advarsel på {windup} sek. og giver Frostskade svarende til {mult} gange hendes våbenskade. Afbrydelse af Drukningens arie stopper projektiler og arien i {quiet} sek.',
+  'bossJournal.temple.selthe.overviewRework':
+    'Selthe bevæger sig aldrig og angriber ikke i nærkamp. Saml jer til Kor, forlad gruppen til Solo, afbryd Drukningens arie, og undvig Søbølge. Ved to helbredsgrænser skal I gentage hendes melodi på månefliserne med sangere, der skiftes.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    'Hendes andre angreb holder pause, mens gruppen besvarer partituret. Månevandsprojektiler har ingen kastebjælke og kan ikke afbrydes.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    'Under svaret bliver fliserne mørke. Husk melodien, og skift tur.',
+  'bossJournal.temple.selthe.scoreResponse':
+    'Se melodien, og træd så på fliserne i rækkefølge. Skift med en anden levende spiller om at spille de rigtige toner; en enlig overlevende kan afslutte alene. Blokerede trin er harmløse. Træd af og på igen for at spille en flise, også en der var optaget, før svaret begyndte.',
+  'bossJournal.temple.selthe.scoreSummary':
+    'Ved {first} og {second} helbred bliver hun immun og spiller {notes}, derefter {finalNotes} toner. Gentag dem inden for {answer}, derefter {finalAnswer} sek. En forkert flise giver {falseNote} Frostskade og nulstiller fremskridtet, men ikke tiden. Udløbet tid giver {min} til {max} Frostskade til alle. Succes bedøver hende i {stun} sek. og øger skaden, hun tager, med {vulnerability} i {bonusSeconds} sek.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    'Hold øje med ariens mål og alle, der fanges alene af Kor. Hjælp med at synge næste tone under partituret, og hel fejlene.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    'Gå til den umarkerede halvdel, før advarslen slutter. Midterlinjen er sikker. På Heroisk slukker ånden også tændte glyffer i sin halvdel; de kan tændes igen straks.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    'Hvert {every} sek. markeres den ene halvdel af terrassen i {warning} sek., hvorefter alle i den halvdel tager {min} til {max} Naturskade. Ånden skifter mellem halvdelene.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    'Umarkerede spillere tænder glyffer foran Byttet. Før ham gennem dem, og angrib under Solramt. Glyfferne slukkes, når jagten slutter.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    'De {count} glyffer starter slukkede. Mens han jager, tænder en umarkeret spiller en ved at stå på den i {kindle} sek. Hvis ingen umarkerede spillere er tilbage, kan Byttet tænde den på {alone} sek. At træde væk nulstiller fremskridtet. Når han krydser en tændt glyf, sænkes hans fart med {slow}, og skaden, han tager, øges med {vulnerability} i {seconds} sek. Glyffen kan ikke tændes igen i {dark} sek.; han kan ikke rammes af en anden glyf i {wary} sek. Under jagten varer bedøvelser halvt så længe.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    'Han markerer et nyt par hvert {pair} sek. og skifter mellem dem hvert {switch} sek. Hvert skift giver det nye Bytte {turn} sek., før han jager.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    'Han vælger nyt Bytte hvert {every} sek. og vender sig så mod det i {turn} sek., før han jager.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    'Ved {health} helbred forbliver han en jaguarånd, indtil han besejres. Tanken kan også blive Bytte.',
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    'Hvert {every} sek. rammer en besværgelse med {cast} sek. kastetid alle inden for {radius} yd for {min} til {max} skade. Fastspiddede spillere tager {pinMult} gange denne skade uanset afstand.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    'Vælg spyddet, og interager inden for {range} yd for at trække det ud på {pull} sek. Skade afbryder ikke udtrækningen. Hvis ingen andre står frit på terrassen, kan offeret interagere og slippe fri på {self} sek.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    'En besværgelse med {cast} sek. kastetid fastspidder en spiller, der ikke er tank, eller tanken, hvis ingen andre er tilbage. Rodfæstelsen varer op til {seconds} sek. og giver {bleed} skade hvert {tick} sek.',
+  'entities.mobs.wildheart_hunting_spear.name': 'Jagtspyd',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    'Hendes stemme er brudt: hun tager {pct}% mere skade, indtil dette slutter.',
+  'hudChrome.auraEffect.temple.scoreWard':
+    'Synger partituret: hun tager ingen skade, før det slutter. Træd på månefliserne i den rækkefølge, de lød, før verset slutter, for at bryde hendes stemme. Skift tur: efter en tone skal en anden spiller spille næste rigtige tone. En enlig overlevende kan afslutte alene. Hvis verset slutter først, giver Disharmoni {min} til {max} Frostskade ({heroicMin} til {heroicMax} på Heroisk) til alle i gården.',
+  'hudChrome.auraEffect.temple.spentVoice':
+    'Du kan ikke spille en ny måneflise, før en anden spiller spiller næste rigtige tone. At træde på en flise imens nulstiller ikke svaret og skader dig ikke. Kan ikke ophæves. Fjernes, når du er den eneste levende spiller i din instans, eller partituret slutter.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    'Stenjaguaren er vågen. Hvert {every} sek. ånder den over den ene halvdel af terrassen, derefter den anden, efter en gulvadvarsel på {warning} sek.: {min} til {max} Naturskade ({heroicMin} til {heroicMax} på Heroisk) til alle i den halvdel. Zulgar forbliver Jaguaravataren, til han dør, og vælger nyt Bytte hvert {seconds} sek. ({heroicSeconds} sek. på Heroisk).',
+  'hudChrome.auraEffect.wildheart.pinned':
+    'Et Jagtspyd holder dig fast. Du bløder for {bleed} Fysisk skade ({heroicBleed} på Heroisk) hvert {every} sek., og Vildhjertets puls rammer dig overalt for {pulse}% mere skade. En holdkammerat kan trække spyddet ud på {pull} sek. Hvis ingen andre står frit, kan du selv trække det ud på {wrench} sek. Det slipper efter {seconds} sek.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    'Ingen solglyf kan ramme ham, indtil dette slutter. En tændt glyf, han krydser, forbliver tændt.',
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    'Ramt af en tændt solglyf: bevæger sig {pct}% langsommere.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    'Ramt af en tændt solglyf: tager {pct}% mere skade.',
+  'hudChrome.courier.accountBank':
+    'Hent fra denne bank. Den figur skal være logget ud, når kureren ankommer.',
+  'hudChrome.courier.accountPlanned':
+    'Planlagt til {name}: {count} stakke. Valg til en anden figur erstatter dem.',
+  'hudChrome.courier.accountTitle': 'Andre figurer',
+  'hudChrome.courier.bagsAccount': 'Send til {name}s bank',
+  'hudChrome.courier.bagsAccountNone': 'Vælg en figur at sende genstande til.',
+  'hudChrome.courier.bagsVault': 'Send materialer til boksen',
+  'hudChrome.courier.boundAccount': 'På vej til en anden figurs bank',
+  'hudChrome.courier.boundBank': 'På vej til banken',
+  'hudChrome.courier.boundVault': 'På vej til Materialehvælvet',
+  'hudChrome.courier.storeTabs': 'Kurerens lager',
+  'hudChrome.courier.vault': 'Hent fra boksen. Hvert valg henter hele rækken.',
+  'hudChrome.courier.vaultCap': 'Rummer {cap} af hvert materiale',
+  'hudChrome.courier.vaultEmpty': 'Din boks er tom.',
+  'hudChrome.courier.vaultLocked':
+    'Lås Materialehvælvet op hos en bankmand for at bruge den med kureren.',
+  'hudChrome.courier.vaultTitle': 'Materialehvælv',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    'Normal valgt. Nuværende instanser er stadig Heroiske.',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    'Heroisk valgt. Nuværende instanser er stadig Normale.',
+  'hudChrome.finder.mech.the_score':
+    'Partituret (to gange synger hun en melodi på månefliserne: træd på dem i den rækkefølge, de lød, for at bryde hendes stemme)',
+  'hudChrome.itemHistory.close': 'Luk',
+  'hudChrome.itemHistory.noTransfers': 'Denne genstand har aldrig skiftet ejer.',
+  'hudChrome.itemHistory.openAria': 'Genstandshistorik for {item}',
+  'hudChrome.itemHistory.passedTo': 'Overdraget til {name} den {date}',
+  'hudChrome.itemHistory.title': '{item}: historik',
+  'hudChrome.itemMenu.itemHistory': 'Genstandshistorik',
+  'hudChrome.itemTooltip.lootedBy': 'Plyndret af {name} den {date}',
+  'hudChrome.itemTooltip.obtainedBy': 'Erhvervet af {name} den {date}',
+  'hudChrome.itemTooltip.questRewardTo': 'Opgavebelønning til {name} den {date}',
+  'hudChrome.kitUse.freeAria': 'Træk {name} ud',
+  'hudChrome.kitUse.freeClick': 'Klik her for at trække {name} ud',
+  'hudChrome.kitUse.freeFar': 'Kom inden for {range} yd for at trække det ud',
+  'hudChrome.kitUse.freeKey': 'Træk {name} ud',
+  'hudChrome.kitUse.freeLine':
+    'Træk spyddet op af jorden for at befri den fastspiddede. Slag stopper dig ikke; bevægelse eller bedøvelse gør',
+  'hudChrome.kitUse.freeTap': 'Tryk her for at trække {name} ud',
+  'hudChrome.kitUse.freeUsingLine':
+    'Stå stille for at trække spyddet ud: bevægelse eller bedøvelse stopper dig',
+  'hudChrome.options.firstPersonBody': 'Vis krop',
+  'hudChrome.options.firstPersonMode': 'Førsteperson (Helt zoomet ind)',
+  'hudChrome.options.firstPersonNoBody': 'Ingen krop',
+  'hudChrome.options.firstPersonOff': 'Fra',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few': '{count} tidligere overdragelser vises ikke.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many': '{count} tidligere overdragelser vises ikke.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': '{count} tidligere overdragelse vises ikke.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other': '{count} tidligere overdragelser vises ikke.',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp':
+    'Valgt fra PvP-rækken i den ugentlige hvælving',
+  'hudChrome.templeAlert.answerDarkLine':
+    'Skift tur, og gentag rækkefølgen fra hukommelsen. Træd af, før du træder på en flise igen. Spillet: {done} af {total}',
+  'hudChrome.templeAlert.answerLine':
+    'Skift tur: træd på måneflisen mærket {place}. Spillet: {done} af {total}',
+  'hudChrome.templeAlert.answerTitle': 'Besvar partituret!',
+  'hudChrome.templeAlert.brokenLine':
+    'Hun tager {pct}% mere skade, indtil dette slutter: brug dine stærkeste angreb nu',
+  'hudChrome.templeAlert.brokenTitle': 'Selthes stemme er brudt!',
+  'hudChrome.templeAlert.falseLine':
+    'Den flise var uden for tur. Svaret starter forfra fra første flise',
+  'hudChrome.templeAlert.falseTitle': 'Falsk tone!',
+  'hudChrome.templeAlert.melodyDarkLine':
+    'Husk rækkefølgen, før fliserne slukkes. Gentag den på skift med en anden spiller',
+  'hudChrome.templeAlert.melodyLine':
+    'Se månefliserne lyde en efter en. Gentag rækkefølgen på skift med en anden spiller',
+  'hudChrome.templeAlert.melodyTitle': 'Partituret',
+  'hudChrome.templeAlert.spentLine':
+    'Du kan ikke spille en flise, før en anden spiller spiller næste rigtige tone. Spillet: {done} af {total}',
+  'hudChrome.templeAlert.spentTitle': 'En anden stemme skal svare',
+  'hudChrome.templeAlert.stepOffLine':
+    'En måneflise lyder kun, når nogen træder på den. Forlad denne flise, og træd på den igen',
+  'hudChrome.templeAlert.stepOffTitle': 'Træd af og så på igen',
+  'hudChrome.templeAlert.timeAria': '{seconds} sekunder tilbage',
+  'hudChrome.wildheartAlert.breathLine':
+    'Stenjaguaren vil ånde over denne halvdel af terrassen. Gå til den anden halvdel',
+  'hudChrome.wildheartAlert.breathTitle': 'Idolens ånde!',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    'Bliv på glyffen, indtil den tændes. At træde væk starter forfra',
+  'hudChrome.wildheartAlert.glyphLightingTitle': 'Tænder solglyffen',
+  'hudChrome.wildheartAlert.glyphLine':
+    'Stå på en slukket solglyf i {seconds} sek. for at tænde den. Når Zulgar krydser den, tager han {pct}% mere skade i {duration} sek.',
+  'hudChrome.wildheartAlert.glyphTitle': 'Tænd solglyfferne',
+  'hudChrome.wildheartAlert.pinnedLine':
+    'En holdkammerat skal trække Jagtspyddet ud. Vildhjertets puls rammer hårdere, mens du er fastspiddet',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    'Ingen er fri til at hjælpe: træk selv Jagtspyddet ud, før Vildhjertets puls rammer',
+  'hudChrome.wildheartAlert.pinnedTitle': 'Fastspiddet!',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    'Ingen andre kan tænde solglyfferne. Stå på en slukket glyf i {seconds} sek. for at tænde den, og lok så Zulgar over den',
+  'hudChrome.wildheartAlert.spearLine':
+    'Løb til Jagtspyddet, og træk det ud, før Vildhjertets puls rammer',
+  'hudChrome.wildheartAlert.spearTitle': 'En allieret er fastspiddet!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    'Han tager {pct}% mere skade, indtil dette slutter: brug dine stærkeste angreb nu',
+  'hudChrome.wildheartAlert.sunstruckTitle': 'Zulgar er solramt!',
+  'itemUi.errors.orderTrackedItem': 'Købmanden tager ikke imod bestillinger på unikt udstyr.',
+  'hudChrome.cosmetics.mountsIntro':
+    'Vælg dit ridedyrs udseende her. Ridetræning bestemmer hastigheden. Behold ridedyrsgenstanden i en vilkårlig figurs tasker eller bank for at dele udseendet på hele kontoen.',
+  'hudChrome.cosmetics.mountsNoMount':
+    'Lær at ride hos staldmester Marla for at tilkalde et ridedyr.',
+  'hudChrome.cosmetics.notCollected': 'Ikke samlet',
+  'hudChrome.guildHall.mountPreview':
+    'Ridedyrsudseende til alle figurer på din konto. Din ridetræning bestemmer hastigheden.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    'Vælg dit ridedyr i Kosmetik. Brug Stig op / Stig af for at ride.',
+  'hudChrome.mounts.desc_grag_bear': 'En hårdfør bjørn med sikre skridt og en tung sadel.',
+  'hudChrome.mounts.desc_stalkglider_snail':
+    'En robust snegl med langvarig energi og en mosbegroet skal.',
+  'hudChrome.mounts.desc_valorsteed': 'En hårdfør ganger med sikre skridt og lædersadel.',
+  'hudChrome.mounts.useToRide':
+    'Brug til at vælge dette udseende og tilkalde dit ridedyr. Behold genstanden i en vilkårlig figurs tasker eller bank for at dele udseendet på hele kontoen. Ridetræning bestemmer hastigheden.',
+  'itemUi.vendor.advancedRiding': 'Avanceret ridetræning',
+  'itemUi.vendor.basicRiding': 'Ridetræning',
+  'itemUi.vendor.ridingSpeed':
+    'Øger din bevægelseshastighed til hest med {speed}%. Gælder alle ridedyr.',
+  'guide.mountsPage.firstBody':
+    'Marla sælger Modgangers tøjler for 10 guld, når du har lært at ride. At have tøjlerne låser hesteudseendet op i Kosmetik for alle figurer på din konto. Ridetræningen lader dig allerede tilkalde et ridedyr uden at bære tøjler, så vælg hesten eller et andet ejet udseende, når du vil skifte stil.',
+  'guide.mountsPage.goodsBody':
+    'Samlede ridedyrsudseender er tilgængelige på hele kontoen, så længe mindst én tilsvarende tøjlegenstand findes i en vilkårlig figurs tasker eller personlige bank. Hvis den sidste gyldige genstand byttes, sendes, udbydes, sælges eller på anden måde fjernes, forsvinder udseendet fra Kosmetik. En rytter, der bruger det, skifter til standardhestens udseende og forbliver til hest med sin trænede hastighed.\n\nSpillertøjler kan byttes, sendes med post og udbydes på Verdensmarkedet, medmindre genstanden siger andet. Hestens tøjler kan også sælges til en købmand for 10 guld. Andre tøjler beholder deres egne begrænsninger for salg. Ridedyrsskins fra butikken forbliver kontokosmetik uafhængigt af tøjlegenstande.',
+  'guide.mountsPage.intro':
+    'Vælg et ridedyrsudseende, lær at ride i stalden, og rejs hurtigere gennem verden. Din træning bestemmer farten; alle ridedyrsudseender er kosmetiske.',
+  'guide.mountsPage.learnBody':
+    'Ridning åbnes på niveau {level}. Staldmester Marla Hitchen sælger Ridetræning for 80 guld i Galecrest-staldene. Grundtræningen giver {basicSpeed}% hurtigere bevægelse til hest. Når du har lært den, sælger Marla også Avanceret ridetræning for {advancedFee} guld, så bevægelsen til hest bliver {advancedSpeed}% hurtigere. Hver rang tilhører den figur, der lærer den.\n\nEfter grundtræningen tager du Marlas opgave Ridelektioner og følger markøren til den lysende firkant bag startbuen. Tryk på Start løb for at låne træningens Modganger. Gennemfør banen, og vend tilbage efter mønter og erfaring. Lånehesten vender tilbage til stalden, når lektionen slutter.',
+  'guide.mountsPage.rideBody':
+    'Åbn Kosmetik, og vælg et udseende på fanen Ridedyr. Tasten Stig op / Stig af, som normalt er tasten for grav accent, tilkalder dit trænede ridedyr med det udseende. Knappen Ridedyr på mobilen gør det samme. Tilkaldelse kræver en kort kanalisering; afstigning er øjeblikkelig. Du kan skifte udseende, mens du rider, uden at ændre hastigheden.\n\nDu kan også bruge tøjler fra taskerne eller en handlingsbjælke til at vælge udseendet og tilkalde. Brug af det udseende, du allerede rider på, fjerner ridedyret. Tøjler i banken eller på andre figurer låser samme kosmetik op, uden at rytteren skal bære dem.',
+  'guide.mountsPage.speedBody':
+    'Grundlæggende ridetræning giver {basicSpeed}% hurtigere bevægelse til hest. Avanceret ridetræning giver {advancedSpeed}% hurtigere bevægelse til hest og koster {advancedFee} guld hos Marla. Alle ridedyrsudseender bruger samme hastighed for figurens træningsrang, uanset sjældenhed eller kilde. Butiksskins bruger også denne trænede hastighed.',
+  'guide.mountsPage.speedHeading': 'Ridehastighed og træning',
+  'guide.mountsPage.whatBody':
+    'Ridedyr er kosmetiske udseender til din trænede ridning. De giver ingen rustning, skade eller kampstatistik. Ridetræning øger rejsehastigheden på land, og spring til hest klarer større højder. Alle ridedyr bliver på jorden, og ingen kan svømme.',
+  'guide.progression.ridingBody':
+    'På niveau {level} lærer staldmester Marla dig grundlæggende ridning for guld og tilbyder derefter en avanceret rang. Træning bestemmer hastigheden til hest. Vælg dit ridedyrsudseende i Kosmetik; samlede udseender deles, så længe tøjlerne ligger i en vilkårlig figurs tasker eller bank.',
 };

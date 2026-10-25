@@ -475,9 +475,24 @@ export const da_DK: EnTranslations = {
       "returning": "Bringer dine genstande tilbage",
       "waiting": "Venter på at returnere dine genstande",
       "bags": "Send til banken",
+      "bagsVault": "Send materialer til boksen",
       "bank": "Hent fra banken",
+      "vault": "Hent fra boksen. Hvert valg henter hele rækken.",
       "inventory": "Inventar",
       "bankTitle": "Banken",
+      "vaultTitle": "Materialehvælv",
+      "storeTabs": "Kurerens lager",
+      "vaultCap": "Rummer {cap} af hvert materiale",
+      "vaultEmpty": "Din boks er tom.",
+      "vaultLocked": "Lås Materialehvælvet op hos en bankmand for at bruge den med kureren.",
+      "boundBank": "På vej til banken",
+      "boundVault": "På vej til Materialehvælvet",
+      "boundAccount": "På vej til en anden figurs bank",
+      "accountTitle": "Andre figurer",
+      "accountBank": "Hent fra denne bank. Den figur skal være logget ud, når kureren ankommer.",
+      "bagsAccount": "Send til {name}s bank",
+      "bagsAccountNone": "Vælg en figur at sende genstande til.",
+      "accountPlanned": "Planlagt til {name}: {count} stakke. Valg til en anden figur erstatter dem.",
       "capacity": "{used} / {capacity} pladser",
       "cargo": "Kurerens oppakning",
       "empty": "Ingen genstande",
@@ -485,7 +500,7 @@ export const da_DK: EnTranslations = {
       "selected": "{count} / {limit} stakke valgt",
       "select": "Vælg {item}, {count}",
       "selectedItem": "Fravælg {item}, {count}",
-      "instructions": "Vælg hele stakke. Kureren indsætter dem først og henter så de ønskede genstande. Opgavegenstande kan ikke sendes.",
+      "instructions": "Vælg hele stakke til din bank, Materialehvælvet eller en anden figur. Kureren indsætter dem først og henter så de ønskede genstande. Opgavegenstande kan ikke sendes.",
       "membership": "Forny dit medlemskab for at starte en ny tur.",
       "cargoSafe": "Returnerede genstande opbevares som overskud i fulde tasker. Kureren forsvinder efter levering, indtil den fremkaldes igen.",
       "unavailable": "Fremkald din kurer for at planlægge en levering."
@@ -862,7 +877,7 @@ export const da_DK: EnTranslations = {
       "titleOffer": "Titel: {title}",
       "titlePreview": "Vises som {preview}",
       "mountOffer": "Ridedyr: {mount}",
-      "mountPreview": "Landridedyr: +{pct}% bevægelseshastighed under ridning. Kræver ridetræning.",
+      "mountPreview": "Ridedyrsudseende til alle figurer på din konto. Din ridetræning bestemmer hastigheden.",
       "skinOffer": "Sværdudseende: {skin}",
       "skinPreview": "Ændrer udseendet på dit udstyrede sværd på alle figurer på din konto. Kun udseende: ingen egenskaber.",
       "buy": "Køb",
@@ -2538,7 +2553,7 @@ export const da_DK: EnTranslations = {
       "riding": "Rider",
       "mount": "Ridedyr",
       "dismount": "Stig af",
-      "useToRide": "Brug for at tilkalde dette ridedyr.",
+      "useToRide": "Brug til at vælge dette udseende og tilkalde dit ridedyr. Behold genstanden i en vilkårlig figurs tasker eller bank for at dele udseendet på hele kontoen. Ridetræning bestemmer hastigheden.",
       "emptyTitle": "Ingen ridedyr samlet",
       "emptyStableHint": "Nå niveau 20 og tag rideundervisning hos Staldmester Marla ved Højvagtstaldene, vest for Højvagt.",
       "emptyDropHint": "Sjældnere ridedyr droppes fra heroiske fangehulsbosser og gennemførte Rifter.",
@@ -2568,9 +2583,9 @@ export const da_DK: EnTranslations = {
       "name_rickshaw_mount": "Knogebundet Rickshaw",
       "name_wobbles_slime": "Slimklumpen Vrikke",
       "name_nightwing_chimera": "Natvinget kimære",
-      "desc_valorsteed": "En hårdfør, sikker ganger, der giver øget rejsehastighed.",
-      "desc_grag_bear": "En hårdfør, sikker bjørn, der giver øget rejsehastighed.",
-      "desc_stalkglider_snail": "En robust, langsomt forbrændende snegl, der giver øget rejsehastighed.",
+      "desc_valorsteed": "En hårdfør ganger med sikre skridt og lædersadel.",
+      "desc_grag_bear": "En hårdfør bjørn med sikre skridt og en tung sadel.",
+      "desc_stalkglider_snail": "En robust snegl med langvarig energi og en mosbegroet skal.",
       "desc_aether_hover_cycle": "En kraftfuld magitek-cykel designet til hurtig, lavtsvævende forflytning i kamp.",
       "desc_shadowjump_toad": "En enorm, sikker kæmpetudse, trænet i lynhurtige skyggehop, der dækker ethvert terræn.",
       "desc_stormfeather_griffin": "En kongelig stormgrif, der bevæger sig hen over jorden på runebeslåede kløer, med sammenfoldede vinger.",
@@ -2593,7 +2608,7 @@ export const da_DK: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Tryk på {key} for at stige op på trænings-Modgangeren.",
-      "ownedMountPrompt": "Dine tøjler er i dine tasker. Brug dem til at ride.",
+      "ownedMountPrompt": "Vælg dit ridedyr i Kosmetik. Brug Stig op / Stig af for at ride.",
       "ridePrompt": "Følg den glødende markør til startlinjen, og tryk derefter på Start Løb.",
       "begin": "Begynd Lektion",
       "success": "Du har tæmmet Modgangeren.",
@@ -2864,6 +2879,10 @@ export const da_DK: EnTranslations = {
       "actionCamShoulderLeft": "Venstre {pct}",
       "actionCamShoulderRight": "Højre {pct}",
       "actionCamShoulderCenter": "Midte",
+      "firstPersonMode": "Førsteperson (Helt zoomet ind)",
+      "firstPersonOff": "Fra",
+      "firstPersonBody": "Vis krop",
+      "firstPersonNoBody": "Ingen krop",
       "showAttackButton": "Vis angrebsknap",
       "showDailyRewardsChest": "Vis kisten med daglige belønninger",
       "mobileCameraJoystick": "Kamera joystick",
@@ -3826,6 +3845,12 @@ export const da_DK: EnTranslations = {
       "linkHint": "Shift-klik for at linke denne genstand i chatten."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} tidligere overdragelse vises ikke.",
+        "few": "{count} tidligere overdragelser vises ikke.",
+        "many": "{count} tidligere overdragelser vises ikke.",
+        "other": "{count} tidligere overdragelser vises ikke."
+      },
       "guildBoardShown": {
         "one": "{count} laug vist",
         "few": "{count} laug vist",
@@ -4278,6 +4303,8 @@ export const da_DK: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Indstil fangekældersværhedsgrad: Heroisk",
       "setNormal": "Indstil fangekældersværhedsgrad: Normal",
+      "unappliedNormal": "Heroisk valgt. Nuværende instanser er stadig Normale.",
+      "unappliedHeroic": "Normal valgt. Nuværende instanser er stadig Heroiske.",
       "resetAll": "Nulstil alle instanser",
       "resetDone": "Alle instanser er blevet nulstillet.",
       "resetNone": "Du har ingen instanser at nulstille.",
@@ -4287,10 +4314,11 @@ export const da_DK: EnTranslations = {
       "resetSameDifficulty": "Skift fangekældersværhedsgrad, før du nulstiller disse instanser. Tomme instanser nulstilles automatisk efter 5 minutter.",
       "resetLoot": "Du kan ikke nulstille instanser, mens der stadig er bytte derinde.",
       "resetConfirmTitle": "Nulstil alle instanser?",
-      "resetConfirmBody": "Dette forlader tomme instanser fra din tidligere valgte sværhedsgrad. Uhentet bytte forhindrer nulstillingen.",
+      "resetConfirmBody": "Dette opgiver dine tomme instanser, så næste tur starter forfra på den valgte sværhedsgrad. Låsninger ændres ikke. Nogen, der stadig er inde, eller uhentet bytte forhindrer nulstillingen.",
       "resetConfirm": "Nulstil instanser",
       "resetCooldown": "Instanser kan kun nulstilles én gang hvert 5. minut.",
-      "resetUsage": "Brug /dungeon reset til at forlade dine tomme instanser efter at have ændret sværhedsgrad.",
+      "resetAlreadyFresh": "Dine instanser er allerede nulstillet. Ingen har været inde i dem siden sidste nulstilling.",
+      "resetUsage": "Brug /dungeon reset til at opgive dine tomme instanser og starte dem forfra.",
       "entryMismatchNormal": "Denne instans er indstillet til Normal sværhedsgrad. Brug Nulstil alle instanser for at starte en ny Heroisk gennemspilning.",
       "entryMismatchHeroic": "Denne instans er indstillet til Heroisk sværhedsgrad. Brug Nulstil alle instanser for at starte en ny Normal gennemspilning."
     },
@@ -4623,7 +4651,17 @@ export const da_DK: EnTranslations = {
         "pollinated": "Hvis du rører en frøkapsel, skyder den straks en tornespire. Hold dig væk fra frøene, og lad en upåvirket spiller trampe dem ned; en urørt kapsel spirer efter {seconds} sek. (på heroisk graver den sig ned efter {heroic} sek. og dukker op ved nærmeste spiller).",
         "prey": "Zulgar jager dig. Led ham over en tændt solglyf for at sænke ham med {slow}%. Fanger han dig, bliver du sønderrevet for {damage} skade ({heroic} på heroisk) og slået omkuld i {stun} sek.",
         "avatar": "Bevæger sig {pct}% hurtigere og jager sit bytte. Sænkninger og rodfæstninger virker, og bedøvelser varer halvt så længe.",
-        "vanished": "Skjult og immun over for skade. Han er ved at springe på spilleren længst væk."
+        "vanished": "Skjult og immun over for skade. Han er ved at springe på spilleren længst væk.",
+        "sunstruck": "Ramt af en tændt solglyf: bevæger sig {pct}% langsommere.",
+        "sunstruckExposed": "Ramt af en tændt solglyf: tager {pct}% mere skade.",
+        "sunWary": "Ingen solglyf kan ramme ham, indtil dette slutter. En tændt glyf, han krydser, forbliver tændt.",
+        "pinned": "Et Jagtspyd holder dig fast. Du bløder for {bleed} Fysisk skade ({heroicBleed} på Heroisk) hvert {every} sek., og Vildhjertets puls rammer dig overalt for {pulse}% mere skade. En holdkammerat kan trække spyddet ud på {pull} sek. Hvis ingen andre står frit, kan du selv trække det ud på {wrench} sek. Det slipper efter {seconds} sek.",
+        "idolAwake": "Stenjaguaren er vågen. Hvert {every} sek. ånder den over den ene halvdel af terrassen, derefter den anden, efter en gulvadvarsel på {warning} sek.: {min} til {max} Naturskade ({heroicMin} til {heroicMax} på Heroisk) til alle i den halvdel. Zulgar forbliver Jaguaravataren, til han dør, og vælger nyt Bytte hvert {seconds} sek. ({heroicSeconds} sek. på Heroisk)."
+      },
+      "temple": {
+        "scoreWard": "Synger partituret: hun tager ingen skade, før det slutter. Træd på månefliserne i den rækkefølge, de lød, før verset slutter, for at bryde hendes stemme. Skift tur: efter en tone skal en anden spiller spille næste rigtige tone. En enlig overlevende kan afslutte alene. Hvis verset slutter først, giver Disharmoni {min} til {max} Frostskade ({heroicMin} til {heroicMax} på Heroisk) til alle i gården.",
+        "brokenVoice": "Hendes stemme er brudt: hun tager {pct}% mere skade, indtil dette slutter.",
+        "spentVoice": "Du kan ikke spille en ny måneflise, før en anden spiller spiller næste rigtige tone. At træde på en flise imens nulstiller ikke svaret og skader dig ikke. Kan ikke ophæves. Fjernes, når du er den eneste levende spiller i din instans, eller partituret slutter."
       },
       "bastion": {
         "brineColumn": "Rodfæstet i en søjle af havvand: du tager {min} til {max} naturskade hver {tick} sek. i op til {seconds} sek. Afbryd eller bedøv den tidevandsbundne akolyt for at bryde den.",
@@ -5256,6 +5294,9 @@ export const da_DK: EnTranslations = {
       "partyTradeWindow": "Du kan handle denne genstand til spillere, der delte dens bytte, i de næste {time}. Udstyrer du den, afsluttes handelsvinduet.",
       "perfectedBadge": "Forædlet",
       "perfectingRank": "Forædling: rang {rank} af {ranks}",
+      "lootedBy": "Plyndret af {name} den {date}",
+      "questRewardTo": "Opgavebelønning til {name} den {date}",
+      "obtainedBy": "Erhvervet af {name} den {date}",
       "materialSourceGatherer": "{count} × samlet af {name}",
       "trophySkullSource": "{count} × Taget fra {name}",
       "materialSourceGathererSigned": "{count} × samlet af {name}, signeret af {signer}",
@@ -5799,14 +5840,8 @@ export const da_DK: EnTranslations = {
       "logAdminPurge": "En administrator fjernede {count} {item}"
     },
     "collections": {
-      "title": "Jagt",
-      "close": "Luk jagt",
-      "keybindLabel": "Jagt",
-      "launcherTitle": "Jagt: ledsagere, ridedyr og genstandssæt",
       "tabs": {
-        "buddies": "Ledsagere",
-        "mounts": "Ridedyr",
-        "sets": "Genstandssæt"
+        "buddies": "Ledsagere"
       },
       "state": {
         "owned": "Samlet",
@@ -5816,7 +5851,6 @@ export const da_DK: EnTranslations = {
       },
       "presenceDefault": "Du mærker et nærvær iagttage dig.",
       "revealed": "{name} har besluttet at følge dig.",
-      "cosmeticUnlocked": "Nyt udseende til {name}: {look}.",
       "presence": {
         "ember_fox": "Noget lille og varmt tasser efter dig.",
         "moss_hare": "En raslen i tørven holder trit med dine skridt.",
@@ -5854,134 +5888,9 @@ export const da_DK: EnTranslations = {
         "phantom": "Luften bag dig er en anelse for stille.",
         "emberfall_phoenix": "En varme som fra en ulmende ild lægger sig bag dig."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Frostbundet",
-        "crystal_lich_voltaic": "Elektrisk",
-        "forgemaw_ashen": "Askegrå",
-        "forgemaw_whitehot": "Hvidglødende",
-        "stag_acorn": "Agernkrans",
-        "stag_gilded": "Forgyldt",
-        "moss_hare_verdant": "Grøn frodighed",
-        "proud_grunt_warlord": "Krigsherre",
-        "frog_sapphire": "Safirfrø"
-      },
       "actions": {
         "summon": "Tilkald",
-        "dismiss": "Afvis",
-        "wear": "Bær",
-        "remove": "Fjern"
-      },
-      "looks": {
-        "title": "Udseender",
-        "unlocked": "Låst op",
-        "locked": "Låst",
-        "worn": "Båret",
-        "none": "Ingen udseender er skabt til denne ledsager endnu"
-      },
-      "source": {
-        "bossLabel": "Bossledsager",
-        "bossDrop": "{mob} ({location}), {chance}% pr. spiller pr. drab",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% pr. spiller, {heroicChance}% på heroisk",
-        "bossDropHeroicOnly": "{mob} ({location}), kun heroisk, {chance}% pr. spiller",
-        "rollNote": "Hver spiller slår særskilt; ingen mister et slag til et gruppemedlem.",
-        "deedLabel": "Fortjent gennem",
-        "deed": "Bedriften {deed}",
-        "challengeLabel": "Udfordring",
-        "challengeSpeed": "Besejr {mob} inden for {seconds} sekunder fra kampens start",
-        "challengeDps": "Gør {dps} skade i sekundet på {mob} gennem kampen",
-        "craftLabel": "Fremstillet",
-        "craft": "{item} (opskrift til {profession})",
-        "grantLabel": "Tildelt",
-        "grantOnly": "Sæsonbelønning: den månedlige rangliste og belønninger for bedste kamplogge",
-        "tokenLabel": "Polet",
-        "token": "{item}, bruges én gang til at knytte ledsageren til dig"
-      },
-      "buddyLore": {
-        "ember_fox": "En hunræv fra Østbæk Dals levende hegn, opkaldt efter den kulrøde pels, der ses gennem vinterskrubbet. Fældefangerne der opgav ungerne for generationer siden og begyndte at sætte mad ud i stedet.",
-        "moss_hare": "En hare fra Pilekæret, grønpelset efter et liv med leje i våd tørv. Mosens urtekyndige regner dem for lykkebringere og vil ikke have en jaget væk fra en dørtrappe.",
-        "frog": "Mosekær Sump opfostrer dem fede og ubekymrede, kvækkende hele natten fra sivene. Moseguiderne sværger på, at en båd med en ombord aldrig går på grund.",
-        "crimson_claw_crab": "En tidevandskrabbe fra Fjernkysten, hvis klo forbliver rød længe efter, at den forlader vandet. Havnefolk plejede at lade dem løbe om kap på plankerne om penge.",
-        "golden_sentinel": "En vagtbille fra Ravfaldet, forgyldt af harpiksen, den voksede op i. Navnet er ældre end harpiksen: vogtere af en slags holdt de lunde, længe før nogen fandt på at tappe saften på flaske.",
-        "nightfang": "En ung jæger fra Natblomsten, tavs selv efter sin arts målestok. Den følger med for selskabets skyld og jager intet større end et møl.",
-        "tuskhorn_boar": "Et dyr fra Tornetop Højder, avlet kortbenet af hyrder, der ville have et vildsvin, som ikke kunne vælte et hegn. Det beholdt temperamentet alligevel.",
-        "emerald_wolf": "En hvalp fra Genfærdsskoven, hvis pels er grøn i trækronernes lys, som aldrig helt når skovbunden. Vogterne opfostrer de forældreløse unger, skoven efterlader.",
-        "tiger": "Palmebugtens striber på et dyr, der aldrig har set Palmebugten: slægten har været holdt i fangenskab, siden de gamle menagerier lukkede. Den adlyder en fløjten og intet andet.",
-        "cate_coin": "En kat, der ikke vil skilles fra mønten, den sidder på, og som ingen nogensinde har set spise. Købmændene i Østbæk skændes stadig om, hvem af de to der er kæledyret.",
-        "alon": "En rejsendes maskot fra en vej, intet kort vil vedkende sig, som dukker op, hvor en plan går skævt. Den ser til, den billiger, og den tilbyder overhovedet ingen hjælp.",
-        "trollface": "En grinende ting, Genfærdsskoven sendte ud og nægtede at tage tilbage. Ethvert forsøg på at beskrive den ender med, at fortælleren ler og opgiver.",
-        "ansem": "Den taler om døre og mørke og vil ikke uddybe nogen af delene. Natblomstens kultister hævder, at den er deres; den vandrer væk, hver gang de holder et ritual.",
-        "triple_t": "Tre af noget eller én ting tre gange. Beretningerne er uenige, og væsenet vil ikke stå stille længe nok til at blive talt.",
-        "kekius": "En leende ledsager af uklar oprindelse, taget til sig som lykkebringer af Stormkammens væddeløbsstalde. Den har overlevet fire stalde, der svor til den.",
-        "solbot": "En lille soldrevet automat, gravet halvt begravet ud af Dragelandets aske og stadig tikkende. Værkstedet, der byggede den, efterlod intet mærke nogetsteds på hylstret.",
-        "frostfire": "Født i Frostsløret, hvor en varm kilde bryder gennem ismarken, og den har aldrig besluttet, hvilken halvdel den hører til. Den damper i kold luft og ryster i varm.",
-        "rocky": "En stenskallet kryber fra Tornetop Højders skråninger, langsom og fuldstændig ubekymret. Minefolk holder dem, fordi de stivner et øjeblik før et sammenstyrt.",
-        "proud_grunt": "En veteran fra krigsforrådene, som beholdt salutten og mistede graden. Krigsmarskal Draven Kole giver en til enhver soldat med ære nok til at vide, hvad det koster.",
-        "loot_goblin": "Den følger enhver, der bærer heroiske mærker, og er aldrig blevet taget i at stjæle. Kvartermester Vex fastholder, at det overhovedet intet beviser.",
-        "penny_goldspark": "En gnomopfinders lærling, som tager betaling i timen og er hver kobbermønt værd. Rustningsmager Hode tog hende ind for at afvikle en gæld og sælger nu aftalen til enhver med tusind guld.",
-        "stag": "En blodlinje fra Evighaven, avlet ned fra de store hjorte, vogterne engang red. Den sænker stadig hovedet for en løftet hånd af en vane, der er ældre end dyret.",
-        "alpaca": "Hjordene i Stormkammen holder dem for uldens og sindets skyld: intet forbliver roligere i en storm. Denne spytter på præcis én person på hver rejse.",
-        "horse": "En dalpony, avlet lille til frugthavernes stier og aldrig fortalt, at den ikke er en stridshest. Den holder trit ved din skulder og følger enhver, der engang gav den et æble.",
-        "sapling": "Et ungt træ med et smil i barken og et nysgerrigt lilla blik. Dets rødder bærer det i en munter vralt, hvor du end vandrer.",
-        "bull": "En tyr fra Dalen på størrelse med en hund, hvilket er den eneste grund til, at nogen gik med til at holde en indendørs. Temperamentet blev ikke mindre sammen med resten.",
-        "spider": "En håndfladestor væver fra Genfærdsskoven, som indretter enhver oppakning, den bæres i, på ny. Spindet er stærkere end tråden, det erstatter.",
-        "raptor": "En unge fra Dragelandet, solgt videre før den lærer, hvor hurtigt den kan løbe. Hver ny ejer får at vide, at den skal holdes mæt, og ingen behøver høre det to gange.",
-        "skeleton": "Det kom op fra Genfærdsskovens gravhøje, støvede sig af og har fulgt efter folk lige siden. Ingen har fastslået, hvis knogler det var.",
-        "crystal_lich": "Et skår af selve Nythraxis, stadig summende af kulden, der formede det. Det adlyder den, der trak det ud af raidets vrag, og har ikke tilgivet vedkommende for det.",
-        "forgemaw": "Smedet i Den Sidste Kildes Digel og aldrig helt færdig gik den ud af Ignivars støberi, mens hamrene stadig faldt. Kun den heroiske nedstigning finder den: det smeltede væsen vender stadig tilbage til smedjen, der skabte det, og følger hjem med den, der overlever ilden to gange.",
-        "crystal_tide": "En tidevandsånd, der rider på sin egen dråbe havglas, fisket op af stille vand af lystfiskere fra Dalen til Fjernkysten, som ville fange aftensmad. Den beholder vandet, den kom op i, og vil ikke overtales til at vende tilbage.",
-        "sprites": "To små ildånder, én gylden og én blågrøn, som aldrig helt enes om, hvem der fører an. Kom tæt nok på, og de smelter til én grøn flamme, før de igen flyder fra hinanden under latter.",
-        "phantom": "Et håndfladestort genfærd fra Genfærdsskovens gravhøje, helt lagen og ingen knogler, som dukker op i en lukket oppakning og bliver for selskabets skyld. Ingen har fundet ud af, hvad det vil, og det har aldrig prøvet at skræmme nogen.",
-        "emberfall_phoenix": "Den brænder ned til en glød hvert efterår og rejser sig af sin egen aske til foråret, hvilket er alt, nogen kan fortælle om den. Ingen har nogensinde fundet en rede, og ingen har nogensinde fanget en to gange."
-      },
-      "petKind": {
-        "beast": "Bæster",
-        "elemental": "Elementarvæsner",
-        "humanoid": "Humanoider",
-        "undead": "Udøde",
-        "celebrity": "Berømtheder"
-      },
-      "armor": {
-        "cloth": "Stof",
-        "mail": "Ringbrynje",
-        "leather": "Læder"
-      },
-      "stat": {
-        "intellect": "Intellekt",
-        "agility": "Smidighed",
-        "strength": "Styrke",
-        "mixed": "Blandet"
-      },
-      "set": {
-        "owned": "{owned} af {total} dele",
-        "itemLevel": "genstandsniveau {level}",
-        "bonusLabel": "{pieces} dele"
-      },
-      "detail": {
-        "dropLabel": "Bytte fra",
-        "vendorLabel": "Sælges af",
-        "bindLabel": "Binding",
-        "sellLabel": "Handleren betaler",
-        "marketLabel": "Verdensmarked",
-        "exchangeLabel": "$WOC-børsen",
-        "setLabel": "Samlet",
-        "drop": "{mob} ({location}), {chance}% pr. drab",
-        "heroicDrop": "{mob} ({location}), kun heroisk, {chance}% pr. drab",
-        "dropWithHeroic": "{mob} ({location}), {chance}% pr. drab, {heroicChance}% på heroisk",
-        "globalDrop": "Enhver fjende, {chance}% pr. drab, en af {count} med denne sjældenhed",
-        "fishingDrop": "Fiskeri hvor som helst, {chance}% pr. fangst",
-        "vendor": "{npc} ({location}) for {price}",
-        "honorPrice": "{amount} Ære",
-        "marksPrice": "{amount} heroiske mærker",
-        "noSource": "Ingen kilde i spillet endnu",
-        "noItem": "Ingen genstand giver dette endnu",
-        "tradeable": "Kan handles",
-        "soulbound": "Sjælebundet",
-        "noSell": "Kan ikke sælges",
-        "marketAtMerchant": "Vises hos købmanden",
-        "marketChecking": "Kontrollerer...",
-        "marketNone": "Ingen annoncer",
-        "exchangeNone": "Ingen annoncer",
-        "exchangeUnavailable": "Ikke tilgængelig i denne klient"
+        "dismiss": "Afvis"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const da_DK: EnTranslations = {
       "viewSources": "Vis kilder",
       "separateByGatherer": "Adskil efter samler",
       "takeChosenQuantity": "Tag valgt antal ud",
-      "combine": "Saml materialebunker"
+      "combine": "Saml materialebunker",
+      "itemHistory": "Genstandshistorik"
+    },
+    "itemHistory": {
+      "title": "{item}: historik",
+      "passedTo": "Overdraget til {name} den {date}",
+      "noTransfers": "Denne genstand har aldrig skiftet ejer.",
+      "close": "Luk",
+      "openAria": "Genstandshistorik for {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Lær formlen, før du anvender denne fortryllelse.",
@@ -7073,6 +6990,7 @@ export const da_DK: EnTranslations = {
         "summons_adds": "Tilkalder forstærkninger",
         "lunar_tide": "Manetide (pulserende omradesskade)",
         "chorus_and_solo": "Kor og Solo (saml jer på det ene mærke, spred jer fra det andet)",
+        "the_score": "Partituret (to gange synger hun en melodi på månefliserne: træd på dem i den rækkefølge, de lød, for at bryde hendes stemme)",
         "tideglass_reflections": "Tidevandsglassets spejlbilleder (dræb hinandens spejlbilleder)",
         "hydra_three_elements": "Tre elementer (venstre hoved ånder en frostkegle på 18 yard, som sænker dig med 70 procent i 4 sekunder, midterhovedet spytter gift under op til 3 spillere, som brister efter 1,5 sekunder og brænder i 6 sekunder, hvor det lander, og højre hoved sender en strøm ned ad en bane på 26 yard, som kaster dig 8 yard tilbage: træd ud af hver af dem. Når et hoved falder, overtager de stående hoveder dets angreb)",
         "hydra_tsunami": "Flodbølge (hovederne synker i 4,5 sekunder og tager 75 procent mindre skade, og en bølge ruller over den ene halvdel af bassinet, den anden næste gang: 160 til 190 frostskade på normal og et skub på 10 yard. Kryds til den anden halvdel, eller stå bag en kantsøjle; på heroisk ruller bølgen tilbage over den anden halvdel 3,5 sekunder senere. Første flodbølge kommer 24 sekunder inde i kampen, hver senere 40 sekunder efter den forrige er passeret)",
@@ -7197,6 +7115,23 @@ export const da_DK: EnTranslations = {
       "shadeLine": "Forlad dette lokkebillede. Angrib den Vael, hvis lygte blusser i strålen, for at bryde sløret",
       "timeAria": "{seconds} sekunder tilbage"
     },
+    "templeAlert": {
+      "melodyTitle": "Partituret",
+      "melodyLine": "Se månefliserne lyde en efter en. Gentag rækkefølgen på skift med en anden spiller",
+      "melodyDarkLine": "Husk rækkefølgen, før fliserne slukkes. Gentag den på skift med en anden spiller",
+      "answerTitle": "Besvar partituret!",
+      "answerLine": "Skift tur: træd på måneflisen mærket {place}. Spillet: {done} af {total}",
+      "answerDarkLine": "Skift tur, og gentag rækkefølgen fra hukommelsen. Træd af, før du træder på en flise igen. Spillet: {done} af {total}",
+      "spentTitle": "En anden stemme skal svare",
+      "spentLine": "Du kan ikke spille en flise, før en anden spiller spiller næste rigtige tone. Spillet: {done} af {total}",
+      "stepOffTitle": "Træd af og så på igen",
+      "stepOffLine": "En måneflise lyder kun, når nogen træder på den. Forlad denne flise, og træd på den igen",
+      "falseTitle": "Falsk tone!",
+      "falseLine": "Den flise var uden for tur. Svaret starter forfra fra første flise",
+      "brokenTitle": "Selthes stemme er brudt!",
+      "brokenLine": "Hun tager {pct}% mere skade, indtil dette slutter: brug dine stærkeste angreb nu",
+      "timeAria": "{seconds} sekunder tilbage"
+    },
     "wildheartAlert": {
       "preyTitle": "Du er byttet!",
       "preyLine": "Lok Zulgar gennem tændte solglyffer for at sænke ham, før han fanger og sønderriver dig",
@@ -7207,7 +7142,21 @@ export const da_DK: EnTranslations = {
       "pollinatedLine": "Undgå frøkapsler: berøring, mens du er bestøvet, skaber fjender. Umærkede allierede kan trampe dem ned",
       "bondTitle": "Flokbånd",
       "bondLine": "Adskil bæstmesteren og jaguaren for at fjerne deres skadesreduktion og skadebonus",
-      "timeAria": "{seconds} sekunder tilbage"
+      "timeAria": "{seconds} sekunder tilbage",
+      "preyAloneLine": "Ingen andre kan tænde solglyfferne. Stå på en slukket glyf i {seconds} sek. for at tænde den, og lok så Zulgar over den",
+      "pinnedTitle": "Fastspiddet!",
+      "pinnedLine": "En holdkammerat skal trække Jagtspyddet ud. Vildhjertets puls rammer hårdere, mens du er fastspiddet",
+      "pinnedSelfLine": "Ingen er fri til at hjælpe: træk selv Jagtspyddet ud, før Vildhjertets puls rammer",
+      "sunstruckTitle": "Zulgar er solramt!",
+      "sunstruckLine": "Han tager {pct}% mere skade, indtil dette slutter: brug dine stærkeste angreb nu",
+      "spearTitle": "En allieret er fastspiddet!",
+      "spearLine": "Løb til Jagtspyddet, og træk det ud, før Vildhjertets puls rammer",
+      "glyphTitle": "Tænd solglyfferne",
+      "glyphLine": "Stå på en slukket solglyf i {seconds} sek. for at tænde den. Når Zulgar krydser den, tager han {pct}% mere skade i {duration} sek.",
+      "glyphLightingTitle": "Tænder solglyffen",
+      "glyphLightingLine": "Bliv på glyffen, indtil den tændes. At træde væk starter forfra",
+      "breathTitle": "Idolens ånde!",
+      "breathLine": "Stenjaguaren vil ånde over denne halvdel af terrassen. Gå til den anden halvdel"
     },
     "sanctumAlert": {
       "quenchTitle": "I kølevandet!",
@@ -7296,6 +7245,13 @@ export const da_DK: EnTranslations = {
       "relightFar": "Kom inden for {range} yard for at gentænde den",
       "relightAria": "Gentænd {name}",
       "relightUsingLine": "Bliv ved med at kanalisere for at tænde lyset: det dræner helbred. Træffere afbryder ikke; bevægelse eller bedøvelse gør",
+      "freeLine": "Træk spyddet op af jorden for at befri den fastspiddede. Slag stopper dig ikke; bevægelse eller bedøvelse gør",
+      "freeKey": "Træk {name} ud",
+      "freeTap": "Tryk her for at trække {name} ud",
+      "freeClick": "Klik her for at trække {name} ud",
+      "freeFar": "Kom inden for {range} yd for at trække det ud",
+      "freeAria": "Træk {name} ud",
+      "freeUsingLine": "Stå stille for at trække spyddet ud: bevægelse eller bedøvelse stopper dig",
       "timeAria": "{seconds} sekunder tilbage"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const da_DK: EnTranslations = {
       "detach": "Tag af",
       "applied": "Anvendt",
       "owned": "Ejet",
+      "notCollected": "Ikke samlet",
       "storeOnly": "Tilgængelig i WOC-butikken",
       "preview": "Forhåndsvisning",
       "previewAria": "Forhåndsvisning {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Et ridedyrsskind tegnes over det ridedyr, denne figur rider på. Det ændrer aldrig hastigheden.",
-      "mountsNoMount": "Få først et ridedyr: et skind behøver noget at ride på.",
+      "mountsIntro": "Vælg dit ridedyrs udseende her. Ridetræning bestemmer hastigheden. Behold ridedyrsgenstanden i en vilkårlig figurs tasker eller bank for at dele udseendet på hele kontoen.",
+      "mountsNoMount": "Lær at ride hos staldmester Marla for at tilkalde et ridedyr.",
       "skinsEmpty": "Du ejer endnu ingen våbenskind. Besøg WOC-butikken.",
       "skinsApplyHint": "Udstyr en {type} for at anvende dette skind.",
       "mechIntro": "Kampmechen erstatter denne figurs krop. Én farvevariant bæres ad gangen.",
@@ -7430,6 +7387,7 @@ export const da_DK: EnTranslations = {
       "sourceActivityRiftFirstClear": "Tildeles hvert medlem af den gruppe, der vinder den første gennemførsel af en rangeret Rift",
       "sourceActivityBuriedHoard": "Fundet i belønningskisten i et Begravet skattkammer, hvælven som et skattekort fører til",
       "sourceActivityLanternHall": "Købt for lygtesegl hos Lygtehallens kvartermester",
+      "sourceActivityWeeklyVaultPvp": "Valgt fra PvP-rækken i den ugentlige hvælving",
       "cellMissingSourceAria": "{name}, endnu ikke fundet, {source}",
       "cellOwnedClearsAria": "{name}, katalogiseret, først fundet ved gennemførsel {count}",
       "searchPlaceholder": "Søg efter relikvier",
@@ -8454,6 +8412,16 @@ export const da_DK: EnTranslations = {
         "heroicCloud": "Pollensky: at stå inden for {cloudRadius} yard af en bestøvet spiller i {cloudSeconds} sek. bestøver også dig."
       },
       "zulgar": {
+        "pulseSummaryRework": "Hvert {every} sek. rammer en besværgelse med {cast} sek. kastetid alle inden for {radius} yd for {min} til {max} skade. Fastspiddede spillere tager {pinMult} gange denne skade uanset afstand.",
+        "spearSummary": "En besværgelse med {cast} sek. kastetid fastspidder en spiller, der ikke er tank, eller tanken, hvis ingen andre er tilbage. Rodfæstelsen varer op til {seconds} sek. og giver {bleed} skade hvert {tick} sek.",
+        "spearResponse": "Vælg spyddet, og interager inden for {range} yd for at trække det ud på {pull} sek. Skade afbryder ikke udtrækningen. Hvis ingen andre står frit på terrassen, kan offeret interagere og slippe fri på {self} sek.",
+        "glyphSummaryRework": "De {count} glyffer starter slukkede. Mens han jager, tænder en umarkeret spiller en ved at stå på den i {kindle} sek. Hvis ingen umarkerede spillere er tilbage, kan Byttet tænde den på {alone} sek. At træde væk nulstiller fremskridtet. Når han krydser en tændt glyf, sænkes hans fart med {slow}, og skaden, han tager, øges med {vulnerability} i {seconds} sek. Glyffen kan ikke tændes igen i {dark} sek.; han kan ikke rammes af en anden glyf i {wary} sek. Under jagten varer bedøvelser halvt så længe.",
+        "glyphResponseRework": "Umarkerede spillere tænder glyffer foran Byttet. Før ham gennem dem, og angrib under Solramt. Glyfferne slukkes, når jagten slutter.",
+        "idolSummary": "Ved {health} helbred forbliver han en jaguarånd, indtil han besejres. Tanken kan også blive Bytte.",
+        "idolHuntSummary": "Han vælger nyt Bytte hvert {every} sek. og vender sig så mod det i {turn} sek., før han jager.",
+        "idolHuntHeroicSummary": "Han markerer et nyt par hvert {pair} sek. og skifter mellem dem hvert {switch} sek. Hvert skift giver det nye Bytte {turn} sek., før han jager.",
+        "breathSummary": "Hvert {every} sek. markeres den ene halvdel af terrassen i {warning} sek., hvorefter alle i den halvdel tager {min} til {max} Naturskade. Ånden skifter mellem halvdelene.",
+        "breathResponse": "Gå til den umarkerede halvdel, før advarslen slutter. Midterlinjen er sikker. På Heroisk slukker ånden også tændte glyffer i sin halvdel; de kan tændes igen straks.",
         "overview": "Bassinets ypperstepræst. En jævn kamp med en varslet ring, indtil han bliver en jaguarånd og jager én spiller. Den jagede spiller holder ham på afstand over tændte solglyffer, som sænker ham.",
         "phaseShrineName": "Helligdommen",
         "phaseShrineSummary": "Han kæmper i nærkamp og pulserer en ring omkring sig.",
@@ -8766,6 +8734,14 @@ export const da_DK: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe bevæger sig aldrig og angriber ikke i nærkamp. Saml jer til Kor, forlad gruppen til Solo, afbryd Drukningens arie, og undvig Søbølge. Ved to helbredsgrænser skal I gentage hendes melodi på månefliserne med sangere, der skiftes.",
+        "phaseSummaryRework": "Hendes andre angreb holder pause, mens gruppen besvarer partituret. Månevandsprojektiler har ingen kastebjælke og kan ikke afbrydes.",
+        "boltSummaryRework": "Mellem andre besværgelser rammer et projektil hvert {every} sek. efter en synlig advarsel på {windup} sek. og giver Frostskade svarende til {mult} gange hendes våbenskade. Afbrydelse af Drukningens arie stopper projektiler og arien i {quiet} sek.",
+        "boltResponseRework": "Hold tanken i hendes synsfelt. Gem afbrydelser til Drukningens arie.",
+        "tipHealerRework": "Hold øje med ariens mål og alle, der fanges alene af Kor. Hjælp med at synge næste tone under partituret, og hel fejlene.",
+        "scoreSummary": "Ved {first} og {second} helbred bliver hun immun og spiller {notes}, derefter {finalNotes} toner. Gentag dem inden for {answer}, derefter {finalAnswer} sek. En forkert flise giver {falseNote} Frostskade og nulstiller fremskridtet, men ikke tiden. Udløbet tid giver {min} til {max} Frostskade til alle. Succes bedøver hende i {stun} sek. og øger skaden, hun tager, med {vulnerability} i {bonusSeconds} sek.",
+        "scoreResponse": "Se melodien, og træd så på fliserne i rækkefølge. Skift med en anden levende spiller om at spille de rigtige toner; en enlig overlevende kan afslutte alene. Blokerede trin er harmløse. Træd af og på igen for at spille en flise, også en der var optaget, før svaret begyndte.",
+        "scoreHeroic": "Under svaret bliver fliserne mørke. Husk melodien, og skift tur.",
         "overview": "Kormoderen synger fra sit bassin og hverken bevæger sig eller angriber i nærkamp. Hun mærker spillere til et delt Kor og en ensom Solo, retter en stigende arie mod én spiller og sender en bølge gennem gården. Hendes bolte og arie kan afbrydes.",
         "phaseName": "Korgården",
         "phaseSummary": "Én fase med timere. En mekanik, som bliver klar under en besværgelse, venter, til den slutter.",
@@ -9678,7 +9654,7 @@ export const da_DK: EnTranslations = {
       "graveyard": "Hvor din ånd ville vende tilbage til, hvis du faldt her.",
       "dungeons": "Hver fangekælder med den zone, dens dør sidder i, og den gruppestørrelse, den er bygget til, samt den sværhedsgrad, du er indstillet til nu.",
       "dungeonMode": "Skift dine fangekældre mellem normal og heroisk sværhedsgrad.",
-      "dungeonReset": "Opgiv dine egne tomme instanser, hvilket er det, du gør efter at have skiftet sværhedsgrad.",
+      "dungeonReset": "Opgiv dine egne tomme instanser, så næste tur starter forfra på samme eller en ny sværhedsgrad.",
       "groupRecovery": "Genopretning og tilstedeværelse",
       "unstuck": "Vejen ud, når verden har fanget dig. Stå stille gennem en kort nedtælling, så bliver du flyttet til den nærmeste kirkegård, og genoplivet der, hvis du allerede var faldet. Den efterlader dig svækket af Frigørelsessyge et stykke tid bagefter, så det er en sidste udvej snarere end en genvej.",
       "unstuckWindow": "Vejen ud når verden har fanget dig. Stå stille gennem en kort nedtælling og du bliver flyttet til nærmeste kirkegård og rejst der, hvis du allerede var faldet. Den første brug på en time er gratis. Brug det igen inden for en time efter den seneste og det efterlader dig svækket af Fastfrosset Sygdom i et stykke tid derefter, så det er en redning snarere end en genvej.",
@@ -10105,27 +10081,27 @@ export const da_DK: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Ridedyr og ridning",
-      "intro": "Et ridedyr er en hurtigere måde at komme rundt i verden på, og det er alt, det er. Du lærer at ride ved staldene, køber dit første sæt tøjler, og enhver vej derefter er kortere.",
+      "intro": "Vælg et ridedyrsudseende, lær at ride i stalden, og rejs hurtigere gennem verden. Din træning bestemmer farten; alle ridedyrsudseender er kosmetiske.",
       "whatHeading": "Hvad et ridedyr er",
-      "whatBody": "Et ridedyr er et dyr, du rider på, og det, det giver dig, er fart. Ingen rustning, ingen skade, ingen egenskaber: det bærer dig hen over jorden hurtigere og springer en anelse højere, når du hopper, og det er hele handlen. Ethvert ridedyr i spillet er et landridedyr, så der er ingen flyvning, og ingen af dem svømmer.",
+      "whatBody": "Ridedyr er kosmetiske udseender til din trænede ridning. De giver ingen rustning, skade eller kampstatistik. Ridetræning øger rejsehastigheden på land, og spring til hest klarer større højder. Alle ridedyr bliver på jorden, og ingen kan svømme.",
       "learnHeading": "At lære at ride",
-      "learnBody": "Ridning er en færdighed, du køber én gang, og den åbner ved niveau {level}. Marla Hitchen, staldmesteren, holder til på Stormkammens Stalde ude på bakkerne, og hun sælger Ridetræning for 80 guld. Det ene køb er, hvad der overhovedet lader dig sidde på et ridedyr, og det følger dig for altid.\n\nNår du har det, har Marla et opdrag til dig: Ridelektioner. Tag det, følg markøren til det glødende felt bag startbuen, og tryk Start Løb. Hun låner dig en trænings-Valorsteed til lektionen, så selve lektionen koster dig intet. Rid banen, gennemfør den, og gå tilbage til hende for dine mønter og din erfaring. Det lånte dyr går tilbage i stalden bagefter, så lektionen lærer dig sædet snarere end at give dig en hest.",
+      "learnBody": "Ridning åbnes på niveau {level}. Staldmester Marla Hitchen sælger Ridetræning for 80 guld i Galecrest-staldene. Grundtræningen giver {basicSpeed}% hurtigere bevægelse til hest. Når du har lært den, sælger Marla også Avanceret ridetræning for {advancedFee} guld, så bevægelsen til hest bliver {advancedSpeed}% hurtigere. Hver rang tilhører den figur, der lærer den.\n\nEfter grundtræningen tager du Marlas opgave Ridelektioner og følger markøren til den lysende firkant bag startbuen. Tryk på Start løb for at låne træningens Modganger. Gennemfør banen, og vend tilbage efter mønter og erfaring. Lånehesten vender tilbage til stalden, når lektionen slutter.",
       "whereHeading": "Hvor du finder hende",
       "whereBody": "Stormkammens Stalde er markeret på kortet over Stormkammen, ude på bakkerne mellem Klippeskæret og Vragmarkerne. Marla står ved siden af laden med front mod løbsbanen.",
       "firstHeading": "Dit første ridedyr",
-      "firstBody": "Valorsteed er det eneste ridedyr, der sælges noget sted i verden. Når du har lært Ridning, sælger Marla dig Tøjler til Valorsteed for 10 guld, og de tøjler er dine at beholde. Ethvert andet ridedyr optjenes ude i verden, så hesten er, hvor næsten enhver rytter starter.",
+      "firstBody": "Marla sælger Modgangers tøjler for 10 guld, når du har lært at ride. At have tøjlerne låser hesteudseendet op i Kosmetik for alle figurer på din konto. Ridetræningen lader dig allerede tilkalde et ridedyr uden at bære tøjler, så vælg hesten eller et andet ejet udseende, når du vil skifte stil.",
       "rideHeading": "At stige op og stige af",
-      "rideBody": "Der er intet ridedyrsvindue og ingen favorit at indstille, for tøjlerne ER ridedyret. Brug et sæt tøjler fra dine tasker eller fra en handlingsbjælkeplads, og du rider det ridedyr. At tilkalde tager et øjeblik, et kort kald snarere end et øjeblikkeligt, så det redder dig ikke fra et dårligt træk. At stige af er øjeblikkeligt og aldrig blokeret.\n\nBrug de tøjler, du allerede rider på, og du sætter det ridedyr væk igen. Brug et andet sæt, mens du er monteret, og du skifter direkte til det, uden noget at tilkalde imellem. Tasten Stig op / Stig af, som standard tasten med accent grave, gør kun én ting: den sætter dig af. Den er vejen ned, ikke vejen op. Den ene undtagelse er ridelektionen, hvor den samme tast tilkalder det dyr, Marla låner dig, da en lånt hest ikke har tøjler at klikke på. På en telefon eller tablet virker Ridedyr-knappen i Mere-bakken begge veje, selvom den tilkalder det første sæt tøjler i dine tasker snarere end et, du selv vælger, så tryk på selve tøjlerne, når du vil have et bestemt ridedyr.",
+      "rideBody": "Åbn Kosmetik, og vælg et udseende på fanen Ridedyr. Tasten Stig op / Stig af, som normalt er tasten for grav accent, tilkalder dit trænede ridedyr med det udseende. Knappen Ridedyr på mobilen gør det samme. Tilkaldelse kræver en kort kanalisering; afstigning er øjeblikkelig. Du kan skifte udseende, mens du rider, uden at ændre hastigheden.\n\nDu kan også bruge tøjler fra taskerne eller en handlingsbjælke til at vælge udseendet og tilkalde. Brug af det udseende, du allerede rider på, fjerner ridedyret. Tøjler i banken eller på andre figurer låser samme kosmetik op, uden at rytteren skal bære dem.",
       "breaksHeading": "Det, der sætter dig af igen",
       "breaksBody": "Vandet vinder altid. Rider du ud i noget, der er dybt nok til at svømme i, bliver du sat af på stedet, for intet landridedyr svømmer, og dør du, falder du af, dér hvor du falder. Du kan ikke tilkalde et ridedyr, mens du er i kamp, mens du er død eller på vej tilbage som ånd, eller på noget tidspunkt under en kamp i Tornehulemarkerne, som udkæmpes til fods fra opstillingen til den sidste dyst: sad du på et ridedyr, mens du ventede, sætter selve indsætningen i kampen dig af sammen med det. Går du i kamp eller ud i vand midt i en tilkaldelse, annullerer det også tilkaldelsen.\n\nDet meste af det, du foretager dig, sætter dig også af. At svinge efter noget, at begynde en besværgelse, at høste en ressourcekilde, at fiske, at fremstille, at fortrylle, at nedbryde og at genoplade et professionsværktøj sætter dig alle af i samme øjeblik, du begynder, så regn med at hoppe af ved hver eneste åre. At tilkalde et ridedyr afbryder også enhver formskifteform, du er i: du er aldrig både formskiftet og ridende på samme tid.",
-      "speedHeading": "Fart og trin",
-      "speedBody": "Fart er det eneste, der skiller ét ridedyr fra et andet. Valorsteed, du køber af Marla, sætter grundtempoet, og de ridedyr, du samler ude i verden, ligger over det: jo sjældnere tøjlerne, desto hurtigere ridet, i nogle få tydelige trin snarere end en jævn glidning. Der er intet andet ridetrin at træne og ingen opgradering at købe bagefter. Du betaler for Ridning én gang, og derfra afgør de tøjler, du bruger, hvor hurtigt du rejser.",
+      "speedHeading": "Ridehastighed og træning",
+      "speedBody": "Grundlæggende ridetræning giver {basicSpeed}% hurtigere bevægelse til hest. Avanceret ridetræning giver {advancedSpeed}% hurtigere bevægelse til hest og koster {advancedFee} guld hos Marla. Alle ridedyrsudseender bruger samme hastighed for figurens træningsrang, uanset sjældenhed eller kilde. Butiksskins bruger også denne trænede hastighed.",
       "collectHeading": "Hvor de sjældnere ridedyr kommer fra",
       "collectBody": "Ud over Marlas disk findes tøjler snarere end købes. De falder fra de sidste bosser i fangehullerne for fem spillere og raidet på heroisk, og fra Rift-rydninger, hvor jo hårdere den Rift, du fuldfører, desto sjældnere de tøjler, den kan efterlade. De er sjældne fund med vilje, og ingen tur lover én, så den skånsomme måde at jage et ridedyr på er at tage jagten med på de ture, du alligevel skulle på. Denne side fortæller dig ikke, hvilket ridedyr der hænger på hvilken boss: den del må du selv finde ud af.",
       "raceHeading": "Staldenes løb",
       "raceBody": "Spring-banen i Marlas fold er åben for enhver, når som helst, ikke kun under lektionen. Sæt dig på et ridedyr, stå på det glødende felt bag buen, og tryk Start Løb. En nedtælling holder dig stille, så løber uret: ryd alle syv spring, og rid tilbage ud gennem buen, før tiden løber ud.\n\nEt spring tæller kun, hvis du reelt er i luften over bommen, så en let gennemridning rydder ingenting. Du må tage dem i en hvilken som helst rækkefølge og fra begge sider, og et forbigået spring er ikke verdens undergang: vend om, og tag det igen. At dø, stige af eller forlade folden afslutter forsøget, og det samme gør at lade uret løbe ud, hvilket sætter dig af sadlen, dér hvor du står; annullerer du det selv, stopper det blot uret. Intet forhindrer dig i at starte et nyt. Der er intet gebyr, ingen nedkølingstid og ingen præmie ud over selve tiden, og et vilkårligt antal ryttere kan gennemføre banen samtidig uden at komme i vejen for hinanden.",
       "goodsHeading": "Tøjler er almindelige varer",
-      "goodsBody": "Et ridedyr er en genstand, hvilket gør det til noget, økonomien kan flytte rundt på. Du ejer et ridedyr, så længe dets tøjler ligger i dine tasker eller din bank, selvom tøjler i banken holder ridedyret dit uden at lade dig ride det: for at tilkalde dyret skal du bære tøjlerne på dig. Spillertøjler bærer ingen sjælebinding, så de handles, rejser med posten og kan sættes til salg på Verdensmarkedet som ethvert andet fund, medmindre selve genstanden siger andet. To ting er værd at vide, før du skiller dig af med et sæt: ingen handlende køber nogensinde et sæt tøjler tilbage, så et ridedyr er et køb, du beholder eller giver videre snarere end veksler til mønt, og forlader tøjlerne både dine tasker og din bank, mens du rider, handlet væk, sendt med posten eller solgt på markedet, følger ridedyret med, og du bliver sat af, dér hvor du står."
+      "goodsBody": "Samlede ridedyrsudseender er tilgængelige på hele kontoen, så længe mindst én tilsvarende tøjlegenstand findes i en vilkårlig figurs tasker eller personlige bank. Hvis den sidste gyldige genstand byttes, sendes, udbydes, sælges eller på anden måde fjernes, forsvinder udseendet fra Kosmetik. En rytter, der bruger det, skifter til standardhestens udseende og forbliver til hest med sin trænede hastighed.\n\nSpillertøjler kan byttes, sendes med post og udbydes på Verdensmarkedet, medmindre genstanden siger andet. Hestens tøjler kan også sælges til en købmand for 10 guld. Andre tøjler beholder deres egne begrænsninger for salg. Ridedyrsskins fra butikken forbliver kontokosmetik uafhængigt af tøjlegenstande."
     },
     "worldPage": {
       "heading": "Verdenen",
@@ -10300,7 +10276,7 @@ export const da_DK: EnTranslations = {
       "heroicRewardsBody": "Heroiske bosser taber det bytte, du kender, opgraderet og mærket Heroisk i værktøjstippet, og hver turs slutboss lægger episke genstande til, som ikke findes andre steder. Det sidste drab efterlader også Heroiske Mærker til hver deltager: en valuta, der bruges hos kvartermester Vex i Highwatch, hvis disk er en hylde med ringe og vedhæng, som intet andet end beviset fra de heroiske dybder kan købe.",
       "heroicLockoutBody": "Almindelige fangekældre kan løbes hele dagen. Heroisk kræver tålmodighed: slutbossens fald begrænser alle på turen til én heroisk gennemførelse af den fangekælder om dagen, og raidet holder en daglig spærring for hver sværhedsgrad. På et levende rige falder alle daglige spærringer sammen ved rigets egen natlige nulstillingstime, så en gennemførelse taget lige før den time og en taget lige efter falder på to forskellige dage; spil i stedet offline i din browser, og en spærring udløber ganske enkelt et døgn efter dit eget drab. En allerede gennemført tur for fem spillere står stadig åben for gruppen selv til ligløb og bytte, så ingen bliver låst ude fra det, de tjente derinde. Raidet er strengere: når dets drab først har spærret dig, står døren lukket til nulstillingen, og den eneste vej tilbage ind er et ligløb af en, der faldt netop i den tur, som spærrede dem, så en levende raider, der går ud, er gået ud for dagen. Saml dit bytte, før du forlader arenaen. Hver af disse spærringer tilhører den figur, der tjente den, så en gennemførelse på din hovedfigur lader dine andre figurer være frie.",
       "resetTitle": "Nulstilling af dine instanser",
-      "resetBody": "Skift sværhedsgrad, mens din gruppe stadig holder ture, den har gjort krav på, og de gamle krav bliver hængende et stykke tid, før de slipper af sig selv. Gruppelederen kan slippe dem på én gang i stedet: vælg Nulstil alle instanser i menuen for eget portræt, eller skriv /dungeon reset. En nulstilling virker først, efter sværhedsgraden faktisk er ændret, kun så længe ingen, levende eller faldne, er tilbage derinde, kun når hvert lig derinde er plyndret rent, og en kort nedkølingstid adskiller den ene nulstilling fra den næste. Kommer I til døren med den forkerte sværhedsgrad, siger spillet det, før turen begynder. Raidet nulstilles aldrig sådan; dets egne spærreregler står ved magt.",
+      "resetBody": "Tomme instanser, der er gjort krav på, bliver hængende en stund, før de frigives automatisk. Gruppelederen kan frigive dem straks: vælg Nulstil alle instanser i menuen for eget portræt, eller skriv /dungeon reset, så starter næste tur forfra på den aktuelle sværhedsgrad. Et skift i sværhedsgrad gør det samme for instanser på den gamle sværhedsgrad. En nulstilling virker kun, når ingen, levende eller faldne, er tilbage inde, og hvert lig er plyndret helt. Den forkorter aldrig en låsning: en låst Heroisk instans eller raid forbliver låst indtil sin nulstilling, og en kort nedkøling adskiller nulstillingerne. Kommer I til døren på forkert sværhedsgrad, siger spillet til, før turen starter. Raidet nulstilles på samme måde, mens dets egne regler for låsning og tilbagevenden til lig stadig gælder. Et raid, der skifter sværhedsgrad, springer nedkølingen over: valgte raidet forkert niveau, eller kunne det ikke klare Heroisk, kan det straks skifte tilbage, da dets egen låsning begrænser gentagne ture.",
       "templeLoreTitle": "Det Druknede Tempel, en smule dybere",
       "templeLoreBody": "Templet har sit eget sagn, ældre end den kult, du jagter andetsteds. På bredden af Glimmertjernet, en tjern der drikker måneskinnet og giver de druknede tilbage, holder en ensom vogter en port af blegt lys. Under overfladen løber en trappe af kold sten ned til den. De folk, der sank dér, druknede ikke ved et uheld: de var Det Blege Kor, der gik under i tilbedelse og aldrig holdt op med at synge. De gamle vogtere ridsede en enkelt advarsel i klipperne, før vandet tog dem, en bøn til noget, de kaldte Den Druknede Måne, med en mere fast hånd, der tilføjede to ord nedenunder: den sover blot.",
       "cryptLeadTitle": "En dør, de døde skulle holde lukket",
@@ -11280,7 +11256,7 @@ export const da_DK: EnTranslations = {
       "prestigeBody": "Erfaring tæller stadig, selv efter loftet. Den fodrer et kosmetisk virtuelt niveau, så din erfaringsbjælke bliver ved med at stige, og en langsigtet prestigerang, du kan optjene fra dit karakterark, når du først er der. At passere store milepæle for samlet livstidserfaring optjener også bedrifter i din Bedrifternes Bog, med kosmetiske titler og navneskiltskanter, der vises på dit karakterark. Det hele er rent valgfrit og giver aldrig magt, blot et mærke for den vej, du har vandret.",
       "noRush": "Der er ingen hast. Verden er der til at nyde i dit eget tempo, så vandr omkring, tag de opdrag der fanger dit blik, og lad din helt vokse undervejs.",
       "ridingTitle": "At lære at ride",
-      "ridingBody": "Ridning er en af de ting, der venter for enden af opstigningen. Ved niveau {level} lærer en staldmester dig færdigheden for en solid sum guld, og en lektion ude på træningsbanen giver dig dit første sæt tøjler. Et ridedyr giver ingen magt overhovedet; det gør blot verden mindre, hvilket efter en lang vandring mod nord er sin egen slags belønning."
+      "ridingBody": "På niveau {level} lærer staldmester Marla dig grundlæggende ridning for guld og tilbyder derefter en avanceret rang. Træning bestemmer hastigheden til hest. Vælg dit ridedyrsudseende i Kosmetik; samlede udseender deles, så længe tøjlerne ligger i en vilkårlig figurs tasker eller bank."
     },
     "placeholder": {
       "note": "Denne del af guiden er på vej."
@@ -16384,6 +16360,8 @@ export const da_DK: EnTranslations = {
       "temple_moonwater_bolt": "Månevandsbolt",
       "temple_drowning_aria": "Drukningens arie",
       "temple_mere_surge": "Søbølge",
+      "temple_score": "Partituret",
+      "temple_score_answer": "Besvar partituret",
       "temple_tideglass_fracture": "Tidevandsglassets brud",
       "temple_undertow": "Understrøm",
       "temple_lunar_tide": "Månetidevand",
@@ -16421,6 +16399,12 @@ export const da_DK: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Fråds",
       "wildheart_zulgar_pulse": "Vildhjertets puls",
       "wildheart_zulgar_spirit_hunt": "Jagtens ånd",
+      "wildheart_zulgar_hunting_spear": "Jagtspyd",
+      "wildheart_zulgar_idol_wakes": "Idolet vågner",
+      "kituse_wildheart_pull_spear": "Træk spyddet ud",
+      "wildheart_idols_breath": "Idolens ånde",
+      "wildheart_sun_glyph_kindle": "Tændes",
+      "wildheart_sun_glyph_cold": "Køler af",
       "sanctum_cinder_breath": "Glødeånde",
       "sanctum_warming_rite": "Varmende ritual",
       "sanctum_goad": "Driv frem",
@@ -17053,6 +17037,9 @@ export const da_DK: EnTranslations = {
       "levelClass": "Niveau {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Ridetræning",
+      "advancedRiding": "Avanceret ridetræning",
+      "ridingSpeed": "Øger din bevægelseshastighed til hest med {speed}%. Gælder alle ridedyr.",
       "goodsTitle": "{name}: Varer",
       "close": "Luk købmand",
       "hint": "Klik på en genstand i dine tasker for at sælge den, mens dette vindue er åbent.",
@@ -17263,7 +17250,8 @@ export const da_DK: EnTranslations = {
       "tooManyOrders": "Du kan holde højst {count} ordrer åbne på én gang.",
       "orderClosed": "Den ordre er ikke længere åben.",
       "orderOwn": "Det er din egen ordre. Annuller den for at trække den tilbage.",
-      "orderNotYours": "Det er ikke din ordre."
+      "orderNotYours": "Det er ikke din ordre.",
+      "orderTrackedItem": "Købmanden tager ikke imod bestillinger på unikt udstyr."
     },
     "loot": {
       "takeAll": "Tag alt",
@@ -21189,117 +21177,6 @@ export const da_DK: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Hvilesten"
-      },
-      "whistle_ember_fox": {
-        "name": "Gløderævens fløjte"
-      },
-      "whistle_moss_hare": {
-        "name": "Mosharens fløjte"
-      },
-      "whistle_frog": {
-        "name": "Frøfløjte"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Karmesinkrabbens fløjte"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Den gyldne vogters fløjte"
-      },
-      "whistle_nightfang": {
-        "name": "Nattandens fløjte"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Stødhornsvinets fløjte"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Smaragdulvens fløjte"
-      },
-      "whistle_tiger": {
-        "name": "Tigerfløjte"
-      },
-      "whistle_cate_coin": {
-        "name": "Møntkattens fløjte"
-      },
-      "whistle_alon": {
-        "name": "Fløjte til Alon"
-      },
-      "whistle_trollface": {
-        "name": "Troldeansigtets fløjte"
-      },
-      "whistle_ansem": {
-        "name": "Fløjte til Ansem"
-      },
-      "whistle_triple_t": {
-        "name": "Trippel-Ts fløjte"
-      },
-      "whistle_kekius": {
-        "name": "Fløjte til Kekius"
-      },
-      "whistle_solbot": {
-        "name": "Solbottens fløjte"
-      },
-      "whistle_frostfire": {
-        "name": "Frostildens fløjte"
-      },
-      "whistle_rocky": {
-        "name": "Stenklumps fløjte"
-      },
-      "whistle_proud_grunt": {
-        "name": "Den stolte soldats fløjte"
-      },
-      "whistle_loot_goblin": {
-        "name": "Byttegoblinens fløjte"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Penny Guldgnists fløjte"
-      },
-      "whistle_stag": {
-        "name": "Hjortefløjte"
-      },
-      "whistle_alpaca": {
-        "name": "Alpakafløjte"
-      },
-      "whistle_horse": {
-        "name": "Hestefløjte"
-      },
-      "whistle_sapling": {
-        "name": "Træspirens fløjte"
-      },
-      "whistle_bull": {
-        "name": "Tyrefløjte"
-      },
-      "whistle_spider": {
-        "name": "Edderkoppefløjte"
-      },
-      "whistle_raptor": {
-        "name": "Raptorfløjte"
-      },
-      "whistle_skeleton": {
-        "name": "Skeletfløjte"
-      },
-      "whistle_crystal_lich": {
-        "name": "Krystallichens fløjte"
-      },
-      "whistle_forgemaw": {
-        "name": "Fløjte til Smeltekæben"
-      },
-      "whistle_sprites": {
-        "name": "Flimmer og Glimmers fløjte"
-      },
-      "whistle_crystal_tide": {
-        "name": "Krystaltidevandets fløjte"
-      },
-      "whistle_phantom": {
-        "name": "Spøgelsesfløjte"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Glødefaldsføniksens fløjte"
-      },
-      "charm_stag_acorn": {
-        "name": "Agernkransens amulet"
-      },
-      "charm_stag_gilded": {
-        "name": "Forgyldt amulet"
       },
       "lastflame_core": {
         "name": "Den sidste flammes kerne"
@@ -26340,6 +26217,9 @@ export const da_DK: EnTranslations = {
       "thorn_sprout": {
         "name": "Tornespire"
       },
+      "wildheart_hunting_spear": {
+        "name": "Jagtspyd"
+      },
       "buddy_ember_fox": {
         "name": "Gløderæv"
       },
@@ -26414,9 +26294,6 @@ export const da_DK: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Træk, stridshesten"
-      },
-      "buddy_sapling": {
-        "name": "Træspire"
       },
       "buddy_bull": {
         "name": "Tyr"

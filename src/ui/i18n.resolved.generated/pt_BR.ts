@@ -475,9 +475,24 @@ export const pt_BR: EnTranslations = {
       "returning": "Trazendo seus itens de volta",
       "waiting": "Esperando para devolver seus itens",
       "bags": "Enviar ao banco",
+      "bagsVault": "Enviar materiais ao depósito",
       "bank": "Trazer do banco",
+      "vault": "Trazer do depósito. Cada seleção traz a linha inteira.",
       "inventory": "Inventário",
       "bankTitle": "Banco",
+      "vaultTitle": "Depósito de Materiais",
+      "storeTabs": "Armazenamento do mensageiro",
+      "vaultCap": "Guarda {cap} de cada material",
+      "vaultEmpty": "Seu depósito está vazio.",
+      "vaultLocked": "Desbloqueie o Depósito de Materiais em um banqueiro para usá-lo com seu mensageiro.",
+      "boundBank": "Indo ao banco",
+      "boundVault": "Indo ao Depósito de Materiais",
+      "boundAccount": "Indo ao banco de outro personagem",
+      "accountTitle": "Outros personagens",
+      "accountBank": "Trazer deste banco. O personagem deve estar desconectado quando o mensageiro chegar.",
+      "bagsAccount": "Enviar ao banco de {name}",
+      "bagsAccountNone": "Escolha um personagem para receber os itens.",
+      "accountPlanned": "Planejado para {name}: {count} pilhas. Escolher outro personagem substitui essas pilhas.",
       "capacity": "{used} / {capacity} espaços",
       "cargo": "Inventário do mensageiro",
       "empty": "Sem itens",
@@ -485,7 +500,7 @@ export const pt_BR: EnTranslations = {
       "selected": "{count} / {limit} pilhas selecionadas",
       "select": "Selecionar {item}, {count}",
       "selectedItem": "Desmarcar {item}, {count}",
-      "instructions": "Selecione pilhas inteiras. Seu mensageiro deposita primeiro e depois coleta os itens solicitados. Itens de missão não podem ser enviados.",
+      "instructions": "Selecione pilhas inteiras para seu banco, o Depósito de Materiais ou outro personagem. Seu mensageiro deposita tudo primeiro e depois coleta os itens solicitados. Itens de missão não podem ser enviados.",
       "membership": "Renove sua assinatura para iniciar outra viagem.",
       "cargoSafe": "Itens devolvidos transbordam as bolsas cheias. O mensageiro desaparece após entregar até ser invocado de novo.",
       "unavailable": "Invoque seu mensageiro para planejar uma entrega."
@@ -862,7 +877,7 @@ export const pt_BR: EnTranslations = {
       "titleOffer": "Título: {title}",
       "titlePreview": "Exibido como {preview}",
       "mountOffer": "Montaria: {mount}",
-      "mountPreview": "Montaria terrestre: +{pct}% de velocidade de movimento ao montar. Requer treinamento de montaria.",
+      "mountPreview": "Aparência de montaria para todos os personagens da conta. Seu treinamento de montaria define a velocidade.",
       "skinOffer": "Aparência de espada: {skin}",
       "skinPreview": "Muda a aparência da espada equipada em todos os personagens da conta. Apenas aparência: sem atributos.",
       "buy": "Comprar",
@@ -2538,7 +2553,7 @@ export const pt_BR: EnTranslations = {
       "riding": "Montado",
       "mount": "Montar",
       "dismount": "Desmontar",
-      "useToRide": "Use para invocar esta montaria.",
+      "useToRide": "Use para vestir esta aparência e invocar sua montaria. Mantenha este item nas bolsas ou no banco de qualquer personagem para compartilhar a aparência pela conta. O treinamento de montaria determina a velocidade.",
       "emptyTitle": "Nenhuma montaria coletada",
       "emptyStableHint": "Alcance o nível 20 e faça aulas de montaria com a Cavalariça-mor Marla nos estábulos a oeste de Highwatch.",
       "emptyDropHint": "Montarias mais raras caem de chefes de masmorra e raide.",
@@ -2568,9 +2583,9 @@ export const pt_BR: EnTranslations = {
       "name_rickshaw_mount": "Riquixá de Ossos Vinculados",
       "name_wobbles_slime": "Balanço, o Limo",
       "name_nightwing_chimera": "Quimera de Asa Noturna",
-      "desc_valorsteed": "Um corcel resistente e de passo firme que aumenta a velocidade de viagem.",
-      "desc_grag_bear": "Um urso resistente e de passo firme que aumenta a velocidade de viagem.",
-      "desc_stalkglider_snail": "Um caracol valente e de queima lenta que aumenta a velocidade de viagem.",
+      "desc_valorsteed": "Um corcel resistente de passos firmes com uma sela de couro.",
+      "desc_grag_bear": "Um urso resistente de passos firmes com uma sela pesada.",
+      "desc_stalkglider_snail": "Um caracol robusto de ritmo tranquilo com uma concha musgosa.",
       "desc_aether_hover_cycle": "Uma poderosa moto magitec projetada para travessias de combate rápidas e rente ao chão.",
       "desc_shadowjump_toad": "Um sapo gigante, maciço e de passo firme, treinado em saltos sombrios relâmpago por qualquer terreno.",
       "desc_stormfeather_griffin": "Um grifo da tempestade majestoso que ronda o chão sobre garras rúnicas, asas recolhidas.",
@@ -2593,7 +2608,7 @@ export const pt_BR: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Pressione {key} para montar no Valorsteed de treinamento.",
-      "ownedMountPrompt": "Suas rédeas estão em suas bolsas. Use-as para montar.",
+      "ownedMountPrompt": "Escolha sua montaria em Cosméticos. Use Montar / Desmontar para cavalgar.",
       "ridePrompt": "Siga o marcador luminoso até a linha de partida, depois pressione Iniciar Corrida.",
       "begin": "Iniciar Lição",
       "success": "Você domou o Valorsteed.",
@@ -2864,6 +2879,10 @@ export const pt_BR: EnTranslations = {
       "actionCamShoulderLeft": "Esquerda {pct}",
       "actionCamShoulderRight": "Direita {pct}",
       "actionCamShoulderCenter": "Centro",
+      "firstPersonMode": "Primeira pessoa (zoom máximo)",
+      "firstPersonOff": "Desativado",
+      "firstPersonBody": "Mostrar corpo",
+      "firstPersonNoBody": "Sem corpo",
       "showAttackButton": "Exibir Botão de Ataque",
       "showDailyRewardsChest": "Mostrar Baú de Recompensas Diárias",
       "mobileCameraJoystick": "Joystick da câmera",
@@ -3826,6 +3845,12 @@ export const pt_BR: EnTranslations = {
       "linkHint": "Shift-clique para vincular este item no chat."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} transferência anterior não é exibida.",
+        "few": "{count} transferências anteriores não são exibidas.",
+        "many": "{count} transferências anteriores não são exibidas.",
+        "other": "{count} transferências anteriores não são exibidas."
+      },
       "guildBoardShown": {
         "one": "{count} guilda mostrada",
         "few": "{count} guildas mostradas",
@@ -4278,6 +4303,8 @@ export const pt_BR: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Definir Dificuldade da Masmorra: Heroico",
       "setNormal": "Definir Dificuldade da Masmorra: Normal",
+      "unappliedNormal": "Heroico selecionado. As instâncias atuais continuam no Normal.",
+      "unappliedHeroic": "Normal selecionado. As instâncias atuais continuam no Heroico.",
       "resetAll": "Redefinir todas as instâncias",
       "resetDone": "Todas as instâncias foram redefinidas.",
       "resetNone": "Você não tem instâncias para redefinir.",
@@ -4287,10 +4314,11 @@ export const pt_BR: EnTranslations = {
       "resetSameDifficulty": "Altere a dificuldade da masmorra antes de redefinir estas instâncias. Instâncias vazias são redefinidas automaticamente após 5 minutos.",
       "resetLoot": "Você não pode redefinir instâncias enquanto houver saque dentro delas.",
       "resetConfirmTitle": "Redefinir todas as instâncias?",
-      "resetConfirmBody": "Isso abandona as instâncias vazias da dificuldade selecionada anteriormente. Saques não coletados impedirão a redefinição.",
+      "resetConfirmBody": "Isso abandona suas instâncias vazias para que a próxima tentativa comece do zero na dificuldade selecionada. Os bloqueios não mudam. Qualquer jogador ainda dentro ou saque não recolhido impede a redefinição.",
       "resetConfirm": "Redefinir instâncias",
       "resetCooldown": "As instâncias só podem ser redefinidas uma vez a cada 5 minutos.",
-      "resetUsage": "Use /dungeon reset para abandonar suas instâncias vazias após alterar a dificuldade.",
+      "resetAlreadyFresh": "Suas instâncias já estão novas. Ninguém entrou nelas desde a última redefinição.",
+      "resetUsage": "Use /dungeon reset para abandonar suas instâncias vazias e começá-las do zero.",
       "entryMismatchNormal": "Esta instância está definida na dificuldade Normal. Use Redefinir todas as instâncias para iniciar uma nova sessão Heroica.",
       "entryMismatchHeroic": "Esta instância está definida na dificuldade Heroica. Use Redefinir todas as instâncias para iniciar uma nova sessão Normal."
     },
@@ -4623,7 +4651,17 @@ export const pt_BR: EnTranslations = {
         "pollinated": "Tocar uma vagem de sementes faz um Broto Espinhoso nascer imediatamente. Evite as sementes e deixe um jogador sem pólen pisá-las; uma vagem intocada brota após {seconds} s (no heroico, enterra-se após {heroic} s e emerge ao lado do jogador mais próximo).",
         "prey": "Zulgar caça você. Leve-o por um glifo solar aceso para reduzir a velocidade dele em {slow}%. Se alcançar você, causa Dilacerado por {damage} de dano ({heroic} no heroico) e derruba por {stun} s.",
         "avatar": "Move-se {pct}% mais rápido e caça sua Presa. Lentidões e raízes funcionam, e atordoamentos duram metade do tempo.",
-        "vanished": "Oculto e imune a dano. Está prestes a saltar sobre o jogador mais distante."
+        "vanished": "Oculto e imune a dano. Está prestes a saltar sobre o jogador mais distante.",
+        "sunstruck": "Atingido por um glifo solar aceso: move-se {pct}% mais devagar.",
+        "sunstruckExposed": "Atingido por um glifo solar aceso: recebe {pct}% a mais de dano.",
+        "sunWary": "Nenhum glifo solar pode atingi-lo até isto terminar. Um glifo aceso que ele cruzar continua aceso.",
+        "pinned": "Uma Lança de caça prende você. Você sangra, recebendo {bleed} de dano Físico ({heroicBleed} no Heroico) a cada {every} s, e Pulso do Coração Selvagem atinge você em qualquer lugar com {pulse}% a mais de dano. Um aliado pode puxar a lança em {pull} s. Se ninguém mais estiver livre, puxe-a em {wrench} s. Ela se solta após {seconds} s.",
+        "idolAwake": "O jaguar de pedra está desperto. A cada {every} s, ele sopra sobre uma metade do terraço e depois a outra, após um aviso de {warning} s no chão: de {min} a {max} de dano de Natureza ({heroicMin} a {heroicMax} no Heroico) a todos naquela metade. Zulgar permanece como Avatar do Jaguar até morrer e escolhe nova Presa a cada {seconds} s ({heroicSeconds} s no Heroico)."
+      },
+      "temple": {
+        "scoreWard": "Cantando a partitura: ela não recebe dano até terminar. Pise nos pisos lunares na ordem em que soaram antes do fim do verso para quebrar a voz dela. Alternem as vezes: após uma nota, espere outro jogador tocar a próxima nota correta. O único sobrevivente pode terminar sozinho. Se o verso acabar antes, Discórdia causa de {min} a {max} de dano de Gelo ({heroicMin} a {heroicMax} no Heroico) a todos no pátio.",
+        "brokenVoice": "A voz dela está quebrada: ela recebe {pct}% a mais de dano até isto terminar.",
+        "spentVoice": "Você não pode soar outro piso lunar até outro jogador tocar a próxima nota correta. Pisar em um piso durante este efeito não reinicia a resposta nem causa dano a você. Não pode ser dissipado. Removido quando você é o único jogador vivo na instância ou a partitura termina."
       },
       "bastion": {
         "brineColumn": "Enraizado em uma coluna de água do mar: você recebe de {min} a {max} de dano de Natureza a cada {tick} s por até {seconds} s. Interrompa ou atordoe o Acólito das Marés para romper.",
@@ -5256,6 +5294,9 @@ export const pt_BR: EnTranslations = {
       "partyTradeWindow": "Você pode negociar este item com jogadores que compartilharam esse saque pelos próximos {time}. Equipá-lo encerra a janela de troca.",
       "perfectedBadge": "Aperfeiçoado",
       "perfectingRank": "Aperfeiçoamento: ranque {rank} de {ranks}",
+      "lootedBy": "Saqueado por {name} em {date}",
+      "questRewardTo": "Recompensa de missão para {name} em {date}",
+      "obtainedBy": "Obtido por {name} em {date}",
       "materialSourceGatherer": "{count} × Coletado por {name}",
       "trophySkullSource": "{count} × Obtido de {name}",
       "materialSourceGathererSigned": "{count} × Coletado por {name}, assinado por {signer}",
@@ -5799,14 +5840,8 @@ export const pt_BR: EnTranslations = {
       "logAdminPurge": "Um administrador removeu {count} {item}"
     },
     "collections": {
-      "title": "Caçada",
-      "close": "Fechar caçada",
-      "keybindLabel": "Caçada",
-      "launcherTitle": "Caçada: companheiros, montarias e conjuntos de itens",
       "tabs": {
-        "buddies": "Companheiros",
-        "mounts": "Montarias",
-        "sets": "Conjuntos de itens"
+        "buddies": "Companheiros"
       },
       "state": {
         "owned": "Coletado",
@@ -5816,7 +5851,6 @@ export const pt_BR: EnTranslations = {
       },
       "presenceDefault": "Você sente uma presença observando.",
       "revealed": "{name} decidiu seguir você.",
-      "cosmeticUnlocked": "Nova aparência para {name}: {look}.",
       "presence": {
         "ember_fox": "Algo pequeno e quente caminha macio atrás de você.",
         "moss_hare": "Um farfalhar na turfa acompanha seus passos.",
@@ -5854,134 +5888,9 @@ export const pt_BR: EnTranslations = {
         "phantom": "O ar atrás de você está um pouco quieto demais.",
         "emberfall_phoenix": "Um calor como o de brasas abafadas se acomoda às suas costas."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Preso ao gelo",
-        "crystal_lich_voltaic": "Voltaico",
-        "forgemaw_ashen": "Acinzentado",
-        "forgemaw_whitehot": "Branco incandescente",
-        "stag_acorn": "Coroa de Bolotas",
-        "stag_gilded": "Dourado",
-        "moss_hare_verdant": "Verdejante",
-        "proud_grunt_warlord": "Senhor da Guerra",
-        "frog_sapphire": "Sapo Safira"
-      },
       "actions": {
         "summon": "Invocar",
-        "dismiss": "Dispensar",
-        "wear": "Equipar",
-        "remove": "Remover"
-      },
-      "looks": {
-        "title": "Aparências",
-        "unlocked": "Desbloqueado",
-        "locked": "Bloqueado",
-        "worn": "Equipado",
-        "none": "Ainda não há aparências criadas para este companheiro"
-      },
-      "source": {
-        "bossLabel": "Mascote de chefe",
-        "bossDrop": "{mob} ({location}), {chance}% por jogador por morte",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% por jogador, {heroicChance}% no heroico",
-        "bossDropHeroicOnly": "{mob} ({location}), somente no heroico, {chance}% por jogador",
-        "rollNote": "Cada jogador faz sua própria rolagem; ninguém perde para um membro do grupo.",
-        "deedLabel": "Obtido por",
-        "deed": "O feito {deed}",
-        "challengeLabel": "Desafio",
-        "challengeSpeed": "Derrote {mob} em até {seconds} segundos após iniciar a luta",
-        "challengeDps": "Cause {dps} de dano por segundo a {mob} ao longo da luta",
-        "craftLabel": "Fabricado",
-        "craft": "{item} (receita de {profession})",
-        "grantLabel": "Concedido",
-        "grantOnly": "Prêmio sazonal: classificação mensal e recompensas dos melhores registros de combate",
-        "tokenLabel": "Ficha",
-        "token": "{item}, usado uma vez para vincular o companheiro"
-      },
-      "buddyLore": {
-        "ember_fox": "Uma raposa das sebes do Vale de Eastbrook, nomeada pela pelagem vermelha como brasa que aparece no mato do inverno. Os caçadores desistiram dos filhotes há gerações e passaram a deixar comida.",
-        "moss_hare": "A lebre de Willowfen, de pelo verde por uma vida deitada em turfa molhada. Os herboristas do brejo a consideram de sorte e não deixam ninguém enxotá-la de uma porta.",
-        "frog": "O Pântano de Mirefen os cria gordos e tranquilos, cantando a noite toda nos juncais. Os guias juram que um barco levando um nunca encalha.",
-        "crimson_claw_crab": "Um caranguejo de maré de Farshore cuja garra continua vermelha muito depois de sair da água. As equipes do cais costumavam apostar moedas em corridas deles sobre as tábuas.",
-        "golden_sentinel": "Um besouro sentinela de Amberfall, dourado pela resina onde cresceu. O nome é mais antigo que a resina: sentinelas de algum tipo guardavam aqueles bosques muito antes de alguém pensar em engarrafar a seiva.",
-        "nightfang": "Um jovem caçador de Nightbloom, silencioso mesmo para os padrões da espécie. Segue pela companhia e não caça nada maior que uma mariposa.",
-        "tuskhorn_boar": "Linhagem de Thornpeak, criada com pernas curtas por pastores que queriam um javali incapaz de derrubar uma cerca. Conservou o temperamento mesmo assim.",
-        "emerald_wolf": "Um filhote de Wraithwood, com pelagem verde à luz das copas que nunca chega por completo ao chão da floresta. Os guardiões criam os órfãos que a mata deixa para trás.",
-        "tiger": "Listras de Palmreach num animal que nunca viu Palmreach: a linhagem é mantida em cativeiro desde que os antigos zoológicos fecharam. Responde a um apito e a nada mais.",
-        "cate_coin": "Um gato que não se separa da moeda onde se senta e que ninguém jamais viu comer. Os mercadores de Eastbrook ainda discutem qual dos dois é o mascote.",
-        "alon": "Um mascote de viajante vindo de uma estrada que nenhum mapa admite existir, aparecendo onde um plano vai mal. Observa, aprova e não oferece ajuda alguma.",
-        "trollface": "Uma coisa sorridente que Wraithwood expulsou e se recusou a receber de volta. Toda tentativa de descrevê-la acaba com a pessoa rindo e desistindo.",
-        "ansem": "Fala de portas e de escuridão e não aceita aprofundar nenhum dos assuntos. Os cultistas de Nightbloom o reivindicam; ele vai embora sempre que fazem um rito.",
-        "triple_t": "Três de alguma coisa ou uma coisa três vezes. Os relatos discordam, e a criatura não fica quieta o bastante para ser contada.",
-        "kekius": "Um companheiro risonho de origem incerta, adotado pelos campos de corrida de Galecrest como amuleto. Sobreviveu a quatro estábulos que juravam pela sorte dele.",
-        "solbot": "Um pequeno autômato alimentado pelo sol, desenterrado das cinzas de Drakelands, onde estava meio enterrado, e ainda funcionando. A oficina que o fez não deixou marca alguma na carcaça.",
-        "frostfire": "Nasceu nos Confins de Frostveil onde uma fonte quente emerge pelo campo de gelo e nunca decidiu a qual metade pertence. Solta vapor no ar frio e treme no quente.",
-        "rocky": "Um rastejante de casco de pedra das encostas pedregosas de Thornpeak, lento e totalmente despreocupado. Os mineiros os mantêm porque param de se mover um instante antes de um desabamento.",
-        "proud_grunt": "Um veterano das lojas de Warfare que manteve a continência e perdeu a patente. O Marechal de Guerra Draven Kole entrega um a qualquer soldado com honra suficiente para saber o preço disso.",
-        "loot_goblin": "Segue qualquer um que carregue marcas heroicas e nunca foi pego roubando. O Intendente Vex afirma que isso não prova absolutamente nada.",
-        "penny_goldspark": "Uma aprendiz de inventora gnoma que cobra por hora e vale cada cobre. O armeiro Hode a contratou para quitar uma dívida e agora vende o acordo a quem tiver mil moedas de ouro.",
-        "stag": "Linhagem de Evergarden, reduzida por criação a partir dos grandes cervos que os guardiões montavam. Ainda abaixa a cabeça diante de uma mão erguida, por um hábito mais velho que o animal.",
-        "alpaca": "Os rebanhos de Galecrest os mantêm pela lã e pelo temperamento: nada fica mais calmo numa tempestade. Este cuspirá em exatamente uma pessoa por viagem.",
-        "horse": "Linhagem de pônei do Vale, criada pequena para os caminhos dos pomares e nunca avisada de que não é cavalo de guerra. Acompanha seu passo ao lado e segue qualquer um que já tenha lhe dado uma maçã.",
-        "sapling": "Uma árvore jovem com um sorriso na casca e um olhar roxo curioso. As raízes a levam num andar alegre e bamboleante por onde você for.",
-        "bull": "Um touro do Vale do tamanho de um cachorro, a única razão pela qual alguém aceitou mantê-lo dentro de casa. O temperamento não diminuiu com o resto.",
-        "spider": "Uma tecelã de Wraithwood do tamanho da palma da mão, que redecora qualquer mochila onde é carregada. A teia é mais resistente que o fio que substitui.",
-        "raptor": "Linhagem de filhote de Drakelands, vendida antes de aprender a velocidade que alcança. Todo novo dono é avisado para mantê-lo alimentado, e ninguém precisa ouvir duas vezes.",
-        "skeleton": "Saiu dos túmulos de Wraithwood, tirou o pó e desde então segue as pessoas. Ninguém estabeleceu de quem eram esses ossos.",
-        "crystal_lich": "Um estilhaço do próprio Nythraxis, ainda zumbindo com o frio que o moldou. Obedece a quem o tirou dos destroços da raide e não perdoou essa pessoa por isso.",
-        "forgemaw": "Forjado no Crisol da Última Fonte e nunca inteiramente terminado, saiu da fundição de Ignivar enquanto os martelos ainda caíam. Só a descida heroica o encontra: a criatura fundida sempre volta à forja que a fez e segue para casa quem sobrevive ao fogo duas vezes.",
-        "crystal_tide": "Um espírito de maré que monta sua própria gota de vidro marinho, fisgado de água parada por pescadores do Vale a Farshore que buscavam o jantar. Conserva a água de onde saiu e não aceita voltar.",
-        "sprites": "Dois pequenos espíritos de fogo, um dourado e outro verde-azulado, que nunca concordam sobre quem lidera. Quando chegam perto, viram uma chama verde e depois se separam de novo, rindo.",
-        "phantom": "Um fantasma do tamanho da palma da mão vindo dos túmulos de Wraithwood, todo lençol e nada de ossos, que aparece numa mochila fechada e fica pela companhia. Ninguém sabe o que quer, e nunca tentou assustar ninguém.",
-        "emberfall_phoenix": "Queima até virar brasa a cada outono e renasce das próprias cinzas na primavera; isso é tudo que se pode dizer sobre ela. Ninguém jamais achou um ninho e ninguém capturou a mesma duas vezes."
-      },
-      "petKind": {
-        "beast": "Feras",
-        "elemental": "Elementais",
-        "humanoid": "Humanoides",
-        "undead": "Mortos-vivos",
-        "celebrity": "Celebridades"
-      },
-      "armor": {
-        "cloth": "Tecido",
-        "mail": "Malha",
-        "leather": "Couro"
-      },
-      "stat": {
-        "intellect": "Intelecto",
-        "agility": "Agilidade",
-        "strength": "Força",
-        "mixed": "Híbrido"
-      },
-      "set": {
-        "owned": "{owned} de {total} peças",
-        "itemLevel": "Nível de item {level}",
-        "bonusLabel": "{pieces} peças"
-      },
-      "detail": {
-        "dropLabel": "Obtido de",
-        "vendorLabel": "Vendido por",
-        "bindLabel": "Vinculação",
-        "sellLabel": "O vendedor paga",
-        "marketLabel": "Mercado Mundial",
-        "exchangeLabel": "Bolsa de $WOC",
-        "setLabel": "Coletado",
-        "drop": "{mob} ({location}), {chance}% por morte",
-        "heroicDrop": "{mob} ({location}), somente no heroico, {chance}% por morte",
-        "dropWithHeroic": "{mob} ({location}), {chance}% por morte, {heroicChance}% no heroico",
-        "globalDrop": "Qualquer inimigo, {chance}% por morte, um de {count} nesta raridade",
-        "fishingDrop": "Pesca em qualquer lugar, {chance}% por captura",
-        "vendor": "{npc} ({location}) por {price}",
-        "honorPrice": "{amount} de Honra",
-        "marksPrice": "{amount} marcas heroicas",
-        "noSource": "Ainda sem fonte no jogo",
-        "noItem": "Nenhum item concede isto ainda",
-        "tradeable": "Negociável",
-        "soulbound": "Vinculado à alma",
-        "noSell": "Não pode ser vendido",
-        "marketAtMerchant": "Exibido no mercador",
-        "marketChecking": "Verificando...",
-        "marketNone": "Nenhum anúncio",
-        "exchangeNone": "Nenhum anúncio",
-        "exchangeUnavailable": "Indisponível neste cliente"
+        "dismiss": "Dispensar"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const pt_BR: EnTranslations = {
       "viewSources": "Ver fontes",
       "separateByGatherer": "Separar por coletor",
       "takeChosenQuantity": "Retirar a quantidade escolhida",
-      "combine": "Combinar pilhas de materiais"
+      "combine": "Combinar pilhas de materiais",
+      "itemHistory": "Histórico do item"
+    },
+    "itemHistory": {
+      "title": "{item}: histórico",
+      "passedTo": "Passado para {name} em {date}",
+      "noTransfers": "Este item nunca mudou de mãos.",
+      "close": "Fechar",
+      "openAria": "Histórico de {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Aprenda a fórmula antes de aplicar este encantamento.",
@@ -7073,6 +6990,7 @@ export const pt_BR: EnTranslations = {
         "summons_adds": "Convoca reforços",
         "lunar_tide": "Mare Lunar (dano em área pulsante)",
         "chorus_and_solo": "Coro e Solo (agrupem-se em uma marca e espalhem-se da outra)",
+        "the_score": "A partitura (ela canta uma melodia duas vezes nos pisos lunares: pise neles na ordem em que soaram para quebrar a voz dela)",
         "tideglass_reflections": "Reflexos de Vidro de Maré (matem as imagens refletidas uns dos outros)",
         "hydra_three_elements": "Três elementos (a cabeça esquerda exala um cone de gelo de 18 jardas que reduz a velocidade em 70 por cento por 4 segundos; a central cospe veneno sob até 3 jogadores, que explode após 1,5 segundo e queima por 6 segundos onde cai; a direita dispara uma torrente numa faixa de 26 jardas e empurra 8 jardas. Saia de cada uma. Quando uma cabeça cai, as que restam assumem seu ataque)",
         "hydra_tsunami": "Onda de tsunami (as cabeças afundam por 4,5 segundos, recebendo 75 por cento menos dano, e uma onda atravessa metade da piscina, a outra metade na próxima vez: de 160 a 190 de dano de gelo no normal e empurrão de 10 jardas. Cruze para a outra metade ou fique atrás de uma coluna da borda; no heroico a onda volta pela outra metade 3,5 segundos depois. O primeiro tsunami chega aos 24 segundos de luta; os seguintes, 40 segundos após o anterior passar)",
@@ -7197,6 +7115,23 @@ export const pt_BR: EnTranslations = {
       "shadeLine": "Deixe este chamariz. Ataque o Vael cuja lanterna reluz no feixe para romper o véu",
       "timeAria": "Restam {seconds} segundos"
     },
+    "templeAlert": {
+      "melodyTitle": "A partitura",
+      "melodyLine": "Observe os pisos lunares soarem um após o outro. Repita a ordem alternando com outro jogador",
+      "melodyDarkLine": "Lembre a ordem antes que os pisos apaguem. Repita alternando com outro jogador",
+      "answerTitle": "Responda à partitura!",
+      "answerLine": "Alternem as vezes: pise no piso lunar marcado com {place}. Notas: {done} de {total}",
+      "answerDarkLine": "Alternem as vezes e repitam a ordem de memória. Saia do piso antes de pisar nele novamente. Notas: {done} de {total}",
+      "spentTitle": "Outra voz deve responder",
+      "spentLine": "Você não pode soar um piso até outro jogador tocar a próxima nota correta. Notas: {done} de {total}",
+      "stepOffTitle": "Saia e entre de novo",
+      "stepOffLine": "Um piso lunar só soa quando alguém pisa nele. Saia deste piso e pise nele novamente",
+      "falseTitle": "Nota falsa!",
+      "falseLine": "Esse piso estava fora de ordem. A resposta recomeça no primeiro piso",
+      "brokenTitle": "A voz de Selthe está quebrada!",
+      "brokenLine": "Ela recebe {pct}% a mais de dano até isto terminar: use seus ataques mais fortes agora",
+      "timeAria": "Restam {seconds} segundos"
+    },
     "wildheartAlert": {
       "preyTitle": "Você é a Presa!",
       "preyLine": "Atraia Zulgar por glifos solares acesos para deixá-lo lento antes que alcance e dilacere você",
@@ -7207,7 +7142,21 @@ export const pt_BR: EnTranslations = {
       "pollinatedLine": "Evite vagens: tocá-las com Polinizado cria inimigos. Aliados sem marca podem pisá-las",
       "bondTitle": "Vínculo da matilha",
       "bondLine": "Separe o Mestre das Feras do jaguar para remover a redução e o bônus de dano deles",
-      "timeAria": "Restam {seconds} segundos"
+      "timeAria": "Restam {seconds} segundos",
+      "preyAloneLine": "Ninguém mais pode acender os glifos solares. Fique num apagado por {seconds} s para acender e atraia Zulgar por ele",
+      "pinnedTitle": "Empalado!",
+      "pinnedLine": "Um aliado precisa puxar a Lança de caça. Pulso do Coração Selvagem causa mais dano enquanto você está empalado",
+      "pinnedSelfLine": "Ninguém está livre para ajudar: puxe a Lança de caça antes que Pulso do Coração Selvagem atinja você",
+      "sunstruckTitle": "Zulgar foi atingido pelo sol!",
+      "sunstruckLine": "Ele recebe {pct}% a mais de dano até isto terminar: use seus ataques mais fortes agora",
+      "spearTitle": "Um aliado está empalado!",
+      "spearLine": "Corra até a Lança de caça e puxe-a antes de Pulso do Coração Selvagem",
+      "glyphTitle": "Acenda os glifos solares",
+      "glyphLine": "Fique num glifo solar apagado por {seconds} s para acendê-lo. Quando Zulgar cruzar, ele receberá {pct}% a mais de dano por {duration} s",
+      "glyphLightingTitle": "Acendendo o glifo solar",
+      "glyphLightingLine": "Fique no glifo até ele acender. Sair reinicia o processo",
+      "breathTitle": "Sopro do ídolo!",
+      "breathLine": "O jaguar de pedra vai soprar sobre esta metade do terraço. Atravesse para a outra metade"
     },
     "sanctumAlert": {
       "quenchTitle": "Na água de têmpera!",
@@ -7296,6 +7245,13 @@ export const pt_BR: EnTranslations = {
       "relightFar": "Chegue a menos de {range} jardas para reacender",
       "relightAria": "Reacender: {name}",
       "relightUsingLine": "Continue canalizando para acender a vela: drena vida. Golpes não interrompem; mover ou ser atordoado sim",
+      "freeLine": "Puxe a lança do chão para libertar quem ela prende. Receber dano não impede você; mover-se ou ficar atordoado impede",
+      "freeKey": "Puxar {name}",
+      "freeTap": "Toque aqui para puxar {name}",
+      "freeClick": "Clique aqui para puxar {name}",
+      "freeFar": "Chegue a até {range} m para puxar",
+      "freeAria": "Puxar {name}",
+      "freeUsingLine": "Fique parado para puxar a lança: mover-se ou ficar atordoado interrompe",
       "timeAria": "Restam {seconds} segundos"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const pt_BR: EnTranslations = {
       "detach": "Separar",
       "applied": "Aplicado",
       "owned": "Adquirido",
+      "notCollected": "Não coletado",
       "storeOnly": "Disponível na Loja WOC",
       "preview": "Visualização",
       "previewAria": "Visualização {name}",
       "cardAria": "Item: {name}, {rarity}",
-      "mountsIntro": "Uma aparência de montaria é desenhada sobre qualquer montaria deste personagem. Ela nunca altera a velocidade.",
-      "mountsNoMount": "Adquira uma montaria primeiro: uma aparência precisa de algo para montar.",
+      "mountsIntro": "Escolha a aparência da montaria aqui. O treinamento de montaria determina a velocidade. Mantenha o item de montaria nas bolsas ou no banco de qualquer personagem para compartilhar a aparência pela conta.",
+      "mountsNoMount": "Aprenda montaria com a cavalariça-mor Marla para invocar uma montaria.",
       "skinsEmpty": "Nenhuma aparência de arma adquirida. Visite a Loja WOC.",
       "skinsApplyHint": "Equipe um {type} para aplicar esta aparência.",
       "mechIntro": "O Mecha de Combate substitui o corpo deste personagem. Um croma é usado por vez.",
@@ -7430,6 +7387,7 @@ export const pt_BR: EnTranslations = {
       "sourceActivityRiftFirstClear": "Concedida a todos os membros do grupo que vence a primeira conquista de uma Fenda classificada",
       "sourceActivityBuriedHoard": "Encontrado no cofre de recompensa de um Tesouro Enterrado, o cofre para o qual um mapa do tesouro leva",
       "sourceActivityLanternHall": "Comprado com selos da lanterna do intendente do Salão da Lanterna",
+      "sourceActivityWeeklyVaultPvp": "Escolhido na linha JxJ do Cofre Semanal",
       "cellMissingSourceAria": "{name}, ainda não encontrada, {source}",
       "cellOwnedClearsAria": "{name}, catalogada, encontrada pela primeira vez na conquista {count}",
       "searchPlaceholder": "Pesquisar relíquias",
@@ -8454,6 +8412,16 @@ export const pt_BR: EnTranslations = {
         "heroicCloud": "Nuvem de pólen: ficar a menos de {cloudRadius} jardas de um jogador Polinizado por {cloudSeconds} s também poliniza você."
       },
       "zulgar": {
+        "pulseSummaryRework": "A cada {every} s, uma conjuração de {cast} s atinge todos em um raio de {radius} m, causando de {min} a {max} de dano. Jogadores empalados recebem {pinMult} vezes esse dano a qualquer distância.",
+        "spearSummary": "Uma conjuração de {cast} s empala um jogador que não seja o tanque, ou o tanque se não houver mais ninguém. A imobilização dura até {seconds} s e causa {bleed} de dano a cada {tick} s.",
+        "spearResponse": "Selecione a lança e interaja a até {range} m para puxá-la em {pull} s. Dano não interrompe a retirada. Se ninguém mais estiver livre no terraço, a vítima pode interagir para escapar em {self} s.",
+        "glyphSummaryRework": "Os {count} glifos começam apagados. Durante a caçada, um jogador sem marca acende um ficando sobre ele por {kindle} s. Se não houver ninguém sem marca, a Presa pode acendê-lo em {alone} s. Sair reinicia o progresso. Cruzar um glifo aceso reduz a velocidade dele em {slow} e aumenta o dano recebido em {vulnerability} por {seconds} s. O glifo não pode ser reacendido por {dark} s; outro glifo não pode atingi-lo por {wary} s. Durante a caçada, atordoamentos duram metade do tempo.",
+        "glyphResponseRework": "Jogadores sem marca acendem glifos à frente da Presa. Conduza-o por eles e ataque durante o efeito Atingido pelo sol. Os glifos apagam quando a caçada termina.",
+        "idolSummary": "Com {health} de vida, ele permanece como espírito de jaguar até ser derrotado. O tanque também pode virar Presa.",
+        "idolHuntSummary": "Ele escolhe uma nova Presa a cada {every} s, depois se vira para ela por {turn} s antes de perseguir.",
+        "idolHuntHeroicSummary": "Ele marca uma nova dupla a cada {pair} s e alterna entre os dois a cada {switch} s. Cada troca dá à nova Presa {turn} s antes da perseguição.",
+        "breathSummary": "A cada {every} s, metade do terraço fica marcada por {warning} s, depois todos nessa metade recebem de {min} a {max} de dano de Natureza. Os sopros alternam as metades.",
+        "breathResponse": "Vá para a metade sem marca antes do fim do aviso. A linha central é segura. No Heroico, o sopro também apaga os glifos acesos daquela metade; eles podem ser reacendidos imediatamente.",
         "overview": "O sumo sacerdote da bacia. Uma luta constante com círculo anunciado até virar espírito de jaguar e caçar um jogador. O caçado o atrai por glifos solares acesos, que reduzem a velocidade dele.",
         "phaseShrineName": "O Santuário",
         "phaseShrineSummary": "Luta corpo a corpo e pulsa um círculo ao redor.",
@@ -8766,6 +8734,14 @@ export const pt_BR: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe nunca se move nem ataca corpo a corpo. Agrupem-se para Coro, saia do grupo para Solo, interrompa Ária de afogamento e desvie de Surto da lagoa. Em dois limiares de vida, repitam a melodia dos pisos lunares alternando os cantores.",
+        "phaseSummaryRework": "Os outros ataques dela param enquanto o grupo responde à partitura. Descargas de água lunar não têm barra de conjuração e não podem ser interrompidas.",
+        "boltSummaryRework": "Entre outras conjurações, uma descarga acerta a cada {every} s após um aviso visual de {windup} s, causando {mult} vezes o dano da arma dela como dano de Gelo. Interromper Ária de afogamento para as descargas e a ária por {quiet} s.",
+        "boltResponseRework": "Mantenha o tanque na linha de visão dela. Guarde as interrupções para Ária de afogamento.",
+        "tipHealerRework": "Observe o alvo da ária e quem ficar sozinho no Coro. Durante a partitura, ajude a cantar a próxima nota e cure os erros.",
+        "scoreSummary": "Com {first} e {second} de vida, ela fica imune e toca {notes} e depois {finalNotes} notas. Repitam em {answer} e depois {finalAnswer} s. Um piso errado causa {falseNote} de dano de Gelo e reinicia o progresso, mas não o tempo. Se o tempo acabar, todos recebem de {min} a {max} de dano de Gelo. O sucesso a atordoa por {stun} s e aumenta o dano recebido em {vulnerability} por {bonusSeconds} s.",
+        "scoreResponse": "Observe a melodia e pise nos pisos em ordem. Alterne notas corretas com outro jogador vivo; o único sobrevivente pode terminar sozinho. Passos bloqueados são inofensivos. Saia do piso e entre de novo para fazê-lo soar, mesmo que já o ocupasse antes da resposta.",
+        "scoreHeroic": "Durante a resposta, os pisos apagam. Lembre-se da melodia e alternem as vezes.",
         "overview": "A Mãe do Coro canta na piscina e nunca se move ou ataca corpo a corpo. Marca jogadores para um Coro compartilhado e um Solo isolado, lança uma ária crescente num jogador e envia uma onda pelo pátio. Descargas e ária podem ser interrompidas.",
         "phaseName": "O Pátio do Coro",
         "phaseSummary": "Uma fase com temporizadores. Uma mecânica que vence durante um lançamento espera ele acabar.",
@@ -9678,7 +9654,7 @@ export const pt_BR: EnTranslations = {
       "graveyard": "Para onde seu espírito retornaria se você caísse aqui.",
       "dungeons": "Cada masmorra com a zona onde sua porta fica e o tamanho de grupo para o qual foi feita, além da dificuldade em que você está configurado atualmente.",
       "dungeonMode": "Alterna suas masmorras entre as dificuldades normal e heroica.",
-      "dungeonReset": "Abandona suas próprias instâncias vazias, o que você faz depois de trocar de dificuldade.",
+      "dungeonReset": "Abandone suas instâncias vazias para que a próxima tentativa comece do zero, na mesma dificuldade ou em outra.",
       "groupRecovery": "Recuperação e presença",
       "unstuck": "A saída para quando o mundo o prendeu. Fique parado durante uma contagem regressiva curta e você é levado ao cemitério mais próximo, sendo reerguido ali se já tiver caído. Isso o deixa enfraquecido pelo Mal do Desbloqueio por um tempo depois, então é um último recurso, não um atalho.",
       "unstuckWindow": "A saída para quando o mundo o prendeu. Fique parado durante uma contagem regressiva curta e você é levado ao cemitério mais próximo, sendo reerguido ali se já tiver caído. O primeiro uso em uma hora é gratuito. Use-o de novo dentro de uma hora do último uso e ele o deixa enfraquecido pelo Mal do Desbloqueio por um tempo depois, então é um resgate, não um atalho.",
@@ -10105,27 +10081,27 @@ export const pt_BR: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Montarias e equitação",
-      "intro": "Uma montaria é uma forma mais rápida de atravessar o mundo, e é só isso que ela é. Você aprende a montar nos estábulos, compra seu primeiro conjunto de rédeas, e toda estrada depois disso fica mais curta.",
+      "intro": "Escolha uma aparência de montaria, aprenda a montar nos estábulos e viaje mais rápido pelo mundo. Seu treinamento define o ritmo; toda aparência de montaria é cosmética.",
       "whatHeading": "O que é uma montaria",
-      "whatBody": "Uma montaria é um animal que você cavalga, e o que ela te dá é velocidade. Sem armadura, sem dano, sem atributos: ela te carrega pelo chão mais rápido, e pula um pouco mais alto quando você salta, e isso é tudo o que o acordo oferece. Toda montaria do jogo é uma montaria terrestre, então não há voo, e nenhuma delas nada.",
+      "whatBody": "Montarias são aparências cosméticas sobre sua montaria treinada. Não concedem armadura, dano nem atributos de combate. O treinamento aumenta a velocidade por terra, e saltos montados alcançam mais altura. Toda montaria fica no chão, e nenhuma pode nadar.",
       "learnHeading": "Aprendendo a montar",
-      "learnBody": "Equitação é uma habilidade que você compra uma única vez, e ela se abre no nível {level}. Marla Hitchen, a cavalariça-mor, mantém os Estábulos de Galecrest lá nas colinas, e ela vende Treinamento de Equitação por 80 ouro. Essa única compra é o que permite montar em qualquer montaria, e ela fica com você para sempre.\n\nDepois de tê-la, Marla tem uma missão para você: Aulas de Equitação. Aceite-a, siga o marcador até o quadrado luminoso atrás do arco de largada, e pressione Iniciar Corrida. Ela empresta a você um Corcel do Valor de treinamento para a lição, então a lição em si não custa nada. Percorra o percurso, termine-o e volte até ela para receber suas moedas e experiência. O corcel emprestado volta para o celeiro depois, então a lição ensina a sela, não entrega um cavalo.",
+      "learnBody": "Montaria é liberada no nível {level}. A cavalariça-mor Marla Hitchen vende Treinamento de Equitação por 80 de ouro nos Estábulos de Galecrest. O treinamento básico concede {basicSpeed}% a mais de velocidade montado. Depois de aprendê-lo, Marla também vende Treinamento avançado de Equitação por {advancedFee} de ouro, aumentando o bônus para {advancedSpeed}%. Cada graduação pertence ao personagem que a aprende.\n\nApós aprender a montaria básica, aceite a missão Aulas de Equitação de Marla e siga o marcador até o quadrado brilhante atrás do arco de largada. Pressione Iniciar corrida para pegar emprestado o Corcel do Valor de treino. Termine o percurso e volte para receber moedas e experiência. O cavalo emprestado volta ao celeiro quando a lição termina.",
       "whereHeading": "Onde encontrá-la",
       "whereBody": "Os Estábulos de Galecrest estão marcados no mapa de Galecrest, lá nas colinas entre o Despenhadeiro e os Campos dos Destroços. Marla fica ao lado do celeiro, de frente para o pátio de corrida.",
       "firstHeading": "Sua primeira montaria",
-      "firstBody": "O Corcel do Valor é a única montaria vendida em qualquer lugar do mundo. Assim que você tiver aprendido Equitação, Marla vai vender para você as Rédeas do Corcel do Valor por 10 ouro, e essas rédeas são suas para sempre. Toda outra montaria é conquistada mundo afora, então o cavalo é onde quase todos os cavaleiros começam.",
+      "firstBody": "Marla vende as Rédeas do Corcel do Valor por 10 de ouro após você aprender montaria. Guardar as rédeas desbloqueia a aparência do cavalo em Cosméticos para todos os personagens da conta. O treinamento já permite invocar uma montaria sem carregar rédeas; escolha o cavalo ou outra aparência que possua quando quiser mudar o visual.",
       "rideHeading": "Montando e desmontando",
-      "rideBody": "Não há janela de montarias nem favorita para definir, porque as rédeas são a montaria. Use um conjunto de rédeas das suas bolsas ou de um espaço da barra de ação e você monta naquela montaria. Invocar leva um instante, um chamado breve em vez de instantâneo, então isso não vai te salvar de um puxão ruim. Desmontar é instantâneo e nunca é impedido.\n\nUse as rédeas que você já está montando e você guarda aquela montaria. Use um conjunto diferente enquanto montado e você troca direto para ele, sem nada para invocar no meio do caminho. A tecla Montar / Desmontar, a tecla de crase por padrão, só serve para descer: é o caminho para baixo, não para cima. A única exceção é a aula de equitação, onde essa mesma tecla chama o corcel que Marla empresta, já que um cavalo emprestado não tem rédeas para clicar. Em um celular ou tablet, o botão Montar na bandeja Mais funciona nos dois sentidos, embora chame o primeiro conjunto de rédeas nas suas bolsas em vez de um que você escolha, então toque nas próprias rédeas quando quiser uma montaria específica.",
+      "rideBody": "Abra Cosméticos e escolha uma aparência na aba Montarias. A tecla Montar / Desmontar, por padrão o acento grave, invoca sua montaria treinada usando essa aparência. O botão Montar no celular faz o mesmo. Invocar exige uma breve canalização; desmontar é instantâneo. Você pode mudar a aparência enquanto está montado sem alterar a velocidade.\n\nVocê também pode usar rédeas das bolsas ou de uma barra de ação para escolher a aparência e invocar. Usar a aparência em que já está montado guarda a montaria. Rédeas no banco ou em outro personagem liberam o mesmo cosmético sem que o cavaleiro precise carregá-las.",
       "breaksHeading": "O que te devolve ao chão",
       "breaksBody": "A água sempre vence. Entre em qualquer coisa funda o bastante para nadar e você desmonta na hora, porque nenhuma montaria terrestre nada, e morrer te derruba onde você caiu. Você não pode chamar uma enquanto está em combate, enquanto está morto ou voltando como espírito, ou em qualquer momento durante uma partida dos Campos de Thornhollow, disputada a pé desde a preparação até a resistência final: se você estava montado enquanto esperava, ser posicionado na partida te derruba junto com ela. Andar para dentro de combate ou de água no meio de uma invocação também a cancela.\n\nA maior parte do que você faz também te derruba. Golpear algo, começar uma conjuração, colher um nó, pescar, criar, encantar, recuperar materiais e recarregar uma ferramenta de profissão te desmontam no instante em que você começa, então espere descer a cada veio. Chamar uma montaria também cancela qualquer forma que você esteja mantendo: você nunca fica transformado e montado ao mesmo tempo.",
-      "speedHeading": "Velocidade e níveis",
-      "speedBody": "Velocidade é a única coisa que separa uma montaria da outra. O Corcel do Valor que você compra de Marla define o ritmo básico, e as montarias que você coleta mundo afora cavalgam acima dele: quanto mais raras as rédeas, mais rápida a montaria, em alguns degraus claros em vez de uma progressão suave. Não existe um segundo grau de Equitação para treinar nem um aprimoramento para comprar depois. Você paga por Equitação uma única vez, e a partir daí as rédeas que você usa decidem sua velocidade de viagem.",
+      "speedHeading": "Velocidade e treinamento de montaria",
+      "speedBody": "O Treinamento de Equitação básico concede {basicSpeed}% a mais de velocidade montado. O Treinamento avançado de Equitação concede {advancedSpeed}% a mais e custa {advancedFee} de ouro com Marla. Todas as aparências usam a mesma velocidade conforme a graduação do personagem, independentemente da raridade ou origem. Visuais da loja também usam essa velocidade.",
       "collectHeading": "De onde vêm as montarias mais raras",
       "collectBody": "Além do balcão de Marla, as rédeas são encontradas, não compradas. Elas caem dos últimos chefes das masmorras de cinco jogadores e do raide no heroico, e de fendas concluídas, onde quanto mais difícil a fenda que você termina, mais raras as rédeas que ela pode deixar para trás. São achados raros por design, e nenhuma tentativa garante uma, então o jeito tranquilo de caçar uma montaria é levar a caçada junto nas investidas que você já ia fazer de qualquer forma. Esta página não vai te contar qual montaria pertence a qual chefe: essa parte é sua para descobrir.",
       "raceHeading": "A corrida dos estábulos",
       "raceBody": "O percurso de salto no cercado de Marla está aberto para qualquer um, a qualquer hora, não só durante a lição. Monte, fique no quadrado luminoso atrás do arco e pressione Iniciar Corrida. Uma contagem regressiva te mantém parado, depois o relógio corre: supere todos os sete obstáculos e volte cavalgando pelo arco antes que o tempo acabe.\n\nUm salto só conta se você estiver genuinamente no ar sobre a barra, então um simples passar por baixo não conta nada. Você pode enfrentá-los em qualquer ordem e por qualquer lado, e errar um não é o fim do mundo: dê a volta e tente de novo. Morrer, desmontar ou deixar o cercado encerra a tentativa, assim como deixar o relógio zerar, o que te tira da sela onde você estiver; cancelar por conta própria apenas para o relógio. Nada te impede de começar outra. Não há taxa, tempo de recarga nem prêmio além do próprio tempo, e qualquer número de cavaleiros pode correr o percurso ao mesmo tempo sem atrapalhar uns aos outros.",
       "goodsHeading": "As rédeas são mercadorias comuns",
-      "goodsBody": "Uma montaria é um item, o que a torna algo que a economia pode movimentar. Você é dono de uma montaria enquanto suas rédeas estiverem nas suas bolsas ou no seu banco, embora rédeas guardadas no banco mantenham a montaria sua sem deixar você montá-la: para chamar o animal você precisa estar carregando as rédeas. Rédeas de jogador não trazem vínculo de alma, então elas são negociáveis, viajam pelo correio e entram no Mercado Mundial como qualquer outro achado, a menos que o próprio item diga o contrário. Duas coisas valem a pena saber antes de se desfazer de uma: nenhum mercador jamais recompra um conjunto de rédeas, então uma montaria é uma compra que você guarda ou repassa em vez de transformar em dinheiro, e se as rédeas saírem das suas bolsas e do seu banco ao mesmo tempo enquanto você está montado, seja por negociação, por correio ou por venda no mercado, a montaria vai junto e você é posto no chão onde estiver."
+      "goodsBody": "As aparências de montaria colecionáveis ficam disponíveis pela conta enquanto ao menos um item de rédeas correspondente estiver nas bolsas ou no banco pessoal de qualquer personagem. Trocar, enviar por correio, anunciar, vender ou remover de outra forma o último item válido remove a aparência de Cosméticos. Quem a estiver usando volta à aparência do cavalo padrão e continua montado na velocidade do treinamento.\n\nRédeas de jogadores podem ser trocadas, enviadas por correio e anunciadas no Mercado Mundial, salvo indicação contrária no item. As rédeas do cavalo também podem ser vendidas a um mercador por 10 de ouro. Outras rédeas mantêm suas próprias restrições de venda. Visuais de montaria da loja continuam sendo cosméticos de conta independentes dos itens de rédeas."
     },
     "worldPage": {
       "heading": "O mundo",
@@ -10300,7 +10276,7 @@ export const pt_BR: EnTranslations = {
       "heroicRewardsBody": "Os chefes heroicos deixam cair o espólio que você conhece, aprimorado e marcado como Heroico na descrição, e o chefe final de cada sessão acrescenta épicos que não se acham em lugar nenhum. Essa última morte também deixa Selos Heroicos para cada participante: uma moeda gasta com o intendente Vex em Highwatch, cujo balcão é uma prateleira de anéis e pingentes que nada além da prova das profundezas heroicas consegue comprar.",
       "heroicLockoutBody": "As masmorras normais podem ser percorridas o dia inteiro. O heroico pede paciência: a morte do chefe final limita todos na sessão a uma única conclusão heroica daquela masmorra por dia, e a incursão mantém um bloqueio diário para cada dificuldade. Num reino ao vivo todos os bloqueios diários caem juntos na hora da reinicialização noturna do próprio reino, então uma conclusão obtida logo antes dessa hora e outra logo depois caem em dias diferentes; jogue offline no seu navegador e um bloqueio simplesmente expira um dia depois da sua própria morte do chefe. Uma sessão de cinco jogadores já concluída continua aberta ao próprio grupo para corridas de cadáver e espólio, então ninguém fica trancado longe do que conquistou ali. A incursão é mais rígida: uma vez que a morte dela bloqueia você, a porta fica fechada até a reinicialização, e o único caminho de volta é uma corrida de cadáver de alguém que tombou na mesma sessão que o bloqueou, então um incursor vivo que sai saiu pelo resto do dia. Recolha seus despojos antes de deixar a arena. Cada um desses bloqueios pertence ao personagem que o conquistou, então uma conclusão no seu personagem principal deixa os outros livres.",
       "resetTitle": "Redefinindo suas instâncias",
-      "resetBody": "Se vocês trocarem de dificuldade enquanto o grupo ainda mantém sessões reivindicadas, as reivindicações antigas permanecem um tempo antes de se soltarem sozinhas. O líder do grupo pode soltá-las de uma vez: escolham Redefinir todas as instâncias no menu do próprio retrato, ou digitem /dungeon reset. Uma redefinição só funciona depois de a dificuldade ter sido de fato trocada, só enquanto ninguém, vivo ou tombado, permanecer lá dentro, só depois de todo cadáver lá dentro ter sido saqueado por completo, e um breve tempo de recarga separa uma redefinição da seguinte. Cheguem à porta com a dificuldade errada e o jogo avisa antes de a sessão começar. A incursão nunca é redefinida assim; valem as regras de bloqueio dela.",
+      "resetBody": "Tentativas reservadas vazias permanecem por um tempo antes de desaparecer sozinhas. O líder do grupo pode abandoná-las imediatamente: escolha Redefinir todas as instâncias no menu do próprio retrato ou digite /dungeon reset. A próxima tentativa começa do zero na dificuldade atual. Mudar a dificuldade faz o mesmo com tentativas da dificuldade anterior. Só é possível redefinir quando ninguém, vivo ou morto, está dentro e todos os cadáveres foram completamente saqueados. Isso nunca reduz um bloqueio: uma masmorra heroica ou raide bloqueada permanece assim até sua reinicialização. Há um breve intervalo entre redefinições. Se você chegar à porta com a dificuldade errada, o jogo avisa antes de começar. A raide é redefinida da mesma forma, mantendo suas regras de bloqueio e retorno ao cadáver. Uma raide que muda de dificuldade ignora o intervalo: se o grupo escolheu errado ou não venceu o Heroico, pode voltar imediatamente, pois o próprio bloqueio limita as repetições.",
       "templeLoreTitle": "O Templo Afogado, um pouco mais fundo",
       "templeLoreBody": "O templo tem sua própria lenda, mais antiga que o culto que você persegue em outros lugares. Na margem do Glimmermere, um tarn que bebe o luar e devolve os afogados, um vigia solitário guarda um portal de luz pálida. Sob a superfície, uma escadaria de pedra fria desce até ele. As pessoas que afundaram ali não se afogaram por desventura: eram o Coro Pálido, que mergulhou em adoração e nunca parou de cantar. Os antigos guardiões riscaram um único aviso nas rochas antes de a água levá-los, uma prece a algo que chamavam de Lua Afogada, com uma mão mais firme acrescentando duas palavras abaixo: ela apenas dorme.",
       "cryptLeadTitle": "Uma porta que os mortos deviam manter fechada",
@@ -11280,7 +11256,7 @@ export const pt_BR: EnTranslations = {
       "prestigeBody": "A experiência continua contando mesmo depois do limite. Ela alimenta um nível virtual cosmético, então sua barra de experiência segue subindo, e uma classificação de prestígio de longo prazo que você pode conquistar pela sua ficha de personagem assim que chegar lá. Passar de grandes marcos de experiência acumulada também rende feitos no seu Livro dos Feitos, com títulos cosméticos e bordas de placa de nome que aparecem na sua ficha de personagem. Tudo isso é puramente opcional e nunca concede poder, apenas uma marca da estrada que você percorreu.",
       "noRush": "Não há pressa. O mundo está aqui para ser aproveitado no seu próprio ritmo, então perambule, aceite as missões que chamarem sua atenção e deixe seu herói crescer pelo caminho.",
       "ridingTitle": "Aprendendo a montar",
-      "ridingBody": "Equitação é uma das coisas que esperam no fim da subida. No nível {level}, uma cavalariça-mor ensina a habilidade por uma soma considerável de ouro, e uma aula no percurso de treinamento rende suas primeiras rédeas. Uma montaria não concede poder algum; ela simplesmente encolhe o mundo, o que, depois de uma longa caminhada rumo ao norte, é uma recompensa à sua maneira."
+      "ridingBody": "No nível {level}, a cavalariça-mor Marla ensina montaria básica por ouro e oferece uma graduação avançada depois. O treinamento determina a velocidade montado. Escolha a aparência em Cosméticos; aparências colecionáveis são compartilhadas enquanto suas rédeas estiverem nas bolsas ou no banco de qualquer personagem."
     },
     "placeholder": {
       "note": "Esta parte do guia está a caminho."
@@ -16384,6 +16360,8 @@ export const pt_BR: EnTranslations = {
       "temple_moonwater_bolt": "Descarga de água lunar",
       "temple_drowning_aria": "Ária de afogamento",
       "temple_mere_surge": "Surto da lagoa",
+      "temple_score": "A partitura",
+      "temple_score_answer": "Responder à partitura",
       "temple_tideglass_fracture": "Fratura de vidro de maré",
       "temple_undertow": "Ressaca",
       "temple_lunar_tide": "Maré lunar",
@@ -16421,6 +16399,12 @@ export const pt_BR: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Empanturrar",
       "wildheart_zulgar_pulse": "Pulso do Coração Selvagem",
       "wildheart_zulgar_spirit_hunt": "Espírito da caçada",
+      "wildheart_zulgar_hunting_spear": "Lança de caça",
+      "wildheart_zulgar_idol_wakes": "O ídolo desperta",
+      "kituse_wildheart_pull_spear": "Puxar a lança",
+      "wildheart_idols_breath": "Sopro do ídolo",
+      "wildheart_sun_glyph_kindle": "Acendimento",
+      "wildheart_sun_glyph_cold": "Resfriamento",
       "sanctum_cinder_breath": "Sopro de cinzas",
       "sanctum_warming_rite": "Rito de aquecimento",
       "sanctum_goad": "Aguilhão",
@@ -17053,6 +17037,9 @@ export const pt_BR: EnTranslations = {
       "levelClass": "Nível {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Treinamento de Equitação",
+      "advancedRiding": "Treinamento avançado de Equitação",
+      "ridingSpeed": "Aumenta sua velocidade de movimento montado em {speed}%. Aplica-se a todas as montarias.",
       "goodsTitle": "{name}: mercadorias",
       "close": "Fechar vendedor",
       "hint": "Clique em um item nas suas bolsas para vendê-lo enquanto esta janela estiver aberta.",
@@ -17263,7 +17250,8 @@ export const pt_BR: EnTranslations = {
       "tooManyOrders": "Você pode manter no máximo {count} pedidos abertos de uma vez.",
       "orderClosed": "Esse pedido não está mais aberto.",
       "orderOwn": "Esse é seu próprio pedido. Cancele-o para retirá-lo.",
-      "orderNotYours": "Esse pedido não é seu."
+      "orderNotYours": "Esse pedido não é seu.",
+      "orderTrackedItem": "O Mercador não aceita pedidos de equipamentos únicos."
     },
     "loot": {
       "takeAll": "Pegar tudo",
@@ -21189,117 +21177,6 @@ export const pt_BR: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Pedra de Passagem"
-      },
-      "whistle_ember_fox": {
-        "name": "Apito de raposa de brasas"
-      },
-      "whistle_moss_hare": {
-        "name": "Apito de lebre de musgo"
-      },
-      "whistle_frog": {
-        "name": "Apito de sapo"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Apito de caranguejo de garra carmesim"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Apito de sentinela dourado"
-      },
-      "whistle_nightfang": {
-        "name": "Apito de Presa Noturna"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Apito de javali Presa Cornuda"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Apito de lobo esmeralda"
-      },
-      "whistle_tiger": {
-        "name": "Apito de tigre"
-      },
-      "whistle_cate_coin": {
-        "name": "Apito de Cate Coin"
-      },
-      "whistle_alon": {
-        "name": "Apito de Alon"
-      },
-      "whistle_trollface": {
-        "name": "Apito de Trollface"
-      },
-      "whistle_ansem": {
-        "name": "Apito de Ansem"
-      },
-      "whistle_triple_t": {
-        "name": "Apito de Triple T"
-      },
-      "whistle_kekius": {
-        "name": "Apito de Kekius"
-      },
-      "whistle_solbot": {
-        "name": "Apito de Solbot"
-      },
-      "whistle_frostfire": {
-        "name": "Apito de fogo-gelo"
-      },
-      "whistle_rocky": {
-        "name": "Apito de Rocky"
-      },
-      "whistle_proud_grunt": {
-        "name": "Apito de bruto orgulhoso"
-      },
-      "whistle_loot_goblin": {
-        "name": "Apito de goblin do saque"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Apito de Penny Centelha Dourada"
-      },
-      "whistle_stag": {
-        "name": "Apito de cervo"
-      },
-      "whistle_alpaca": {
-        "name": "Apito de alpaca"
-      },
-      "whistle_horse": {
-        "name": "Apito de cavalo"
-      },
-      "whistle_sapling": {
-        "name": "Apito de broto"
-      },
-      "whistle_bull": {
-        "name": "Apito de touro"
-      },
-      "whistle_spider": {
-        "name": "Apito de aranha"
-      },
-      "whistle_raptor": {
-        "name": "Apito de raptor"
-      },
-      "whistle_skeleton": {
-        "name": "Apito de esqueleto"
-      },
-      "whistle_crystal_lich": {
-        "name": "Apito de lich de cristal"
-      },
-      "whistle_forgemaw": {
-        "name": "Apito de Bocaforja, o Fundido"
-      },
-      "whistle_sprites": {
-        "name": "Apito de Cintila e Brilha"
-      },
-      "whistle_crystal_tide": {
-        "name": "Apito de maré de cristal"
-      },
-      "whistle_phantom": {
-        "name": "Apito de fantasma"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Apito de fênix de chuva de brasas"
-      },
-      "charm_stag_acorn": {
-        "name": "Amuleto da coroa de bolotas"
-      },
-      "charm_stag_gilded": {
-        "name": "Amuleto dourado"
       },
       "lastflame_core": {
         "name": "Núcleo da Última Chama"
@@ -26340,6 +26217,9 @@ export const pt_BR: EnTranslations = {
       "thorn_sprout": {
         "name": "Broto Espinhoso"
       },
+      "wildheart_hunting_spear": {
+        "name": "Lança de caça"
+      },
       "buddy_ember_fox": {
         "name": "Raposa de Brasas"
       },
@@ -26414,9 +26294,6 @@ export const pt_BR: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, o Cavalo de Guerra"
-      },
-      "buddy_sapling": {
-        "name": "Broto"
       },
       "buddy_bull": {
         "name": "Touro"

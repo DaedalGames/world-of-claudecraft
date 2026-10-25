@@ -475,9 +475,24 @@ export const cs_CZ: EnTranslations = {
       "returning": "Přináší tvé předměty zpět",
       "waiting": "Čeká na vrácení tvých předmětů",
       "bags": "Poslat do banky",
+      "bagsVault": "Poslat materiály do trezoru",
       "bank": "Přinést z banky",
+      "vault": "Přinést z trezoru. Každý výběr přinese celý řádek.",
       "inventory": "Inventář",
       "bankTitle": "Banka",
+      "vaultTitle": "Trezor materiálů",
+      "storeTabs": "Úložiště kurýra",
+      "vaultCap": "Uchová {cap} kusů každého materiálu",
+      "vaultEmpty": "Váš trezor je prázdný.",
+      "vaultLocked": "Odemkněte trezor materiálů u bankéře, abyste jej mohli používat s kurýrem.",
+      "boundBank": "Na cestě do banky",
+      "boundVault": "Na cestě do trezoru materiálů",
+      "boundAccount": "Na cestě do banky jiné postavy",
+      "accountTitle": "Ostatní postavy",
+      "accountBank": "Přinést z této banky. Postava musí být při příchodu kurýra odhlášená.",
+      "bagsAccount": "Poslat do banky postavy {name}",
+      "bagsAccountNone": "Vyberte postavu, které chcete poslat předměty.",
+      "accountPlanned": "Naplánováno pro {name}: {count} stohů. Výběr pro jinou postavu je nahradí.",
       "capacity": "{used} / {capacity} míst",
       "cargo": "Kurýrův inventář",
       "empty": "Žádné předměty",
@@ -485,7 +500,7 @@ export const cs_CZ: EnTranslations = {
       "selected": "Vybráno {count} / {limit} hromádek",
       "select": "Vybrat {item}, {count}",
       "selectedItem": "Zrušit výběr {item}, {count}",
-      "instructions": "Vyber celé hromádky. Kurýr je nejprve uloží a pak vyzvedne požadované předměty. Úkolové předměty nelze posílat.",
+      "instructions": "Vyberte celé stohy pro svou banku, Trezor materiálů nebo jinou postavu. Kurýr je nejprve uloží a pak vyzvedne požadované předměty. Úkolové předměty nelze posílat.",
       "membership": "Před další cestou si obnov členství.",
       "cargoSafe": "Vrácené předměty mohou přeplnit plné batohy. Kurýr po doručení zmizí, dokud ho znovu nepřivoláš.",
       "unavailable": "Přivolej kurýra a naplánuj doručení."
@@ -862,7 +877,7 @@ export const cs_CZ: EnTranslations = {
       "titleOffer": "Titul: {title}",
       "titlePreview": "Zobrazeno jako {preview}",
       "mountOffer": "Jízdní zvíře: {mount}",
-      "mountPreview": "Pozemní jízdní zvíře: +{pct}% rychlost pohybu při jízdě. Vyžaduje výcvik jízdy.",
+      "mountPreview": "Vzhled jízdního zvířete pro všechny postavy účtu. Rychlost určuje jezdecký výcvik.",
       "skinOffer": "Vzhled meče: {skin}",
       "skinPreview": "Mění vzhled vybaveného meče u každé postavy na tvém účtu. Pouze vzhled: žádné vlastnosti.",
       "buy": "Koupit",
@@ -2538,7 +2553,7 @@ export const cs_CZ: EnTranslations = {
       "riding": "Jízda",
       "mount": "Nasednout",
       "dismount": "Sesednout",
-      "useToRide": "Použij k přivolání tohoto jízdního zvířete.",
+      "useToRide": "Použijte k nasazení tohoto vzhledu a přivolání jízdního zvířete. Ponechte předmět v brašnách nebo bance libovolné postavy a sdílejte vzhled v celém účtu. Rychlost určuje jezdecký výcvik.",
       "emptyTitle": "Žádná jízdní zvířata nezískána",
       "emptyStableHint": "Dosáhni úrovně 20 a vezmi si jezdecké lekce u Stájmistryně Marly ve Highwatchských stájích, západně od Highwatche.",
       "emptyDropHint": "Vzácnější jízdní zvířata padají z hrdinských bossů žalářů a z dokončených trhlin.",
@@ -2568,9 +2583,9 @@ export const cs_CZ: EnTranslations = {
       "name_rickshaw_mount": "Kostipoutaná rikša",
       "name_wobbles_slime": "Sliz Vikláček",
       "name_nightwing_chimera": "Chiméra Noční křídlo",
-      "desc_valorsteed": "Otužilý, jistonohý oř poskytující zvýšenou rychlost cestování.",
-      "desc_grag_bear": "Otužilý, jistonohý medvěd poskytující zvýšenou rychlost cestování.",
-      "desc_stalkglider_snail": "Statný, pomalu se pohybující plž poskytující zvýšenou rychlost cestování.",
+      "desc_valorsteed": "Odolný oř s jistým krokem a koženým sedlem.",
+      "desc_grag_bear": "Odolný medvěd s jistým krokem a těžkým sedlem.",
+      "desc_stalkglider_snail": "Statný, rozvážný hlemýžď s mechem porostlou ulitou.",
       "desc_aether_hover_cycle": "Výkonné magitechnické kolo navržené pro rychlý, nízko se vznášející pohyb v boji.",
       "desc_shadowjump_toad": "Mohutná, jistonohá obří ropucha, vycvičená v bleskurychlých stínových skocích, které zvládnou jakýkoli terén.",
       "desc_stormfeather_griffin": "Vznešený bouřný gryf, který se plíží po zemi na rounami okovaných spárech, se složenými křídly.",
@@ -2593,7 +2608,7 @@ export const cs_CZ: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Stiskni {key} pro nasednutí na cvičného Udatného oře.",
-      "ownedMountPrompt": "Tvé otěže jsou v tvých brašnách. Použij je k jízdě.",
+      "ownedMountPrompt": "Vyberte jízdní zvíře v Kosmetice. K jízdě použijte Nasednout / Sesednout.",
       "ridePrompt": "Následuj zářící značku ke startovní čáře a stiskni Začít závod.",
       "begin": "Začít lekci",
       "success": "Zkrotil jsi Udatného oře.",
@@ -2864,6 +2879,10 @@ export const cs_CZ: EnTranslations = {
       "actionCamShoulderLeft": "Vlevo {pct}",
       "actionCamShoulderRight": "Vpravo {pct}",
       "actionCamShoulderCenter": "Uprostřed",
+      "firstPersonMode": "První osoba (maximální přiblížení)",
+      "firstPersonOff": "Vypnuto",
+      "firstPersonBody": "Zobrazit tělo",
+      "firstPersonNoBody": "Bez těla",
       "showAttackButton": "Zobrazit tlačítko útoku",
       "showDailyRewardsChest": "Zobrazit truhlu denních odměn",
       "mobileCameraJoystick": "Joystick kamery",
@@ -3826,6 +3845,12 @@ export const cs_CZ: EnTranslations = {
       "linkHint": "Shift + kliknutí vloží odkaz na tento předmět do chatu."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} dřívější předání není zobrazeno.",
+        "few": "{count} dřívější předání nejsou zobrazena.",
+        "many": "{count} dřívějších předání není zobrazeno.",
+        "other": "{count} dřívějších předání není zobrazeno."
+      },
       "guildBoardShown": {
         "one": "Zobrazena {count} gilda",
         "few": "Zobrazeny {count} gildy",
@@ -4278,6 +4303,8 @@ export const cs_CZ: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Nastavit obtížnost dungeonu: Hrdinská",
       "setNormal": "Nastavit obtížnost dungeonu: Normální",
+      "unappliedNormal": "Vybrána hrdinská obtížnost. Současné instance jsou stále normální.",
+      "unappliedHeroic": "Vybrána normální obtížnost. Současné instance jsou stále hrdinské.",
       "resetAll": "Resetovat všechny instance",
       "resetDone": "Všechny instance byly resetovány.",
       "resetNone": "Nemáš žádné instance k resetování.",
@@ -4287,10 +4314,11 @@ export const cs_CZ: EnTranslations = {
       "resetSameDifficulty": "Před resetováním těchto instancí změň obtížnost dungeonu. Prázdné instance se po 5 minutách resetují samy.",
       "resetLoot": "Instance nelze resetovat, dokud uvnitř zůstává kořist.",
       "resetConfirmTitle": "Resetovat všechny instance?",
-      "resetConfirmBody": "Tím opustíš prázdné instance z dříve vybrané obtížnosti. Nevyzvednutá kořist zabrání resetování.",
+      "resetConfirmBody": "Opustíte své prázdné instance, aby další průchod začal znovu na zvolené obtížnosti. Uzamčení se nemění. Reset znemožní kdokoli uvnitř nebo nevyzvednutá kořist.",
       "resetConfirm": "Resetovat instance",
       "resetCooldown": "Instance lze resetovat pouze jednou za 5 minut.",
-      "resetUsage": "Po změně obtížnosti použij /dungeon reset k opuštění prázdných instancí.",
+      "resetAlreadyFresh": "Vaše instance jsou již obnovené. Od posledního resetu do nich nikdo nevstoupil.",
+      "resetUsage": "Pomocí /dungeon reset opusťte své prázdné instance a začněte je znovu.",
       "entryMismatchNormal": "Tato instance je nastavena na normální obtížnost. Použij Resetovat všechny instance a začni nový hrdinský průchod.",
       "entryMismatchHeroic": "Tato instance je nastavena na hrdinskou obtížnost. Použij Resetovat všechny instance a začni nový normální průchod."
     },
@@ -4623,7 +4651,17 @@ export const cs_CZ: EnTranslations = {
         "pollinated": "Dotyk Semenného lusku v něm okamžitě vypěstuje Trnitý výhonek. Vyhýbej se semenům a nech je rozdupat neopyleným hráčem. Nedotčený lusk vyklíčí po {seconds} s (na hrdinskou se po {heroic} s zahrabe a vynoří vedle nejbližšího hráče).",
         "prey": "Zulgar tě loví. Veď ho přes rozsvícený sluneční glyf a zpomalíš ho o {slow}%. Pokud tě dostihne, Rozsápání ti způsobí {damage} poškození ({heroic} na hrdinskou) a srazí tě na {stun} s.",
         "avatar": "Pohybuje se o {pct}% rychleji a loví svou Kořist. Zpomalení a znehybnění fungují, omráčení trvají polovinu obvyklé doby.",
-        "vanished": "Skrytý a imunní vůči poškození. Chystá se skočit na nejvzdálenějšího hráče."
+        "vanished": "Skrytý a imunní vůči poškození. Chystá se skočit na nejvzdálenějšího hráče.",
+        "sunstruck": "Zasažen rozsvíceným slunečním glyfem: pohybuje se o {pct}% pomaleji.",
+        "sunstruckExposed": "Zasažen rozsvíceným slunečním glyfem: utrpí o {pct}% více poškození.",
+        "sunWary": "Do konce účinku ho nemůže zasáhnout žádný sluneční glyf. Rozsvícený glyf, přes který přejde, zůstane svítit.",
+        "pinned": "Lovecké kopí vás drží na místě. Krvácíte za {bleed} fyzického poškození ({heroicBleed} na hrdinské obtížnosti) každých {every} s a Pulz Divokého srdce vás zasahuje kdekoli a způsobuje o {pulse}% více poškození. Spoluhráč vytáhne kopí za {pull} s. Pokud není nikdo jiný volný, vytáhněte je sami za {wrench} s. Uvolní vás po {seconds} s.",
+        "idolAwake": "Kamenný jaguár je vzhůru. Každých {every} s dýchne na jednu polovinu terasy a pak na druhou po varování na zemi trvajícím {warning} s: {min} až {max} přírodního poškození ({heroicMin} až {heroicMax} na hrdinské obtížnosti) všem v dané polovině. Zulgar zůstává Avatarem jaguára až do smrti a vybírá novou Kořist každých {seconds} s ({heroicSeconds} s na hrdinské obtížnosti)."
+      },
+      "temple": {
+        "scoreWard": "Zpívá partituru: do konce neutrpí žádné poškození. Vstupte na měsíční dlaždice v pořadí, v jakém zazněly, než skončí sloka, a zlomte její hlas. Střídejte se: po tónu počkejte, až jiný hráč zahraje další správný tón. Jediný přeživší může dokončit sám. Pokud sloka skončí dřív, Nesoulad způsobí všem na nádvoří {min} až {max} mrazivého poškození ({heroicMin} až {heroicMax} na hrdinské obtížnosti).",
+        "brokenVoice": "Její hlas je zlomený: do konce účinku utrpí o {pct}% více poškození.",
+        "spentVoice": "Nemůžete rozeznít další měsíční dlaždici, dokud jiný hráč nezahraje další správný tón. Vstup na dlaždici během účinku nevynuluje odpověď ani vás nezraní. Nelze rozptýlit. Zmizí, když jste jediným živým hráčem ve své instanci nebo partitura skončí."
       },
       "bastion": {
         "brineColumn": "Znehybněn ve sloupci mořské vody: každých {tick} s utrpíš {min} až {max} přírodního poškození po dobu až {seconds} s. Přerušte nebo omračte Přílivem spoutaného akolytu a účinek ukončíte.",
@@ -5256,6 +5294,9 @@ export const cs_CZ: EnTranslations = {
       "partyTradeWindow": "Tento předmět můžeš dalších {time} směňovat s hráči, kteří sdíleli jeho kořist. Nasazení předmětu okno pro směnu ukončí.",
       "perfectedBadge": "Zdokonalené",
       "perfectingRank": "Zdokonalování: hodnost {rank} z {ranks}",
+      "lootedBy": "Ukořistila postava {name} dne {date}",
+      "questRewardTo": "Odměna za úkol pro {name} dne {date}",
+      "obtainedBy": "Získala postava {name} dne {date}",
       "materialSourceGatherer": "{count} × sebral(a) {name}",
       "trophySkullSource": "{count} × Získáno od {name}",
       "materialSourceGathererSigned": "{count} × sebral(a) {name}, podepsal(a) {signer}",
@@ -5799,14 +5840,8 @@ export const cs_CZ: EnTranslations = {
       "logAdminPurge": "Administrátor: odstranění {count}x {item}"
     },
     "collections": {
-      "title": "Lov",
-      "close": "Zavřít lov",
-      "keybindLabel": "Lov",
-      "launcherTitle": "Lov: společníci, jízdní zvířata a sady předmětů",
       "tabs": {
-        "buddies": "Společníci",
-        "mounts": "Jezdecká zvířata",
-        "sets": "Sady předmětů"
+        "buddies": "Společníci"
       },
       "state": {
         "owned": "Získáno",
@@ -5816,7 +5851,6 @@ export const cs_CZ: EnTranslations = {
       },
       "presenceDefault": "Cítíš přítomnost, která tě sleduje.",
       "revealed": "{name} se rozhodl tě následovat.",
-      "cosmeticUnlocked": "Nový vzhled pro {name}: {look}.",
       "presence": {
         "ember_fox": "Něco malého a teplého ťapká za tebou.",
         "moss_hare": "Šustění v rašelině drží krok s tebou.",
@@ -5854,134 +5888,9 @@ export const cs_CZ: EnTranslations = {
         "phantom": "Vzduch za tebou je o trochu příliš nehybný.",
         "emberfall_phoenix": "Za zády se ti usazuje teplo jako od přikrytého ohně."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Spoutaný mrazem",
-        "crystal_lich_voltaic": "Bleskový",
-        "forgemaw_ashen": "Popelavý",
-        "forgemaw_whitehot": "Rozžhavený doběla",
-        "stag_acorn": "Žaludová koruna",
-        "stag_gilded": "Zlacený",
-        "moss_hare_verdant": "Zelenající se",
-        "proud_grunt_warlord": "Válečný pán",
-        "frog_sapphire": "Safírová žába"
-      },
       "actions": {
         "summon": "Přivolat",
-        "dismiss": "Zavřít",
-        "wear": "Nosit",
-        "remove": "Odebrat"
-      },
-      "looks": {
-        "title": "Vzhledy",
-        "unlocked": "Odemčeno",
-        "locked": "Uzamčeno",
-        "worn": "Nošeno",
-        "none": "Pro tohoto společníka zatím nejsou vytvořeny vzhledy"
-      },
-      "source": {
-        "bossLabel": "Společník z hlavního nepřítele",
-        "bossDrop": "{mob} ({location}), {chance}% na hráče za zabití",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% na hráče, {heroicChance}% na hrdinskou",
-        "bossDropHeroicOnly": "{mob} ({location}), jen hrdinská obtížnost, {chance}% na hráče",
-        "rollNote": "Každý hráč hází zvlášť. Nikdo neprohraje hod kvůli členovi družiny.",
-        "deedLabel": "Získáno za",
-        "deed": "Skutek {deed}",
-        "challengeLabel": "Výzva",
-        "challengeSpeed": "Poraz cíl {mob} do {seconds} sekund od zahájení boje",
-        "challengeDps": "Způsobuj cíli {mob} po celý boj {dps} poškození za sekundu",
-        "craftLabel": "Vyrobeno",
-        "craft": "{item} (recept povolání {profession})",
-        "grantLabel": "Uděleno",
-        "grantOnly": "Sezónní odměna: měsíční žebříček a odměny za nejlepší bojové záznamy",
-        "tokenLabel": "Žeton",
-        "token": "{item}, jednorázově použitý k připojení společníka"
-      },
-      "buddyLore": {
-        "ember_fox": "Liška z živých plotů Eastbrookského údolí, pojmenovaná po uhlově rudé srsti prosvítající zimním křovím. Zdejší lovci to s mláďaty vzdali před mnoha pokoleními a začali jim raději nechávat jídlo.",
-        "moss_hare": "Zajíc z Vrbové bažiny, se srstí zezelenalou po životě ve vlhké rašelině. Bažinní bylinkáři ho považují za šťastné znamení a nedovolí ho odehnat z prahu.",
-        "frog": "V Mirefenském močálu vyrůstají vykrmené a bezstarostné a celé noci zpívají z rákosin. Průvodci přísahají, že loď s jednou na palubě nikdy neuvázne.",
-        "crimson_claw_crab": "Přílivový krab ze Vzdáleného pobřeží, jehož klepeto zůstává rudé ještě dlouho po opuštění vody. Přístavní dělníci je kdysi nechávali závodit po prknech o mince.",
-        "golden_sentinel": "Hlídací brouk z Jantarového pádu, pozlacený pryskyřicí, v níž vyrůstal. Jméno je starší než pryskyřice: takoví strážci hlídali háje dlouho předtím, než někoho napadlo stáčet mízu do lahví.",
-        "nightfang": "Mladý lovec Nočního květu, tichý i na poměry svého druhu. Následuje tě pro společnost a neloví nic většího než můru.",
-        "tuskhorn_boar": "Thornpeakský chov, jemuž pastýři zkrátili nohy, protože chtěli kance, který nezboří plot. Povahu si přesto ponechal.",
-        "emerald_wolf": "Mládě z Přízračného lesa, jehož srst zelená ve světle korun, které nikdy docela nedosáhne k zemi. Strážci vychovávají všechny sirotky, které za sebou les zanechá.",
-        "tiger": "Pruhy Palmového kraje na zvířeti, které ho nikdy nevidělo: rod je držen v zajetí od zavření starých zvěřinců. Poslouchá píšťalku a nic jiného.",
-        "cate_coin": "Kočka, která se nehne od mince pod sebou a kterou nikdo nikdy neviděl jíst. Eastbrookští kupci se stále přou, kdo z těch dvou je vlastně mazlíček.",
-        "alon": "Cestovatelský maskot ze silnice, kterou žádná mapa nepřizná. Objevuje se všude, kde plán nevychází. Pozoruje, schvaluje a nenabízí vůbec žádnou pomoc.",
-        "trollface": "Šklebící se tvor, kterého Přízračný les vyvrhl a nechtěl zpět. Každý pokus o popis končí smíchem a rezignací vypravěče.",
-        "ansem": "Mluví o dveřích a temnotě, ale k ničemu dalšímu se přimět nedá. Kultisté Nočního květu ji prohlašují za svou. Při každém jejich obřadu se zatoulá pryč.",
-        "triple_t": "Tři kusy něčeho, nebo jedna věc třikrát. Svědectví se rozcházejí a tvor nevydrží v klidu dost dlouho, aby šel spočítat.",
-        "kekius": "Rozesmátý společník nejasného původu, jehož si závodiště Vichrného hřebene osvojila jako talisman. Přežil už čtyři stáje, které na něj přísahaly.",
-        "solbot": "Malý sluncem poháněný automat, vykopaný napůl pohřbený v popelu Dračích zemí, který stále tiká. Dílna, jež ho postavila, na pouzdře nezanechala žádnou značku.",
-        "frostfire": "Narodil se v Kraji Mrazivého závoje, kde horký pramen proráží ledové pole, a nikdy si nevybral, ke které polovině patří. V chladném vzduchu se z něj kouří a v teplém se třese.",
-        "rocky": "Kamenným krunýřem krytý lezoun z thornpeakských sutí, pomalý a naprosto klidný. Horníci je chovají, protože chvíli před závalem znehybní.",
-        "proud_grunt": "Veterán válečných skladů, jemuž zůstal pozdrav a zmizela hodnost. Válečný maršál Draven Kole ho předá každému vojákovi s dostatkem cti, aby znal její cenu.",
-        "loot_goblin": "Následuje každého, kdo nosí Hrdinské značky, a nikdo ho dosud nepřistihl při krádeži. Zásobovač Vex tvrdí, že to vůbec nic nedokazuje.",
-        "penny_goldspark": "Učednice gnómského kutila, která si účtuje za hodinu a stojí za každý měďák. Zbrojíř Hode ji přijal na splacení dluhu a teď tuto dohodu prodá každému, kdo má tisíc zlatých.",
-        "stag": "Rod z Věčné zahrady, vyšlechtěný z velkých jelenů, na nichž kdysi jezdili strážci. Před zvednutou rukou stále sklání hlavu ze zvyku staršího než sám tvor.",
-        "alpaca": "Stáda z Vichrného hřebene je chovají pro vlnu i povahu: v bouři není nic klidnějšího. Tahle za každou cestu plivne přesně na jednoho člověka.",
-        "horse": "Poník z údolí, vyšlechtěný drobný do sadových uliček, jemuž nikdo neřekl, že není válečný oř. Drží s tebou krok a půjde za každým, kdo mu jednou dal jablko.",
-        "sapling": "Mladý strom s úsměvem v kůře a zvědavým fialovým pohledem. Kořeny ho nesou veselým kolébáním všude, kam se vydáš.",
-        "bull": "Býk z údolí velký jako pes. Jen díky tomu vůbec někdo souhlasil s jeho chovem doma. Povaha se spolu se zbytkem nezmenšila.",
-        "spider": "Pavouk z Přízračného lesa velký jako dlaň, který přestaví každý batoh, v němž ho neseš. Pavučina je pevnější než vlákno, které nahrazuje.",
-        "raptor": "Mládě z Dračích zemí, prodané dřív, než zjistí, jak rychle umí běhat. Každému novému majiteli řeknou, ať ho dobře krmí. Nikomu to nemusí říkat dvakrát.",
-        "skeleton": "Vylezl z mohyl Přízračného lesa, oprášil se a od té doby chodí za lidmi. Nikdo nezjistil, komu ty kosti patřily.",
-        "crystal_lich": "Úlomek samotného Nythraxise, stále rozechvělý chladem, který ho utvářel. Poslouchá toho, kdo ho vytáhl z trosek raidu, a dodnes mu to neodpustil.",
-        "forgemaw": "Byl ukován v Kelímku posledního jara a nikdy zcela dokončen. Z Ignivarovy slévárny odešel, když ještě dopadala kladiva. Najdeš ho jen při hrdinském sestupu: roztavený tvor se stále vrací ke své výhni a domů následuje toho, kdo oheň přežije dvakrát.",
-        "crystal_tide": "Přílivový skřítek, který se vozí na vlastní kapce mořského skla. Rybáři od údolí po Vzdálené pobřeží ho vytáhli z klidné vody při lovu večeře. Vodu, z níž vzešel, si nechává a k návratu ho nikdo nepřemluví.",
-        "sprites": "Dva malí ohniví skřítci, zlatý a tyrkysový, kteří se nikdy úplně neshodnou, kdo vede. Když se přiblížíš, spojí se v jediný zelený plamen, pak se znovu se smíchem rozletí.",
-        "phantom": "Přízrak velikosti dlaně z mohyl Přízračného lesa, samé prostěradlo a žádné kosti. Objeví se v zavřeném batohu a zůstane kvůli společnosti. Nikdo nepřišel na to, co chce, a ještě nikdy se nikoho nepokusil vystrašit.",
-        "emberfall_phoenix": "Každý podzim shoří na uhlík a na jaře znovu povstane z vlastního popela. Víc o ní nikdo neví. Nikdo nikdy nenašel hnízdo a nikdo žádnou nechytil dvakrát."
-      },
-      "petKind": {
-        "beast": "Šelmy",
-        "elemental": "Elementálové",
-        "humanoid": "Humanoidi",
-        "undead": "Nemrtví",
-        "celebrity": "Slavné osobnosti"
-      },
-      "armor": {
-        "cloth": "Látka",
-        "mail": "Kroužková zbroj",
-        "leather": "Kůže"
-      },
-      "stat": {
-        "intellect": "Intelekt",
-        "agility": "Obratnost",
-        "strength": "Síla",
-        "mixed": "Smíšené"
-      },
-      "set": {
-        "owned": "{owned} z {total} dílů",
-        "itemLevel": "úroveň předmětu {level}",
-        "bonusLabel": "Díly: {pieces}"
-      },
-      "detail": {
-        "dropLabel": "Padá z",
-        "vendorLabel": "Prodává",
-        "bindLabel": "Vázání",
-        "sellLabel": "Obchodník zaplatí",
-        "marketLabel": "Světový trh",
-        "exchangeLabel": "Burza $WOC",
-        "setLabel": "Získáno",
-        "drop": "{mob} ({location}), {chance}% za zabití",
-        "heroicDrop": "{mob} ({location}), jen hrdinská obtížnost, {chance}% za zabití",
-        "dropWithHeroic": "{mob} ({location}), {chance}% za zabití, {heroicChance}% na hrdinskou",
-        "globalDrop": "Libovolný nepřítel, {chance}% za zabití, jeden z {count} v této vzácnosti",
-        "fishingDrop": "Rybolov kdekoli, {chance}% za úlovek",
-        "vendor": "{npc} ({location}) za {price}",
-        "honorPrice": "{amount} cti",
-        "marksPrice": "{amount} hrdinských značek",
-        "noSource": "Zatím žádný zdroj ve hře",
-        "noItem": "Žádný předmět to zatím neposkytuje",
-        "tradeable": "Obchodovatelné",
-        "soulbound": "Vázáno na duši",
-        "noSell": "Nelze prodat",
-        "marketAtMerchant": "Zobrazeno u Obchodníka",
-        "marketChecking": "Kontrola...",
-        "marketNone": "Žádné nabídky",
-        "exchangeNone": "Žádné nabídky",
-        "exchangeUnavailable": "Nedostupné v tomto klientu"
+        "dismiss": "Zavřít"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const cs_CZ: EnTranslations = {
       "viewSources": "Zobrazit zdroje",
       "separateByGatherer": "Oddělit podle sběrače",
       "takeChosenQuantity": "Vyjmout zvolené množství",
-      "combine": "Sloučit hromádky materiálu"
+      "combine": "Sloučit hromádky materiálu",
+      "itemHistory": "Historie předmětu"
+    },
+    "itemHistory": {
+      "title": "{item}: historie",
+      "passedTo": "Předáno postavě {name} dne {date}",
+      "noTransfers": "Tento předmět nikdy nezměnil majitele.",
+      "close": "Zavřít",
+      "openAria": "Historie předmětu {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Než toto očarování použiješ, nauč se vzorec.",
@@ -7073,6 +6990,7 @@ export const cs_CZ: EnTranslations = {
         "summons_adds": "Přivolává posily",
         "lunar_tide": "Měsíční příboj (pulzující plošné poškození)",
         "chorus_and_solo": "Sbor a Sólo (na jedné značce se shlukněte, od druhé se rozestupte)",
+        "the_score": "Partitura (dvakrát zazpívá melodii na měsíčních dlaždicích: vstupte na ně v pořadí, v jakém zazněly, a zlomte její hlas)",
         "tideglass_reflections": "Odrazy přílivového skla (zabíjejte navzájem své zrcadlové obrazy)",
         "hydra_three_elements": "Tři živly (levá hlava dýchá mráz do 18yardového kužele a na 4 sekundy zpomaluje o 70 procent. Prostřední plive pod až 3 hráče jed, který po 1.5 sekundy vybuchne a místo dopadu 6 sekund pálí. Pravá střílí příval do 26yardového pruhu a odhazuje o 8 yardů: každému útoku uhněte. Když hlava padne, přeživší převezmou její útok)",
         "hydra_tsunami": "Přílivová vlna (hlavy se na 4.5 sekundy ponoří a utrpí o 75 procent méně poškození. Jednu polovinu tůně převalí vlna, příště druhou: na normální obtížnost 160 až 190 mrazivého poškození a odhození o 10 yardů. Přejděte na druhou polovinu nebo stůjte za obvodovým sloupem. Na hrdinskou se za 3.5 sekundy vrátí vlna přes druhou polovinu. První Přílivová vlna přichází po 24 sekundách boje, další vždy 40 sekund po průchodu předchozí)",
@@ -7197,6 +7115,23 @@ export const cs_CZ: EnTranslations = {
       "shadeLine": "Nech tuto návnadu. Útoč na Vaela, jehož lucerna vzplane v paprsku, a protrhni závoj",
       "timeAria": "Zbývá {seconds} sekund"
     },
+    "templeAlert": {
+      "melodyTitle": "Partitura",
+      "melodyLine": "Sledujte měsíční dlaždice, jak postupně znějí. Opakujte pořadí střídavě s jiným hráčem",
+      "melodyDarkLine": "Zapamatujte si pořadí, než dlaždice zhasnou. Opakujte je střídavě s jiným hráčem",
+      "answerTitle": "Odpovězte na partituru!",
+      "answerLine": "Střídejte se: vstupte na měsíční dlaždici označenou {place}. Tóny: {done} z {total}",
+      "answerDarkLine": "Střídejte se a opakujte pořadí zpaměti. Před dalším vstupem z dlaždice sestupte. Tóny: {done} z {total}",
+      "spentTitle": "Musí odpovědět jiný hlas",
+      "spentLine": "Nemůžete rozeznít dlaždici, dokud jiný hráč nezahraje další správný tón. Tóny: {done} z {total}",
+      "stepOffTitle": "Sestupte a vraťte se",
+      "stepOffLine": "Měsíční dlaždice zazní jen při vstupu. Opusťte tuto dlaždici a vstupte na ni znovu",
+      "falseTitle": "Falešný tón!",
+      "falseLine": "Tato dlaždice nebyla na řadě. Odpověď začíná znovu od první dlaždice",
+      "brokenTitle": "Hlas Selthe je zlomený!",
+      "brokenLine": "Do konce utrpí o {pct}% více poškození: použijte své nejsilnější útoky",
+      "timeAria": "Zbývá {seconds} sekund"
+    },
     "wildheartAlert": {
       "preyTitle": "Jsi Kořist!",
       "preyLine": "Veď Zulgara přes rozsvícené sluneční glyfy a zpomal ho, než tě dožene a rozsápe",
@@ -7207,7 +7142,21 @@ export const cs_CZ: EnTranslations = {
       "pollinatedLine": "Vyhýbej se semenným luskům: dotyk při Opylení vytvoří nepřátele. Neoznačení spojenci je mohou rozdupat",
       "bondTitle": "Pouto smečky",
       "bondLine": "Oddělte Pána šelem od jaguára a zrušte jejich snížení utrpěného poškození i bonus k poškození",
-      "timeAria": "Zbývá {seconds} sekund"
+      "timeAria": "Zbývá {seconds} sekund",
+      "preyAloneLine": "Nikdo jiný nemůže rozsvítit sluneční glyfy. Stůjte na zhasnutém {seconds} s, abyste jej rozsvítili, a pak přes něj nalákejte Zulgara",
+      "pinnedTitle": "Probodnutí!",
+      "pinnedLine": "Spoluhráč musí vytáhnout Lovecké kopí. Pulz Divokého srdce vás zasahuje silněji, když jste probodnutí",
+      "pinnedSelfLine": "Nikdo není volný, aby pomohl: vytáhněte Lovecké kopí sami, než zasáhne Pulz Divokého srdce",
+      "sunstruckTitle": "Zulgara zasáhlo slunce!",
+      "sunstruckLine": "Do konce utrpí o {pct}% více poškození: použijte své nejsilnější útoky",
+      "spearTitle": "Spojenec je probodnutý!",
+      "spearLine": "Běžte k Loveckému kopí a vytáhněte je, než zasáhne Pulz Divokého srdce",
+      "glyphTitle": "Rozsviťte sluneční glyfy",
+      "glyphLine": "Stůjte na zhasnutém slunečním glyfu {seconds} s a rozsvítíte jej. Když přes něj Zulgar přejde, utrpí o {pct}% více poškození na {duration} s",
+      "glyphLightingTitle": "Rozsvěcení slunečního glyfu",
+      "glyphLightingLine": "Zůstaňte na glyfu, dokud se nerozsvítí. Sestoupení začne postup znovu",
+      "breathTitle": "Dech modly!",
+      "breathLine": "Kamenný jaguár se chystá dýchnout na tuto polovinu terasy. Přejděte do druhé poloviny"
     },
     "sanctumAlert": {
       "quenchTitle": "V kalicí vodě!",
@@ -7296,6 +7245,13 @@ export const cs_CZ: EnTranslations = {
       "relightFar": "Pro zapálení se přibliž na {range} yardů",
       "relightAria": "Znovu zapálit: {name}",
       "relightUsingLine": "Pokračuj v usměrňování a zapal svíci: odčerpává zdraví. Zásahy ho nepřeruší, pohyb nebo omráčení ano",
+      "freeLine": "Vytáhněte kopí ze země a osvoboďte jeho oběť. Zásah vás nezastaví; pohyb nebo omráčení ano",
+      "freeKey": "Vytáhnout {name}",
+      "freeTap": "Klepnutím sem vytáhnete {name}",
+      "freeClick": "Kliknutím sem vytáhnete {name}",
+      "freeFar": "Přibližte se na {range} m pro vytažení",
+      "freeAria": "Vytáhnout {name}",
+      "freeUsingLine": "Při vytahování kopí stůjte: pohyb nebo omráčení vás přeruší",
       "timeAria": "Zbývá {seconds} sekund"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const cs_CZ: EnTranslations = {
       "detach": "Odpojit",
       "applied": "Použito",
       "owned": "Vlastněno",
+      "notCollected": "Nezískáno",
       "storeOnly": "Dostupné v obchodě WOC",
       "preview": "Náhled",
       "previewAria": "Náhled {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Vzhled jezdeckého zvířete se vykreslí přes zvíře, na kterém tato postava jede. Nikdy nemění rychlost.",
-      "mountsNoMount": "Nejprve si pořiď jezdecké zvíře, vzhled potřebuje něco, na čem se dá jezdit.",
+      "mountsIntro": "Zde vyberte vzhled svého jízdního zvířete. Rychlost určuje jezdecký výcvik. Ponechte předmět zvířete v brašnách nebo bance libovolné postavy a sdílejte jeho vzhled v celém účtu.",
+      "mountsNoMount": "Naučte se jezdit u stájové mistryně Marly, abyste mohli přivolat jízdní zvíře.",
       "skinsEmpty": "Zatím nevlastníš žádné vzhledy zbraní. Navštiv obchod WOC.",
       "skinsApplyHint": "Vybav si {type}, aby se tento vzhled použil.",
       "mechIntro": "Bojový mech nahrazuje tělo této postavy. Najednou lze nosit jednu barevnou variantu.",
@@ -7430,6 +7387,7 @@ export const cs_CZ: EnTranslations = {
       "sourceActivityRiftFirstClear": "Uděleno každému členu družiny, která zvládne první průchod hodnocenou trhlinou",
       "sourceActivityBuriedHoard": "Nalezeno v odměnném truhlici pohřbeného pokladu, trezoru který mapu vede",
       "sourceActivityLanternHall": "Zakoupeno za Lucernové pečeti u zásobovače Lucernové síně",
+      "sourceActivityWeeklyVaultPvp": "Vybráno z PvP řádku týdenního trezoru",
       "cellMissingSourceAria": "{name}, dosud nenalezeno, {source}",
       "cellOwnedClearsAria": "{name}, zkatalogizováno, poprvé nalezeno při průchodu {count}",
       "searchPlaceholder": "Hledat relikvie",
@@ -8454,6 +8412,16 @@ export const cs_CZ: EnTranslations = {
         "heroicCloud": "Pylový mrak: stání do {cloudRadius} yardů od Opyleného hráče po {cloudSeconds} s opylí i tebe."
       },
       "zulgar": {
+        "pulseSummaryRework": "Každých {every} s zasáhne kouzlo sesílané {cast} s všechny do {radius} m za {min} až {max} poškození. Probodnutí hráči utrpí {pinMult}násobek tohoto poškození na jakoukoli vzdálenost.",
+        "spearSummary": "Kouzlo sesílané {cast} s probodne hráče kromě tanka, nebo tanka, pokud nikdo jiný nezbývá. Znehybnění trvá až {seconds} s a způsobuje {bleed} poškození každých {tick} s.",
+        "spearResponse": "Zaměřte kopí a interagujte do {range} m, abyste je vytáhli za {pull} s. Poškození vytahování nepřeruší. Pokud na terase není nikdo jiný volný, oběť může interagovat a uniknout za {self} s.",
+        "glyphSummaryRework": "Všech {count} glyfů začíná zhasnutých. Během lovu neoznačený hráč rozsvítí glyf, když na něm stojí {kindle} s. Pokud žádný neoznačený nezbývá, Kořist ho rozsvítí za {alone} s. Sestoupení vynuluje postup. Přechod přes rozsvícený glyf ho zpomalí o {slow} a zvýší utrpěné poškození o {vulnerability} na {seconds} s. Glyf nelze znovu rozsvítit {dark} s; jiný glyf ho nemůže zasáhnout {wary} s. Během lovu omráčení trvají polovinu doby.",
+        "glyphResponseRework": "Neoznačení hráči rozsvěcují glyfy před Kořistí. Veďte ho přes ně a pak útočte během účinku Zasažený sluncem. Glyfy zhasnou, když lov skončí.",
+        "idolSummary": "Při {health} zdraví zůstane jaguářím duchem až do porážky. Kořistí se může stát i tank.",
+        "idolHuntSummary": "Každých {every} s vybere novou Kořist a {turn} s se k ní otáčí, než začne pronásledovat.",
+        "idolHuntHeroicSummary": "Každých {pair} s označí novou dvojici a každých {switch} s mezi nimi přepíná. Každá změna dá nové Kořisti {turn} s, než ji začne pronásledovat.",
+        "breathSummary": "Každých {every} s se polovina terasy označí na {warning} s, pak všichni v této polovině utrpí {min} až {max} přírodního poškození. Dech střídá poloviny.",
+        "breathResponse": "Přejděte do neoznačené poloviny, než skončí varování. Středová čára je bezpečná. Na hrdinské obtížnosti dech také zhasne rozsvícené glyfy ve své polovině; lze je ihned znovu rozsvítit.",
         "overview": "Velekněz kotliny. Stálý boj s vyznačeným kruhem, dokud se nepromění v jaguářího ducha a nezačne lovit hráče. Lovený ho vodí přes rozsvícené sluneční glyfy, které ho zpomalují.",
         "phaseShrineName": "Svatyně",
         "phaseShrineSummary": "Bojuje zblízka a vysílá kolem sebe kruhový pulz.",
@@ -8766,6 +8734,14 @@ export const cs_CZ: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe se nikdy nehýbe ani neútočí zblízka. Na Sbor se seskupte, na Sólo opusťte skupinu, přerušte Árii tonutí a vyhněte se Přívalu jezera. Při dvou hranicích zdraví opakujte její melodii na měsíčních dlaždicích a střídejte zpěváky.",
+        "phaseSummaryRework": "Její ostatní útoky se pozastaví, když skupina odpovídá na partituru. Střely měsíční vody nemají ukazatel sesílání a nelze je přerušit.",
+        "boltSummaryRework": "Mezi ostatními kouzly zasáhne každých {every} s střela po viditelném varování trvajícím {windup} s a způsobí {mult}násobek poškození její zbraně jako mrazivé poškození. Přerušení Árie tonutí zastaví střely i árii na {quiet} s.",
+        "boltResponseRework": "Udržujte tanka v jejím zorném poli. Přerušení si nechte na Árii tonutí.",
+        "tipHealerRework": "Sledujte cíl árie a každého, kdo zůstane sám při Sboru. Během partitury pomáhejte s dalším tónem a léčte chyby.",
+        "scoreSummary": "Při {first} a {second} zdraví se stane nezranitelnou a zahraje {notes}, poté {finalNotes} tónů. Zopakujte je do {answer}, poté {finalAnswer} s. Chybná dlaždice způsobí {falseNote} mrazivého poškození a vynuluje postup, ale ne časovač. Vypršení času způsobí všem {min} až {max} mrazivého poškození. Úspěch ji omráčí na {stun} s a zvýší utrpěné poškození o {vulnerability} na {bonusSeconds} s.",
+        "scoreResponse": "Sledujte melodii a vstupujte na dlaždice ve správném pořadí. Ve správných tónech se střídejte s jiným živým hráčem; jediný přeživší může dokončit sám. Zablokované kroky neškodí. Z dlaždice sestupte a vstupte znovu, aby zazněla, i když jste na ní stáli už před začátkem odpovědi.",
+        "scoreHeroic": "Během odpovědi dlaždice zhasnou. Zapamatujte si melodii a střídejte se.",
         "overview": "Matka sboru zpívá ze své tůně a nikdy se nehýbe ani neútočí zblízka. Označuje hráče sdíleným Sborem a osamělým Sólem, míří na jednoho sílící árií a posílá vlnu přes nádvoří. Střely i árii lze přerušit.",
         "phaseName": "Sborové nádvoří",
         "phaseSummary": "Jediná fáze řízená časovači. Mechanika, jejíž čas nastane během sesílání, čeká na jeho dokončení.",
@@ -9678,7 +9654,7 @@ export const cs_CZ: EnTranslations = {
       "graveyard": "Kam by se vrátil tvůj duch, kdybys tady padl(a).",
       "dungeons": "Všechny dungeony se zónou, ve které leží jejich dveře, a velikostí skupiny, pro kterou jsou stavěné, plus obtížnost, na kterou máš aktuálně nastaveno.",
       "dungeonMode": "Přepne tvé dungeony mezi normální a hrdinskou obtížností.",
-      "dungeonReset": "Opustí tvé vlastní prázdné instance, což uděláš po změně obtížnosti.",
+      "dungeonReset": "Opusťte své prázdné instance, aby další průchod začal znovu na stejné nebo nové obtížnosti.",
       "groupRecovery": "Zotavení a stav",
       "unstuck": "Cesta ven, když tě svět uvězní. Vydrž stát nehybně po krátké odpočítávání a přemístí tě to na nejbližší hřbitov, a oživí tě tam, pokud jsi už padl(a). Poté tě na chvíli oslabí Nemoc z vyproštění, takže je to poslední záchrana, ne zkratka.",
       "unstuckWindow": "Cesta ven, když tě svět uvězní. Vydrž stát nehybně po krátké odpočítávání a přemístí tě to na nejbližší hřbitov, a oživí tě tam, pokud jsi už padl(a). První použití za hodinu je zdarma. Použiješ-li ho znovu do hodiny od posledního použití, na chvíli tě to oslabí Nemocí z vyproštění, takže je to poslední záchrana, ne zkratka.",
@@ -10105,27 +10081,27 @@ export const cs_CZ: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Jízdní zvířata a jízda",
-      "intro": "Jízdní zvíře je rychlejší způsob, jak se dostat po světě, a nic víc. Jízdu se naučíš ve stájích, koupíš si svůj první pár otěží a každá další cesta je pak kratší.",
+      "intro": "Vyberte vzhled jízdního zvířete, naučte se jezdit ve stájích a cestujte světem rychleji. Tempo určuje výcvik; každý vzhled je kosmetický.",
       "whatHeading": "Co je jízdní zvíře",
-      "whatBody": "Jízdní zvíře je bestie, na které jezdíš, a to, co ti dává, je rychlost. Žádná zbroj, žádné poškození, žádné statistiky: nese tě po zemi rychleji a při skoku vyskočíš o něco výš, a to je celá dohoda. Každé jízdní zvíře ve hře je pozemní, takže žádné létání neexistuje a žádné z nich neplave.",
+      "whatBody": "Jízdní zvířata jsou kosmetické vzhledy pro vaši vycvičenou jízdu. Nedávají zbroj, poškození ani bojové statistiky. Jezdecký výcvik zvyšuje rychlost cestování po zemi a skoky v sedle dosáhnou výše. Všechna jízdní zvířata zůstávají na zemi a žádné neumí plavat.",
       "learnHeading": "Jak se naučit jezdit",
-      "learnBody": "Jízda je dovednost, kterou si koupíš jen jednou, a otevírá se na úrovni {level}. Marla Hitchen, správkyně stájí, spravuje Stáje Vichrného hřebene na stráních, a prodává Jezdecký výcvik za 80 zlatých. Právě tenhle nákup je to, co ti vůbec dovolí sednout na jízdní zvíře, a zůstává s tebou navždy.\n\nJakmile ho máš, čeká na tebe u Marly úkol: Jezdecké lekce. Vezmi si ho, sleduj značku k zářícímu čtverci za startovním obloukem a stiskni Začít závod. Na lekci ti půjčí cvičného Valorsteeda, takže samotná lekce tě nic nestojí. Projeď parkur, dokonči ho a vrať se k ní pro mince a zkušenosti. Půjčené zvíře se pak vrátí zpátky do stáje, takže lekce tě naučí sedět v sedle, ne že bys dostal(a) koně.",
+      "learnBody": "Jízda se odemyká na úrovni {level}. Stájová mistryně Marla Hitchen prodává Jezdecký výcvik za 80 zlatých ve Stájích Vichrného hřebene. Základní výcvik zvyšuje rychlost jízdy o {basicSpeed}%. Po jeho naučení Marla prodává také Pokročilý jezdecký výcvik za {advancedFee} zlatých, který zvyšuje bonus na {advancedSpeed}%. Každý stupeň patří postavě, která se jej naučí.\n\nPo základním výcviku přijměte Marlin úkol Jezdecké lekce a sledujte značku k zářícímu čtverci za startovním obloukem. Stiskněte Začít závod a vypůjčte si cvičného Udatného oře. Dokončete trať a vraťte se pro mince a zkušenosti. Vypůjčený kůň se po skončení lekce vrací do stáje.",
       "whereHeading": "Kde ji najdeš",
       "whereBody": "Stáje Vichrného hřebene jsou vyznačené na mapě Vichrného hřebene, na stráních mezi Srázem a Vrakovými poli. Marla stojí vedle stodoly, obrácená k závodní ohradě.",
       "firstHeading": "Tvé první jízdní zvíře",
-      "firstBody": "Valorsteed je jediné jízdní zvíře, které se dá koupit kdekoli ve světě. Jakmile se naučíš Jízdu, Marla ti prodá Otěže Valorsteeda za 10 zlatých, a ty otěže jsou navždy tvoje. Každé jiné jízdní zvíře se získává ven ve světě, takže tenhle kůň je místo, kde začíná skoro každý jezdec.",
+      "firstBody": "Marla prodává Otěže Udatného oře za 10 zlatých po naučení jízdy. Držení otěží odemyká vzhled koně v Kosmetice všem postavám účtu. Výcvik již umožňuje přivolat jízdní zvíře bez nošení otěží, takže při změně vzhledu vyberte koně nebo jiný vlastněný vzhled.",
       "rideHeading": "Nasedání a sesedání",
-      "rideBody": "Neexistuje žádné okno jízdních zvířat ani oblíbená položka k nastavení, protože otěže jsou to jízdní zvíře. Použij otěže z brašen nebo ze slotu na akční liště a pojedeš na tom zvířeti. Přivolání chvíli trvá, je to krátké volání, ne okamžité, takže tě nezachrání před špatným pullem. Sesednutí je okamžité a nikdy zablokované.\n\nPoužij otěže, na kterých už jedeš, a to jízdní zvíře uklidíš. Použij jiné otěže, zatímco jsi v sedle, a rovnou na ně přesedneš, bez přivolávání mezitím. Klávesa Nasednout / Sesednout, ve výchozím nastavení klávesa s obráceným apostrofem, tě vždy jen sesadí: je to cesta dolů, ne nahoru. Jedinou výjimkou je jezdecká lekce, kde stejná klávesa přivolá oře, kterého ti půjčila Marla, protože půjčený kůň nemá otěže, na které by ses dalo kliknout. Na telefonu nebo tabletu funguje tlačítko Nasednout v nabídce Více oběma směry, i když přivolá první otěže ležící v tvých brašnách místo té, kterou by sis vybral(a), takže když chceš konkrétní jízdní zvíře, klepni přímo na jeho otěže.",
+      "rideBody": "Otevřete Kosmetiku a na kartě Jízdní zvířata vyberte vzhled. Klávesa Nasednout / Sesednout, ve výchozím nastavení obrácený apostrof, přivolá vaše vycvičené jízdní zvíře s tímto vzhledem. Mobilní tlačítko Nasednout funguje stejně. Přivolání vyžaduje krátké soustředění; sesednutí je okamžité. Vzhled můžete změnit i v sedle beze změny rychlosti.\n\nOtěže lze použít také z brašen nebo akční lišty pro výběr vzhledu a přivolání. Použití vzhledu, na kterém již jedete, zvíře odvolá. Otěže v bance nebo u jiné postavy odemykají stejnou kosmetiku, aniž by je jezdec musel nosit.",
       "breaksHeading": "Co tě staví zpátky na nohy",
       "breaksBody": "Voda vždycky vyhraje. Vjeď do čehokoli dost hlubokého na plavání a hned jsi dole, protože žádné pozemní jízdní zvíře neplave, a smrt tě srazí tam, kde padneš. Nemůžeš žádné přivolat v boji, po smrti, když se vracíš jako duch, ani kdykoli během zápasu na Thornhollowských polích, který se bojuje pěšky od nástupu až do posledního výsledku: pokud jsi předtím čekal(a) v sedle, tvé zařazení do zápasu tě z něj shodí. Vstup do boje nebo do vody uprostřed přivolávání ho také zruší.\n\nVětšina toho, co děláš, tě také shodí ze sedla. Napřažení k útoku, zahájení sesílání, sbírání ze zdroje, rybaření, výroba, okouzlování, rozebírání i dobíjení profesního nástroje tě sesadí hned ve chvíli, kdy začneš, takže počítej s tím, že sesedneš u každé žíly. Přivolání jízdního zvířete zároveň ukončí jakoukoli podobu, kterou máš aktivní: podoba a sedlo nejdou dohromady nikdy.",
-      "speedHeading": "Rychlost a stupně",
-      "speedBody": "Rychlost je jediné, co odlišuje jedno jízdní zvíře od druhého. Valorsteed, kterého koupíš od Marly, nastavuje základní tempo, a jízdní zvířata, která posbíráš ve světě, jedou nad ním: čím vzácnější otěže, tím rychlejší jízda, v několika jasných stupních místo plynulého přechodu. Neexistuje žádný druhý stupeň Jízdy k natrénování ani žádné vylepšení, které bys pak koupil(a). Za Jízdu zaplatíš jen jednou a od té chvíle rozhodují o tom, jak rychle cestuješ, otěže, které používáš.",
+      "speedHeading": "Rychlost jízdy a výcvik",
+      "speedBody": "Základní jezdecký výcvik zvyšuje rychlost jízdy o {basicSpeed}%. Pokročilý jezdecký výcvik ji zvyšuje o {advancedSpeed}% a stojí u Marly {advancedFee} zlatých. Každý vzhled používá stejnou rychlost podle stupně výcviku postavy, bez ohledu na vzácnost či původ. Také vzhledy z obchodu používají tuto rychlost.",
       "collectHeading": "Odkud pocházejí vzácnější jízdní zvířata",
       "collectBody": "Mimo Marlin pult se otěže spíš nacházejí, než kupují. Padají z posledních bossů pětičlenných dungeonů a raidu ve hrdinském režimu, i z čištění trhlin, kde platí, že čím těžší trhlinu dokončíš, tím vzácnější otěže po sobě může nechat. Jsou to záměrně vzácné nálezy a žádný běh je negarantuje, takže nejlepší způsob, jak lovit jízdní zvíře, je nést ten lov s sebou na běhy, které bys dělal(a) tak jako tak. Tahle stránka ti neprozradí, které jízdní zvíře visí na kterém bossovi: to je na tobě, abys to zjistil(a).",
       "raceHeading": "Stájový závod",
       "raceBody": "Parkur v Marlině ohradě je otevřený komukoli a kdykoli, nejen během lekce. Nasedni na jízdní zvíře, postav se na zářící čtverec za obloukem a stiskni Začít závod. Odpočet tě chvíli podrží na místě, pak se spustí čas: přejeď všech sedm skoků a vrať se obloukem ven, než čas doběhne.\n\nSkok se počítá, jen když jsi opravdu ve vzduchu nad laťkou, takže obyčejné proježdění skrz nesplní nic. Skoky můžeš brát v libovolném pořadí a z kterékoli strany, a přeskočený skok není konec světa: vrať se a zkus ho znovu. Smrt, sesednutí nebo opuštění ohrady pokus ukončí, stejně jako dojetí času, které tě sesadí ze sedla tam, kde právě stojíš; vlastní zrušení pokusu čas jednoduše zastaví. Nic ti nebrání začít znovu. Není tu žádný poplatek, žádná doba obnovy a žádná odměna kromě samotného času, a parkur může běžet libovolný počet jezdců najednou, aniž by si překáželi.",
       "goodsHeading": "Otěže jsou obyčejné zboží",
-      "goodsBody": "Jízdní zvíře je předmět, což z něj dělá něco, s čím dokáže hýbat ekonomika. Jízdní zvíře vlastníš, dokud jeho otěže leží v tvých brašnách nebo v bance, i když otěže uložené v bance ti zvíře ponechají, aniž bys na něm mohl(a) jezdit: aby ses na bestii dostal(a), musíš otěže nosit u sebe. Hráčské otěže nenesou žádnou vazbu k duši, takže se obchodují, cestují poštou a vystavují na Světovém trhu jako každý jiný nález, pokud sám předmět neříká jinak. Než se otěží zbavíš, stojí za to znát dvě věci: žádný obchodník ti otěže nikdy nevykoupí zpátky, takže jízdní zvíře je nákup, který si necháš nebo předáš dál, ne že bys ho zpeněžil(a), a pokud otěže opustí tvé brašny i banku zároveň, ať už je vyměníš, pošleš poštou nebo prodáš na trhu, jízdní zvíře jde s nimi a ty jsi sesazen(a) tam, kde právě stojíš."
+      "goodsBody": "Sběratelské vzhledy jízdních zvířat zůstávají dostupné v celém účtu, dokud je alespoň jeden odpovídající předmět otěží v brašnách nebo osobní bance libovolné postavy. Obchodování, odeslání poštou, vystavení, prodej nebo jiné odstranění posledního platného předmětu odebere vzhled z Kosmetiky. Jezdec, který jej používá, se vrátí k výchozímu vzhledu koně a zůstane v sedle rychlostí svého výcviku.\n\nOtěže hráčů lze obchodovat, posílat poštou a nabízet na Světovém trhu, pokud předmět neuvádí jinak. Otěže koně lze také prodat obchodníkovi za 10 zlatých. Ostatní otěže si zachovávají vlastní omezení prodeje. Vzhledy z obchodu zůstávají kosmetikou účtu nezávislou na předmětech otěží."
     },
     "worldPage": {
       "heading": "Svět",
@@ -10300,7 +10276,7 @@ export const cs_CZ: EnTranslations = {
       "heroicRewardsBody": "Hrdinští bossové upouštějí kořist, kterou znáš, vylepšenou a v popisku označenou jako Hrdinská, a koncový boss každého běhu přidává epiky, které jinde nenajdeš. To poslední zabití také zanechá Hrdinské známky každému účastníkovi: měnu, kterou utratíš u ubytovatele Vexe v Highwatch, jehož pult je regál prstenů a přívěsků, který nekoupí nic než důkaz z hrdinských hlubin.",
       "heroicLockoutBody": "Normální dungeony lze běhat celý den. Hrdinský žádá trpělivost: zabití koncového bosse omezí všechny v běhu na jedno hrdinské dokončení toho dungeonu za den a raid drží denní zámek pro každou obtížnost. Na živé říši všechny denní zámky padají společně v její vlastní noční hodině obnovy, takže dokončení vzaté těsně před tou hodinou a jiné těsně po ní spadnou do dvou různých dnů; hraj místo toho offline v prohlížeči a zámek prostě vyprší den po tvém vlastním zabití. Už dokončený pětičlenný běh zůstává otevřený vlastní skupině pro běhy k mrtvole a kořist, takže nikdo není odříznut od toho, co si tam vysloužil. Raid je přísnější: jakmile tě jeho zabití zamkne, dveře zůstanou zavřené až do obnovy, a jediná cesta zpět dovnitř je běh k mrtvole toho, kdo padl právě v tom běhu, který ho zamkl, takže živý raider, který vyjde ven, vyšel ven na celý den. Posbírej svou kořist, než opustíš arénu. Každý z těchto zámků patří postavě, která si ho vysloužila, takže dokončení na tvé hlavní postavě nechává ostatní postavy volné.",
       "resetTitle": "Resetování instancí",
-      "resetBody": "Změň obtížnost, dokud vaše skupina ještě drží nárokované běhy, a staré nároky chvíli přetrvají, než se samy uvolní. Vůdce skupiny je může pustit naráz: vyberte Resetovat všechny instance v nabídce vlastního portrétu, nebo napište /dungeon reset. Reset funguje až po skutečné změně obtížnosti, jen dokud uvnitř nikdo nezůstal, živý ani padlý, jen když každá mrtvola uvnitř byla dočista vyloupena, a jeden reset od dalšího dělí krátká doba obnovy. Přijdete-li ke dveřím se špatnou obtížností, hra to řekne dřív, než běh začne. Raid se takto nikdy neresetuje; platí jeho vlastní pravidla zámků.",
+      "resetBody": "Prázdné zabrané průchody chvíli přetrvají, než se samy vymažou. Vůdce skupiny je může opustit hned: zvolte Resetovat všechny instance v nabídce vlastního portrétu nebo napište /dungeon reset. Další průchod začne znovu na aktuální obtížnosti. Změna obtížnosti udělá totéž s průchody na předchozí obtížnosti. Reset lze provést jen tehdy, když uvnitř nikdo živý ani mrtvý nezůstává a všechny mrtvoly jsou zcela vybrané. Nikdy nezkracuje uzamčení: zamčený hrdinský dungeon či raid zůstane zamčený do svého obnovení. Resety odděluje krátká čekací doba. Pokud dorazíte ke vchodu se špatnou obtížností, hra vás upozorní před začátkem. Raid se resetuje stejně a zachovává pravidla uzamčení a návratu k mrtvole. Raid při změně obtížnosti čekací dobu přeskakuje: skupina, která zvolila špatnou úroveň nebo neuspěla na hrdinské, může ihned přepnout zpět, protože opakování omezuje samotné uzamčení.",
       "templeLoreTitle": "Utopený chrám, o trochu hlouběji",
       "templeLoreBody": "Chrám má vlastní legendu, starší než kult, který pronásleduješ jinde. Na břehu Třpytivého plesa, horského jezera, které pije měsíční světlo a vrací utopené, drží osamělý hlídač bránu bledého světla. Pod hladinou k ní vede schodiště studeného kamene. Lidé, kteří tam klesli, se neutopili nešťastnou náhodou: byli Bledý sbor, který sestoupil pod vodu v uctívání a nikdy nepřestal zpívat. Staří strážci vyryli do skal jediné varování, než je voda vzala, modlitbu k něčemu, čemu říkali Utopený měsíc, a pevnější ruka pod ni přidala dvě slova: jen spí.",
       "cryptLeadTitle": "Dveře, které měli mrtví udržet zavřené",
@@ -11280,7 +11256,7 @@ export const cs_CZ: EnTranslations = {
       "prestigeBody": "Zkušenosti se počítají i po maximu. Krmí kosmetickou virtuální úroveň, takže lišta zkušeností dál stoupá, a dlouhodobou prestižní hodnost, kterou si po dosažení maxima můžeš nárokovat z karty postavy. Překonání velkých milníků celoživotních zkušeností také vynáší skutky v Knize skutků, s kosmetickými tituly a rámečky jmenovek, které se ukazují na kartě postavy. Všechno je čistě volitelné a nikdy nedává sílu, jen značku cesty, kterou jsi prošel.",
       "noRush": "Není kam spěchat. Svět je tu pro hraní vlastním tempem, takže se toulaj, ber úkoly, které tě zaujmou, a nech hrdinu růst po cestě.",
       "ridingTitle": "Jak se naučit jezdit",
-      "ridingBody": "Jízda je jedna z věcí, které čekají na konci výstupu. Na úrovni {level} tě správkyně stájí naučí tuto dovednost za pěknou sumu zlata a lekce na cvičném parkuru ti vynese tvůj první pár otěží. Jízdní zvíře nedává vůbec žádnou sílu; jen zmenšuje svět, což je po dlouhé cestě na sever odměna sama o sobě."
+      "ridingBody": "Na úrovni {level} stájová mistryně Marla učí základní jízdu za zlato a poté nabízí pokročilý stupeň. Výcvik určuje rychlost jízdy. Vzhled vyberte v Kosmetice; sběratelské vzhledy jsou sdílené, dokud jejich otěže zůstávají v brašnách nebo bance libovolné postavy."
     },
     "placeholder": {
       "note": "Tato část průvodce se připravuje."
@@ -16384,6 +16360,8 @@ export const cs_CZ: EnTranslations = {
       "temple_moonwater_bolt": "Střela měsíční vody",
       "temple_drowning_aria": "Árie tonutí",
       "temple_mere_surge": "Příval jezera",
+      "temple_score": "Partitura",
+      "temple_score_answer": "Odpovědět na partituru",
       "temple_tideglass_fracture": "Prasknutí přílivového skla",
       "temple_undertow": "Spodní proud",
       "temple_lunar_tide": "Měsíční příliv",
@@ -16421,6 +16399,12 @@ export const cs_CZ: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Hltání",
       "wildheart_zulgar_pulse": "Pulz Divokého srdce",
       "wildheart_zulgar_spirit_hunt": "Duch lovu",
+      "wildheart_zulgar_hunting_spear": "Lovecké kopí",
+      "wildheart_zulgar_idol_wakes": "Modla se probouzí",
+      "kituse_wildheart_pull_spear": "Vytáhnout kopí",
+      "wildheart_idols_breath": "Dech modly",
+      "wildheart_sun_glyph_kindle": "Rozsvěcení",
+      "wildheart_sun_glyph_cold": "Chladnutí",
       "sanctum_cinder_breath": "Dech žhavých uhlíků",
       "sanctum_warming_rite": "Zahřívací obřad",
       "sanctum_goad": "Bodnutí bodcem",
@@ -17053,6 +17037,9 @@ export const cs_CZ: EnTranslations = {
       "levelClass": "Úroveň {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Jezdecký výcvik",
+      "advancedRiding": "Pokročilý jezdecký výcvik",
+      "ridingSpeed": "Zvyšuje rychlost pohybu při jízdě o {speed}%. Platí pro všechna jízdní zvířata.",
       "goodsTitle": "{name}: Zboží",
       "close": "Zavřít obchodníka",
       "hint": "Když je toto okno otevřené, klikni na předmět v batozích a prodáš ho.",
@@ -17263,7 +17250,8 @@ export const cs_CZ: EnTranslations = {
       "tooManyOrders": "Najednou můžeš mít otevřených nejvýše {count} objednávek.",
       "orderClosed": "Tato objednávka už není otevřená.",
       "orderOwn": "To je tvoje vlastní objednávka. Zrušením ji stáhneš.",
-      "orderNotYours": "To není tvoje objednávka."
+      "orderNotYours": "To není tvoje objednávka.",
+      "orderTrackedItem": "Obchodník nepřijímá objednávky na jedinečnou výbavu."
     },
     "loot": {
       "takeAll": "Vzít vše",
@@ -21189,117 +21177,6 @@ export const cs_CZ: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Kámen přechodu"
-      },
-      "whistle_ember_fox": {
-        "name": "Píšťalka Žhavé lišky"
-      },
-      "whistle_moss_hare": {
-        "name": "Píšťalka Mechového zajíce"
-      },
-      "whistle_frog": {
-        "name": "Píšťalka žáby"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Píšťalka Kraba karmínového klepeta"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Píšťalka Zlatého strážce"
-      },
-      "whistle_nightfang": {
-        "name": "Píšťalka Nočního tesáku"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Píšťalka Kance Tesákoroha"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Píšťalka Smaragdového vlka"
-      },
-      "whistle_tiger": {
-        "name": "Píšťalka tygra"
-      },
-      "whistle_cate_coin": {
-        "name": "Píšťalka Cate Coin"
-      },
-      "whistle_alon": {
-        "name": "Alonova píšťalka"
-      },
-      "whistle_trollface": {
-        "name": "Píšťalka Trollface"
-      },
-      "whistle_ansem": {
-        "name": "Ansemova píšťalka"
-      },
-      "whistle_triple_t": {
-        "name": "Píšťalka Triple T"
-      },
-      "whistle_kekius": {
-        "name": "Kekiova píšťalka"
-      },
-      "whistle_solbot": {
-        "name": "Solbotova píšťalka"
-      },
-      "whistle_frostfire": {
-        "name": "Píšťalka Mrazivého ohně"
-      },
-      "whistle_rocky": {
-        "name": "Píšťalka Skalníka"
-      },
-      "whistle_proud_grunt": {
-        "name": "Píšťalka Hrdého pěšáka"
-      },
-      "whistle_loot_goblin": {
-        "name": "Píšťalka Goblina kořisti"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Píšťalka Penny Goldspark"
-      },
-      "whistle_stag": {
-        "name": "Píšťalka jelena"
-      },
-      "whistle_alpaca": {
-        "name": "Píšťalka alpaky"
-      },
-      "whistle_horse": {
-        "name": "Píšťalka koně"
-      },
-      "whistle_sapling": {
-        "name": "Píšťalka stromku"
-      },
-      "whistle_bull": {
-        "name": "Píšťalka býka"
-      },
-      "whistle_spider": {
-        "name": "Píšťalka pavouka"
-      },
-      "whistle_raptor": {
-        "name": "Píšťalka raptora"
-      },
-      "whistle_skeleton": {
-        "name": "Píšťalka kostlivce"
-      },
-      "whistle_crystal_lich": {
-        "name": "Píšťalka Křišťálového licha"
-      },
-      "whistle_forgemaw": {
-        "name": "Píšťalka Výhňotlama Roztaveného"
-      },
-      "whistle_sprites": {
-        "name": "Píšťalka Mihotala a Třpytala"
-      },
-      "whistle_crystal_tide": {
-        "name": "Píšťalka Křišťálového přílivu"
-      },
-      "whistle_phantom": {
-        "name": "Píšťalka přízraku"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Píšťalka Fénixe Popelopádu"
-      },
-      "charm_stag_acorn": {
-        "name": "Amulet Žaludové koruny"
-      },
-      "charm_stag_gilded": {
-        "name": "Zlacený amulet"
       },
       "lastflame_core": {
         "name": "Jádro Posledního plamene"
@@ -26340,6 +26217,9 @@ export const cs_CZ: EnTranslations = {
       "thorn_sprout": {
         "name": "Trnitý výhonek"
       },
+      "wildheart_hunting_spear": {
+        "name": "Lovecké kopí"
+      },
       "buddy_ember_fox": {
         "name": "Žhavá liška"
       },
@@ -26414,9 +26294,6 @@ export const cs_CZ: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, Válečný kůň"
-      },
-      "buddy_sapling": {
-        "name": "Stromek"
       },
       "buddy_bull": {
         "name": "Býk"

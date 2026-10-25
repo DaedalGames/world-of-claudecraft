@@ -475,9 +475,24 @@ export const en_CA: EnTranslations = {
       "returning": "Bringing your items back",
       "waiting": "Waiting to return your items",
       "bags": "Send to bank",
+      "bagsVault": "Send materials to the vault",
       "bank": "Bring from bank",
+      "vault": "Bring from the vault. Each pick brings back the whole row.",
       "inventory": "Inventory",
       "bankTitle": "Bank",
+      "vaultTitle": "Materials Vault",
+      "storeTabs": "Courier storage",
+      "vaultCap": "Holds {cap} of each material",
+      "vaultEmpty": "Your vault is empty.",
+      "vaultLocked": "Unlock the Materials Vault at a banker to use it with your courier.",
+      "boundBank": "Going to the bank",
+      "boundVault": "Going to the Materials Vault",
+      "boundAccount": "Going to another character's bank",
+      "accountTitle": "Other characters",
+      "accountBank": "Bring from this bank. That character must be logged out when the courier arrives.",
+      "bagsAccount": "Send to {name}'s bank",
+      "bagsAccountNone": "Choose a character to send items to.",
+      "accountPlanned": "Planned for {name}: {count} stacks. Picking for another character replaces them.",
       "capacity": "{used} / {capacity} slots",
       "cargo": "Courier inventory",
       "empty": "No items",
@@ -485,7 +500,7 @@ export const en_CA: EnTranslations = {
       "selected": "{count} / {limit} stacks selected",
       "select": "Select {item}, {count}",
       "selectedItem": "Deselect {item}, {count}",
-      "instructions": "Select whole stacks. Your courier deposits them first, then collects your requested items. Quest items cannot be sent.",
+      "instructions": "Select whole stacks for your bank, the Materials Vault or another character. Your courier deposits them first, then collects your requested items. Quest items cannot be sent.",
       "membership": "Renew your membership to start another trip.",
       "cargoSafe": "Returned items overflow full bags. The courier vanishes after delivery until summoned again.",
       "unavailable": "Summon your courier to plan a delivery."
@@ -862,7 +877,7 @@ export const en_CA: EnTranslations = {
       "titleOffer": "Title: {title}",
       "titlePreview": "Shown as {preview}",
       "mountOffer": "Mount: {mount}",
-      "mountPreview": "Ground mount: +{pct}% movement speed while riding. Requires riding training.",
+      "mountPreview": "Mount appearance for every character on your account. Your riding training sets your speed.",
       "skinOffer": "Sword appearance: {skin}",
       "skinPreview": "Changes how your equipped sword looks, on every character of your account. Appearance only: no stats.",
       "buy": "Buy",
@@ -2538,7 +2553,7 @@ export const en_CA: EnTranslations = {
       "riding": "Riding",
       "mount": "Mount",
       "dismount": "Dismount",
-      "useToRide": "Use to summon this mount.",
+      "useToRide": "Use to wear this appearance and summon your mount. Keep this item in any character's bags or bank to share the appearance across your account. Riding training determines speed.",
       "emptyTitle": "No mounts collected",
       "emptyStableHint": "Reach level 20 and take riding lessons with Stablemaster Marla at the Highwatch Stables, west of Highwatch.",
       "emptyDropHint": "Rarer mounts drop from heroic dungeon bosses and Rift completions.",
@@ -2568,9 +2583,9 @@ export const en_CA: EnTranslations = {
       "name_rickshaw_mount": "Bonebound Rickshaw",
       "name_wobbles_slime": "Wobbles the Slime",
       "name_nightwing_chimera": "Nightwing Chimaera",
-      "desc_valorsteed": "A hardy, sure-footed steed that provides enhanced travel speed.",
-      "desc_grag_bear": "A hardy, sure-footed bear that provides enhanced travel speed.",
-      "desc_stalkglider_snail": "A hearty, slow-burning snail that provides enhanced travel speed.",
+      "desc_valorsteed": "A hardy, sure-footed steed with a leather saddle.",
+      "desc_grag_bear": "A hardy, sure-footed bear fitted with a heavy saddle.",
+      "desc_stalkglider_snail": "A hearty, slow-burning snail with a mossy shell.",
       "desc_aether_hover_cycle": "A powerful magitech bike designed for swift, low-hovering combat traversal.",
       "desc_shadowjump_toad": "A massive, sure-footed giant toad, trained in lightning-fast shadowed bounds that cover any terrain.",
       "desc_stormfeather_griffin": "A regal storm griffin that stalks the ground on rune-shod talons, wings furled.",
@@ -2593,7 +2608,7 @@ export const en_CA: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Press {key} to mount the training Valorsteed.",
-      "ownedMountPrompt": "Your reins are in your bags. Use them to ride.",
+      "ownedMountPrompt": "Choose your mount in Cosmetics. Use Mount / Dismount to ride.",
       "ridePrompt": "Follow the glowing marker to the start line, then press Start Race.",
       "begin": "Begin Lesson",
       "success": "You have tamed the Valorsteed.",
@@ -2864,6 +2879,10 @@ export const en_CA: EnTranslations = {
       "actionCamShoulderLeft": "Left {pct}",
       "actionCamShoulderRight": "Right {pct}",
       "actionCamShoulderCenter": "Center",
+      "firstPersonMode": "First Person (Fully Zoomed In)",
+      "firstPersonOff": "Off",
+      "firstPersonBody": "Show Body",
+      "firstPersonNoBody": "No Body",
       "showAttackButton": "Show Attack Button",
       "showDailyRewardsChest": "Show Daily Rewards Chest",
       "mobileCameraJoystick": "Camera joystick",
@@ -3826,6 +3845,12 @@ export const en_CA: EnTranslations = {
       "linkHint": "Shift-click to link this item in chat."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} earlier transfer is not shown.",
+        "few": "{count} earlier transfers are not shown.",
+        "many": "{count} earlier transfers are not shown.",
+        "other": "{count} earlier transfers are not shown."
+      },
       "guildBoardShown": {
         "one": "{count} guild shown",
         "few": "{count} guilds shown",
@@ -4278,6 +4303,8 @@ export const en_CA: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Set Dungeon Difficulty: Heroic",
       "setNormal": "Set Dungeon Difficulty: Normal",
+      "unappliedNormal": "Heroic selected. Current instances are still Normal.",
+      "unappliedHeroic": "Normal selected. Current instances are still Heroic.",
       "resetAll": "Reset All Instances",
       "resetDone": "All instances have been reset.",
       "resetNone": "You have no instances to reset.",
@@ -4287,10 +4314,11 @@ export const en_CA: EnTranslations = {
       "resetSameDifficulty": "Change dungeon difficulty before resetting these instances. Empty instances reset on their own after 5 minutes.",
       "resetLoot": "You cannot reset instances while loot remains inside.",
       "resetConfirmTitle": "Reset All Instances?",
-      "resetConfirmBody": "This abandons empty instances from your previously selected difficulty. Unclaimed loot will prevent the reset.",
+      "resetConfirmBody": "This abandons your empty instances so the next run starts fresh at your selected difficulty. Lockouts are not changed. Anyone still inside, or unclaimed loot, will prevent the reset.",
       "resetConfirm": "Reset Instances",
       "resetCooldown": "Instances can only be reset once every 5 minutes.",
-      "resetUsage": "Use /dungeon reset to abandon your empty instances after changing difficulty.",
+      "resetAlreadyFresh": "Your instances are already fresh. Nobody has entered them since they were last reset.",
+      "resetUsage": "Use /dungeon reset to abandon your empty instances and start them fresh.",
       "entryMismatchNormal": "This instance is set to Normal difficulty. Use Reset All Instances to start a fresh Heroic run.",
       "entryMismatchHeroic": "This instance is set to Heroic difficulty. Use Reset All Instances to start a fresh Normal run."
     },
@@ -4623,7 +4651,17 @@ export const en_CA: EnTranslations = {
         "pollinated": "Touching a Seedpod makes it sprout a Thorn Sprout at once. Stay off the seeds and let a clean player stomp them; an untouched pod sprouts after {seconds} sec (on Heroic it burrows after {heroic} sec and rises beside the nearest player).",
         "prey": "Zulgar hunts you. Lead him across a lit sun glyph to slow him by {slow}%. If he catches you, you are Mauled for {damage} damage ({heroic} on Heroic) and knocked down for {stun} sec.",
         "avatar": "Moves {pct}% faster and hunts its Prey. Slows and roots take hold, and stuns last half as long.",
-        "vanished": "Hidden and immune to damage. He is about to pounce on the farthest player."
+        "vanished": "Hidden and immune to damage. He is about to pounce on the farthest player.",
+        "sunstruck": "Struck by a lit sun glyph: moves {pct}% slower.",
+        "sunstruckExposed": "Struck by a lit sun glyph: takes {pct}% more damage.",
+        "sunWary": "No sun glyph can strike him until this ends. A lit glyph he crosses stays lit.",
+        "pinned": "A Hunting Spear pins you in place. You bleed for {bleed} Physical damage ({heroicBleed} on Heroic) every {every} sec, and Wildheart Pulse hits you wherever you stand for {pulse}% more damage. A teammate can pull the spear out in {pull} sec. If nobody else stands free, pull it out yourself in {wrench} sec. It lets go after {seconds} sec.",
+        "idolAwake": "The stone jaguar is awake. Every {every} sec it breathes over one half of the terrace, then the other, after a {warning} sec warning on the floor: {min} to {max} Nature damage ({heroicMin} to {heroicMax} on Heroic) to everyone in that half. Zulgar stays the Jaguar Avatar until he dies and picks new Prey every {seconds} sec ({heroicSeconds} sec on Heroic)."
+      },
+      "temple": {
+        "scoreWard": "Singing the Score: she takes no damage until it ends. Step onto the moon tiles in the order they rang before the verse ends to break her voice. Take turns: after sounding a note, wait for another player to sound the next correct note. A lone survivor can finish alone. If the verse ends first, Discord deals {min} to {max} Frost damage ({heroicMin} to {heroicMax} on Heroic) to everyone in the court.",
+        "brokenVoice": "Her voice is broken: she takes {pct}% more damage until this ends.",
+        "spentVoice": "You cannot sound another moon tile until another player sounds the next correct note. Stepping onto a tile while this lasts does not reset the answer or hurt you. Cannot be dispelled. Removed when you are the only living player in your instance or the Score ends."
       },
       "bastion": {
         "brineColumn": "Rooted in a column of sea water: you take {min} to {max} Nature damage every {tick} sec for up to {seconds} sec. Interrupt or stun the Tidebound Acolyte to break it.",
@@ -5256,6 +5294,9 @@ export const en_CA: EnTranslations = {
       "partyTradeWindow": "You may trade this item to players who shared its drop for the next {time}. Equipping it ends the trade window.",
       "perfectedBadge": "Perfected",
       "perfectingRank": "Perfecting: rank {rank} of {ranks}",
+      "lootedBy": "Looted by {name} on {date}",
+      "questRewardTo": "Quest reward to {name} on {date}",
+      "obtainedBy": "Obtained by {name} on {date}",
       "materialSourceGatherer": "{count} × Collected by {name}",
       "trophySkullSource": "{count} × Taken from {name}",
       "materialSourceGathererSigned": "{count} × Collected by {name}, signed by {signer}",
@@ -5799,14 +5840,8 @@ export const en_CA: EnTranslations = {
       "logAdminPurge": "An administrator removed {count} {item}"
     },
     "collections": {
-      "title": "Hunting",
-      "close": "Close hunting",
-      "keybindLabel": "Hunting",
-      "launcherTitle": "Hunting: buddies, mounts and item sets",
       "tabs": {
-        "buddies": "Buddies",
-        "mounts": "Mounts",
-        "sets": "Item Sets"
+        "buddies": "Buddies"
       },
       "state": {
         "owned": "Collected",
@@ -5816,7 +5851,6 @@ export const en_CA: EnTranslations = {
       },
       "presenceDefault": "You feel a presence watching you.",
       "revealed": "{name} has decided to follow you.",
-      "cosmeticUnlocked": "New look for {name}: {look}.",
       "presence": {
         "ember_fox": "Something small and warm is padding along behind you.",
         "moss_hare": "A rustle in the peat keeps pace with your steps.",
@@ -5854,134 +5888,9 @@ export const en_CA: EnTranslations = {
         "phantom": "The air behind you is a shade too still.",
         "emberfall_phoenix": "A warmth like a banked fire settles at your back."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Frostbound",
-        "crystal_lich_voltaic": "Voltaic",
-        "forgemaw_ashen": "Ashen",
-        "forgemaw_whitehot": "White-Hot",
-        "stag_acorn": "Acorn Crown",
-        "stag_gilded": "Gilded",
-        "moss_hare_verdant": "Verdant",
-        "proud_grunt_warlord": "Warlord",
-        "frog_sapphire": "Sapphire Frog"
-      },
       "actions": {
         "summon": "Summon",
-        "dismiss": "Dismiss",
-        "wear": "Wear",
-        "remove": "Remove"
-      },
-      "looks": {
-        "title": "Looks",
-        "unlocked": "Unlocked",
-        "locked": "Locked",
-        "worn": "Worn",
-        "none": "No looks authored for this companion yet"
-      },
-      "source": {
-        "bossLabel": "Boss pet",
-        "bossDrop": "{mob} ({location}), {chance}% per player per kill",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% per player, {heroicChance}% on Heroic",
-        "bossDropHeroicOnly": "{mob} ({location}), Heroic only, {chance}% per player",
-        "rollNote": "Every player rolls separately; nobody loses a roll to a party member.",
-        "deedLabel": "Earned by",
-        "deed": "The deed {deed}",
-        "challengeLabel": "Challenge",
-        "challengeSpeed": "Defeat {mob} within {seconds} seconds of the pull",
-        "challengeDps": "Deal {dps} damage per second to {mob} across the fight",
-        "craftLabel": "Crafted",
-        "craft": "{item} ({profession} recipe)",
-        "grantLabel": "Awarded",
-        "grantOnly": "Seasonal award: the monthly ladder and top-parse rewards",
-        "tokenLabel": "Token",
-        "token": "{item}, used once to attach the companion"
-      },
-      "buddyLore": {
-        "ember_fox": "A vixen out of the Eastbrook Vale hedgerows, named for the coal-red coat that shows through winter scrub. The trappers there gave up on the kits generations ago and started leaving food out instead.",
-        "moss_hare": "The Willowfen hare, green-furred from a lifetime bedded down in wet peat. Fen herbalists count them lucky and will not have one chased off a doorstep.",
-        "frog": "Mirefen Marsh raises them fat and unbothered, singing all night from the reed beds. The marsh guides swear a boat carrying one never runs aground.",
-        "crimson_claw_crab": "A Farshore tidal crab whose claw stays red long after it leaves the water. Dock crews used to race them along the boards for coin.",
-        "golden_sentinel": "A watch-beetle of the Amberfall, gilded by the resin it grew up in. The name is older than the resin: sentinels of a kind kept those groves long before anyone thought to bottle the sap.",
-        "nightfang": "A young Nightbloom hunter, silent even by the standards of its kind. It follows for the company and hunts nothing larger than a moth.",
-        "tuskhorn_boar": "Thornpeak stock, bred short-legged by shepherds who wanted a boar that could not put a fence down. It kept the temper regardless.",
-        "emerald_wolf": "A Wraithwood pup, its coat green in the canopy light that never quite reaches the forest floor. The wardens raise whichever orphans the wood leaves behind.",
-        "tiger": "Palmreach stripes on an animal that has never seen the Palmreach: the line has been kept in captivity since the old menageries closed. It answers to a whistle and to nothing else.",
-        "cate_coin": "A cat that will not be parted from the coin it sits on, and that nobody has ever seen eat. Eastbrook merchants still argue over which of the two is the pet.",
-        "alon": "A traveller's mascot from a road no map will admit to, turning up wherever a plan is going badly. It watches, it approves, and it offers no help whatsoever.",
-        "trollface": "A grinning thing the Wraithwood put out and would not take back. Every attempt to describe it ends with the describer laughing and giving up.",
-        "ansem": "It speaks of doors and of darkness and will not be drawn further on either. The Nightbloom cultists claim it as theirs; it wanders off whenever they hold a rite.",
-        "triple_t": "Three of something, or one thing three times over. The accounts disagree, and the creature will not hold still long enough to be counted.",
-        "kekius": "A laughing companion of unclear origin, adopted by the Galecrest race yards as a charm. It has outlived four stables that swore by it.",
-        "solbot": "A small sun-fed automaton, dug half-buried out of the Drakelands ash and still ticking. Whatever workshop built it left no mark anywhere on the casing.",
-        "frostfire": "Born in the Frostveil Reach where a hot spring surfaces through the ice field, and it has never settled on which half it belongs to. It steams in cold air and shivers in warm.",
-        "rocky": "A stone-shelled crawler off the Thornpeak scree, slow and thoroughly unbothered. Miners keep them for the way they go still a moment before a collapse.",
-        "proud_grunt": "A veteran of the Warfare stores who kept the salute and lost the rank. Warmarshal Draven Kole hands one to any soldier with honor enough to know what that costs.",
-        "loot_goblin": "It follows anyone carrying Heroic Marks and has never once been caught stealing. Quartermaster Vex maintains that this proves nothing at all.",
-        "penny_goldspark": "A gnome tinker's apprentice who charges by the hour and is worth every copper of it. Armorer Hode took her on to settle a debt and now sells the arrangement to anyone holding a thousand gold.",
-        "stag": "Evergarden bloodline, bred down from the great stags the wardens once rode. It still lowers its head at a raised hand, from a habit older than the animal.",
-        "alpaca": "The Galecrest herds keep them for wool and for temper: nothing stays calmer in a storm. This one will spit at exactly one person per journey.",
-        "horse": "Vale pony stock, bred small for the orchard lanes and never told it is not a warhorse. It keeps pace at your shoulder and will follow anyone who once fed it an apple.",
-        "sapling": "A young tree with a smile in its bark and a curious purple gaze. Its roots carry it in a cheerful waddle wherever you wander.",
-        "bull": "A Vale bull the size of a dog, which is the only reason anyone agreed to keep one indoors. The temperament did not scale down with the rest.",
-        "spider": "A Wraithwood weaver, palm-sized, that redecorates any pack it is carried in. The webbing is stronger than the thread it replaces.",
-        "raptor": "Drakelands hatchling stock, sold on before it learns how fast it can run. Every new owner is told to keep it fed, and none of them need telling twice.",
-        "skeleton": "It came up out of the Wraithwood barrows, dusted itself off, and has followed people about ever since. Nobody has established whose bones these were.",
-        "crystal_lich": "A splinter of Nythraxis itself, still humming with the cold that shaped it. It answers to whoever pulled it from the wreck of the raid, and it has not forgiven them for it.",
-        "forgemaw": "Forged in the Crucible of the Last Spring and never quite finished, it walked out of Ignivar's foundry while the hammers were still falling. Only the heroic descent finds it: the molten thing keeps returning to the forge that made it, and follows home whoever survives the fire twice.",
-        "crystal_tide": "A tide sprite that rides its own drop of sea-glass, hooked out of still water by anglers from the Vale to Farshore who were fishing for supper. It keeps the water it came up in, and it will not be talked into going back.",
-        "sprites": "Two small fire sprites, one gold and one teal, who never quite agree which of them is leading. Get close enough and they fold into one green flame, then spill apart again, laughing.",
-        "phantom": "A palm-sized haunt out of the Wraithwood barrows, all sheet and no bones, which turns up in a pack that was closed and stays for the company. Nobody has worked out what it wants, and it has never once tried to frighten anyone.",
-        "emberfall_phoenix": "It burns down to an ember every autumn and comes back up out of its own ash by spring, which is the whole of what anyone can tell you about it. Nobody has ever found a nest, and nobody has ever caught one twice."
-      },
-      "petKind": {
-        "beast": "Beasts",
-        "elemental": "Elementals",
-        "humanoid": "Humanoids",
-        "undead": "Undead",
-        "celebrity": "Celebrities"
-      },
-      "armor": {
-        "cloth": "Cloth",
-        "mail": "Mail",
-        "leather": "Leather"
-      },
-      "stat": {
-        "intellect": "Intellect",
-        "agility": "Agility",
-        "strength": "Strength",
-        "mixed": "Hybrid"
-      },
-      "set": {
-        "owned": "{owned} of {total} pieces",
-        "itemLevel": "ilvl {level}",
-        "bonusLabel": "{pieces} pieces"
-      },
-      "detail": {
-        "dropLabel": "Drops from",
-        "vendorLabel": "Sold by",
-        "bindLabel": "Binding",
-        "sellLabel": "Vendor pays",
-        "marketLabel": "World Market",
-        "exchangeLabel": "$WOC Exchange",
-        "setLabel": "Collected",
-        "drop": "{mob} ({location}), {chance}% per kill",
-        "heroicDrop": "{mob} ({location}), Heroic only, {chance}% per kill",
-        "dropWithHeroic": "{mob} ({location}), {chance}% per kill, {heroicChance}% on Heroic",
-        "globalDrop": "Any enemy, {chance}% per kill, one of {count} at this rarity",
-        "fishingDrop": "Fishing anywhere, {chance}% per catch",
-        "vendor": "{npc} ({location}) for {price}",
-        "honorPrice": "{amount} Honor",
-        "marksPrice": "{amount} Heroic Marks",
-        "noSource": "No source in the game yet",
-        "noItem": "No item grants this yet",
-        "tradeable": "Tradeable",
-        "soulbound": "Soulbound",
-        "noSell": "Cannot be sold",
-        "marketAtMerchant": "Shown at the Merchant",
-        "marketChecking": "Checking...",
-        "marketNone": "No listings",
-        "exchangeNone": "No listings",
-        "exchangeUnavailable": "Not available on this client"
+        "dismiss": "Dismiss"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const en_CA: EnTranslations = {
       "viewSources": "View sources",
       "separateByGatherer": "Separate by gatherer",
       "takeChosenQuantity": "Take out chosen quantity",
-      "combine": "Combine material stacks"
+      "combine": "Combine material stacks",
+      "itemHistory": "Item history"
+    },
+    "itemHistory": {
+      "title": "{item}: history",
+      "passedTo": "Passed to {name} on {date}",
+      "noTransfers": "This item has never changed hands.",
+      "close": "Close",
+      "openAria": "Item history for {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Learn the formula before applying this enchant.",
@@ -7073,6 +6990,7 @@ export const en_CA: EnTranslations = {
         "summons_adds": "Summons reinforcements",
         "lunar_tide": "Lunar Tide (pulsing area damage)",
         "chorus_and_solo": "Chorus and Solo (stack on one mark, spread from the other)",
+        "the_score": "The Score (twice she sings a melody on the moon tiles: step onto them in the order they rang to break her voice)",
         "tideglass_reflections": "Tideglass Reflections (kill each other's mirror images)",
         "hydra_three_elements": "Three Elements (the left head breathes an 18 yard cone of frost that slows you by 70 percent for 4 seconds, the centre head spits venom under up to 3 players that bursts after 1.5 seconds and burns for 6 seconds where it lands, and the right head fires a torrent down a 26 yard lane that throws you back 8 yards: step out of each one. When a head falls, the heads still standing take over its attack)",
         "hydra_tsunami": "Tsunami (the heads sink for 4.5 seconds, taking 75 percent less damage, and a wave rolls over one half of the pool, the other half the next time: 160 to 190 frost damage on normal and a 10 yard shove. Cross to the other half or stand behind a rim column; on heroic the wave rolls back over the other half 3.5 seconds later. The first Tsunami comes 24 seconds into the fight, each later one 40 seconds after the last has passed)",
@@ -7197,6 +7115,23 @@ export const en_CA: EnTranslations = {
       "shadeLine": "Leave this decoy. Attack the Vael whose lantern flares in the beam to break the veil",
       "timeAria": "{seconds} seconds left"
     },
+    "templeAlert": {
+      "melodyTitle": "The Score",
+      "melodyLine": "Watch the moon tiles ring one after another. Repeat the order, taking turns with another player",
+      "melodyDarkLine": "Remember the order before the tiles go dark. Repeat it, taking turns with another player",
+      "answerTitle": "Answer the Score!",
+      "answerLine": "Take turns: step onto the moon tile marked {place}. Sounded: {done} of {total}",
+      "answerDarkLine": "Take turns and repeat the order from memory. Step off before stepping onto a tile again. Sounded: {done} of {total}",
+      "spentTitle": "Another voice must answer",
+      "spentLine": "You cannot sound a tile until another player sounds the next correct note. Sounded: {done} of {total}",
+      "stepOffTitle": "Step off, then back on",
+      "stepOffLine": "A moon tile sounds only when someone steps onto it. Leave this tile and step onto it again",
+      "falseTitle": "False Note!",
+      "falseLine": "That tile was out of turn. The answer starts over from the first tile",
+      "brokenTitle": "Selthe's voice is broken!",
+      "brokenLine": "She takes {pct}% more damage until this ends: use your strongest attacks now",
+      "timeAria": "{seconds} seconds left"
+    },
     "wildheartAlert": {
       "preyTitle": "You are the Prey!",
       "preyLine": "Lure Zulgar through lit sun glyphs to slow him before he catches and mauls you",
@@ -7207,7 +7142,21 @@ export const en_CA: EnTranslations = {
       "pollinatedLine": "Avoid seedpods: touching them while Pollinated creates enemies. Unmarked allies can stomp them",
       "bondTitle": "Pack Bond",
       "bondLine": "Separate the Beastmaster and jaguar to remove their damage reduction and damage bonus",
-      "timeAria": "{seconds} seconds left"
+      "timeAria": "{seconds} seconds left",
+      "preyAloneLine": "Nobody else can light the sun glyphs. Stand on a dark one for {seconds} sec to light it, then lure Zulgar across it",
+      "pinnedTitle": "Pinned!",
+      "pinnedLine": "A teammate must pull the Hunting Spear out. Wildheart Pulse hits you harder while you are Pinned",
+      "pinnedSelfLine": "Nobody is free to help: pull the Hunting Spear out yourself before Wildheart Pulse lands",
+      "sunstruckTitle": "Zulgar is Sunstruck!",
+      "sunstruckLine": "He takes {pct}% more damage until this ends: use your strongest attacks now",
+      "spearTitle": "An ally is Pinned!",
+      "spearLine": "Run to the Hunting Spear and pull it out before Wildheart Pulse lands",
+      "glyphTitle": "Light the sun glyphs",
+      "glyphLine": "Stand on a dark sun glyph for {seconds} sec to light it. When Zulgar crosses it he takes {pct}% more damage for {duration} sec",
+      "glyphLightingTitle": "Lighting the sun glyph",
+      "glyphLightingLine": "Stay on the glyph until it catches light. Stepping off starts it over",
+      "breathTitle": "Idol's Breath!",
+      "breathLine": "The stone jaguar is about to breathe over this half of the terrace. Cross to the other half"
     },
     "sanctumAlert": {
       "quenchTitle": "In the quench-water!",
@@ -7296,6 +7245,13 @@ export const en_CA: EnTranslations = {
       "relightFar": "Get within {range} yd to relight it",
       "relightAria": "Relight the {name}",
       "relightUsingLine": "Keep channeling to light the candle: it drains health. Hits do not interrupt; moving or a stun does",
+      "freeLine": "Pull the spear out of the ground to free whoever it pins. Taking a hit does not stop you; moving or a stun does",
+      "freeKey": "Pull out the {name}",
+      "freeTap": "Tap here to pull out the {name}",
+      "freeClick": "Click here to pull out the {name}",
+      "freeFar": "Get within {range} yd to pull it out",
+      "freeAria": "Pull out the {name}",
+      "freeUsingLine": "Hold still to pull the spear out: moving or a stun stops you",
       "timeAria": "{seconds} seconds left"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const en_CA: EnTranslations = {
       "detach": "Detach",
       "applied": "Applied",
       "owned": "Owned",
+      "notCollected": "Not collected",
       "storeOnly": "Available in the WOC Store",
       "preview": "Preview",
       "previewAria": "Preview {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "A mount skin is drawn over whichever mount this character rides. It never changes speed.",
-      "mountsNoMount": "Own a mount first: a skin needs something to ride.",
+      "mountsIntro": "Choose your mount appearance here. Riding training determines speed. Keep the mount item in any character's bags or bank to share its appearance across your account.",
+      "mountsNoMount": "Learn riding from Stablemaster Marla to summon a mount.",
       "skinsEmpty": "No weapon skins owned yet. Visit the WOC Store.",
       "skinsApplyHint": "Equip a {type} to apply this skin.",
       "mechIntro": "The Combat Mech replaces this character's body. One chroma is worn at a time.",
@@ -7430,6 +7387,7 @@ export const en_CA: EnTranslations = {
       "sourceActivityRiftFirstClear": "Awarded to every member of the party that wins a ranked Rift's first clear",
       "sourceActivityBuriedHoard": "Found in the reward chest of a Buried Hoard, the vault a treasure map leads to",
       "sourceActivityLanternHall": "Bought for Lantern Seals from Lantern Hall's quartermaster",
+      "sourceActivityWeeklyVaultPvp": "Chosen from the PvP row of the Weekly Vault",
       "cellMissingSourceAria": "{name}, not yet found, {source}",
       "cellOwnedClearsAria": "{name}, catalogued, first found on clear {count}",
       "searchPlaceholder": "Search relics",
@@ -8454,6 +8412,16 @@ export const en_CA: EnTranslations = {
         "heroicCloud": "Pollen Cloud: standing within {cloudRadius} yd of a Pollinated player for {cloudSeconds} sec pollinates you too."
       },
       "zulgar": {
+        "pulseSummaryRework": "Every {every} sec, a {cast} sec cast hits everyone within {radius} yd for {min} to {max} damage. Pinned players take {pinMult} times this damage at any distance.",
+        "spearSummary": "A {cast} sec cast pins a non-tank player, or the tank if nobody else remains. The root lasts up to {seconds} sec and deals {bleed} damage every {tick} sec.",
+        "spearResponse": "Target the spear and interact within {range} yd to pull it out in {pull} sec. Damage does not interrupt the pull. If nobody else stands free on the terrace, the victim can interact to escape in {self} sec.",
+        "glyphSummaryRework": "The {count} glyphs start dark. While he hunts, an unmarked player lights one by standing on it for {kindle} sec. If no unmarked player remains, Prey can light it in {alone} sec. Moving off resets progress. Crossing a lit glyph slows him by {slow} and increases damage taken by {vulnerability} for {seconds} sec. The glyph cannot be relit for {dark} sec; he cannot be struck by another glyph for {wary} sec. During the hunt, stuns last half as long.",
+        "glyphResponseRework": "Unmarked players light glyphs ahead of the Prey. Lead him through them, then attack during Sunstruck. Glyphs go dark when the hunt ends.",
+        "idolSummary": "At {health} health, he stays a jaguar spirit until defeated. The tank can also become Prey.",
+        "idolHuntSummary": "He picks new Prey every {every} sec, then turns toward them for {turn} sec before chasing.",
+        "idolHuntHeroicSummary": "He marks a fresh pair every {pair} sec and switches between them every {switch} sec. Each switch gives the new Prey {turn} sec before he chases.",
+        "breathSummary": "Every {every} sec, one half of the terrace is marked for {warning} sec, then everyone in that half takes {min} to {max} Nature damage. Breaths alternate halves.",
+        "breathResponse": "Cross to the unmarked half before the warning ends. The centre line is safe. On Heroic, the breath also extinguishes lit glyphs in its half; they can be relit immediately.",
         "overview": "The high priest of the basin. A steady fight with a telegraphed ring, until he turns into a jaguar spirit and hunts one player. The hunted player kites him across lit sun glyphs, which slow him.",
         "phaseShrineName": "The Shrine",
         "phaseShrineSummary": "He fights in melee and pulses a ring around himself.",
@@ -8766,6 +8734,14 @@ export const en_CA: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe never moves or melees. Stack for Chorus, leave the group for Solo, interrupt Drowning Aria and dodge Mere Surge. At two health thresholds, repeat her moon-tile melody with alternating singers.",
+        "phaseSummaryRework": "Her other attacks pause while the group answers the Score. Moonwater Bolts have no cast bar and cannot be interrupted.",
+        "boltSummaryRework": "Between other casts, a bolt lands every {every} sec after a {windup} sec visual warning, dealing {mult} times her weapon damage as Frost. Interrupting Drowning Aria stops bolts and Aria for {quiet} sec.",
+        "boltResponseRework": "Keep the tank in her line of sight. Save interrupts for Drowning Aria.",
+        "tipHealerRework": "Watch the Aria target and anyone caught alone by Chorus. During the Score, help sing the next note and heal mistakes.",
+        "scoreSummary": "At {first} and {second} health, she becomes immune and plays {notes}, then {finalNotes} notes. Repeat them within {answer}, then {finalAnswer} sec. A wrong tile deals {falseNote} Frost damage and resets progress, not the timer. Timeout deals {min} to {max} Frost damage to everyone. Success stuns her for {stun} sec and increases damage taken by {vulnerability} for {bonusSeconds} sec.",
+        "scoreResponse": "Watch the melody, then step onto tiles in order. Alternate correct notes with another living player; a sole survivor can finish alone. Blocked steps are harmless. Step off and enter again to sound a tile, including one occupied before the answer begins.",
+        "scoreHeroic": "During the answer, the tiles go dark. Remember the melody and take turns.",
         "overview": "The Choirmother sings from her pool and never moves or melees. She marks players for a shared Chorus and a lonely Solo, beams a rising aria at one player, and sends a wave across the court. Her bolts and her aria can be interrupted.",
         "phaseName": "The Choir Court",
         "phaseSummary": "One phase on timers. A mechanic that comes due during a cast waits for it to end.",
@@ -9678,7 +9654,7 @@ export const en_CA: EnTranslations = {
       "graveyard": "Where your spirit would return to if you fell here.",
       "dungeons": "Every dungeon with the zone its door sits in and the party size it is built for, plus the difficulty you are currently set to.",
       "dungeonMode": "Switch your dungeons between the normal and heroic difficulty.",
-      "dungeonReset": "Abandon your own empty instances, which is what you do after changing difficulty.",
+      "dungeonReset": "Abandon your own empty instances so your next run starts fresh, at the same difficulty or a new one.",
       "groupRecovery": "Recovery and presence",
       "unstuck": "The way out when the world has trapped you. Stand still through a short countdown and you are moved to the nearest graveyard, and raised there if you had already fallen. It leaves you weakened by Unstuck Sickness for a while afterwards, so it is a last resort rather than a shortcut.",
       "unstuckWindow": "The way out when the world has trapped you. Stand still through a short countdown and you are moved to the nearest graveyard, and raised there if you had already fallen. The first use in an hour is free. Use it again within an hour of the last and it leaves you weakened by Unstuck Sickness for a while afterwards, so it is a rescue rather than a shortcut.",
@@ -10105,27 +10081,27 @@ export const en_CA: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Mounts and riding",
-      "intro": "A mount is a faster way across the world, and that is all it is. You learn to ride at the stables, buy your first set of reins, and every road after that is shorter.",
+      "intro": "Choose a mount appearance, learn riding at the stables, and travel faster across the world. Your training sets the pace; every mount appearance is cosmetic.",
       "whatHeading": "What a mount is",
-      "whatBody": "A mount is a beast you ride, and what it gives you is speed. No armor, no damage, no stats: it carries you over the ground faster, and springs a little higher when you jump, and that is the whole of the bargain. Every mount in the game is a ground mount, so there is no flying, and none of them swim.",
+      "whatBody": "Mounts are cosmetic appearances worn over your trained ride. They grant no armor, damage, or combat stats. Riding training increases ground travel speed and mounted jumps clear more height. Every mount stays on the ground, and none can swim.",
       "learnHeading": "Learning to ride",
-      "learnBody": "Riding is a skill you buy once, and it opens at level {level}. Marla Hitchen, the stablemaster, keeps the Galecrest Stables out on the downs, and she sells Riding Training for 80 gold. That one purchase is what lets you sit a mount at all, and it stays with you for good.\n\nOnce you have it, Marla has a quest for you: Riding Lessons. Take it, follow the marker to the glowing square behind the start arch, and press Start Race. She lends you a training Valorsteed for the lesson, so the lesson itself costs you nothing. Ride the course, finish it, and go back to her for your coin and experience. The lent steed goes back in the barn afterward, so the lesson teaches you the seat rather than handing you a horse.",
+      "learnBody": "Riding opens at level {level}. Stablemaster Marla Hitchen sells Riding Training for 80 gold at the Galecrest Stables. Basic training grants {basicSpeed}% faster mounted movement. Once you have learned it, Marla also sells Advanced Riding Training for {advancedFee} gold, raising mounted movement to {advancedSpeed}% faster. Each rank belongs to the character who learns it.\n\nAfter learning basic riding, take Marla's Riding Lessons quest and follow the marker to the glowing square behind the start arch. Press Start Race to borrow the training Valorsteed. Finish the course and return for your coin and experience. The borrowed horse returns to the barn when the lesson ends.",
       "whereHeading": "Where to find her",
       "whereBody": "The Galecrest Stables are marked on the map of The Galecrest, out on the downs between the Shear and the Wreckfields. Marla stands beside the barn, facing the race yard.",
       "firstHeading": "Your first mount",
-      "firstBody": "The Valorsteed is the only mount sold anywhere in the world. Once you have learned Riding, Marla will sell you the Reins of the Valorsteed for 10 gold, and those reins are yours to keep. Every other mount is earned out in the world, so the horse is where nearly every rider starts.",
+      "firstBody": "Marla sells the Reins of the Valorsteed for 10 gold after you learn Riding. Holding the reins unlocks the horse appearance in Cosmetics for every character on your account. Riding training already lets you summon a mount without carrying reins, so choose the horse or another owned appearance when you want a different look.",
       "rideHeading": "Getting on and getting off",
-      "rideBody": "There is no mount window and no favorite to set, because the reins are the mount. Use a set of reins from your bags or from an action bar slot and you ride that mount. Summoning takes a moment, a short call rather than an instant one, so it will not save you from a bad pull. Getting off is instant and never blocked.\n\nUse the reins you are already riding and you put that mount away. Use a different set while mounted and you swap straight to it, with nothing to summon in between. The Mount and Dismount key, the backquote key by default, only ever gets you off: it is the way down, not the way up. The one exception is the riding lesson, where that same key calls the steed Marla lends you, since a borrowed horse has no reins to click. On a phone or tablet, the Mount button in the More tray works both ways, though it calls the first set of reins sitting in your bags rather than one you pick, so tap the reins themselves when you want a particular mount.",
+      "rideBody": "Open Cosmetics and choose an appearance on its Mounts tab. The Mount / Dismount key, the backquote key by default, summons your trained mount wearing that appearance. The mobile Mount button does the same. Summoning takes a short channel; getting off is instant. You can change the appearance while mounted without changing your riding speed.\n\nYou can also use reins from your bags or an action bar to select that appearance and summon. Using the appearance you are already riding puts the mount away. Banked or alternate-character reins unlock the same cosmetic without needing to be carried by the rider.",
       "breaksHeading": "What puts you back on your feet",
       "breaksBody": "Water always wins. Ride into anything deep enough to swim in and you are down at once, because no ground mount swims, and dying drops you where you fall. You cannot call one while you are in combat, while you are dead or making your way back as a spirit, or at any point during a Thornhollow Fields match, which is fought on foot from the form-up to the final hold: if you were riding while you waited, being seated into the match puts you down with it. Walking into combat or into water partway through a summon cancels it as well.\n\nMost of what you do puts you down too. Swinging at something, starting a cast, harvesting a node, fishing, crafting, enchanting, salvaging, and recharging a profession tool all dismount you the moment you start, so expect to hop off at every vein. Calling a mount also drops any shapeshift form you are holding: you are never both shifted and mounted.",
-      "speedHeading": "Speed and tiers",
-      "speedBody": "Speed is the only thing that separates one mount from another. The Valorsteed you buy from Marla sets the base pace, and the mounts you collect out in the world ride above it: the rarer the reins, the quicker the ride, in a few clear steps rather than a smooth slide. There is no second rank of riding to train and no upgrade to buy afterward. You pay for Riding once, and from then on the reins you used decide how fast you travel.",
+      "speedHeading": "Riding speed and training",
+      "speedBody": "Basic Riding Training gives {basicSpeed}% faster mounted movement. Advanced Riding Training gives {advancedSpeed}% faster mounted movement and costs {advancedFee} gold from Marla. Every mount appearance uses the same speed for the character's training rank, regardless of rarity or source. Store skins use that training speed too.",
       "collectHeading": "Where the rarer mounts come from",
       "collectBody": "Beyond Marla's counter, reins are found rather than bought. They come off the last bosses of the five-player dungeons and the raid on heroic, and out of rift clears, where the harder the rift you finish the rarer the reins it can leave behind. They are rare finds by design and no run promises one, so the kind way to hunt a mount is to bring the hunt along on the runs you were making anyway. This page will not tell you which mount hangs on which boss: that part is yours to find out.",
       "raceHeading": "The stables race",
       "raceBody": "The show-jumping course in Marla's paddock is open to anyone, any time, not only during the lesson. Sit a mount, stand on the glowing square behind the arch, and press Start Race. A countdown holds you still, then the clock runs: clear all seven jumps and ride back out through the arch before it runs down.\n\nA jump only counts if you are genuinely in the air over the bar, so an easy ride-through clears nothing. You may take them in any order and from either side, and a missed one is not the end of the world: circle back and take it again. Dying, getting off, or leaving the paddock ends the attempt, and so does letting the clock run out, which sets you down out of the saddle where you stand; cancelling it yourself just stops the clock. Nothing stops you starting another. There is no fee, no cooldown, and no prize beyond the time itself, and any number of riders can run the course at once without getting in each other's way.",
       "goodsHeading": "Reins are ordinary goods",
-      "goodsBody": "A mount is an item, which makes it something the economy can move. You own a mount for as long as its reins sit in your bags or your bank, though banked reins keep the mount yours without letting you ride it: to call the beast you have to be carrying the reins. Player reins carry no soulbind, so they trade, travel by mail, and list on the World Market like any other find, unless the item itself says otherwise. Two things are worth knowing before you part with one: no merchant will ever buy a set of reins back, so a mount is a purchase you keep or pass on rather than cash out, and if the reins leave your bags and your bank both while you are riding, traded away, mailed off, or sold on the market, the mount goes with them and you are set down where you stand."
+      "goodsBody": "Collectible mount appearances remain available across your account while at least one matching reins item is in any character's bags or personal bank. Trading, mailing, listing, selling, or otherwise removing the last qualifying item removes the appearance from Cosmetics. A rider wearing it returns to the default horse appearance and stays mounted at their trained speed.\n\nPlayer reins can be traded, mailed, and listed on the World Market unless the item says otherwise. The horse reins can also be sold to a merchant for 10 gold. Other reins retain their own item sale restrictions. Store mount skins remain account cosmetics independent of reins items."
     },
     "worldPage": {
       "heading": "The world",
@@ -10300,7 +10276,7 @@ export const en_CA: EnTranslations = {
       "heroicRewardsBody": "Heroic bosses drop the loot you know, upgraded and tagged Heroic on the tooltip, and the final boss of each run adds epics found nowhere else. That last kill also leaves Heroic Marks for every participant: a currency spent with Quartermaster Vex in Highwatch, whose counter is a shelf of rings and pendants that nothing but proof of the heroic depths will buy.",
       "heroicLockoutBody": "Normal dungeons can be run all day. Heroic asks patience: the final boss kill locks everyone in the run to one heroic clear of that dungeon per day, and the raid keeps a daily lockout for each difficulty. On a live realm every daily lockout clears together at the realm's own nightly reset hour, so a clear taken just before that hour and one taken just after fall on two different days; play offline in your browser instead and a lockout simply runs out a day after your own kill. A cleared five-player run stays open to its own party for corpse runs and loot, so nobody is locked away from what they earned there. The raid is stricter: once its kill locks you the door stays shut until the reset, and the only way back through it is a corpse run by someone who fell in the very run that locked them, so a living raider who walks out has walked out for the day. Collect your spoils before you leave the arena. Every one of these lockouts belongs to the character that earned it, so a clear on your main leaves your other characters free.",
       "resetTitle": "Resetting your instances",
-      "resetBody": "Switch difficulty while your group still holds claimed runs and the old claims linger for a while before clearing on their own. The party leader can let them go at once instead: choose Reset All Instances on their own portrait menu, or type /dungeon reset. A reset works only after the difficulty has actually been changed, only while nobody, living or fallen, remains inside, only once every corpse in there has been looted clean, and a short cooldown separates one reset from the next. Arrive at the door on the wrong difficulty and the game says so before the run starts. The raid resets the same way, its own lockout and corpse-return rules still standing on top, but it skips the cooldown between resets: a raid that picked the wrong tier, or bounced off Heroic, can switch back at once, since its own lockout is what limits repeat runs.",
+      "resetBody": "Empty claimed runs linger for a while before clearing on their own. The party leader can let them go at once instead: choose Reset All Instances on their own portrait menu, or type /dungeon reset, and the next run starts fresh at your current difficulty. Switching difficulty does the same for runs on the old difficulty. A reset works only while nobody, living or fallen, remains inside, and only once every corpse in there has been looted clean. It never shortens a lockout: a locked heroic or raid stays locked until its reset, and a short cooldown separates one reset from the next. Arrive at the door on the wrong difficulty and the game says so before the run starts. The raid resets the same way, its own lockout and corpse-return rules still standing on top, and a raid switching tier skips the cooldown: a raid that picked the wrong tier, or bounced off Heroic, can switch back at once, since its own lockout is what limits repeat runs.",
       "templeLoreTitle": "The Drowned Temple, a little deeper",
       "templeLoreBody": "The temple has its own legend, older than the cult you chase elsewhere. On the shore of the Glimmermere, a tarn that drinks the moonlight and gives back the drowned, a lone watcher keeps a gate of pale light. Beneath the surface, a stair of cold stone runs down to it. The folk who sank there did not drown by misadventure: they were the Pale Choir, who went under in worship and never stopped singing. The old wardens scratched a single warning into the rocks before the water took them, a prayer to something they called the Drowned Moon, with a steadier hand adding two words beneath it: it only sleeps.",
       "cryptLeadTitle": "A door the dead were meant to keep shut",
@@ -11280,7 +11256,7 @@ export const en_CA: EnTranslations = {
       "prestigeBody": "Experience keeps counting even after the cap. It feeds a cosmetic virtual level, so your experience bar keeps climbing, and a long-term prestige rank you can claim from your character sheet once you are there. Passing big lifetime-experience milestones also earns deeds in your Book of Deeds, with cosmetic titles and nameplate borders that show on your character sheet. All of it is purely optional and never grants power, just a mark of the road you have walked.",
       "noRush": "There is no rush. The world is there to enjoy at your own pace, so wander, take the quests that catch your eye, and let your hero grow along the way.",
       "ridingTitle": "Learning to ride",
-      "ridingBody": "Riding is one of the things waiting at the end of the climb. At level {level} a stablemaster will teach you the skill for a serious sum of gold, and a lesson out on the training course earns you your first set of reins. A mount grants no power at all; it simply makes the world smaller, which after a long walk north is its own kind of reward."
+      "ridingBody": "At level {level}, Stablemaster Marla teaches basic riding for gold and offers an advanced rank afterward. Training determines mounted speed. Choose your mount appearance in Cosmetics; collectible appearances are shared while their reins remain in any character's bags or bank."
     },
     "placeholder": {
       "note": "This part of the guide is on its way."
@@ -16384,6 +16360,8 @@ export const en_CA: EnTranslations = {
       "temple_moonwater_bolt": "Moonwater Bolt",
       "temple_drowning_aria": "Drowning Aria",
       "temple_mere_surge": "Mere Surge",
+      "temple_score": "The Score",
+      "temple_score_answer": "Answer the Score",
       "temple_tideglass_fracture": "Tideglass Fracture",
       "temple_undertow": "Undertow",
       "temple_lunar_tide": "Lunar Tide",
@@ -16421,6 +16399,12 @@ export const en_CA: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Gorge",
       "wildheart_zulgar_pulse": "Wildheart Pulse",
       "wildheart_zulgar_spirit_hunt": "Spirit of the Hunt",
+      "wildheart_zulgar_hunting_spear": "Hunting Spear",
+      "wildheart_zulgar_idol_wakes": "The Idol Wakes",
+      "kituse_wildheart_pull_spear": "Pull the Spear",
+      "wildheart_idols_breath": "Idol's Breath",
+      "wildheart_sun_glyph_kindle": "Lighting",
+      "wildheart_sun_glyph_cold": "Cooling",
       "sanctum_cinder_breath": "Cinder Breath",
       "sanctum_warming_rite": "Warming Rite",
       "sanctum_goad": "Goad",
@@ -17053,6 +17037,9 @@ export const en_CA: EnTranslations = {
       "levelClass": "Level {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Riding Training",
+      "advancedRiding": "Advanced Riding Training",
+      "ridingSpeed": "Increase your movement speed while mounted by {speed}%. Applies to every mount.",
       "goodsTitle": "{name}: Goods",
       "close": "Close vendor",
       "hint": "Click an item in your bags to sell it while this window is open.",
@@ -17263,7 +17250,8 @@ export const en_CA: EnTranslations = {
       "tooManyOrders": "You may keep at most {count} orders open at once.",
       "orderClosed": "That order is no longer open.",
       "orderOwn": "That is your own order. Cancel it to withdraw it.",
-      "orderNotYours": "That is not your order."
+      "orderNotYours": "That is not your order.",
+      "orderTrackedItem": "The Merchant takes no orders for one-of-a-kind gear."
     },
     "loot": {
       "takeAll": "Take All",
@@ -21189,117 +21177,6 @@ export const en_CA: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Passing Stone"
-      },
-      "whistle_ember_fox": {
-        "name": "Ember Fox Whistle"
-      },
-      "whistle_moss_hare": {
-        "name": "Moss Hare Whistle"
-      },
-      "whistle_frog": {
-        "name": "Frog Whistle"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Crimson Claw Crab Whistle"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Golden Sentinel Whistle"
-      },
-      "whistle_nightfang": {
-        "name": "Nightfang Whistle"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Tuskhorn Boar Whistle"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Emerald Wolf Whistle"
-      },
-      "whistle_tiger": {
-        "name": "Tiger Whistle"
-      },
-      "whistle_cate_coin": {
-        "name": "Cate Coin Whistle"
-      },
-      "whistle_alon": {
-        "name": "Alon Whistle"
-      },
-      "whistle_trollface": {
-        "name": "Trollface Whistle"
-      },
-      "whistle_ansem": {
-        "name": "Ansem Whistle"
-      },
-      "whistle_triple_t": {
-        "name": "Triple T Whistle"
-      },
-      "whistle_kekius": {
-        "name": "Kekius Whistle"
-      },
-      "whistle_solbot": {
-        "name": "Solbot Whistle"
-      },
-      "whistle_frostfire": {
-        "name": "Frostfire Whistle"
-      },
-      "whistle_rocky": {
-        "name": "Rocky Whistle"
-      },
-      "whistle_proud_grunt": {
-        "name": "Proud Grunt Whistle"
-      },
-      "whistle_loot_goblin": {
-        "name": "Loot Goblin Whistle"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Penny Goldspark Whistle"
-      },
-      "whistle_stag": {
-        "name": "Stag Whistle"
-      },
-      "whistle_alpaca": {
-        "name": "Alpaca Whistle"
-      },
-      "whistle_horse": {
-        "name": "Horse Whistle"
-      },
-      "whistle_sapling": {
-        "name": "Sapling Whistle"
-      },
-      "whistle_bull": {
-        "name": "Bull Whistle"
-      },
-      "whistle_spider": {
-        "name": "Spider Whistle"
-      },
-      "whistle_raptor": {
-        "name": "Raptor Whistle"
-      },
-      "whistle_skeleton": {
-        "name": "Skeleton Whistle"
-      },
-      "whistle_crystal_lich": {
-        "name": "Crystal Lich Whistle"
-      },
-      "whistle_forgemaw": {
-        "name": "Forgemaw The Molten Whistle"
-      },
-      "whistle_sprites": {
-        "name": "Flicker and Glimmer Whistle"
-      },
-      "whistle_crystal_tide": {
-        "name": "Crystal Tide Whistle"
-      },
-      "whistle_phantom": {
-        "name": "Phantom Whistle"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Emberfall Phoenix Whistle"
-      },
-      "charm_stag_acorn": {
-        "name": "Acorn Crown Charm"
-      },
-      "charm_stag_gilded": {
-        "name": "Gilded Charm"
       },
       "lastflame_core": {
         "name": "Core of the Last Flame"
@@ -26340,6 +26217,9 @@ export const en_CA: EnTranslations = {
       "thorn_sprout": {
         "name": "Thorn Sprout"
       },
+      "wildheart_hunting_spear": {
+        "name": "Hunting Spear"
+      },
       "buddy_ember_fox": {
         "name": "Ember Fox"
       },
@@ -26414,9 +26294,6 @@ export const en_CA: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, the Warhorse"
-      },
-      "buddy_sapling": {
-        "name": "Sapling"
       },
       "buddy_bull": {
         "name": "Bull"

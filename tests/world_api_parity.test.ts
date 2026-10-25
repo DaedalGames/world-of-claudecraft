@@ -36,6 +36,22 @@ import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { ClientWorld } from '../src/net/online';
 import { Sim } from '../src/sim/sim';
+
+describe('riding purchase quote default parity', () => {
+  it('a rankless online request remains basic-only and advanced requests carry an explicit quote', () => {
+    const commands: unknown[] = [];
+    const client = Object.create(ClientWorld.prototype) as ClientWorld;
+    Object.defineProperty(client, 'cmd', { value: (command: unknown) => commands.push(command) });
+    Object.defineProperty(client, 'ridingTrainingTier', { value: () => 1 });
+    client.learnRiding(42);
+    client.learnRiding(42, 1);
+    expect(commands).toEqual([
+      { cmd: 'learn_riding', npc: 42, ridingTier: 0 },
+      { cmd: 'learn_riding', npc: 42, ridingTier: 1 },
+    ]);
+  });
+});
+
 import { OVERHEAD_EMOTE_IDS, type PlayerClass } from '../src/sim/types';
 // The 27 facet interfaces the W1 split produced (src/world_api/<facet>.ts), plus the
 // bank facet added in the bank-system feature and the Book of Deeds facet. Imported
@@ -510,6 +526,7 @@ export const IWORLD_MEMBERS = [
   { name: 'riftEventMsRemaining', kind: 'method' }, // ms until the rift event stops admitting parties
   { name: 'dungeonDifficulty', kind: 'method' }, // read-returning
   { name: 'activeDungeonDifficulty', kind: 'method' }, // active claim read, null outside
+  { name: 'unappliedDungeonDifficulty', kind: 'method' }, // live claim tier the selection missed
   { name: 'setDungeonDifficulty', kind: 'method' },
   { name: 'heroicMarks', kind: 'data' }, // Heroic Marks currency balance
   { name: 'buyHeroicVendorItem', kind: 'method' },
@@ -540,6 +557,7 @@ export const IWORLD_MEMBERS = [
   { name: 'deleteLoadout', kind: 'method' },
   // --- rideable ground mounts (IWorldMounts) ---
   { name: 'ownedMounts', kind: 'method' }, // read-returning
+  { name: 'ridingTrainingTier', kind: 'method' },
   { name: 'ridingTrained', kind: 'method' }, // read-returning
   { name: 'toggleMounted', kind: 'method' },
   // --- riding skill purchase (IWorldMounts) ---
@@ -1004,9 +1022,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // sitOnSeat (method) on feature/mirefen-tavern: 426/127/299 on its own,
     // 451/133/318 merged into the v0.45.0 integration.
     // Lantern Hall's guildContracts (data) and buyGuildCosmetic (method): 453/134/319.
-    expect(IWORLD_MEMBERS.length).toBe(465);
+    // Riding ranks (PR 4390) add one method over the release: 466/137/329.
+    // The portrait menu's unappliedDungeonDifficulty (method, PR 4625) adds one
+    // more: 467/137/330.
+    expect(IWORLD_MEMBERS.length).toBe(467);
     expect(DATA_MEMBERS.length).toBe(137);
-    expect(METHOD_MEMBERS.length).toBe(328);
+    expect(METHOD_MEMBERS.length).toBe(330);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -1371,6 +1392,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'resurrectAtSpiritHealer',
       'revivePet',
       'ridingTrained',
+      'ridingTrainingTier',
       'riftBossDeathZones',
       'riftCollisionToken',
       'riftEventMsRemaining',
@@ -1451,6 +1473,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'trainRecipe',
       'treasureMap',
       'turnInQuest',
+      'unappliedDungeonDifficulty',
       'unbindItem',
       'unequipBag',
       'unequipItem',
@@ -1875,6 +1898,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'resurrectAtSpiritHealer',
       'revivePet',
       'ridingTrained',
+      'ridingTrainingTier',
       'riftBossDeathZones',
       'riftEventMsRemaining',
       'rotateWorldQuestPuzzleTile',
@@ -1942,6 +1966,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeSetOffer',
       'trainRecipe',
       'turnInQuest',
+      'unappliedDungeonDifficulty',
       'unbindItem',
       'unequipBag',
       'unequipItem',
@@ -2480,6 +2505,7 @@ const FACET_DUNGEONS = [
   'riftEventMsRemaining',
   'dungeonDifficulty',
   'activeDungeonDifficulty',
+  'unappliedDungeonDifficulty',
   'setDungeonDifficulty',
   'heroicMarks',
   'buyHeroicVendorItem',
@@ -2525,6 +2551,7 @@ type _ExhaustTelemetry = AssertNever<
 
 const FACET_MOUNTS = [
   'ownedMounts',
+  'ridingTrainingTier',
   'ridingTrained',
   'toggleMounted',
   'learnRiding',
@@ -2835,9 +2862,10 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     // The integration includes the five-dungeon rework, six buddy methods and
     // the dungeon objectives tracker's dungeonRun (one data member); the tavern
     // adds resting (data) and sitOnSeat (the seating facet's method).
-    // Plus Lantern Hall's guildContracts and buyGuildCosmetic.
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(465);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(465);
+    // Plus Lantern Hall's guildContracts and buyGuildCosmetic, the riding
+    // ranks method (PR 4390) and unappliedDungeonDifficulty (PR 4625).
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(467);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(467);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

@@ -475,9 +475,24 @@ export const nl_NL: EnTranslations = {
       "returning": "Brengt je voorwerpen terug",
       "waiting": "Wacht om je voorwerpen terug te brengen",
       "bags": "Naar bank sturen",
+      "bagsVault": "Stuur materialen naar de kluis",
       "bank": "Uit bank halen",
+      "vault": "Haal uit de kluis. Elke keuze haalt de hele rij op.",
       "inventory": "Inventaris",
       "bankTitle": "Bank",
+      "vaultTitle": "Materialenkluis",
+      "storeTabs": "Koerieropslag",
+      "vaultCap": "Bewaart {cap} van elk materiaal",
+      "vaultEmpty": "Je kluis is leeg.",
+      "vaultLocked": "Ontgrendel de Materialenkluis bij een bankier om hem met je koerier te gebruiken.",
+      "boundBank": "Onderweg naar de bank",
+      "boundVault": "Onderweg naar de Materialenkluis",
+      "boundAccount": "Onderweg naar de bank van een ander personage",
+      "accountTitle": "Andere personages",
+      "accountBank": "Haal uit deze bank. Dat personage moet uitgelogd zijn wanneer de koerier aankomt.",
+      "bagsAccount": "Stuur naar de bank van {name}",
+      "bagsAccountNone": "Kies een personage om voorwerpen naartoe te sturen.",
+      "accountPlanned": "Gepland voor {name}: {count} stapels. Kiezen voor een ander personage vervangt ze.",
       "capacity": "{used} / {capacity} plaatsen",
       "cargo": "Koeriersinventaris",
       "empty": "Geen voorwerpen",
@@ -485,7 +500,7 @@ export const nl_NL: EnTranslations = {
       "selected": "{count} / {limit} stapels geselecteerd",
       "select": "Selecteer {item}, {count}",
       "selectedItem": "Deselecteer {item}, {count}",
-      "instructions": "Kies volledige stapels. Je koerier stort ze eerst en haalt daarna de gevraagde voorwerpen op. Missievoorwerpen kunnen niet worden verstuurd.",
+      "instructions": "Selecteer hele stapels voor je bank, de Materialenkluis of een ander personage. Je koerier stort ze eerst en haalt daarna de gevraagde voorwerpen op. Missievoorwerpen kunnen niet worden verstuurd.",
       "membership": "Verleng je lidmaatschap om nog een reis te starten.",
       "cargoSafe": "Teruggebrachte voorwerpen mogen volle tassen laten overlopen. De koerier verdwijnt na bezorging totdat je hem opnieuw oproept.",
       "unavailable": "Roep je koerier op om een bezorging te plannen."
@@ -862,7 +877,7 @@ export const nl_NL: EnTranslations = {
       "titleOffer": "Titel: {title}",
       "titlePreview": "Getoond als {preview}",
       "mountOffer": "Rijdier: {mount}",
-      "mountPreview": "Grondrijdier: +{pct}% bewegingssnelheid tijdens het rijden. Vereist rijtraining.",
+      "mountPreview": "Rijdieruiterlijk voor elk personage op je account. Je rijopleiding bepaalt de snelheid.",
       "skinOffer": "Zwaarduiterlijk: {skin}",
       "skinPreview": "Verandert het uiterlijk van je uitgeruste zwaard op elk personage van je account. Alleen uiterlijk: geen eigenschappen.",
       "buy": "Kopen",
@@ -2538,7 +2553,7 @@ export const nl_NL: EnTranslations = {
       "riding": "Rijdend",
       "mount": "Rijdier",
       "dismount": "Afstijgen",
-      "useToRide": "Gebruik om dit rijdier op te roepen.",
+      "useToRide": "Gebruik om dit uiterlijk te dragen en je rijdier op te roepen. Bewaar dit voorwerp in de tassen of bank van een willekeurig personage om het uiterlijk met je hele account te delen. Je rijopleiding bepaalt de snelheid.",
       "emptyTitle": "Geen rijdieren verzameld",
       "emptyStableHint": "Bereik niveau 20 en volg rijlessen bij Stalmeester Marla in de Hoogwacht-stallen, ten westen van Hoogwacht.",
       "emptyDropHint": "Zeldzamere rijdieren vallen van heroische kerkerbazen en het voltooien van Rifts.",
@@ -2568,9 +2583,9 @@ export const nl_NL: EnTranslations = {
       "name_rickshaw_mount": "Beengebonden Riksja",
       "name_wobbles_slime": "Wobbles het Slijmwezen",
       "name_nightwing_chimera": "Nachtvleugelchimera",
-      "desc_valorsteed": "Een sterk, standvastig strijdros dat extra reissnelheid geeft.",
-      "desc_grag_bear": "Een sterke, standvastige beer die extra reissnelheid geeft.",
-      "desc_stalkglider_snail": "Een taaie, langzaam brandende slak die extra reissnelheid geeft.",
+      "desc_valorsteed": "Een sterk, tredzeker ros met een leren zadel.",
+      "desc_grag_bear": "Een sterke, tredzekere beer met een zwaar zadel.",
+      "desc_stalkglider_snail": "Een stevige, rustige slak met een bemoste schelp.",
       "desc_aether_hover_cycle": "Een krachtige magitech-motor, ontworpen voor snelle, laag zwevende verplaatsing tijdens gevechten.",
       "desc_shadowjump_toad": "Een enorme, standvastige reuzenpad, getraind in bliksemsnelle schaduwsprongen die elk terrein overbruggen.",
       "desc_stormfeather_griffin": "Een koninklijke stormgriffioen die met runenbeslagen klauwen over de grond sluipt, vleugels opgevouwen.",
@@ -2593,7 +2608,7 @@ export const nl_NL: EnTranslations = {
     },
     "mountTraining": {
       "mountPrompt": "Druk op {key} om op de trainings-Moedros te stijgen.",
-      "ownedMountPrompt": "Je teugels zitten in je tassen. Gebruik ze om te rijden.",
+      "ownedMountPrompt": "Kies je rijdier onder Uiterlijk. Gebruik Opstijgen / Afstijgen om te rijden.",
       "ridePrompt": "Volg de gloeiende markering naar de startlijn en druk dan op Race Starten.",
       "begin": "Les Beginnen",
       "success": "Je hebt de Moedros getemd.",
@@ -2864,6 +2879,10 @@ export const nl_NL: EnTranslations = {
       "actionCamShoulderLeft": "Links {pct}",
       "actionCamShoulderRight": "Rechts {pct}",
       "actionCamShoulderCenter": "Midden",
+      "firstPersonMode": "Eerste persoon (volledig ingezoomd)",
+      "firstPersonOff": "Uit",
+      "firstPersonBody": "Lichaam tonen",
+      "firstPersonNoBody": "Geen lichaam",
       "showAttackButton": "Aanvalsknop Tonen",
       "showDailyRewardsChest": "Kist met dagelijkse beloningen tonen",
       "mobileCameraJoystick": "Camerajoystick",
@@ -3826,6 +3845,12 @@ export const nl_NL: EnTranslations = {
       "linkHint": "Shift-klik om dit voorwerp in de chat te delen."
     },
     "plurals": {
+      "itemHistoryEarlierHidden": {
+        "one": "{count} eerdere overdracht wordt niet getoond.",
+        "few": "{count} eerdere overdrachten worden niet getoond.",
+        "many": "{count} eerdere overdrachten worden niet getoond.",
+        "other": "{count} eerdere overdrachten worden niet getoond."
+      },
       "guildBoardShown": {
         "one": "{count} gilde getoond",
         "few": "{count} gilden getoond",
@@ -4278,6 +4303,8 @@ export const nl_NL: EnTranslations = {
     "dungeonDifficulty": {
       "setHeroic": "Kerkermoeilijkheid instellen: Heroïsch",
       "setNormal": "Kerkermoeilijkheid instellen: Normaal",
+      "unappliedNormal": "Heroïsch geselecteerd. Huidige instanties zijn nog Normaal.",
+      "unappliedHeroic": "Normaal geselecteerd. Huidige instanties zijn nog Heroïsch.",
       "resetAll": "Alle instanties resetten",
       "resetDone": "Alle instanties zijn gereset.",
       "resetNone": "Je hebt geen instanties om te resetten.",
@@ -4287,10 +4314,11 @@ export const nl_NL: EnTranslations = {
       "resetSameDifficulty": "Wijzig de kerkermoeilijkheid voordat je deze instanties reset. Lege instanties resetten zichzelf na 5 minuten.",
       "resetLoot": "Je kunt instanties niet resetten zolang er nog buit binnen ligt.",
       "resetConfirmTitle": "Alle instanties resetten?",
-      "resetConfirmBody": "Hiermee verlaat je lege instanties van je eerder geselecteerde moeilijkheid. Niet-opgeëiste buit voorkomt de reset.",
+      "resetConfirmBody": "Dit verlaat je lege instanties zodat de volgende poging opnieuw begint op de gekozen moeilijkheid. Vergrendelingen veranderen niet. Spelers binnen of niet opgehaalde buit voorkomen de reset.",
       "resetConfirm": "Instanties resetten",
       "resetCooldown": "Instanties kunnen slechts eenmaal per 5 minuten worden gereset.",
-      "resetUsage": "Gebruik /dungeon reset om je lege instanties te verlaten nadat je de moeilijkheid hebt gewijzigd.",
+      "resetAlreadyFresh": "Je instances zijn al fris. Niemand is ze binnengegaan sinds de laatste reset.",
+      "resetUsage": "Gebruik /dungeon reset om je lege instanties te verlaten en opnieuw te beginnen.",
       "entryMismatchNormal": "Deze instantie is ingesteld op de moeilijkheid Normaal. Gebruik Alle instanties resetten om een nieuwe Heroïsche run te starten.",
       "entryMismatchHeroic": "Deze instantie is ingesteld op de moeilijkheid Heroïsch. Gebruik Alle instanties resetten om een nieuwe Normale run te starten."
     },
@@ -4623,7 +4651,17 @@ export const nl_NL: EnTranslations = {
         "pollinated": "Een Zaaddoos aanraken laat meteen een doornspruit ontkiemen. Blijf van de zaden af en laat een schone speler ze platstampen. Een onaangeroerde zaaddoos ontkiemt na {seconds} sec (op Heroïsch graaft hij zich na {heroic} sec in en verrijst naast de dichtstbijzijnde speler).",
         "prey": "Zulgar jaagt op je. Leid hem over een brandende zonnerune om hem met {slow}% te vertragen. Vangt hij je, dan word je Toegetakeld voor {damage} schade ({heroic} op Heroïsch) en {stun} sec omvergeworpen.",
         "avatar": "Beweegt {pct}% sneller en jaagt op zijn Prooi. Vertragingen en vastzetten werken, verdovingen duren half zo lang.",
-        "vanished": "Verborgen en immuun voor schade. Hij staat op het punt op de verste speler te springen."
+        "vanished": "Verborgen en immuun voor schade. Hij staat op het punt op de verste speler te springen.",
+        "sunstruck": "Geraakt door een brandende zonnerune: beweegt {pct}% langzamer.",
+        "sunstruckExposed": "Geraakt door een brandende zonnerune: krijgt {pct}% meer schade.",
+        "sunWary": "Geen zonnerune kan hem raken tot dit eindigt. Een brandende rune die hij oversteekt blijft branden.",
+        "pinned": "Een Jachtspeer houdt je vast. Je bloedt voor {bleed} fysieke schade ({heroicBleed} op Heroïsch) elke {every} sec en Wildhartpuls raakt je overal voor {pulse}% meer schade. Een teamgenoot kan de speer in {pull} sec uittrekken. Als niemand anders vrij is, trek hem zelf uit in {wrench} sec. Na {seconds} sec laat hij los.",
+        "idolAwake": "De stenen jaguar is wakker. Elke {every} sec ademt hij over een terrashelft en daarna de andere, na een waarschuwing van {warning} sec op de vloer: {min} tot {max} natuurschade ({heroicMin} tot {heroicMax} op Heroïsch) aan iedereen in die helft. Zulgar blijft de Jaguaravatar tot zijn dood en kiest elke {seconds} sec een nieuwe Prooi ({heroicSeconds} sec op Heroïsch)."
+      },
+      "temple": {
+        "scoreWard": "Ze zingt de partituur: ze krijgt geen schade tot die eindigt. Betreed de maantegels in de volgorde waarin ze klonken voordat het vers eindigt om haar stem te breken. Wissel elkaar af: wacht na een noot totdat een andere speler de volgende juiste noot speelt. De enige overlevende kan alleen afronden. Als het vers eerder eindigt, doet Wanklank {min} tot {max} vorstschade ({heroicMin} tot {heroicMax} op Heroïsch) aan iedereen op het hof.",
+        "brokenVoice": "Haar stem is gebroken: ze krijgt {pct}% meer schade tot dit eindigt.",
+        "spentVoice": "Je kunt geen andere maantegel laten klinken totdat een andere speler de volgende juiste noot speelt. Op een tegel stappen tijdens dit effect zet het antwoord niet terug en doet je geen pijn. Kan niet worden verdreven. Verwijderd als je de enige levende speler in je instantie bent of de partituur eindigt."
       },
       "bastion": {
         "brineColumn": "Vastgezet in een zeewaterzuil: je krijgt elke {tick} sec {min} tot {max} natuurschade, maximaal {seconds} sec. Onderbreek of verdoof de getijdengebonden acoliet om dit te verbreken.",
@@ -5256,6 +5294,9 @@ export const nl_NL: EnTranslations = {
       "partyTradeWindow": "Je kunt dit voorwerp de komende {time} ruilen met spelers die deze buit deelden. Uitrusten beëindigt het ruilvenster.",
       "perfectedBadge": "Geperfectioneerd",
       "perfectingRank": "Perfecteren: rang {rank} van {ranks}",
+      "lootedBy": "Geplunderd door {name} op {date}",
+      "questRewardTo": "Missiebeloning voor {name} op {date}",
+      "obtainedBy": "Verkregen door {name} op {date}",
       "materialSourceGatherer": "{count} × Verzameld door {name}",
       "trophySkullSource": "{count} × Afgenomen van {name}",
       "materialSourceGathererSigned": "{count} × Verzameld door {name}, gesigneerd door {signer}",
@@ -5799,14 +5840,8 @@ export const nl_NL: EnTranslations = {
       "logAdminPurge": "Een beheerder verwijderde {count} {item}"
     },
     "collections": {
-      "title": "Jacht",
-      "close": "Jacht sluiten",
-      "keybindLabel": "Jacht",
-      "launcherTitle": "Jacht: metgezellen, rijdieren en uitrustingssets",
       "tabs": {
-        "buddies": "Metgezellen",
-        "mounts": "Rijdieren",
-        "sets": "Uitrustingssets"
+        "buddies": "Metgezellen"
       },
       "state": {
         "owned": "Verzameld",
@@ -5816,7 +5851,6 @@ export const nl_NL: EnTranslations = {
       },
       "presenceDefault": "Je voelt dat een aanwezigheid naar je kijkt.",
       "revealed": "{name} heeft besloten je te volgen.",
-      "cosmeticUnlocked": "Nieuw uiterlijk voor {name}: {look}.",
       "presence": {
         "ember_fox": "Iets kleins en warms trippelt achter je aan.",
         "moss_hare": "Geritsel in de turf houdt je stappen bij.",
@@ -5854,134 +5888,9 @@ export const nl_NL: EnTranslations = {
         "phantom": "De lucht achter je is net iets te stil.",
         "emberfall_phoenix": "Een warmte als een smeulend vuur nestelt zich achter je."
       },
-      "cosmetic": {
-        "crystal_lich_frostbound": "Vorstgreep",
-        "crystal_lich_voltaic": "Elektrisch",
-        "forgemaw_ashen": "Asgrauw",
-        "forgemaw_whitehot": "Witgloeiend",
-        "stag_acorn": "Eikelkroon",
-        "stag_gilded": "Verguld",
-        "moss_hare_verdant": "Groenbloeiend",
-        "proud_grunt_warlord": "Krijgsheer",
-        "frog_sapphire": "Saffierkikker"
-      },
       "actions": {
         "summon": "Oproepen",
-        "dismiss": "Wegsturen",
-        "wear": "Aandoen",
-        "remove": "Verwijderen"
-      },
-      "looks": {
-        "title": "Uiterlijken",
-        "unlocked": "Ontgrendeld",
-        "locked": "Vergrendeld",
-        "worn": "Gedragen",
-        "none": "Nog geen uiterlijken gemaakt voor deze metgezel"
-      },
-      "source": {
-        "bossLabel": "Bazenhuisdier",
-        "bossDrop": "{mob} ({location}), {chance}% per speler per overwinning",
-        "bossDropWithHeroic": "{mob} ({location}), {chance}% per speler, {heroicChance}% op Heroïsch",
-        "bossDropHeroicOnly": "{mob} ({location}), alleen Heroïsch, {chance}% per speler",
-        "rollNote": "Elke speler werpt apart. Niemand verliest een worp aan een groepslid.",
-        "deedLabel": "Verdiend met",
-        "deed": "De daad {deed}",
-        "challengeLabel": "Uitdaging",
-        "challengeSpeed": "Versla {mob} binnen {seconds} seconden na het begin van het gevecht",
-        "challengeDps": "Doe gedurende het gevecht {dps} schade per seconde aan {mob}",
-        "craftLabel": "Vervaardigd",
-        "craft": "{item} (recept voor {profession})",
-        "grantLabel": "Toegekend",
-        "grantOnly": "Seizoensbeloning: de maandranglijst en beloningen voor beste gevechtsverslagen",
-        "tokenLabel": "Munt",
-        "token": "{item}, eenmaal gebruikt om de metgezel te verbinden"
-      },
-      "buddyLore": {
-        "ember_fox": "Een moervos uit de heggen van Oostbeekdal, vernoemd naar de koolrode vacht die door het winterstruikgewas schijnt. De pelsjagers gaven de jongen generaties geleden op en zetten sindsdien liever voedsel neer.",
-        "moss_hare": "De haas uit Wilgenveen, groenvachtig na een leven in natte turf. Kruidenkundigen uit het veen vinden ze geluksbrengers en laten ze niet van een drempel jagen.",
-        "frog": "Slijkveenmoeras brengt ze vet en onbezorgd groot. Ze zingen de hele nacht in de rietvelden. De moerasgidsen zweren dat een boot met zo'n kikker nooit vastloopt.",
-        "crimson_claw_crab": "Een getijdenkrab uit Verrekust wiens klauw nog lang rood blijft nadat hij uit het water komt. Havenarbeiders lieten ze vroeger over de planken racen om geld.",
-        "golden_sentinel": "Een wachtkever uit Amberval, verguld door de hars waarin hij opgroeide. De naam is ouder dan de hars: zulke wachters bewaakten die bosjes lang voordat iemand het sap in flessen dacht te doen.",
-        "nightfang": "Een jonge jager uit Nachtbloesem, zelfs naar de maatstaven van zijn soort stil. Hij volgt je voor het gezelschap en jaagt op niets groters dan een mot.",
-        "tuskhorn_boar": "Een ras uit Doorntop, met korte poten gefokt door herders die een ever wilden dat geen hek kon slopen. Het temperament bleef hetzelfde.",
-        "emerald_wolf": "Een pup uit Schimmenwoud, met een groene vacht in het bladerlicht dat de bosbodem nooit helemaal bereikt. De wachters brengen de wezen groot die het bos achterlaat.",
-        "tiger": "Palmreik-strepen op een dier dat Palmreik nooit zag. De bloedlijn wordt in gevangenschap gehouden sinds de oude menagerieën sloten. Hij luistert naar een fluitje en nergens anders naar.",
-        "cate_coin": "Een kat die niet gescheiden wil worden van de munt waarop hij zit en die niemand ooit heeft zien eten. De kooplieden van Eastbrook twisten nog steeds over wie van de twee het huisdier is.",
-        "alon": "Een reizigersmascotte van een weg die op geen kaart staat. Hij verschijnt overal waar plannen mislopen. Hij kijkt toe, keurt het goed en helpt helemaal nergens bij.",
-        "trollface": "Een grijnzend ding dat Schimmenwoud naar buiten stuurde en niet terug wilde nemen. Elke poging het te beschrijven eindigt met een lachende verteller die het opgeeft.",
-        "ansem": "Hij spreekt over deuren en duisternis, maar wil over geen van beide meer kwijt. De Nachtbloesem-sekteleden eisen hem op, maar hij dwaalt weg zodra ze een ritueel houden.",
-        "triple_t": "Drie van iets, of één ding driemaal. De verhalen spreken elkaar tegen en het wezen blijft niet lang genoeg stil om geteld te worden.",
-        "kekius": "Een lachende metgezel van onduidelijke oorsprong, door de renstallen van Windkam geadopteerd als geluksbrenger. Hij heeft vier stallen overleefd die bij hem zwoeren.",
-        "solbot": "Een kleine, door zonlicht gevoede automaat, half begraven uit de as van de Drakenlanden opgegraven en nog steeds tikkend. De werkplaats die hem bouwde liet nergens op de behuizing een merk achter.",
-        "frostfire": "Geboren in Vorstsluier, waar een warmwaterbron door het ijsveld breekt. Hij heeft nooit gekozen bij welke helft hij hoort. In koude lucht stoomt hij en in warme lucht rilt hij.",
-        "rocky": "Een kruiper met een stenen schild uit het puin van Doorntop, traag en volkomen onbezorgd. Mijnwerkers houden ze omdat ze vlak voor een instorting even stil worden.",
-        "proud_grunt": "Een veteraan van de oorlogsvoorraden die zijn saluut behield en zijn rang verloor. Oorlogsmaarschalk Draven Kole geeft er één aan elke soldaat met genoeg eer om te begrijpen wat dat kost.",
-        "loot_goblin": "Hij volgt iedereen met Heroïsche Merktekens en is nog nooit op diefstal betrapt. Kwartiermeester Vex houdt vol dat dit helemaal niets bewijst.",
-        "penny_goldspark": "Een leerling van een gnomenknutselaar die per uur rekent en elk koperstuk waard is. Wapensmid Hode nam haar aan om een schuld te vereffenen en verkoopt de regeling nu aan iedereen met duizend goud.",
-        "stag": "Een bloedlijn uit Eeuwigtuin, klein gefokt uit de grote herten waarop de wachters ooit reden. Hij buigt nog steeds zijn hoofd voor een opgeheven hand, uit een gewoonte ouder dan het dier zelf.",
-        "alpaca": "De kuddes van Windkam worden gehouden om hun wol en hun aard: niets blijft kalmer in een storm. Deze spuugt tijdens elke reis naar precies één persoon.",
-        "horse": "Een valleipony, klein gefokt voor de boomgaardpaden en nooit verteld dat hij geen oorlogspaard is. Hij loopt naast je mee en volgt iedereen die hem ooit een appel gaf.",
-        "sapling": "Een jong boompje met een glimlach in zijn schors en een nieuwsgierige paarse blik. Zijn wortels dragen hem vrolijk waggelend mee, waar je ook heen gaat.",
-        "bull": "Een stier uit de vallei ter grootte van een hond. Alleen daarom wilde iemand hem binnen houden. Zijn temperament is niet meegekrompen.",
-        "spider": "Een handgrote wever uit Schimmenwoud die elke tas waarin hij wordt gedragen opnieuw inricht. Het web is sterker dan de draad die het vervangt.",
-        "raptor": "Een jong uit de Drakenlanden, doorverkocht voordat het leert hoe hard het kan rennen. Elke nieuwe eigenaar krijgt te horen dat het goed gevoerd moet worden. Niemand hoeft dat tweemaal te horen.",
-        "skeleton": "Hij kwam uit de grafheuvels van Schimmenwoud omhoog, klopte het stof af en volgt sindsdien mensen. Van wie de botten waren, weet nog niemand.",
-        "crystal_lich": "Een splinter van Nythraxis zelf, nog steeds zoemend van de kou die hem vormde. Hij gehoorzaamt degene die hem uit het puin van de overval haalde en heeft het diegene nog niet vergeven.",
-        "forgemaw": "Gesmeed in de Smeltkroes van de Laatste Bron en nooit helemaal voltooid. Hij liep Ignivars gieterij uit terwijl de hamers nog vielen. Je vindt hem alleen tijdens de heroïsche afdaling: het gesmolten wezen keert steeds terug naar de smidse die hem maakte en volgt degene naar huis die het vuur tweemaal overleeft.",
-        "crystal_tide": "Een getijdengeestje dat op zijn eigen druppel zeeglas rijdt. Vissers van de vallei tot Verrekust haalden hem uit stil water terwijl ze avondeten vingen. Hij bewaart het water waaruit hij opkwam en laat zich niet overhalen terug te gaan.",
-        "sprites": "Twee kleine vuurgeestjes, één goud en één blauwgroen, die het nooit eens worden over wie leidt. Van dichtbij vouwen ze samen tot één groene vlam en vallen daarna lachend weer uiteen.",
-        "phantom": "Een handgroot spook uit de grafheuvels van Schimmenwoud, alleen laken en geen botten. Hij verschijnt in een gesloten tas en blijft voor het gezelschap. Niemand weet wat hij wil en hij heeft nog nooit iemand proberen te laten schrikken.",
-        "emberfall_phoenix": "Elke herfst brandt hij terug tot een sintel en in de lente herrijst hij uit zijn eigen as. Meer kan niemand je vertellen. Niemand vond ooit een nest en niemand ving er ooit tweemaal één."
-      },
-      "petKind": {
-        "beast": "Beesten",
-        "elemental": "Elementalen",
-        "humanoid": "Mensachtigen",
-        "undead": "Ondoden",
-        "celebrity": "Beroemdheden"
-      },
-      "armor": {
-        "cloth": "Stof",
-        "mail": "Maliën",
-        "leather": "Leer"
-      },
-      "stat": {
-        "intellect": "Intelligentie",
-        "agility": "Behendigheid",
-        "strength": "Kracht",
-        "mixed": "Gemengd"
-      },
-      "set": {
-        "owned": "{owned} van {total} delen",
-        "itemLevel": "Voorwerpniveau {level}",
-        "bonusLabel": "{pieces} delen"
-      },
-      "detail": {
-        "dropLabel": "Afkomstig van",
-        "vendorLabel": "Verkocht door",
-        "bindLabel": "Binding",
-        "sellLabel": "Handelaar betaalt",
-        "marketLabel": "Wereldmarkt",
-        "exchangeLabel": "$WOC-beurs",
-        "setLabel": "Verzameld",
-        "drop": "{mob} ({location}), {chance}% per overwinning",
-        "heroicDrop": "{mob} ({location}), alleen Heroïsch, {chance}% per overwinning",
-        "dropWithHeroic": "{mob} ({location}), {chance}% per overwinning, {heroicChance}% op Heroïsch",
-        "globalDrop": "Elke vijand, {chance}% per overwinning, één van {count} op deze zeldzaamheid",
-        "fishingDrop": "Overal vissen, {chance}% per vangst",
-        "vendor": "{npc} ({location}) voor {price}",
-        "honorPrice": "{amount} Eer",
-        "marksPrice": "{amount} Heroïsche Merktekens",
-        "noSource": "Nog geen bron in het spel",
-        "noItem": "Nog geen voorwerp dat dit verleent",
-        "tradeable": "Verhandelbaar",
-        "soulbound": "Zielsgebonden",
-        "noSell": "Kan niet worden verkocht",
-        "marketAtMerchant": "Getoond bij de handelaar",
-        "marketChecking": "Controleren...",
-        "marketNone": "Geen aanbiedingen",
-        "exchangeNone": "Geen aanbiedingen",
-        "exchangeUnavailable": "Niet beschikbaar op deze client"
+        "dismiss": "Wegsturen"
       }
     },
     "calendar": {
@@ -6659,7 +6568,15 @@ export const nl_NL: EnTranslations = {
       "viewSources": "Bronnen bekijken",
       "separateByGatherer": "Per verzamelaar scheiden",
       "takeChosenQuantity": "Gekozen aantal uitnemen",
-      "combine": "Materiaalstapels combineren"
+      "combine": "Materiaalstapels combineren",
+      "itemHistory": "Voorwerpgeschiedenis"
+    },
+    "itemHistory": {
+      "title": "{item}: geschiedenis",
+      "passedTo": "Doorgegeven aan {name} op {date}",
+      "noTransfers": "Dit voorwerp is nooit van eigenaar veranderd.",
+      "close": "Sluiten",
+      "openAria": "Voorwerpgeschiedenis van {item}"
     },
     "enchanting": {
       "recipeNotLearned": "Leer de formule voordat je deze betovering toepast.",
@@ -7073,6 +6990,7 @@ export const nl_NL: EnTranslations = {
         "summons_adds": "Roept versterkingen op",
         "lunar_tide": "Maantij (pulserende gebiedsschade)",
         "chorus_and_solo": "Koorzang en Eenstemmige zang (verzamel op de ene markering, verspreid bij de andere)",
+        "the_score": "De partituur (ze zingt tweemaal een melodie op de maantegels: betreed ze in de gespeelde volgorde om haar stem te breken)",
         "tideglass_reflections": "Getijdenglasweerspiegelingen (dood elkaars spiegelbeelden)",
         "hydra_three_elements": "Drie elementen (de linkerkop ademt een vorstkegel van 18 yard die je 4 seconden met 70 procent vertraagt. De middelste spuugt gif onder maximaal 3 spelers, dat na 1,5 seconden ontploft en 6 seconden op die plek brandt. De rechter vuurt een stortvloed door een baan van 26 yard die je 8 yard terugslaat. Stap uit elke aanval. Valt een kop, dan nemen de levende koppen zijn aanval over)",
         "hydra_tsunami": "Vloedgolf (de koppen zinken 4,5 seconden en krijgen 75 procent minder schade. Een golf rolt over de helft van de poel, de volgende keer over de andere: 160 tot 190 vorstschade op Normaal en een duw van 10 yard. Ga naar de andere helft of achter een randzuil. Op Heroïsch rolt de golf 3,5 seconden later terug over de andere helft. De eerste komt na 24 seconden, elke volgende 40 seconden nadat de vorige voorbij is)",
@@ -7197,6 +7115,23 @@ export const nl_NL: EnTranslations = {
       "shadeLine": "Laat deze lokvogel met rust. Val de Vael aan wiens lantaarn oplicht in de lichtbundel om de sluier te breken",
       "timeAria": "Nog {seconds} seconden"
     },
+    "templeAlert": {
+      "melodyTitle": "De partituur",
+      "melodyLine": "Kijk hoe de maantegels na elkaar klinken. Herhaal de volgorde om de beurt met een andere speler",
+      "melodyDarkLine": "Onthoud de volgorde voordat de tegels donker worden. Herhaal die om de beurt met een andere speler",
+      "answerTitle": "Beantwoord de partituur!",
+      "answerLine": "Wissel elkaar af: betreed de maantegel met {place}. Noten: {done} van {total}",
+      "answerDarkLine": "Wissel elkaar af en herhaal de volgorde uit het hoofd. Stap af voordat je een tegel opnieuw betreedt. Noten: {done} van {total}",
+      "spentTitle": "Een andere stem moet antwoorden",
+      "spentLine": "Je kunt geen tegel laten klinken totdat een andere speler de volgende juiste noot speelt. Noten: {done} van {total}",
+      "stepOffTitle": "Stap eraf en weer erop",
+      "stepOffLine": "Een maantegel klinkt alleen wanneer iemand erop stapt. Stap van deze tegel af en weer erop",
+      "falseTitle": "Valse noot!",
+      "falseLine": "Die tegel was niet aan de beurt. Het antwoord begint opnieuw bij de eerste tegel",
+      "brokenTitle": "Selthes stem is gebroken!",
+      "brokenLine": "Ze krijgt {pct}% meer schade tot dit eindigt: gebruik nu je sterkste aanvallen",
+      "timeAria": "Nog {seconds} seconden"
+    },
     "wildheartAlert": {
       "preyTitle": "Jij bent de Prooi!",
       "preyLine": "Lok Zulgar door brandende zonnerunen om hem te vertragen voordat hij je vangt en toetakelt",
@@ -7207,7 +7142,21 @@ export const nl_NL: EnTranslations = {
       "pollinatedLine": "Vermijd zaaddozen: ze aanraken terwijl je Bestoven bent maakt vijanden. Ongemarkeerde bondgenoten kunnen ze platstampen",
       "bondTitle": "Roedelband",
       "bondLine": "Scheid de Beestenmeester en jaguar om hun schadevermindering en schadebonus te verwijderen",
-      "timeAria": "Nog {seconds} seconden"
+      "timeAria": "Nog {seconds} seconden",
+      "preyAloneLine": "Niemand anders kan de zonnerunen ontsteken. Sta {seconds} sec op een donkere rune om die te ontsteken en lok Zulgar eroverheen",
+      "pinnedTitle": "Vastgespiest!",
+      "pinnedLine": "Een teamgenoot moet de Jachtspeer uittrekken. Wildhartpuls raakt je harder zolang je vastgespiest bent",
+      "pinnedSelfLine": "Niemand is vrij om te helpen: trek de Jachtspeer zelf uit voordat Wildhartpuls raakt",
+      "sunstruckTitle": "Zulgar is door de zon geraakt!",
+      "sunstruckLine": "Hij krijgt {pct}% meer schade tot dit eindigt: gebruik nu je sterkste aanvallen",
+      "spearTitle": "Een bondgenoot is vastgespiest!",
+      "spearLine": "Ren naar de Jachtspeer en trek hem uit voordat Wildhartpuls raakt",
+      "glyphTitle": "Ontsteek de zonnerunen",
+      "glyphLine": "Sta {seconds} sec op een donkere zonnerune om die te ontsteken. Wanneer Zulgar oversteekt, krijgt hij {duration} sec {pct}% meer schade",
+      "glyphLightingTitle": "De zonnerune ontsteken",
+      "glyphLightingLine": "Blijf op de rune tot die brandt. Afstappen begint opnieuw",
+      "breathTitle": "Adem van het idool!",
+      "breathLine": "De stenen jaguar gaat over deze terrashelft ademen. Steek over naar de andere helft"
     },
     "sanctumAlert": {
       "quenchTitle": "In het bluswater!",
@@ -7296,6 +7245,13 @@ export const nl_NL: EnTranslations = {
       "relightFar": "Kom binnen {range} yard om dit opnieuw aan te steken",
       "relightAria": "Steek {name} opnieuw aan",
       "relightUsingLine": "Blijf kanaliseren om de kaars aan te steken: dit kost gezondheid. Treffers onderbreken niet, bewegen of een verdoving wel",
+      "freeLine": "Trek de speer uit de grond om het slachtoffer te bevrijden. Schade stopt je niet; bewegen of verdoving wel",
+      "freeKey": "Trek {name} uit",
+      "freeTap": "Tik hier om {name} uit te trekken",
+      "freeClick": "Klik hier om {name} uit te trekken",
+      "freeFar": "Kom binnen {range} m om hem uit te trekken",
+      "freeAria": "Trek {name} uit",
+      "freeUsingLine": "Sta stil om de speer uit te trekken: bewegen of verdoving stopt je",
       "timeAria": "Nog {seconds} seconden"
     },
     "cosmetics": {
@@ -7317,12 +7273,13 @@ export const nl_NL: EnTranslations = {
       "detach": "Afdoen",
       "applied": "Toegepast",
       "owned": "In bezit",
+      "notCollected": "Niet verzameld",
       "storeOnly": "Verkrijgbaar in de WOC-winkel",
       "preview": "Voorbeeld",
       "previewAria": "Voorbeeld {name}",
       "cardAria": "{name}, {rarity}",
-      "mountsIntro": "Een rijdier-skin wordt over het rijdier getekend waarop dit personage rijdt. De snelheid verandert nooit.",
-      "mountsNoMount": "Bezit eerst een rijdier: een skin heeft iets nodig om op te rijden.",
+      "mountsIntro": "Kies hier het uiterlijk van je rijdier. Je rijopleiding bepaalt de snelheid. Bewaar het rijdiervoorwerp in de tassen of bank van een willekeurig personage om het uiterlijk met je hele account te delen.",
+      "mountsNoMount": "Leer rijden bij stalmeester Marla om een rijdier op te roepen.",
       "skinsEmpty": "Nog geen wapenskins in bezit. Bezoek de WOC-winkel.",
       "skinsApplyHint": "Rust een {type} uit om deze skin toe te passen.",
       "mechIntro": "De gevechtsmech vervangt het lichaam van dit personage. Er wordt telkens één chroma gedragen.",
@@ -7430,6 +7387,7 @@ export const nl_NL: EnTranslations = {
       "sourceActivityRiftFirstClear": "Toegekend aan elk lid van de groep die de eerste voltooiing van een gerangschikte Rift wint",
       "sourceActivityBuriedHoard": "Gevonden in de beloninsgkist van een Begraven Schat, de kluis waarnaar een kaart leidt",
       "sourceActivityLanternHall": "Gekocht voor Lantaarnzegels bij de kwartiermeester van Lantaarnhal",
+      "sourceActivityWeeklyVaultPvp": "Gekozen uit de PvP-rij van de Wekelijkse Kluis",
       "cellMissingSourceAria": "{name}, nog niet gevonden, {source}",
       "cellOwnedClearsAria": "{name}, gecatalogiseerd, voor het eerst gevonden bij voltooiing {count}",
       "searchPlaceholder": "Relieken zoeken",
@@ -8454,6 +8412,16 @@ export const nl_NL: EnTranslations = {
         "heroicCloud": "Stuifmeelwolk: {cloudSeconds} sec binnen {cloudRadius} yard van een bestoven speler staan bestuift jou ook."
       },
       "zulgar": {
+        "pulseSummaryRework": "Elke {every} sec raakt een spreuk van {cast} sec iedereen binnen {radius} m voor {min} tot {max} schade. Vastgespieste spelers krijgen op elke afstand {pinMult} keer deze schade.",
+        "spearSummary": "Een spreuk van {cast} sec spiest een speler vast die niet de tank is, of de tank als niemand anders overblijft. Het vastzetten duurt maximaal {seconds} sec en doet elke {tick} sec {bleed} schade.",
+        "spearResponse": "Selecteer de speer en gebruik interactie binnen {range} m om hem in {pull} sec uit te trekken. Schade onderbreekt het trekken niet. Als niemand anders vrij is op het terras, kan het slachtoffer zichzelf met interactie in {self} sec bevrijden.",
+        "glyphSummaryRework": "De {count} runen beginnen donker. Tijdens de jacht ontsteekt een ongemarkeerde speler een rune door er {kindle} sec op te staan. Als niemand ongemarkeerd is, kan de Prooi hem in {alone} sec ontsteken. Afstappen zet de voortgang terug. Een brandende rune vertraagt hem met {slow} en verhoogt zijn ontvangen schade met {vulnerability} gedurende {seconds} sec. De rune kan {dark} sec niet opnieuw worden ontstoken; een andere rune kan hem {wary} sec niet treffen. Tijdens de jacht duren verdovingen half zo lang.",
+        "glyphResponseRework": "Ongemarkeerde spelers ontsteken runen voor de Prooi. Leid hem eroverheen en val aan tijdens Door de zon getroffen. De runen doven wanneer de jacht eindigt.",
+        "idolSummary": "Bij {health} gezondheid blijft hij een jaguargeest tot hij is verslagen. Ook de tank kan Prooi worden.",
+        "idolHuntSummary": "Hij kiest elke {every} sec een nieuwe Prooi en draait zich {turn} sec naar die speler voordat hij achtervolgt.",
+        "idolHuntHeroicSummary": "Hij markeert elke {pair} sec een nieuw paar en wisselt elke {switch} sec tussen hen. Elke wissel geeft de nieuwe Prooi {turn} sec voordat hij achtervolgt.",
+        "breathSummary": "Elke {every} sec wordt een terrashelft {warning} sec gemarkeerd, waarna iedereen in die helft {min} tot {max} natuurschade krijgt. De adem wisselt van helft.",
+        "breathResponse": "Steek voor het einde van de waarschuwing over naar de ongemarkeerde helft. De middenlijn is veilig. Op Heroïsch dooft de adem ook brandende runen in zijn helft; die kunnen meteen opnieuw worden ontstoken.",
         "overview": "De hogepriester van het bekken. Een vast gevecht met een vooraf aangegeven ring, totdat hij in een jaguargeest verandert en op één speler jaagt. De bejaagde speler leidt hem over brandende zonnerunen die hem vertragen.",
         "phaseShrineName": "Het Heiligdom",
         "phaseShrineSummary": "Hij vecht van dichtbij en laat een ring om zich heen pulseren.",
@@ -8766,6 +8734,14 @@ export const nl_NL: EnTranslations = {
     },
     "temple": {
       "selthe": {
+        "overviewRework": "Selthe beweegt nooit en valt nooit in de melee aan. Groepeer voor Koorzang, verlaat de groep voor Eenstemmige zang, onderbreek Verdrinkingsaria en ontwijk Meergolf. Herhaal bij twee gezondheidsgrenzen haar melodie op de maantegels met afwisselende zangers.",
+        "phaseSummaryRework": "Haar andere aanvallen pauzeren terwijl de groep de partituur beantwoordt. Maanwaterschichten hebben geen spreukbalk en kunnen niet worden onderbroken.",
+        "boltSummaryRework": "Tussen andere spreuken landt elke {every} sec een schicht na een zichtbare waarschuwing van {windup} sec en doet {mult} keer haar wapenschade als vorstschade. Verdrinkingsaria onderbreken stopt schichten en de aria {quiet} sec.",
+        "boltResponseRework": "Houd de tank in haar zichtlijn. Bewaar onderbrekingen voor Verdrinkingsaria.",
+        "tipHealerRework": "Let op het doelwit van de aria en spelers die alleen staan bij Koorzang. Help tijdens de partituur de volgende noot zingen en genees fouten.",
+        "scoreSummary": "Bij {first} en {second} gezondheid wordt ze immuun en speelt ze {notes}, daarna {finalNotes} noten. Herhaal ze binnen {answer}, daarna {finalAnswer} sec. Een verkeerde tegel doet {falseNote} vorstschade en zet de voortgang terug, maar niet de tijd. Bij tijdsoverschrijding krijgt iedereen {min} tot {max} vorstschade. Succes verdooft haar {stun} sec en verhoogt haar ontvangen schade met {vulnerability} gedurende {bonusSeconds} sec.",
+        "scoreResponse": "Bekijk de melodie en betreed de tegels in volgorde. Wissel juiste noten af met een andere levende speler; de enige overlevende kan alleen afronden. Geblokkeerde stappen zijn onschadelijk. Stap van een tegel af en weer erop om hem te laten klinken, ook als je er voor het antwoord al op stond.",
+        "scoreHeroic": "Tijdens het antwoord worden de tegels donker. Onthoud de melodie en wissel elkaar af.",
         "overview": "De Koormoeder zingt vanuit haar poel en beweegt of slaat nooit. Ze markeert spelers voor gedeelde Koorzang en eenzame Eenstemmige zang, richt een oplopende aria op één speler en stuurt een golf over het hof. Haar schichten en aria kunnen worden onderbroken.",
         "phaseName": "Het Koorhof",
         "phaseSummary": "Eén fase met timers. Een mechaniek dat tijdens een spreuk aan de beurt komt, wacht totdat die klaar is.",
@@ -9678,7 +9654,7 @@ export const nl_NL: EnTranslations = {
       "graveyard": "Waar je geest naartoe zou terugkeren als je hier zou vallen.",
       "dungeons": "Elke kerker met de zone waarin de deur staat en de groepsgrootte waarvoor hij is gebouwd, plus de moeilijkheidsgraad die je nu hebt ingesteld.",
       "dungeonMode": "Wissel je kerkers tussen de normale en heroïsche moeilijkheidsgraad.",
-      "dungeonReset": "Reset je eigen lege instanties, wat je doet na het wijzigen van de moeilijkheidsgraad.",
+      "dungeonReset": "Verlaat je lege instanties zodat je volgende poging opnieuw begint, op dezelfde of een nieuwe moeilijkheid.",
       "groupRecovery": "Herstel en aanwezigheid",
       "unstuck": "De uitweg wanneer de wereld je heeft vastgezet. Sta stil tijdens een korte aftelling en je wordt verplaatst naar de dichtstbijzijnde begraafplaats, en daar tot leven gewekt als je al was gevallen. Het laat je daarna een tijdje verzwakt achter door de Loskomingsziekte, dus het is een laatste redmiddel, geen kortere weg.",
       "unstuckWindow": "De uitweg wanneer de wereld je hebt opgesloten. Sta stil door een korte aftelling en je bent verplaatst naar de dichtstbijzijnde begraafplaats, en opgericht daar als je al was gevallen. Het eerste gebruik in een uur is gratis. Gebruik het opnieuw binnen een uur van het vorige en het laat je verzwakt achter door Bevrijd-Ziekte voor een poosje daarna, dus het is een redding in plaats van een snelpad.",
@@ -10105,27 +10081,27 @@ export const nl_NL: EnTranslations = {
     },
     "mountsPage": {
       "heading": "Rijdieren en rijden",
-      "intro": "Een rijdier is een snellere manier om de wereld door te trekken, en dat is alles wat het is. Je leert rijden bij de stallen, koopt je eerste set teugels, en elke weg daarna is korter.",
+      "intro": "Kies een rijdieruiterlijk, leer rijden bij de stallen en reis sneller door de wereld. Je opleiding bepaalt het tempo; elk rijdieruiterlijk is cosmetisch.",
       "whatHeading": "Wat een rijdier is",
-      "whatBody": "Een rijdier is een beest waarop je rijdt, en wat het je geeft is snelheid. Geen pantser, geen schade, geen statistieken: het draagt je sneller over de grond, en springt een beetje hoger wanneer je springt, en dat is de hele afspraak. Elk rijdier in het spel is een rijdier op de grond, dus er is geen vliegen, en geen van hen zwemt.",
+      "whatBody": "Rijdieren zijn cosmetische uiterlijken voor je getrainde rit. Ze geven geen pantser, schade of gevechtswaarden. De rijopleiding verhoogt de reissnelheid over de grond en sprongen op een rijdier komen hoger. Elk rijdier blijft op de grond en geen enkel kan zwemmen.",
       "learnHeading": "Leren rijden",
-      "learnBody": "Rijden is een vaardigheid die je één keer koopt, en ze gaat open op niveau {level}. Marla Hitchen, de stalmeesteres, houdt de Windkam-Stallen op de winderige heuvels, en ze verkoopt Rijtraining voor 80 goud. Die ene aankoop is wat je überhaupt op een rijdier laat zitten, en ze blijft voorgoed van jou.\n\nZodra je die hebt, heeft Marla een quest voor je: Rijlessen. Neem hem aan, volg de markering naar het gloeiende vak achter de startboog, en druk op Race Starten. Ze leent je een trainings-Moedros voor de les, dus de les zelf kost je niets. Rijd het parcours, maak het af, en ga terug naar haar voor je munten en ervaring. De geleende ros gaat daarna terug de stal in, dus de les leert je het zadel in plaats van je een paard cadeau te doen.",
+      "learnBody": "Rijden komt beschikbaar op niveau {level}. Stalmeester Marla Hitchen verkoopt Rijtraining voor 80 goud bij de Windkam-Stallen. De basisopleiding geeft {basicSpeed}% sneller bewegen op een rijdier. Daarna verkoopt Marla ook Gevorderde rijtraining voor {advancedFee} goud, wat de bonus verhoogt naar {advancedSpeed}%. Elke rang hoort bij het personage dat die leert.\n\nNeem na de basisopleiding Marla's missie Rijlessen aan en volg de markering naar het lichtgevende vierkant achter de startboog. Druk op Race starten om het trainings-Moedros te lenen. Voltooi de baan en keer terug voor munten en ervaring. Het geleende paard keert terug naar de stal wanneer de les eindigt.",
       "whereHeading": "Waar je haar vindt",
       "whereBody": "De Windkam-Stallen staan gemarkeerd op de kaart van De Windkam, op de winderige heuvels tussen de Scheur en de Wrakvelden. Marla staat naast de stal, met haar gezicht naar de racewei.",
       "firstHeading": "Je eerste rijdier",
-      "firstBody": "De Moedros is het enige rijdier dat ergens in de wereld wordt verkocht. Zodra je Rijden hebt geleerd, verkoopt Marla je de Moedros-teugels voor 10 goud, en die teugels zijn voorgoed van jou. Elk ander rijdier verdien je in de wereld zelf, dus het paard is waar bijna elke ruiter begint.",
+      "firstBody": "Marla verkoopt de Teugels van het Moedros voor 10 goud nadat je hebt leren rijden. De teugels bewaren ontgrendelt het paardenuiterlijk onder Uiterlijk voor elk personage op je account. Je opleiding laat je al een rijdier oproepen zonder teugels te dragen, dus kies het paard of een ander beschikbaar uiterlijk als je iets anders wilt.",
       "rideHeading": "Opstijgen en afstijgen",
-      "rideBody": "Er is geen rijdierenvenster en geen favoriet om in te stellen, want de teugels zijn het rijdier. Gebruik een set teugels uit je tassen of vanaf een vak op je actiebalk en je rijdt dat rijdier. Oproepen duurt een moment, een korte roep in plaats van een directe, dus het redt je niet van een slechte pull. Afstappen is direct en nooit geblokkeerd.\n\nGebruik de teugels waarop je al rijdt en je zet dat rijdier weg. Gebruik een andere set terwijl je bereden bent en je wisselt er direct naartoe, zonder dat er tussendoor iets wordt opgeroepen. De toets Opstijgen / Afstijgen, standaard de backtick-toets, haalt je er altijd alleen maar af: het is de weg naar beneden, niet naar boven. De ene uitzondering is de rijles, waar diezelfde toets de ros oproept die Marla je leent, aangezien een geleend paard geen teugels heeft om op te klikken. Op een telefoon of tablet werkt de knop Rijdieren in de balk Meer beide kanten op, al roept die de eerste set teugels op die in je tassen ligt in plaats van een die je zelf kiest, dus tik op de teugels zelf wanneer je een bepaald rijdier wilt.",
+      "rideBody": "Open Uiterlijk en kies een uiterlijk op het tabblad Rijdieren. De toets Opstijgen / Afstijgen, standaard het accent grave, roept je getrainde rijdier op met dat uiterlijk. De mobiele knop Opstijgen doet hetzelfde. Oproepen duurt een korte kanalisering; afstijgen is direct. Je kunt het uiterlijk tijdens het rijden wijzigen zonder je snelheid te veranderen.\n\nJe kunt ook teugels vanuit je tassen of een actiebalk gebruiken om het uiterlijk te kiezen en op te roepen. Het uiterlijk gebruiken waarop je al rijdt bergt het rijdier op. Teugels in de bank of bij een ander personage ontgrendelen dezelfde cosmetica zonder dat de rijder ze hoeft te dragen.",
       "breaksHeading": "Wat je uit het zadel zet",
       "breaksBody": "Water wint altijd. Rijd iets in dat diep genoeg is om in te zwemmen en je bent meteen af, want geen rijdier op de grond zwemt, en sterven zet je neer waar je valt. Je kunt er geen oproepen terwijl je in gevecht bent, terwijl je dood bent of als geest onderweg terug, of op enig moment tijdens een wedstrijd in Doornholte-Velden, die te voet wordt uitgevochten van de opstelperiode tot de laatste verovering: als je aan het rijden was terwijl je wachtte, zet het invoegen in de wedstrijd je ook af. Tijdens een oproep in gevecht of in het water lopen annuleert de oproep eveneens.\n\nDe meeste dingen die je doet, zetten je ook af. Op iets inhakken, een spreuk beginnen te werpen, een grondstoffenpunt oogsten, vissen, vervaardigen, betoveren, salvagen en het opladen van een beroepsgereedschap zetten je allemaal van je rijdier af zodra je begint, dus reken erop dat je bij elke ader moet afstappen. Een rijdier oproepen laat ook elke gedaanteverwisseling vallen die je vasthoudt: je bent nooit tegelijk veranderd van gedaante en bereden.",
-      "speedHeading": "Snelheid en rangen",
-      "speedBody": "Snelheid is het enige dat het ene rijdier van het andere onderscheidt. De Moedros die je van Marla koopt zet het basistempo, en de rijdieren die je in de wereld verzamelt rijden daarboven: hoe zeldzamer de teugels, hoe sneller de rit, in een paar duidelijke stappen in plaats van een vloeiende glijbaan. Er is geen tweede rang van Rijden om te trainen en geen upgrade om achteraf te kopen. Je betaalt eenmalig voor Rijden, en vanaf dan bepalen de teugels die je gebruikte hoe snel je reist.",
+      "speedHeading": "Rijsnelheid en opleiding",
+      "speedBody": "De basisrijopleiding geeft {basicSpeed}% sneller bewegen op een rijdier. Gevorderde rijtraining geeft {advancedSpeed}% sneller bewegen en kost {advancedFee} goud bij Marla. Elk rijdieruiterlijk gebruikt dezelfde snelheid voor de opleidingsrang van het personage, ongeacht zeldzaamheid of herkomst. Winkeluiterlijken gebruiken die snelheid ook.",
       "collectHeading": "Waar de zeldzamere rijdieren vandaan komen",
       "collectBody": "Naast Marla's toonbank vind je teugels eerder dan dat je ze koopt. Ze vallen van de eindbazen van de kerkers voor vijf spelers en de raid op heroïsch, en uit het voltooien van rifts, waar geldt: hoe zwaarder de rift die je afrondt, hoe zeldzamer de teugels die hij kan achterlaten. Het zijn bewust zeldzame vondsten en geen enkele run garandeert er een, dus de vriendelijke manier om op een rijdier te jagen is de jacht mee te nemen op de runs die je toch al maakte. Deze pagina vertelt je niet van welke baas welk rijdier valt: dat deel mag je zelf ontdekken.",
       "raceHeading": "De stallenrace",
       "raceBody": "Het springparcours in Marla's wei staat open voor iedereen, op elk moment, niet alleen tijdens de les. Stijg op, ga op het gloeiende vak achter de boog staan, en druk op Race Starten. Een aftelling houdt je stil, en dan begint de klok te lopen: neem alle zeven sprongen en rijd terug door de boog voordat de tijd om is.\n\nEen sprong telt alleen als je daadwerkelijk door de lucht over de lat gaat, dus er simpelweg onderdoor rijden telt niet mee. Je mag ze in elke volgorde nemen en van beide kanten, en een gemiste sprong is niet het einde van de wereld: draai bij en probeer het opnieuw. Doodgaan, afstappen of de wei verlaten beëindigt de poging, en hetzelfde geldt voor de klok laten aflopen, wat je uit het zadel zet waar je op dat moment staat; hem zelf annuleren stopt gewoon de klok. Niets houdt je tegen om opnieuw te beginnen. Er zijn geen kosten, geen afkoeltijd en geen prijs behalve de tijd zelf, en elk aantal ruiters kan tegelijk het parcours afleggen zonder elkaar in de weg te zitten.",
       "goodsHeading": "Teugels zijn gewone handelswaar",
-      "goodsBody": "Een rijdier is een voorwerp, wat het tot iets maakt dat de economie kan verplaatsen. Je bezit een rijdier zolang de teugels ervan in je tassen of je bank liggen, al houden gebankte teugels het rijdier wel van jou zonder dat je ermee kunt rijden: om het beest op te roepen moet je de teugels bij je dragen. Teugels van spelers zijn niet zielgebonden, dus ze worden verhandeld, reizen per post en staan op de Wereldmarkt zoals elke andere vondst, tenzij het voorwerp zelf iets anders zegt. Twee dingen zijn de moeite waard om te weten voordat je er een van de hand doet: geen enkele handelaar zal ooit een set teugels terugkopen, dus een rijdier is een aankoop die je houdt of doorgeeft in plaats van verzilvert, en als de teugels zowel je tassen als je bank verlaten terwijl je rijdt, weggeruild, per post verstuurd, of op de markt verkocht, dan gaat het rijdier met ze mee en word je neergezet waar je op dat moment staat."
+      "goodsBody": "Verzamelbare rijdieruiterlijken blijven op je hele account beschikbaar zolang minstens één passend teugelvoorwerp in de tassen of persoonlijke bank van een willekeurig personage ligt. Het laatste geschikte voorwerp ruilen, versturen, aanbieden, verkopen of anders verwijderen haalt het uiterlijk uit Uiterlijk. Een rijder die het draagt krijgt het standaardpaardenuiterlijk terug en blijft rijden op de snelheid van zijn opleiding.\n\nTeugels van spelers kunnen worden geruild, verstuurd en op de Wereldmarkt aangeboden, tenzij het voorwerp anders vermeldt. De paardenteugels kunnen ook voor 10 goud aan een handelaar worden verkocht. Andere teugels behouden hun eigen verkoopbeperkingen. Rijdieruiterlijken uit de winkel blijven accountcosmetica die onafhankelijk zijn van teugelvoorwerpen."
     },
     "worldPage": {
       "heading": "De wereld",
@@ -10300,7 +10276,7 @@ export const nl_NL: EnTranslations = {
       "heroicRewardsBody": "Heroïsche bazen laten de buit vallen die je kent, opgewaardeerd en in de tooltip als Heroïsch aangeduid, en de eindbaas van elke tocht voegt daar epics aan toe die nergens anders te vinden zijn. Die laatste dood laat ook Heroïsche Tekens achter voor elke deelnemer: een munt die je uitgeeft bij kwartiermeester Vex in Highwatch, wiens toonbank een plank vol ringen en hangers is die niets dan het bewijs van de heroïsche diepten kan kopen.",
       "heroicLockoutBody": "Gewone kerkers kun je de hele dag door lopen. Heroïsch vraagt geduld: de dood van de eindbaas beperkt iedereen in de tocht tot één heroïsche voltooiing van die kerker per dag, en de raid houdt een dagelijkse vergrendeling aan voor elke moeilijkheid. Op een live rijk vallen alle dagelijkse vergrendelingen samen weg op het eigen nachtelijke hersteluur van het rijk, zodat een voltooiing vlak voor dat uur en een vlak erna op twee verschillende dagen vallen; speel in plaats daarvan offline in je browser en een vergrendeling loopt gewoon een dag na je eigen dood af. Een al voltooide tocht voor vijf spelers blijft open voor de eigen groep voor lijkentochten en buit, zodat niemand wordt buitengesloten van wat hij daar verdiende. De raid is strenger: zodra zijn dood je heeft vergrendeld, blijft de deur dicht tot het herstel, en de enige weg terug naar binnen is een lijkentocht van iemand die viel in precies de tocht die hem vergrendelde, dus een levende raider die naar buiten loopt, is voor die dag naar buiten gelopen. Verzamel je buit voor je de arena verlaat. Elk van deze vergrendelingen hoort bij het personage dat hem verdiende, dus een voltooiing op je hoofdpersonage laat je andere personages vrij.",
       "resetTitle": "Je instanties resetten",
-      "resetBody": "Wissel van moeilijkheid terwijl je groep nog opgeëiste tochten aanhoudt en de oude claims blijven een tijdje hangen voordat ze vanzelf loslaten. De groepsleider kan ze in plaats daarvan meteen loslaten: kies Alle instanties herstellen in het menu van zijn eigen portret, of typ /dungeon reset. Een herstel werkt pas nadat de moeilijkheid echt is gewijzigd, alleen zolang er niemand, levend of gevallen, binnen is, alleen zodra elk lijk daarbinnen helemaal is leeggehaald, en een korte afkoeltijd scheidt het ene herstel van het volgende. Kom je bij de deur met de verkeerde moeilijkheid, dan zegt het spel het voor de tocht begint. De raid wordt zo nooit hersteld; zijn eigen vergrendelingsregels blijven staan.",
+      "resetBody": "Lege geclaimde pogingen blijven een tijdje bestaan voordat ze vanzelf verdwijnen. De groepsleider kan ze meteen opgeven: kies Alle instanties resetten in het menu van het eigen portret of typ /dungeon reset. De volgende poging begint opnieuw op de huidige moeilijkheid. Van moeilijkheid wisselen doet hetzelfde voor pogingen op de oude moeilijkheid. Resetten kan alleen als niemand, levend of dood, binnen blijft en alle lijken volledig zijn geplunderd. Het verkort nooit een vergrendeling: een vergrendelde heroïsche kerker of raid blijft gesloten tot de eigen reset. Een korte wachttijd scheidt de resets. Kom je met de verkeerde moeilijkheid bij de deur, dan meldt het spel dat voor het begin. De raid reset op dezelfde manier, met behoud van de regels voor vergrendeling en terugkeer naar het lijk. Een raid die van moeilijkheid wisselt slaat de wachttijd over: wie de verkeerde stand koos of op Heroïsch vastliep, kan meteen terugwisselen, omdat de eigen vergrendeling herhalingen beperkt.",
       "templeLoreTitle": "De Verdronken Tempel, een beetje dieper",
       "templeLoreBody": "De tempel heeft zijn eigen legende, ouder dan de sekte die je elders najaagt. Aan de oever van de Glansmere, een bergmeer dat het maanlicht drinkt en de verdronkenen teruggeeft, bewaakt een eenzame wachter een poort van bleek licht. Onder het oppervlak loopt een trap van koude steen erheen naar beneden. Het volk dat daar zonk verdronk niet door een ongeluk: het was het Bleke Koor, dat in aanbidding onderging en nooit ophield met zingen. De oude wachters krasten een enkele waarschuwing in de rotsen voordat het water hen nam, een gebed tot iets dat zij de Verdronken Maan noemden, met een vastere hand die twee woorden eronder toevoegde: het slaapt slechts.",
       "cryptLeadTitle": "Een deur die de doden gesloten moesten houden",
@@ -11280,7 +11256,7 @@ export const nl_NL: EnTranslations = {
       "prestigeBody": "Ervaring blijft tellen, zelfs na het maximum. Het voedt een cosmetisch virtueel niveau, zodat je ervaringsbalk blijft stijgen, en een langetermijn-prestigerang die je vanaf je personageblad kunt claimen zodra je zover bent. Het passeren van grote mijlpalen in totale ervaring levert ook daden op in je Boek der Daden, met cosmetische titels en naamplaatranden die op je personageblad verschijnen. Het is allemaal puur optioneel en geeft nooit macht, alleen een teken van de weg die je hebt afgelegd.",
       "noRush": "Er is geen haast. De wereld is er om in je eigen tempo van te genieten, dus dwaal rond, pak de quests die je aanspreken en laat je held onderweg groeien.",
       "ridingTitle": "Leren rijden",
-      "ridingBody": "Rijden is een van de dingen die aan het einde van de klim op je wachten. Op niveau {level} leert een stalmeester je de vaardigheid voor een fors bedrag aan goud, en een les op het trainingsparcours levert je je eerste set teugels op. Een rijdier geeft helemaal geen kracht; het maakt de wereld alleen kleiner, wat na een lange wandeling naar het noorden zijn eigen soort beloning is."
+      "ridingBody": "Op niveau {level} leert stalmeester Marla je tegen goud de basis van het rijden en biedt daarna een gevorderde rang aan. De opleiding bepaalt de rijsnelheid. Kies je rijdieruiterlijk onder Uiterlijk; verzamelbare uiterlijken worden gedeeld zolang hun teugels in de tassen of bank van een willekeurig personage blijven."
     },
     "placeholder": {
       "note": "Dit deel van de gids is onderweg."
@@ -16384,6 +16360,8 @@ export const nl_NL: EnTranslations = {
       "temple_moonwater_bolt": "Maanwaterschicht",
       "temple_drowning_aria": "Verdrinkingsaria",
       "temple_mere_surge": "Meergolf",
+      "temple_score": "De partituur",
+      "temple_score_answer": "Beantwoord de partituur",
       "temple_tideglass_fracture": "Getijdenglasbreuk",
       "temple_undertow": "Onderstroom",
       "temple_lunar_tide": "Maangetij",
@@ -16421,6 +16399,12 @@ export const nl_NL: EnTranslations = {
       "wildheart_gorgebloom_gorge": "Verzwelgen",
       "wildheart_zulgar_pulse": "Wildhartpuls",
       "wildheart_zulgar_spirit_hunt": "Geest van de jacht",
+      "wildheart_zulgar_hunting_spear": "Jachtspeer",
+      "wildheart_zulgar_idol_wakes": "Het idool ontwaakt",
+      "kituse_wildheart_pull_spear": "De speer uittrekken",
+      "wildheart_idols_breath": "Adem van het idool",
+      "wildheart_sun_glyph_kindle": "Ontsteken",
+      "wildheart_sun_glyph_cold": "Afkoelen",
       "sanctum_cinder_breath": "Sinteladem",
       "sanctum_warming_rite": "Verwarmingsritueel",
       "sanctum_goad": "Provoceren",
@@ -17053,6 +17037,9 @@ export const nl_NL: EnTranslations = {
       "levelClass": "Niveau {level} {className}"
     },
     "vendor": {
+      "basicRiding": "Rijtraining",
+      "advancedRiding": "Gevorderde rijtraining",
+      "ridingSpeed": "Verhoogt je bewegingssnelheid tijdens het rijden met {speed}%. Geldt voor elk rijdier.",
       "goodsTitle": "{name}: Waren",
       "close": "Handelaar sluiten",
       "hint": "Klik op een voorwerp in je tassen om het te verkopen terwijl dit venster open is.",
@@ -17263,7 +17250,8 @@ export const nl_NL: EnTranslations = {
       "tooManyOrders": "Je kunt tegelijk maximaal {count} bestellingen open houden.",
       "orderClosed": "Die bestelling is niet langer open.",
       "orderOwn": "Dat is je eigen bestelling. Annuleer deze om hem in te trekken.",
-      "orderNotYours": "Dat is niet jouw bestelling."
+      "orderNotYours": "Dat is niet jouw bestelling.",
+      "orderTrackedItem": "De Koopman neemt geen bestellingen voor unieke uitrusting aan."
     },
     "loot": {
       "takeAll": "Alles nemen",
@@ -21189,117 +21177,6 @@ export const nl_NL: EnTranslations = {
       },
       "ps_passing_stone": {
         "name": "Doorgangssteen"
-      },
-      "whistle_ember_fox": {
-        "name": "Sintelvosfluitje"
-      },
-      "whistle_moss_hare": {
-        "name": "Moshaasfluitje"
-      },
-      "whistle_frog": {
-        "name": "Kikkerfluitje"
-      },
-      "whistle_crimson_claw_crab": {
-        "name": "Karmozijnklauwkrabfluitje"
-      },
-      "whistle_golden_sentinel": {
-        "name": "Goudenwachterfluitje"
-      },
-      "whistle_nightfang": {
-        "name": "Nachttandfluitje"
-      },
-      "whistle_tuskhorn_boar": {
-        "name": "Slagtandhoorneverfluitje"
-      },
-      "whistle_emerald_wolf": {
-        "name": "Smaragdwolffluitje"
-      },
-      "whistle_tiger": {
-        "name": "Tijgerfluitje"
-      },
-      "whistle_cate_coin": {
-        "name": "Cate Coin-fluitje"
-      },
-      "whistle_alon": {
-        "name": "Alon-fluitje"
-      },
-      "whistle_trollface": {
-        "name": "Trollface-fluitje"
-      },
-      "whistle_ansem": {
-        "name": "Ansem-fluitje"
-      },
-      "whistle_triple_t": {
-        "name": "Triple T-fluitje"
-      },
-      "whistle_kekius": {
-        "name": "Kekius-fluitje"
-      },
-      "whistle_solbot": {
-        "name": "Solbot-fluitje"
-      },
-      "whistle_frostfire": {
-        "name": "Vorstvuurfluitje"
-      },
-      "whistle_rocky": {
-        "name": "Rocky-fluitje"
-      },
-      "whistle_proud_grunt": {
-        "name": "Trotsestrijderfluitje"
-      },
-      "whistle_loot_goblin": {
-        "name": "Buitkoboldfluitje"
-      },
-      "whistle_penny_goldspark": {
-        "name": "Penny Goldspark-fluitje"
-      },
-      "whistle_stag": {
-        "name": "Hertenfluitje"
-      },
-      "whistle_alpaca": {
-        "name": "Alpacafluitje"
-      },
-      "whistle_horse": {
-        "name": "Paardenfluitje"
-      },
-      "whistle_sapling": {
-        "name": "Jongeboomfluitje"
-      },
-      "whistle_bull": {
-        "name": "Stierenfluitje"
-      },
-      "whistle_spider": {
-        "name": "Spinnenfluitje"
-      },
-      "whistle_raptor": {
-        "name": "Raptorfluitje"
-      },
-      "whistle_skeleton": {
-        "name": "Skeletfluitje"
-      },
-      "whistle_crystal_lich": {
-        "name": "Kristallichfluitje"
-      },
-      "whistle_forgemaw": {
-        "name": "Fluitje van Smeedmuil de Gesmoltene"
-      },
-      "whistle_sprites": {
-        "name": "Fluitje van Flicker en Glimmer"
-      },
-      "whistle_crystal_tide": {
-        "name": "Kristalgetijfluitje"
-      },
-      "whistle_phantom": {
-        "name": "Spookfluitje"
-      },
-      "whistle_emberfall_phoenix": {
-        "name": "Sintelvalfeniksfluitje"
-      },
-      "charm_stag_acorn": {
-        "name": "Eikelkroonamulet"
-      },
-      "charm_stag_gilded": {
-        "name": "Verguld amulet"
       },
       "lastflame_core": {
         "name": "Kern van de Laatste Vlam"
@@ -26340,6 +26217,9 @@ export const nl_NL: EnTranslations = {
       "thorn_sprout": {
         "name": "Doornspruit"
       },
+      "wildheart_hunting_spear": {
+        "name": "Jachtspeer"
+      },
       "buddy_ember_fox": {
         "name": "Sintelvos"
       },
@@ -26414,9 +26294,6 @@ export const nl_NL: EnTranslations = {
       },
       "buddy_horse": {
         "name": "Tug, het Oorlogspaard"
-      },
-      "buddy_sapling": {
-        "name": "Jonge boom"
       },
       "buddy_bull": {
         "name": "Stier"

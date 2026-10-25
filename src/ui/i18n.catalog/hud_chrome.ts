@@ -2567,7 +2567,8 @@ export const hudChromeStrings = {
     // Reins are usable items: the bag tooltip tells the player to use them. There
     // is no per-mount level gate and no picker, so the old requiresLevel /
     // pickFirst / keybindHint lines went with them.
-    useToRide: 'Use to summon this mount.',
+    useToRide:
+      "Use to wear this appearance and summon your mount. Keep this item in any character's bags or bank to share the appearance across your account. Riding training determines speed.",
     // The empty state, shown when the player owns no mount yet: a heading plus
     // how to earn a first one (the stablemaster's riding lessons) and the rarer
     // boss-drop mounts.
@@ -2601,9 +2602,9 @@ export const hudChromeStrings = {
     name_rickshaw_mount: 'Bonebound Rickshaw',
     name_wobbles_slime: 'Wobbles the Slime',
     name_nightwing_chimera: 'Nightwing Chimaera',
-    desc_valorsteed: 'A hardy, sure-footed steed that provides enhanced travel speed.',
-    desc_grag_bear: 'A hardy, sure-footed bear that provides enhanced travel speed.',
-    desc_stalkglider_snail: 'A hearty, slow-burning snail that provides enhanced travel speed.',
+    desc_valorsteed: 'A hardy, sure-footed steed with a leather saddle.',
+    desc_grag_bear: 'A hardy, sure-footed bear fitted with a heavy saddle.',
+    desc_stalkglider_snail: 'A hearty, slow-burning snail with a mossy shell.',
     desc_aether_hover_cycle:
       'A powerful magitech bike designed for swift, low-hovering combat traversal.',
     desc_shadowjump_toad:
@@ -2649,7 +2650,7 @@ export const hudChromeStrings = {
     // Shown once the riding lesson is turned in and the reward reins land in the
     // bags. It must teach the ITEM, not a keybind: summoning your own mount is a
     // bag / action-bar click now.
-    ownedMountPrompt: 'Your reins are in your bags. Use them to ride.',
+    ownedMountPrompt: 'Choose your mount in Cosmetics. Use Mount / Dismount to ride.',
     ridePrompt: 'Follow the glowing marker to the start line, then press Start Race.',
     begin: 'Begin Lesson',
     success: 'You have tamed the Valorsteed.',
@@ -2997,7 +2998,7 @@ export const hudChromeStrings = {
     // default); off declutters crowded hubs, the current target stays visible.
     showPlayerNameplates: 'Show Player Nameplates',
     // Interface panel toggle: render a cosmetic buddy follower's nameplate,
-    // name only, never a health bar (off by default — a buddy cannot be
+    // name only, never a health bar (off by default: a buddy cannot be
     // attacked and has no health worth showing).
     showPetNames: 'Show Pet Names',
     // Interface panel: global HUD zoom slider, and the mirror of the landing
@@ -3189,6 +3190,14 @@ export const hudChromeStrings = {
     actionCamShoulderLeft: 'Left {pct}',
     actionCamShoulderRight: 'Right {pct}',
     actionCamShoulderCenter: 'Center',
+    // Interface panel picker for the opt-in first-person camera, which takes
+    // over only at the closest zoom (scroll all the way in). The three choices:
+    // off, first person that still shows your body below the head, and first
+    // person with your character hidden entirely.
+    firstPersonMode: 'First Person (Fully Zoomed In)',
+    firstPersonOff: 'Off',
+    firstPersonBody: 'Show Body',
+    firstPersonNoBody: 'No Body',
     // Interface panel toggle for the fixed Attack button in the first action-bar
     // slot (on by default). Off frees that slot for a normal action (drag one in;
     // its key then casts it). Right-clicking the Attack button flips this off too.
@@ -4491,6 +4500,14 @@ export const hudChromeStrings = {
   // carry the real distinct forms only in the locales that need them (ru_RU). The
   // count is auto-supplied as {count}. Keep all four categories present per base.
   plurals: {
+    // The Item history prompt's rolled-off line (item_history_view.ts): how
+    // many earlier hands fell off the bounded owner chain.
+    itemHistoryEarlierHidden: {
+      one: '{count} earlier transfer is not shown.',
+      few: '{count} earlier transfers are not shown.',
+      many: '{count} earlier transfers are not shown.',
+      other: '{count} earlier transfers are not shown.',
+    },
     // The signpost guild board's live count line ({count} pre-formatted): a
     // screen reader hears how many guilds a read (or a filter flip) produced.
     guildBoardShown: {
@@ -5195,6 +5212,10 @@ export const hudChromeStrings = {
   dungeonDifficulty: {
     setHeroic: 'Set Dungeon Difficulty: Heroic',
     setNormal: 'Set Dungeon Difficulty: Normal',
+    // Inert status row while a refused or queued change has not reached the
+    // group's live instances (IWorld.unappliedDungeonDifficulty).
+    unappliedNormal: 'Heroic selected. Current instances are still Normal.',
+    unappliedHeroic: 'Normal selected. Current instances are still Heroic.',
     resetAll: 'Reset All Instances',
     resetDone: 'All instances have been reset.',
     resetNone: 'You have no instances to reset.',
@@ -5207,10 +5228,12 @@ export const hudChromeStrings = {
     resetLoot: 'You cannot reset instances while loot remains inside.',
     resetConfirmTitle: 'Reset All Instances?',
     resetConfirmBody:
-      'This abandons empty instances from your previously selected difficulty. Unclaimed loot will prevent the reset.',
+      'This abandons your empty instances so the next run starts fresh at your selected difficulty. Lockouts are not changed. Anyone still inside, or unclaimed loot, will prevent the reset.',
     resetConfirm: 'Reset Instances',
     resetCooldown: 'Instances can only be reset once every 5 minutes.',
-    resetUsage: 'Use /dungeon reset to abandon your empty instances after changing difficulty.',
+    resetAlreadyFresh:
+      'Your instances are already fresh. Nobody has entered them since they were last reset.',
+    resetUsage: 'Use /dungeon reset to abandon your empty instances and start them fresh.',
     entryMismatchNormal:
       'This instance is set to Normal difficulty. Use Reset All Instances to start a fresh Heroic run.',
     entryMismatchHeroic:
@@ -5749,6 +5772,24 @@ export const hudChromeStrings = {
       avatar:
         'Moves {pct}% faster and hunts its Prey. Slows and roots take hold, and stuns last half as long.',
       vanished: 'Hidden and immune to damage. He is about to pounce on the farthest player.',
+      // Zulgar's hunt rework: the Sunstruck window, the Hunting Spear's pin and
+      // the final phase. Wordy (M16): non-Latin fills in the overlays.
+      sunstruck: 'Struck by a lit sun glyph: moves {pct}% slower.',
+      sunstruckExposed: 'Struck by a lit sun glyph: takes {pct}% more damage.',
+      sunWary: 'No sun glyph can strike him until this ends. A lit glyph he crosses stays lit.',
+      pinned:
+        'A Hunting Spear pins you in place. You bleed for {bleed} Physical damage ({heroicBleed} on Heroic) every {every} sec, and Wildheart Pulse hits you wherever you stand for {pulse}% more damage. A teammate can pull the spear out in {pull} sec. If nobody else stands free, pull it out yourself in {wrench} sec. It lets go after {seconds} sec.',
+      idolAwake:
+        'The stone jaguar is awake. Every {every} sec it breathes over one half of the terrace, then the other, after a {warning} sec warning on the floor: {min} to {max} Nature damage ({heroicMin} to {heroicMax} on Heroic) to everyone in that half. Zulgar stays the Jaguar Avatar until he dies and picks new Prey every {seconds} sec ({heroicSeconds} sec on Heroic).',
+    },
+    // The Drowned Temple's boss auras (src/ui/temple_aura_effect.ts).
+    // Wordy (M16): non-Latin fills in the overlays.
+    temple: {
+      scoreWard:
+        'Singing the Score: she takes no damage until it ends. Step onto the moon tiles in the order they rang before the verse ends to break her voice. Take turns: after sounding a note, wait for another player to sound the next correct note. A lone survivor can finish alone. If the verse ends first, Discord deals {min} to {max} Frost damage ({heroicMin} to {heroicMax} on Heroic) to everyone in the court.',
+      brokenVoice: 'Her voice is broken: she takes {pct}% more damage until this ends.',
+      spentVoice:
+        'You cannot sound another moon tile until another player sounds the next correct note. Stepping onto a tile while this lasts does not reset the answer or hurt you. Cannot be dispelled. Removed when you are the only living player in your instance or the Score ends.',
     },
     // The Sunken Bastion's boss marks (src/ui/bastion_aura_effect.ts).
     // Wordy (M16): non-Latin fills in the overlays.
@@ -6809,6 +6850,14 @@ export const hudChromeStrings = {
     // the sim's PERFECTING_RANKS, never literals in copy.
     perfectedBadge: 'Perfected',
     perfectingRank: 'Perfecting: rank {rank} of {ranks}',
+    // Tracked epic/legendary copy provenance (item_history_view.ts): the
+    // origin line keyed by the record's source (a kill, a quest reward, or
+    // anything else), rendered by the right-click Item history dialog.
+    // Owner-only: peers never receive the fields, and the item ID itself
+    // is never shown to a player.
+    lootedBy: 'Looted by {name} on {date}',
+    questRewardTo: 'Quest reward to {name} on {date}',
+    obtainedBy: 'Obtained by {name} on {date}',
     // Per-unit material provenance (item_instance_tooltip.ts
     // materialSourceLines over the pure material_sources_view.ts model): one
     // line per recorded descriptor, stating the surviving unit count first so a
@@ -7709,19 +7758,11 @@ export const hudChromeStrings = {
     // carrier, a bystander who did not order it.
     logAdminPurge: 'An administrator removed {count} {item}',
   },
-  // The Collections window (src/ui/collections/): every buddy, mount and
-  // epic-or-better armour set in the game, with where each one comes from.
-  // Sources are derived from the live content tables, so these strings are
-  // frames around derived values, never a second copy of the content itself.
+  // Buddy companion copy: the Cosmetics pane's buddy tab, card states and
+  // Summon/Dismiss, plus the presence and reveal chat lines.
   collections: {
-    title: 'Hunting',
-    close: 'Close hunting',
-    keybindLabel: 'Hunting',
-    launcherTitle: 'Hunting: buddies, mounts and item sets',
     tabs: {
       buddies: 'Buddies',
-      mounts: 'Mounts',
-      sets: 'Item Sets',
     },
     state: {
       owned: 'Collected',
@@ -7733,11 +7774,10 @@ export const hudChromeStrings = {
       // revealed (src/sim/buddies.ts pending).
       pending: 'A presence follows you',
     },
-    // The three text-free buddy events (src/ui/buddy_event_lines.ts). One
+    // The two text-free buddy events (src/ui/buddy_event_lines.ts). One
     // presence line per companion; the default covers a companion without one.
     presenceDefault: 'You feel a presence watching you.',
     revealed: '{name} has decided to follow you.',
-    cosmeticUnlocked: 'New look for {name}: {look}.',
     presence: {
       ember_fox: 'Something small and warm is padding along behind you.',
       moss_hare: 'A rustle in the peat keeps pace with your steps.',
@@ -7775,191 +7815,9 @@ export const hudChromeStrings = {
       phantom: 'The air behind you is a shade too still.',
       emberfall_phoenix: 'A warmth like a banked fire settles at your back.',
     },
-    // Cosmetic (look) names, content/buddy_cosmetics.ts.
-    cosmetic: {
-      crystal_lich_frostbound: 'Frostbound',
-      crystal_lich_voltaic: 'Voltaic',
-      forgemaw_ashen: 'Ashen',
-      forgemaw_whitehot: 'White-Hot',
-      stag_acorn: 'Acorn Crown',
-      stag_gilded: 'Gilded',
-      moss_hare_verdant: 'Verdant',
-      proud_grunt_warlord: 'Warlord',
-      frog_sapphire: 'Sapphire Frog',
-    },
     actions: {
       summon: 'Summon',
       dismiss: 'Dismiss',
-      wear: 'Wear',
-      remove: 'Remove',
-    },
-    looks: {
-      title: 'Looks',
-      unlocked: 'Unlocked',
-      locked: 'Locked',
-      worn: 'Worn',
-      none: 'No looks authored for this companion yet',
-    },
-    // Buddy and look sources, derived from content/buddy_sources.ts.
-    source: {
-      bossLabel: 'Boss pet',
-      bossDrop: '{mob} ({location}), {chance}% per player per kill',
-      bossDropWithHeroic: '{mob} ({location}), {chance}% per player, {heroicChance}% on Heroic',
-      bossDropHeroicOnly: '{mob} ({location}), Heroic only, {chance}% per player',
-      rollNote: 'Every player rolls separately; nobody loses a roll to a party member.',
-      deedLabel: 'Earned by',
-      deed: 'The deed {deed}',
-      challengeLabel: 'Challenge',
-      challengeSpeed: 'Defeat {mob} within {seconds} seconds of the pull',
-      challengeDps: 'Deal {dps} damage per second to {mob} across the fight',
-      craftLabel: 'Crafted',
-      craft: '{item} ({profession} recipe)',
-      grantLabel: 'Awarded',
-      grantOnly: 'Seasonal award: the monthly ladder and top-parse rewards',
-      tokenLabel: 'Token',
-      token: '{item}, used once to attach the companion',
-    },
-    // One blurb per companion: where it comes from and a line of its story.
-    // Flavour only, and deliberately NOT the acquisition line beside it: the
-    // source row is derived from the live tables and stays correct on its own,
-    // so this text never repeats a drop rate or a vendor it could contradict.
-    buddyLore: {
-      ember_fox:
-        'A vixen out of the Eastbrook Vale hedgerows, named for the coal-red coat that shows through winter scrub. The trappers there gave up on the kits generations ago and started leaving food out instead.',
-      moss_hare:
-        'The Willowfen hare, green-furred from a lifetime bedded down in wet peat. Fen herbalists count them lucky and will not have one chased off a doorstep.',
-      frog: 'Mirefen Marsh raises them fat and unbothered, singing all night from the reed beds. The marsh guides swear a boat carrying one never runs aground.',
-      crimson_claw_crab:
-        'A Farshore tidal crab whose claw stays red long after it leaves the water. Dock crews used to race them along the boards for coin.',
-      golden_sentinel:
-        'A watch-beetle of the Amberfall, gilded by the resin it grew up in. The name is older than the resin: sentinels of a kind kept those groves long before anyone thought to bottle the sap.',
-      nightfang:
-        'A young Nightbloom hunter, silent even by the standards of its kind. It follows for the company and hunts nothing larger than a moth.',
-      tuskhorn_boar:
-        'Thornpeak stock, bred short-legged by shepherds who wanted a boar that could not put a fence down. It kept the temper regardless.',
-      emerald_wolf:
-        'A Wraithwood pup, its coat green in the canopy light that never quite reaches the forest floor. The wardens raise whichever orphans the wood leaves behind.',
-      tiger:
-        'Palmreach stripes on an animal that has never seen the Palmreach: the line has been kept in captivity since the old menageries closed. It answers to a whistle and to nothing else.',
-      cate_coin:
-        'A cat that will not be parted from the coin it sits on, and that nobody has ever seen eat. Eastbrook merchants still argue over which of the two is the pet.',
-      alon: "A traveller's mascot from a road no map will admit to, turning up wherever a plan is going badly. It watches, it approves, and it offers no help whatsoever.",
-      trollface:
-        'A grinning thing the Wraithwood put out and would not take back. Every attempt to describe it ends with the describer laughing and giving up.',
-      ansem:
-        'It speaks of doors and of darkness and will not be drawn further on either. The Nightbloom cultists claim it as theirs; it wanders off whenever they hold a rite.',
-      triple_t:
-        'Three of something, or one thing three times over. The accounts disagree, and the creature will not hold still long enough to be counted.',
-      kekius:
-        'A laughing companion of unclear origin, adopted by the Galecrest race yards as a charm. It has outlived four stables that swore by it.',
-      solbot:
-        'A small sun-fed automaton, dug half-buried out of the Drakelands ash and still ticking. Whatever workshop built it left no mark anywhere on the casing.',
-      frostfire:
-        'Born in the Frostveil Reach where a hot spring surfaces through the ice field, and it has never settled on which half it belongs to. It steams in cold air and shivers in warm.',
-      rocky:
-        'A stone-shelled crawler off the Thornpeak scree, slow and thoroughly unbothered. Miners keep them for the way they go still a moment before a collapse.',
-      proud_grunt:
-        'A veteran of the Warfare stores who kept the salute and lost the rank. Warmarshal Draven Kole hands one to any soldier with honor enough to know what that costs.',
-      loot_goblin:
-        'It follows anyone carrying Heroic Marks and has never once been caught stealing. Quartermaster Vex maintains that this proves nothing at all.',
-      penny_goldspark:
-        "A gnome tinker's apprentice who charges by the hour and is worth every copper of it. Armorer Hode took her on to settle a debt and now sells the arrangement to anyone holding a thousand gold.",
-      stag: 'Evergarden bloodline, bred down from the great stags the wardens once rode. It still lowers its head at a raised hand, from a habit older than the animal.',
-      alpaca:
-        'The Galecrest herds keep them for wool and for temper: nothing stays calmer in a storm. This one will spit at exactly one person per journey.',
-      horse:
-        'Vale pony stock, bred small for the orchard lanes and never told it is not a warhorse. It keeps pace at your shoulder and will follow anyone who once fed it an apple.',
-      sapling:
-        'A young tree with a smile in its bark and a curious purple gaze. Its roots carry it in a cheerful waddle wherever you wander.',
-      bull: 'A Vale bull the size of a dog, which is the only reason anyone agreed to keep one indoors. The temperament did not scale down with the rest.',
-      spider:
-        'A Wraithwood weaver, palm-sized, that redecorates any pack it is carried in. The webbing is stronger than the thread it replaces.',
-      raptor:
-        'Drakelands hatchling stock, sold on before it learns how fast it can run. Every new owner is told to keep it fed, and none of them need telling twice.',
-      skeleton:
-        'It came up out of the Wraithwood barrows, dusted itself off, and has followed people about ever since. Nobody has established whose bones these were.',
-      crystal_lich:
-        'A splinter of Nythraxis itself, still humming with the cold that shaped it. It answers to whoever pulled it from the wreck of the raid, and it has not forgiven them for it.',
-      forgemaw:
-        "Forged in the Crucible of the Last Spring and never quite finished, it walked out of Ignivar's foundry while the hammers were still falling. Only the heroic descent finds it: the molten thing keeps returning to the forge that made it, and follows home whoever survives the fire twice.",
-      crystal_tide:
-        'A tide sprite that rides its own drop of sea-glass, hooked out of still water by anglers from the Vale to Farshore who were fishing for supper. It keeps the water it came up in, and it will not be talked into going back.',
-      sprites:
-        'Two small fire sprites, one gold and one teal, who never quite agree which of them is leading. Get close enough and they fold into one green flame, then spill apart again, laughing.',
-      phantom:
-        'A palm-sized haunt out of the Wraithwood barrows, all sheet and no bones, which turns up in a pack that was closed and stays for the company. Nobody has worked out what it wants, and it has never once tried to frighten anyone.',
-      emberfall_phoenix:
-        'It burns down to an ember every autumn and comes back up out of its own ash by spring, which is the whole of what anyone can tell you about it. Nobody has ever found a nest, and nobody has ever caught one twice.',
-    },
-    // The buddy tab groups by what a companion IS before it sorts by rarity.
-    petKind: {
-      beast: 'Beasts',
-      elemental: 'Elementals',
-      humanoid: 'Humanoids',
-      undead: 'Undead',
-      // The guest characters: a group the sim has no creature type for, so
-      // the catalog authors it per companion (content/buddies.ts BuddyKind).
-      celebrity: 'Celebrities',
-    },
-    armor: {
-      cloth: 'Cloth',
-      mail: 'Mail',
-      leather: 'Leather',
-    },
-    stat: {
-      intellect: 'Intellect',
-      agility: 'Agility',
-      strength: 'Strength',
-      // A family whose pieces carry two primary stats evenly. A real identity,
-      // not a missing value.
-      mixed: 'Hybrid',
-    },
-    set: {
-      owned: '{owned} of {total} pieces',
-      // Item level, the tab's sort key: a player compares two families by it,
-      // so it rides both the family header and every piece row.
-      itemLevel: 'ilvl {level}',
-      // A set bonus tier. The bonus TEXT itself comes from the item entity
-      // catalog, the same source the item tooltip reads.
-      bonusLabel: '{pieces} pieces',
-    },
-    detail: {
-      dropLabel: 'Drops from',
-      vendorLabel: 'Sold by',
-      bindLabel: 'Binding',
-      sellLabel: 'Vendor pays',
-      marketLabel: 'World Market',
-      exchangeLabel: '$WOC Exchange',
-      setLabel: 'Collected',
-      drop: '{mob} ({location}), {chance}% per kill',
-      heroicDrop: '{mob} ({location}), Heroic only, {chance}% per kill',
-      // A row that drops at two rates: the same boss, the harder kill, better
-      // odds. Both figures belong on the line or the Heroic run looks equal.
-      dropWithHeroic: '{mob} ({location}), {chance}% per kill, {heroicChance}% on Heroic',
-      // The buddy whistles ride one shared per-kill roll for their whole rarity
-      // tier, so the odds belong to the tier and the winner is drawn from it.
-      globalDrop: 'Any enemy, {chance}% per kill, one of {count} at this rarity',
-      // Fishing: no mob to name and no place to name either, since any water
-      // in the world pays the same share of a landed catch.
-      fishingDrop: 'Fishing anywhere, {chance}% per catch',
-      vendor: '{npc} ({location}) for {price}',
-      honorPrice: '{amount} Honor',
-      marksPrice: '{amount} Heroic Marks',
-      noSource: 'No source in the game yet',
-      noItem: 'No item grants this yet',
-      tradeable: 'Tradeable',
-      soulbound: 'Soulbound',
-      noSell: 'Cannot be sold',
-      // The market figure is a live server read the client only receives while
-      // the player has the item staged at the Merchant, so the pane says where
-      // the number comes from rather than showing a stale one.
-      marketAtMerchant: 'Shown at the Merchant',
-      marketChecking: 'Checking...',
-      marketNone: 'No listings',
-      exchangeNone: 'No listings',
-      // Browser web only (docs/prd/woc/marketplace.md): every wrapped shell
-      // stays fail-closed, so the row says so instead of showing a blank price.
-      exchangeUnavailable: 'Not available on this client',
     },
   },
   // The event calendar window: recurring system events plus the guild lane
@@ -9263,6 +9121,24 @@ export const hudChromeStrings = {
     separateByGatherer: 'Separate by gatherer',
     takeChosenQuantity: 'Take out chosen quantity',
     combine: 'Combine material stacks',
+    // The tracked epic/legendary copy's history row
+    // (bag_item_context_menu.ts), which opens item_history_dialog.ts.
+    itemHistory: 'Item history',
+  },
+  // The Item history prompt (item_history_dialog.ts, lines from
+  // item_history_view.ts): the item's origin line (the itemTooltip keys
+  // above), one row per later hand, the never-changed-hands note, and the
+  // rolled-off count once the bounded chain has shed its oldest hands.
+  itemHistory: {
+    title: '{item}: history',
+    passedTo: 'Passed to {name} on {date}',
+    noTransfers: 'This item has never changed hands.',
+    close: 'Close',
+    // The accessible name of the visible "Item history" button beside a
+    // trade offer row or a guild bank cell (item_history_dialog.ts
+    // appendItemHistoryActionAfter): the visible label plus the item, so two
+    // rows' buttons never share a name.
+    openAria: 'Item history for {item}',
   },
   // Enchanting actions (Professions 2.0): the result toasts for the
   // disenchant / apply-enchant / salvage commands (enchanting_view.ts maps each
@@ -9923,6 +9799,10 @@ export const hudChromeStrings = {
       summons_adds: 'Summons reinforcements',
       lunar_tide: 'Lunar Tide (pulsing area damage)',
       chorus_and_solo: 'Chorus and Solo (stack on one mark, spread from the other)',
+      // Selthe's Score (encounters/drowned_temple/selthe_score.ts). Wordy (M16):
+      // non-Latin fills in the overlays.
+      the_score:
+        'The Score (twice she sings a melody on the moon tiles: step onto them in the order they rang to break her voice)',
       tideglass_reflections: "Tideglass Reflections (kill each other's mirror images)",
       // The Mere Hydra (encounters/drowned_temple/mere_hydra.ts and its
       // hydra_* siblings). Every number is the encounter tuning combat reads
@@ -10091,6 +9971,30 @@ export const hudChromeStrings = {
       'Leave this decoy. Attack the Vael whose lantern flares in the beam to break the veil',
     timeAria: '{seconds} seconds left',
   },
+  // The Drowned Temple's encounter alert (src/ui/hud/dungeon/temple_alert_view.ts):
+  // Choirmother Selthe's Score. Wordy (M16): non-Latin fills in the overlays.
+  templeAlert: {
+    melodyTitle: 'The Score',
+    melodyLine:
+      'Watch the moon tiles ring one after another. Repeat the order, taking turns with another player',
+    melodyDarkLine:
+      'Remember the order before the tiles go dark. Repeat it, taking turns with another player',
+    answerTitle: 'Answer the Score!',
+    answerLine: 'Take turns: step onto the moon tile marked {place}. Sounded: {done} of {total}',
+    answerDarkLine:
+      'Take turns and repeat the order from memory. Step off before stepping onto a tile again. Sounded: {done} of {total}',
+    spentTitle: 'Another voice must answer',
+    spentLine:
+      'You cannot sound a tile until another player sounds the next correct note. Sounded: {done} of {total}',
+    stepOffTitle: 'Step off, then back on',
+    stepOffLine:
+      'A moon tile sounds only when someone steps onto it. Leave this tile and step onto it again',
+    falseTitle: 'False Note!',
+    falseLine: 'That tile was out of turn. The answer starts over from the first tile',
+    brokenTitle: "Selthe's voice is broken!",
+    brokenLine: 'She takes {pct}% more damage until this ends: use your strongest attacks now',
+    timeAria: '{seconds} seconds left',
+  },
   // The Wildheart Basin's encounter alert (src/ui/hud/dungeon/wildheart_alert_view.ts).
   wildheartAlert: {
     preyTitle: 'You are the Prey!',
@@ -10106,6 +10010,27 @@ export const hudChromeStrings = {
     bondLine:
       'Separate the Beastmaster and jaguar to remove their damage reduction and damage bonus',
     timeAria: '{seconds} seconds left',
+    // Zulgar's hunt rework (the sun glyphs, the Hunting Spear, the Idol's
+    // Breath). Wordy (M16): non-Latin fills in the overlays.
+    preyAloneLine:
+      'Nobody else can light the sun glyphs. Stand on a dark one for {seconds} sec to light it, then lure Zulgar across it',
+    pinnedTitle: 'Pinned!',
+    pinnedLine:
+      'A teammate must pull the Hunting Spear out. Wildheart Pulse hits you harder while you are Pinned',
+    pinnedSelfLine:
+      'Nobody is free to help: pull the Hunting Spear out yourself before Wildheart Pulse lands',
+    sunstruckTitle: 'Zulgar is Sunstruck!',
+    sunstruckLine: 'He takes {pct}% more damage until this ends: use your strongest attacks now',
+    spearTitle: 'An ally is Pinned!',
+    spearLine: 'Run to the Hunting Spear and pull it out before Wildheart Pulse lands',
+    glyphTitle: 'Light the sun glyphs',
+    glyphLine:
+      'Stand on a dark sun glyph for {seconds} sec to light it. When Zulgar crosses it he takes {pct}% more damage for {duration} sec',
+    glyphLightingTitle: 'Lighting the sun glyph',
+    glyphLightingLine: 'Stay on the glyph until it catches light. Stepping off starts it over',
+    breathTitle: "Idol's Breath!",
+    breathLine:
+      'The stone jaguar is about to breathe over this half of the terrace. Cross to the other half',
   },
   // The Gravewyrm Sanctum's encounter alert (src/ui/hud/dungeon/sanctum_alert_view.ts).
   // Wordy (M16): non-Latin fills in the overlays.
@@ -10227,6 +10152,16 @@ export const hudChromeStrings = {
     relightAria: 'Relight the {name}',
     relightUsingLine:
       'Keep channeling to light the candle: it drains health. Hits do not interrupt; moving or a stun does',
+    // The 'free' use (Zulgar's Hunting Spear, pulled out to free whoever it
+    // pins), kept through hits.
+    freeLine:
+      'Pull the spear out of the ground to free whoever it pins. Taking a hit does not stop you; moving or a stun does',
+    freeKey: 'Pull out the {name}',
+    freeTap: 'Tap here to pull out the {name}',
+    freeClick: 'Click here to pull out the {name}',
+    freeFar: 'Get within {range} yd to pull it out',
+    freeAria: 'Pull out the {name}',
+    freeUsingLine: 'Hold still to pull the spear out: moving or a stun stops you',
     timeAria: '{seconds} seconds left',
   },
   // The Book of Deeds window: the deed catalog browser (summary strip,
@@ -10411,6 +10346,10 @@ export const hudChromeStrings = {
       'Found in the reward chest of a Buried Hoard, the vault a treasure map leads to',
     // Lantern Hall's horse and sword (src/sim/guild_quartermaster.ts): bought, not dropped.
     sourceActivityLanternHall: "Bought for Lantern Seals from Lantern Hall's quartermaster",
+    // Warfare Season 2 (content/pvp_honor_season2.ts): the PvP row of the Weekly
+    // Vault rolls only Season 2 (weeklyLootPool('pvp')), beside the honor
+    // quartermasters that sell it.
+    sourceActivityWeeklyVaultPvp: 'Chosen from the PvP row of the Weekly Vault',
     // The aria label folds the lines through formatList (Intl.ListFormat), so
     // there is no join key to translate: CLDR owns the separators per locale,
     // including the final-conjunction shapes a pairwise key cannot express.

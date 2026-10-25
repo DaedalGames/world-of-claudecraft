@@ -13,6 +13,42 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const ko_KR: Partial<Record<TranslationKey, string>> = {
+  'bossJournal.wildheart.zulgar.pulseSummaryRework':
+    '{every}초마다 {cast}초 시전 후 {radius}야드 안의 모두에게 {min}~{max} 피해를 줍니다. 꿰뚫린 플레이어는 거리와 관계없이 {pinMult}배 피해를 받습니다.',
+  'bossJournal.wildheart.zulgar.spearSummary':
+    '{cast}초 시전 후 탱커가 아닌 한 명을 꿰뚫습니다. 다른 사람이 없으면 탱커를 겨냥합니다. 최대 {seconds}초 동안 이동 불가가 되며 {tick}초마다 {bleed} 피해를 받습니다.',
+  'bossJournal.wildheart.zulgar.spearResponse':
+    '창을 대상으로 지정하고 {range}야드 안에서 상호작용하면 {pull}초 후 뽑습니다. 피해를 받아도 중단되지 않습니다. 단상에 자유로운 동료가 없으면 피해자가 직접 상호작용해 {self}초 만에 탈출할 수 있습니다.',
+  'bossJournal.wildheart.zulgar.glyphSummaryRework':
+    '문양 {count}개는 처음에 꺼져 있습니다. 사냥 중 표식이 없는 플레이어가 {kindle}초 서 있으면 켜집니다. 표식 없는 사람이 없으면 먹잇감도 {alone}초 만에 켤 수 있습니다. 벗어나면 진행이 초기화됩니다. 그가 켜진 문양을 지나면 {seconds}초 동안 이동 속도가 {slow} 감소하고 받는 피해가 {vulnerability} 증가합니다. 문양은 {dark}초 동안 다시 켤 수 없으며, 그는 {wary}초 동안 다른 문양에 맞지 않습니다. 사냥 중 기절 시간은 절반입니다.',
+  'bossJournal.wildheart.zulgar.glyphResponseRework':
+    '표식 없는 플레이어는 먹잇감 앞의 문양을 켜세요. 그를 문양으로 유도하고 햇빛에 맞은 동안 공격하세요. 사냥이 끝나면 문양이 꺼집니다.',
+  'bossJournal.wildheart.zulgar.idolSummary':
+    '생명력이 {health}가 되면 쓰러질 때까지 재규어 영체로 남습니다. 탱커도 먹잇감이 될 수 있습니다.',
+  'bossJournal.wildheart.zulgar.idolHuntSummary':
+    '{every}초마다 새 먹잇감을 고르고 {turn}초 동안 바라본 뒤 추격합니다.',
+  'bossJournal.wildheart.zulgar.idolHuntHeroicSummary':
+    '{pair}초마다 새 두 명에게 표식을 남기고 {switch}초마다 추격 대상을 바꿉니다. 바뀔 때마다 새 먹잇감에게 {turn}초의 여유가 주어집니다.',
+  'bossJournal.wildheart.zulgar.breathSummary':
+    '{every}초마다 단상 절반을 {warning}초 동안 표시한 뒤 그곳의 모두에게 {min}~{max} 자연 피해를 줍니다. 양쪽을 번갈아 공격합니다.',
+  'bossJournal.wildheart.zulgar.breathResponse':
+    '경고가 끝나기 전에 표시되지 않은 절반으로 이동하세요. 중앙선은 안전합니다. 영웅 난이도에서는 숨결이 해당 절반의 켜진 문양도 끄지만 즉시 다시 켤 수 있습니다.',
+  'bossJournal.temple.selthe.overviewRework':
+    '셀세는 이동하거나 근접 공격하지 않습니다. 합창에는 모이고 독창에는 흩어지며, 익사의 아리아를 차단하고 호수의 파도를 피하세요. 두 생명력 구간에서 달빛 발판의 선율을 번갈아 재현하세요.',
+  'bossJournal.temple.selthe.phaseSummaryRework':
+    '일행이 악보에 응답하는 동안 다른 공격은 멈춥니다. 달물 화살은 시전 막대가 없고 차단할 수 없습니다.',
+  'bossJournal.temple.selthe.boltSummaryRework':
+    '다른 시전 사이에 {every}초마다 화살이 적중합니다. {windup}초 전에 시각적 경고가 나타나며 무기 공격력의 {mult}배 냉기 피해를 줍니다. 익사의 아리아를 차단하면 화살과 아리아가 {quiet}초 멈춥니다.',
+  'bossJournal.temple.selthe.boltResponseRework':
+    '탱커가 그녀의 시야에 있도록 하세요. 차단은 익사의 아리아에 사용하세요.',
+  'bossJournal.temple.selthe.tipHealerRework':
+    '아리아 대상과 혼자 합창을 맞는 사람을 살피세요. 악보 동안 다음 음을 내는 것을 돕고 실수로 받은 피해를 치유하세요.',
+  'bossJournal.temple.selthe.scoreSummary':
+    '생명력 {first}와 {second}에서 무적이 되어 각각 {notes}음과 {finalNotes}음 선율을 연주합니다. 각각 {answer}초와 {finalAnswer}초 안에 재현하세요. 잘못 밟으면 {falseNote} 냉기 피해를 받고 진행만 초기화되며 시간은 늘어나지 않습니다. 시간 초과 시 모두에게 {min}~{max} 냉기 피해를 줍니다. 성공하면 {stun}초 기절하고 동시에 {bonusSeconds}초 동안 받는 피해가 {vulnerability} 증가합니다.',
+  'bossJournal.temple.selthe.scoreResponse':
+    '선율을 본 뒤 순서대로 발판에 들어가세요. 살아 있는 다른 플레이어와 올바른 음을 번갈아 내세요. 혼자 살아남으면 혼자 완료할 수 있습니다. 막힌 발걸음은 해롭지 않습니다. 응답 시작 전부터 서 있던 발판도 한 번 나갔다 다시 들어와야 소리가 납니다.',
+  'bossJournal.temple.selthe.scoreHeroic':
+    '응답 중에는 발판이 어두워집니다. 선율을 기억하고 번갈아 연주하세요.',
   'auth.wocBuilder.cat.skinTone': '피부색',
   'auth.wocBuilder.slider.eyeSize': '눈 크기',
   'hudChrome.raidBossGuide.damageRange': '{min}에서 {max}',
@@ -336,9 +372,26 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.courier.select': '{item}, {count} 선택',
   'hudChrome.courier.selectedItem': '{item}, {count} 선택 해제',
   'hudChrome.courier.instructions':
-    '묶음 전체를 선택하세요. 배달부가 먼저 맡긴 뒤 요청한 아이템을 찾습니다. 퀘스트 아이템은 보낼 수 없습니다.',
+    '내 은행, 보관소 또는 다른 캐릭터에게 보낼 묶음 전체를 선택하세요. 배달부가 먼저 맡긴 뒤 요청한 아이템을 찾습니다. 퀘스트 아이템은 보낼 수 없습니다.',
   'hudChrome.courier.membership': '새 배달을 시작하려면 멤버십을 갱신하세요.',
   'hudChrome.courier.unavailable': '배달부를 소환하여 배달을 계획하세요.',
+  'hudChrome.courier.bagsVault': '재료를 보관소로 보내기',
+  'hudChrome.courier.vault': '보관소에서 가져오기. 고른 줄은 통째로 가져옵니다.',
+  'hudChrome.courier.vaultTitle': '보관소',
+  'hudChrome.courier.storeTabs': '배달부 보관 장소',
+  'hudChrome.courier.vaultCap': '재료당 최대 {cap}개',
+  'hudChrome.courier.vaultEmpty': '보관소가 비어 있습니다.',
+  'hudChrome.courier.vaultLocked': '배달부와 함께 쓰려면 은행원에게서 보관소를 해제하세요.',
+  'hudChrome.courier.boundBank': '은행으로 보낼 예정',
+  'hudChrome.courier.boundVault': '보관소로 보낼 예정',
+  'hudChrome.courier.boundAccount': '다른 캐릭터의 은행으로 보낼 예정',
+  'hudChrome.courier.accountTitle': '다른 캐릭터',
+  'hudChrome.courier.accountBank':
+    '이 은행에서 가져오기. 배달부가 도착할 때 해당 캐릭터는 로그아웃 상태여야 합니다.',
+  'hudChrome.courier.bagsAccount': '{name}의 은행으로 보내기',
+  'hudChrome.courier.bagsAccountNone': '아이템을 보낼 캐릭터를 고르세요.',
+  'hudChrome.courier.accountPlanned':
+    '{name}에게 {count}묶음 예정. 다른 캐릭터를 고르면 대체됩니다.',
   'entities.abilities.courier.name': '배달부',
   // Membership additions: same-change non-Latin coverage (M16).
   'hudChrome.wocStore.subscription.benefitsTitle': '활성 멤버십 혜택',
@@ -754,6 +807,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.reliquary.sourceActivityBuriedHoard':
     '보물 지도가 이끄는 묻힌 보물의 보상 상자에서 획득',
   'hudChrome.reliquary.sourceActivityLanternHall': '등불 회관 보급관에게서 등불 인장으로 구매',
+  'hudChrome.reliquary.sourceActivityWeeklyVaultPvp': '주간 금고의 PvP 줄에서 선택해 획득',
   'clues.hunt_drakelands_gate_ashes.reply.1':
     '바람이 동쪽 모래언덕에서 재를 싣고 왔어. 텅 빈 모래에서는 재가 날아오지 않아. 주둔지 창고지기가 순찰을 전부 기록해 두지. 누가 먹을 걸 가져다주면 입을 열 거야.',
   'clues.hunt_drakelands_gate_ashes.reply.2':
@@ -1276,6 +1330,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'itemUi.errors.orderClosed': '그 주문은 더 이상 열려 있지 않습니다.',
   'itemUi.errors.orderCountNeeded': '원하는 수량을 입력하세요.',
   'itemUi.errors.orderNotYours': '그것은 당신의 주문이 아닙니다.',
+  'itemUi.errors.orderTrackedItem': '상인은 하나뿐인 장비에 대한 주문을 받지 않습니다.',
   'itemUi.errors.orderOwn': '그것은 당신 자신의 주문입니다. 철회하려면 주문을 취소하세요.',
   'itemUi.errors.tooManyOrders': '한 번에 최대 {count}개의 주문만 열어 둘 수 있습니다.',
   'itemUi.logs.orderDelivered':
@@ -3477,6 +3532,10 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.lootSettings.menuItem': '전리품 설정',
   'hudChrome.dungeonDifficulty.setHeroic': '던전 난이도 설정: 영웅',
   'hudChrome.dungeonDifficulty.setNormal': '던전 난이도 설정: 일반',
+  'hudChrome.dungeonDifficulty.unappliedNormal':
+    '영웅 난이도를 선택했습니다. 현재 인스턴스는 아직 일반입니다.',
+  'hudChrome.dungeonDifficulty.unappliedHeroic':
+    '일반 난이도를 선택했습니다. 현재 인스턴스는 아직 영웅입니다.',
   'hudChrome.dungeonDifficulty.resetAll': '모든 인스턴스 초기화',
   'hudChrome.dungeonDifficulty.resetDone': '모든 인스턴스가 초기화되었습니다.',
   'hudChrome.dungeonDifficulty.resetNone': '초기화할 인스턴스가 없습니다.',
@@ -3488,13 +3547,15 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '파티 또는 파티장이 변경되어 대기 중인 난이도 변경이 취소되었습니다.',
   'hudChrome.dungeonDifficulty.resetSameDifficulty':
     '인스턴스를 초기화하기 전에 던전 난이도를 변경하세요. 비어 있는 인스턴스는 5분 후 자동으로 초기화됩니다.',
+  'hudChrome.dungeonDifficulty.resetAlreadyFresh':
+    '인스턴스가 이미 초기화된 상태입니다. 마지막 초기화 이후 아무도 입장하지 않았습니다.',
   'hudChrome.dungeonDifficulty.resetUsage':
-    '난이도를 변경한 후 /dungeon reset 으로 빈 인스턴스를 포기할 수 있습니다.',
+    '/dungeon reset 으로 빈 인스턴스를 포기하고 새로 시작하세요.',
   'hudChrome.dungeonDifficulty.resetLoot':
     '안에 전리품이 남아 있으면 인스턴스를 초기화할 수 없습니다.',
   'hudChrome.dungeonDifficulty.resetConfirmTitle': '모든 인스턴스를 초기화할까요?',
   'hudChrome.dungeonDifficulty.resetConfirmBody':
-    '이전에 선택한 난이도의 빈 인스턴스를 포기합니다. 획득하지 않은 전리품이 있으면 초기화할 수 없습니다.',
+    '빈 인스턴스를 포기하여 다음 도전을 선택한 난이도로 새로 시작합니다. 귀속은 바뀌지 않습니다. 안에 누군가 남아 있거나 획득하지 않은 전리품이 있으면 초기화할 수 없습니다.',
   'hudChrome.dungeonDifficulty.resetConfirm': '인스턴스 초기화',
   'hudChrome.dungeonDifficulty.resetCooldown': '인스턴스는 5분마다 한 번만 초기화할 수 있습니다.',
   'hudChrome.dungeonDifficulty.entryMismatchNormal':
@@ -9749,7 +9810,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '습지 길에서 벗어난 곳에 가라앉은 신전으로, 호기심 많고 만반의 준비를 갖춘 이들을 위한 샛길입니다.',
   'guide.dungeonsPage.sanctumName': '무덤비룡 성소',
   'guide.dungeonsPage.resetBody':
-    "파티가 아직 차지한 여정을 쥐고 있는 동안 난이도를 바꾸면, 예전 차지가 잠시 남았다가 저절로 풀립니다. 파티장은 대신 한꺼번에 놓아 줄 수 있습니다. 자기 초상화 메뉴에서 '모든 인스턴스 초기화'를 고르거나 /dungeon reset 을 입력하세요. 초기화는 난이도가 실제로 바뀐 뒤에만, 산 자든 쓰러진 자든 안에 아무도 남지 않은 동안에만, 그리고 안의 모든 시신을 남김없이 챙긴 뒤에만 작동하며, 초기화 사이에는 짧은 재사용 대기시간이 있습니다. 잘못된 난이도로 문에 이르면 여정이 시작되기 전에 게임이 알려 줍니다. 공격대는 이런 식으로 초기화되는 일이 결코 없으며, 그 자신의 잠금 규칙이 적용됩니다.",
+    '확보한 빈 인스턴스는 잠시 남았다가 저절로 해제됩니다. 파티장은 자기 초상화 메뉴에서 모든 인스턴스 초기화를 선택하거나 /dungeon reset 을 입력해 즉시 해제할 수 있습니다. 다음 도전은 현재 난이도로 새로 시작합니다. 난이도를 바꾸면 이전 난이도의 인스턴스도 해제됩니다. 초기화하려면 살아 있든 쓰러졌든 안에 아무도 남지 않아야 하며 모든 시신의 전리품을 빠짐없이 획득해야 합니다. 귀속 시간은 절대 줄어들지 않습니다. 귀속된 영웅 던전이나 공격대는 귀속 초기화까지 계속 잠겨 있으며 초기화 사이에는 짧은 재사용 대기시간이 있습니다. 잘못된 난이도로 입구에 도착하면 도전 전에 안내합니다. 공격대도 같은 방식으로 초기화되며 자체 귀속 및 시신 복귀 규칙은 그대로 적용됩니다. 공격대 난이도를 바꿀 때는 재사용 대기시간이 없어 난이도를 잘못 골랐거나 영웅 난이도에서 막혔다면 즉시 되돌릴 수 있습니다. 반복 도전은 공격대 자체 귀속으로 제한됩니다.',
   'guide.dungeonsPage.resetTitle': '인스턴스 초기화',
   'guide.dungeonsPage.sanctumBody':
     '가시봉우리 높은 곳에 숨겨진 빙하. 한 마리 용이 얼음 속에 갇혀 있고, 교단은 훔친 영혼을 불태워 그 얼음을 녹이고 있다. 높은 고개에서 얼음 탑과 대장장이의 끊어진 사슬, 교단의 불길을 지나 빙하 발치의 얼어붙은 호수까지 내려간다.',
@@ -14393,9 +14454,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '안장을 얹도록 길들여진 커다란 파란 슬라임. 걷는 대신 통통 튀어 다니고, 기수 아래에서 말랑하게 흔들리며, 젤리 몸속으로 거품이 천천히 떠오른다.',
   'hudChrome.mounts.name_terrorspark_groundshaker': '대지를 뒤흔드는 드레드스파크',
   'hudChrome.mounts.name_rickshaw_mount': '뼈에 묶인 인력거',
-  'hudChrome.mounts.desc_valorsteed': '여행 속도를 높여 주는 튼튼하고 발이 안정된 군마입니다.',
-  'hudChrome.mounts.desc_grag_bear': '여행 속도를 높여 주는 튼튼하고 발이 안정된 곰입니다.',
-  'hudChrome.mounts.desc_stalkglider_snail': '여행 속도를 높여 주는 끈질기고 느긋한 달팽이입니다.',
+  'hudChrome.mounts.desc_valorsteed': '가죽 안장을 갖춘 튼튼하고 발걸음이 안정적인 말입니다.',
+  'hudChrome.mounts.desc_grag_bear': '묵직한 안장을 갖춘 튼튼하고 발걸음이 안정적인 곰입니다.',
+  'hudChrome.mounts.desc_stalkglider_snail': '이끼 낀 껍질을 지닌 끈기 있고 튼튼한 달팽이입니다.',
   'hudChrome.mounts.desc_aether_hover_cycle':
     '낮게 떠서 빠르게 전장을 가로지르도록 설계된 강력한 마도 바이크입니다.',
   'hudChrome.mounts.desc_shadowjump_toad':
@@ -14415,8 +14476,10 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '더 희귀한 탈것은 영웅 던전 우두머리나 균열 완료를 통해 얻을 수 있습니다.',
   'hudChrome.mounts.clickManage': '클릭하여 탈것 선택',
   'hudChrome.mountTraining.mountPrompt': '{key} 키를 눌러 훈련용 발러스티드에 탑승한다.',
-  'hudChrome.mountTraining.ownedMountPrompt': '고삐가 가방에 있습니다. 사용하면 탈 수 있습니다.',
-  'hudChrome.mounts.useToRide': '사용하여 이 탈것을 소환합니다.',
+  'hudChrome.mountTraining.ownedMountPrompt':
+    '꾸미기에서 탈것을 선택하고 타기 / 내리기로 탑승하세요.',
+  'hudChrome.mounts.useToRide':
+    '사용하면 이 외형을 적용하고 탈것을 소환합니다. 아무 캐릭터의 가방이나 은행에 이 아이템을 보관하면 계정의 모든 캐릭터가 해당 외형을 사용할 수 있습니다. 속도는 기승 훈련으로 결정됩니다.',
   'hudChrome.mountTraining.ridePrompt':
     '빛나는 표식을 따라 출발선으로 간 뒤 레이스 시작을 누르세요.',
   'hudChrome.mountTraining.begin': '수업 시작',
@@ -16643,6 +16706,19 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '앞으로 {time} 동안 이 아이템을 같은 전리품을 함께 획득한 플레이어와 거래할 수 있습니다. 착용하면 거래 기간이 끝납니다.',
   'hudChrome.itemTooltip.perfectedBadge': '완전해짐',
   'hudChrome.itemTooltip.perfectingRank': '완전화: {ranks}단계 중 {rank}단계',
+  'hudChrome.itemTooltip.lootedBy': '{date}에 {name}이(가) 획득',
+  'hudChrome.itemTooltip.questRewardTo': '{date}에 {name}이(가) 퀘스트 보상으로 획득',
+  'hudChrome.itemTooltip.obtainedBy': '{date}에 {name}이(가) 입수',
+  'hudChrome.itemMenu.itemHistory': '아이템 이력',
+  'hudChrome.itemHistory.title': '{item}: 이력',
+  'hudChrome.itemHistory.passedTo': '{date}에 {name}에게 넘어감',
+  'hudChrome.itemHistory.noTransfers': '이 아이템은 주인이 바뀐 적이 없습니다.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.one': '이전 {count}건의 양도는 표시되지 않습니다.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.few': '이전 {count}건의 양도는 표시되지 않습니다.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.many': '이전 {count}건의 양도는 표시되지 않습니다.',
+  'hudChrome.plurals.itemHistoryEarlierHidden.other': '이전 {count}건의 양도는 표시되지 않습니다.',
+  'hudChrome.itemHistory.close': '닫기',
+  'hudChrome.itemHistory.openAria': '{item}의 아이템 이력',
   'devCommand.actions.kit.description':
     '특성에 맞는 성소 입장 전 20레벨 사전 설정 장비를 가방부터 착용합니다. 장비만 해당됩니다.',
   'devCommand.actions.kit.label': '20레벨 초기 장비 세트 착용',
@@ -17122,6 +17198,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.actionCamShoulderLeft': '왼쪽 {pct}',
   'hudChrome.options.actionCamShoulderRight': '오른쪽 {pct}',
   'hudChrome.options.actionCamShoulderCenter': '중앙',
+  'hudChrome.options.firstPersonMode': '1인칭 시점 (최대 확대 시)',
   'hudChrome.breath.label': '숨',
   'hudChrome.breath.drowning': '익사 중!',
   'abilityUi.resources.devotion': '헌신',
@@ -17663,7 +17740,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.doesHeader': '하는 일',
   'guide.commandsPage.dungeonMode': '던전 난이도를 일반과 영웅 사이에서 전환합니다.',
   'guide.commandsPage.dungeonReset':
-    '비어 있는 자신의 인스턴스를 버립니다. 난이도를 바꾼 뒤에 하는 일입니다.',
+    '자신의 빈 인스턴스를 포기하여 다음 도전을 같은 난이도 또는 새 난이도로 처음부터 시작합니다.',
   'guide.commandsPage.dungeons':
     '모든 던전을 그 문이 있는 지역과 설계된 파티 인원과 함께 보여 주고, 지금 설정된 난이도도 알려 줍니다.',
   'guide.commandsPage.emotesBody':
@@ -18107,28 +18184,28 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '마를라의 계산대 너머의 고삐는 사는 것이 아니라 찾아내는 것입니다. 5인 던전들과 영웅 난이도 공격대의 마지막 우두머리에게서, 그리고 균열을 정리한 자리에서 나옵니다. 균열은 어려울수록 더 귀한 고삐를 남길 수 있습니다. 이들은 설계상 드문 발견물이라 어떤 공략도 고삐를 약속하지 않으니, 탈것을 노리는 다정한 방법은 어차피 돌던 공략에 그 사냥을 얹어 두는 것입니다. 어느 우두머리에게 어떤 탈것이 걸려 있는지는 이 지면이 알려 주지 않습니다. 그 부분은 여러분이 직접 알아낼 몫입니다.',
   'guide.mountsPage.collectHeading': '더 귀한 탈것은 어디서 오는가',
   'guide.mountsPage.firstBody':
-    '발러스티드는 이 세계 어디에서도 돈으로 살 수 있는 유일한 탈것입니다. 승마를 배우고 나면 마를라가 발러스티드의 고삐를 10골드에 팔며, 그 고삐는 온전히 여러분의 것이 됩니다. 나머지 탈것은 모두 세계에 나가 직접 얻어 내야 하니, 거의 모든 기수는 이 말에서 출발합니다.',
+    '기승을 배우면 말라가 용맹마의 고삐를 10골드에 판매합니다. 고삐를 보유하면 꾸미기 메뉴에서 계정의 모든 캐릭터에게 말 외형이 해제됩니다. 기승 훈련만으로도 고삐를 들고 다니지 않고 탈것을 소환할 수 있으므로, 다른 모습을 원할 때 말이나 다른 보유 외형을 선택하세요.',
   'guide.mountsPage.firstHeading': '첫 탈것',
   'guide.mountsPage.goodsBody':
-    '탈것은 아이템이고, 그래서 경제가 움직일 수 있는 물건입니다. 고삐가 가방이나 은행에 있는 한 그 탈것은 여러분의 것이지만, 은행에 넣어 둔 고삐는 소유만 지켜 줄 뿐 타게 해 주지는 않습니다. 짐승을 부르려면 고삐를 지니고 있어야 합니다. 플레이어의 고삐에는 귀속이 걸리지 않으므로, 아이템 자체가 달리 말하지 않는 한 다른 발견물과 마찬가지로 거래되고 우편으로 오가며 세계 시장에 오릅니다. 넘기기 전에 알아 둘 것이 둘 있습니다. 어떤 상인도 고삐를 되사 주지 않으니 탈것은 팔아 현금으로 바꾸기보다 지니거나 남에게 넘기는 물건이고, 타고 있는 동안 고삐가 손을 떠나면 탈것도 함께 사라져 그 자리에 내려서게 됩니다.',
+    '아무 캐릭터의 가방이나 개인 은행에 해당 고삐가 하나 이상 있는 동안 수집한 탈것 외형을 계정 전체에서 사용할 수 있습니다. 거래, 우편, 등록, 판매 등의 방법으로 마지막 해당 아이템을 제거하면 꾸미기에서 외형이 사라집니다. 사용 중인 캐릭터는 기본 말 외형으로 돌아가며 훈련에 따른 속도로 계속 탑승합니다.\n\n아이템에 별도 제한이 없다면 고삐는 거래, 우편 발송, 세계 시장 등록이 가능합니다. 말 고삐는 상인에게 10골드에 팔 수도 있습니다. 다른 고삐에는 각자의 판매 제한이 유지됩니다. 상점 탈것 스킨은 고삐 아이템과 별개인 계정 꾸미기입니다.',
   'guide.mountsPage.goodsHeading': '고삐도 평범한 물건입니다',
   'guide.mountsPage.heading': '탈것과 승마',
   'guide.mountsPage.intro':
-    '탈것은 세계를 가로지르는 더 빠른 방법이고, 그게 전부입니다. 마구간에서 타는 법을 배우고 첫 고삐를 사고 나면, 그 뒤의 모든 길이 짧아집니다.',
+    '탈것 외형을 선택하고 마구간에서 기승을 배워 세계를 더 빠르게 여행하세요. 속도는 훈련으로 결정되며 모든 탈것 외형은 겉모습만 바꿉니다.',
   'guide.mountsPage.learnBody':
-    '승마는 한 번만 사면 되는 기술이며, {level}레벨에 열립니다. 마구간지기 마를라 히첸이 구릉 위 게일크레스트 마구간을 지키며, 승마 훈련을 80골드에 팝니다. 그 한 번의 구매가 애초에 탈것에 앉을 수 있게 해 주고, 한번 배우면 영영 사라지지 않습니다.\n\n배우고 나면 마를라가 퀘스트를 하나 내줍니다. 승마 수업입니다. 퀘스트를 받고 표식을 따라 출발 아치 뒤의 빛나는 칸으로 간 다음 레이스 시작을 누르세요. 수업 동안에는 마를라가 훈련용 발러스티드를 빌려주므로 수업 자체에는 한 푼도 들지 않습니다. 주로를 달려 완주한 뒤 마를라에게 돌아가 동전과 경험치를 받으세요. 빌린 군마는 그 뒤 다시 마구간으로 돌아가니, 이 수업은 말을 쥐여 주는 것이 아니라 안장에 앉는 법을 가르쳐 줍니다.',
+    '{level}레벨부터 기승을 배울 수 있습니다. 마구간지기 말라 히첸은 게일크레스트 마구간에서 기승 훈련을 80골드에 판매합니다. 기본 훈련은 탑승 중 이동 속도를 {basicSpeed}% 높입니다. 이를 배우면 말라에게 {advancedFee}골드로 고급 기승 훈련을 구매해 탑승 중 이동 속도 증가량을 {advancedSpeed}%로 높일 수 있습니다. 각 단계는 배운 캐릭터에게만 적용됩니다.\n\n기본 기승을 배운 뒤 말라의 기승 수업 퀘스트를 받고 표시를 따라 출발 아치 뒤의 빛나는 네모로 가세요. 경주 시작을 누르면 훈련용 용맹마를 빌릴 수 있습니다. 코스를 완주하고 돌아와 골드와 경험치를 받으세요. 수업이 끝나면 빌린 말은 마구간으로 돌아갑니다.',
   'guide.mountsPage.learnHeading': '타는 법 배우기',
   'guide.mountsPage.raceBody':
     '마를라의 방목장에 있는 장애물 넘기 주로는 수업 때만이 아니라 언제든 누구에게나 열려 있습니다. 탈것에 오르고 아치 뒤의 빛나는 칸에 선 다음 레이스 시작을 누르세요. 초읽기가 여러분을 붙들어 두었다가 시계가 돌기 시작합니다. 시간이 다 되기 전에 일곱 개의 장애물을 모두 넘고 아치를 통과해 돌아 나오세요.\n\n장애물은 정말로 가로대 위를 날아 넘어야 인정되므로, 슬쩍 지나가는 것으로는 아무것도 넘지 못합니다. 순서는 마음대로, 어느 쪽에서 들어가도 되며, 하나를 놓쳤다고 큰일이 나지도 않습니다. 한 바퀴 돌아와 다시 넘으면 됩니다. 죽거나 내리거나 방목장을 벗어나면 그 시도는 끝나지만, 곧바로 다시 시작하는 것을 막는 것은 없습니다. 참가비도, 재사용 대기시간도, 기록 그 자체 말고는 상품도 없으며, 몇 명이 한꺼번에 달려도 서로를 방해하지 않습니다.',
   'guide.mountsPage.raceHeading': '마구간 레이스',
   'guide.mountsPage.rideBody':
-    '탈것 창도 없고 즐겨 쓰는 탈것을 지정할 일도 없습니다. 고삐가 곧 탈것이기 때문입니다. 가방이나 행동 단축바 슬롯에서 고삐를 사용하면 그 탈것에 오릅니다. 소환에는 잠깐이 걸립니다. 즉시가 아니라 짧게 부르는 것이라, 잘못 끌어온 적에게서 여러분을 구해 주지는 못합니다. 내리는 것은 즉시이고 결코 막히지 않습니다.\n\n이미 타고 있는 탈것의 고삐를 사용하면 그 탈것을 거둡니다. 탄 채로 다른 고삐를 사용하면 중간에 다시 소환할 것 없이 곧바로 그 탈것으로 갈아탑니다. 기본값이 백쿼트 키인 탑승 / 하차 키는 오직 내리는 데만 쓰입니다. 내려가는 길이지 올라가는 길이 아닙니다. 단 하나의 예외가 승마 수업으로, 빌린 말에는 클릭할 고삐가 없으므로 그 키가 마를라가 빌려주는 군마를 불러 줍니다. 휴대전화나 태블릿에서는 더보기 서랍의 탑승 버튼이 양쪽 모두를 해 줍니다.',
+    '꾸미기 메뉴의 탈것 탭에서 외형을 선택하세요. 타기 / 내리기 키(기본값은 백쿼트 키)를 누르면 선택한 외형의 탈것을 소환합니다. 모바일의 타기 버튼도 같습니다. 소환에는 짧은 정신 집중이 필요하지만 내리기는 즉시 이루어집니다. 탑승 중에 외형을 바꿔도 기승 속도는 바뀌지 않습니다.\n\n가방이나 행동 단축바의 고삐를 사용해 해당 외형을 선택하고 소환할 수도 있습니다. 현재 타고 있는 외형을 사용하면 탈것을 해제합니다. 은행이나 다른 캐릭터의 고삐도 같은 외형을 해제하므로 탑승자가 직접 소지할 필요가 없습니다.',
   'guide.mountsPage.rideHeading': '타고 내리기',
   'guide.mountsPage.speedBody':
-    '탈것끼리를 가르는 것은 속도뿐입니다. 마를라에게서 사는 발러스티드가 기준 속도를 정하고, 세계에서 모아 온 탈것들은 그보다 빠릅니다. 고삐가 귀할수록 더 빠르며, 매끄럽게 이어지는 것이 아니라 몇 개의 뚜렷한 단계로 나뉩니다. 훈련할 두 번째 승마 단계도, 나중에 사들일 상위 등급도 없습니다. 승마 값은 한 번만 치르고, 그 뒤로는 사용한 고삐가 이동 속도를 정합니다.',
-  'guide.mountsPage.speedHeading': '속도와 등급',
+    '기본 기승 훈련은 탑승 중 이동 속도를 {basicSpeed}% 높입니다. 고급 기승 훈련은 {advancedSpeed}% 높이며 말라에게 {advancedFee}골드로 구매할 수 있습니다. 희귀도나 획득처에 관계없이 모든 외형은 캐릭터의 훈련 단계에 따른 같은 속도를 사용합니다. 상점 스킨도 그 훈련 속도를 사용합니다.',
+  'guide.mountsPage.speedHeading': '기승 속도와 훈련',
   'guide.mountsPage.whatBody':
-    '탈것은 올라타는 짐승이고, 그것이 주는 것은 속도입니다. 방어도도, 피해량도, 능력치도 없습니다. 땅 위를 더 빠르게 실어 나르고 점프할 때 조금 더 높이 튀어 오를 뿐, 그것이 이 거래의 전부입니다. 게임의 모든 탈것은 지상 탈것이므로 비행은 없고, 헤엄칠 수 있는 탈것도 없습니다.',
+    '탈것은 훈련을 통해 타는 기본 탈것에 적용하는 꾸미기 외형입니다. 방어도, 공격력, 전투 능력치를 제공하지 않습니다. 기승 훈련은 지상 이동 속도를 높이며, 탑승 중에는 더 높이 점프할 수 있습니다. 모든 탈것은 지상용이며 수영할 수 없습니다.',
   'guide.mountsPage.whatHeading': '탈것이란 무엇인가',
   'guide.mountsPage.whereBody':
     '게일크레스트 마구간은 게일크레스트 지도에 표시되어 있으며, 절단 절벽과 난파선 벌판 사이 구릉 위에 있습니다. 마를라는 마구간 곁에서 경주장을 바라보고 서 있습니다.',
@@ -18185,7 +18262,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     "채집 도구에는 홈이 하나 있고, 그 자리에 들어가는 것이 제작된 부적이다. Gatherer's Cache는 채집 산출물을 하나 늘리고, Artisan's Eye는 캐 올린 것의 등급을 올리며, Maker's Charm은 같은 방식으로 둘을 늘린다. 앞의 둘은 마법부여의 일감이라, Eastbrook 공작소의 주인 Tinker Gizzel이 마법부여 기술 25에 이른 마법부여사에게 그 둘을 가르친다. Maker's Charm은 기계공학의 일감으로, 드롭으로 얻는 도안을 기술 100에서 만든다. 셋 모두 그의 공작소에서 만든다.\n\n갓 끼운 부적은 일반 도구에서 충전 20회를 지니고, 일반 위로 등급이 한 칸 오를 때마다 10회씩 늘어난다. 그래서 같은 부적도 영웅 곡괭이에 끼우면 50회에서 시작한다. 충전은 부적이 실제로 결과를 바꾸었을 때만 소모되고, 나아지지 않은 채집에는 결코 쓰이지 않으며, 홈은 쓸 때마다 물어보도록 맞출 수 있어 당신이 충전 사용을 말할 때까지 부적이 기다린다. 새 부적을 끼우면 그 순간 지니고 있는 도구를 기준으로 홈이 다시 주조되므로, 예전의 높았던 기록이 아니라 그 도구가 담을 수 있는 만큼 채워진다. 아무것도 달라지지 않을 재장착은 부적을 삼키는 대신 그대로 거절된다.\n\n충전이 떨어져도 부적이 부서지지는 않는다. 도구의 주인이 홈을 되채우며, 비전 재료 하나마다 충전 10회가 들어간다. 어떤 재료를 요구하는지는 지금 지닌 도구와 그 홈이 지금까지 채워졌던 가장 좋은 도구 중 나은 쪽을 따른다. 일반이나 고급 도구는 Chime Dust, 희귀 도구는 Chime Essence, 영웅 도구는 Chime Shard다. 좋은 도구를 은행에 두고 온다고 재충전이 싸지지는 않는다. 값은 그대로인 채 양만 줄어들 뿐이다. 더 싼 칸으로 정직하게 내려가는 길은 낮은 도구를 지닌 채 새 부적을 끼워 그 자리에서 홈을 다시 주조하는 것이다. 홈의 상한이 지금 도구가 채울 수 있는 것보다 높다면 재충전은 그 도구가 멈추는 곳에서 멈추고, 더 나은 도구를 지니라고 알려 준다. 부적에 서명한 제작자 본인이 채우면 재료가 절반만 들고, 그 부적이 속한 기술(Gatherer's Cache와 Artisan's Eye는 마법부여, Maker's Charm은 기계공학)을 주 전공으로 삼았다면 더 줄어든다. 그 밖의 사람은 전액을 낸다. 재충전은 이 제작 계열의 다른 작업과 마찬가지로 짧은 시전이다.",
   'guide.professions.toolEffectsHeading': '도구 효과',
   'guide.progression.ridingBody':
-    '승마는 이 오르막 끝에서 기다리는 것들 가운데 하나입니다. {level}레벨이 되면 마구간지기가 만만치 않은 금액을 받고 이 기술을 가르쳐 주며, 훈련 주로에서 수업을 한 번 마치면 첫 고삐를 얻습니다. 탈것은 힘을 조금도 주지 않습니다. 그저 세계를 작게 만들어 줄 뿐인데, 북쪽으로 오래 걸어 본 사람에게는 그것만으로도 하나의 보상입니다.',
+    '{level}레벨이 되면 마구간지기 말라에게 골드를 내고 기본 기승을 배우고 이후 고급 단계를 구매할 수 있습니다. 훈련이 탑승 속도를 결정합니다. 꾸미기에서 탈것 외형을 선택하세요. 수집한 외형은 아무 캐릭터의 가방이나 은행에 고삐가 있는 동안 계정 전체에 공유됩니다.',
   'guide.progression.ridingTitle': '타는 법 배우기',
   'guide.questsPage.availableBody':
     '퀘스트는 사슬처럼 이어집니다. 대부분은 앞선 퀘스트를 완료해야 비로소 주어지고, 상당수는 최소 레벨도 요구합니다. 그래서 오늘 내줄 것이 없던 NPC도 몇 레벨을 더 올리거나 지금 들고 있는 퀘스트를 마무리하고 나면 잔뜩 내놓기도 합니다. 승마 수업처럼 저만의 조건을 지닌 것도 몇 있는데, 이는 승마 기술을 산 뒤에야 열립니다. 파티 퀘스트는 몇 명을 데려오길 권하는지 미리 밝혀 둡니다. 반복할 수 있는 일도 있습니다. 얼마간 기다린 뒤 다시 받을 수 있으며, 퀘스트를 주는 사람 머리 위의 표식이 다시 돌아왔음을 알려 줍니다.',
@@ -19741,12 +19818,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'questUi.worldQuest.traceReaction.elianComplete':
     '룬 완성! 정성을 다해 연습하면 다음에는 더 멋지게 그릴 걸세.',
   'entities.mobs.buddy_alpaca.name': '알파카',
-  'entities.mobs.buddy_sapling.name': '어린 나무',
-  'entities.items.whistle_sapling.name': '어린 나무의 호루라기',
   'hudChrome.collections.presence.sapling':
     '작은 뿌리들이 뒤에서 종종걸음을 치며 낙엽을 흩뜨립니다.',
-  'hudChrome.collections.buddyLore.sapling':
-    '나무껍질에 미소를 띠고 호기심 가득한 보랏빛 눈을 가진 어린 나무입니다. 뿌리로 즐겁게 뒤뚱거리며 어디든 당신을 따라갑니다.',
   'entities.mobs.buddy_horse.name': '말',
   'entities.mobs.buddy_ansem.name': '안셈',
   'entities.mobs.buddy_crimson_claw_crab.name': '진홍 집게 게',
@@ -19773,39 +19846,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.buddy_triple_t.name': '트리플 T',
   'entities.mobs.buddy_trollface.name': '트롤페이스',
   'entities.mobs.buddy_tuskhorn_boar.name': '엄니뿔 멧돼지',
-  'entities.items.whistle_alon.name': '알론의 호루라기',
-  'entities.items.whistle_alpaca.name': '알파카의 호루라기',
-  'entities.items.whistle_horse.name': '말의 호루라기',
-  'entities.items.whistle_ansem.name': '안셈의 호루라기',
-  'entities.items.whistle_bull.name': '황소의 호루라기',
-  'entities.items.whistle_cate_coin.name': '케이트 코인의 호루라기',
-  'entities.items.whistle_crimson_claw_crab.name': '진홍 집게 게의 호루라기',
-  'entities.items.whistle_crystal_lich.name': '수정 리치의 호루라기',
-  'entities.items.whistle_crystal_tide.name': '수정 물결의 호루라기',
-  'entities.items.whistle_ember_fox.name': '잉걸불 여우의 호루라기',
-  'entities.items.whistle_emerald_wolf.name': '에메랄드 늑대의 호루라기',
-  'entities.items.whistle_forgemaw.name': '용융의 화로아귀의 호루라기',
-  'entities.items.whistle_frog.name': '개구리의 호루라기',
-  'entities.items.whistle_frostfire.name': '서리불꽃의 호루라기',
-  'entities.items.whistle_golden_sentinel.name': '황금 파수병의 호루라기',
-  'entities.items.whistle_kekius.name': '케키우스의 호루라기',
-  'entities.items.whistle_loot_goblin.name': '전리품 고블린의 호루라기',
-  'entities.items.whistle_moss_hare.name': '이끼 산토끼의 호루라기',
-  'entities.items.whistle_nightfang.name': '밤엄니의 호루라기',
-  'entities.items.whistle_penny_goldspark.name': '페니 골드스파크의 호루라기',
-  'entities.items.whistle_phantom.name': '팬텀의 호루라기',
-  'entities.items.whistle_proud_grunt.name': '자랑스러운 병졸의 호루라기',
-  'entities.items.whistle_raptor.name': '랩터의 호루라기',
-  'entities.items.whistle_rocky.name': '로키의 호루라기',
-  'entities.items.whistle_skeleton.name': '해골의 호루라기',
-  'entities.items.whistle_solbot.name': '솔봇의 호루라기',
-  'entities.items.whistle_spider.name': '거미의 호루라기',
-  'entities.items.whistle_stag.name': '수사슴의 호루라기',
-  'entities.items.whistle_tiger.name': '호랑이의 호루라기',
-  'entities.items.whistle_triple_t.name': '트리플 T의 호루라기',
-  'entities.items.whistle_trollface.name': '트롤페이스의 호루라기',
-  'entities.items.whistle_tuskhorn_boar.name': '엄니뿔 멧돼지의 호루라기',
-  'entities.items.whistle_sprites.name': '깜빡이와 반짝이의 호루라기',
   'hudChrome.buddyMenu.rename': '버디 이름 변경',
   'hudChrome.buddyMenu.nameLabel': '버디 이름',
   'hudChrome.buddyMenu.autolootEnable': '자동 전리품 켜기',
@@ -19813,132 +19853,17 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.buddyMenu.autolootHint':
     '버디가 30야드 이내에 있는 당신 소유의 시체에서 전리품을 가져옵니다.',
   'hudChrome.buddyMenu.cancel': '취소',
-  'hudChrome.collections.title': '사냥',
-  'hudChrome.collections.close': '사냥 닫기',
-  'hudChrome.collections.keybindLabel': '사냥',
-  'hudChrome.collections.launcherTitle': '사냥: 버디, 탈것, 아이템 세트',
   'hudChrome.collections.tabs.buddies': '버디',
-  'hudChrome.collections.tabs.mounts': '탈것',
   'hudChrome.collections.state.owned': '수집함',
   'hudChrome.collections.state.notOwned': '수집 안 함',
   'hudChrome.collections.state.unavailable': '아직 획득 불가',
-  'hudChrome.collections.petKind.beast': '야수',
-  'hudChrome.collections.petKind.humanoid': '인간형',
-  'hudChrome.collections.petKind.elemental': '정령',
-  'hudChrome.collections.petKind.undead': '언데드',
-  'hudChrome.collections.petKind.celebrity': '유명 인사',
-  'hudChrome.collections.armor.cloth': '천',
-  'hudChrome.collections.armor.leather': '가죽',
-  'hudChrome.collections.stat.strength': '힘',
-  'hudChrome.collections.stat.agility': '민첩성',
-  'hudChrome.collections.stat.intellect': '지능',
-  'hudChrome.collections.stat.mixed': '혼합',
-  'hudChrome.collections.set.owned': '{total}개 중 {owned}개',
-  'hudChrome.collections.set.bonusLabel': '{pieces}개 세트',
-  'hudChrome.collections.set.itemLevel': '아이템 레벨 {level}',
-  'hudChrome.collections.detail.dropLabel': '드롭 출처',
-  'hudChrome.collections.detail.drop': '{mob}({location}), 처치당 {chance}%',
-  'hudChrome.collections.detail.dropWithHeroic':
-    '{mob}({location}), 처치당 {chance}%, 영웅 난이도에서 {heroicChance}%',
-  'hudChrome.collections.detail.heroicDrop':
-    '{mob}({location}), 영웅 난이도 전용, 처치당 {chance}%',
-  'hudChrome.collections.detail.globalDrop':
-    '아무 적, 처치당 {chance}%, 같은 등급 {count}종 중 하나',
-  'hudChrome.collections.detail.fishingDrop': '아무 곳에서나 낚시, 낚을 때마다 {chance}%',
-  'hudChrome.collections.detail.noSource': '아직 게임 내 획득처가 없습니다',
-  'hudChrome.collections.detail.noItem': '아직 이를 주는 아이템이 없습니다',
-  'hudChrome.collections.detail.bindLabel': '귀속',
-  'hudChrome.collections.detail.soulbound': '귀속',
-  'hudChrome.collections.detail.tradeable': '거래 가능',
-  'hudChrome.collections.detail.sellLabel': '상인 지불액',
-  'hudChrome.collections.detail.noSell': '판매 불가',
-  'hudChrome.collections.detail.setLabel': '수집함',
-  'hudChrome.collections.detail.marketLabel': '월드 마켓',
-  'hudChrome.collections.detail.marketNone': '등록된 물품 없음',
-  'hudChrome.collections.detail.marketChecking': '확인 중…',
-  'hudChrome.collections.detail.marketAtMerchant': '상인에게서 확인',
-  'hudChrome.collections.detail.exchangeLabel': '$WOC 거래소',
-  'hudChrome.collections.detail.exchangeNone': '등록된 물품 없음',
-  'hudChrome.collections.detail.exchangeUnavailable': '이 클라이언트에서는 사용할 수 없습니다',
-  'hudChrome.collections.detail.honorPrice': '명예 {amount}',
-  'hudChrome.collections.detail.marksPrice': '영웅의 징표 {amount}',
   'hudChrome.options.showPetNames': '펫 이름 표시',
   'hudChrome.warfareShop.companions': '동료',
   'itemUi.kind.buddy': '버디',
-  'hudChrome.collections.buddyLore.alon':
-    '어떤 지도에도 없는 길에서 온 여행자의 마스코트로, 일이 틀어지는 곳이면 어디든 나타난다. 지켜보고, 고개를 끄덕이고, 도움은 전혀 주지 않는다.',
-  'hudChrome.collections.buddyLore.alpaca':
-    '게일크레스트의 무리는 털과 성정 때문에 이들을 기른다. 폭풍 속에서 이보다 침착한 짐승은 없다. 이 녀석은 여정마다 정확히 한 사람에게 침을 뱉는다.',
-  'hudChrome.collections.buddyLore.horse':
-    '이스트브룩 골짜기 조랑말 혈통으로, 과수원 길에 맞게 작게 길러졌고 자기가 군마가 아니라는 말은 한 번도 들어 본 적이 없다. 당신의 어깨 옆에서 보조를 맞추며, 한 번이라도 사과를 준 사람이라면 누구든 따라간다.',
-  'hudChrome.collections.buddyLore.ansem':
-    '문과 어둠에 대해 말하지만 그 이상은 결코 말하지 않는다. 밤꽃 평원의 신도들은 자기네 것이라 주장하지만, 의식을 치를 때마다 어디론가 사라진다.',
-  'hudChrome.collections.buddyLore.bull':
-    '개만 한 크기의 이스트브룩 골짜기 황소로, 사람들이 실내에서 기르기로 한 이유는 오직 그 크기뿐이다. 성질머리는 함께 줄어들지 않았다.',
-  'hudChrome.collections.buddyLore.cate_coin':
-    '깔고 앉은 동전에서 절대 떨어지지 않으며, 무언가 먹는 모습을 본 사람이 아무도 없는 고양이. 이스트브룩 상인들은 아직도 둘 중 어느 쪽이 애완동물인지를 두고 다툰다.',
-  'hudChrome.collections.buddyLore.crimson_claw_crab':
-    '먼바다 해안의 조간대 게로, 물 밖에 나온 지 한참이 지나도 집게가 붉게 남는다. 부두 인부들은 예전에 판자 위에서 이들을 경주시키며 돈을 걸었다.',
-  'hudChrome.collections.buddyLore.crystal_lich':
-    '나이트락시스 자신의 파편으로, 그를 빚어낸 냉기를 아직도 웅웅 울리며 품고 있다. 공격대의 잔해에서 자신을 끄집어낸 자를 따르지만, 그 일을 아직 용서하지는 않았다.',
-  'hudChrome.collections.buddyLore.crystal_tide':
-    '자기 몫의 바다유리 방울을 타고 다니는 조수 정령으로, 이스트브룩 골짜기부터 먼바다 해안까지 저녁거리를 낚던 낚시꾼들이 잔잔한 물에서 건져 올렸다. 자신이 딸려 올라온 물을 그대로 지니고 다니며, 돌아가라는 말은 듣지 않는다.',
-  'hudChrome.collections.buddyLore.ember_fox':
-    '이스트브룩 골짜기의 산울타리에서 온 암여우로, 겨울 덤불 사이로 비치는 숯빛 붉은 털에서 이름을 얻었다. 그곳 사냥꾼들은 몇 세대 전에 새끼 잡기를 포기하고, 대신 먹이를 내놓기 시작했다.',
-  'hudChrome.collections.buddyLore.emerald_wolf':
-    '망령숲의 새끼 늑대로, 숲 바닥까지 거의 닿지 않는 잎새 사이 빛 아래에서는 털이 초록빛을 띤다. 숲이 남긴 고아는 어떤 것이든 관리인들이 거두어 기른다.',
-  'hudChrome.collections.buddyLore.sprites':
-    '금빛과 청록빛, 두 작은 불의 정령입니다. 누가 앞장설지 좀처럼 정하지 못합니다. 가까이 붙으면 하나의 초록 불꽃으로 합쳐졌다가, 웃으며 다시 갈라집니다.',
-  'hudChrome.collections.buddyLore.forgemaw':
-    '마지막 샘의 도가니에서 벼려졌으나 끝내 완성되지 못한 것으로, 망치질이 아직 이어지는 동안 이그니바르의 주조장을 제 발로 걸어 나왔다. 오직 영웅 난이도의 공략만이 그를 찾아낸다. 이 용융체는 자신을 만든 화로로 자꾸 돌아가고, 불길을 두 번 살아남은 자를 따라 집까지 온다.',
-  'hudChrome.collections.buddyLore.frog':
-    '마이어펜 습지는 이들을 살지고 태평하게 길러낸다. 갈대밭에서 밤새도록 노래한다. 늪 안내인들은 이 녀석을 태운 배는 절대 좌초하지 않는다고 장담한다.',
-  'hudChrome.collections.buddyLore.frostfire':
-    '서리장막 봉우리에서 온천이 빙원을 뚫고 솟는 자리에 태어났으며, 자신이 어느 쪽에 속하는지 아직도 정하지 못했다. 찬 공기에서는 김을 내고, 따뜻한 곳에서는 몸을 떤다.',
-  'hudChrome.collections.buddyLore.golden_sentinel':
-    '호박빛 가을터의 파수 딱정벌레로, 자라난 수지에 도금되어 금빛을 띤다. 이름이 수지보다 오래되었다. 누군가 수액을 병에 담을 생각을 하기 훨씬 전부터, 그런 부류의 파수꾼들이 그 숲을 지켜왔다.',
-  'hudChrome.collections.buddyLore.kekius':
-    '출처가 분명치 않은 웃는 동행으로, 게일크레스트 경주장이 부적 삼아 거두었다. 이 녀석을 믿고 맹세하던 마구간 네 곳보다 오래 살아남았다.',
-  'hudChrome.collections.buddyLore.loot_goblin':
-    '영웅의 징표를 지닌 사람이라면 누구든 따라다니지만, 훔치다 걸린 적은 단 한 번도 없다. 병참장교 벡스는 그것이 아무것도 증명하지 못한다고 주장한다.',
-  'hudChrome.collections.buddyLore.moss_hare':
-    '버들늪의 산토끼로, 젖은 이탄에 평생 몸을 눕히며 털이 초록으로 물들었다. 늪지 약초사들은 이들을 길조로 여기며, 문간에 온 녀석을 내쫓게 두지 않는다.',
-  'hudChrome.collections.buddyLore.nightfang':
-    '밤꽃 평원의 어린 사냥꾼으로, 제 동족의 기준으로 봐도 유난히 조용하다. 곁을 따르는 것은 그저 함께 있고 싶어서이고, 나방보다 큰 것은 사냥하지 않는다.',
-  'hudChrome.collections.buddyLore.penny_goldspark':
-    '노움 기술자의 견습으로, 시간당 삯을 받지만 구리 한 닢까지 값을 한다. 방어구 제작자 호드는 빚을 갚느라 그녀를 거두었고, 이제는 금화 천 냥을 쥔 사람이면 누구에게든 이 계약을 판다.',
-  'hudChrome.collections.buddyLore.phantom':
-    '망령숲의 고분에서 나온 손바닥만 한 유령으로, 온통 천뿐이고 뼈는 없다. 분명히 닫아둔 배낭 안에 나타나서는 함께 있고 싶다는 이유로 눌러앉는다. 무엇을 원하는지 아무도 알아내지 못했고, 누군가를 겁주려 한 적은 한 번도 없다.',
-  'hudChrome.collections.buddyLore.proud_grunt':
-    '전쟁 보급창의 노병으로, 경례는 지켰으나 계급은 잃었다. 전쟁원수 드레이븐 콜은 그 대가를 알 만큼의 명예를 지닌 병사에게라면 누구에게든 한 명을 내어준다.',
-  'hudChrome.collections.buddyLore.raptor':
-    '드레이크랜드의 부화 개체로, 제가 얼마나 빨리 달릴 수 있는지 깨닫기 전에 팔려 나간다. 새 주인은 하나같이 굶기지 말라는 말을 듣고, 두 번 들을 필요가 있는 사람은 없다.',
-  'hudChrome.collections.buddyLore.rocky':
-    '쏜피크 고지의 너덜지대에 사는 돌껍질 기어다니는 것으로, 느리고 무엇에도 아랑곳하지 않는다. 광부들은 붕락 직전 한순간 딱 멈춰 서는 그 습성 때문에 이들을 기른다.',
-  'hudChrome.collections.buddyLore.skeleton':
-    '망령숲의 고분에서 기어 나와 제 몸의 먼지를 털고는, 그 뒤로 줄곧 사람들을 따라다닌다. 이 뼈가 누구의 것이었는지는 아직 아무도 밝혀내지 못했다.',
-  'hudChrome.collections.buddyLore.solbot':
-    '햇빛을 먹고 도는 작은 자동기계로, 드레이크랜드의 잿더미에 반쯤 묻힌 채 파냈을 때도 여전히 움직이고 있었다. 이를 만든 공방은 외피 어디에도 표시를 남기지 않았다.',
-  'hudChrome.collections.buddyLore.spider':
-    '망령숲의 직조자로, 손바닥만 한 크기에, 자기가 담긴 배낭이라면 어디든 새로 꾸며 놓는다. 그 거미줄은 대신 들어간 실보다 질기다.',
-  'hudChrome.collections.buddyLore.stag':
-    '상록 정원의 혈통으로, 관리인들이 예전에 타던 큰 사슴에서 대를 이어 작게 길러낸 것이다. 손을 들면 여전히 고개를 숙이는데, 이 짐승 자신보다 오래된 버릇이다.',
-  'hudChrome.collections.buddyLore.tiger':
-    '야자 해안의 줄무늬를 지녔으나 야자 해안을 본 적 없는 짐승으로, 옛 동물원이 문을 닫은 뒤로 이 혈통은 줄곧 사육되어 왔다. 오직 호루라기에만 응하고 그 밖의 어떤 것에도 응하지 않는다.',
-  'hudChrome.collections.buddyLore.triple_t':
-    '무언가가 셋인지, 한 가지가 세 번 겹친 것인지. 증언마다 말이 다르고, 정작 이 생물은 셀 수 있을 만큼 가만히 있어 주지 않는다.',
-  'hudChrome.collections.buddyLore.trollface':
-    '망령숲이 내놓고는 도로 거두어들이려 하지 않은, 히죽 웃는 것. 이를 설명하려는 시도는 매번 설명하던 사람이 웃음을 터뜨리고 포기하는 것으로 끝난다.',
-  'hudChrome.collections.buddyLore.tuskhorn_boar':
-    '쏜피크 고지의 혈통으로, 울타리를 무너뜨리지 못하는 멧돼지를 원한 목동들이 다리를 짧게 개량한 것이다. 성질은 그대로 남았다.',
   'entities.mobs.buddy_emberfall_phoenix.name': '잿불낙하 불사조',
-  'entities.items.whistle_emberfall_phoenix.name': '잿불낙하 불사조의 호루라기',
-  'hudChrome.collections.buddyLore.emberfall_phoenix':
-    '가을마다 타들어가 한 점 잉걸불이 되었다가, 봄이면 제 재에서 다시 솟아오른다. 누구에게 물어도 할 수 있는 말은 그것이 전부다. 둥지를 찾아낸 사람도 없고, 같은 개체를 두 번 붙잡은 사람도 없다.',
   'hudChrome.collections.state.pending': '무언가가 당신을 따라옵니다',
   'hudChrome.collections.presenceDefault': '무언가가 당신을 지켜보는 기척이 느껴집니다.',
   'hudChrome.collections.revealed': '{name}이(가) 당신을 따르기로 했습니다.',
-  'hudChrome.collections.cosmeticUnlocked': '{name}의 새로운 모습: {look}.',
   'hudChrome.collections.presence.ember_fox':
     '작고 따뜻한 무언가가 당신 뒤를 살금살금 따라오고 있습니다.',
   'hudChrome.collections.presence.moss_hare':
@@ -19988,46 +19913,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.collections.presence.phantom': '당신 뒤의 공기가 조금 지나치게 고요합니다.',
   'hudChrome.collections.presence.emberfall_phoenix':
     '재에 묻은 불처럼 은근한 온기가 당신의 등 뒤에 내려앉습니다.',
-  'hudChrome.collections.cosmetic.crystal_lich_frostbound': '서리결속',
-  'hudChrome.collections.cosmetic.crystal_lich_voltaic': '전광',
-  'hudChrome.collections.cosmetic.forgemaw_ashen': '잿빛',
-  'hudChrome.collections.cosmetic.forgemaw_whitehot': '백열',
-  'hudChrome.collections.cosmetic.stag_acorn': '도토리 왕관',
-  'hudChrome.collections.cosmetic.stag_gilded': '금박',
-  'hudChrome.collections.cosmetic.moss_hare_verdant': '신록',
-  'hudChrome.collections.cosmetic.proud_grunt_warlord': '전쟁군주',
   'hudChrome.collections.actions.summon': '소환',
   'hudChrome.collections.actions.dismiss': '해제',
-  'hudChrome.collections.actions.wear': '착용',
-  'hudChrome.collections.actions.remove': '벗기기',
-  'hudChrome.collections.looks.title': '모습',
-  'hudChrome.collections.looks.unlocked': '해금됨',
-  'hudChrome.collections.looks.locked': '잠김',
-  'hudChrome.collections.looks.worn': '착용 중',
-  'hudChrome.collections.looks.none': '이 동료에게는 아직 준비된 모습이 없습니다',
-  'hudChrome.collections.source.bossLabel': '보스 펫',
-  'hudChrome.collections.source.bossDrop': '{mob} ({location}), 처치 시 플레이어마다 {chance}%',
-  'hudChrome.collections.source.bossDropWithHeroic':
-    '{mob} ({location}), 플레이어마다 {chance}%, 영웅 난이도 {heroicChance}%',
-  'hudChrome.collections.source.bossDropHeroicOnly':
-    '{mob} ({location}), 영웅 난이도 전용, 플레이어마다 {chance}%',
-  'hudChrome.collections.source.rollNote':
-    '모든 플레이어가 각자 굴립니다. 파티원 때문에 기회를 잃는 일은 없습니다.',
-  'hudChrome.collections.source.deedLabel': '획득 조건',
-  'hudChrome.collections.source.deed': '업적: {deed}',
-  'hudChrome.collections.source.challengeLabel': '도전',
-  'hudChrome.collections.source.challengeSpeed': '전투 시작 후 {seconds}초 안에 {mob} 처치',
-  'hudChrome.collections.source.challengeDps': '전투 내내 {mob}에게 초당 {dps}의 피해를 입히기',
-  'hudChrome.collections.source.craftLabel': '제작',
-  'hudChrome.collections.source.craft': '{item} ({profession} 제작법)',
-  'hudChrome.collections.source.grantLabel': '수여',
-  'hudChrome.collections.source.grantOnly': '시즌 보상: 월간 순위표 및 최고 기록 보상',
-  'hudChrome.collections.source.tokenLabel': '토큰',
-  'hudChrome.collections.source.token': '{item}, 한 번 사용하면 동료가 따라옵니다',
-  'entities.items.charm_stag_acorn.name': '도토리 왕관 부적',
-  'entities.items.charm_stag_gilded.name': '금박 부적',
   'itemUi.kind.buddyCosmetic': '동료 외형',
-  'hudChrome.collections.cosmetic.frog_sapphire': '사파이어 개구리',
   'hudChrome.deeds.buddiesSection': '동료',
   'hudChrome.deeds.buddiesNone': '동료 없음',
   'hudChrome.deeds.buddiesEmpty': '동료를 모으면 여기서 소환할 수 있습니다.',
@@ -20611,12 +20499,13 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.cosmetics.preview': '미리 보기',
   'hudChrome.cosmetics.previewAria': '{name} 미리 보기',
   'hudChrome.cosmetics.cardAria': '{name}, {rarity}',
-  'hudChrome.cosmetics.mountsNoMount': '먼저 탈것을 얻으세요. 스킨에는 탈 대상이 필요합니다.',
+  'hudChrome.cosmetics.mountsNoMount':
+    '마구간지기 말라에게 기승을 배우면 탈것을 소환할 수 있습니다.',
   'hudChrome.cosmetics.skinsEmpty': '아직 보유한 무기 스킨이 없습니다. WOC 상점을 방문하세요.',
   'hudChrome.cosmetics.skinsApplyHint': '{type}을(를) 장착하면 이 스킨을 적용할 수 있습니다.',
   'hudChrome.cosmetics.mechEmpty': '아직 보유한 전투 메카 크로마가 없습니다.',
   'hudChrome.cosmetics.mountsIntro':
-    '탈것 스킨은 이 캐릭터가 타는 어떤 탈것 위에도 덧입혀집니다. 속도는 바뀌지 않습니다.',
+    '여기서 탈것 외형을 선택하세요. 속도는 기승 훈련으로 결정됩니다. 아무 캐릭터의 가방이나 은행에 탈것 아이템을 보관하면 계정의 모든 캐릭터가 해당 외형을 사용할 수 있습니다.',
   'hudChrome.cosmetics.mechIntro':
     '전투 메카는 이 캐릭터의 몸을 대체합니다. 한 번에 하나의 크로마만 착용합니다.',
   'hudChrome.auraTracks.mode': '켜짐',
@@ -21455,6 +21344,11 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '옭아매는 뿌리의 시전 시간이 0.5초 감소합니다. 피해를 입어도 주문 시전이 더 이상 지연되지 않습니다.',
   'entities.itemSets.vanguard_druid_balance.bonus4':
     '옭아매는 뿌리를 시전하면 이동 중에도 시전할 수 있고 이동 속도가 4초 동안 20% 증가합니다. 20초에 한 번만 발동합니다.',
+  'hudChrome.cosmetics.notCollected': '미수집',
+  'itemUi.vendor.basicRiding': '기본 기승 훈련',
+  'itemUi.vendor.advancedRiding': '고급 기승 훈련',
+  'itemUi.vendor.ridingSpeed':
+    '탈것에 탄 동안 이동 속도가 {speed}% 증가합니다. 모든 탈것에 적용됩니다.',
   'entities.letters.world_quest_reward.sender': '까마귀 우편국',
   'entities.letters.world_quest_reward.subject': '전역 퀘스트 보상',
   'entities.letters.world_quest_reward.body':
@@ -22526,9 +22420,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.skinPreview':
     '장착한 검의 모습을 바꿉니다. 계정의 모든 캐릭터에 적용됩니다. 외형 전용: 능력치 없음.',
   'hudChrome.guildHall.skinOffer': '검 외형: {skin}',
-  'hudChrome.guildHall.mountPreview':
-    '지상 탈것: 탑승 중 이동 속도 +{pct}%. 탈것 훈련이 필요합니다.',
   'hudChrome.guildHall.mountOffer': '탈것: {mount}',
+  'hudChrome.guildHall.mountPreview':
+    '계정의 모든 캐릭터가 쓰는 탈것 외형입니다. 이동 속도는 기승 훈련으로 정해집니다.',
   'hudChrome.guildHall.refused.range': '거래하려면 보급관 곁에 서세요.',
   'hudChrome.guildHall.reward.one': '등불 인장 {count}개',
   'hudChrome.guildHall.reward.few': '등불 인장 {count}개',
@@ -23714,10 +23608,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bg.flagNameAzure': '하늘빛 깃발',
   'hudChrome.bg.flagNameCrimson': '진홍 깃발',
   'hudChrome.bg.flagReturnedByLog': '{name} 님이 {team} 깃발을 반환했습니다.',
-  'hudChrome.collections.armor.mail': '사슬 방어구',
-  'hudChrome.collections.detail.vendor': '{npc} ({location}), 가격: {price}',
-  'hudChrome.collections.detail.vendorLabel': '판매자',
-  'hudChrome.collections.tabs.sets': '아이템 세트',
   'hudChrome.dungeonTracker.heroicTitle': '{name} ({difficulty})',
   'hudChrome.expeditions.leader': '공대장: {name}',
   'hudChrome.expeditions.solo': '혼자 도전',
@@ -25413,4 +25303,92 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'editor.tool.zone': '지역',
   'editor.toolGroup.world': '월드',
   'editor.weather.clear': '맑음',
+  // Zulgar's hunt rework (the sun glyphs, the Hunting Spear, The Idol Wakes):
+  // the M16 non-Latin fills of its new English.
+  'hudChrome.auraEffect.wildheart.sunstruck':
+    '빛나는 태양 문양에 그을림: 이동 속도가 {pct}% 감소합니다.',
+  'hudChrome.auraEffect.wildheart.sunstruckExposed':
+    '빛나는 태양 문양에 그을림: 받는 피해가 {pct}% 증가합니다.',
+  'hudChrome.auraEffect.wildheart.sunWary':
+    '이 효과가 끝날 때까지 어떤 태양 문양도 그를 그을릴 수 없습니다. 그동안 그가 밟은 빛나는 문양은 계속 빛납니다.',
+  'hudChrome.auraEffect.wildheart.pinned':
+    '사냥 창이 당신을 그 자리에 꿰어 고정했습니다. {every}초마다 {bleed}의 물리 피해(영웅 난이도 {heroicBleed})를 입는 출혈에 걸리며, 야생심장 파동은 어디에 서 있든 적중하고 피해가 {pulse}% 증가합니다. 아군이 {pull}초에 걸쳐 창을 뽑아 줄 수 있습니다. 도울 수 있는 사람이 아무도 없으면 직접 {wrench}초에 걸쳐 뽑으세요. {seconds}초 뒤에는 저절로 빠집니다.',
+  'hudChrome.auraEffect.wildheart.idolAwake':
+    '돌 재규어가 깨어났습니다. {every}초마다 바닥에 {warning}초 동안 경고를 띄운 뒤 테라스의 절반씩 번갈아 숨결을 내뿜습니다: 그 절반에 있는 모두에게 {min}~{max}의 자연 피해(영웅 난이도 {heroicMin}~{heroicMax})를 줍니다. 줄가르는 죽을 때까지 재규어 화신 상태를 유지하며 {seconds}초마다(영웅 난이도 {heroicSeconds}초마다) 사냥감을 바꿉니다.',
+  'hudChrome.wildheartAlert.preyAloneLine':
+    '태양 문양을 밝혀 줄 사람이 없습니다. 꺼진 문양 위에 {seconds}초 동안 서서 밝힌 뒤 줄가르를 그 위로 끌고 가세요',
+  'hudChrome.wildheartAlert.pinnedTitle': '꿰뚫려 고정됨!',
+  'hudChrome.wildheartAlert.pinnedLine':
+    '아군이 사냥 창을 뽑아 줘야 합니다. 고정된 동안 야생심장 파동의 피해가 더 커집니다',
+  'hudChrome.wildheartAlert.pinnedSelfLine':
+    '도와줄 사람이 없습니다: 야생심장 파동이 닿기 전에 직접 사냥 창을 뽑으세요',
+  'hudChrome.wildheartAlert.sunstruckTitle': '줄가르가 태양에 그을렸습니다!',
+  'hudChrome.wildheartAlert.sunstruckLine':
+    '효과가 끝날 때까지 그가 받는 피해가 {pct}% 증가합니다: 지금 가장 강한 공격을 쓰세요',
+  'hudChrome.wildheartAlert.spearTitle': '아군이 꿰뚫려 고정됐습니다!',
+  'hudChrome.wildheartAlert.spearLine': '사냥 창으로 달려가 야생심장 파동이 닿기 전에 뽑으세요',
+  'hudChrome.wildheartAlert.glyphTitle': '태양 문양을 밝히세요',
+  'hudChrome.wildheartAlert.glyphLine':
+    '꺼진 태양 문양 위에 {seconds}초 동안 서면 밝혀집니다. 줄가르가 그 위를 지나면 {duration}초 동안 받는 피해가 {pct}% 증가합니다',
+  'hudChrome.wildheartAlert.glyphLightingTitle': '태양 문양을 밝히는 중',
+  'hudChrome.wildheartAlert.glyphLightingLine':
+    '문양이 밝혀질 때까지 그 위에 머무르세요. 벗어나면 처음부터 다시 시작합니다',
+  'hudChrome.wildheartAlert.breathTitle': '우상의 숨결!',
+  'hudChrome.wildheartAlert.breathLine':
+    '돌 재규어가 테라스의 이쪽 절반에 숨결을 내뿜으려 합니다. 반대쪽 절반으로 건너가세요',
+  'hudChrome.kitUse.freeLine':
+    '창을 바닥에서 뽑아 고정된 대상을 풀어 주세요. 공격을 받아도 끊기지 않지만, 이동하거나 기절하면 끊깁니다',
+  'hudChrome.kitUse.freeKey': '{name} 뽑기',
+  'hudChrome.kitUse.freeTap': '여기를 탭해 {name}을(를) 뽑으세요',
+  'hudChrome.kitUse.freeClick': '여기를 클릭해 {name}을(를) 뽑으세요',
+  'hudChrome.kitUse.freeFar': '{range}야드 안으로 다가가 뽑으세요',
+  'hudChrome.kitUse.freeAria': '{name} 뽑기',
+  'hudChrome.kitUse.freeUsingLine':
+    '창을 뽑을 때까지 가만히 있으세요: 이동하거나 기절하면 끊깁니다',
+  'abilityUi.cast.wildheart_zulgar_hunting_spear': '사냥 창',
+  'abilityUi.cast.wildheart_zulgar_idol_wakes': '우상이 깨어나다',
+  'abilityUi.cast.kituse_wildheart_pull_spear': '창 뽑기',
+  'abilityUi.cast.wildheart_idols_breath': '우상의 숨결',
+  'abilityUi.cast.wildheart_sun_glyph_kindle': '밝히는 중',
+  'abilityUi.cast.wildheart_sun_glyph_cold': '식는 중',
+  'entities.mobs.wildheart_hunting_spear.name': '사냥 창',
+  // Choirmother Selthe's Score (the Drowned Temple alert, her ward and her
+  // broken voice, her two bars): the M16 non-Latin fills of its new English.
+  'hudChrome.templeAlert.melodyTitle': '악보',
+  'hudChrome.templeAlert.melodyLine':
+    '달 타일이 차례로 울리는 것을 지켜보세요. 다른 플레이어와 번갈아 같은 순서로 밟으세요',
+  'hudChrome.templeAlert.melodyDarkLine':
+    '타일이 어두워지기 전에 순서를 기억하세요. 다른 플레이어와 번갈아 같은 순서로 밟으세요',
+  'hudChrome.templeAlert.answerTitle': '악보에 답하세요!',
+  'hudChrome.templeAlert.answerLine':
+    '번갈아 밟으세요. {place} 표시가 있는 달 타일을 밟으세요. 진행: {total}개 중 {done}개',
+  'hudChrome.templeAlert.answerDarkLine':
+    '번갈아 기억한 순서대로 밟으세요. 같은 타일을 다시 밟으려면 먼저 내려오세요. 진행: {total}개 중 {done}개',
+  'hudChrome.templeAlert.stepOffTitle': '내려갔다가 다시 올라서세요',
+  'hudChrome.templeAlert.stepOffLine':
+    '달의 타일은 누군가 올라설 때만 울립니다. 이 타일에서 내려갔다가 다시 올라서세요',
+  'hudChrome.templeAlert.falseTitle': '틀린 음!',
+  'hudChrome.templeAlert.falseLine':
+    '그 타일은 차례가 아니었습니다. 답은 첫 번째 타일부터 다시 시작됩니다',
+  'hudChrome.templeAlert.brokenTitle': '셀세의 목소리가 갈라졌습니다!',
+  'hudChrome.templeAlert.brokenLine':
+    '효과가 끝날 때까지 받는 피해가 {pct}% 증가합니다: 지금 가장 강한 공격을 쏟아부으세요',
+  'hudChrome.templeAlert.timeAria': '{seconds}초 남음',
+  'hudChrome.auraEffect.temple.scoreWard':
+    '악보를 노래하는 중: 끝날 때까지 피해를 받지 않습니다. 노래가 끝나기 전에 울린 순서대로 달의 타일에 올라서면 그녀의 목소리가 갈라집니다. 번갈아 밟으세요. 음을 울린 뒤에는 다른 플레이어가 다음 올바른 음을 울릴 때까지 기다려야 합니다. 혼자 살아남았다면 끝까지 혼자 답할 수 있습니다. 노래가 먼저 끝나면 불협화음이 뜰에 있는 모두에게 {min}~{max}의 냉기 피해(영웅 난이도에서는 {heroicMin}~{heroicMax})를 입힙니다.',
+  'hudChrome.auraEffect.temple.brokenVoice':
+    '목소리가 갈라졌습니다: 이 효과가 끝날 때까지 받는 피해가 {pct}% 증가합니다.',
+  'abilityUi.cast.temple_score': '악보',
+  'abilityUi.cast.temple_score_answer': '악보에 답하기',
+  // The Dungeon Finder's line for Selthe's Score (M16).
+  'hudChrome.finder.mech.the_score':
+    '악보 (그녀가 두 번 달의 타일에 선율을 노래합니다: 울린 순서대로 올라서면 그녀의 목소리가 갈라집니다)',
+  'hudChrome.templeAlert.spentTitle': '다른 목소리가 답할 차례',
+  'hudChrome.templeAlert.spentLine':
+    '다른 플레이어가 다음 올바른 음을 울릴 때까지 타일을 울릴 수 없습니다. 진행: {total}개 중 {done}개',
+  'hudChrome.auraEffect.temple.spentVoice':
+    '다른 플레이어가 다음 올바른 음을 울릴 때까지 달 타일을 울릴 수 없습니다. 이 동안 타일을 밟아도 답이 초기화되거나 피해를 받지 않습니다. 해제할 수 없습니다. 같은 인스턴스에 살아 있는 플레이어가 자신뿐이거나 악보가 끝나면 사라집니다.',
+  'hudChrome.options.firstPersonBody': '몸 표시',
+  'hudChrome.options.firstPersonNoBody': '몸 숨기기',
+  'hudChrome.options.firstPersonOff': '끄기',
 };
