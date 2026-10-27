@@ -81,6 +81,17 @@ describe('Clockwork Shock Bomb ground aim over the live command path', () => {
     expect(burst.z).toBeCloseTo(-7);
   });
 
+  it('a far aim is clamped to the 30 yard throw range', () => {
+    const { server, session } = liveSetup();
+    server.handleMessage(
+      session,
+      JSON.stringify({ t: 'cmd', cmd: 'use', item: 'clockwork_shock_bomb', aim: { x: 100, z: 0 } }),
+    );
+    const burst = bombBurst(server.sim.drainEvents());
+    expect(burst.x).toBeCloseTo(30);
+    expect(burst.z).toBeCloseTo(0);
+  });
+
   it('a malformed aim falls back to the forward throw', () => {
     const { server, session } = liveSetup();
     server.handleMessage(
