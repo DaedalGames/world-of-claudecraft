@@ -192,6 +192,7 @@ import {
   consumeColdsightReadReservation,
 } from './hunter_coldsight_read';
 import { bloodhookStartError } from './hunter_fieldcraft';
+import { breakTacticalCamoOnAttack } from './hunter_lonely_soul';
 import { packCommandError } from './hunter_packlord';
 import { applyPatchUp } from './hunter_patch_up';
 import { playDeadOnCastAttempt } from './hunter_play_dead';
@@ -393,7 +394,7 @@ function hasAbilityCharge(
   return !!state && state.charges > 0;
 }
 
-type ActiveCastRestriction = 'combat' | 'instance';
+type ActiveCastRestriction = 'combat' | 'instance' | 'pet';
 
 function activeCastRestriction(
   ctx: SimContext,
@@ -406,6 +407,7 @@ function activeCastRestriction(
   if (ability.requiresOutsideInstance && instanceInfoAt(ctx, player.pos)) {
     return 'instance';
   }
+  if (ability.requiresNoPet && ctx.petOf(player.id)) return 'pet';
   return null;
 }
 
@@ -416,6 +418,8 @@ function emitActiveCastRestrictionError(
 ): void {
   if (restriction === 'combat') {
     ctx.error(playerId, "You can't do that while in combat.");
+  } else if (restriction === 'pet') {
+    ctx.error(playerId, 'You already have a pet.');
   } else {
     ctx.error(playerId, 'Leave the dungeon first.');
   }
@@ -3106,6 +3110,9 @@ function applyAbility(
   if (target && firesProjectile) {
     const isSpell = ability.school !== 'physical';
     spendAbilityCost(ctx, p, meta, res, target);
+    // A shot's effects (and the usual stealth break) wait for it to land;
+    // Tactical Camo ends on the release instead (attacking breaks it).
+    if (ctx.isHostileTo(p, target)) breakTacticalCamoOnAttack(ctx, p);
     armAbilityCooldownWithReflection(ctx, p, meta, res, togglingOff);
     res = reserveRuinousBrandCopy(ctx, p, meta, target, res);
     res = reserveShadowStilledMind(ctx, p, res);

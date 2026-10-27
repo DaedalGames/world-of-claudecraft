@@ -74,6 +74,7 @@ import {
   rangedAutoProfile,
 } from './form_swing';
 import { isTravelFormAuraKind } from './forms';
+import { breakTacticalCamoOnAttack } from './hunter_lonely_soul';
 import { tryGrantDawnsWrath } from './paladin_dawns_wrath';
 import { tryGrantSolarReprisal } from './paladin_solar_reprisal';
 import { applyRequitalAutoAttack } from './paladin_talents';
@@ -164,6 +165,7 @@ export function startAutoAttack(ctx: SimContext, pid?: number): void {
   }
   // Auto-dismount when the player is mounted and starts auto-attack.
   if (p.mountKey !== '') forceDismount(ctx, p);
+  breakTacticalCamoOnAttack(ctx, p); // attacking ends Camo on the press
   if (p.sitting) ctx.standUp(p);
   if (p.weaponStowed) drawWeapon(p);
   p.autoAttack = true;
