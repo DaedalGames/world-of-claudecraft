@@ -1321,7 +1321,10 @@ const MONOLITHS: MonolithRow[] = [
     // LOWERED 11410 -> 11401 by the Stealth Rework footprints: breakStealth moved to
     // src/sim/combat/stealth_break.ts (beside the stealth module), paying for the
     // stealthFootprints IWorld getter. wc -l, exact count.
-    ceiling: 11401,
+    // LOWERED 11401 -> 11396 by its shimmer band: the Ice Block crowd-control
+    // predicate (and the control-kind set it builds on) moved to combat/cc.ts,
+    // paying for the stealthShimmers IWorld getter. wc -l, exact count.
+    ceiling: 11396,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {

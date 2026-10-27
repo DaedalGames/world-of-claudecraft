@@ -123,6 +123,7 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   c.worldPvpInfo = null;
   c.hillInfo = null;
   c.stealthFootprints = [];
+  c.stealthShimmers = [];
   c.cardMinigameInfo = { queued: false, available: true, match: null };
   c.socialInfo = null;
   c.referralCardsState = null;

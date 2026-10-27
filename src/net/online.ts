@@ -1215,6 +1215,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   worldPvpInfo: import('../world_api').WorldPvpInfo | null = null;
   hillInfo: import('../world_api').HillInfo | null = null;
   stealthFootprints: readonly import('../world_api').VisibleFootprint[] = [];
+  stealthShimmers: readonly import('../world_api').StealthShimmer[] = [];
   // --- IWorldDungeonFinder: group-finder state, mirrored from the snapshot
   // self (`s.df` personal blob + `s.dfb` shared board, both delta-omitted: a
   // missing key keeps the prior mirror, an explicit null clears it). ---

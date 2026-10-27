@@ -658,6 +658,7 @@ export const IWORLD_MEMBERS = [
   // Stealth Rework: the enemy footprints this player can read (data, the
   // projected list; offline from the Sim, online the `sfp` snapshot suffix).
   { name: 'stealthFootprints', kind: 'data' },
+  { name: 'stealthShimmers', kind: 'data' },
   // The classic inn "Resting" state (IWorldProgressionXp): derived in both worlds.
   { name: 'resting', kind: 'data' },
   // IWorldSeating (seating.ts): sit on a piece of furniture by its seat id.
@@ -1035,8 +1036,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // The portrait menu's unappliedDungeonDifficulty (method, PR 4625) adds one
     // more: 471/140/331.
     // The Stealth Rework's stealthFootprints (data) adds one: 472/141/331.
-    expect(IWORLD_MEMBERS.length).toBe(472);
-    expect(DATA_MEMBERS.length).toBe(141);
+    // Its shimmer band's stealthShimmers (data) adds one more: 473/142/331.
+    expect(IWORLD_MEMBERS.length).toBe(473);
+    expect(DATA_MEMBERS.length).toBe(142);
     expect(METHOD_MEMBERS.length).toBe(331);
   });
   it('has no duplicate member names', () => {
@@ -1453,6 +1455,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'startWorldQuestActivity',
       'stationPlacements',
       'stealthFootprints',
+      'stealthShimmers',
       'stopAutoAttack',
       'submitLootRoll',
       'summonBuddy',
@@ -1641,6 +1644,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'spectating',
       'stationPlacements',
       'stealthFootprints',
+      'stealthShimmers',
       'talentRole',
       'talentSpec',
       'talents',
@@ -2730,6 +2734,7 @@ const FACET_WORLD_PVP = [
   'skullBagAction',
   'hillInfo',
   'stealthFootprints',
+  'stealthShimmers',
 ] as const satisfies readonly (keyof IWorldWorldPvp)[];
 type _ExhaustWorldPvp = AssertNever<
   Exclude<keyof IWorldWorldPvp, (typeof FACET_WORLD_PVP)[number]>
@@ -2894,8 +2899,9 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     // adds resting (data) and sitOnSeat (the seating facet's method).
     // Plus Lantern Hall's guildContracts and buyGuildCosmetic, the riding
     // ranks method (PR 4390) and unappliedDungeonDifficulty (PR 4625).
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(472);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(472);
+    // The Stealth Rework adds stealthFootprints and stealthShimmers (data).
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(473);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(473);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

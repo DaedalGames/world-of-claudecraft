@@ -14,8 +14,9 @@ import type { MaterialComposition } from '../sim/material_sources';
 
 import type { HillCalloutKind } from '../sim/pvp/hill_bounty_rules';
 import type { VisibleFootprint } from '../sim/stealth_footprints';
+import type { StealthShimmer } from '../sim/stealth_shimmer';
 
-export type { VisibleFootprint };
+export type { StealthShimmer, VisibleFootprint };
 
 export type WorldPvpZone = 'sanctuary' | 'contested' | 'ffa';
 
@@ -158,4 +159,11 @@ export interface IWorldWorldPvp {
    *  player; online ClientWorld mirrors the server's `sfp` snapshot suffix
    *  (absent means none). Empty in the common case. */
   readonly stealthFootprints: readonly VisibleFootprint[];
+  /** Stealth Rework: the shimmers this player gets from ENEMY stealthers just
+   *  past the detection cone's spot radius (out to twice it; see
+   *  sim/stealth_shimmer.ts). Rounded positions with a fade, no id: not an
+   *  entity, so never targetable. Offline the Sim projects them for the
+   *  primary player; online ClientWorld mirrors the server's `ssh` snapshot
+   *  suffix (absent means unchanged, [] clears). Empty in the common case. */
+  readonly stealthShimmers: readonly StealthShimmer[];
 }

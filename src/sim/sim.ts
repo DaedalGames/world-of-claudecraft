@@ -121,6 +121,8 @@ import {
 } from './combat/casting_lifecycle';
 import {
   hasUnbreakableMovementLock,
+  isControlAuraKind,
+  isIceBlockCrowdControlAura,
   isRooted,
   isStunned,
   isUnbreakableControlAura,
@@ -722,6 +724,7 @@ import {
   spawnOverworldSpiritHealers,
 } from './spirit';
 import { stealthFootprintsSeenBy } from './stealth_footprints';
+import { stealthShimmersSeenBy } from './stealth_shimmer';
 import { resolveStoragePrices, type StoragePrices } from './storage_prices';
 import { repairTalentLoadouts } from './talent_loadouts';
 import {
@@ -4649,6 +4652,9 @@ export class Sim {
   get stealthFootprints() {
     return stealthFootprintsSeenBy(this.ctx, this.playerId);
   }
+  get stealthShimmers() {
+    return stealthShimmersSeenBy(this.ctx, this.playerId);
+  }
   get factions(): Readonly<Record<FactionId, number>> {
     return this.primary.factions;
   }
@@ -6289,18 +6295,7 @@ export class Sim {
     return !!template && (template.canSwim === true || template.family === 'mudfin');
   }
   private isControlAura(kind: AuraKind): boolean {
-    return kind === 'stun' || kind === 'root' || kind === 'incapacitate' || kind === 'polymorph';
-  }
-  private isIceBlockCrowdControlAura(kind: AuraKind): boolean {
-    return (
-      this.isControlAura(kind) ||
-      kind === 'silence' ||
-      kind === 'blind' ||
-      kind === 'disarm' ||
-      kind === 'slow' ||
-      kind === 'lockout' ||
-      kind === 'tongues'
-    );
+    return isControlAuraKind(kind);
   }
   private isIceBlocked(target: Entity): boolean {
     return target.auras.some(
@@ -6841,7 +6836,7 @@ export class Sim {
     }
     if (
       this.isIceBlocked(target) &&
-      this.isIceBlockCrowdControlAura(aura.kind) &&
+      isIceBlockCrowdControlAura(aura.kind) &&
       aura.sourceId !== target.id &&
       !isUnbreakableControlAura(aura)
     )
