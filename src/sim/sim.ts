@@ -263,7 +263,7 @@ import * as lockpickMod from './delves/lockpick_controller';
 import * as runsMod from './delves/runs';
 import { CASCADE_SCENARIO } from './dev/cascade_playtest';
 import { DEV_SANDBOX_CFG, DEV_SANDBOX_CLASSES } from './dev/dev_sandbox_config';
-import { clearCooldownsForDev, despawnMobsForDev } from './dev_commands';
+import { despawnMobsForDev } from './dev_commands';
 import { projectOutsideDungeonDoors } from './dungeon_door_clearance';
 import { answerDungeonGuide as answerDungeonGuideImpl } from './dungeon_guide';
 import { arenaMapForSlot } from './dungeon_layout';
@@ -6075,10 +6075,7 @@ export class Sim {
       // Show-jumping race driver: per-player, server-authoritative, rng-free
       // (runs after movement so prevPos -> pos is this tick's ridden segment).
       this.ctx.tickMountRace(meta);
-      updateTimers(p);
-      // [dev] /dev god: every cooldown stays clear. Gated on devCommands like the
-      // outgoing 100x damage; draws no rng, so the tick-phase draw order is unchanged.
-      if (p.devGod && this.devCommands) clearCooldownsForDev(p, this.time);
+      updateTimers(p, this.ctx);
       updateComboExpiry(this.ctx, p);
       updateAuras(this.ctx, p);
       lap?.('p.auras');

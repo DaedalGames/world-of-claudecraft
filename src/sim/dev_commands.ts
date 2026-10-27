@@ -22,6 +22,7 @@ import {
   restoreServerTime,
   setServerTimePhase,
 } from './dev/day_night_override';
+import { clearCooldownsForDev } from './dev/dev_cooldowns';
 import { displacePlayerForDev } from './dev/dev_displace';
 import { handleDrownedTempleDevChat } from './dev/drowned_temple_dev';
 import { handleFerryDevChat } from './dev/ferry_dev';
@@ -77,7 +78,7 @@ import type { SentChat } from './sim';
 import type { SimContext } from './sim_context';
 import { bgQueueJoin, bgQueueSize, devEndBg, devStartBg } from './social/battleground';
 import { revivePlayerAt } from './spirit';
-import { type Entity, MAX_LEVEL, type RiftTier } from './types';
+import { MAX_LEVEL, type RiftTier } from './types';
 import { setupVarkhulDevRaid } from './varkhul_dev_raid';
 import { recordWeeklyPvpWin } from './weekly_rewards';
 import {
@@ -187,22 +188,6 @@ export function resetCombatForDev(ctx: SimContext, pid: number): void {
       entity.castTargetId = null;
       entity.castRemaining = 0;
       entity.castTotal = 0;
-    }
-  }
-}
-
-/** [dev] Clears every player cooldown: abilities, GCD, potion, firebottle, and charge pools. */
-export function clearCooldownsForDev(entity: Entity, time: number): void {
-  entity.cooldowns.clear();
-  entity.gcdRemaining = 0;
-  entity.potionCooldownUntil = time;
-  entity.potionCdRemaining = 0;
-  entity.firebottleCdRemaining = 0;
-  if (entity.abilityCharges) {
-    for (const state of Object.values(entity.abilityCharges)) {
-      state.charges = state.maxCharges;
-      state.recharges = [];
-      state.recharge = 0;
     }
   }
 }
