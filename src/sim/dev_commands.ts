@@ -77,7 +77,7 @@ import type { SentChat } from './sim';
 import type { SimContext } from './sim_context';
 import { bgQueueJoin, bgQueueSize, devEndBg, devStartBg } from './social/battleground';
 import { revivePlayerAt } from './spirit';
-import { MAX_LEVEL, type RiftTier } from './types';
+import { type Entity, MAX_LEVEL, type RiftTier } from './types';
 import { setupVarkhulDevRaid } from './varkhul_dev_raid';
 import { recordWeeklyPvpWin } from './weekly_rewards';
 import {
@@ -187,6 +187,22 @@ export function resetCombatForDev(ctx: SimContext, pid: number): void {
       entity.castTargetId = null;
       entity.castRemaining = 0;
       entity.castTotal = 0;
+    }
+  }
+}
+
+/** [dev] Clears every player cooldown: abilities, GCD, potion, firebottle, and charge pools. */
+export function clearCooldownsForDev(entity: Entity, time: number): void {
+  entity.cooldowns.clear();
+  entity.gcdRemaining = 0;
+  entity.potionCooldownUntil = time;
+  entity.potionCdRemaining = 0;
+  entity.firebottleCdRemaining = 0;
+  if (entity.abilityCharges) {
+    for (const state of Object.values(entity.abilityCharges)) {
+      state.charges = state.maxCharges;
+      state.recharges = [];
+      state.recharge = 0;
     }
   }
 }
@@ -1213,8 +1229,9 @@ export function handleDevChat(
         entity.profilerInvulnerable = false;
         entity.hp = entity.maxHp;
         entity.resource = entity.maxResource;
+        clearCooldownsForDev(entity, ctx.time);
       }
-      emitDevLog(ctx, pid, `[dev] God mode ${entity.devGod ? 'ON' : 'OFF'}.`);
+      emitDevLog(ctx, pid, `[dev] God mode ${entity.devGod ? 'ON' : 'OFF'} (no cooldowns).`);
     }
     return null;
   }
@@ -1510,12 +1527,7 @@ export function handleDevChat(
   }
   if (/^\/(?:dev\s+cooldowns|devcooldowns)\s*$/i.test(raw)) {
     const entity = ctx.entities.get(pid);
-    if (entity) {
-      entity.cooldowns.clear();
-      entity.gcdRemaining = 0;
-      entity.potionCooldownUntil = ctx.time;
-      entity.potionCdRemaining = 0;
-    }
+    if (entity) clearCooldownsForDev(entity, ctx.time);
     emitDevLog(ctx, pid, '[dev] Cooldowns cleared.');
     return null;
   }
