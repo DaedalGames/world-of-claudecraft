@@ -133,6 +133,10 @@ export interface LookRender {
   rampSoft: number;
   /** Meadow blade-root shade multiplier (1 is shipped; lower deepens the roots). */
   bladeBase: number;
+  /** Near-field meadow shade (1 is shipped; lower darkens grass toward the camera). */
+  bladeNear: number;
+  /** Ground under the near carpet: 0 the shipped pale floor, 1 a darker meadow floor. */
+  carpetGround: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -150,6 +154,8 @@ export const STOCK_RENDER: LookRender = {
   bladeWidth: 1,
   rampSoft: 0,
   bladeBase: 1,
+  bladeNear: 1,
+  carpetGround: 0,
 };
 
 export interface ZoneLook {

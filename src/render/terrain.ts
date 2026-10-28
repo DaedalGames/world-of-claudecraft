@@ -25,6 +25,7 @@ import {
   biomeHazeUniforms,
   hasBiomeHazeField,
 } from './biome_haze_field';
+import { CARPET_GROUND_DARK, CARPET_GROUND_UNIFORM } from './blade_width_zone_core';
 import { runBoundedLane } from './build_lane_core';
 import { isCanvasDrawableImage } from './canvas_drawable';
 import { type ChunkGrid, type GroundPendingAt, orderCellsForEntry } from './chunk_residency_core';
@@ -954,7 +955,11 @@ const GRASS_PAINT_RING_GLSL = `
               uCarpetRing.z, distance(vWPos.xz, uCarpetRing.xy));
             vec3 wocPlainSample = WOC_ALB(tuv, WOC_L_GRASS) * uPlainLift;
             float wocPlainGrain = clamp(dot(wocPlainSample, vec3(0.299, 0.587, 0.114)) * 0.4 + 0.88, 0.92, 1.06);
-            grassAlb = mix(mix(vec3(0.92), grassAlb, 0.35) * wocPlainGrain, grassAlb, wocPaintT);
+            // uCarpetGround (blade_width_zone_core.ts): a zone look may swap the
+            // pale floor for a darker meadow tone; 0 is the shipped floor exactly
+            vec3 wocCarpetFloor = mix(mix(vec3(0.92), grassAlb, 0.35) * wocPlainGrain,
+              grassAlb * ${CARPET_GROUND_DARK.toFixed(2)}, uCarpetGround);
+            grassAlb = mix(wocCarpetFloor, grassAlb, wocPaintT);
           }`;
 
 // The meadow-continuum grass layer: when the ground bake exists, the grass
@@ -1451,6 +1456,7 @@ function buildSplatMaterial(
       // case is then a slight tone step under the dense carpet, never a
       // blown-out ground.
       sh.uniforms.uCarpetRing = sharedUniforms.uCarpetRing;
+      sh.uniforms.uCarpetGround = CARPET_GROUND_UNIFORM;
       sh.uniforms.uPlainLift = { value: plainGrassLift(albedo.grassMean, grassBake.mean) };
     }
     // The live terrain-detail shed level (terrain_detail_shed_core.ts), by shared reference.
@@ -1512,7 +1518,7 @@ function buildSplatMaterial(
         uniform sampler2DArray uAlb;
         uniform sampler2DArray uNrm;
         uniform sampler2D uMacro, uGroundAO;
-        ${grassBake ? 'uniform sampler2D uGrassBake;\n        uniform vec3 uCarpetRing;\n        uniform vec3 uPlainLift;' : ''}
+        ${grassBake ? 'uniform sampler2D uGrassBake;\n        uniform vec3 uCarpetRing;\n        uniform vec3 uPlainLift;\n        uniform float uCarpetGround;' : ''}
         ${hasPaint ? PAINT_LAYER_UNIFORMS_GLSL : ''}
         ${terrainReliefLevel() >= 2 ? 'uniform float uReliefSteps;' : ''}
         ${SPLAT_ALBEDO_GLSL}

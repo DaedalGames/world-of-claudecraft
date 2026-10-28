@@ -66,7 +66,7 @@ export const PALETTE_CLOUDS_GLSL = /* glsl */ `
         wocCloudOctave *= 2.0;
       }
       // Coverage: billowy masses with soft brushed edges.
-      float wocCloudMask = smoothstep(0.58, 0.63, wocCloudA);
+      float wocCloudMask = smoothstep(0.545, 0.6, wocCloudA);
       // Light: denser toward the sun means a shaded flank; thinner means lit.
       float wocCloudLit = clamp(0.55 + (wocCloudA - wocCloudB) * 7.0, 0.0, 1.0);
       float wocCloudLum = max(dot(uPalSkyHorizon.rgb, vec3(0.2126, 0.7152, 0.0722)), 1e-3);

@@ -99,6 +99,29 @@ const OAK_CROWN_PRESETS: readonly (readonly PuffLobe[])[] = [
 ];
 
 // Deterministic counter PRNG so every tree variant generates identically.
+// Bark vertex tones (multiply the bark texture): neutral grey-brown trunks.
+const BARK_TONE: readonly [number, number, number] = [0.92, 1.08, 1.3];
+const BARK_TONE_SLENDER: readonly [number, number, number] = [0.96, 1.1, 1.3];
+
+// Leaf density: the art bible's painterly canopy reads as many small leaves,
+// not a few large cards. Every crown preset's card count is multiplied by
+// LEAF_DENSITY and its card size by LEAF_SIZE (about the same canopy cover).
+const LEAF_DENSITY = 1.7;
+const LEAF_SIZE = 0.74;
+
+// Albedo lift for the barks the sculpt does not rebuild (no vertex tones):
+// the twisted and dead tree barks ship a near-black atlas that reads as ink
+// in a painterly meadow. foliage.ts multiplies the material colour by this.
+const BARK_ALBEDO_LIFT: Readonly<Record<string, number>> = {
+  Bark_TwistedTree: 2.1,
+  Bark_DeadTree: 1.6,
+};
+
+/** The colour multiplier for a foliage source material, or null to leave it. */
+export function barkAlbedoLift(materialName: string): number | null {
+  return BARK_ALBEDO_LIFT[materialName] ?? null;
+}
+
 function makeSculptRng(seed: number): () => number {
   let s = seed | 0 || 1;
   return () => {
@@ -167,9 +190,11 @@ function sculptBroadleafBark(geo: THREE.BufferGeometry, variantIdx: number): THR
     const rootAo = THREE.MathUtils.lerp(0.56, 1.0, THREE.MathUtils.smoothstep(y, -0.1, 0.65));
     const canopyShadow = THREE.MathUtils.lerp(1.0, 0.34, THREE.MathUtils.smoothstep(y, 2.35, 3.75));
     const shade = rootAo * canopyShadow;
-    const rTone = isSlender ? 0.86 : 0.78;
-    const gTone = isSlender ? 0.84 : 0.74;
-    const bTone = isSlender ? 0.8 : 0.68;
+    // Grey-brown painted bark (docs/design/art-direction.md): the tones lean
+    // green and blue so the red-brown bark texture lands on a neutral brown.
+    const rTone = isSlender ? BARK_TONE_SLENDER[0] : BARK_TONE[0];
+    const gTone = isSlender ? BARK_TONE_SLENDER[1] : BARK_TONE[1];
+    const bTone = isSlender ? BARK_TONE_SLENDER[2] : BARK_TONE[2];
     colors[i * 3] = rTone * shade;
     colors[i * 3 + 1] = gTone * shade;
     colors[i * 3 + 2] = bTone * shade;
@@ -215,9 +240,9 @@ function buildLeanBroadleafBarkInPlace(
   const isSlender = variantIdx === 1 || variantIdx === 3;
   const slim = isSlender ? 0.85 : 1.0;
   const phase = variantIdx * 1.65;
-  const rTone = isSlender ? 0.86 : 0.78;
-  const gTone = isSlender ? 0.84 : 0.74;
-  const bTone = isSlender ? 0.8 : 0.68;
+  const rTone = isSlender ? BARK_TONE_SLENDER[0] : BARK_TONE[0];
+  const gTone = isSlender ? BARK_TONE_SLENDER[1] : BARK_TONE[1];
+  const bTone = isSlender ? BARK_TONE_SLENDER[2] : BARK_TONE[2];
 
   const trunkRadial = 7;
   const trunkRings = [
@@ -432,7 +457,12 @@ function buildLeanPineBarkInPlace(geo: THREE.BufferGeometry): THREE.BufferGeomet
  * Build a Genshin Impact / Studio Ghibli style multi-dome cumulus canopy.
  */
 function buildGenshinBroadleafCanopy(variantIdx: number, lean = false): THREE.BufferGeometry {
-  const rawLobes = OAK_CROWN_PRESETS[variantIdx] ?? OAK_CROWN_PRESETS[0];
+  const presetLobes = OAK_CROWN_PRESETS[variantIdx] ?? OAK_CROWN_PRESETS[0];
+  const rawLobes = presetLobes.map((l) => ({
+    ...l,
+    cards: Math.round(l.cards * LEAF_DENSITY),
+    cardScale: l.cardScale * LEAF_SIZE,
+  }));
   const lobes = lean
     ? rawLobes.map((l) => ({
         ...l,

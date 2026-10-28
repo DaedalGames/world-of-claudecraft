@@ -132,7 +132,7 @@ const STORYBOOK_SKY = {
   band: 0.12,
 };
 const STORYBOOK_MEADOW_GRADE = {
-  exposure: 0.98,
+  exposure: 1.0,
   temperature: 0.06,
   contrast: 1.07,
   saturation: 0.98,
@@ -148,15 +148,17 @@ const STORYBOOK_MEADOW_GRADE = {
 };
 const STORYBOOK_MEADOW_RENDER = {
   rim: 0.3,
-  shadowStrength: 0.55,
+  shadowStrength: 0.8,
   meadowCoverage: 1,
-  meadowHeight: 0.6,
+  meadowHeight: 0.5,
   meadowWidth: 0.8,
   canopyLift: 1.35,
   ink: 0,
-  bladeWidth: 0.55,
+  bladeWidth: 0.45,
   rampSoft: 0.8,
   bladeBase: 0.55,
+  bladeNear: 0.54,
+  carpetGround: 1,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
@@ -197,7 +199,7 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
         dirt: 0xa88c62,
         sand: 0xddcca0,
       },
-      fog: { color: 0x9fbde8, near: 60, far: 520 },
+      fog: { color: 0xa8c6ea, near: 18, far: 230 },
       light: {
         hemiSky: 0xcfe2f6,
         hemiGround: 0x6e8a50,

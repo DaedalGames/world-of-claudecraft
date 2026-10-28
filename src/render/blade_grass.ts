@@ -19,6 +19,8 @@ import { buildBladeSectorPool } from './blade_grass_sector_pool';
 import {
   BLADE_BASE_GLSL,
   BLADE_BASE_UNIFORM,
+  BLADE_NEAR_GLSL,
+  BLADE_NEAR_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
 } from './blade_width_zone_core';
@@ -347,6 +349,7 @@ export function buildBladeGrass(
     attachGrassInteractionUniforms(sh.uniforms);
     sh.uniforms.uBladeWidth = BLADE_WIDTH_UNIFORM;
     sh.uniforms.uBladeBase = BLADE_BASE_UNIFORM;
+    sh.uniforms.uBladeNear = BLADE_NEAR_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -357,7 +360,8 @@ export function buildBladeGrass(
         uniform vec4 uGrassWake;
         attribute vec3 aBladeSide;
         uniform float uBladeWidth;
-        uniform float uBladeBase;`,
+        uniform float uBladeBase;
+        uniform float uBladeNear;`,
       )
       .replace(
         '#include <color_vertex>',
@@ -381,6 +385,7 @@ export function buildBladeGrass(
             distance(bgOrigin, cameraPosition));
           ${bladeSwayGlsl(classicSway)}
           ${grassBladeInteractionGlsl()}
+          ${BLADE_NEAR_GLSL}
         #endif`,
       );
     sh.vertexShader = patchConstantUpNormalVertexShader(sh.vertexShader);

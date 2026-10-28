@@ -1432,6 +1432,8 @@ const RENDER_PURE_CORES = [
   'src/render/blade_width_zone_core.ts',
   // The per-zone cel ramp softness a zone look writes (cel_shading.ts binds it).
   'src/render/cel_ramp_soft_zone_core.ts',
+  // Cosmetic meadow stone placement (meadow_stones.ts paints it).
+  'src/render/meadow_stones_core.ts',
   'src/render/post_bloom_shader_core.ts',
   'src/render/dynamic_resolution_core.ts',
   'src/render/post_plan_core.ts',

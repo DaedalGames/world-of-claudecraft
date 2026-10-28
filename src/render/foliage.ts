@@ -107,6 +107,7 @@ import {
 } from './foliage_shadow_core';
 import { foliageShoreSkip } from './foliage_shore_gate_core';
 import {
+  barkAlbedoLift,
   foliageMeshBoundsOr,
   foliageSpotsBounds,
   recordFoliageMeshBounds,
@@ -146,6 +147,7 @@ import {
 } from './ground_decor_prewarm';
 import { ghostHideGeometry, withInstancedDitherFade } from './instanced_dither_fade';
 import { InstancedOccluderGhosts } from './instanced_occluder_ghosts';
+import { buildMeadowStones } from './meadow_stones';
 import {
   advanceInstanceCountInto,
   farFieldDensityFractionForValues,
@@ -994,6 +996,8 @@ function foliageMaterial(
     mat.emissiveMap = std.map;
     mat.emissive.setRGB(...CANOPY_EMISSIVE_FLOOR);
   }
+  const barkLift = barkAlbedoLift(src.name);
+  if (barkLift) (mat as THREE.MeshStandardMaterial).color.multiplyScalar(barkLift);
   applyInstanceCollapse(mat, role);
   // Trunks take the bark family, the shared boulder fields a stronger stone;
   // leaf/flower/mushroom names return null so canopies stay clean. Applied
@@ -3514,6 +3518,7 @@ export function buildFoliage(seed: number, webgl?: THREE.WebGLRenderer): Foliage
   const session = webgl ? createImpostorSession() : null;
   buildTrees(group, seed, bucketMeshes, treeHideables, session);
   buildDressing(group, seed, bucketMeshes, session);
+  group.add(buildMeadowStones(seed));
   // The sprite swap law engages only once sprite meshes really exist: if the
   // bake throws (a grown kit overflowing the atlas, a lost context) the far
   // field falls back to the lean law instead of collapsing real trees with
