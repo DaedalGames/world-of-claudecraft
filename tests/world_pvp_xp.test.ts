@@ -114,11 +114,12 @@ describe('World PvP XP bonus', () => {
   it('applies the reputation bonus before the standing cap clamps it', () => {
     const { sim, pid, meta } = fixture(MAX_LEVEL);
     sim.setWorldPvpFlag(true, pid);
-    meta.factions.rift_watch = maxStandingForLevel(MAX_LEVEL) - 50;
+    // 105 headroom: the unboosted 100 would fit, the boosted 110 is clamped.
+    meta.factions.rift_watch = maxStandingForLevel(MAX_LEVEL) - 105;
     const result = awardFactionReputation(meta, 'rift_watch', 100, MAX_LEVEL, {
       worldPvpBonus: true,
     });
-    expect(result.gained).toBe(50);
+    expect(result.gained).toBe(105);
     expect(result.capped).toBe(true);
     expect(meta.factions.rift_watch).toBe(maxStandingForLevel(MAX_LEVEL));
   });

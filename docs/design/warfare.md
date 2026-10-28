@@ -1023,8 +1023,10 @@ authored, which is why Thornhide appears last there and fourth in the shop.
 
 ## World PvP flag rewards
 
-Keeping `/pvp` on grants 10% more XP, including lifetime XP, with no faction
-reputation bonus. XP multiplies before rested kill XP and rounds down to whole
+Keeping `/pvp` on grants 10% more XP, including lifetime XP, and 10% more
+faction reputation from world quests, the weekly commendation and clue hunts.
+Honor, faction currency and Renown are not boosted. XP multiplies before rested
+kill XP, reputation before the standing cap, and both round down to whole
 points. Turning PvP off stops the bonus immediately, including during disarm.
 Automatically raised flags receive the same rewards while armed. Played-time
 progress counts while alive in the open world and while seated in battleground
