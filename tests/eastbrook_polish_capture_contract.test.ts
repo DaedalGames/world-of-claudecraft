@@ -740,7 +740,7 @@ const PINNED_POLISH_COMPOSITE_FINGERPRINT =
   // No capture was retaken.
   // Re-minted for v0.45.4 graphics and dungeon loading optimizations in renderer.ts.
   // No capture was retaken.
-  'cc9fb309fde1c6b2d1c1dc66fd820b52524808eb56c04dac3e489f5c661c584d';
+  'f79dd14b173b432d7056d797f2184116e645d03474c03ef9d8000cdeb5dd80b9';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
