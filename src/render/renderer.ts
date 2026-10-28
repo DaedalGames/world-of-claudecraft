@@ -862,7 +862,11 @@ import {
   lookAtFrozen,
   refreshFrozenWorldMatrix,
 } from './static_matrix';
-import { buildStaticWorldFeatures, updateSetPieceOccluders } from './static_world_features';
+import {
+  buildStaticWorldFeatures,
+  buildZoneStaticFeatures,
+  updateSetPieceOccluders,
+} from './static_world_features';
 import { buildStationProps } from './stations';
 import { createStepSmooth, type StepSmoothState, stepSmoothHeight } from './step_smooth_core';
 import { buildStreetlamps, type StreetlampsView } from './streetlamps';
@@ -1056,7 +1060,7 @@ const VIEW_COMPILE_GATE_MAX_MS = 1500;
 // Textures per zone-prewarm upload unit: small enough that one grant's
 // decode+upload stays well under a frame, large enough not to double the
 // idle-slot count for texture-light children.
-const PREWARM_TEXTURE_UNIT_BATCH = 2;
+const PREWARM_TEXTURE_UNIT_BATCH = 1;
 // Reserve at the tail of the view-build budget so the compile + final-frame
 // steps always start before the prewarm deadline (runEntry skips late entries).
 const PREWARM_BUILD_RESERVE_MS = 1000;
@@ -2676,17 +2680,9 @@ export class Renderer {
     // The light budget must exist BEFORE any attachZoneFeature call: a static
     // feature that ships glowLights pushes into it during the loop below.
     this.fireLights = props.fireLights;
-    // World-spanning modeled dressing, all static: the Duskfall cave mouths
-    // plus static_world_features.ts (lake flora, the Farshore's palm strand,
-    // the Sanctum's Seal Gate). Attached like the per-zone features so the
-    // distance cull applies: the gates and the palm strand have compact
-    // footprints, and water flora registers one cull child per zone.
     this.hollowGates = buildHollowGates(this.sim.cfg.seed);
-    for (const staticFeature of [
-      this.hollowGates,
-      ...buildStaticWorldFeatures(this.sim.cfg.seed),
-    ]) {
-      this.attachZoneFeature(staticFeature);
+    for (const f of [this.hollowGates, ...buildStaticWorldFeatures(this.sim.cfg.seed)]) {
+      this.attachZoneFeature(f);
     }
     this.flames = props.flames;
     this.windmillFans = props.windmillFans;
@@ -4319,6 +4315,9 @@ export class Renderer {
         break;
       default:
         break;
+    }
+    for (const f of buildZoneStaticFeatures(zone.biome, this.sim.cfg.seed)) {
+      this.attachZoneFeature(f);
     }
   }
 
