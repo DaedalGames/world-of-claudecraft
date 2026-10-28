@@ -55,7 +55,8 @@ export class GuildHallWireState extends LanceWireState {
     const changed = super.applyQuestSelfSnapshot(self, simTime);
     // delta key: absent keeps the mirror
     if (self.gcon === undefined) return changed;
-    const sealsBefore = this.guildContracts.seals;
+    // a mirror built without its field initializers (a bare test client) has no board yet
+    const sealsBefore = this.guildContracts?.seals ?? 0;
     this.guildContracts = decodeGuildContractsWire(self.gcon);
     // a seals move no longer echoes through the inventory: repaint balance-priced windows
     return this.guildContracts.seals !== sealsBefore || changed;
