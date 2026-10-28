@@ -3898,7 +3898,8 @@ export class Renderer {
 
   async prewarmZoneAt(x: number, z: number, opts?: { background?: boolean }): Promise<void> {
     if (this.shutdownStarted) return;
-    const zoneId = this.zoneIdAt(x, z);
+    const dungeon = dungeonAt(x);
+    const zoneId = dungeon ? `dungeon:${dungeon.interior}` : this.zoneIdAt(x, z);
     if (zoneId === null || this.prewarmedZonePrograms.has(zoneId)) return;
     const pending = this.pendingZonePrewarms.get(zoneId);
     if (pending) return pending;
@@ -3906,8 +3907,8 @@ export class Renderer {
       const zone = zoneAt(x, z);
       const deadline = performance.now() + 5000;
       const t0 = performance.now();
-      const mobPrewarm = buildEntityPrewarmGroup(this.zonePrewarmHost(), zone);
-      const npcPrewarm = buildNpcPrewarmGroup(this.zonePrewarmHost(), zone, deadline);
+      const mobPrewarm = buildEntityPrewarmGroup(this.zonePrewarmHost(), zone, dungeon?.interior);
+      const npcPrewarm = buildNpcPrewarmGroup(this.zonePrewarmHost(), zone, deadline, !!dungeon);
       const mobGroup = mobPrewarm.group;
       const npcGroup = npcPrewarm.group;
       // Hide before scene attachment. The shared GPU queue may be occupied by
