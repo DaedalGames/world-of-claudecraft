@@ -98,6 +98,12 @@ const PET_PULL_SCAN = 20;
 const PET_OWNER_IDLE_TICKS = 1200;
 
 export function updatePet(ctx: SimContext, pet: Entity): void {
+  // Assist's cast record lasts for the fight it opened (pet/pet_assist.ts). Ahead
+  // of every early-out, so a vehicle ride or a stun never leaves a gap in the checks.
+  const assistOwner = pet.ownerId !== null ? ctx.entities.get(pet.ownerId) : undefined;
+  if (assistOwner) {
+    expireStalePetAssistCast(assistOwner, ctx.players.get(assistOwner.id), ctx.tickCount);
+  }
   if (pet.ownerId !== null && ctx.players.get(pet.ownerId)?.vehicle) {
     pet.targetId = null;
     pet.autoAttack = false;
@@ -146,8 +152,6 @@ export function updatePet(ctx: SimContext, pet: Entity): void {
   const travelling = ownerIsMounted(owner);
   if (!travelling) pullNearbyMobs(ctx, pet);
 
-  // Assist's cast record lasts for the fight it opened (pet/pet_assist.ts).
-  expireStalePetAssistCast(owner, ctx.players.get(owner.id), ctx.tickCount);
   let target = pet.aggroTargetId !== null ? (ctx.entities.get(pet.aggroTargetId) ?? null) : null;
   // isEvadingWildMob (mob/evade_immunity.ts) drops a mob mid-evade (leashed home,
   // walking back to spawn) exactly like dealDamage already voids any hit on one:

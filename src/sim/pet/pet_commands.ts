@@ -1084,4 +1084,6 @@ export interface PetOwnerRuntimeState {
   petAssistTargetId?: number | null;
   // Tick of that cast, so the record can expire once its fight is over.
   petAssistCastTick?: number;
+  // Last tick a pet checked that record for expiry (pet/pet_assist.ts).
+  petAssistCheckTick?: number;
 }

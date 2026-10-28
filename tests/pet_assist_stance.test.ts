@@ -180,17 +180,26 @@ describe('an assisting pet in the sim', () => {
     expect(pet.aggroTargetId).toBeNull();
   });
 
-  it('keeps an opener while it is still in flight, before the owner is in combat', () => {
+  // One pet tick per sim tick, the way locomotion drives a live pet.
+  function stepPet(sim: Sim, pet: Entity, ticks: number): void {
+    for (let i = 0; i < ticks; i++) {
+      sim.tickCount += 1;
+      updatePet(sim.ctx, pet);
+    }
+  }
+
+  it('keeps an opener through the 2 sec grace before combat registers, then drops it', () => {
     const { sim, pid, owner, pet, a, meta } = setup();
     owner.targetId = a.id;
     owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
     sim.castAbility('raptor_strike', pid);
     owner.inCombat = false; // the hit has not registered combat yet
     owner.castingAbility = null;
-    sim.tickCount += 1;
-    updatePet(sim.ctx, pet);
+    pet.petMode = 'passive'; // hold the pet back so only the record is under test
+    stepPet(sim, pet, 40);
     expect(meta.petAssistTargetId).toBe(a.id);
-    expect(pet.aggroTargetId).toBe(a.id);
+    stepPet(sim, pet, 1);
+    expect(meta.petAssistTargetId ?? null).toBeNull();
   });
 
   it('keeps the cast through a mid-fight target switch while the owner stays in combat', () => {
@@ -198,13 +207,32 @@ describe('an assisting pet in the sim', () => {
     meta.petAssistTargetId = a.id;
     meta.petAssistCastTick = sim.tickCount;
     owner.inCombat = true;
-    sim.tickCount += 400;
     owner.targetId = b.id;
-    updatePet(sim.ctx, pet);
+    stepPet(sim, pet, 400);
     expect(pet.aggroTargetId).toBeNull();
     owner.targetId = a.id;
-    updatePet(sim.ctx, pet);
+    stepPet(sim, pet, 1);
     expect(pet.aggroTargetId).toBe(a.id);
+  });
+
+  it('forgets the cast across a stretch with no pet ticking, even if the owner is back in combat', () => {
+    const { sim, pid, owner, pet, a, meta } = setup();
+    owner.targetId = a.id;
+    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
+    sim.castAbility('raptor_strike', pid);
+    owner.inCombat = true;
+    stepPet(sim, pet, 1);
+    expect(meta.petAssistTargetId).toBe(a.id);
+
+    // The pet dies in the wipe: no pet ticks while the owner runs back. They are
+    // already in a new fight on the same boss when the pet is revived.
+    pet.aggroTargetId = null;
+    sim.tickCount += 600;
+    owner.inCombat = true;
+    owner.targetId = a.id;
+    updatePet(sim.ctx, pet);
+    expect(meta.petAssistTargetId ?? null).toBeNull();
+    expect(pet.aggroTargetId).toBeNull();
   });
 
   it('switches stance through the command, and refuses an unknown one', () => {

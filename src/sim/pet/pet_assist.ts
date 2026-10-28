@@ -50,15 +50,26 @@ export function notePetAssistCast(
 /** Forget the recorded cast once its fight is over: the owner is out of combat,
  *  not casting, and past the opener grace. A world boss resets on a wipe without
  *  dying and keeps its id, so a record that outlived the fight let a plain
- *  reselect send the pet in. Run every pet tick, before the pet picks a target. */
+ *  reselect send the pet in. Run every pet tick, before the pet picks a target.
+ *
+ *  Only a ticking pet runs this, so a gap in the checks (the pet dead, dismissed,
+ *  stunned, or the owner in a vehicle) is read as "the fight may have ended":
+ *  without it, a pet revived straight into a NEW fight on the same boss would
+ *  find the old record still standing. */
 export function expireStalePetAssistCast(
   owner: Pick<Entity, 'inCombat' | 'castingAbility'>,
-  meta: Pick<PlayerMeta, 'petAssistTargetId' | 'petAssistCastTick'> | undefined,
+  meta:
+    | Pick<PlayerMeta, 'petAssistTargetId' | 'petAssistCastTick' | 'petAssistCheckTick'>
+    | undefined,
   tickCount: number,
 ): void {
-  if (!meta || meta.petAssistTargetId == null) return;
-  if (owner.inCombat || owner.castingAbility) return;
+  if (!meta) return;
+  const lastCheck = meta.petAssistCheckTick;
+  meta.petAssistCheckTick = tickCount;
+  if (meta.petAssistTargetId == null) return;
   if (tickCount - (meta.petAssistCastTick ?? 0) <= PET_ASSIST_OPENER_GRACE_TICKS) return;
+  const unwatched = lastCheck === undefined || tickCount - lastCheck > 1;
+  if (!unwatched && (owner.inCombat || owner.castingAbility)) return;
   meta.petAssistTargetId = null;
 }
 
