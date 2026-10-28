@@ -49,5 +49,5 @@ line reads
 `WorldPvpInfo.rewardPause`: death, a PvE instance, or sanctuary ground. PvP-focused
 instances continue accumulating time. An older server without a pause cause falls
 back to the sanctuary rule. Title thresholds resolve from
-`WORLD_PVP_TITLE_THRESHOLDS`. The panel does not show the 10% XP and reputation
-bonus (`world_pvp_rewards_rules.ts`).
+`WORLD_PVP_TITLE_THRESHOLDS`. The bonus line reads its percent from
+`WORLD_PVP_XP_BONUS`, which a test pins equal to `WORLD_PVP_REPUTATION_BONUS`.
