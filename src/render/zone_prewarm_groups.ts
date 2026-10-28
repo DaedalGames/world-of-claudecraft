@@ -11,7 +11,6 @@ import { ALL_CLASSES, type Entity, type ZoneDef } from '../sim/types';
 import { buildAfflictionFamiliarPrewarmStandIn } from './affliction_familiar';
 import { type CharacterVisual, createCharacterVisual, visualAssetsResident } from './characters';
 import { skinCount, visualKeyFor } from './characters/manifest';
-import { dungeonMobTemplateIds } from './characters/rift_body_stream_core';
 import { characterVisualPoolKey } from './characters/visual_pool';
 import type { PooledObjectView } from './ground_object_pool';
 import { buildGroundQuestObject, prewarmFarshoreSalvageObjects } from './quest_objects';
@@ -86,7 +85,6 @@ export interface ZonePrewarmGroupHost {
 export function buildEntityPrewarmGroup(
   host: object,
   zone: ZoneDef,
-  dungeonInterior?: string,
 ): {
   group: THREE.Group;
   pooled: { key: string; visual: CharacterVisual }[];
@@ -120,12 +118,9 @@ export function buildEntityPrewarmGroup(
       place(visual.root);
     }
   };
-  // Warm only templates that can appear in this zone or dungeon interior. The
-  // per-template set persists across transitions, so shared families are paid once.
-  const templateIds = dungeonInterior
-    ? dungeonMobTemplateIds(dungeonInterior)
-    : h.templateIdsInZone(zone, 'mob');
-  for (const templateId of templateIds) {
+  // Warm only templates that can appear in this zone. The per-template set
+  // persists across transitions, so shared families are paid once per session.
+  for (const templateId of h.templateIdsInZone(zone, 'mob')) {
     if (h.prewarmedMobTemplates.has(templateId)) continue;
     const copies = PREWARM_MOB_COMMON_IDS.has(templateId) ? PREWARM_MOB_POOL_COPIES : 1;
     build(templateId, copies);
@@ -145,7 +140,6 @@ export function buildNpcPrewarmGroup(
   host: object,
   zone: ZoneDef,
   deadline: number,
-  skip = false,
 ): {
   group: THREE.Group;
   pooled: { key: string; visual: CharacterVisual }[];
@@ -160,7 +154,6 @@ export function buildNpcPrewarmGroup(
   const h = host as ZonePrewarmGroupHost;
   const group = new THREE.Group();
   const pooled: { key: string; visual: CharacterVisual }[] = [];
-  if (skip) return { group, pooled, warmed: 0, planned: 0, trimmed: false };
   const p = h.sim.player;
   group.position.set(p.pos.x, p.pos.y, p.pos.z - 24);
   setRenderCategory(group, 'prewarm');

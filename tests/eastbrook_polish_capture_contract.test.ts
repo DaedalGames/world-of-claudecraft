@@ -738,7 +738,9 @@ const PINNED_POLISH_COMPOSITE_FINGERPRINT =
   // No capture was retaken.
   // Re-minted for Low-tier outdoor night light grading in renderer.ts merged over release/v0.45.3.
   // No capture was retaken.
-  '226ef4c9e6962d8c8178bb76993eab7e200076e7c848e6ba76300410e1fa07e4';
+  // Re-minted for v0.45.4 graphics and dungeon loading optimizations in renderer.ts.
+  // No capture was retaken.
+  '22cfa1400794d3477f61fd6423f62a7e1ef8bf5d1ef9679dd979bdbc5fbff357';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
