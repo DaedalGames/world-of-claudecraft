@@ -499,8 +499,12 @@ describe('trinket aura tooltip numbers match combat', () => {
       expect(shield).toBeDefined();
       expect(cooldown).toBeDefined();
       if (!shield || !cooldown) throw new Error('protective trinket did not trigger');
-      const expected = { bastion_sigil: Math.round(p.maxHp * 0.15), referral_hollow_charm: 250 };
-      expect(shield.value).toBe(expected[itemId as keyof typeof expected] ?? 350);
+      const expected: Record<string, number> = {
+        bastion_sigil: Math.round(p.maxHp * 0.15),
+        referral_hollow_charm: 250,
+        referral_fog_charm: 350,
+      };
+      expect(shield.value).toBe(expected[itemId]);
       expect(shield.value2).toBe(0.35);
       expect(cooldown.duration).toBe(itemId === 'bastion_sigil' ? 90 : 120);
       expect(render(shield, p)).toBe(

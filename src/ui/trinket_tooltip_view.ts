@@ -123,7 +123,7 @@ function passiveLine(
       values = {
         threshold: pct(p.belowHp),
         absorb: n(lastStandAbsorb(p, viewer.maxHp)),
-        absorbPct: pct(p.absorb),
+        ...(p.flat ? {} : { absorbPct: pct(p.absorb) }),
         duration: n(p.duration),
         icd: n(p.icd),
       };
