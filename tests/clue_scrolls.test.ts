@@ -697,6 +697,25 @@ describe('the dig step (using the scroll on the spot)', () => {
     expect(ofType(evs, 'clueHuntDone')).toHaveLength(1);
   });
 
+  it('adds the 10 percent World PvP reputation bonus to the casket standing while armed', () => {
+    const sim = huntSim();
+    const meta = metaOf(sim);
+    startHunt(sim);
+    advanceTo(sim, 4);
+    sim.addItem(CLUE_SCROLL_ITEM_ID, 1);
+    placeAt(sim, DIG_SPOT.x + 2, DIG_SPOT.z - 2);
+    sim.drainEvents();
+    meta.worldPvp = { flagged: true, disarmAt: null, kills: 0, deaths: 0 };
+    const standingBefore = meta.factions?.automatons ?? 0;
+    sim.useItem(CLUE_SCROLL_ITEM_ID);
+    const boosted = Math.floor(CLUE_HUNT_STANDING * 1.1);
+    expect(boosted).toBeGreaterThan(CLUE_HUNT_STANDING);
+    expect((meta.factions?.automatons ?? 0) - standingBefore).toBe(boosted);
+    expect(ofType(sim.drainEvents(), 'loot').map((ev) => ev.text)).toContain(
+      `+${boosted} Automatons Standing.`,
+    );
+  });
+
   it('refuses off the spot, keeps the scroll on a dig, and the last step hands the casket', () => {
     const sim = huntSim();
     const meta = metaOf(sim);
