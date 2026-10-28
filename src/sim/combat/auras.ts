@@ -81,6 +81,7 @@ import { tickMendingCurrent } from './shaman_spiritmend';
 import { tickShamanTalentAura } from './shaman_talents';
 import { thundercallOnDotTick } from './shaman_thundercall_kit';
 import { stoneboundThreatMultiplier } from './shaman_warspirit';
+import { updatePvpStealthObservers } from './stealth_detection';
 import { onHotExpired, tickProcState } from './talent_procs';
 import { temporalHourglassCooldownDelta, tickTemporalHourglassHealing } from './temporal_hourglass';
 import { tickThornsCooldown } from './thorns_charge';
@@ -299,6 +300,7 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
   recordStealthFootprints(e, ctx.time); // reads last tick's cached stealth flag
   if (e.dead) {
     e.stealthed = e.auras.some((a) => a.kind === 'stealth');
+    updatePvpStealthObservers(ctx, e);
     return;
   }
   if (e.inCombat || e.onGround) {
@@ -593,4 +595,5 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
       recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance);
   }
   e.stealthed = e.auras.some((a) => a.kind === 'stealth');
+  updatePvpStealthObservers(ctx, e);
 }

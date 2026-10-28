@@ -33,6 +33,7 @@ import {
   type StealthShimmer,
   shimmerSources,
 } from '../src/sim/stealth_shimmer';
+import { hasPvpEscapeStealth } from '../src/sim/threat';
 import type { Entity } from '../src/sim/types';
 
 export const SHIMMER_WIRE_KEY = 'ssh';
@@ -43,7 +44,7 @@ export interface ShimmerSentSet {
 
 interface Pacing {
   tick: number;
-  ids: number[];
+  rows: { s: StealthShimmer; id: number }[];
 }
 
 const pacingBySession = new WeakMap<object, Pacing>();
@@ -91,22 +92,34 @@ export class StealthShimmerWire {
     this.picked.length = 0;
     this.sent = sent;
     forEachShimmer(this.world, viewer, this.candidatesFor(viewer), this.seen, this.visit);
+    const tick = this.world.tickCount;
+    const pacing = pacingBySession.get(lastSent);
+    if (pacing && tick - pacing.tick < SHIMMER_SEND_INTERVAL_TICKS) {
+      // Clear escapes immediately, but keep every other row at its LAST SENT
+      // position. One escaping source must not bypass the movement cadence for
+      // all the nearby sources. At most SHIMMER_VIEW_CAP records per session.
+      const kept = pacing.rows.filter(({ id }) => {
+        const source = this.world.entities.get(id);
+        return source && !source.dead && !hasPvpEscapeStealth(source) && !sent.has(id);
+      });
+      if (kept.length !== pacing.rows.length) {
+        const json = `[${kept.map(({ s }) => `[${s.x},${s.y},${s.z},${s.fade}]`).join(',')}]`;
+        lastSent[SHIMMER_WIRE_KEY] = json;
+        pacingBySession.set(lastSent, { tick: pacing.tick, rows: kept });
+        return `,"${SHIMMER_WIRE_KEY}":${json}`;
+      }
+    }
     let json = '[]';
     if (this.picked.length > 0) {
       this.picked.sort((a, b) => a.s.x - b.s.x || a.s.z - b.s.z || a.s.y - b.s.y);
       json = `[${this.picked.map(({ s }) => `[${s.x},${s.y},${s.z},${s.fade}]`).join(',')}]`;
     }
     if (json === prior) return '';
-    const tick = this.world.tickCount;
-    const pacing = pacingBySession.get(lastSent);
     const urgent =
-      prior === undefined ||
-      !pacing ||
-      (pacing.ids.length === 0 && this.picked.length > 0) ||
-      pacing.ids.some((id) => sent.has(id));
+      prior === undefined || !pacing || (pacing.rows.length === 0 && this.picked.length > 0);
     if (!urgent && tick - (pacing as Pacing).tick < SHIMMER_SEND_INTERVAL_TICKS) return '';
     lastSent[SHIMMER_WIRE_KEY] = json;
-    pacingBySession.set(lastSent, { tick, ids: this.picked.map((p) => p.id) });
+    pacingBySession.set(lastSent, { tick, rows: this.picked.slice() });
     return `,"${SHIMMER_WIRE_KEY}":${json}`;
   }
 

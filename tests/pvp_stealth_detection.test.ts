@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { canObserveEntity } from '../server/entity_observation';
 import { startAutoAttack } from '../src/sim/combat/auto_attack';
 import { dropTargetsOnStealth } from '../src/sim/combat/stealth';
+import { updatePvpStealthObservers } from '../src/sim/combat/stealth_detection';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { petPickTarget } from '../src/sim/pet/pet_ai';
@@ -197,6 +198,7 @@ describe('sim gates follow the same rule', () => {
   it('hiddenFromHostile allows the hysteresis margin and refuses beyond it', () => {
     const { rogue, foe } = duel();
     hide(rogue);
+    rogue.pvpStealthObservers = new Set([foe.id]);
     placeFrom(rogue, foe, 0, 5.5);
     expect(hiddenFromHostile(foe, rogue)).toBe(false);
     placeFrom(rogue, foe, 0, 6.5);
@@ -270,6 +272,84 @@ describe('entering stealth drops only the enemies that lose sight', () => {
 });
 
 describe('pet sight', () => {
+  it('never acquires an unseen rear stealther merely from the owner target ID', () => {
+    const { sim, rogue, foe } = duel();
+    const pet = createMob(sim.nextId++, MOBS.forest_wolf, 20, { ...foe.pos });
+    pet.ownerId = foe.id;
+    pet.hostile = false;
+    pet.facing = 0;
+    pet.petMode = 'assist';
+    sim.addEntity(pet);
+    hide(rogue);
+    placeFrom(rogue, pet, 0, -5.5);
+    sim.targetEntity(rogue.id, foe.id); // the wire accepts target intent, not sight
+    startAutoAttack(sim.ctx, foe.id);
+    expect(foe.autoAttack).toBe(false);
+    foe.inCombat = true; // a fight elsewhere does not grant sight either
+    sim.grid.refresh(sim.entities.values());
+    updatePvpStealthObservers(sim.ctx, rogue);
+    expect(hiddenFromHostile(foe, rogue)).toBe(true);
+    expect(petCanSeeStealthedTarget(rogue, pet)).toBe(false);
+    expect(petPickTarget(sim.ctx, pet, foe)).toBeNull();
+  });
+
+  it('holds a genuine spot through a turn, then resets after leaving and escape', () => {
+    const { sim, rogue, foe } = duel();
+    hide(rogue);
+    const refresh = () => {
+      sim.grid.refresh(sim.entities.values());
+      updatePvpStealthObservers(sim.ctx, rogue);
+    };
+    placeFrom(rogue, foe, 0, 4);
+    refresh();
+    expect(rogue.pvpStealthObservers?.has(foe.id)).toBe(true);
+    placeFrom(rogue, foe, 0, -5.5);
+    refresh();
+    expect(hiddenFromHostile(foe, rogue)).toBe(false);
+    placeFrom(rogue, foe, 0, -6.5);
+    refresh();
+    placeFrom(rogue, foe, 0, -5.5);
+    refresh();
+    expect(hiddenFromHostile(foe, rogue)).toBe(true);
+    placeFrom(rogue, foe, 0, 2);
+    refresh();
+    rogue.auras = [stealthAura('vanish')];
+    refresh();
+    expect(rogue.pvpStealthObservers).toBeUndefined();
+    rogue.auras = [stealthAura()];
+    placeFrom(rogue, foe, 0, -5.5);
+    refresh();
+    expect(hiddenFromHostile(foe, rogue)).toBe(true);
+    rogue.dead = true;
+    refresh();
+    expect(rogue.pvpStealthObservers).toBeUndefined();
+  });
+
+  it('retains a normal body seen before stealth even without a combat lock', () => {
+    const { sim, rogue, foe } = duel();
+    updatePvpStealthObservers(sim.ctx, rogue);
+    hide(rogue);
+    placeFrom(rogue, foe, 0, -5.5);
+    sim.grid.refresh(sim.entities.values());
+    updatePvpStealthObservers(sim.ctx, rogue);
+    expect(foe.targetId).toBeNull();
+    expect(hiddenFromHostile(foe, rogue)).toBe(false);
+    sim.entities.delete(foe.id);
+    sim.grid.refresh(sim.entities.values());
+    updatePvpStealthObservers(sim.ctx, rogue);
+    expect(rogue.pvpStealthObservers?.has(foe.id)).toBe(false);
+  });
+
+  it('does not bank a hostile reveal while the observer is non-hostile', () => {
+    const { sim, rogue, foe } = duel();
+    hide(rogue);
+    placeFrom(rogue, foe, 0, 4);
+    sim.grid.refresh(sim.entities.values());
+    sim.ctx.duels.clear();
+    updatePvpStealthObservers(sim.ctx, rogue);
+    expect(rogue.pvpStealthObservers?.has(foe.id)).toBe(false);
+  });
+
   it('a pet sees a stealthed player in its detection radius and nothing beyond', () => {
     const { sim, rogue, foe } = duel();
     const pet = createMob(sim.nextId++, MOBS.forest_wolf, 20, { ...foe.pos });

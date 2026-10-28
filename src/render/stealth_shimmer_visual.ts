@@ -19,6 +19,7 @@ import { attachSceneGroupGated } from './gated_scene_attach';
 import {
   type DrawnShimmer,
   SHIMMER_STRENGTH,
+  shimmerDisplayOpacity,
   shimmerShaderTime,
   stepShimmers,
 } from './stealth_shimmer_core';
@@ -77,8 +78,9 @@ void main() {
   float glintA = rim * (band * 1.2 + spark * 1.0) + 0.12;
   float total = edgeA + glintA;
   vec3 tone = (uEdge * edgeA + uColor * glintA) / max(total, 1e-4);
-  // The band fade dims toward the outer edge but never to nothing.
-  gl_FragColor = vec4(tone, clamp(total * mix(0.4, 1.0, vFade) * uStrength, 0.0, 1.0));
+  // The CPU keeps the distance floor separate from the display fade, which
+  // reaches zero at both ends of appearance/disappearance.
+  gl_FragColor = vec4(tone, clamp(total * vFade * uStrength, 0.0, 1.0));
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }`;
@@ -177,7 +179,7 @@ export class StealthShimmerVisual {
       this.position.set(d.x, Math.max(d.y, this.groundAt(d.x, d.z)) + SHIMMER_LIFT, d.z);
       this.rotation.setFromAxisAngle(this.up, d.yaw);
       this.mesh.setMatrixAt(i, this.matrix.compose(this.position, this.rotation, this.scale));
-      this.fade.setX(i, d.alpha);
+      this.fade.setX(i, shimmerDisplayOpacity(d.alpha, d.bandFade));
     }
     this.mesh.count = count;
     // The mesh, never the group: the group's visibility is the gate's reveal.

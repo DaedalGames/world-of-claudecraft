@@ -24,6 +24,7 @@ import {
   SHIMMER_FADE_OUT,
   SHIMMER_STRENGTH,
   SHIMMER_TIME_PERIOD,
+  shimmerDisplayOpacity,
   shimmerShaderTime,
   stepShimmers,
 } from '../src/render/stealth_shimmer_core';
@@ -246,6 +247,32 @@ describe('server wire', () => {
     expect(suffix()).not.toBe('');
   });
 
+  it.each(['vanish', 'greater_invisibility'])(
+    'clears %s without advancing other moving rows',
+    (escapeId) => {
+      const { sim, rogue, foe, suffix } = wired();
+      const otherId = sim.addPlayer('rogue', 'Other');
+      const other = sim.entities.get(otherId)!;
+      other.level = rogue.level;
+      other.auras = [stealthAura()];
+      other.stealthed = true;
+      // A shared hostile verdict isolates wire pacing from duel membership.
+      vi.spyOn(sim, 'isHostileTo').mockImplementation((a, b) => a.id !== b.id);
+      placeFrom(other, foe, 1, 7);
+      const decode = (s: string) => JSON.parse(s.slice(`,"${SHIMMER_WIRE_KEY}":`.length));
+      const first = decode(suffix());
+      const priorOther = first.find((r: number[]) => r[0] === Math.round(other.pos.x));
+      expect(first).toHaveLength(2);
+      sim.tickCount += 1;
+      rogue.auras = [stealthAura(escapeId)];
+      placeFrom(other, foe, 1, 8.2);
+      expect(decode(suffix())).toEqual([priorOther]);
+      expect(suffix()).toBe('');
+      sim.tickCount += SHIMMER_SEND_INTERVAL_TICKS;
+      expect(decode(suffix())[0][2]).toBe(Math.round(other.pos.z));
+    },
+  );
+
   it('orders rows by position, so row order says nothing about who is who', () => {
     const { sim, rogue, foe } = duel();
     const second = sim.entities.get(sim.addPlayer('rogue', 'Second'))!;
@@ -402,6 +429,13 @@ describe('render plan', () => {
     expect(shimmerShaderTime(SHIMMER_TIME_PERIOD * 40 + 3, false)).toBeCloseTo(3);
   });
 
+  it('keeps the distance floor while display opacity reaches zero', () => {
+    expect(shimmerDisplayOpacity(0, 0.25)).toBe(0);
+    expect(shimmerDisplayOpacity(0.125, 0.25)).toBeCloseTo(0.275);
+    expect(shimmerDisplayOpacity(0.25, 0.25)).toBeCloseTo(0.55);
+    expect(shimmerDisplayOpacity(1, 1)).toBe(1);
+  });
+
   it('fades a new shimmer in, eases a moved one, fades a lost one out', () => {
     const drawn: DrawnShimmer[] = [];
     stepShimmers(drawn, [at(10, 0, 0.75)], 0, 0, 0);
@@ -463,6 +497,9 @@ describe('visual', () => {
     expect(material.transparent).toBe(true);
     expect(material.depthWrite).toBe(false);
     expect(material.fragmentShader).toContain('pow(clamp(1.0 - facing, 0.0, 1.0)');
+    expect(material.fragmentShader).toContain('total * vFade * uStrength');
+    visual.update([at3(1, 2)], 0, 0, false, null);
+    expect(mesh.geometry.getAttribute('aFade').getX(0)).toBe(0);
     const keyBefore = threeProgramKeys(material, mesh);
     visual.update([], 0, 0.016, false, null);
     expect(mesh.count).toBe(0);

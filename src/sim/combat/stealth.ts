@@ -1,6 +1,7 @@
 import type { SimContext } from '../sim_context';
 import { hostileCanSeeStealthed, isFeigningDeath } from '../threat';
 import type { Entity } from '../types';
+import { updatePvpStealthObservers } from './stealth_detection';
 
 // When a player slips into stealth (Rogue Duskveil/Smokestep, Druid Stalk, Mage
 // Greater Invisibility, all kind:'stealth' auras) every hostile hunter that
@@ -36,6 +37,7 @@ export function dropTargetsOnStealth(
   hidden: Entity,
   alsoHidden: readonly number[] = [],
 ): void {
+  updatePvpStealthObservers(ctx, hidden);
   const hiddenIds = alsoHidden.length === 0 ? [hidden.id] : [hidden.id, ...alsoHidden];
   for (const e of ctx.entities.values()) {
     if (hiddenIds.includes(e.id)) continue;
@@ -90,5 +92,9 @@ function canStillSee(
   // Play Dead clears locks through this sweep before its own aura lands; a
   // feigning hunter is never kept, camouflaged or not.
   if (isFeigningDeath(locked)) return false;
-  return hostileCanSeeStealthed(observer, locked, true);
+  return hostileCanSeeStealthed(
+    observer,
+    locked,
+    locked.pvpStealthObservers?.has(observer.id) ?? false,
+  );
 }

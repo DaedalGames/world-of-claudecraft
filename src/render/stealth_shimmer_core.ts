@@ -28,6 +28,8 @@ export interface DrawnShimmer {
   /** Current fade (0 to 1) and the one it is heading for. */
   alpha: number;
   target: number;
+  /** Last live distance fade, retained while the display fades out. */
+  bandFade: number;
   /** Turned toward the viewer: rotation about +Y (forward is +Z). */
   yaw: number;
   /** The step that last claimed it (a stamp, so a frame allocates nothing). */
@@ -63,8 +65,18 @@ export function stepShimmers(
       best.y += (t.y - best.y) * ease;
       best.z += (t.z - best.z) * ease;
       best.target = t.fade;
+      best.bandFade = t.fade;
     } else {
-      best = { x: t.x, y: t.y, z: t.z, alpha: 0, target: t.fade, yaw: 0, claimedAt: 0 };
+      best = {
+        x: t.x,
+        y: t.y,
+        z: t.z,
+        alpha: 0,
+        target: t.fade,
+        bandFade: t.fade,
+        yaw: 0,
+        claimedAt: 0,
+      };
       drawn.push(best);
     }
     best.claimedAt = stamp;
@@ -92,6 +104,14 @@ export function stepShimmers(
     drawn[w++] = d;
   }
   return drawn;
+}
+
+/** Keep the distance-strength floor separate from appearance/disappearance.
+ *  CPU alpha tracks the distance fade, so normalize by the last live fade. */
+export function shimmerDisplayOpacity(alpha: number, bandFade: number): number {
+  if (!(bandFade > 0)) return 0;
+  const displayFade = Math.min(1, Math.max(0, alpha / bandFade));
+  return (0.4 + 0.6 * bandFade) * displayFade;
 }
 
 /** The sparkle pattern repeats on this period (seconds); time is wrapped to it

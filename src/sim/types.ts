@@ -7756,6 +7756,10 @@ export interface Entity extends ClientMirroredEntityFields {
   // prints a moving stealthed player leaves for enemies to read. Presentation
   // only (never a gameplay input, never persisted); absent when there are none.
   stealthTrail?: import('./stealth_footprints').StealthTrail;
+  // Ephemeral authoritative PvP reveal history, never saved or mirrored. A Set
+  // contains only nearby live observers; null means the last aura phase showed
+  // the normal body. Undefined is a fresh entity, death, or a full escape.
+  pvpStealthObservers?: Set<number> | null;
   // Practice bot for an authored map's objective rehearsal
   // (sim/social/map_objectives_run.ts + map_objective_bots.ts). Absent on every
   // other entity, so nothing outside that module changes behaviour for one.

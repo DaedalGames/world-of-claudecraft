@@ -120,10 +120,9 @@ const CONE_HALF_COS = Math.cos(((PVP_STEALTH_DETECTION_CONE_DEG / 2) * Math.PI) 
 // (full radius inside the cone, halved outside it). Once spotted ("held"), the reveal
 // keeps the FRONT radius whatever the arc, plus this many extra yards, so a
 // rogue on the edge, or an observer turning on the spot, never flickers in and
-// out of view. The server holds an entity the viewer already has; the sim's own
-// gates (casting, auto-attack, pet sight, the stealth-entry drop) always use
-// the held radius, so they never refuse an action against a target the client
-// is legitimately still shown.
+// out of view. The server holds an entity the viewer already has; the sim's
+// gates use authoritative nearby reveal history, never a client-supplied
+// target ID, to distinguish a genuine hold from fresh spotting.
 export const PVP_STEALTH_DETECTION_HYSTERESIS = 1;
 
 /** True when `target` stands inside `observer`'s front detection cone
@@ -178,20 +177,23 @@ export function hostileCanSeeStealthed(observer: Entity, target: Entity, held = 
 
 /** The sim's own gate for a hostile action (cast, channel, auto-attack) against
  *  `target`: Vanish hides any target, and a stealthed player is hidden once it
- *  is beyond the observer's held detection radius. */
+ *  is beyond the observer's verified detection radius. */
 export function hiddenFromHostile(observer: Entity, target: Entity): boolean {
-  return hasEscapeStealth(target) || !hostileCanSeeStealthed(observer, target, true);
+  return (
+    hasEscapeStealth(target) ||
+    !hostileCanSeeStealthed(observer, target, target.pvpStealthObservers?.has(observer.id) ?? false)
+  );
 }
 
 // What a PET perceives. A feigning hunter is never seen. A stealthed player is
 // seen through the same PvP rule as an enemy player (hostileCanSeeStealthed,
-// the pet as the observer, reveal hysteresis included because the pet holds a
-// live lock). Without a pet to measure from the answer stays the old blind one.
+// the pet as the observer, hysteresis only after a verified reveal). Without
+// a pet to measure from the answer stays the old blind one.
 export function petCanSeeStealthedTarget(target: Entity, pet?: Entity): boolean {
   if (target.auras.some((a) => a.kind === 'feign_death')) return false;
   if (!target.auras.some((a) => a.kind === 'stealth')) return true;
   if (!pet) return false;
-  return hostileCanSeeStealthed(pet, target, true);
+  return hostileCanSeeStealthed(pet, target, target.pvpStealthObservers?.has(pet.id) ?? false);
 }
 
 export function addThreat(mob: Entity, sourceId: number, amount: number): void {
