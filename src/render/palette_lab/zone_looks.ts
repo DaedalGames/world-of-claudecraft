@@ -152,7 +152,7 @@ const STORYBOOK_MEADOW_RENDER = {
   meadowCoverage: 1,
   meadowHeight: 0.6,
   meadowWidth: 0.8,
-  canopyLift: 1.5,
+  canopyLift: 1.35,
   ink: 0,
   bladeWidth: 0.55,
   rampSoft: 0.8,
