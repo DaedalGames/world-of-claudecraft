@@ -172,10 +172,10 @@ export function footprintSourceViews(
 export function forEachVisibleFootprint(
   world: FootprintWorld,
   viewer: Entity,
-  views: readonly FootprintSourceView[],
+  views: Iterable<FootprintSourceView>,
   visit: (print: StealthFootprint, view: FootprintSourceView, index: number) => void,
 ): number {
-  if (views.length === 0 || viewer.dead) return 0;
+  if (viewer.dead) return 0;
   const r = FOOTPRINT_READ_RADIUS;
   const vx = viewer.pos.x;
   const vz = viewer.pos.z;

@@ -219,6 +219,41 @@ describe('server wire', () => {
     expect(suffix()).toBe('');
   });
 
+  it('skips candidate selection while paced and re-arms even when due bytes are identical', () => {
+    const { sim, suffix } = wired();
+    const hostile = vi.spyOn(sim, 'isHostileTo');
+    expect(suffix()).not.toBe('');
+    hostile.mockClear();
+    for (let tick = 1; tick < SHIMMER_SEND_INTERVAL_TICKS; tick++) {
+      sim.tickCount = tick;
+      expect(suffix()).toBe('');
+    }
+    expect(hostile).not.toHaveBeenCalled();
+    sim.tickCount = SHIMMER_SEND_INTERVAL_TICKS;
+    expect(suffix()).toBe(''); // due, identical bytes, still a completed rebuild
+    expect(hostile).toHaveBeenCalledTimes(1);
+    hostile.mockClear();
+    sim.tickCount++;
+    expect(suffix()).toBe('');
+    expect(hostile).not.toHaveBeenCalled();
+  });
+
+  it.each(['body', 'death', 'removal'] as const)(
+    'retires cached %s rows before any paced candidate selection',
+    (reason) => {
+      const { sim, rogue, sent, suffix } = wired();
+      expect(suffix()).not.toBe('');
+      const hostile = vi.spyOn(sim, 'isHostileTo');
+      hostile.mockClear();
+      sim.tickCount++;
+      if (reason === 'body') sent.add(rogue.id);
+      else if (reason === 'death') rogue.dead = true;
+      else sim.entities.delete(rogue.id);
+      expect(suffix()).toBe(',"ssh":[]');
+      expect(hostile).not.toHaveBeenCalled();
+    },
+  );
+
   it('moves at most twice a second, but drops a shimmer at once', () => {
     const { sim, rogue, foe, sent, suffix } = wired();
     expect(suffix()).not.toBe('');

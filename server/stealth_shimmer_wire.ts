@@ -23,6 +23,10 @@
 // so a realm full of rogues costs each viewer its nearby ones, not all of them. The pacing note lives in a WeakMap on the
 // session's lastSent object, so every session reset (lastSent = {}) resets it.
 // Rows are sorted by position, so their order carries no identity.
+// A paced nonempty session checks only its eight retained rows for urgent
+// retirement, before collecting candidates or building JSON. Due rebuilds
+// advance the deadline even when their bytes are unchanged. Empty sessions
+// keep checking for eager news; lazy grid iteration stops at the output cap.
 
 import {
   forEachShimmer,
@@ -57,7 +61,6 @@ const cellKey = (cx: number, cz: number): number => cx * 1_000_003 + cz;
 export class StealthShimmerWire {
   private sources: readonly Entity[] = [];
   private grid: Map<number, Entity[]> | null = null;
-  private readonly near: Entity[] = [];
   private readonly picked: { s: StealthShimmer; id: number }[] = [];
   private sent: ShimmerSentSet = new Set<number>();
   private readonly seen = (src: Entity): boolean => this.sent.has(src.id);
@@ -89,9 +92,6 @@ export class StealthShimmerWire {
   suffixFor(viewer: Entity, lastSent: Record<string, string>, sent: ShimmerSentSet): string {
     const prior = lastSent[SHIMMER_WIRE_KEY];
     if (this.sources.length === 0 && prior === '[]') return '';
-    this.picked.length = 0;
-    this.sent = sent;
-    forEachShimmer(this.world, viewer, this.candidatesFor(viewer), this.seen, this.visit);
     const tick = this.world.tickCount;
     const pacing = pacingBySession.get(lastSent);
     if (pacing && tick - pacing.tick < SHIMMER_SEND_INTERVAL_TICKS) {
@@ -108,34 +108,38 @@ export class StealthShimmerWire {
         pacingBySession.set(lastSent, { tick: pacing.tick, rows: kept });
         return `,"${SHIMMER_WIRE_KEY}":${json}`;
       }
+      if (pacing.rows.length > 0) return '';
     }
+    this.picked.length = 0;
+    this.sent = sent;
+    forEachShimmer(this.world, viewer, this.candidatesFor(viewer), this.seen, this.visit);
     let json = '[]';
     if (this.picked.length > 0) {
       this.picked.sort((a, b) => a.s.x - b.s.x || a.s.z - b.s.z || a.s.y - b.s.y);
       json = `[${this.picked.map(({ s }) => `[${s.x},${s.y},${s.z},${s.fade}]`).join(',')}]`;
     }
-    if (json === prior) return '';
-    const urgent =
-      prior === undefined || !pacing || (pacing.rows.length === 0 && this.picked.length > 0);
-    if (!urgent && tick - (pacing as Pacing).tick < SHIMMER_SEND_INTERVAL_TICKS) return '';
-    lastSent[SHIMMER_WIRE_KEY] = json;
+    // Record due rebuilds even if their bytes did not change. Otherwise an
+    // unchanged nonempty list would remain due on every following tick.
     pacingBySession.set(lastSent, { tick, rows: this.picked.slice() });
+    if (json === prior) return '';
+    lastSent[SHIMMER_WIRE_KEY] = json;
     return `,"${SHIMMER_WIRE_KEY}":${json}`;
   }
 
   /** Every source, or with the grid, those in the viewer's 3x3 cells (a
    *  superset of everything within SHIMMER_MAX_REACH). */
-  private candidatesFor(viewer: Entity): readonly Entity[] {
-    if (!this.grid) return this.sources;
-    this.near.length = 0;
+  private *candidatesFor(viewer: Entity): Iterable<Entity> {
+    if (!this.grid) {
+      yield* this.sources;
+      return;
+    }
     const cx = cellOf(viewer.pos.x);
     const cz = cellOf(viewer.pos.z);
     for (let dx = -1; dx <= 1; dx++) {
       for (let dz = -1; dz <= 1; dz++) {
         const cell = this.grid.get(cellKey(cx + dx, cz + dz));
-        if (cell) for (const src of cell) this.near.push(src);
+        if (cell) yield* cell;
       }
     }
-    return this.near;
   }
 }

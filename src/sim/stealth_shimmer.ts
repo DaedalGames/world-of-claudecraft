@@ -103,11 +103,11 @@ export function shimmerFor(viewer: Entity, src: Entity): StealthShimmer | null {
 export function forEachShimmer(
   world: ShimmerWorld,
   viewer: Entity,
-  sources: readonly Entity[],
+  sources: Iterable<Entity>,
   seen: (src: Entity) => boolean,
   visit: (shimmer: StealthShimmer, src: Entity) => void,
 ): number {
-  if (sources.length === 0 || viewer.dead) return 0;
+  if (viewer.dead) return 0;
   const reachSq = SHIMMER_MAX_REACH * SHIMMER_MAX_REACH;
   let shown = 0;
   for (const src of sources) {
