@@ -862,11 +862,7 @@ import {
   lookAtFrozen,
   refreshFrozenWorldMatrix,
 } from './static_matrix';
-import {
-  buildStaticWorldFeatures,
-  buildZoneStaticFeatures,
-  updateSetPieceOccluders,
-} from './static_world_features';
+import { buildStaticWorldFeatures, updateSetPieceOccluders } from './static_world_features';
 import { buildStationProps } from './stations';
 import { createStepSmooth, type StepSmoothState, stepSmoothHeight } from './step_smooth_core';
 import { buildStreetlamps, type StreetlampsView } from './streetlamps';
@@ -3612,14 +3608,22 @@ export class Renderer {
 
   isZonePreparedAt(x: number, z: number): boolean {
     const dungeon = dungeonAt(x);
-    if (dungeon) return dungeonCharacterBodiesResident(dungeon.interior);
+    if (dungeon)
+      return (
+        dungeonCharacterBodiesResident(dungeon.interior) &&
+        (this.staticInteriors?.isDungeonSettled(dungeon, z) ?? true)
+      );
     const id = this.zoneIdAt(x, z);
     return id === null || this.preparedZones.has(id);
   }
 
   isZoneReadyAt(x: number, z: number): boolean {
     const dungeon = dungeonAt(x);
-    if (dungeon) return dungeonCharacterBodiesResident(dungeon.interior);
+    if (dungeon)
+      return (
+        dungeonCharacterBodiesResident(dungeon.interior) &&
+        (this.staticInteriors?.isDungeonSettled(dungeon, z) ?? true)
+      );
     const id = this.zoneIdAt(x, z);
     if (id === null) return true;
     // Sky residency is part of arrival readiness: a false routes the arrival
@@ -3733,7 +3737,10 @@ export class Renderer {
     if (this.shutdownStarted) return Promise.resolve();
     const dungeon = dungeonAt(x);
     if (dungeon) {
-      return prepareDungeonCharacterBodies(dungeon.interior).then(() => onProgress?.(1, 1));
+      return (
+        this.staticInteriors?.prepareDungeon(dungeon, z, onProgress) ??
+        prepareDungeonCharacterBodies(dungeon.interior).then(() => onProgress?.(1, 1))
+      );
     }
     const zoneId = this.zoneIdAt(x, z);
     if (zoneId === null || this.preparedZones.has(zoneId)) {
@@ -4248,76 +4255,63 @@ export class Renderer {
   }
 
   private ensureZoneFeatures(zone: ZoneDef): void {
+    const mount = <T extends { group: THREE.Group }>(
+      cur: T | null,
+      name: string,
+      build: (seed: number) => T,
+      gate = true,
+    ): T => {
+      if (cur) return cur;
+      const built = this.timedBuild(name, build);
+      this.attachZoneFeature(built, gate);
+      return built;
+    };
     switch (zone.biome) {
       case 'dusk':
-        if (!this.realmFlora) {
-          this.realmFlora = this.timedBuild('buildRealmFlora', buildRealmFlora);
-          this.attachZoneFeature(this.realmFlora);
-        }
+        this.realmFlora = mount(this.realmFlora, 'buildRealmFlora', buildRealmFlora);
         break;
       case 'ember':
-        if (!this.emberFeatures) {
-          this.emberFeatures = this.timedBuild('buildEmberFeatures', buildEmberFeatures);
-          this.attachZoneFeature(this.emberFeatures);
-        }
+        this.emberFeatures = mount(this.emberFeatures, 'buildEmberFeatures', buildEmberFeatures);
         break;
       case 'frost':
-        if (!this.frostSky) {
-          this.frostSky = this.timedBuild('buildFrostSky', buildFrostSky);
-          this.attachZoneFeature(this.frostSky, false);
-        }
+        this.frostSky = mount(this.frostSky, 'buildFrostSky', buildFrostSky, false);
         break;
       case 'fen':
-        if (!this.fenFeatures) {
-          this.fenFeatures = this.timedBuild('buildFenFeatures', buildFenFeatures);
-          this.attachZoneFeature(this.fenFeatures);
-        }
+        this.fenFeatures = mount(this.fenFeatures, 'buildFenFeatures', buildFenFeatures);
         break;
       case 'amber':
-        if (!this.amberFeatures) {
-          this.amberFeatures = this.timedBuild('buildAmberFeatures', buildAmberFeatures);
-          this.attachZoneFeature(this.amberFeatures);
-        }
+        this.amberFeatures = mount(this.amberFeatures, 'buildAmberFeatures', buildAmberFeatures);
         break;
       case 'night':
-        if (!this.nightFeatures) {
-          this.nightFeatures = this.timedBuild('buildNightFeatures', buildNightFeatures);
-          this.attachZoneFeature(this.nightFeatures);
-        }
+        this.nightFeatures = mount(this.nightFeatures, 'buildNightFeatures', buildNightFeatures);
         break;
       case 'haunt':
-        if (!this.hauntFeatures) {
-          this.hauntFeatures = this.timedBuild('buildHauntFeatures', buildHauntFeatures);
-          this.attachZoneFeature(this.hauntFeatures);
-        }
+        this.hauntFeatures = mount(this.hauntFeatures, 'buildHauntFeatures', buildHauntFeatures);
         break;
       case 'jungle':
-        if (!this.jungleFeatures) {
-          this.jungleFeatures = this.timedBuild('buildJungleFeatures', buildJungleFeatures);
-          this.attachZoneFeature(this.jungleFeatures);
-        }
+        this.jungleFeatures = mount(
+          this.jungleFeatures,
+          'buildJungleFeatures',
+          buildJungleFeatures,
+        );
         break;
       case 'garden':
-        if (!this.gardenFeatures) {
-          this.gardenFeatures = this.timedBuild('buildGardenFeatures', buildGardenFeatures);
-          this.attachZoneFeature(this.gardenFeatures);
-        }
-        if (!this.dawnholdFeatures) {
-          this.dawnholdFeatures = this.timedBuild('buildDawnholdFeatures', buildDawnholdFeatures);
-          this.attachZoneFeature(this.dawnholdFeatures);
-        }
+        this.gardenFeatures = mount(
+          this.gardenFeatures,
+          'buildGardenFeatures',
+          buildGardenFeatures,
+        );
+        this.dawnholdFeatures = mount(
+          this.dawnholdFeatures,
+          'buildDawnholdFeatures',
+          buildDawnholdFeatures,
+        );
         break;
       case 'gale':
-        if (!this.galeFeatures) {
-          this.galeFeatures = this.timedBuild('buildGaleFeatures', buildGaleFeatures);
-          this.attachZoneFeature(this.galeFeatures, false);
-        }
+        this.galeFeatures = mount(this.galeFeatures, 'buildGaleFeatures', buildGaleFeatures, false);
         break;
       default:
         break;
-    }
-    for (const f of buildZoneStaticFeatures(zone.biome, this.sim.cfg.seed)) {
-      this.attachZoneFeature(f);
     }
   }
 
@@ -6123,6 +6117,7 @@ export class Renderer {
         priority: 32,
         required: false,
         run: async () => {
+          if (p.pos.x <= DUNGEON_X_THRESHOLD) return;
           interiorPrewarmGroup = await this.ensureDungeons().buildPrewarmGroup();
           this.scene.add(interiorPrewarmGroup);
         },

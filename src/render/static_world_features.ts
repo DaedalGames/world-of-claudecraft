@@ -6,7 +6,7 @@
 // Fallen Chapel, the Drowned Temple's Moon Stair and the Wildheart Basin's
 // Jaguar Maw). A new static set piece joins this list, never a new line in
 // renderer.ts (the monolith ratchet).
-import { getActiveWorldContent, isBuiltinWorldActive } from '../sim/data';
+import { getActiveWorldContent } from '../sim/data';
 import { DROWNED_TEMPLE_ENTRANCE_DUNGEON_ID } from '../sim/drowned_temple_entrance';
 import { HOLLOW_CRYPT_ENTRANCE_DUNGEON_ID } from '../sim/hollow_crypt_entrance';
 import { objectRemoved } from '../sim/moved_objects';
@@ -26,8 +26,6 @@ import { buildWildheartBasinEntrance } from './wildheart_basin_entrance';
 // (set_piece_occluders.ts); the renderer drives the pass through this module.
 export { updateSetPieceOccluders } from './set_piece_occluders';
 
-const builtStaticBiomes = new Set<string>();
-
 function isDoorKept(dungeonId: string): boolean {
   return !objectRemoved(getActiveWorldContent().objectMoves, 'dungeonDoor', dungeonId);
 }
@@ -35,11 +33,6 @@ function isDoorKept(dungeonId: string): boolean {
 export function buildStaticWorldFeatures(seed: number) {
   // a rebuilt renderer builds its set pieces afresh: forget the old meshes
   clearSetPieceOccluders();
-  builtStaticBiomes.clear();
-  if (isBuiltinWorldActive()) {
-    return [buildWaterFlora(seed)];
-  }
-  // A Studio map may move or preview any door across custom zones: attach all kept entrances.
   return [
     buildWaterFlora(seed),
     buildFarshoreFeatures(seed),
@@ -49,33 +42,4 @@ export function buildStaticWorldFeatures(seed: number) {
     ...(isDoorKept(DROWNED_TEMPLE_ENTRANCE_DUNGEON_ID) ? [buildDrownedTempleEntrance(seed)] : []),
     ...(isDoorKept(WILDHEART_BASIN_ENTRANCE_DUNGEON_ID) ? [buildWildheartBasinEntrance(seed)] : []),
   ];
-}
-
-/** Stream biome-scoped static set pieces and dungeon entrances when their biome prepares. */
-export function buildZoneStaticFeatures(biome: string, seed: number) {
-  if (!isBuiltinWorldActive() || builtStaticBiomes.has(biome)) return [];
-  builtStaticBiomes.add(biome);
-  switch (biome) {
-    case 'meadow':
-      return isDoorKept(HOLLOW_CRYPT_ENTRANCE_DUNGEON_ID) ? [buildHollowCryptEntrance(seed)] : [];
-    case 'fen':
-      return isDoorKept(SUNKEN_BASTION_ENTRANCE_DUNGEON_ID)
-        ? [buildSunkenBastionEntrance(seed)]
-        : [];
-    case 'frost':
-      return isDoorKept(SANCTUM_SEAL_GATE_DUNGEON_ID) ? [buildSanctumSealGate(seed)] : [];
-    case 'night':
-      return isDoorKept(DROWNED_TEMPLE_ENTRANCE_DUNGEON_ID)
-        ? [buildDrownedTempleEntrance(seed)]
-        : [];
-    case 'jungle':
-      return [
-        buildFarshoreFeatures(seed),
-        ...(isDoorKept(WILDHEART_BASIN_ENTRANCE_DUNGEON_ID)
-          ? [buildWildheartBasinEntrance(seed)]
-          : []),
-      ];
-    default:
-      return [];
-  }
 }
