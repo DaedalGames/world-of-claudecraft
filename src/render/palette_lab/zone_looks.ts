@@ -120,6 +120,40 @@ const ISLAND_SKY = {
   cloudKeep: 1,
   intensity: 1.32,
 };
+// The art bible's Eastbrook (storybook-meadow): a deep painted zenith over a
+// pale horizon, with the painted cumulus layer on.
+const STORYBOOK_SKY = {
+  zenith: 0x3f86d8,
+  horizon: 0xb4d4ee,
+  amount: 0.95,
+  cloudKeep: 0.4,
+  intensity: 1.0,
+  clouds: 1,
+  band: 0.12,
+};
+const STORYBOOK_MEADOW_GRADE = {
+  exposure: 0.98,
+  temperature: 0.06,
+  contrast: 1.07,
+  saturation: 0.98,
+  vibrance: 0.12,
+  shadowTint: 0x3c5c9a,
+  shadowAmt: 0.12,
+  highlightTint: 0xffe8c0,
+  highlightAmt: 0.06,
+  lift: 0.014,
+  greenHue: -8,
+  greenSat: 0.96,
+  greenVal: 1.06,
+};
+const STORYBOOK_MEADOW_RENDER = {
+  rim: 0.3,
+  meadowCoverage: 0.8,
+  meadowHeight: 0.7,
+  meadowWidth: 1.0,
+  canopyLift: 1.5,
+  ink: 0,
+};
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
   horizon: 0xf6cf9e,
@@ -145,6 +179,35 @@ const ROSE_SKY = {
 const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
   // ---------------------------------------------------------------- vale ---
   eastbrook_vale: [
+    {
+      // The art bible's target (docs/design/art-direction.md): a painterly
+      // world under a deep painted sky, soft olive-lime grass that darkens
+      // toward the camera, blue aerial distance, and no ink on the world.
+      id: 'storybook-meadow',
+      name: 'Storybook Meadow',
+      note: 'Painterly vale: deep blue painted sky, big cumulus, olive-lime meadow, blue distance.',
+      ground: {
+        grass: 0x86b24c,
+        grassDark: 0x467838,
+        grassYellow: 0xb2c466,
+        dirt: 0xa88c62,
+        sand: 0xddcca0,
+      },
+      fog: { color: 0x9fbde8, near: 60, far: 520 },
+      light: {
+        hemiSky: 0xcfe2f6,
+        hemiGround: 0x6e8a50,
+        sun: 0xfff0d6,
+        sunScale: 1.0,
+        hemiScale: 3.85,
+        envScale: 1.5,
+      },
+      sky: STORYBOOK_SKY,
+      water: LAGOON,
+      grade: STORYBOOK_MEADOW_GRADE,
+      bloom: { strength: 0.28, threshold: 1.38 },
+      render: STORYBOOK_MEADOW_RENDER,
+    },
     {
       id: 'windrise-meadow',
       name: 'Windrise Meadow',

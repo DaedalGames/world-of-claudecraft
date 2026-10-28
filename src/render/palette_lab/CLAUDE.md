@@ -42,6 +42,15 @@ golden, moody), overridable per look:
   the carpet's culling bound by `MEADOW_MAX_STRETCH`.
 - **Canopy lift**: leaf and bush material colours (and their far sprites) times a
   factor, from the authored colour kept per material.
+- **Ink** (`../cel_ink_zone_scale_core.ts`): a multiplier on the cel post ink the
+  output grade reads every frame; 0 draws none (the art bible's painterly world).
+  The material ink on no-grade chains (iOS) keeps its baked strength.
+
+The sky carries two painterly arms too (`palette_sky.ts`), both off at stock:
+`sky.clouds` paints a cumulus deck over the gradient, and `sky.band` lowers the
+dome's horizon fog band so a deep painted sky reaches the hills. A lowered band
+re-derives the sky after the distant-zone haze tint, so that look gives the tint
+up. Eastbrook's `storybook-meadow` (the default) is the reference user.
 
 ## How a click reaches the screen (`palette_lab_runtime.ts`)
 - Shared uniform blocks, written in place: the grade (`palette_grade.ts`, its

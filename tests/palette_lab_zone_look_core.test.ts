@@ -273,3 +273,46 @@ describe('curated look data', () => {
     }
   });
 });
+
+describe('Storybook Meadow (Eastbrook, the art bible look)', () => {
+  const stock = stockLookFor('vale', WATER, BLOOM);
+
+  it('is Eastbrook Vale default day look', () => {
+    expect(DEFAULT_ZONE_SELECTIONS.eastbrook_vale).toBe('storybook-meadow');
+    expect(
+      resolveZoneLookId(
+        'eastbrook_vale',
+        DEFAULT_ZONE_SELECTIONS,
+        DEFAULT_ZONE_NIGHT_SELECTIONS,
+        true,
+      ),
+    ).toBe('storybook-meadow');
+  });
+
+  it('draws no world ink, paints cumulus and lowers the dome horizon band', () => {
+    const patch = (ZONE_LOOKS.eastbrook_vale ?? []).find((l) => l.id === 'storybook-meadow');
+    expect(patch).toBeDefined();
+    const look = applyLookPatch(stock, patch!);
+    expect(look.render.ink).toBe(0);
+    expect(look.sky.clouds).toBeGreaterThan(0);
+    expect(look.sky.band).toBeGreaterThan(0);
+    expect(look.sky.band).toBeLessThan(0.36);
+    const sky = skyUniformValues(look.sky, lookDisplayModel(look, 1));
+    expect(sky.clouds).toBe(look.sky.clouds);
+    expect(sky.band).toBe(look.sky.band);
+  });
+
+  it('leaves the stock look and every other zone default on the shipped ink, clouds and band', () => {
+    expect(stock.render.ink).toBe(1);
+    expect(stock.sky.clouds).toBe(0);
+    expect(stock.sky.band).toBe(0);
+    for (const [zoneId, lookId] of Object.entries(DEFAULT_ZONE_SELECTIONS)) {
+      if (zoneId === 'eastbrook_vale') continue;
+      const patch = (ZONE_LOOKS[zoneId] ?? []).find((l) => l.id === lookId);
+      const look = applyLookPatch(stock, patch!);
+      expect(look.render.ink, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.sky.clouds, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.sky.band, `${zoneId}/${lookId}`).toBe(0);
+    }
+  });
+});

@@ -58,6 +58,11 @@ export interface LookSky {
   cloudKeep: number;
   /** Brightness trim on the solved gradient (1 = exactly the authored colours). */
   intensity: number;
+  /** 0..1: painted cumulus layer over the gradient (palette_sky.ts); 0 is off. */
+  clouds: number;
+  /** Top of the dome horizon fog band as a view elevation (sin of the angle); 0 keeps
+   *  the shipped band. Lower lets a painted sky reach down toward the hills. */
+  band: number;
 }
 
 export interface LookWater {
@@ -120,6 +125,8 @@ export interface LookRender {
   meadowWidth: number;
   /** Tree and bush canopy brightness multiplier (1 is shipped). */
   canopyLift: number;
+  /** Multiplier on the cel look's post ink (1 is shipped, 0 draws no ink). */
+  ink: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -133,6 +140,7 @@ export const STOCK_RENDER: LookRender = {
   meadowHeight: 1,
   meadowWidth: 1,
   canopyLift: 1,
+  ink: 1,
 };
 
 export interface ZoneLook {
@@ -184,6 +192,8 @@ export const STOCK_SKY: LookSky = {
   amount: 0,
   cloudKeep: 1,
   intensity: 1,
+  clouds: 0,
+  band: 0,
 };
 
 interface StockTables {
@@ -480,7 +490,7 @@ export function isNeutralGrade(g: LookGrade): boolean {
 export function skyUniformValues(
   sky: LookSky,
   model: DisplayModel,
-): { zenith: Vec4; horizon: Vec4 } {
+): { zenith: Vec4; horizon: Vec4; clouds: number; band: number } {
   // Solved so the gradient displays as authored under the look's model.
   const z = radianceForDisplay(sky.zenith, model);
   const h = radianceForDisplay(sky.horizon, model);
@@ -488,6 +498,8 @@ export function skyUniformValues(
   return {
     zenith: [z[0] * k, z[1] * k, z[2] * k, sky.amount],
     horizon: [h[0] * k, h[1] * k, h[2] * k, sky.cloudKeep],
+    clouds: sky.clouds,
+    band: sky.band,
   };
 }
 
@@ -499,7 +511,7 @@ export type LookSelections = Record<string, string>;
 /** The chosen default look per zone (day / general). */
 export const DEFAULT_ZONE_SELECTIONS: Readonly<LookSelections> = {
   proving_shore: 'skyward-isles',
-  eastbrook_vale: 'skyward-isles',
+  eastbrook_vale: 'storybook-meadow',
   mirefen_marsh: 'jade-wetland',
   thornpeak_heights: 'alpine-clear',
   farshore_isle: 'tropic-lagoon',

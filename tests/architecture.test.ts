@@ -1426,6 +1426,8 @@ const RENDER_PURE_CORES = [
   // The opt-in cel-shading R&D look (`?cel=on`): URL parse + the toon ramp
   // patch over three's directional light loop.
   'src/render/cel_shading_core.ts',
+  // The per-zone multiplier on the cel post ink a zone look writes.
+  'src/render/cel_ink_zone_scale_core.ts',
   'src/render/post_bloom_shader_core.ts',
   'src/render/dynamic_resolution_core.ts',
   'src/render/post_plan_core.ts',
