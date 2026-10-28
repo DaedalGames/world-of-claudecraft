@@ -49,12 +49,21 @@ export function buddyEventLogArgs(ev: BuddyEvent): [string, string] {
   return [line.text, line.color];
 }
 
+/** How long a buddy banner holds the slot. A sentence needs longer than the
+ *  2600ms default, but an ambient banner (the zone name on the walk out)
+ *  parked behind it must still be fresh when the slot frees, so this stays
+ *  under AMBIENT_MAX_DEFER_MS less the advance gap (src/ui/banner_queue.ts;
+ *  pinned in tests/buddy_event_lines.test.ts). */
+export const BUDDY_BANNER_MS = 3500;
+
 /** The HUD's showBanner() arguments for one event. Queued as a 'loot'
  *  celebration (src/ui/banner_queue.ts): the presence line lands on the boss
  *  kill beside loot and deed banners, and the reveal lands on the zone-out
  *  beside the zone-name banner, so an ambient banner would be replaced
  *  before it could be read. The loot class also carries the sentence-sized
- *  banner style. */
+ *  banner style. Login reveals (buddy_drops.ts revealBuddiesOnJoin) paint
+ *  too: today that is only a companion left pending by a mid-instance
+ *  logout, and the bounded queue caps any larger catch-up burst. */
 export function buddyEventBannerArgs(ev: BuddyEvent) {
   return [
     buddyEventLine(ev).text,
@@ -62,7 +71,7 @@ export function buddyEventBannerArgs(ev: BuddyEvent) {
     undefined,
     'default',
     undefined,
-    4000,
+    BUDDY_BANNER_MS,
     null,
     'loot',
   ] as const;
@@ -70,14 +79,22 @@ export function buddyEventBannerArgs(ev: BuddyEvent) {
 
 /** The two HUD sinks one buddy event paints into. */
 export interface BuddyEventHost {
-  log(text: string, color: string): void;
+  log(
+    text: string,
+    color: string,
+    decorativeIconUrl: undefined,
+    channel: undefined,
+    announceWhenFiltered: boolean,
+  ): void;
   showBanner(...args: ReturnType<typeof buddyEventBannerArgs>): unknown;
 }
 
 /** Paint one buddy event: the chat line first (the durable record a dropped
- *  banner falls back to), then the on-screen banner. */
+ *  banner falls back to), then the on-screen banner. The banner is not a
+ *  live region, so the line is announced even when its chat channel is
+ *  filtered: a screen-reader user gets what a sighted player sees. */
 export function showBuddyEvent(host: BuddyEventHost, ev: BuddyEvent): void {
-  host.log(...buddyEventLogArgs(ev));
+  host.log(...buddyEventLogArgs(ev), undefined, undefined, true);
   host.showBanner(...buddyEventBannerArgs(ev));
 }
 
