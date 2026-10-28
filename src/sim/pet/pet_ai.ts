@@ -68,7 +68,7 @@ import {
   steadyAngleTo,
   type Vec3,
 } from '../types';
-import { petAssistKeepsTarget, petAssistTargetId } from './pet_assist';
+import { expireStalePetAssistCast, petAssistKeepsTarget, petAssistTargetId } from './pet_assist';
 import { isTameableFamily, petHeelSpeed, petOwnerScaling } from './pet_scaling';
 import { petCanForceTaunt } from './pet_taunt_gate';
 import { tryUseWarlockPetSkill } from './warlock_pet_skills';
@@ -146,6 +146,8 @@ export function updatePet(ctx: SimContext, pet: Entity): void {
   const travelling = ownerIsMounted(owner);
   if (!travelling) pullNearbyMobs(ctx, pet);
 
+  // Assist's cast record lasts for the fight it opened (pet/pet_assist.ts).
+  expireStalePetAssistCast(owner, ctx.players.get(owner.id), ctx.tickCount);
   let target = pet.aggroTargetId !== null ? (ctx.entities.get(pet.aggroTargetId) ?? null) : null;
   // isEvadingWildMob (mob/evade_immunity.ts) drops a mob mid-evade (leashed home,
   // walking back to spawn) exactly like dealDamage already voids any hit on one:

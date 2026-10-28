@@ -1082,4 +1082,6 @@ export interface PetOwnerRuntimeState {
   // The enemy this player's last committed cast was aimed at (session-only): what
   // an Assist-stance pet may attack, while it is still the active target.
   petAssistTargetId?: number | null;
+  // Tick of that cast, so the record can expire once its fight is over.
+  petAssistCastTick?: number;
 }

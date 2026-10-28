@@ -76,7 +76,7 @@ describe('the owner half: which cast an assisting pet follows', () => {
   const caster = { id: 1 } as Entity;
   const enemy = { id: 2, dead: false } as Entity;
   const ally = { id: 3, dead: false } as Entity;
-  const ctx = { isHostileTo: (_a: Entity, t: Entity) => t.id === enemy.id };
+  const ctx = { isHostileTo: (_a: Entity, t: Entity) => t.id === enemy.id, tickCount: 0 };
 
   it('records a cast on an enemy, and keeps it through a friendly or self cast', () => {
     const meta: { petAssistTargetId?: number | null } = {};
@@ -152,6 +152,59 @@ describe('an assisting pet in the sim', () => {
     owner.targetId = null;
     updatePet(sim.ctx, pet);
     expect(pet.aggroTargetId).toBeNull();
+  });
+
+  // Field report (Thunzharr, the Waking Peak): a world boss evades and resets on a
+  // wipe without dying, so it keeps its entity id. The cast record from the last
+  // attempt used to survive the wipe, and merely selecting the boss again sent the
+  // pet in with no fresh cast.
+  it('forgets the cast once the owner leaves combat, so a reselect alone does nothing', () => {
+    const { sim, pid, owner, pet, a, meta } = setup();
+    owner.targetId = a.id;
+    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
+    sim.castAbility('raptor_strike', pid);
+    expect(meta.petAssistTargetId).toBe(a.id);
+
+    // The fight ends (wipe, evade, or walking away) and the owner drops combat.
+    owner.targetId = null;
+    owner.inCombat = false;
+    owner.castingAbility = null;
+    pet.aggroTargetId = null;
+    sim.tickCount += 200;
+    updatePet(sim.ctx, pet);
+    expect(meta.petAssistTargetId ?? null).toBeNull();
+
+    // Selecting the same enemy again, without casting, leaves the pet at heel.
+    owner.targetId = a.id;
+    updatePet(sim.ctx, pet);
+    expect(pet.aggroTargetId).toBeNull();
+  });
+
+  it('keeps an opener while it is still in flight, before the owner is in combat', () => {
+    const { sim, pid, owner, pet, a, meta } = setup();
+    owner.targetId = a.id;
+    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
+    sim.castAbility('raptor_strike', pid);
+    owner.inCombat = false; // the hit has not registered combat yet
+    owner.castingAbility = null;
+    sim.tickCount += 1;
+    updatePet(sim.ctx, pet);
+    expect(meta.petAssistTargetId).toBe(a.id);
+    expect(pet.aggroTargetId).toBe(a.id);
+  });
+
+  it('keeps the cast through a mid-fight target switch while the owner stays in combat', () => {
+    const { sim, owner, pet, a, b, meta } = setup();
+    meta.petAssistTargetId = a.id;
+    meta.petAssistCastTick = sim.tickCount;
+    owner.inCombat = true;
+    sim.tickCount += 400;
+    owner.targetId = b.id;
+    updatePet(sim.ctx, pet);
+    expect(pet.aggroTargetId).toBeNull();
+    owner.targetId = a.id;
+    updatePet(sim.ctx, pet);
+    expect(pet.aggroTargetId).toBe(a.id);
   });
 
   it('switches stance through the command, and refuses an unknown one', () => {
