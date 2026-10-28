@@ -1,6 +1,8 @@
 // The chat lines for the two text-free buddy events (src/sim/types.ts
 // buddyPresence / buddyRevealed): a pure plan the HUD
 // paints, so the wording and colour are unit-pinned away from the coordinator.
+// Each line lands twice: the durable chat entry and an on-screen banner, so
+// the player actually sees it mid-fight or on the walk out.
 //
 // The presence line is the whole point of the boss-pet reveal (owner plan):
 // the player reads that something is watching them, and only on the walk out
@@ -39,10 +41,44 @@ export function buddyRevealedLine(key: string): BuddyEventLine {
   };
 }
 
+type BuddyEvent = Parameters<typeof buddyEventLine>[0];
+
 /** The HUD's log() arguments for one event: `this.log(...buddyEventLogArgs(ev))`. */
-export function buddyEventLogArgs(ev: Parameters<typeof buddyEventLine>[0]): [string, string] {
+export function buddyEventLogArgs(ev: BuddyEvent): [string, string] {
   const line = buddyEventLine(ev);
   return [line.text, line.color];
+}
+
+/** The HUD's showBanner() arguments for one event. Queued as a 'loot'
+ *  celebration (src/ui/banner_queue.ts): the presence line lands on the boss
+ *  kill beside loot and deed banners, and the reveal lands on the zone-out
+ *  beside the zone-name banner, so an ambient banner would be replaced
+ *  before it could be read. The loot class also carries the sentence-sized
+ *  banner style. */
+export function buddyEventBannerArgs(ev: BuddyEvent) {
+  return [
+    buddyEventLine(ev).text,
+    true,
+    undefined,
+    'default',
+    undefined,
+    4000,
+    null,
+    'loot',
+  ] as const;
+}
+
+/** The two HUD sinks one buddy event paints into. */
+export interface BuddyEventHost {
+  log(text: string, color: string): void;
+  showBanner(...args: ReturnType<typeof buddyEventBannerArgs>): unknown;
+}
+
+/** Paint one buddy event: the chat line first (the durable record a dropped
+ *  banner falls back to), then the on-screen banner. */
+export function showBuddyEvent(host: BuddyEventHost, ev: BuddyEvent): void {
+  host.log(...buddyEventLogArgs(ev));
+  host.showBanner(...buddyEventBannerArgs(ev));
 }
 
 /** One entry point for the HUD's event switch. */

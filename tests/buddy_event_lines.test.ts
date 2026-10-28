@@ -4,7 +4,9 @@ import {
   BUDDY_PRESENCE_COLOR,
   BUDDY_REVEAL_COLOR,
   buddyDisplayName,
+  buddyEventBannerArgs,
   buddyEventLine,
+  showBuddyEvent,
 } from '../src/ui/buddy_event_lines';
 import { setLanguage } from '../src/ui/i18n';
 
@@ -34,5 +36,37 @@ describe('buddy event chat lines', () => {
     const line = buddyEventLine({ type: 'buddyRevealed', key: 'crystal_lich' });
     expect(line.text).toBe(`${buddyDisplayName('crystal_lich')} has decided to follow you.`);
     expect(line.color).toBe(BUDDY_REVEAL_COLOR);
+  });
+});
+
+describe('buddy event on-screen banner', () => {
+  it('paints the same line as the chat entry, queued as a loot celebration', () => {
+    setLanguage('en');
+    for (const ev of [
+      { type: 'buddyPresence', key: 'ember_fox' },
+      { type: 'buddyRevealed', key: 'ember_fox' },
+    ] as const) {
+      const args = buddyEventBannerArgs(ev);
+      expect(args[0]).toBe(buddyEventLine(ev).text);
+      // 'loot', never 'ambient': the reveal lands beside the zone-name banner
+      // on the walk out, which would replace an ambient banner immediately.
+      expect(args[7]).toBe('loot');
+      expect(args[5]).toBe(4000);
+    }
+  });
+
+  it('showBuddyEvent writes the chat line first, then the banner', () => {
+    setLanguage('en');
+    const calls: string[] = [];
+    const ev = { type: 'buddyPresence', key: 'frog' } as const;
+    showBuddyEvent(
+      {
+        log: (text, color) => calls.push(`log|${text}|${color}`),
+        showBanner: (text, ...rest) => calls.push(`banner|${text}|${rest[6]}`),
+      },
+      ev,
+    );
+    const text = buddyEventLine(ev).text;
+    expect(calls).toEqual([`log|${text}|${BUDDY_PRESENCE_COLOR}`, `banner|${text}|loot`]);
   });
 });

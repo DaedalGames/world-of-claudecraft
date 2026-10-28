@@ -199,7 +199,7 @@ export type { BannerVariant } from './banner_queue';
 
 import { blockLandingLogKey } from './block_landing_feedback_core';
 import { BootcampOverlay } from './bootcamp';
-import { buddyDisplayName, buddyEventLogArgs } from './buddy_event_lines';
+import { buddyDisplayName, showBuddyEvent } from './buddy_event_lines';
 import { CalendarWindow } from './calendar_window';
 import { require2dContext } from './canvas_context';
 import { CardDuelWindow } from './card_duel_window';
@@ -11587,7 +11587,7 @@ export class Hud {
         case 'buddyPresence':
         case 'buddyRevealed':
           if (this.openWarfareVendorNpcId !== null) this.renderWarfareVendor();
-          this.log(...buddyEventLogArgs(ev));
+          showBuddyEvent(this, ev);
           break;
         case 'gatherResult':
           // Node-harvest feedback: line, cue, and rare-tier stinger (extracted
