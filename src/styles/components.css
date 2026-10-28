@@ -4037,6 +4037,12 @@
     max-height: none;
     padding: 14px;
   }
+  /* Rewards-only mode has no tab strip: block flow collapsed the header's 8px
+     margin-bottom with this body's 8px margin-top, and the flex column does not
+     collapse margins, so drop one to keep the single 8px gap. */
+  #daily-rewards-window > .panel-title + .dr-body {
+    margin-top: 0;
+  }
   .woc-store-hero {
     position: relative;
     display: grid;
