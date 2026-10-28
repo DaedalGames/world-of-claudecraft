@@ -23,11 +23,46 @@ export function sanitizeLanternSeals(raw: unknown): number {
   return Math.min(Number.MAX_SAFE_INTEGER, Math.max(0, Math.floor(raw)));
 }
 
-/** Credit `count` seals (a whole, non-negative amount; the balance saturates). */
+/** A valid earned credit cannot fit the supported scalar balance. */
+export class LanternSealsCapacityError extends RangeError {
+  constructor() {
+    super('lantern seals credit overflow');
+  }
+}
+
+/** Validate before mutation so a representational limit never burns seals. */
+function creditedLanternSeals(balance: number | undefined, count: number): number {
+  const amount = Math.max(0, Math.floor(count));
+  const current = sanitizeLanternSeals(balance);
+  if (!Number.isFinite(count) || !Number.isSafeInteger(amount))
+    throw new RangeError('lantern seals credit overflow');
+  const next = current + amount;
+  if (!Number.isSafeInteger(next)) {
+    if (balance === undefined || (Number.isSafeInteger(balance) && balance >= 0)) {
+      throw new LanternSealsCapacityError();
+    }
+    throw new RangeError('lantern seals credit overflow');
+  }
+  return next;
+}
+
+/** Credit `count` seals, refusing overflow before changing the holder. */
 export function creditLanternSeals(holder: { lanternSeals?: number }, count: number): void {
-  const amount = sanitizeLanternSeals(count);
-  if (amount === 0) return;
-  holder.lanternSeals = sanitizeLanternSeals(sanitizeLanternSeals(holder.lanternSeals) + amount);
+  const next = creditedLanternSeals(holder.lanternSeals, count);
+  if (next > 0) holder.lanternSeals = next;
+}
+
+/** Preflight a whole parcel before its other rewards, gates or receipts change. */
+export function assertLanternSealsGrantsFit(
+  holder: { lanternSeals?: number },
+  items: readonly { itemId: string; count: number; instance?: unknown }[],
+): void {
+  let balance = holder.lanternSeals;
+  for (const item of items) {
+    if (item.itemId === LANTERN_SEAL_ITEM_ID && !item.instance) {
+      balance = creditedLanternSeals(balance, item.count);
+    }
+  }
 }
 
 /** Debit `cost` seals when the balance covers it; false (and no change) otherwise. */
@@ -45,14 +80,19 @@ export function absorbLegacyLanternSealSlots(meta: {
   inventory: InvSlot[];
   bank: { inventory: InvSlot[] };
 }): number {
-  let moved = 0;
+  // Preflight the complete conversion before removing either container's stock.
+  const before = sanitizeLanternSeals(meta.lanternSeals);
+  let balance = before;
   for (const slots of [meta.inventory, meta.bank.inventory]) {
-    for (let i = slots.length - 1; i >= 0; i--) {
-      if (slots[i].itemId !== LANTERN_SEAL_ITEM_ID) continue;
-      moved += sanitizeLanternSeals(slots[i].count);
-      slots.splice(i, 1);
+    for (const slot of slots) {
+      if (slot.itemId === LANTERN_SEAL_ITEM_ID) balance = creditedLanternSeals(balance, slot.count);
     }
   }
-  creditLanternSeals(meta, moved);
-  return moved;
+  for (const slots of [meta.inventory, meta.bank.inventory]) {
+    for (let i = slots.length - 1; i >= 0; i--) {
+      if (slots[i].itemId === LANTERN_SEAL_ITEM_ID) slots.splice(i, 1);
+    }
+  }
+  meta.lanternSeals = balance;
+  return balance - before;
 }

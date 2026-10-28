@@ -4,8 +4,11 @@
 
 import { addStacked } from '../src/sim/bags';
 import type { CharacterState } from '../src/sim/character_state';
-import { creditCurrencyGrant, isCurrencyGrantId } from '../src/sim/currency_grants';
-import { assertHeroicMarksGrantsFit } from '../src/sim/heroic_marks';
+import {
+  assertCurrencyGrantsFit,
+  creditCurrencyGrant,
+  isCurrencyGrantId,
+} from '../src/sim/currency_grants';
 import { hoardRewardGrantItems } from '../src/sim/rift/hoard_reward_items';
 import { projectHoardRewardCollections } from '../src/sim/rift/hoard_reward_save';
 import { cloneItemInstancePayload, type InvSlot } from '../src/sim/types';
@@ -16,7 +19,7 @@ export function addVaultRewardToCharacterState(
   claim: VaultRewardClaim,
   preparedItems?: readonly InvSlot[],
 ): CharacterState {
-  assertHeroicMarksGrantsFit(state, claim.items);
+  assertCurrencyGrantsFit(state, claim.items);
   const capped = claim.items.length === 0 && claim.copper === 0;
   if (!capped) {
     // Currency (Heroic Marks) lands on the saved balance, exactly as the live hub credits it.

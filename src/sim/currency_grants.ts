@@ -7,8 +7,8 @@
 
 import { HEROIC_MARK_CURRENCY_ID } from './content/dungeon_difficulty';
 import { LANTERN_SEAL_ITEM_ID } from './content/guild_contracts';
-import { creditHeroicMarks } from './heroic_marks';
-import { creditLanternSeals } from './lantern_seals';
+import { assertHeroicMarksGrantsFit, creditHeroicMarks } from './heroic_marks';
+import { assertLanternSealsGrantsFit, creditLanternSeals } from './lantern_seals';
 
 /** True for a reward-list id the hub credits as currency rather than an item. */
 export function isCurrencyGrantId(itemId: string): boolean {
@@ -23,4 +23,13 @@ export function creditCurrencyGrant(
 ): void {
   if (itemId === HEROIC_MARK_CURRENCY_ID) creditHeroicMarks(holder, count);
   else if (itemId === LANTERN_SEAL_ITEM_ID) creditLanternSeals(holder, count);
+}
+
+/** Validate all currency credits before a parcel mutates any of its carriers. */
+export function assertCurrencyGrantsFit(
+  holder: { heroicMarks?: number; lanternSeals?: number },
+  items: readonly { itemId: string; count: number; instance?: unknown }[],
+): void {
+  assertHeroicMarksGrantsFit(holder, items);
+  assertLanternSealsGrantsFit(holder, items);
 }

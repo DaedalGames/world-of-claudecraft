@@ -20,7 +20,11 @@ import {
   type GuildContractDef,
   LANTERN_SEAL_ITEM_ID,
 } from './content/guild_contracts';
-import { sanitizeLanternSeals } from './lantern_seals';
+import {
+  assertLanternSealsGrantsFit,
+  LanternSealsCapacityError,
+  sanitizeLanternSeals,
+} from './lantern_seals';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
 import type { Entity } from './types';
@@ -134,6 +138,14 @@ function payContract(
 ): void {
   const progress = guildContractProgress(ctx, meta);
   if (progress.done.includes(contract.id)) return;
+  try {
+    assertLanternSealsGrantsFit(meta, [{ itemId: LANTERN_SEAL_ITEM_ID, count: contract.seals }]);
+  } catch (error) {
+    // Keep the contract eligible for another qualifying kill after spending.
+    // No paid stamp, lifetime credit or success receipt precedes this refusal.
+    if (error instanceof LanternSealsCapacityError) return;
+    throw error;
+  }
   progress.done.push(contract.id);
   progress.lifetime++;
   meta.wireRev++;
