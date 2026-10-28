@@ -12,13 +12,28 @@ treatment, in the spirit of World of Warcraft, so actors always read clearly aga
 
 Reference images for this doc live in [`art-direction/`](art-direction/). Files named
 `target-*` show the look we are aiming for; files named `avoid-*` show what this doc rules
-out. Every `target-*` and `avoid-*` image except the in-game Varkhul capture is an AI
-repaint of a real in-game capture (gpt-image-2 edits). They show intent, not a real-time
-render, so match their rules, not their pixels.
+out. Every image except `avoid-boss-merges-with-room.jpg` (a raw in-game capture) is an AI
+repaint of a real in-game capture; sources and exact prompts are in
+[`art-direction/provenance.md`](art-direction/provenance.md). They show intent, not a
+real-time render, so match their rules, not their pixels.
 
 | Target: actor in the world | Target: a Crucible boss |
 |---|---|
 | ![Warrior in Eastbrook Vale](art-direction/target-warrior.jpg) | ![Ignivar in the Crucible](art-direction/target-ignivar.jpg) |
+
+## Where the game is today
+
+This doc describes the target. Two shipped systems already point in its direction and
+two parts of them change:
+
+| Shipped today | Source | What this doc changes |
+|---|---|---|
+| A cel light ramp on the sun for every lit material, on by default in browsers (`?cel=off` disables it) | `src/render/cel_shading.ts`, `CEL_SHADING_DEFAULTS` in `src/render/cel_shading_core.ts` | The hard two-band cut becomes a soft ramp for the world and a crisper one for actors (sections 2 and 3) |
+| Depth-based ink outlines, drawn in the output grade pass on tiers with one and inside materials elsewhere | `src/render/post_cel_ink_glsl.ts`, `celNeedsGradePass` in `src/render/gfx.ts` | Retired: no ink on the world or on actors |
+| Per-zone curated looks (palette, fog, sky, water, grade), on by default (`?palette=off` disables them) | `DEFAULT_ZONE_SELECTIONS` and `DEFAULT_ZONE_NIGHT_SELECTIONS` in `src/render/palette_lab/zone_look_core.ts`, looks in `zone_looks.ts` | Kept as the zone palette system; each default is reviewed against section 5 |
+
+Note that some code comments (the headers of `cel_shading_core.ts` and the palette lab's
+`CLAUDE.md`) still describe both systems as opt-in; the defaults above are what ships.
 
 ## 1. Pillars
 
@@ -48,8 +63,8 @@ Covers terrain, grass, foliage, rocks, buildings, dungeon and raid rooms, water 
 | Textures | Painted, brushy, low frequency. Detail comes from shape and colour shifts, not noise. Photo-sourced tiling textures are retired as assets are reworked. |
 | Atmosphere | Strong aerial perspective: distance fades and desaturates toward the zone's haze colour, which matches the horizon sky so distance reads as air. |
 | Outlines | None. No ink lines on terrain, foliage or architecture. |
-| Grass | Soft blades with gradient tips, below an actor's knee at gameplay camera distance, opaque where the tier allows. Density scales by tier; the colour and shape do not. |
-| Foliage | Round, readable canopy masses (the puffball sculpt is the right direction), painted gradient from sunlit top to shaded underside. |
+| Grass | Soft blades with gradient tips, no higher than an actor's knee at gameplay camera distance, opaque where the tier allows. Density scales by tier; the colour and shape do not. |
+| Foliage | Round, readable canopy masses (the canopy sculpt in `src/render/foliage_tree_sculpt.ts` is the right direction), painted gradient from sunlit top to shaded underside. |
 | Architecture | Chunky, slightly exaggerated proportions, painted wear on edges, big readable roof shapes. Each town keeps its material set (slate, thatch, timber, stone) as its identity. |
 | Sky | Painted gradient with soft brushy clouds. See open question 2 for HDRI versus painted. |
 
@@ -87,44 +102,46 @@ Covers player characters, NPCs, creatures, mobs, bosses, mounts and held gear.
 - **Rooms frame, they do not compete.** Room colour supports the boss palette but at lower
   saturation. Lava, braziers and machinery may glow, but never brighter than the boss's core.
 - **Telegraphs outrank everything.** Mechanic telegraphs stay legible over both the room and
-  the boss; VFX readability rules in `src/render/CLAUDE.md` still apply.
+  the boss; the floor VFX layering ladder (`src/render/floor_vfx_layer_core.ts`,
+  [`vfx-floor-layering.md`](vfx-floor-layering.md)) still applies.
 - **The Crucible palette.** Charcoal basalt, gunmetal and dark iron, burnt bronze accents,
   a white-hot core with yellow-orange inner fire. Magma lives only inside cracks and furnace
   openings (from [`ignivar-boss-model/provenance.md`](ignivar-boss-model/provenance.md)).
   The room stays in muted basalt and bronze so the boss's furnace reads first.
 
-| Target: Ignivar | Target: Varkhul |
+| Target: Ignivar, the boss outranks its arena | Target: Varkhul, the furnace heart and beard read before the lava columns |
 |---|---|
 | ![Ignivar](art-direction/target-ignivar.jpg) | ![Varkhul](art-direction/target-varkhul.jpg) |
 
 ## 5. Zone palette sheets
 
 Each zone gets one sheet: signature hue, light tint, shade tint, haze and horizon colour,
-grass light and shade, and the actor accent that pops against it. The starting points
-are the curated looks in the palette lab (`src/render/palette_lab/zone_looks.ts`), whose
-shared rules already match this doc: warm key light, coloured cool shade, horizon-matched
-haze, and lifted rather than crushed blacks.
+grass light and shade, and the actor accent that pops against it. The starting point is
+the look each zone already ships (`DEFAULT_ZONE_SELECTIONS` and
+`DEFAULT_ZONE_NIGHT_SELECTIONS` in `src/render/palette_lab/zone_look_core.ts`, authored in
+`zone_looks.ts`). Their shared rules already match this doc: warm key light, coloured cool
+shade, horizon-matched haze, and lifted rather than crushed blacks.
 
-| Zone | Signature hue to keep | Starting look in the palette lab |
+| Zone | Ships today (day, night if different) | Signature hue to keep |
 |---|---|---|
-| The Proving Shore | Pink-gold sunrise light | Dawnrest Sunrise |
-| Eastbrook Vale | Lime light, emerald shade, cyan sky | Windrise Meadow |
-| The Farshore | Jade grass, glowing lagoon | Tropic Lagoon |
-| Mirefen Marsh | Emerald marsh, cyan sky | Emerald Bayou |
-| Thornpeak Heights | Deep blue sky, cool stone | Alpine Clear |
-| The Veiled Hollow | Pink-mauve dusk, violet shade | Rosewater Twilight |
-| The Drakelands | Red-orange magma glow, purple-black shade | Molten Dusk |
-| The Frostveil Reach | White snow, cyan shadows | Crystal Noon |
-| The Amberfall | Gold canopy and grass | Sky Island Gold |
-| The Willowfen | Pastel spring greens, pale water | Spring Watercolour |
-| The Nightbloom | Lavender and violet meadows | Dreamlight Lavender |
-| The Wraithwood | Grey-teal fog | Grave Mist |
-| The Palmreach | Saturated palms, red flower accents | Tropic Paradise |
-| The Evergarden | Vivid manicured green | Sunlit Topiary |
-| The Galecrest | Lavender-pink dawn, pearl sea | Seawind Dawn |
+| The Proving Shore | Skyward Isles | Pale cyan air, white clouds, cobalt water |
+| Eastbrook Vale | Skyward Isles | Pale cyan air, fresh greens, gold canopies |
+| The Farshore | Tropic Lagoon | Jade grass, coral sand, glowing lagoon |
+| Mirefen Marsh | Jade Wetland | Sunlit meadow reeds, clear lagoon water |
+| Thornpeak Heights | Alpine Clear, night Sky Island Gold | Deep blue sky, cool stone |
+| The Veiled Hollow | Rosewater Twilight | Pink-mauve dusk, violet shade |
+| The Drakelands | Ashfall, night Obsidian and Teal | Grey ash where only fire keeps its colour |
+| The Frostveil Reach | Glacier Teal, night Violet Whiteout | Aqua ice, teal air |
+| The Amberfall | Sky Island Gold | Gold grass and yellow canopy |
+| The Willowfen | Spring Watercolour | Pastel spring greens, pale water |
+| The Nightbloom | Fae Pink | Pink-violet fairy dusk, glowing blooms |
+| The Wraithwood | Stock look (no curated default yet) | Needs a sheet |
+| The Palmreach | Lagoon Turquoise | Bleached sand, turquoise water |
+| The Evergarden | Afternoon Reverie | Pastel hand-painted afternoon |
+| The Galecrest | Skyward Isles | Pale cyan air, cobalt water |
 
-The palette lab is a temporary dev tool today (`?palette=on`); shipping these sheets means
-promoting the chosen looks to the stock tables. That is a phase 2 task, not part of this doc.
+Phase 2 reviews each default against this doc; changing a zone's look is a data change to
+those selection tables, not new code.
 
 | Target: Nightbloom keeps its violet | Avoid: naturalism erases the zone |
 |---|---|
@@ -132,17 +149,19 @@ promoting the chosen looks to the stock tables. That is a phase 2 task, not part
 
 ## 6. Technical spec
 
-The look must hold on every graphics tier, including Low and iOS (Lambert materials, no
-post-processing, no shadows). Nothing in this section may depend on a post pass.
+The look must hold on every graphics tier. iOS runs Lambert materials with no
+post-processing and no dynamic shadows; Low runs Lambert with no dynamic shadows and,
+today, a grade-only post pass that the default cel look switches on. The target: nothing
+in this section depends on a post pass, so both keep the full look.
 
 | Item | Spec |
 |---|---|
 | Actor textures | One hand-painted albedo per material, KTX2 (ETC1S suits painted colour). No normal or metal/roughness maps; wear and form are painted. An optional emissive mask for glows. |
-| Actor texture size | Player armour and bosses 1024; mobs and NPCs 512; held props 256 to 512. The local player's existing high-tier top mip stays. |
+| Actor texture size | Player armour and bosses 1024; mobs and NPCs 512; held props 256 to 512. The local player's existing high-tier top mip stays, and iPhones keep the existing 512 cap on character-side KTX2 mips (pinned by `tests/ktx2_mip_cap.test.ts`). |
 | World textures | Painted tiling sets per material family, KTX2. Terrain keeps its splat blend with painted layers in place of photo-sourced ones. |
-| Geometry | Existing budgets hold: today's WOC player bodies and the Crucible creature budget are the reference points. Chunky shapes spend triangles on silhouette, not surface noise. |
+| Geometry | Existing budgets hold: the WOC character budgets pinned by `tests/woc_triangle_budget.test.ts`, and the boss reference in [`ignivar-boss-model/provenance.md`](ignivar-boss-model/provenance.md). Chunky shapes spend triangles on silhouette, not surface noise. |
 | World shading | One world material family: soft ramp on the sun, coloured hemisphere fill, full haze. |
-| Actor shading | One actor material family: crisper ramp on the sun, warm rim, reduced haze, slight saturation lift. A pure, Vitest-pinned core behind the render seam, in the same pattern as `cel_shading_core.ts`. |
+| Actor shading | One actor material family: crisper ramp on the sun, warm rim, reduced haze, slight saturation lift. A pure, Vitest-pinned core behind the render seam, in the same pattern as `src/render/cel_shading_core.ts`. |
 | Shader programs | Two families means more programs to prepare. Both go through the GPU preparation scheduler (see "GPU work" in `src/render/CLAUDE.md`). |
 | Fairness | Actor readability is never a tier knob. A test asserts the actor treatment is identical across tiers. |
 
