@@ -40,6 +40,12 @@ import {
 } from './blade_grass_dense_core';
 import { toroidalCell } from './blade_grass_pool_core';
 import { buildBladeSectorPool } from './blade_grass_sector_pool';
+import {
+  BLADE_BASE_GLSL,
+  BLADE_BASE_UNIFORM,
+  BLADE_WIDTH_GLSL,
+  BLADE_WIDTH_UNIFORM,
+} from './blade_width_zone_core';
 import { GRASS_BIOME_DENSITY } from './foliage';
 import {
   eastbrookGrassExclusions,
@@ -161,6 +167,8 @@ export function buildBladeGrassBand(
     sh.uniforms.uBandFar = uBandFar;
     sh.uniforms.uBaseSink = uBaseSink;
     attachGrassInteractionUniforms(sh.uniforms);
+    sh.uniforms.uBladeWidth = BLADE_WIDTH_UNIFORM;
+    sh.uniforms.uBladeBase = BLADE_BASE_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -170,7 +178,10 @@ export function buildBladeGrassBand(
         uniform vec4 uGrassMove;
         uniform vec4 uGrassWake;
         uniform float uBandFar;
-        uniform vec3 uBaseSink;`,
+        uniform vec3 uBaseSink;
+        attribute vec3 aBladeSide;
+        uniform float uBladeWidth;
+        uniform float uBladeBase;`,
       )
       .replace(
         '#include <color_vertex>',
@@ -183,11 +194,13 @@ export function buildBladeGrassBand(
           vec3 bandGroundCol = mix(vColor.rgb, instanceColor.rgb * uBaseSink,
             ${MEADOW_BAND_BASE_SINK.toFixed(3)});
           vColor.rgb = mix(bandGroundCol, vColor.rgb, bandBaseT);
-        #endif`,
+        #endif
+        ${BLADE_BASE_GLSL}`,
       )
       .replace(
         '#include <begin_vertex>',
         `#include <begin_vertex>
+        ${BLADE_WIDTH_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer fade by scale collapse over the outer band fraction, and

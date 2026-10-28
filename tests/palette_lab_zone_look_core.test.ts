@@ -316,3 +316,33 @@ describe('Storybook Meadow (Eastbrook, the art bible look)', () => {
     }
   });
 });
+
+describe('painterly render arms stay off outside Eastbrook', () => {
+  const stock = stockLookFor('vale', WATER, BLOOM);
+
+  it('stock is the shipped blade, ramp and ink', () => {
+    expect(stock.render.bladeWidth).toBe(1);
+    expect(stock.render.bladeBase).toBe(1);
+    expect(stock.render.rampSoft).toBe(0);
+    expect(stock.render.ink).toBe(1);
+  });
+
+  it('Storybook Meadow thins and deepens the blades and softens the ramp', () => {
+    const patch = (ZONE_LOOKS.eastbrook_vale ?? []).find((l) => l.id === 'storybook-meadow');
+    const look = applyLookPatch(stock, patch!);
+    expect(look.render.bladeWidth).toBeLessThan(1);
+    expect(look.render.bladeBase).toBeLessThan(1);
+    expect(look.render.rampSoft).toBeGreaterThan(0);
+  });
+
+  it('every other zone default keeps the shipped blade and ramp', () => {
+    for (const [zoneId, lookId] of Object.entries(DEFAULT_ZONE_SELECTIONS)) {
+      if (zoneId === 'eastbrook_vale') continue;
+      const patch = (ZONE_LOOKS[zoneId] ?? []).find((l) => l.id === lookId);
+      const look = applyLookPatch(stock, patch!);
+      expect(look.render.bladeWidth, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.bladeBase, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.rampSoft, `${zoneId}/${lookId}`).toBe(0);
+    }
+  });
+});

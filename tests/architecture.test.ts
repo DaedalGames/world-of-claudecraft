@@ -1428,6 +1428,10 @@ const RENDER_PURE_CORES = [
   'src/render/cel_shading_core.ts',
   // The per-zone multiplier on the cel post ink a zone look writes.
   'src/render/cel_ink_zone_scale_core.ts',
+  // The per-zone meadow blade width a zone look writes (blade_grass*.ts read it).
+  'src/render/blade_width_zone_core.ts',
+  // The per-zone cel ramp softness a zone look writes (cel_shading.ts binds it).
+  'src/render/cel_ramp_soft_zone_core.ts',
   'src/render/post_bloom_shader_core.ts',
   'src/render/dynamic_resolution_core.ts',
   'src/render/post_plan_core.ts',

@@ -45,6 +45,15 @@ golden, moody), overridable per look:
 - **Ink** (`../cel_ink_zone_scale_core.ts`): a multiplier on the cel post ink the
   output grade reads every frame; 0 draws none (the art bible's painterly world).
   The material ink on no-grade chains (iOS) keeps its baked strength.
+- **Blade width and root shade** (`../blade_width_zone_core.ts`): shared uniforms
+  both meadow layers bind (`blade_grass.ts`, `blade_grass_band.ts`). Width pulls
+  each blade's edges toward its spine (the cluster geometry carries the offset as
+  `aBladeSide`); root shade deepens blade bases so a dense near meadow darkens
+  toward the camera. Both are 1 at stock, the shipped blade exactly.
+- **Ramp softness** (`../cel_ramp_soft_zone_core.ts`): blends the cel sun ramp's
+  hard band toward a smooth falloff; a vec4 over a shared Float32Array declared in
+  `lights_pars_begin` by `cel_shading.ts`. 0 at stock. Read it as `.r`: the read
+  sits inside the `WOC_CEL_BAND( x )` macro, which rewrites an `.x` swizzle.
 
 The sky carries two painterly arms too (`palette_sky.ts`), both off at stock:
 `sky.clouds` paints a cumulus deck over the gradient, and `sky.band` lowers the

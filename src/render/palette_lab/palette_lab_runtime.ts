@@ -39,7 +39,9 @@ import { refreshBiomeHazeField } from '../biome_haze_field';
 import { type BiomeHazePreset, hazeLightLevel } from '../biome_haze_field_core';
 import { recolorLiveBladeGrassView } from '../blade_grass';
 import { recolorLiveBladeGrassBandView } from '../blade_grass_band';
+import { setBladeBaseZoneShade, setBladeWidthZoneScale } from '../blade_width_zone_core';
 import { setCelInkZoneScale } from '../cel_ink_zone_scale_core';
+import { setCelRampSoftZone } from '../cel_ramp_soft_zone_core';
 import { celShadingSettings } from '../cel_shading';
 import {
   currentDayNightPhase,
@@ -120,6 +122,9 @@ const LIVE = {
   clouds: 42,
   skyBand: 43,
   ink: 44,
+  bladeWidth: 45,
+  rampSoft: 46,
+  bladeBase: 47,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -569,6 +574,9 @@ class PaletteLabRuntime implements PaletteLabApi {
     su.uPalClouds.value.x = v[LIVE.clouds];
     su.uPalClouds.value.y = v[LIVE.skyBand];
     setCelInkZoneScale(v[LIVE.ink]);
+    setBladeWidthZoneScale(v[LIVE.bladeWidth]);
+    setCelRampSoftZone(v[LIVE.rampSoft]);
+    setBladeBaseZoneShade(v[LIVE.bladeBase]);
 
     // Water is one shared material for every sheet, so it wears the look of
     // the zone the player is in (the water in view is almost always local).
@@ -701,6 +709,9 @@ class PaletteLabRuntime implements PaletteLabApi {
       sky.clouds,
       sky.band,
       look.render.ink,
+      look.render.bladeWidth,
+      look.render.rampSoft,
+      look.render.bladeBase,
     ];
     this.targetCache.set(look, flat);
     return flat;

@@ -144,15 +144,19 @@ const STORYBOOK_MEADOW_GRADE = {
   lift: 0.014,
   greenHue: -8,
   greenSat: 0.96,
-  greenVal: 1.06,
+  greenVal: 1.0,
 };
 const STORYBOOK_MEADOW_RENDER = {
   rim: 0.3,
-  meadowCoverage: 0.8,
-  meadowHeight: 0.7,
-  meadowWidth: 1.0,
+  shadowStrength: 0.55,
+  meadowCoverage: 1,
+  meadowHeight: 0.6,
+  meadowWidth: 0.8,
   canopyLift: 1.5,
   ink: 0,
+  bladeWidth: 0.55,
+  rampSoft: 0.8,
+  bladeBase: 0.55,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
@@ -187,9 +191,9 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
       name: 'Storybook Meadow',
       note: 'Painterly vale: deep blue painted sky, big cumulus, olive-lime meadow, blue distance.',
       ground: {
-        grass: 0x86b24c,
-        grassDark: 0x467838,
-        grassYellow: 0xb2c466,
+        grass: 0x88b24e,
+        grassDark: 0x6a9a46,
+        grassYellow: 0xa6c05e,
         dirt: 0xa88c62,
         sand: 0xddcca0,
       },

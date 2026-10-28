@@ -16,6 +16,12 @@ import {
 } from './blade_grass_dense_core';
 import { toroidalCell } from './blade_grass_pool_core';
 import { buildBladeSectorPool } from './blade_grass_sector_pool';
+import {
+  BLADE_BASE_GLSL,
+  BLADE_BASE_UNIFORM,
+  BLADE_WIDTH_GLSL,
+  BLADE_WIDTH_UNIFORM,
+} from './blade_width_zone_core';
 import { GRASS_BIOME_DENSITY } from './foliage';
 import {
   eastbrookGrassExclusions,
@@ -128,6 +134,9 @@ export function mulberry32(seed: number): () => number {
 export function clusterGeometry(rng: () => number, segments: 2 | 3 = 3): THREE.BufferGeometry {
   const positions: number[] = [];
   const colors: number[] = [];
+  // each vertex's offset from its blade's spine, so a zone look can thin the
+  // blade in the vertex shader (blade_width_zone_core.ts)
+  const sides: number[] = [];
   const indices: number[] = [];
   const BLADES = 9;
   for (let b = 0; b < BLADES; b++) {
@@ -153,6 +162,7 @@ export function clusterGeometry(rng: () => number, segments: 2 | 3 = 3): THREE.B
       // quadratic bend: roots stay planted, tips arc over like real grass
       const lean = (tilt * t + bow * t * t) * len;
       positions.push(ox + px * wx + cos * lean, len * t, oz + pz * wx + sin * lean);
+      sides.push(px * wx, 0, pz * wx);
       // all-up normals: blades take the terrain's lighting response, the
       // same trick the card tufts use, so the carpet never shades apart
       // from the ground it grows in
@@ -206,6 +216,7 @@ export function clusterGeometry(rng: () => number, segments: 2 | 3 = 3): THREE.B
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
   geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
+  geo.setAttribute('aBladeSide', new THREE.BufferAttribute(new Float32Array(sides), 3));
   geo.setIndex(indices);
   return geo;
 }
@@ -334,6 +345,8 @@ export function buildBladeGrass(
     sh.uniforms.uTime = sharedUniforms.uTime;
     sh.uniforms.uPlayerPos = uPlayerPos;
     attachGrassInteractionUniforms(sh.uniforms);
+    sh.uniforms.uBladeWidth = BLADE_WIDTH_UNIFORM;
+    sh.uniforms.uBladeBase = BLADE_BASE_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -341,11 +354,20 @@ export function buildBladeGrass(
         uniform float uTime;
         uniform vec2 uPlayerPos;
         uniform vec4 uGrassMove;
-        uniform vec4 uGrassWake;`,
+        uniform vec4 uGrassWake;
+        attribute vec3 aBladeSide;
+        uniform float uBladeWidth;
+        uniform float uBladeBase;`,
+      )
+      .replace(
+        '#include <color_vertex>',
+        `#include <color_vertex>
+        ${BLADE_BASE_GLSL}`,
       )
       .replace(
         '#include <begin_vertex>',
         `#include <begin_vertex>
+        ${BLADE_WIDTH_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer-ring fade by collapse: alpha would need transparency and a

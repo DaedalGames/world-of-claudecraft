@@ -127,6 +127,12 @@ export interface LookRender {
   canopyLift: number;
   /** Multiplier on the cel look's post ink (1 is shipped, 0 draws no ink). */
   ink: number;
+  /** Meadow blade width multiplier (1 is shipped; lower is a finer carpet). */
+  bladeWidth: number;
+  /** Cel light ramp softness, 0 (the shipped hard band) to 1 (a soft falloff). */
+  rampSoft: number;
+  /** Meadow blade-root shade multiplier (1 is shipped; lower deepens the roots). */
+  bladeBase: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -141,6 +147,9 @@ export const STOCK_RENDER: LookRender = {
   meadowWidth: 1,
   canopyLift: 1,
   ink: 1,
+  bladeWidth: 1,
+  rampSoft: 0,
+  bladeBase: 1,
 };
 
 export interface ZoneLook {
