@@ -3618,7 +3618,7 @@ export class Renderer {
   }
 
   isZoneReadyAt(x: number, z: number): boolean {
-    if (dungeonAt(x)) return this.isZonePreparedAt(x, z);
+    if (dungeonAt(x)) return Renderer.prototype.isZonePreparedAt.call(this, x, z);
     const id = this.zoneIdAt(x, z);
     if (id === null) return true;
     // Sky residency is part of arrival readiness: a false routes the arrival
