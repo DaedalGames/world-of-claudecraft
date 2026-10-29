@@ -1471,6 +1471,13 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
   // The list and detail scroll the live poll carries across a quest-progress
   // rebuild (one read and one write each), only when the log signature moved.
   { file: 'hud/quest/questlog_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
+  // The band list scroll the live poll carries across a rebuild (one read, one
+  // write), only when the forge signature moved.
+  {
+    file: 'hud/rift_forge/rift_forge_window.ts',
+    reflowAllow: { '.scrollTop': 2 },
+    driverAllow: {},
+  },
   { file: 'town_focus_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   // The scroll pair again, and TWO containers behind it (the panel body and the
   // detail pane) rather than one, which is why the count is still 2: the painter

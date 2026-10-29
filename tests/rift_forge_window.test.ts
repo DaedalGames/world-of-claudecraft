@@ -346,6 +346,17 @@ describe('RiftForgeWindow', () => {
       expect(document.activeElement).toBe(root.querySelectorAll('[data-socket]')[1]);
     });
 
+    it("keeps the band list's scroll offset across a poll rebuild", () => {
+      win.open();
+      const body = root.querySelector<HTMLElement>('.rf-body');
+      if (body) body.scrollTop = 120;
+      inventory.push({ itemId: RIFT_ESSENCE_ITEM_ID, count: 1 });
+      win.refreshIfChanged();
+      const rebuilt = root.querySelector<HTMLElement>('.rf-body');
+      expect(rebuilt, 'the poll must really rebuild the list').not.toBe(body);
+      expect(rebuilt?.scrollTop).toBe(120);
+    });
+
     it('a reopen starts with no carried pick', () => {
       inventory.push({ itemId: RIFT_GEM_IDS[0], count: 1 });
       win.open();

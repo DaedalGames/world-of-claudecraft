@@ -195,7 +195,11 @@ export class RiftForgeWindow {
     if (focusedWithin(el)?.tagName === 'SELECT') return;
     if (riftForgeSig(this.buildView()) === this.lastSig) return;
     const key = captureFocusKey(el);
+    // The band list scrolls on its own; a poll must not throw it to the top.
+    const scrollTop = el.querySelector('.rf-body')?.scrollTop ?? 0;
     this.render();
+    const body = el.querySelector<HTMLElement>('.rf-body');
+    if (body && scrollTop > 0) body.scrollTop = scrollTop;
     if (key !== null)
       restoreFirstEnabled([findFocusKey(el, key), el.querySelector<HTMLElement>('[data-close]')]);
   }
