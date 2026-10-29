@@ -202,6 +202,8 @@ const SHARE_GLYPH =
 export class CharWindow {
   private openerFocus: HTMLElement | null = null;
   private sidebarTab: CharacterSidebarTab = 'stats';
+  /** The tab the last paint showed: a same-tab rebuild keeps the panel's scroll. */
+  private paintedTab: CharacterSidebarTab | null = null;
   // True while a native drag started on one of this window's own equipped-item
   // rows (dragging a piece off the paperdoll to unequip it) is in flight. A
   // browser never fires dragend on a source element that has already left the
@@ -237,6 +239,7 @@ export class CharWindow {
     const el = this.deps.root();
     if (el.style.display !== 'block') return;
     el.style.display = 'none';
+    this.paintedTab = null;
     this.deps.hideTooltip();
     this.deps.restoreFocus(this.openerFocus);
     this.openerFocus = null;
@@ -244,6 +247,12 @@ export class CharWindow {
 
   renderIfOpen(): void {
     if (this.isOpen) this.render();
+  }
+
+  /** The sidebar tab the sheet shows (kept across close and reopen). Read-only:
+   *  the HUD's refresh latch narrows charSheetRefreshSigFor to this board. */
+  get activeSidebarTab(): CharacterSidebarTab {
+    return this.sidebarTab;
   }
 
   /** The title chip carries the player's own COMPOSED face, and that portrait
@@ -347,7 +356,16 @@ export class CharWindow {
         selected: sidebar.selected,
       }),
     )}<div class="pc-share-row"><button type="button" class="btn ui-btn char-cosmetics-btn" data-act="open-cosmetics">${esc(t('hudChrome.cosmetics.title'))}</button><button type="button" class="pc-share-btn ui-btn ui-btn--red" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div></footer></div>`;
+    // A poll rebuild (a long Reputation list, a buff under the Stats rail) must
+    // not throw the panel back to the top; a tab switch starts at the top.
+    const keepScroll = this.paintedTab === sidebar.selected;
+    const scrollTop = keepScroll ? (el.querySelector('#char-sidebar-panel')?.scrollTop ?? 0) : 0;
     el.innerHTML = html;
+    this.paintedTab = sidebar.selected;
+    if (scrollTop > 0) {
+      const panel = el.querySelector<HTMLElement>('#char-sidebar-panel');
+      if (panel) panel.scrollTop = scrollTop;
+    }
     hydratePortraits(el);
     wireTabStrip(el, 'char-sidebar-tab', (id, focusFollow) => {
       this.sidebarTab = buildCharacterSidebarView(id).selected;
@@ -565,8 +583,9 @@ export class CharWindow {
   // and the settings write are HUD-owned through deps, the helm eye doctrine.
   // The value is a per-render snapshot ON PURPOSE: a cold window may not arm
   // its own repeating driver (tests/hud_perf_budget.test.ts), so an open sheet
-  // refreshes on the next repaint (reopen, equip change, locale switch), never
-  // on a clock. Do not "fix" staleness with a setInterval here.
+  // refreshes through the HUD's slow-band latch, whose signature carries the
+  // displayed minute (char_sheet_sig_core.ts), never through a clock of its
+  // own. Do not "fix" staleness with a setInterval here.
   private playtimeHtml(world: IWorld): string {
     const visible = this.deps.playtimeVisible();
     const value = visible
