@@ -105,6 +105,7 @@ function renderQuestFixture(referral: ReferralCardsSnapshot | null = null): {
           player: { name: 'Aurelia' },
           questLog,
           questsDone: new Set<string>(),
+          entities: new Map(),
           abandonQuest,
           referralCardsSnapshot: () => referral,
         }) as never,
@@ -322,5 +323,117 @@ describe('questlog_window: W7 grouped-list interactions', () => {
     const onConfirm = confirmDialog.mock.calls[0][4] as () => void;
     onConfirm();
     expect(abandonQuest).toHaveBeenCalledWith(questB);
+  });
+});
+
+describe('questlog_window: live refresh (the Hud slow-band poll)', () => {
+  /** Every DOM mutation under root while `run` executes. */
+  function mutationsDuring(root: HTMLElement, run: () => void): number {
+    const observer = new MutationObserver(() => undefined);
+    observer.observe(root, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    });
+    run();
+    const count = observer.takeRecords().length;
+    observer.disconnect();
+    return count;
+  }
+
+  it('repaints objective progress when a kill moves the counts while the log is open', () => {
+    const { root, win, questIds, questLog } = renderQuestFixture();
+    const [questA] = questIds;
+    expect(win.selectedQuestId).toBe(questA);
+    const fills = () =>
+      [...root.querySelectorAll<HTMLElement>('.qd-progress .ui-bar-fill')].map(
+        (fill) => fill.style.width,
+      );
+    expect(fills().every((width) => width === '50%')).toBe(true);
+    const progress = questLog.get(questA);
+    if (!progress) throw new Error('fixture quest missing');
+    progress.counts = QUESTS[questA].objectives.map((objective) => objective.count);
+    win.refreshIfChanged();
+    expect(fills().every((width) => width === '100%')).toBe(true);
+    expect(root.querySelectorAll('.qd-obj.done').length).toBe(QUESTS[questA].objectives.length);
+  });
+
+  it('shows a quest turning ready, a new accept and a turn-in made elsewhere', () => {
+    const { root, win, questIds, questLog } = renderQuestFixture();
+    const [questA, questB] = questIds;
+    const progressB = questLog.get(questB);
+    if (!progressB) throw new Error('fixture quest missing');
+    progressB.state = 'ready';
+    win.refreshIfChanged();
+    expect(root.querySelector(`[data-quest="${questB}"]`)?.classList.contains('is-complete')).toBe(
+      true,
+    );
+    // Handed in elsewhere: the row leaves the log on the next poll.
+    questLog.delete(questA);
+    win.refreshIfChanged();
+    expect(root.querySelector(`[data-quest="${questA}"]`)).toBeNull();
+    expect(win.selectedQuestId).toBe(questB);
+    // Accepted elsewhere: the row arrives.
+    const third = Object.values(QUESTS).find(
+      (quest) => quest.objectives.length > 0 && quest.id !== questA && quest.id !== questB,
+    );
+    if (!third) throw new Error('fixture needs a third quest');
+    questLog.set(third.id, {
+      questId: third.id,
+      counts: third.objectives.map(() => 0),
+      state: 'active',
+    });
+    win.refreshIfChanged();
+    expect(root.querySelector(`[data-quest="${third.id}"]`)).not.toBeNull();
+  });
+
+  it('does no DOM work on a repeated identical poll, or on the poll after an explicit render', () => {
+    const { root, win, questIds } = renderQuestFixture();
+    expect(mutationsDuring(root, () => win.refreshIfChanged())).toBe(0);
+    // A click repaint (selection) latches the new signature itself.
+    root.querySelector<HTMLButtonElement>(`[data-quest="${questIds[1]}"]`)?.click();
+    expect(mutationsDuring(root, () => win.refreshIfChanged())).toBe(0);
+    // relocalize forces exactly one rebuild and leaves the signature latched.
+    expect(mutationsDuring(root, () => win.relocalize())).toBeGreaterThan(0);
+    expect(mutationsDuring(root, () => win.refreshIfChanged())).toBe(0);
+  });
+
+  it('keeps focus on the same row and the list scroll across a poll rebuild', () => {
+    const { root, win, questIds, questLog } = renderQuestFixture();
+    const [questA, questB] = questIds;
+    root.querySelector<HTMLButtonElement>(`[data-quest="${questB}"]`)?.focus();
+    const list = root.querySelector<HTMLElement>('.ql-list');
+    if (list) list.scrollTop = 40;
+    const progressA = questLog.get(questA);
+    if (!progressA) throw new Error('fixture quest missing');
+    progressA.counts = progressA.counts.map((count) => count + 1);
+    win.refreshIfChanged();
+    const rebuiltRow = root.querySelector<HTMLButtonElement>(`[data-quest="${questB}"]`);
+    expect(rebuiltRow).not.toBeNull();
+    expect(document.activeElement).toBe(rebuiltRow);
+    expect(root.querySelector<HTMLElement>('.ql-list')?.scrollTop).toBe(list?.scrollTop);
+  });
+
+  it('never pulls focus out of chat (or anything outside the window) on a poll', () => {
+    const { win, questIds, questLog } = renderQuestFixture();
+    const chat = document.createElement('input');
+    document.body.appendChild(chat);
+    chat.focus();
+    const progress = questLog.get(questIds[0]);
+    if (!progress) throw new Error('fixture quest missing');
+    progress.state = 'ready';
+    win.refreshIfChanged();
+    expect(document.activeElement).toBe(chat);
+  });
+
+  it('does nothing while closed', () => {
+    const { root, win, questIds, questLog } = renderQuestFixture();
+    win.close(false);
+    const progress = questLog.get(questIds[0]);
+    if (!progress) throw new Error('fixture quest missing');
+    progress.state = 'ready';
+    expect(mutationsDuring(root, () => win.refreshIfChanged())).toBe(0);
+    expect(mutationsDuring(root, () => win.relocalize())).toBe(0);
   });
 });
