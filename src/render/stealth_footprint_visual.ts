@@ -16,6 +16,7 @@
 import * as THREE from 'three';
 import { FOOTPRINT_VIEW_CAP } from '../sim/stealth_footprints';
 import type { VisibleFootprint } from '../world_api';
+import { CAMERA_RELATIVE_GLSL } from './camera_relative_glsl';
 import { floorVfxRenderOrder } from './floor_vfx_layer';
 import { attachSceneGroupGated } from './gated_scene_attach';
 import { SUN_DIR } from './gfx';
@@ -39,7 +40,7 @@ const LIGHT_GAIN = 0.7;
 const RINGS = 10;
 const SEGMENTS = 24;
 
-const VERTEX = /* glsl */ `
+const VERTEX = /* glsl */ `${CAMERA_RELATIVE_GLSL}
 varying vec3 vNormalW;
 void main() {
   mat4 m = modelMatrix;
@@ -47,7 +48,11 @@ void main() {
     m = modelMatrix * instanceMatrix;
   #endif
   vNormalW = normalize(mat3(m) * normal);
-  gl_Position = projectionMatrix * viewMatrix * (m * vec4(position, 1.0));
+  // Subtract the camera from the instance origin before adding the small
+  // footprint vertices, so distant instance bands retain the dent's shape.
+  vec4 mv = wocCamRelView(m[3].xyz);
+  mv.xyz += mat3(viewMatrix) * (mat3(m) * position);
+  gl_Position = projectionMatrix * mv;
 }`;
 
 // Light on the dent over light on flat ground: below 1 is shadow, above 1 is
