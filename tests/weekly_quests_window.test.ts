@@ -184,6 +184,25 @@ describe('weekly quests window: refresh signature', () => {
     r.window.refreshIfChanged();
     expect(r.el.querySelector('[data-wk-accept]')).toBe(accept);
     expect(document.activeElement).toBe(accept);
+    // The pick lands elsewhere (another client, an authority echo) while the
+    // dialog is still up: the poll holds, so the cards still read the old state.
+    r.world.weeklyQuest = { questId: 'wk_dungeons', week: 'wk_1', count: 1, state: 'active' };
+    r.window.refreshIfChanged();
+    expect(r.el.querySelector('[data-wk-accept]')).toBe(accept);
+    expect(
+      [...r.el.querySelectorAll<HTMLButtonElement>('[data-wk-choose]')].map((b) => b.disabled),
+    ).toEqual([false, false, false, false]);
+    // Catch-up: the dialog closes and the moved data is what the window now shows
+    // (asserted on the painted cards, since the decline's own render re-latches).
+    (r.el.querySelector('[data-wk-decline]') as HTMLButtonElement).click();
+    r.window.refreshIfChanged();
+    expect(r.el.querySelector('.wk-dialog')).toBeNull();
+    const buttons = [...r.el.querySelectorAll<HTMLButtonElement>('[data-wk-choose]')];
+    expect(buttons.map((b) => b.disabled)).toEqual([true, true, true, true]);
+    expect(r.el.querySelector('[data-wk-choose="wk_dungeons"]')?.textContent).toBe(
+      'In progress (1/3)',
+    );
+    expect(r.el.querySelector('.wk-card-active')?.getAttribute('data-wk-card')).toBe('wk_dungeons');
   });
 
   it('keeps focus on the same control across a poll-driven rebuild', () => {

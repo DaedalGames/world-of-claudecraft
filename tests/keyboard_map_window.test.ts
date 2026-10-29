@@ -220,6 +220,58 @@ describe('KeyboardMapWindow: live refresh (the Hud slow-band poll)', () => {
     expect(cap.text()).toBe('Heroic Strike');
   });
 
+  /** The first letter cap with nothing bound on it (the assign arm's target). */
+  function emptyLetterCap(r: ReturnType<typeof rig>): HTMLButtonElement {
+    const cap = [...(r.root()?.querySelectorAll<HTMLButtonElement>('.kbm-key[data-code]') ?? [])]
+      .filter((cell) => /^Key[A-Z]$/.test(cell.dataset.code ?? ''))
+      .find((cell) => !cell.disabled && cell.querySelector('.kbm-action') === null);
+    if (!cap) throw new Error('fixture needs an unbound letter cap');
+    return cap;
+  }
+
+  it('holds the poll while the assign row is shown (no capture armed), then catches up once it closes', () => {
+    const r = rig();
+    const cap = slotCap(r);
+    r.win.open();
+    const armedBefore = r.armed.length;
+    emptyLetterCap(r).click();
+    // The assign arm arms no capture: only the action row holds the board busy.
+    expect(r.armed).toHaveLength(armedBefore);
+    const actions = () => r.root()?.querySelector<HTMLElement>('.kbm-actions');
+    const row = actions();
+    expect(row?.hidden).toBe(false);
+    expect(row?.childElementCount).toBe(2);
+    r.slotNames.set('slot3', 'Heroic Strike');
+    r.win.refreshIfChanged();
+    // The poll held: the row is still up and the cap still shows the old name.
+    expect(actions()).toBe(row);
+    expect(actions()?.hidden).toBe(false);
+    expect(cap.text()).toBe('name:slot3');
+    // Cancel closes the row: the next poll shows the moved name.
+    const cancel = row?.querySelector<HTMLButtonElement>('button.btn');
+    expect(cancel?.textContent).toBe(t('hudChrome.actionBar.cancel'));
+    cancel?.click();
+    expect(actions()?.hidden).toBe(true);
+    r.win.refreshIfChanged();
+    expect(cap.text()).toBe('Heroic Strike');
+  });
+
+  it('picks up a bindings-only change (no slot name moved) on the poll', () => {
+    const r = rig();
+    r.win.open();
+    const free = emptyLetterCap(r);
+    const code = free.dataset.code ?? '';
+    const text = (c: string) =>
+      r.root()?.querySelector(`[data-code="${c}"] .kbm-action`)?.textContent ?? undefined;
+    expect(text('KeyW')).toBe('name:forward');
+    expect(text(code)).toBeUndefined();
+    // A rebind made elsewhere (the options panel): forward moves off W.
+    expect(r.keybinds.bind('forward', 0, code)).toBe(true);
+    r.win.refreshIfChanged();
+    expect(text(code)).toBe('name:forward');
+    expect(text('KeyW')).not.toBe('name:forward');
+  });
+
   it('keeps focus on the focused cap across a poll repaint', () => {
     const r = rig();
     slotCap(r);

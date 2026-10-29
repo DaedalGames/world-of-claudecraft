@@ -357,6 +357,20 @@ describe('talents_window: live refresh (the Hud slow-band poll)', () => {
     expect(document.activeElement).toBe(after);
   });
 
+  it('keeps the #tal-body scroll position across a poll rebuild', () => {
+    const level = { value: 1 };
+    const { root, win, rows } = openRows(level);
+    const before = root.querySelector<HTMLElement>('#tal-body');
+    if (!before) throw new Error('fixture needs #tal-body');
+    before.scrollTop = 80;
+    level.value = rows[rows.length - 1].level;
+    win.refreshIfChanged();
+    const after = root.querySelector<HTMLElement>('#tal-body');
+    expect(after).not.toBeNull();
+    expect(after).not.toBe(before);
+    expect(after?.scrollTop).toBe(80);
+  });
+
   it('holds the poll while the loadout menu is open, then catches up once it closes', () => {
     const level = { value: 1 };
     const { root, win, rows } = openRows(level);

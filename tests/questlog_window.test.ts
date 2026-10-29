@@ -54,7 +54,17 @@ function renderQuestFixture(referral: ReferralCardsSnapshot | null = null): {
   mapOpen: ReturnType<typeof vi.fn>;
   showOnMap: ReturnType<typeof vi.fn>;
   tracking: QuestTrackingState;
-  questLog: Map<string, { questId: string; counts: number[]; state: string }>;
+  questLog: Map<
+    string,
+    {
+      questId: string;
+      counts: number[];
+      state: string;
+      resolvedCounts?: number[];
+      selection?: string;
+    }
+  >;
+  world: { talents: { spec: string | null }; questsDone: Set<string> };
   insertQuestChatLink: ReturnType<typeof vi.fn>;
   confirmDialog: ReturnType<typeof vi.fn>;
   abandonQuest: ReturnType<typeof vi.fn>;
@@ -95,20 +105,21 @@ function renderQuestFixture(referral: ReferralCardsSnapshot | null = null): {
   tracking.useCharacter('warrior', 'Aurelia');
   const confirmDialog = vi.fn();
   const abandonQuest = vi.fn((questId: string) => questLog.delete(questId));
+  // One stable world object, so a test can move a single signed field in place.
+  const world = {
+    cfg: { playerClass: 'warrior' },
+    talents: { spec: null as string | null },
+    player: { name: 'Aurelia' },
+    questLog,
+    questsDone: new Set<string>(),
+    entities: new Map(),
+    abandonQuest,
+    referralCardsSnapshot: () => referral,
+  };
   const win = new QuestLogWindow(
     stubDeps({
       root: () => root,
-      world: () =>
-        ({
-          cfg: { playerClass: 'warrior' },
-          talents: { spec: null },
-          player: { name: 'Aurelia' },
-          questLog,
-          questsDone: new Set<string>(),
-          entities: new Map(),
-          abandonQuest,
-          referralCardsSnapshot: () => referral,
-        }) as never,
+      world: () => world as never,
       captureFocus: () => null,
       moneyHtml: () => '',
       itemIcon: () => '',
@@ -132,6 +143,7 @@ function renderQuestFixture(referral: ReferralCardsSnapshot | null = null): {
     openReferralCards,
     tracking,
     questLog,
+    world,
     insertQuestChatLink,
     confirmDialog,
     abandonQuest,
@@ -403,8 +415,15 @@ describe('questlog_window: live refresh (the Hud slow-band poll)', () => {
     const { root, win, questIds, questLog } = renderQuestFixture();
     const [questA, questB] = questIds;
     root.querySelector<HTMLButtonElement>(`[data-quest="${questB}"]`)?.focus();
-    const list = root.querySelector<HTMLElement>('.ql-list');
-    if (list) list.scrollTop = 40;
+    const scrollers = ['.ql-list', '.ql-detail', '.ql-detail-body'].map((sel) => {
+      const node = root.querySelector<HTMLElement>(sel);
+      if (!node) throw new Error(`fixture needs ${sel}`);
+      return node;
+    });
+    const written = [40, 25, 15];
+    scrollers.forEach((node, i) => {
+      node.scrollTop = written[i];
+    });
     const progressA = questLog.get(questA);
     if (!progressA) throw new Error('fixture quest missing');
     progressA.counts = progressA.counts.map((count) => count + 1);
@@ -412,7 +431,61 @@ describe('questlog_window: live refresh (the Hud slow-band poll)', () => {
     const rebuiltRow = root.querySelector<HTMLButtonElement>(`[data-quest="${questB}"]`);
     expect(rebuiltRow).not.toBeNull();
     expect(document.activeElement).toBe(rebuiltRow);
-    expect(root.querySelector<HTMLElement>('.ql-list')?.scrollTop).toBe(list?.scrollTop);
+    expect(root.querySelector<HTMLElement>('.ql-list')).not.toBe(scrollers[0]);
+    expect(root.querySelector<HTMLElement>('.ql-list')?.scrollTop).toBe(40);
+    expect(root.querySelector<HTMLElement>('.ql-detail')?.scrollTop).toBe(25);
+    expect(root.querySelector<HTMLElement>('.ql-detail-body')?.scrollTop).toBe(15);
+  });
+
+  describe('each signed term rebuilds on its own', () => {
+    type Fixture = ReturnType<typeof renderQuestFixture>;
+    const cases: [string, (f: Fixture) => void][] = [
+      ['questsDone.size', (f) => f.world.questsDone.add('some_turned_in_quest')],
+      [
+        'talents.spec',
+        (f) => {
+          f.world.talents.spec = 'arms';
+        },
+      ],
+      ['the tracked flag', (f) => f.tracking.setTracked(f.questIds[0], false)],
+      [
+        'resolvedCounts',
+        (f) => {
+          const progress = f.questLog.get(f.questIds[1]);
+          if (!progress) throw new Error('fixture quest missing');
+          progress.resolvedCounts = [1];
+        },
+      ],
+      [
+        'selection',
+        (f) => {
+          const progress = f.questLog.get(f.questIds[1]);
+          if (!progress) throw new Error('fixture quest missing');
+          progress.selection = 'reward_choice_1';
+        },
+      ],
+    ];
+    for (const [term, move] of cases) {
+      it(`a ${term} change alone triggers a poll rebuild`, () => {
+        const f = renderQuestFixture();
+        const [questA] = f.questIds;
+        expect(f.win.selectedQuestId).toBe(questA);
+        expect(f.tracking.isTracked(questA)).toBe(true);
+        const before = f.root.querySelector(`[data-quest="${questA}"]`);
+        expect(before).not.toBeNull();
+        // Baseline: an unmoved poll keeps the very same row node.
+        f.win.refreshIfChanged();
+        expect(f.root.querySelector(`[data-quest="${questA}"]`)).toBe(before);
+        move(f);
+        f.win.refreshIfChanged();
+        const after = f.root.querySelector(`[data-quest="${questA}"]`);
+        expect(after).not.toBeNull();
+        expect(after).not.toBe(before);
+        // And it re-latched: the next poll is a no-op again.
+        f.win.refreshIfChanged();
+        expect(f.root.querySelector(`[data-quest="${questA}"]`)).toBe(after);
+      });
+    }
   });
 
   it('never pulls focus out of chat (or anything outside the window) on a poll', () => {
