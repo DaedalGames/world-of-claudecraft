@@ -1487,7 +1487,7 @@ export class CharacterVisual {
    *  the first shift, so a rig that never takes the form pays nothing. */
   private gloam: GloamPresence | null = null;
   private moonkin = false;
-  /** Moonwing's antlers, crescent and wings (form_adornments.ts).
+  /** Moonwing's antlers and crescent (form_adornments.ts).
    *  Built on the first form edge, so a rig that never shifts pays nothing. */
   private formAdornments: FormAdornments | null = null;
   private ferocityStage = 0;
@@ -1927,8 +1927,6 @@ export class CharacterVisual {
     }
     this.formAdornments?.update(
       dt,
-      s.moving,
-      s.casting,
       reducedMotion,
       this.root.visible && !farMeshShown(this.far, this.farMesh !== null, this.farCompilePending),
     );
