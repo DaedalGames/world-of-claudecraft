@@ -740,7 +740,7 @@ const PINNED_POLISH_COMPOSITE_FINGERPRINT =
   // No capture was retaken.
   // Re-minted for the Stealth Rework's enemy stealth look (renderer.ts picks the
   // veil through ghostLookFor). No capture was retaken.
-  '1aecc88850e137f53a9cfeab9376e83677c385a160c005af9ce02f0025cbf7f9';
+  '0f34c9f5d164aab6d86270d272ec3d221ae441642193024024436d944f53d136';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
