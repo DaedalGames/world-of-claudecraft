@@ -184,8 +184,10 @@ describe('haunted pumpkin personal render state', () => {
       HAUNTED_PUMPKIN_SCALE,
     ]);
     expect(built.height).toBe(HAUNTED_PUMPKIN_HEIGHT);
-    // the kit geometry itself is untouched (shared with the city dressing)
-    expect(geometry.boundingBox).toBeNull();
+    // the size lives on the group: the mesh keeps the shared kit geometry, unscaled
+    const mesh = built.group.children[0] as THREE.Mesh;
+    expect(mesh.geometry).toBe(geometry);
+    expect(mesh.scale.toArray()).toEqual([1, 1, 1]);
     kit.get.mockReturnValue({ decor: { pumpkin_lit: [{ geometry, material }] } });
     const live = buildHauntedPumpkin(
       { activeSeasonalEvent: GOURDLIGHT_EVE_ID, hauntedPumpkinsFound: [] },

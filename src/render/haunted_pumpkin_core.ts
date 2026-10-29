@@ -28,13 +28,15 @@ export function hauntedPumpkinBeacon(time: number, reducedMotion = false): numbe
  * bleed (`LIT_RIND_SHARE`) and the carved face carries the light. */
 export const HAUNTED_PUMPKIN_BEACON_RIND_SHARE = 0.6;
 const LIT_RIND_SHARE = 0.04;
+/** The candle core's share: the beacon is expressed relative to it. */
+const CANDLE_CORE_SHARE = 1.4;
 
 /** Each glow material's share of the pumpkin's light (the candle core brightest);
  * the stem and any other material carry none. */
 function glowShare(materialName: string, found: boolean): number {
   switch (materialName) {
     case 'GourdGlow':
-      return 1.4;
+      return CANDLE_CORE_SHARE;
     case 'GourdInner':
       return 1;
     case 'GourdFlesh':
@@ -60,7 +62,7 @@ export function hauntedPumpkinGlow(
 ): number {
   const share = glowShare(materialName, found);
   if (share === 0) return 0;
-  if (!found) return (share / 1.4) * hauntedPumpkinBeacon(time, reducedMotion);
+  if (!found) return (share / CANDLE_CORE_SHARE) * hauntedPumpkinBeacon(time, reducedMotion);
   const flicker = reducedMotion ? 1 : seasonalFlicker(time, 0);
   return share * flicker;
 }
