@@ -91,7 +91,6 @@ export class CalendarWindow {
     this.year = today.year;
     this.month = today.month;
     this.selectedIso = this.todayIso();
-    this.lastSig = '';
     this.render();
     this.deps.root().style.display = 'flex';
     audio.bagOpen();

@@ -382,10 +382,11 @@ export class CommissionOrderBoardPainter {
     return buildCommissionOrderBoardModel(world.commissionOrders, world.recipeList, ITEMS);
   }
 
-  /** The full paint (open, an own-action result). Opening a closed board
-   *  starts the form clean; repainting an open one carries the form across. */
-  render(el: HTMLElement, deps: CommissionOrderWindowDeps): void {
-    const carry = el.style.display === 'flex' ? captureFormState(el) : null;
+  /** The full paint (open, an own-action result). Opening a closed board, or
+   *  `resetForm` (the player's own order just posted), starts the form clean;
+   *  any other repaint of an open one carries the form across. */
+  render(el: HTMLElement, deps: CommissionOrderWindowDeps, resetForm = false): void {
+    const carry = el.style.display === 'flex' && !resetForm ? captureFormState(el) : null;
     this.root = el;
     this.deps = deps;
     renderCommissionOrderWindow(el, this.model(), deps);

@@ -81,6 +81,29 @@ describe('treasure_map_window: live refresh (the Hud slow-band poll)', () => {
     expect(root.dataset.rarity).toBe('rare');
   });
 
+  it('stays open through an upgrade whose rarity and bag swap land in different frames', () => {
+    const { world, win, root } = fixture();
+    // Online frame 1: the quest snapshot's new rarity, the old map still bagged.
+    world.treasureMap = { rarity: 'rare', siteId: TREASURE_SITES[0].id };
+    win.refreshIfChanged();
+    expect(win.isOpen).toBe(true);
+    // Frame 2: the inventory delta swaps the map item.
+    world.inventory[0] = { itemId: TREASURE_MAP_ITEM_IDS.rare, count: 1 };
+    win.refreshIfChanged();
+    expect(win.isOpen).toBe(true);
+    expect(root.dataset.rarity).toBe('rare');
+  });
+
+  it('repaints a site change on the poll', () => {
+    const { world, win, root } = fixture();
+    const other = TREASURE_SITES.find((site) => site.id !== TREASURE_SITES[0].id);
+    if (!other) throw new Error('need a second treasure site');
+    const before = root.innerHTML;
+    world.treasureMap = { rarity: 'common', siteId: other.id };
+    win.refreshIfChanged();
+    expect(root.innerHTML).not.toBe(before);
+  });
+
   it('does no DOM work on a repeated identical poll, and latches on refresh and relocalize', () => {
     const { world, win, root } = fixture();
     expect(mutationsDuring(root, () => win.refreshIfChanged())).toBe(0);

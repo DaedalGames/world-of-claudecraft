@@ -13,10 +13,13 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import type { InvSlot, QuestProgress } from '../src/sim/types';
 import {
   ServiceWindowRefresh,
-  type ServiceWindowWorld,
   serviceWindowShown,
-  serviceWindowSig,
 } from '../src/ui/hud/vendor/service_window_refresh';
+import {
+  type ServiceTrainLearns,
+  type ServiceWindowWorld,
+  serviceWindowSig,
+} from '../src/ui/hud/vendor/service_window_refresh_core';
 import { TRAIN_PENDING_TTL_MS, TrainLearnTracker } from '../src/ui/hud/vendor/train_learn_core';
 
 type MutableWorld = {
@@ -26,6 +29,7 @@ type MutableWorld = {
 function makeWorld(): MutableWorld {
   let riding: 0 | 1 | 2 = 0;
   const owned: string[] = [];
+  const pending: string[] = [];
   return {
     copper: 100,
     honor: 0,
@@ -45,9 +49,9 @@ function makeWorld(): MutableWorld {
     } as unknown as ServiceWindowWorld['craftingIdentity'],
     stationPlacements: [],
     ownedBuddies: () => owned as unknown as ReturnType<ServiceWindowWorld['ownedBuddies']>,
-    pendingBuddies: () => [],
+    pendingBuddies: () => pending as unknown as ReturnType<ServiceWindowWorld['pendingBuddies']>,
     // test hooks
-    ...{ setRiding: (t: 0 | 1 | 2) => (riding = t), owned },
+    ...{ setRiding: (t: 0 | 1 | 2) => (riding = t), owned, pending },
   } as MutableWorld;
 }
 
@@ -90,6 +94,12 @@ describe('serviceWindowSig', () => {
       ],
       ['station placements', (w) => (w.stationPlacements = [{ id: 's' } as never])],
       ['buddies', (w) => (w as unknown as { owned: string[] }).owned.push('b1')],
+      ['pending buddies', (w) => (w as unknown as { pending: string[] }).pending.push('b1')],
+      [
+        'Perfecting flag',
+        (w) =>
+          (w.inventory[0] = { ...w.inventory[0], instance: { perfectingBound: true } as never }),
+      ],
     ];
     for (const [label, mutate] of cases) {
       const w = makeWorld();
@@ -98,6 +108,35 @@ describe('serviceWindowSig', () => {
       mutate(w);
       expect(serviceWindowSig(w, learns, 0), label).not.toBe(before);
     }
+  });
+
+  it('moves when a pending buddy turns owned (the counts are not summed)', () => {
+    const w = makeWorld();
+    const hooks = w as unknown as { owned: string[]; pending: string[] };
+    hooks.pending.push('b1');
+    const before = serviceWindowSig(w, learns, 0);
+    hooks.pending.pop();
+    hooks.owned.push('b1');
+    expect(serviceWindowSig(w, learns, 0)).not.toBe(before);
+  });
+
+  it('moves on an in-flight and on a confirmed train Learn', () => {
+    const w = makeWorld();
+    let pendingIds = new Set<string>();
+    let confirmed = new Set<string>();
+    const fake: ServiceTrainLearns = {
+      pendingIds: () => pendingIds,
+      confirmedIds: () => confirmed,
+    };
+    const before = serviceWindowSig(w, fake, 0);
+    pendingIds = new Set(['r1']);
+    const inFlight = serviceWindowSig(w, fake, 0);
+    expect(inFlight).not.toBe(before);
+    pendingIds = new Set();
+    confirmed = new Set(['r1']);
+    const done = serviceWindowSig(w, fake, 0);
+    expect(done).not.toBe(before);
+    expect(done).not.toBe(inFlight);
   });
 
   it('moves on a same-size recipe or station swap, not just a count change', () => {
@@ -156,6 +195,22 @@ describe('ServiceWindowRefresh', () => {
     world.honor = 50; // honor gained online: the WARFARE / vendor rows re-price
     expect(latch.refreshIfChanged(world, learns, 0)).toBe(true);
     expect(repaints).toBe(2);
+  });
+
+  it('builds the signature once per repainting poll (the repaint relatch is skipped)', () => {
+    let builds = 0;
+    const tier = world.ridingTrainingTier;
+    world.ridingTrainingTier = () => {
+      builds++;
+      return tier();
+    };
+    expect(latch.refreshIfChanged(world, learns, 0)).toBe(true);
+    expect(builds).toBe(1);
+    // An explicit repaint outside the poll still re-latches.
+    world.copper = 7;
+    latch.relatch(world, learns, 0);
+    expect(builds).toBe(2);
+    expect(latch.refreshIfChanged(world, learns, 0)).toBe(false);
   });
 
   it('an explicit repaint re-latches, so the next poll does not rebuild again', () => {

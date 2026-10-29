@@ -194,6 +194,10 @@ export interface CharWindowDeps extends Omit<PainterHostPresentation, 'itemToolt
   /** Flip the stored Time Played preference and repaint the sheet (HUD-owned:
    *  the settings write and the repaint). */
   togglePlaytimeVisible(): void;
+  /** The sheet's data signature for the board on screen
+   *  (char_sheet_sig_core.ts charSheetRefreshSigFor; HUD-owned because it
+   *  reads the clock). Absent, refreshIfChanged never rebuilds. */
+  refreshSig?(tab: CharacterSidebarTab): string;
 }
 
 const SHARE_GLYPH =
@@ -204,6 +208,9 @@ export class CharWindow {
   private sidebarTab: CharacterSidebarTab = 'stats';
   /** The tab the last paint showed: a same-tab rebuild keeps the panel's scroll. */
   private paintedTab: CharacterSidebarTab | null = null;
+  /** The data signature the last paint drew from (see refreshIfChanged). Latched
+   *  by every paint, so a tab click or a reopen never buys a second rebuild. */
+  private lastSig = '';
   // True while a native drag started on one of this window's own equipped-item
   // rows (dragging a piece off the paperdoll to unequip it) is in flight. A
   // browser never fires dragend on a source element that has already left the
@@ -249,10 +256,31 @@ export class CharWindow {
     if (this.isOpen) this.render();
   }
 
-  /** The sidebar tab the sheet shows (kept across close and reopen). Read-only:
-   *  the HUD's refresh latch narrows charSheetRefreshSigFor to this board. */
+  /** The sidebar tab the sheet shows (kept across close and reopen). Read-only. */
   get activeSidebarTab(): CharacterSidebarTab {
     return this.sidebarTab;
+  }
+
+  /**
+   * The Hud slow-band poll (2 Hz). The stats (buffs, procs, level), header,
+   * progression block and the visible tab's readouts sit on a cold window, and
+   * no surface that moves them repaints an already open sheet;
+   * char_sheet_sig_core.ts says what the signature signs. Closed, it reads
+   * nothing: every paint (open, tab click, language switch) re-latches, so the
+   * first poll after one compares equal. Converges in both hosts with no
+   * optimistic write (offline setters are synchronous; online the
+   * atitle/aborder echo and the snapshot's ownership fields land well inside
+   * one band), and render() rebuilds every row fresh.
+   */
+  refreshIfChanged(): void {
+    if (!this.isOpen || this.refreshSig() === this.lastSig) return;
+    // The wipe removes a hovered stat cell, which never fires mouseleave.
+    this.deps.hideTooltip();
+    this.render();
+  }
+
+  private refreshSig(): string {
+    return this.deps.refreshSig?.(this.sidebarTab) ?? '';
   }
 
   /** The title chip carries the player's own COMPOSED face, and that portrait
@@ -277,7 +305,7 @@ export class CharWindow {
     // for bag-item drags).
     if (this.dragRenderGate.shouldDefer(this.unequipDragActive)) return;
     const el = this.deps.root();
-    // The 2 Hz staleness latch (Hud.refreshCharSheetIfChanged) makes mid-focus
+    // The 2 Hz staleness latch (refreshIfChanged) makes mid-focus
     // rebuilds ROUTINE: a loot, a deed earn, or a mount gain repaints the open
     // sheet within 500 ms, and the innerHTML wipe below would park a keyboard
     // user's focus on <body> (the FocusManager trap is focus-inside-only, so
@@ -306,6 +334,7 @@ export class CharWindow {
     const hobbyCraft = hobbyCraftText(world.hobbyCraft);
     const sidebar = buildCharacterSidebarView(this.sidebarTab);
     this.sidebarTab = sidebar.selected;
+    this.lastSig = this.refreshSig();
     const subtitle =
       world.hobbyCraft === null
         ? t('hudChrome.charSidebar.subtitleNoHobby', {

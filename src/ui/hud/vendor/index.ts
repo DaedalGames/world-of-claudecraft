@@ -2,6 +2,7 @@ export * from './buy_quantity_prompt_window';
 export * from './heroic_vendor_view';
 export * from './heroic_vendor_window';
 export * from './service_window_refresh';
+export * from './service_window_refresh_core';
 export * from './train_learn_core';
 export * from './train_view';
 export * from './train_window';

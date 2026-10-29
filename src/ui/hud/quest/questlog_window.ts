@@ -162,6 +162,8 @@ export class QuestLogWindow {
    */
   refreshIfChanged(): void {
     if (!this.isOpen || this.signature() === this.lastSig) return;
+    // The wipe removes a hovered reward, which never fires mouseleave.
+    this.deps.hideTooltip();
     this.paint(true);
   }
 

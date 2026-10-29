@@ -1882,11 +1882,6 @@ export class Hud {
   // online cprof or professions snapshot replaces stale archetype art/title
   // and Gathering numbers without repainting for attunedZone bystanders.
   private lastProfessionSurfaceSig = '';
-  // The character sheet's WORN cosmetic rows (active title line, border badge
-  // worn state) are painted from the same cold path, and the Book of Deeds
-  // picker repaints only itself when the player wears a different one. Latch the
-  // two ids on the slow band so an already-open sheet converges in both hosts.
-  private lastCharSheetSig = '';
   // Commission opt-in state (Professions 2.0): recipe ids whose
   // NEXT craft goes out with the commission flag. Held here (not in the
   // painter) so the crafting window's staleness repaints never untick a
@@ -5765,6 +5760,7 @@ export class Hud {
       if (!hooks) return;
       hooks.onSettingChange('showPlaytime', !hooks.settings.get('showPlaytime'));
     },
+    refreshSig: (tab) => charSheetRefreshSigFor(this.sim, tab, Date.now()),
   });
   // Inspect ("Profile") window painter (inspect_view.ts pure core + inspect_window.ts
   // painter). It paints #inspect-window for both the rich in-range card (live
@@ -9341,7 +9337,7 @@ export class Hud {
     if (slowHud && this.reliquaryWindow.isOpen) this.reliquaryWindow.refreshIfChanged();
     if (slowHud && this.cosmeticsWindow.isOpen) this.cosmeticsWindow.refreshIfChanged();
     if (slowHud) this.refreshOpenProfessionSurfacesIfChanged();
-    if (slowHud) this.refreshCharSheetIfChanged();
+    if (slowHud) this.charWindow.refreshIfChanged();
     if (slowHud && this.professionsWindow.isOpen) this.professionsWindow.refreshIfChanged();
     if (slowHud) this.plantSheetWindow.refreshIfChanged();
     if (slowHud && this.commissionBoardOpen) this.commissionBoardPainter.refreshIfChanged();
@@ -11530,7 +11526,7 @@ export class Hud {
           // when it is not); deliver also touches bags on the crafter's own
           // arm (the requester's side rides the ordinary loot event's bag
           // refresh).
-          this.renderCommissionBoard();
+          this.renderCommissionBoard(ev.action === 'open' && ev.ok);
           if (ev.action === 'deliver' && $('#bags').style.display !== 'none') this.renderBags();
           break;
         }
@@ -15324,23 +15320,28 @@ export class Hud {
     if (!wasOpen) this.commissionBoardOpenerFocus = this.commissionBoardFocus.captureFocus();
   }
 
-  private renderCommissionBoard(): void {
+  /** `resetForm`: the player's own order just posted, so the form starts clean. */
+  private renderCommissionBoard(resetForm = false): void {
     if (!this.commissionBoardOpen) return;
-    this.commissionBoardPainter.render($('#commission-board-window'), {
-      ...this.presentationBag,
-      hideTooltip: () => this.hideTooltip(),
-      onOpen: (recipeId, scope, crafterName) => {
-        this.sim.openCommissionOrder(recipeId, scope, crafterName);
+    this.commissionBoardPainter.render(
+      $('#commission-board-window'),
+      {
+        ...this.presentationBag,
+        hideTooltip: () => this.hideTooltip(),
+        onOpen: (recipeId, scope, crafterName) => {
+          this.sim.openCommissionOrder(recipeId, scope, crafterName);
+        },
+        onCancel: (orderId) => this.sim.cancelCommissionOrder(orderId),
+        onAccept: (orderId) => this.sim.acceptCommissionOrder(orderId),
+        onDeliver: (orderId) => this.sim.deliverCommissionOrder(orderId),
+        // The gathering goal Track control (Intentional Gathering PR4):
+        // renders only on a row this viewer accepted to craft (canDeliver),
+        // so no separate accepted-mine check is needed here.
+        onTrack: (orderId) => this.gatheringGoalController.onTrack(orderId),
+        onClose: () => this.closeCommissionBoard(),
       },
-      onCancel: (orderId) => this.sim.cancelCommissionOrder(orderId),
-      onAccept: (orderId) => this.sim.acceptCommissionOrder(orderId),
-      onDeliver: (orderId) => this.sim.deliverCommissionOrder(orderId),
-      // The gathering goal Track control (Intentional Gathering PR4):
-      // renders only on a row this viewer accepted to craft (canDeliver),
-      // so no separate accepted-mine check is needed here.
-      onTrack: (orderId) => this.gatheringGoalController.onTrack(orderId),
-      onClose: () => this.closeCommissionBoard(),
-    });
+      resetForm,
+    );
   }
 
   closeCommissionBoard(): void {
@@ -15701,12 +15702,12 @@ export class Hud {
     this.renderCrafting();
   }
 
-  /** Repaint every OPEN service window (copper vendor, heroic quartermaster,
-   *  WARFARE quartermaster, training ladder, unbind list) behind its own
-   *  open-plus-shown guard. All five price their rows against the purse or a
-   *  balance, so the language switch and the authoritative inventory hook
-   *  repaint the family through this one method; the per-site copies of the
-   *  guard pack earned the extraction (rule of three). */
+  /** Repaint every OPEN service window (copper, heroic and crucible vendors,
+   *  WARFARE quartermaster, training ladder, unbind list; the crucible's id is
+   *  nulled by every close and tenant swap, so it needs no shown check) and
+   *  let the Rift Forge re-read through its own guarded poll. They price rows
+   *  against the purse or a balance, so the language switch, the inventory
+   *  hook and the slow-band serviceLatch repaint the family here. */
   private repaintOpenServiceWindows(): void {
     if (this.openVendorNpcId !== null && $('#vendor-window').style.display === 'block')
       this.renderVendor();
@@ -15719,7 +15720,7 @@ export class Hud {
       this.renderTrain();
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
-    if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
+    this.riftForgeWindow.refreshIfChanged();
     this.serviceLatch.relatch(this.sim, this.trainLearns, performance.now());
   }
 
@@ -15899,33 +15900,6 @@ export class Hud {
     // session, so a stale row is over-locked rather than wrongly open. (The
     // sole decrement anywhere is the one-time mastery reset, which runs inside
     // applyState at character load, when no window can be open.)
-  }
-
-  // The whole-sheet sibling of refreshOpenProfessionSurfacesIfChanged: the
-  // stats (buffs, procs, level), header, progression block and the visible
-  // tab's readouts sit on a cold window, and no surface that moves them
-  // repaints an already open sheet (char_sheet_sig_core.ts says what it signs).
-  //
-  // Computed even when closed, like the sibling, with the cost stated rather
-  // than waved through: the reads are scalars plus one aura and one worn-item
-  // walk, the size reads are O(1), and Sim.ownedMounts() pays
-  // one merged bags-plus-bank allocation per 2 Hz tick (the read the Reliquary
-  // tracker defers behind a thunk). Microseconds against a 500 ms band,
-  // ACCEPTED so the warm signature stops a reopen from being followed by a
-  // redundant signature-diff repaint. The sizes are a proxy, not a second
-  // completion walk; the core's own header says what the proxy misses.
-  //
-  // Rule of three: a THIRD consumer of these ownership reads on this band earns
-  // one shared once-per-tick computation instead of a third inventory walk.
-  //
-  // Converges in both hosts with no optimistic write (offline setters are
-  // synchronous; online the atitle/aborder echo and the snapshot's ownership
-  // fields land well inside one band), and render() rebuilds every row fresh.
-  private refreshCharSheetIfChanged(): void {
-    const sig = charSheetRefreshSigFor(this.sim, this.charWindow.activeSidebarTab, Date.now());
-    if (sig === this.lastCharSheetSig) return;
-    this.lastCharSheetSig = sig;
-    this.charWindow.renderIfOpen();
   }
 
   renderBags(): void {

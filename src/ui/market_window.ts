@@ -530,11 +530,21 @@ export class MarketWindow {
     );
   }
 
-  // What the staged item's form can sell right now: an instanced staging is a
-  // single copy, a fungible one is the live bag count.
+  // What the staged item's form can sell right now: an instanced staging is its
+  // one copy while the bags still hold it (by value: the online mirror rebuilds
+  // payload objects), a fungible one is the live bag count.
   private sellHaveNow(): number {
-    if (!this.sellItemId) return 0;
-    return this.sellInstance ? 1 : this.fungibleBagCount(this.sellItemId);
+    const itemId = this.sellItemId;
+    if (!itemId) return 0;
+    if (!this.sellInstance) return this.fungibleBagCount(itemId);
+    const staged = JSON.stringify(this.sellInstance);
+    const held = this.deps
+      .world()
+      .inventory.some(
+        (slot) =>
+          slot?.itemId === itemId && slot.instance && JSON.stringify(slot.instance) === staged,
+      );
+    return held ? 1 : 0;
   }
 
   // The Sell body's structure, read through the same pure core renderSell paints

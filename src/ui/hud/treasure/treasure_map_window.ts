@@ -44,13 +44,16 @@ function inksHeld(world: TreasureMapWorld): number {
   );
 }
 
-/** Whether the bags still hold the read map itself: sold, destroyed or mailed
- *  away, the parchment has nothing left to show. */
+const MAP_ITEM_IDS: ReadonlySet<string> = new Set(Object.values(TREASURE_MAP_ITEM_IDS));
+
+/** Whether the bags still hold a treasure map: sold, destroyed or mailed away,
+ *  the parchment has nothing left to show. ANY rarity counts, not just the read
+ *  map's own: online an upgrade's new rarity (the quest snapshot) and its
+ *  swapped bag item (the inventory delta) can land in different frames, and a
+ *  rarity-exact check would close the window mid-upgrade. */
 function mapInBags(world: TreasureMapWorld): boolean {
-  const map = world.treasureMap;
-  if (!map) return false;
-  const itemId = TREASURE_MAP_ITEM_IDS[map.rarity];
-  return world.inventory.some((slot) => slot?.itemId === itemId);
+  if (!world.treasureMap) return false;
+  return world.inventory.some((slot) => slot !== null && MAP_ITEM_IDS.has(slot.itemId));
 }
 
 export class TreasureMapWindow {

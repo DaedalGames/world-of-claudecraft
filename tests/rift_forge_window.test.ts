@@ -330,6 +330,41 @@ describe('RiftForgeWindow', () => {
       expect(document.activeElement).toBe(root.querySelector('[data-socket]'));
     });
 
+    it('carries the pick and focus to the SAME band when a new band shifts the rows', () => {
+      inventory.push({ itemId: RIFT_GEM_IDS[0], count: 1 });
+      win.open();
+      (root.querySelector('select[data-gem]') as HTMLSelectElement).value = RIFT_GEM_IDS[2];
+      root.querySelector<HTMLButtonElement>('[data-socket]')?.focus();
+      // A second band lands in the EARLIER bag slot: the original band's row
+      // index moves from 0 to 1, its bag slot does not.
+      inventory[0] = { itemId: gear.itemId, count: 1, instance: structuredClone(gear.instance) };
+      win.refreshIfChanged();
+      const picks = [...root.querySelectorAll<HTMLSelectElement>('select[data-gem]')];
+      expect(picks).toHaveLength(2);
+      expect(picks[0].value, 'the newcomer starts unpicked').toBe(RIFT_GEM_IDS[0]);
+      expect(picks[1].value, 'the pick followed its band').toBe(RIFT_GEM_IDS[2]);
+      expect(document.activeElement).toBe(root.querySelectorAll('[data-socket]')[1]);
+    });
+
+    it('a reopen starts with no carried pick', () => {
+      inventory.push({ itemId: RIFT_GEM_IDS[0], count: 1 });
+      win.open();
+      (root.querySelector('select[data-gem]') as HTMLSelectElement).value = RIFT_GEM_IDS[2];
+      win.close();
+      win.open();
+      expect(root.querySelector<HTMLSelectElement>('select[data-gem]')?.value).toBe(
+        RIFT_GEM_IDS[0],
+      );
+    });
+
+    it('relocalize re-latches: the next unchanged poll does not rebuild', () => {
+      win.open();
+      win.relocalize();
+      const card = root.querySelector('.rf-ring');
+      win.refreshIfChanged();
+      expect(root.querySelector('.rf-ring')).toBe(card);
+    });
+
     it('holds while a gem picker has focus or a click awaits its result', async () => {
       win.open();
       root.querySelector<HTMLSelectElement>('[data-gem]')?.focus();

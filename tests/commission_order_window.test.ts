@@ -468,6 +468,63 @@ describe('CommissionOrderBoardPainter: live refresh', () => {
     expect(el.querySelector('.commission-order-row')).toBe(row);
   });
 
+  it('a sections-only poll rebuild restores the window root scroll offset', () => {
+    const { el, painter } = setup([order({ id: 8 }), order({ id: 9 })]);
+    // jsdom keeps no layout, so stand in for the browser: a root scrollTop the
+    // test can write, which the sections wipe collapses to 0 the way emptying a
+    // scrolled box clamps it in a real browser.
+    let scroll = 0;
+    Object.defineProperty(el, 'scrollTop', {
+      configurable: true,
+      get: () => scroll,
+      set: (value: number) => {
+        scroll = value;
+      },
+    });
+    const body = el.querySelector<HTMLElement>('.commission-board-sections');
+    if (!body) throw new Error('fixture needs the sections body');
+    const wipe = body.replaceChildren.bind(body);
+    body.replaceChildren = (...nodes: (Node | string)[]) => {
+      wipe(...nodes);
+      scroll = 0;
+    };
+    const form = el.querySelector('.commission-board-form');
+    const rowsBefore = [...el.querySelectorAll('.commission-order-row')];
+    expect(rowsBefore).toHaveLength(2);
+    el.scrollTop = 60;
+    world.commissionOrders = [
+      order({ id: 8, status: 'accepted', acceptedByName: 'Borin' }),
+      order({ id: 9 }),
+    ];
+    painter.refreshIfChanged();
+    expect(el.scrollTop).toBe(60);
+    // The sections really rebuilt (new row nodes), the form did not.
+    const rowsAfter = [...el.querySelectorAll('.commission-order-row')];
+    expect(rowsAfter).toHaveLength(2);
+    for (const row of rowsAfter) expect(rowsBefore).not.toContain(row);
+    expect(el.querySelector('.commission-board-sections')).toBe(body);
+    expect(el.querySelector('.commission-board-form')).toBe(form);
+  });
+
+  it('render(el, deps, true) starts the form clean on an OPEN board; omitted, it carries the form', () => {
+    const { el, painter, d } = setup();
+    expect(el.style.display).toBe('flex');
+    fillForm(el);
+    // resetForm omitted: the typed crafter name and scope ride the repaint.
+    painter.render(el, d);
+    expect((el.querySelector('#cob-recipe') as HTMLSelectElement).value).toBe(OTHER_RECIPE);
+    expect((el.querySelector('input[value="crafter"]') as HTMLInputElement).checked).toBe(true);
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('Borin');
+    // resetForm true (the player's own order just posted): clean, board still open.
+    painter.render(el, d, true);
+    expect(el.style.display).toBe('flex');
+    expect((el.querySelector('#cob-recipe') as HTMLSelectElement).value).toBe(SWORD_RECIPE);
+    expect((el.querySelector('input[value="open"]') as HTMLInputElement).checked).toBe(true);
+    expect((el.querySelector('input[value="crafter"]') as HTMLInputElement).checked).toBe(false);
+    expect((el.querySelector('#cob-crafter-field') as HTMLElement).style.display).toBe('none');
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('');
+  });
+
   it('opening a closed board starts the form clean', () => {
     const { el, painter, d } = setup();
     fillForm(el);

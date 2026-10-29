@@ -1,6 +1,6 @@
-// Refresh signature for the character sheet: the cheap data digest the HUD's
-// 2 Hz slow band (Hud.refreshCharSheetIfChanged) latches on to call
-// charWindow.renderIfOpen() when anything the open sheet shows has moved.
+// Refresh signature for the character sheet: the cheap data digest the open
+// sheet's 2 Hz slow-band poll (CharWindow.refreshIfChanged) latches on to
+// rebuild when anything the open sheet shows has moved.
 //
 // Why this exists at all: the character sheet is a COLD window. It repaints on
 // open and on the handful of edges that call renderIfOpen, so without a latch an
@@ -21,8 +21,9 @@
 // 2. The Stats tab's boards and attribute tiles, signed by the RAW inputs the
 //    stat model (char_stat_model_core.ts) reads, never by calling it: the stat
 //    block, the attack / spell / heal power, the crit / dodge chances and
-//    ratings, the shared crit bonus, and the talent spec (the Specialization
-//    panel). Numbers are rounded to 1e-3, which is at or finer than every
+//    ratings, the shared crit bonus, the spell-only crit auras' summed bonus
+//    (the Spell Crit cell adds it on top of Intellect), and the talent spec
+//    (the Specialization panel). Numbers are rounded to 1e-3, which is at or finer than every
 //    display precision the cells use (whole numbers, and one-decimal percents of
 //    0..1 fractions), so a sub-display float wobble cannot repaint.
 // 3. Per-tab terms: Reputation (faction standings, the world quest board's done
@@ -36,24 +37,27 @@
 //
 // AURAS ARE NOT SIGNED. The sheet never draws an aura (the only aura reader is
 // the stat tooltip, built at hover time), and every number a buff or proc moves
-// is signed above in its own right. Signing aura ids, stacks or timers would
+// is signed above in its own right; the one stat the sheet derives from auras
+// at paint time, Spell Crit, signs its aura bonus as a single number, which a
+// timer, a stack or an unrelated aura never moves. Signing aura ids, stacks or timers would
 // rebuild the whole open sheet up to twice a second in combat (a mob DoT, each
 // stack of a debuff) for a picture that did not change.
 //
-// TAB AWARENESS. charSheetRefreshSigFor(world) with no view signs the union of
+// TAB AWARENESS. charSheetRefreshSigFor(world) with no tab signs the union of
 // every tab's terms, so it is correct whichever tab is showing, at the price of
 // a rebuild when a HIDDEN tab's data moves (the Time Played minute, for one,
-// would repaint the Character tab once a minute). Passing the CharWindow's
+// would repaint the Stats tab once a minute). Passing the CharWindow's
 // active tab narrows layers 2 and 3 to the board actually on screen, and
 // passing a clock adds the Reputation reset countdown's minute (the core never
 // reads a clock itself). Only layer 1 stays signed on every tab.
 //
-// Cost: one fixed array through JSON.stringify per slow tick, the worn equipment record (a fixed slot count),
-// and, on the Reputation tab, the world quest board (a few entries). No stat
-// model, no t(), no formatting. The original layer's one non-O(1) read stays as
-// documented below: Sim.ownedMounts() spreads bags AND bank into a fresh array
-// per call, read unconditionally because keeping the signature warm across a
-// closed sheet is what avoids a redundant repaint on reopen.
+// Cost: one fixed array through JSON.stringify per slow tick, the worn
+// equipment record (a fixed slot count), the player's auras for the spell crit
+// bonus, and, on the Reputation tab, the world quest board (a few entries). No
+// stat model, no t(), no formatting. The one allocating read is
+// Sim.ownedMounts(), which spreads bags AND bank into a fresh array per call,
+// read only while the sheet is open (every paint re-latches, so a
+// reopen is never followed by a redundant repaint).
 //
 // Blind spots, all accepted: a mount add plus a mount remove inside ONE 500 ms
 // band cancel out (the Reliquary tracker carries the same one); a discovery that
@@ -77,6 +81,7 @@
 // Pure and host-agnostic: no DOM, no i18n, no clock, no live world import, so a
 // Vitest drives it directly with a plain object.
 
+import { spellCritBonusFromAuras } from '../sim/combat/spell_combat';
 import type { Entity, EquipSlot, WorldQuestProgress } from '../sim/types';
 import { worldQuestCompletedForBoard } from '../sim/world_quest_practice';
 import type { CharacterSidebarTab } from './char_view';
@@ -107,6 +112,7 @@ export interface CharSheetSigWorld {
     | 'hasteRating'
     | 'hitRating'
     | 'sharedCritBonus'
+    | 'auras'
   >;
   equipment: Readonly<Partial<Record<EquipSlot, string>>>;
   talentSpec: string | null;
@@ -167,6 +173,7 @@ function statsTerms(world: CharSheetSigWorld): unknown[] {
     r3(p.hasteRating),
     r3(p.hitRating),
     r3(p.sharedCritBonus),
+    r3(spellCritBonusFromAuras(p)),
     world.talentSpec,
   ];
 }

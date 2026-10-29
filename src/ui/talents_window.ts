@@ -171,6 +171,8 @@ export class TalentsWindow {
     if (!this.isOpen) return;
     if (this.dismissLoadoutMenu !== null) return;
     if (this.signature() === this.lastSig) return;
+    // The wipe removes a hovered node, which never fires mouseleave.
+    this.deps.hideTooltip();
     this.paint(true);
   }
 
@@ -197,7 +199,7 @@ export class TalentsWindow {
     const root = this.deps.root();
     if (root.style.display !== 'block') return;
     const focusKey = keepPlace ? captureFocusKey(root) : null;
-    const scroll = root.querySelector('#tal-body')?.scrollTop ?? 0;
+    const scroll = keepPlace ? (root.querySelector('#tal-body')?.scrollTop ?? 0) : 0;
     this.drawWindow(root);
     this.stampFocusKeys(root);
     this.lastSig = this.signature();

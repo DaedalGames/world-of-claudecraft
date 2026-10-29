@@ -195,7 +195,7 @@ const FANOUT_ARMS: readonly string[] = [
   'this.talentsWindow.relocalize|',
   'this.treasureMapWindow.relocalize|',
   "this.renderBags|$('#bags').style.display !== 'none'",
-  // The four service windows (copper vendor, heroic quartermaster, train,
+  // The service windows (copper, heroic and crucible vendors, warfare, train,
   // unbind) repaint through the shared helper; its per-window open-plus-shown
   // guards are pinned by tests/train_window_hud.test.ts, since this half only
   // sees refreshLocalizedDynamicUi's OWN statement-position calls.
@@ -475,9 +475,9 @@ const ANSWERED: readonly AnsweredSurface[] = [
   },
   {
     file: 'char_window.ts',
-    memos: ['paintedTab'],
+    memos: ['lastSig', 'paintedTab'],
     answer: 'this.charWindow.renderIfOpen',
-    why: 'paintedTab is the sidebar tab the last paint showed, read only to keep the panel scroll across a same-tab rebuild (text-free, it gates no paint); the fan-out renderIfOpen rebuilds the whole sheet in the current language and re-stamps it',
+    why: 'lastSig is the sheet data signature (stat numbers, ids, ranks and counts, none of which a locale moves) and paintedTab is the sidebar tab the last paint showed, read only to keep the panel scroll across a same-tab rebuild; the fan-out renderIfOpen rebuilds the whole sheet in the current language and re-latches both',
   },
   {
     file: 'calendar_window.ts',
@@ -738,9 +738,9 @@ const ANSWERED: readonly AnsweredSurface[] = [
   },
   {
     file: 'hud.ts',
-    memos: ['lastCharSheetSig', 'lastProfessionSurfaceSig'],
+    memos: ['lastProfessionSurfaceSig'],
     answer: 'this.charWindow.renderIfOpen',
-    why: "the character sheet's stat signature and the profession surface signature: stat numbers, ids, ranks and counts, none of which a locale moves. Both gate the same window, and the fan-out drives charWindow.renderIfOpen(), which rebuilds it wholesale with fresh t() when it is open",
+    why: 'the profession surface signature: ids, ranks and counts, none of which a locale moves. It gates the character window, and the fan-out drives charWindow.renderIfOpen(), which rebuilds it wholesale with fresh t() when it is open',
   },
   {
     file: 'hud.ts',

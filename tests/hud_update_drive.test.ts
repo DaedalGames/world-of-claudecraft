@@ -1544,12 +1544,16 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     why: 'repaints the character window and the crafting window when a profession number moves',
   },
   {
-    call: 'this.refreshCharSheetIfChanged',
+    call: 'this.charWindow.refreshIfChanged',
     band: 'slow',
     gate: '',
     surface: 'window',
-    guard: { kind: 'hud', proof: 'if (sig === this.lastCharSheetSig) return;' },
-    why: 'converges the open character sheet on its whole progression block: the WORN title / border (the deeds picker repaints only itself), the earned border badges, and the Reliquary pair plus Curator rank',
+    guard: {
+      kind: 'module',
+      module: 'char_window.ts',
+      proof: 'if (!this.isOpen || this.refreshSig() === this.lastSig) return;',
+    },
+    why: 'converges the open character sheet on everything it paints (char_sheet_sig_core.ts): stats and buffs, the header, the visible tab, the WORN title / border, the badges and the Reliquary pair; closed it reads nothing',
   },
   {
     call: 'this.professionsWindow.refreshIfChanged',
@@ -2080,12 +2084,13 @@ describe('Hud.update() drives exactly the registered set, on the registered band
       // refreshing instead of only closing.
       // The courier window owns both revision and content signature guards.
       // Lantern Hall's guild window owns its signature guard (hud/guild_hall/).
-      module: 39,
-      // Phase 20's refreshCharSheetIfChanged and its siblings. Their latches are
-      // HUD fields (lastCharSheetSig et al) because the cold char_window painter
-      // holds no signature of its own to diff. The release's trade row left this
-      // bucket when its lastTradeSig latch moved into the woc_trade module.
-      hud: 6,
+      module: 40,
+      // The profession-surface latch and its siblings. Their latches are HUD
+      // fields because the painters they gate hold no signature of their own.
+      // The release's trade row left this bucket when its lastTradeSig latch
+      // moved into the woc_trade module, and the character sheet's when its
+      // latch moved into char_window (its paints now re-latch it).
+      hud: 5,
       // Up to 12 with the crucible vendor's out-of-range close: the same
       // callsite-guarded shape as the copper and heroic vendor closes.
       // Up one more on the release arm's own callsite-guarded row, beside the
@@ -2128,6 +2133,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
         'bags_window.ts: if (!bagsMoneyRowStale(el.style.display, this.deps.world().copper, this.lastMoneyCopper)) return;',
         'bank_window.ts: if (sig === this.lastSig) return;',
         'calendar_window.ts: if (sig === this.lastSig) return;',
+        'char_window.ts: if (!this.isOpen || this.refreshSig() === this.lastSig) return;',
         'card_duel_window.ts: if (sig === this.lastSig) return;',
         'daily_rewards_window.ts: if (!this.charterFit.changedFrom(this.deps.world().bankPurchasedSlots)) return;',
         'deeds_window.ts: if (sig === this.lastSig) return;',
@@ -2139,8 +2145,6 @@ describe('Hud.update() drives exactly the registered set, on the registered band
         'hud.ts: if (craftCastActivitySig(session) !== this.lastCraftingCastSig) {',
         'hud.ts: if (craftingReagentSig(this.sim.inventory, this.sim.player.name, this.sim.craftVaultStock) === this.lastCraftingReagentSig) return;',
         'hud.ts: if (sig !== this.lastLootSettingsSig) {',
-        // Phase 20: the progression-block latch for the open character sheet.
-        'hud.ts: if (sig === this.lastCharSheetSig) return;',
         'hud.ts: if (sig === this.lastProfessionSurfaceSig) return;',
         'hud.ts: if (sig === this.lastTownFocusSig) return;',
         'hud/woc_trade/woc_trade_controller.ts: if (sig === this.lastTradeSig) return;',

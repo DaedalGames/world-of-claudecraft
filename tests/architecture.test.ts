@@ -521,6 +521,7 @@ const UI_PURE_CORES = [
   'src/ui/hud/vendor/crucible_vendor_view.ts',
   'src/ui/hud/vendor/warfare_vendor_view.ts',
   'src/ui/hud/vendor/train_view.ts',
+  'src/ui/hud/vendor/service_window_refresh_core.ts',
   'src/ui/hud/vendor/train_learn_core.ts',
   'src/ui/hud/vendor/unbind_view.ts',
   'src/ui/card_duel_view.ts',

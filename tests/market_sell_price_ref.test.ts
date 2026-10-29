@@ -54,19 +54,27 @@ interface Harness {
   /** Swap what the window reads next, simulating a snapshot arriving. */
   setInfo(next: MarketInfo | null): void;
   /** Swap the carried bags, simulating a listing escrow or a loot landing. */
-  setBags(next: { itemId: string; count: number }[]): void;
+  setBags(next: { itemId: string; count: number; instance?: unknown }[]): void;
+  /** Every fungible marketList call: item, quantity, total price. */
+  lists: [string, number, number][];
 }
 
 function harness(initial: MarketInfo): Harness {
+  const lists: [string, number, number][] = [];
   const root = document.createElement('div');
   document.body.appendChild(root);
   const world = {
     marketInfo: initial as MarketInfo | null,
     marketCollectPending: false,
-    inventory: [{ itemId: ITEM, count: 3 }] as { itemId: string; count: number }[],
+    inventory: [{ itemId: ITEM, count: 3 }] as {
+      itemId: string;
+      count: number;
+      instance?: unknown;
+    }[],
     marketSearch: () => {},
     marketSellPriceCheck: () => {},
-    marketList: () => {},
+    marketList: (itemId: string, qty: number, total: number) =>
+      void lists.push([itemId, qty, total]),
     marketListInstance: () => {},
     marketBuy: () => {},
     marketCancel: () => {},
@@ -98,6 +106,7 @@ function harness(initial: MarketInfo): Harness {
     setBags: (next) => {
       world.inventory = next;
     },
+    lists,
   };
 }
 
@@ -242,6 +251,40 @@ describe('market_window: the Sell tab stock and listing count stay live (world m
     expect(h.root.querySelector('.mkt-sell-pick')?.textContent).toBe(
       t('itemUi.market.sellPickEmpty'),
     );
+  });
+
+  it('List clamps the typed quantity to the LIVE stack, not the count the form opened with', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    const qty = qtyInput(h.root);
+    const gold = h.root.querySelector<HTMLInputElement>('#mkt-g');
+    if (qty) qty.value = '3';
+    if (gold) gold.value = '1';
+    // Two of the three sold to a vendor while the form stayed open.
+    h.setBags([{ itemId: ITEM, count: 2 }]);
+    h.window.refreshIfChanged();
+    expect(qtyInput(h.root)).toBe(qty);
+    h.root.querySelector<HTMLButtonElement>('.mkt-list-btn')?.click();
+    expect(h.lists).toHaveLength(1);
+    expect(h.lists[0][1]).toBe(2);
+  });
+
+  it('drops a staged instanced copy once that copy leaves the bags', () => {
+    const h = harness(info());
+    const copy = { guid: 'g-1' };
+    h.setBags([{ itemId: ITEM, count: 1, instance: copy }]);
+    h.window.open();
+    h.root.querySelector<HTMLElement>('[data-tab="sell"]')?.click();
+    h.window.stageSell(ITEM, copy as never);
+    expect(h.root.querySelector('#mkt-g')).not.toBeNull();
+    // The online mirror rebuilds the payload object: an equal copy still counts.
+    h.setBags([{ itemId: ITEM, count: 1, instance: { guid: 'g-1' } }]);
+    h.window.refreshIfChanged();
+    expect(h.root.querySelector('#mkt-g')).not.toBeNull();
+    // Vendored away while staged: the form must not keep offering it.
+    h.setBags([{ itemId: ITEM, count: 1, instance: { guid: 'g-2' } }]);
+    h.window.refreshIfChanged();
+    expect(h.root.querySelector('#mkt-g')).toBeNull();
   });
 
   it('patches the note listing count when the snapshot echoes a new listing', () => {
