@@ -151,6 +151,9 @@ export interface LookRender {
   /** Extra finer blades on (1) or off (0), and the share of tufts showing a flower. */
   bladeExtra: number;
   flowerShare: number;
+  /** Clumping 0..1 (tussocks sharing lean, height, shade) and view-space widening 0..2. */
+  bladeClump: number;
+  bladeWiden: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -180,6 +183,8 @@ export const STOCK_RENDER: LookRender = {
   bladeSpread: 1,
   bladeExtra: 0,
   flowerShare: 0,
+  bladeClump: 0,
+  bladeWiden: 0,
 };
 
 export interface ZoneLook {

@@ -65,9 +65,9 @@ export function setBladeNearZoneShade(value: number): void {
 
 /** Near-field shade over the camera distance of the blade's instance origin
  *  (begin_vertex, where the carpet already has `bgOrigin`). Full at 4 yards,
- *  gone by 17. */
+ *  gone by 24. */
 export const BLADE_NEAR_GLSL = `#ifdef USE_COLOR
-          vColor.rgb *= mix(uBladeNear, 1.0, smoothstep(4.0, 17.0, distance(bgOrigin, cameraPosition)));
+          vColor.rgb *= mix(uBladeNear, 1.0, smoothstep(4.0, 24.0, distance(bgOrigin, cameraPosition)));
         #endif`;
 
 // The ground UNDER the near carpet: terrain.ts paints a pale near-grey floor
@@ -99,7 +99,9 @@ export function setCarpetGroundZone(value: number): void {
  *  (tip offset in cluster units per unit height squared); w: droop (how far
  *  the tip sinks as it leans). Zeros are the shipped upright blades. */
 export const BLADE_COMB_VALUES = new Float32Array([0, 0, 0, 0]);
-/** x: field patch strength (0..0.5); y: warm-tip strength (0..1); zw reserved. */
+/** x: field patch strength (0..0.5); y: warm-tip strength (0..1); z: clumping
+ *  (0..1, blades in a clump share a comb direction, lean, height and shade, the
+ *  way Ghost of Tsushima-style fields break into tussocks); w reserved. */
 export const BLADE_PAINT_VALUES = new Float32Array([0, 0, 0, 0]);
 
 /** Shared uniforms both blade materials bind (typed arrays reach every clone). */
@@ -116,24 +118,28 @@ export function setBladeCombZone(dirX: number, dirZ: number, lean: number, droop
   BLADE_COMB_VALUES[3] = ok ? Math.min(1, Math.max(0, droop)) : 0;
 }
 
-/** Set the painted field: patch strength and warm-tip strength (clamped). */
-export function setBladePaintZone(patch: number, tip: number): void {
+/** Set the painted field: patch strength, warm-tip strength and clumping (clamped). */
+export function setBladePaintZone(patch: number, tip: number, clump = 0): void {
   BLADE_PAINT_VALUES[0] = Number.isFinite(patch) ? Math.min(0.5, Math.max(0, patch)) : 0;
   BLADE_PAINT_VALUES[1] = Number.isFinite(tip) ? Math.min(1, Math.max(0, tip)) : 0;
+  BLADE_PAINT_VALUES[2] = Number.isFinite(clump) ? Math.min(1, Math.max(0, clump)) : 0;
 }
 
 /** x: blade height scale, y: cluster spread scale (1, 1 is the shipped
- *  cluster); zw reserved. The carpet's placement no longer reads the palette
+ *  cluster); z: view-space widening (0 is off; a blade seen edge-on widens
+ *  toward the camera instead of vanishing, after the Ghost of Tsushima grass
+ *  talk); w reserved. The carpet's placement no longer reads the palette
  *  lab's meadowHeight/Width (meadow_fullness_core.ts is orphaned), so blade
  *  size is set here, in the shader, for both meadow layers. */
 export const BLADE_SIZE_VALUES = new Float32Array([1, 1, 0, 0]);
 export const BLADE_SIZE_UNIFORM: { value: Float32Array } = { value: BLADE_SIZE_VALUES };
 
-/** Set the blade size: height and spread scales, clamped to 0.3..1.6. */
-export function setBladeSizeZone(height: number, spread: number): void {
+/** Set the blade size: height and spread scales (0.3..1.6) and widening (0..2). */
+export function setBladeSizeZone(height: number, spread: number, widen = 0): void {
   const clamp = (v: number): number => (Number.isFinite(v) ? Math.min(1.6, Math.max(0.3, v)) : 1);
   BLADE_SIZE_VALUES[0] = clamp(height);
   BLADE_SIZE_VALUES[1] = clamp(spread);
+  BLADE_SIZE_VALUES[2] = Number.isFinite(widen) ? Math.min(2, Math.max(0, widen)) : 0;
 }
 
 /** begin_vertex block (after the width pull, before any fade): comb and paint.
@@ -145,10 +151,33 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
           vec2 wocCombXZ = instanceMatrix[3].xz;
           float wocCombJit = fract(sin(dot(wocCombXZ, vec2(12.9898, 78.233))) * 43758.5453);
           float wocCombH = max(position.y, 0.0) * uBladeSize.x;
+          // clumps: a smooth world field (tussocks a couple of yards across)
+          // that every blade of a clump reads alike
+          float wocClumpA = sin(wocCombXZ.x * 0.61 + sin(wocCombXZ.y * 0.47) * 1.9);
+          float wocClumpB = sin(wocCombXZ.y * 0.57 + sin(wocCombXZ.x * 0.39) * 2.3);
+          float wocClump = uBladePaint.z;
+          if (wocClump > 0.0) {
+            float wocClumpH = 1.0 + wocClump * 0.22 * wocClumpA * wocClumpB;
+            transformed.y *= wocClumpH;
+            wocCombH *= wocClumpH;
+          }
+          if (uBladeSize.z > 0.0) {
+            // view-space widening: the view direction in this cluster's frame
+            // against the blade's own width axis; edge-on blades widen
+            vec3 wocViewL = (cameraPosition - (modelMatrix * vec4(wocCombXZ.x, instanceMatrix[3].y, wocCombXZ.y, 1.0)).xyz)
+              * mat3(instanceMatrix);
+            float wocEdge = abs(dot(normalize(wocViewL.xz + vec2(1e-4, 0.0)),
+              normalize(aBladeSide.xz + vec2(1e-5, 0.0))));
+            transformed += aBladeSide * (uBladeSize.z * wocEdge);
+          }
           if (uBladeComb.y > 0.0) {
-            // the world comb direction in this cluster's own (yawed) frame
-            vec3 wocCombD = normalize(vec3(uBladeComb.x, 0.0, uBladeComb.z) * mat3(instanceMatrix));
-            float wocCombK = wocCombH * wocCombH * (0.75 + 0.5 * wocCombJit);
+            // the world comb direction, turned per clump, in this cluster's frame
+            float wocTurn = wocClump * 0.9 * wocClumpA;
+            vec2 wocDir = vec2(uBladeComb.x * cos(wocTurn) - uBladeComb.z * sin(wocTurn),
+              uBladeComb.x * sin(wocTurn) + uBladeComb.z * cos(wocTurn));
+            vec3 wocCombD = normalize(vec3(wocDir.x, 0.0, wocDir.y) * mat3(instanceMatrix));
+            float wocLeanClump = 1.0 + wocClump * 0.35 * wocClumpB;
+            float wocCombK = wocCombH * wocCombH * (0.75 + 0.5 * wocCombJit) * wocLeanClump;
             transformed += wocCombD * (uBladeComb.y * wocCombK);
             transformed.y -= uBladeComb.w * wocCombK;
           }
@@ -157,7 +186,7 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
             // broad painted patches: two crossed warped sines over the world
             float wocPatch = sin(wocCombXZ.x * 0.17 + sin(wocCombXZ.y * 0.11) * 2.1)
               * sin(wocCombXZ.y * 0.15 + sin(wocCombXZ.x * 0.09) * 1.8);
-            vColor.rgb *= 1.0 + uBladePaint.x * wocPatch;
+            vColor.rgb *= 1.0 + uBladePaint.x * wocPatch + wocClump * 0.1 * wocClumpA * wocClumpB;
             // warm yellow-green tips over the cooler body
             vColor.rgb *= mix(vec3(1.0), vec3(1.3, 1.2, 0.7),
               uBladePaint.y * smoothstep(0.35, 1.0, wocCombH));

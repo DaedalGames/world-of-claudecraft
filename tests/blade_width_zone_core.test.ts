@@ -114,7 +114,7 @@ describe('windswept comb, painted field and blade size (zone look arms)', () => 
     expect(BLADE_COMB_VALUES[1]).toBeCloseTo(0.62, 6);
     expect(BLADE_COMB_VALUES[2]).toBeCloseTo(-0.1, 6);
     expect(BLADE_COMB_VALUES[3]).toBeCloseTo(0.22, 6);
-    expect(BLADE_COMB_GLSL).toContain('vec3(uBladeComb.x, 0.0, uBladeComb.z)');
+    expect(BLADE_COMB_GLSL).toContain('uBladeComb.x * cos(wocTurn) - uBladeComb.z * sin(wocTurn)');
     expect(BLADE_COMB_GLSL).toContain('uBladeComb.y * wocCombK');
     expect(BLADE_COMB_GLSL).toContain('uBladeComb.w * wocCombK');
   });
@@ -159,5 +159,35 @@ describe('extra blades and flowers (zone look arm)', () => {
     expect(BLADE_EXTRA_GLSL).toContain('if (!wocShow) transformed = vec3(0.0);');
     expect(BLADE_EXTRA_GLSL).toContain('uBladeExtra.x > 0.5');
     expect(BLADE_EXTRA_GLSL).toContain('< uBladeExtra.y');
+  });
+});
+
+describe('clumping and view-space widening (zone look arms)', () => {
+  afterEach(() => {
+    setBladePaintZone(0, 0, 0);
+    setBladeSizeZone(1, 1, 0);
+  });
+
+  it('default to off, so a two-argument call keeps the shipped field', () => {
+    setBladePaintZone(0.2, 0.5);
+    setBladeSizeZone(0.8, 1.1);
+    expect(BLADE_PAINT_VALUES[2]).toBe(0);
+    expect(BLADE_SIZE_VALUES[2]).toBe(0);
+  });
+
+  it('clamp clumping to 0..1 and widening to 0..2, non-finite to off', () => {
+    setBladePaintZone(0, 0, 3);
+    expect(BLADE_PAINT_VALUES[2]).toBe(1);
+    setBladeSizeZone(1, 1, 9);
+    expect(BLADE_SIZE_VALUES[2]).toBe(2);
+    setBladePaintZone(0, 0, Number.NaN);
+    setBladeSizeZone(1, 1, Number.NaN);
+    expect(BLADE_PAINT_VALUES[2]).toBe(0);
+    expect(BLADE_SIZE_VALUES[2]).toBe(0);
+  });
+
+  it('branches both out at zero in GLSL', () => {
+    expect(BLADE_COMB_GLSL).toContain('if (wocClump > 0.0)');
+    expect(BLADE_COMB_GLSL).toContain('if (uBladeSize.z > 0.0)');
   });
 });

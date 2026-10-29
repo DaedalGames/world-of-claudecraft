@@ -140,6 +140,7 @@ const LIVE = {
   paint: 54,
   bladeSize: 56,
   bladeExtra: 58,
+  bladeClump: 60,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -595,8 +596,8 @@ class PaletteLabRuntime implements PaletteLabApi {
     setBladeNearZoneShade(v[LIVE.bladeNear]);
     setCarpetGroundZone(v[LIVE.carpetGround]);
     setBladeCombZone(v[LIVE.comb], v[LIVE.comb + 1], v[LIVE.comb + 2], v[LIVE.comb + 3]);
-    setBladePaintZone(v[LIVE.paint], v[LIVE.paint + 1]);
-    setBladeSizeZone(v[LIVE.bladeSize], v[LIVE.bladeSize + 1]);
+    setBladePaintZone(v[LIVE.paint], v[LIVE.paint + 1], v[LIVE.bladeClump]);
+    setBladeSizeZone(v[LIVE.bladeSize], v[LIVE.bladeSize + 1], v[LIVE.bladeClump + 1]);
     setBladeExtraZone(v[LIVE.bladeExtra], v[LIVE.bladeExtra + 1]);
 
     // Water is one shared material for every sheet, so it wears the look of
@@ -745,6 +746,8 @@ class PaletteLabRuntime implements PaletteLabApi {
       look.render.bladeSpread,
       look.render.bladeExtra,
       look.render.flowerShare,
+      look.render.bladeClump,
+      look.render.bladeWiden,
     ];
     this.targetCache.set(look, flat);
     return flat;

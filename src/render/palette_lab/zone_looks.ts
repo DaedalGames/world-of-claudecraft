@@ -157,7 +157,7 @@ const STORYBOOK_MEADOW_RENDER = {
   bladeWidth: 0.6,
   rampSoft: 0.8,
   bladeBase: 0.45,
-  bladeNear: 0.7,
+  bladeNear: 0.55,
   carpetGround: 1,
   // windswept toward screen-right as seen down the vale road
   combX: 0.9,
@@ -165,11 +165,13 @@ const STORYBOOK_MEADOW_RENDER = {
   combLean: 0.62,
   combDroop: 0.22,
   paintPatch: 0.18,
-  paintTip: 1,
+  paintTip: 0.75,
   bladeHeight: 0.6,
   bladeSpread: 1.35,
   bladeExtra: 1,
   flowerShare: 0.22,
+  bladeClump: 0.6,
+  bladeWiden: 0.3,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
