@@ -255,6 +255,8 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'pendingSkinCatalog',
       'pendingSkinItemId',
       'pendingSkinRank',
+      'petAssistCastTick',
+      'petAssistLiveTick',
       'petAssistTargetId',
       'skin',
       'skinCatalog',
@@ -280,7 +282,13 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'castRadiantResonance', // set only while Dawn's Embrace has reserved the proc
       'stealthTrail', // only present while a stealthed player has left footprints
     ]);
-    const optionalMeta = new Set(['characterId', 'lastWhisperFrom', 'petAssistTargetId']);
+    const optionalMeta = new Set([
+      'characterId',
+      'lastWhisperFrom',
+      'petAssistTargetId',
+      'petAssistCastTick',
+      'petAssistLiveTick',
+    ]);
     for (const k of ENTITY_EXCLUDE) {
       if (!optionalEntity.has(k)) expect(k in entity, `Entity.${k} missing (renamed?)`).toBe(true);
     }
