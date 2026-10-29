@@ -9,83 +9,25 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "es_ES": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "fr_FR": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "fr_CA": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
+  "es": [],
+  "es_ES": [],
+  "fr_FR": [],
+  "fr_CA": [],
   "en_CA": [],
-  "it_IT": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "de_DE": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
+  "it_IT": [],
+  "de_DE": [],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
+  "pt_BR": [],
   "ru_RU": [],
-  "cs_CZ": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "nl_NL": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "pl_PL": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "id_ID": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "tr_TR": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "sv_SE": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "vi_VN": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ],
-  "da_DK": [
-    "hudChrome.currencies.lanternSealNote",
-    "hudChrome.trinkets.equip.lastStandFlat",
-    "hudChrome.worldPvp.rewardBonus"
-  ]
+  "cs_CZ": [],
+  "nl_NL": [],
+  "pl_PL": [],
+  "id_ID": [],
+  "tr_TR": [],
+  "sv_SE": [],
+  "vi_VN": [],
+  "da_DK": []
 };

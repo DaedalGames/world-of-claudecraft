@@ -6412,7 +6412,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '소환수를 응급 처치합니다. 살아 있으면 12초에 걸쳐 3초마다 생명력을 회복합니다. 죽어 있으면 35%의 생명력으로 되살립니다.',
   'entities.abilities.tactical_camo.name': '전술 위장',
   'entities.abilities.tactical_camo.description':
-    '주변 환경에 녹아듭니다. 적이 거의 알아채지 못하며, 이동 속도가 80%가 됩니다. 공격하거나 피해를 받으면 전술 위장이 해제됩니다. 다시 시전하면 해제됩니다. (야전술)',
+    '주변 환경에 녹아듭니다. 적이 거의 알아채지 못하며, 이동 속도가 80%가 됩니다. 공격하거나 피해를 받거나 소환수를 부르면 전술 위장이 해제됩니다. 다시 시전하면 해제됩니다. 고독한 영혼이 필요하며 소환수가 없어야 합니다.',
   'entities.abilities.play_dead.name': '죽은 척하기',
   'entities.abilities.play_dead.description':
     '땅에 쓰러져 죽은 척합니다. 모두에게 생명력과 집중이 비어 있는 것으로 보입니다. 적은 당신을 잊고, 당신을 대상으로 삼은 적 플레이어는 대상을 잃습니다. 이동하거나 공격하거나 다른 능력을 사용하면 끝납니다. 이동 중에 시전하면 1초 안에 멈춰야 하며, 그렇지 않으면 이동으로 인해 끝납니다. 다시 시전하면 일어납니다.',
@@ -22468,7 +22468,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.resetIn': '{time} 후 새 계약',
   'hudChrome.guildHall.resetSoon': '다음 주간 초기화에 새 계약',
   'hudChrome.guildHall.contractsIntro':
-    '계약은 일주일에 세 건, 왕국의 모든 모험가에게 똑같이 게시됩니다. 서명할 필요는 없습니다. 하나를 끝까지 해내면 그 인장이 매주 한 번씩 곧바로 가방에 들어옵니다.',
+    '계약은 일주일에 세 건, 왕국의 모든 모험가에게 똑같이 게시됩니다. 서명할 필요는 없습니다. 하나를 끝까지 해내면 그 인장을 매주 한 번씩 바로 지급받습니다.',
   'hudChrome.guildHall.kinds.boss': '현상금',
   'hudChrome.guildHall.kinds.heroic': '영웅 돌파',
   'hudChrome.guildHall.kinds.task': '수행',
@@ -22522,7 +22522,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.board.rewardLine': '보상: {reward}',
   'hudChrome.guildHall.board.stamp': '봉인됨',
   'hudChrome.guildHall.board.sealsTip':
-    '등불 인장은 등불 회관 주간 계약의 보상으로 지급되며, 보급관 개릭 홀트에게서만 사용할 수 있습니다. 귀속 아이템입니다.',
+    '등불 인장은 등불 회관 주간 계약의 보상으로 지급되며, 보급관 개릭 홀트에게서만 사용할 수 있습니다. 자신에게 귀속되는 화폐이며 가방 공간을 차지하지 않습니다.',
   'hudChrome.guildHall.shop.stockLabel': '개릭 홀트의 판매 목록',
   'hudChrome.guildHall.shop.kindMount': '탈것',
   'hudChrome.guildHall.shop.kindSword': '검 외형',

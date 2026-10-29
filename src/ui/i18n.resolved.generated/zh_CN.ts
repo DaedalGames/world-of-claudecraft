@@ -851,7 +851,7 @@ export const zh_CN: EnTranslations = {
       "seals": "灯火印章：{count}",
       "resetIn": "{time}后发布新契约",
       "resetSoon": "下次每周重置时发布新契约",
-      "contractsIntro": "每周三份契约，王国中的每位冒险者看到的都一样。无需签署：完成其中一份，它的印章就会直接放进你的背包，每周一次。",
+      "contractsIntro": "每周三份契约，王国中的每位冒险者看到的都一样。无需签署：完成其中一份，你就会直接获得它的印章，每周一次。",
       "kinds": {
         "boss": "悬赏",
         "heroic": "英雄通关",
@@ -900,7 +900,7 @@ export const zh_CN: EnTranslations = {
         "cardProgress": "本周 {done}/{total}",
         "rewardLine": "奖励：{reward}",
         "stamp": "已盖印",
-        "sealsTip": "灯火印章由灯火大厅的每周契约发放，只能在军需官加里克·霍尔特处使用。它们与你绑定。"
+        "sealsTip": "灯火印章由灯火大厅的每周契约发放，只能在军需官加里克·霍尔特处使用。它们是与你绑定的货币，不占背包空间。"
       },
       "shop": {
         "stockLabel": "加里克·霍尔特的货品",
@@ -17565,7 +17565,7 @@ export const zh_CN: EnTranslations = {
       },
       "tactical_camo": {
         "name": "战术伪装",
-        "description": "融入周围环境：敌人几乎察觉不到你，你以80%的速度移动。攻击或受到伤害会打破战术伪装。再次施放即可解除。（野战技艺）"
+        "description": "融入周围环境：敌人几乎察觉不到你，你以80%的速度移动。攻击、受到伤害或召唤宠物会打破战术伪装。再次施放即可解除。需要孤独之魂，且不能有宠物。"
       },
       "frostjaw_trap": {
         "name": "霜颚陷阱",

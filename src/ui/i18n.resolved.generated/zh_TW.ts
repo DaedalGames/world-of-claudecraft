@@ -851,7 +851,7 @@ export const zh_TW: EnTranslations = {
       "seals": "燈火印章：{count}",
       "resetIn": "{time}後發布新契約",
       "resetSoon": "下次每週重置時發布新契約",
-      "contractsIntro": "每週三份契約，王國中的每位冒險者看到的都一樣。無需簽署：完成其中一份，它的印章就會直接放進你的背包，每週一次。",
+      "contractsIntro": "每週三份契約，王國中的每位冒險者看到的都一樣。無需簽署：完成其中一份，你就會直接獲得它的印章，每週一次。",
       "kinds": {
         "boss": "懸賞",
         "heroic": "英雄通關",
@@ -900,7 +900,7 @@ export const zh_TW: EnTranslations = {
         "cardProgress": "本週 {done}/{total}",
         "rewardLine": "獎勵：{reward}",
         "stamp": "已蓋印",
-        "sealsTip": "燈火印章由燈火大廳的每週契約發放，只能在軍需官加里克·霍爾特處使用。它們與你綁定。"
+        "sealsTip": "燈火印章由燈火大廳的每週契約發放，只能在軍需官加里克·霍爾特處使用。它們是與你綁定的貨幣，不佔背包空間。"
       },
       "shop": {
         "stockLabel": "加里克·霍爾特的貨品",
@@ -17565,7 +17565,7 @@ export const zh_TW: EnTranslations = {
       },
       "tactical_camo": {
         "name": "戰術偽裝",
-        "description": "融入周圍環境：敵人幾乎察覺不到你，你以 80% 的速度移動。攻擊或受到傷害會打破戰術偽裝。再次施放即可解除。（野戰技藝）"
+        "description": "融入周圍環境：敵人幾乎察覺不到你，你以 80% 的速度移動。攻擊、受到傷害或召喚寵物會打破戰術偽裝。再次施放即可解除。需要孤獨之魂，且不能有寵物。"
       },
       "frostjaw_trap": {
         "name": "霜顎陷阱",

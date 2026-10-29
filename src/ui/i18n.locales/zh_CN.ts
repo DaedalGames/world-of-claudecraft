@@ -7818,7 +7818,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
     '修补你的宠物。若其存活，在12秒内每3秒恢复一次生命值；若其死亡，则以35%生命值将其复活。',
   'entities.abilities.tactical_camo.name': '战术伪装',
   'entities.abilities.tactical_camo.description':
-    '融入周围环境：敌人几乎察觉不到你，你以80%的速度移动。攻击或受到伤害会打破战术伪装。再次施放即可解除。（野战技艺）',
+    '融入周围环境：敌人几乎察觉不到你，你以80%的速度移动。攻击、受到伤害或召唤宠物会打破战术伪装。再次施放即可解除。需要孤独之魂，且不能有宠物。',
   'entities.abilities.play_dead.name': '装死',
   'entities.abilities.play_dead.description':
     '倒地装死：所有人看到你的生命值和集中值都为空。敌人会遗忘你，正以你为目标的敌方玩家会失去目标。移动、攻击或使用其他技能都会结束装死。若在移动中施放，你有 1 秒时间停下，否则移动会结束装死。再次施放即可起身。',
@@ -23012,7 +23012,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.resetIn': '{time}后发布新契约',
   'hudChrome.guildHall.resetSoon': '下次每周重置时发布新契约',
   'hudChrome.guildHall.contractsIntro':
-    '每周三份契约，王国中的每位冒险者看到的都一样。无需签署：完成其中一份，它的印章就会直接放进你的背包，每周一次。',
+    '每周三份契约，王国中的每位冒险者看到的都一样。无需签署：完成其中一份，你就会直接获得它的印章，每周一次。',
   'hudChrome.guildHall.kinds.boss': '悬赏',
   'hudChrome.guildHall.kinds.heroic': '英雄通关',
   'hudChrome.guildHall.kinds.task': '执行',
@@ -23060,7 +23060,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.board.rewardLine': '奖励：{reward}',
   'hudChrome.guildHall.board.stamp': '已盖印',
   'hudChrome.guildHall.board.sealsTip':
-    '灯火印章由灯火大厅的每周契约发放，只能在军需官加里克·霍尔特处使用。它们与你绑定。',
+    '灯火印章由灯火大厅的每周契约发放，只能在军需官加里克·霍尔特处使用。它们是与你绑定的货币，不占背包空间。',
   'hudChrome.guildHall.shop.stockLabel': '加里克·霍尔特的货品',
   'hudChrome.guildHall.shop.kindMount': '坐骑',
   'hudChrome.guildHall.shop.kindSword': '剑的外观',

@@ -7819,7 +7819,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
     '修補你的寵物。若其存活，在 12 秒內每 3 秒恢復一次生命值；若其死亡，則以 35% 生命值將其復活。',
   'entities.abilities.tactical_camo.name': '戰術偽裝',
   'entities.abilities.tactical_camo.description':
-    '融入周圍環境：敵人幾乎察覺不到你，你以 80% 的速度移動。攻擊或受到傷害會打破戰術偽裝。再次施放即可解除。（野戰技藝）',
+    '融入周圍環境：敵人幾乎察覺不到你，你以 80% 的速度移動。攻擊、受到傷害或召喚寵物會打破戰術偽裝。再次施放即可解除。需要孤獨之魂，且不能有寵物。',
   'entities.abilities.play_dead.name': '裝死',
   'entities.abilities.play_dead.description':
     '倒地裝死：所有人看到你的生命值和集中值都為空。敵人會遺忘你，正以你為目標的敵方玩家會失去目標。移動、攻擊或使用其他技能都會結束裝死。若在移動中施放，你有 1 秒時間停下，否則移動會結束裝死。再次施放即可起身。',
@@ -23028,7 +23028,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.resetIn': '{time}後發布新契約',
   'hudChrome.guildHall.resetSoon': '下次每週重置時發布新契約',
   'hudChrome.guildHall.contractsIntro':
-    '每週三份契約，王國中的每位冒險者看到的都一樣。無需簽署：完成其中一份，它的印章就會直接放進你的背包，每週一次。',
+    '每週三份契約，王國中的每位冒險者看到的都一樣。無需簽署：完成其中一份，你就會直接獲得它的印章，每週一次。',
   'hudChrome.guildHall.kinds.boss': '懸賞',
   'hudChrome.guildHall.kinds.heroic': '英雄通關',
   'hudChrome.guildHall.kinds.task': '執行',
@@ -23076,7 +23076,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.board.rewardLine': '獎勵：{reward}',
   'hudChrome.guildHall.board.stamp': '已蓋印',
   'hudChrome.guildHall.board.sealsTip':
-    '燈火印章由燈火大廳的每週契約發放，只能在軍需官加里克·霍爾特處使用。它們與你綁定。',
+    '燈火印章由燈火大廳的每週契約發放，只能在軍需官加里克·霍爾特處使用。它們是與你綁定的貨幣，不佔背包空間。',
   'hudChrome.guildHall.shop.stockLabel': '加里克·霍爾特的貨品',
   'hudChrome.guildHall.shop.kindMount': '坐騎',
   'hudChrome.guildHall.shop.kindSword': '劍的外觀',

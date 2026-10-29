@@ -6459,7 +6459,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'ペットを応急処置する。生存している場合は12秒間、3秒ごとに回復する。死亡している場合は体力35%で蘇生する。',
   'entities.abilities.tactical_camo.name': '戦術迷彩',
   'entities.abilities.tactical_camo.description':
-    '周囲に溶け込む。敵にほとんど気づかれず、移動速度は80%になる。攻撃するかダメージを受けると戦術迷彩は解除される。再使用で解除する。（野戦術）',
+    '周囲に溶け込む。敵にほとんど気づかれず、移動速度は80%になる。攻撃するかダメージを受けるかペットを呼び出すと戦術迷彩は解除される。再使用で解除する。孤独な魂が必要で、ペットがいない場合のみ使用できる。',
   'entities.abilities.play_dead.name': '死んだふり',
   'entities.abilities.play_dead.description':
     '地面に倒れて死んだふりをする。体力と集中値は全員に空として表示される。敵はあなたを忘れ、あなたをターゲットしている敵プレイヤーはターゲットを失う。移動、攻撃、または他のアビリティの使用で終了する。移動中に使用した場合、1秒以内に止まらないと移動によって終了する。再使用で起き上がる。',
@@ -22497,7 +22497,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.resetIn': '新しい契約まで{time}',
   'hudChrome.guildHall.resetSoon': '新しい契約は次の週次リセットで',
   'hudChrome.guildHall.contractsIntro':
-    '契約は週に三件、王国のすべての冒険者に同じものが貼り出される。署名は不要：やり遂げれば、その印章は週に一度ずつ直接バッグに届く。',
+    '契約は週に三件、王国のすべての冒険者に同じものが貼り出される。署名は不要：やり遂げれば、その印章は週に一度ずつ直接受け取れる。',
   'hudChrome.guildHall.kinds.boss': '討伐依頼',
   'hudChrome.guildHall.kinds.heroic': 'ヒロイック踏破',
   'hudChrome.guildHall.kinds.task': '遂行',
@@ -22550,7 +22550,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.guildHall.board.rewardLine': '報酬：{reward}',
   'hudChrome.guildHall.board.stamp': '封印済み',
   'hudChrome.guildHall.board.sealsTip':
-    '燈火の印章は燈火の館の週替わり契約で支払われ、補給係ギャリック・ホルトのもとでのみ使える。あなたに結びつけられている。',
+    '燈火の印章は燈火の館の週替わり契約で支払われ、補給係ギャリック・ホルトのもとでのみ使える。あなたに紐づく通貨で、バッグの容量を使わない。',
   'hudChrome.guildHall.shop.stockLabel': 'ギャリック・ホルトの品揃え',
   'hudChrome.guildHall.shop.kindMount': 'マウント',
   'hudChrome.guildHall.shop.kindSword': '剣の外見',
