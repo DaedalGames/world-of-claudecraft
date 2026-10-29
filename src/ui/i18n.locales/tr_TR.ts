@@ -20479,6 +20479,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountWithdrawHint': 'Bu yığını çantalarına çekmek için tıkla.',
   'hudChrome.bank.accountWithdrawLead': 'Bir eşyayı çantalarına taşımak için üzerine tıkla.',
   'hudChrome.bank.referralArmour': 'Dostluk zırhını al',
+  'hudChrome.wocStore.promoClose': 'Tanıtımları kapat',
   'hudChrome.wocStore.membershipPromo.close': 'Üyelik tanıtımını kapat',
   'hudChrome.wocStore.membershipPromo.cta': 'Şimdi katıl',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Hesap ayrıcalıkları',

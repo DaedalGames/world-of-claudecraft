@@ -23616,6 +23616,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedTitle': 'Gestalkt!',
   'hudChrome.wildheartAlert.timeAria': 'Nog {seconds} seconden',
   'hudChrome.wocStore.collections.lantern_hall': 'Lantaarnhal',
+  'hudChrome.wocStore.promoClose': 'Aanbiedingen sluiten',
   'hudChrome.wocStore.membershipPromo.close': 'Lidmaatschapsaanbieding sluiten',
   'hudChrome.wocStore.membershipPromo.cta': 'Nu lid worden',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Accountvoordelen',

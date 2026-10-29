@@ -20642,6 +20642,7 @@ export const pl_PL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountWithdrawHint': 'Kliknij, aby przenieść ten stos do swoich toreb.',
   'hudChrome.bank.accountWithdrawLead': 'Kliknij przedmiot, aby przenieść go do swoich toreb.',
   'hudChrome.bank.referralArmour': 'Odbierz pancerz przyjaźni',
+  'hudChrome.wocStore.promoClose': 'Zamknij promocje',
   'hudChrome.wocStore.membershipPromo.close': 'Zamknij promocję członkostwa',
   'hudChrome.wocStore.membershipPromo.cta': 'Dołącz teraz',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Korzyści konta',

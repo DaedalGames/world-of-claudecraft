@@ -20400,6 +20400,7 @@ export const cs_CZ: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountWithdrawHint': 'Kliknutím vyber tento stoh do svých brašen.',
   'hudChrome.bank.accountWithdrawLead': 'Kliknutím na předmět jej přesuň do svých brašen.',
   'hudChrome.bank.referralArmour': 'Vyzvednout zbroj přátelství',
+  'hudChrome.wocStore.promoClose': 'Zavřít nabídky',
   'hudChrome.wocStore.membershipPromo.close': 'Zavřít nabídku členství',
   'hudChrome.wocStore.membershipPromo.cta': 'Přidej se nyní',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Výhody účtu',

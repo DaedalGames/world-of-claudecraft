@@ -21859,6 +21859,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedTitle': 'Forfulgt!',
   'hudChrome.wildheartAlert.timeAria': '{seconds} sekunder tilbage',
   'hudChrome.wocStore.collections.lantern_hall': 'Lygtehallen',
+  'hudChrome.wocStore.promoClose': 'Luk kampagner',
   'hudChrome.wocStore.membershipPromo.close': 'Luk medlemskabstilbud',
   'hudChrome.wocStore.membershipPromo.cta': 'Bliv medlem nu',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Kontofordele',

@@ -22929,6 +22929,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.preyTitle': 'Você é a Presa!',
   'hudChrome.wildheartAlert.stalkedTitle': 'Espreitado!',
   'hudChrome.wocStore.collections.lantern_hall': 'Salão da Lanterna',
+  'hudChrome.wocStore.promoClose': 'Fechar promoções',
   'hudChrome.wocStore.membershipPromo.close': 'Fechar promoção de assinatura',
   'hudChrome.wocStore.membershipPromo.cta': 'Assine agora',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Vantagens da conta',

@@ -1607,7 +1607,7 @@ export const pt_BR: EnTranslations = {
         }
       },
       "seasonOne": "Temporada 1",
-      "promoClose": "Close promotions",
+      "promoClose": "Fechar promoções",
       "membershipPromo": {
         "open": "Assinatura na Loja WOC",
         "close": "Fechar promoção de assinatura",

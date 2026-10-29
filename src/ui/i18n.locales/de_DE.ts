@@ -21865,6 +21865,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedTitle': 'Verfolgt!',
   'hudChrome.wildheartAlert.timeAria': 'Noch {seconds} Sekunden',
   'hudChrome.wocStore.collections.lantern_hall': 'Laternenhalle',
+  'hudChrome.wocStore.promoClose': 'Werbeaktionen schließen',
   'hudChrome.wocStore.membershipPromo.close': 'Mitgliedschaftswerbung schließen',
   'hudChrome.wocStore.membershipPromo.cta': 'Jetzt beitreten',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Kontovorteile',

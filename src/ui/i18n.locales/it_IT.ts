@@ -22228,6 +22228,7 @@ export const it_IT: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedTitle': 'Braccato!',
   'hudChrome.wildheartAlert.timeAria': '{seconds} secondi rimasti',
   'hudChrome.wocStore.collections.lantern_hall': 'Sala della Lanterna',
+  'hudChrome.wocStore.promoClose': 'Chiudi le promozioni',
   'hudChrome.wocStore.membershipPromo.close': "Chiudi la promozione dell'abbonamento",
   'hudChrome.wocStore.membershipPromo.cta': 'Abbonati ora',
   'hudChrome.wocStore.membershipPromo.eyebrow': "Vantaggi dell'account",

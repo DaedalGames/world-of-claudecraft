@@ -1607,7 +1607,7 @@ export const sv_SE: EnTranslations = {
         }
       },
       "seasonOne": "Säsong 1",
-      "promoClose": "Close promotions",
+      "promoClose": "Stäng kampanjer",
       "membershipPromo": {
         "open": "Medlemskap i WOC-butiken",
         "close": "Stäng medlemskampanjen",

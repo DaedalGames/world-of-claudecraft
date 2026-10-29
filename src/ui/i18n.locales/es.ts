@@ -23315,6 +23315,7 @@ No hay un límite de profesiones que debas temer. Cada personaje puede subir nue
   'hudChrome.wildheartAlert.preyTitle': '¡Eres la Presa!',
   'hudChrome.wildheartAlert.stalkedTitle': '¡Acechado!',
   'hudChrome.wocStore.collections.lantern_hall': 'Salón del Farol',
+  'hudChrome.wocStore.promoClose': 'Cerrar promociones',
   'hudChrome.wocStore.membershipPromo.close': 'Cerrar promoción de membresía',
   'hudChrome.wocStore.membershipPromo.cta': 'Únete ahora',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Ventajas de cuenta',

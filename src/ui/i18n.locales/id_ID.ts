@@ -24100,6 +24100,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedTitle': 'Dikuntit!',
   'hudChrome.wildheartAlert.timeAria': 'Tersisa {seconds} detik',
   'hudChrome.wocStore.collections.lantern_hall': 'Balai Lentera',
+  'hudChrome.wocStore.promoClose': 'Tutup promosi',
   'hudChrome.wocStore.membershipPromo.close': 'Tutup promosi keanggotaan',
   'hudChrome.wocStore.membershipPromo.cta': 'Gabung sekarang',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Keuntungan akun',

@@ -23106,6 +23106,7 @@ export const vi_VN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wildheartAlert.stalkedLine':
     'Chạy khỏi báo đốm để tránh cắn. Dẫn xa Thầy Thú để phá Liên Kết Bầy Đàn',
   'hudChrome.wildheartAlert.stalkedTitle': 'Bị Rình Rập!',
+  'hudChrome.wocStore.promoClose': 'Đóng quảng cáo',
   'hudChrome.wocStore.membershipPromo.close': 'Đóng Quảng Bá Thành Viên',
   'hudChrome.wocStore.membershipPromo.cta': 'Tham Gia Ngay',
   'hudChrome.wocStore.membershipPromo.eyebrow': 'Ưu Đãi Tài Khoản',
