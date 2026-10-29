@@ -16,8 +16,10 @@ import {
   petAssistKeepsTarget,
   petAssistTargetId,
 } from '../src/sim/pet/pet_assist';
+import { PROJECTILE_MAX_FLIGHT } from '../src/sim/projectile_travel';
 import { Sim } from '../src/sim/sim';
-import type { Entity, WorldContent } from '../src/sim/types';
+import type { SimContext } from '../src/sim/sim_context';
+import { DT, type Entity, type WorldContent } from '../src/sim/types';
 import { expectDefined } from './helpers/defined';
 
 const TEST_WORLD: WorldContent = {
@@ -174,30 +176,58 @@ describe('the cast record expires with its fight', () => {
     petAssistCastTick?: number;
     petAssistLiveTick?: number;
   };
-  const idle = { inCombat: false, castingAbility: null };
+  const idle = { id: 1, inCombat: false, castingAbility: null };
+  const context = (tickCount: number): Pick<SimContext, 'tickCount' | 'pendingProjectiles'> => ({
+    tickCount,
+    pendingProjectiles: [],
+  });
 
   it('stays live while the owner is in combat or casting, however long', () => {
     const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 0 };
-    expireStalePetAssistCast({ inCombat: true, castingAbility: null }, meta, 500);
+    expireStalePetAssistCast({ ...idle, inCombat: true }, meta, context(500));
     expect(meta.petAssistTargetId).toBe(2);
-    expireStalePetAssistCast({ inCombat: false, castingAbility: 'aimed_shot' }, meta, 900);
+    expireStalePetAssistCast({ ...idle, castingAbility: 'aimed_shot' }, meta, context(900));
     expect(meta.petAssistTargetId).toBe(2);
     expect(meta.petAssistLiveTick).toBe(900);
   });
 
   it('drops the record 2 sec after the last live tick, not before', () => {
     const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 0, petAssistLiveTick: 900 };
-    expireStalePetAssistCast(idle, meta, 940);
+    expireStalePetAssistCast(idle, meta, context(940));
     expect(meta.petAssistTargetId).toBe(2);
-    expireStalePetAssistCast(idle, meta, 941);
+    expireStalePetAssistCast(idle, meta, context(941));
     expect(meta.petAssistTargetId).toBeNull();
+  });
+
+  it('keeps only a matching owner projectile live, then preserves the 40/41 idle boundary', () => {
+    const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 0 };
+    const ctx = context(100);
+    const projectile = { x: 0, z: 0, sourceId: 1, targetId: 2, ttl: 1, resolve: () => {} };
+    ctx.pendingProjectiles.push(projectile);
+    expireStalePetAssistCast(idle, meta, ctx);
+    expect(meta.petAssistTargetId).toBe(2);
+    expect(meta.petAssistLiveTick).toBe(100);
+    ctx.pendingProjectiles = [];
+    expireStalePetAssistCast(idle, meta, { ...ctx, tickCount: 140 });
+    expect(meta.petAssistTargetId).toBe(2);
+    expireStalePetAssistCast(idle, meta, { ...ctx, tickCount: 141 });
+    expect(meta.petAssistTargetId).toBeNull();
+
+    for (const unrelated of [
+      { ...projectile, sourceId: 3 },
+      { ...projectile, targetId: 3 },
+    ]) {
+      const old: Rec = { petAssistTargetId: 2, petAssistCastTick: 0 };
+      expireStalePetAssistCast(idle, old, { tickCount: 100, pendingProjectiles: [unrelated] });
+      expect(old.petAssistTargetId).toBeNull();
+    }
   });
 
   it('counts the grace from the cast when the owner was never live after it', () => {
     const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 300, petAssistLiveTick: 10 };
-    expireStalePetAssistCast(idle, meta, 340);
+    expireStalePetAssistCast(idle, meta, context(340));
     expect(meta.petAssistTargetId).toBe(2);
-    expireStalePetAssistCast(idle, meta, 341);
+    expireStalePetAssistCast(idle, meta, context(341));
     expect(meta.petAssistTargetId).toBeNull();
   });
 });
@@ -258,6 +288,70 @@ describe('an assisting pet across a real fight', () => {
     expect(meta.petAssistTargetId).toBe(a.id);
     expect(pet.aggroTargetId).toBe(a.id);
   });
+
+  it.each([
+    { ability: 'arcane_shot', fleeSpeed: 14 },
+    { ability: 'aimed_shot', fleeSpeed: 26 },
+  ])(
+    'keeps $ability live against a $fleeSpeed yd/sec fleeing target through first combat',
+    ({ ability, fleeSpeed }) => {
+      const { sim, owner, a, pet, meta } = fight();
+      place(a, owner.pos.x, owner.pos.z + 35);
+      pet.moveSpeed = 0;
+      pet.auras.push({
+        id: 'test_stun',
+        name: 'Test Stun',
+        kind: 'stun',
+        remaining: 20,
+        duration: 20,
+        value: 0,
+        sourceId: a.id,
+      } as Entity['auras'][number]);
+      sim.grid.refresh(sim.entities.values());
+      sim.castAbility(ability);
+      owner.autoAttack = false;
+      for (let i = 0; i < 80 && sim.ctx.pendingProjectiles.length === 0; i++) sim.tick();
+      expect(sim.ctx.pendingProjectiles).toHaveLength(1);
+      expect(owner.castingAbility).toBeNull();
+      const releaseTick = sim.tickCount;
+      for (let i = 0; i < 41; i++) {
+        a.pos.z += fleeSpeed * DT;
+        sim.tick();
+      }
+      expect(sim.tickCount - releaseTick).toBe(41);
+      expect(sim.ctx.pendingProjectiles).toHaveLength(1);
+      expect(owner.inCombat).toBe(false);
+      expect(a.hp).toBe(a.maxHp);
+      expect(pet.aggroTargetId).toBeNull();
+      expect(meta.petAssistTargetId).toBe(a.id);
+      for (let i = 0; i < 20 && sim.ctx.pendingProjectiles.length > 0; i++) {
+        a.pos.z += fleeSpeed * DT;
+        sim.tick();
+      }
+      expect(sim.ctx.pendingProjectiles).toHaveLength(0);
+      const flightTicks = sim.tickCount - releaseTick;
+      expect(flightTicks).toBeGreaterThan(41);
+      // The floating-point TTL countdown can cross zero one tick after 3 sec.
+      expect(flightTicks).toBeLessThanOrEqual(Math.ceil(PROJECTILE_MAX_FLIGHT / DT) + 1);
+      if (ability === 'aimed_shot') {
+        expect(flightTicks).toBeGreaterThanOrEqual(Math.ceil(PROJECTILE_MAX_FLIGHT / DT));
+      }
+      expect(a.hp).toBeLessThan(a.maxHp);
+      expect(owner.inCombat).toBe(true);
+      expect(meta.petAssistTargetId).toBe(a.id);
+      expect(pet.aggroTargetId).toBeNull();
+
+      // Bring the same live enemy back within Assist's range, then clear and
+      // reselect it. The stunned pet cannot have opened combat itself.
+      place(a, owner.pos.x, owner.pos.z + 20);
+      sim.grid.refresh(sim.entities.values());
+      reselect(sim, owner, a.id);
+      pet.auras = pet.auras.filter((aura) => aura.id !== 'test_stun');
+      sim.tick();
+      expect(meta.petAssistTargetId).toBe(a.id);
+      expect(pet.aggroTargetId).toBe(a.id);
+    },
+  );
 
   it('keeps the record while the pet is stunned mid-fight', () => {
     const { sim, owner, a, pet, meta } = fight();

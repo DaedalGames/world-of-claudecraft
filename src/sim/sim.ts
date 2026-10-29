@@ -6108,17 +6108,16 @@ export class Sim {
     updateDragonkinBrood(this.ctx);
     lap?.('dragonkinBrood');
 
-    // The engaged pass (combat/engaged_combat.ts): one pass over the entities
-    // collects everyone a live mob still holds on its hate table (plus pet
-    // owners and, for an engaged boss, its attackers' nearby group members),
-    // instead of one full scan per player. Reads mob AND pet state after both
-    // updated above, so the phase stays here.
+    // The engaged pass (combat/engaged_combat.ts) collects players on live mob hate
+    // tables, pet owners, and engaged bosses' nearby group members in one entity pass.
+    // Read mob and pet state after both update so combat settles before idle
+    // Assist records expire.
     collectEngagedPids(this.ctx, this.engagedPids);
     for (const meta of this.players.values()) {
       const p = this.entities.get(meta.entityId);
       if (p) {
         p.inCombat = this.engagedPids.has(p.id) || p.combatTimer < 5;
-        petAi.expireStalePetAssistCast(p, meta, this.tickCount);
+        petAi.expireStalePetAssistCast(p, meta, this.ctx);
         updatePaladinDevotion(p, DT, this.playerMods(meta).global.paladinSacredReserve > 0);
         druidEngineCombatState(this.ctx, p);
         updateHunterTick(this.ctx, p);
