@@ -862,10 +862,14 @@ export const ROGUE_CHOICE_ROWS: ClassChoiceRows = {
         {
           id: 'rog_r11_cheap_trick',
           name: 'Cheap Trick',
-          description: 'Gut Punch no longer requires Duskveil.',
+          description: 'Gut Punch no longer requires Duskveil, but has a 10 sec cooldown.',
           icon: 'cheap_shot',
+          // PvP stuns carry no diminishing returns (src/sim/stun_dr.ts), so a
+          // stealth-free Gut Punch with no cooldown chained a 4 sec stun as fast
+          // as Energy allowed (measured ~97% stun uptime). The cooldown restores
+          // a real gap; pinned by tests/cheap_trick_stunlock.test.ts.
           effect: {
-            ability: [{ ability: 'cheap_shot', ignoreStealthRequirement: true }],
+            ability: [{ ability: 'cheap_shot', ignoreStealthRequirement: true, cooldownFlat: 10 }],
           },
         },
       ],
