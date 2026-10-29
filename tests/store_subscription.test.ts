@@ -17,7 +17,7 @@ import {
   SUBSCRIPTION_OFF,
   type SubscriptionStoreHooks,
 } from '../src/subscription_contract';
-import { StoreSubscription } from '../src/ui/store_subscription';
+import { REWARD_RETRY_MS, StoreSubscription } from '../src/ui/store_subscription';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -46,12 +46,14 @@ describe('subscription store section', () => {
       link,
       annualMountClaim,
     });
+    // No collect button: entering the store looks the owed reward up once.
     await panel.refresh();
-    expect(annualMountClaim).not.toHaveBeenCalled();
+    expect(annualMountClaim).toHaveBeenCalledExactlyOnceWith(undefined);
+    await panel.refresh();
+    expect(annualMountClaim).toHaveBeenCalledOnce();
     document.body.innerHTML = panel.html();
-    panel.bind(document.body);
-    document.querySelector<HTMLButtonElement>('[data-subscription-mount-claim]')!.click();
-    await vi.waitFor(() => expect(annualMountClaim).toHaveBeenCalledExactlyOnceWith(undefined));
+    expect(document.querySelector('[data-subscription-mount-claim]')).toBeNull();
+    expect(document.body.textContent).toContain('Your mount reins have arrived');
     expect(link).not.toHaveBeenCalled();
     expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBeNull();
   });
@@ -147,7 +149,8 @@ describe('subscription store section', () => {
     panel.bind(document.body);
     expect(document.body.textContent).not.toContain('Resume checkout');
     expect(document.querySelector('[data-subscription-action="checkout"]')).toBeNull();
-    expect(document.querySelector('[data-subscription-mount-claim]')).not.toBeNull();
+    expect(document.querySelector('[data-subscription-mount-claim]')).toBeNull();
+    expect(document.body.textContent).toContain('Your mount reins appear in a loot window');
     expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBe(
       'known-annual-intent',
     );
@@ -189,13 +192,12 @@ describe('subscription store section', () => {
     await panel.refresh();
     expect(annualMountClaim).toHaveBeenCalledWith(key);
     expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBe(key);
+    // A pending purchase retries on every store entry until it delivers.
+    await panel.refresh();
+    expect(annualMountClaim).toHaveBeenLastCalledWith(key);
+    expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBeNull();
     document.body.innerHTML = panel.html();
-    panel.bind(document.body);
-    document.querySelector<HTMLButtonElement>('[data-subscription-mount-claim]')!.click();
-    await vi.waitFor(() =>
-      expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBeNull(),
-    );
-    expect(document.body.textContent).toContain('delivered by mail');
+    expect(document.body.textContent).toContain('Your mount reins have arrived');
     expect(link).toHaveBeenCalledTimes(1);
   });
   it('mints a new checkout key on every click, across refreshes and panel instances', async () => {
@@ -479,7 +481,7 @@ describe('subscription store section', () => {
       ),
     );
   });
-  it('buys a tradable token with a stable intent and collects mail only after verified delivery', async () => {
+  it('buys a tradable token with a stable intent and claims it on store entry, never by button', async () => {
     runtime.desktop = true;
     localStorage.clear();
     const tokenCheckout = vi.fn(async (_key: string) => ({
@@ -506,27 +508,95 @@ describe('subscription store section', () => {
     vi.spyOn(window, 'open').mockReturnValue(null);
     let panel = panelWith(hooks);
     await panel.refresh();
+    expect(tokenClaim).not.toHaveBeenCalled();
     document.body.innerHTML = panel.html();
     panel.bind(document.body);
+    expect(document.querySelector('[data-membership-purchase-action="claim"]')).toBeNull();
     document.querySelector<HTMLButtonElement>('[data-membership-purchase-action="buy"]')!.click();
     await vi.waitFor(() => expect(tokenCheckout).toHaveBeenCalledTimes(1));
     const key = tokenCheckout.mock.calls[0][0];
     expect(localStorage.getItem('woc.membership-token.pending')).toBe(key);
-    // A reload restores the purchase intent; it never starts another paid checkout.
+    // A reload restores the purchase intent and claims it; it never starts another checkout.
     panel = panelWith(hooks);
     await panel.refresh();
-    document.body.innerHTML = panel.html();
-    panel.bind(document.body);
-    const collect = document.querySelector<HTMLButtonElement>(
-      '[data-membership-purchase-action="claim"]',
-    )!;
-    collect.click();
-    await vi.waitFor(() => expect(collect.disabled).toBe(false));
     expect(tokenClaim).toHaveBeenLastCalledWith(key);
     expect(localStorage.getItem('woc.membership-token.pending')).toBe(key);
-    collect.click();
-    await vi.waitFor(() => expect(localStorage.getItem('woc.membership-token.pending')).toBeNull());
+    document.body.innerHTML = panel.html();
+    expect(document.body.textContent).toContain('Your token appears in a loot window');
+    // Once per panel: a repaint refresh does not hammer the claim.
+    await panel.refresh();
+    expect(tokenClaim).toHaveBeenCalledTimes(1);
+    panel = panelWith(hooks);
+    await panel.refresh();
+    expect(tokenClaim).toHaveBeenCalledTimes(2);
     expect(tokenClaim).toHaveBeenLastCalledWith(key);
+    expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
     expect(tokenCheckout).toHaveBeenCalledTimes(1);
+  });
+  it('claims a token and an annual mount while the embedded payment settles', async () => {
+    vi.useFakeTimers();
+    try {
+      const intent = { clientSecret: 'cs_test_3_secret_x', publishableKey: 'pk_test_1' };
+      const tokenClaim = vi
+        .fn()
+        .mockResolvedValueOnce({ delivered: false })
+        .mockResolvedValueOnce({ delivered: true });
+      const annualMountClaim = vi
+        .fn()
+        .mockResolvedValueOnce({ delivered: false })
+        .mockResolvedValueOnce({ delivered: true });
+      const repaint = vi.fn();
+      const panel = panelWith({
+        snapshot: async () => ({
+          ...SUBSCRIPTION_OFF,
+          available: true,
+          accountId: 41,
+          canCheckout: true,
+          plans: Object.values(GAME_SUBSCRIPTION_PLANS),
+          trialEligible: false,
+          trialDays: 7,
+        }),
+        link: async () => ({ ok: true, url: null, stripe: intent }),
+        tokenOffer: async () => ({
+          available: true,
+          canCheckout: true,
+          days: 30,
+          price: { currency: 'usd', unitAmount: 500 },
+        }),
+        tokenCheckout: async () => ({ ok: true, url: null, stripe: intent }),
+        tokenClaim,
+        annualMountClaim,
+      });
+      await panel.refresh();
+      document.body.innerHTML = panel.html();
+      panel.bind(document.body, repaint);
+      document.querySelector<HTMLButtonElement>('[data-membership-purchase-action="buy"]')!.click();
+      await vi.waitFor(() => expect(stripe.open).toHaveBeenCalledOnce());
+      stripe.open.mock.calls[0][2]?.onComplete?.();
+      expect(document.querySelector('[data-membership-token-status]')?.textContent).toContain(
+        'loot window',
+      );
+      await vi.advanceTimersByTimeAsync(REWARD_RETRY_MS[0]);
+      expect(tokenClaim).toHaveBeenCalledOnce();
+      await vi.advanceTimersByTimeAsync(REWARD_RETRY_MS[1]);
+      expect(tokenClaim).toHaveBeenCalledTimes(2);
+      await vi.advanceTimersByTimeAsync(60_000);
+      expect(tokenClaim).toHaveBeenCalledTimes(2);
+      expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
+
+      document
+        .querySelector<HTMLButtonElement>('[data-subscription-checkout-plan="game_annual"]')!
+        .click();
+      await vi.waitFor(() => expect(stripe.open).toHaveBeenCalledTimes(2));
+      stripe.open.mock.calls[1][2]?.onComplete?.();
+      await vi.advanceTimersByTimeAsync(REWARD_RETRY_MS[0] + REWARD_RETRY_MS[1]);
+      expect(annualMountClaim).toHaveBeenCalledTimes(2);
+      expect(annualMountClaim.mock.calls[0][0]).toEqual(expect.any(String));
+      await vi.advanceTimersByTimeAsync(60_000);
+      expect(annualMountClaim).toHaveBeenCalledTimes(2);
+      expect(panel.html()).toContain('Your mount reins have arrived');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

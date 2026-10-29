@@ -1330,6 +1330,18 @@ export const es_ES: EnTranslations = {
         "hintBelowMin": "El precio mínimo de la Bolsa es {usd}."
       }
     },
+    "purchaseLoot": {
+      "title": "Your purchase has arrived",
+      "description": "Collect it now. If your bags are full it is kept as overflow, and anything you leave for later waits in your mailbox.",
+      "collect": "Collect",
+      "later": "Later"
+    },
+    "membershipWelcome": {
+      "title": "Congratulations!",
+      "body": "Your membership is active. Enjoy every membership benefit, adventurer!",
+      "bodyUntil": "Your membership is active until {date}. Enjoy every membership benefit, adventurer!",
+      "close": "Onward"
+    },
     "wocStore": {
       "subscription": {
         "title": "Suscripción al juego",
@@ -1344,6 +1356,16 @@ export const es_ES: EnTranslations = {
         "annualClaim": "Recoger montura del paquete",
         "annualPending": "Vuelve al personaje comprador después del pago para recoger la montura del paquete. Si el pago se está procesando o la prueba está activa, inténtalo de nuevo después del cargo de pago.",
         "annualDelivered": "La llave de la montura de tu paquete se ha entregado por correo.",
+        "monthlyArtAlt": "A knight in membership armour",
+        "annualArtAlt": "A knight in membership armour beside the Nightwing Chimaera mount",
+        "tokenArtAlt": "A golden membership token",
+        "annualAllBenefits": "All the benefits of a monthly membership.",
+        "annualPerMonth": "Works out to {price} per month, {percent} cheaper than paying monthly.",
+        "annualMountInfo": "Includes the Nightwing Chimaera mount for every character on your account. Its soulbound reins arrive in a loot window on the character that buys it. One per account, and it stays yours after membership ends.",
+        "annualArriving": "Your mount reins appear in a loot window on this character once the paid charge settles. If the trial is active, they arrive after the first payment.",
+        "annualArrived": "Your mount reins have arrived. Collect them from the loot window.",
+        "tokenDescription": "A membership token you receive in game. Redeem it for 30 days of membership, or trade it with other players and sell it at the auction house.",
+        "tokenArriving": "Your token appears in a loot window on this character once the payment settles.",
         "tokenTitle": "Ficha de membresía intercambiable",
         "tokenPrice": "{price} por 30 días",
         "benefitsTitle": "Ventajas de membresía activas",
