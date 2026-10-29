@@ -3,16 +3,23 @@ import {
   BLADE_BASE_GLSL,
   BLADE_BASE_MIN,
   BLADE_BASE_UNIFORM,
+  BLADE_COMB_GLSL,
+  BLADE_COMB_VALUES,
   BLADE_NEAR_GLSL,
   BLADE_NEAR_MIN,
   BLADE_NEAR_UNIFORM,
+  BLADE_PAINT_VALUES,
+  BLADE_SIZE_VALUES,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_MIN,
   BLADE_WIDTH_UNIFORM,
   CARPET_GROUND_DARK,
   CARPET_GROUND_UNIFORM,
   setBladeBaseZoneShade,
+  setBladeCombZone,
   setBladeNearZoneShade,
+  setBladePaintZone,
+  setBladeSizeZone,
   setBladeWidthZoneScale,
   setCarpetGroundZone,
 } from '../src/render/blade_width_zone_core';
@@ -78,7 +85,54 @@ describe('near-field meadow shade and carpet floor (zone look arms)', () => {
 
   it('the near shade is the identity at 1 in GLSL', () => {
     expect(BLADE_NEAR_GLSL).toContain('mix(uBladeNear, 1.0,');
-    expect(CARPET_GROUND_DARK).toBeGreaterThan(0);
-    expect(CARPET_GROUND_DARK).toBeLessThan(1);
+    for (const channel of CARPET_GROUND_DARK) {
+      expect(channel).toBeGreaterThan(0);
+      expect(channel).toBeLessThan(1);
+    }
+  });
+});
+
+describe('windswept comb, painted field and blade size (zone look arms)', () => {
+  afterEach(() => {
+    setBladeCombZone(0, 0, 0, 0);
+    setBladePaintZone(0, 0);
+    setBladeSizeZone(1, 1);
+  });
+
+  it('start at the shipped upright, unpainted, full-size blade', () => {
+    expect([...BLADE_COMB_VALUES]).toEqual([0, 0, 0, 0]);
+    expect([...BLADE_PAINT_VALUES]).toEqual([0, 0, 0, 0]);
+    expect([...BLADE_SIZE_VALUES]).toEqual([1, 1, 0, 0]);
+  });
+
+  it('packs the comb as (dirX, lean, dirZ, droop), the layout the GLSL reads', () => {
+    setBladeCombZone(0.9, -0.1, 0.62, 0.22);
+    expect(BLADE_COMB_VALUES[0]).toBeCloseTo(0.9, 6);
+    expect(BLADE_COMB_VALUES[1]).toBeCloseTo(0.62, 6);
+    expect(BLADE_COMB_VALUES[2]).toBeCloseTo(-0.1, 6);
+    expect(BLADE_COMB_VALUES[3]).toBeCloseTo(0.22, 6);
+    expect(BLADE_COMB_GLSL).toContain('vec3(uBladeComb.x, 0.0, uBladeComb.z)');
+    expect(BLADE_COMB_GLSL).toContain('uBladeComb.y * wocCombK');
+    expect(BLADE_COMB_GLSL).toContain('uBladeComb.w * wocCombK');
+  });
+
+  it('restores the upright blade on any non-finite comb value and clamps the rest', () => {
+    setBladeCombZone(1, 0, 9, 9);
+    expect(BLADE_COMB_VALUES[1]).toBe(2);
+    expect(BLADE_COMB_VALUES[3]).toBe(1);
+    setBladeCombZone(1, Number.NaN, 0.5, 0.2);
+    expect([...BLADE_COMB_VALUES]).toEqual([0, 0, 0, 0]);
+    setBladePaintZone(5, -1);
+    expect(BLADE_PAINT_VALUES[0]).toBe(0.5);
+    expect(BLADE_PAINT_VALUES[1]).toBe(0);
+    setBladeSizeZone(0, Number.NaN);
+    expect(BLADE_SIZE_VALUES[0]).toBeCloseTo(0.3, 6);
+    expect(BLADE_SIZE_VALUES[1]).toBe(1);
+  });
+
+  it('skips the comb and paint work at the shipped zeros (uniform branches)', () => {
+    expect(BLADE_COMB_GLSL).toContain('if (uBladeComb.y > 0.0)');
+    expect(BLADE_COMB_GLSL).toContain('if (uBladePaint.x > 0.0 || uBladePaint.y > 0.0)');
+    expect(BLADE_COMB_GLSL.startsWith('transformed.y *= uBladeSize.x;')).toBe(true);
   });
 });

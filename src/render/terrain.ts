@@ -958,7 +958,7 @@ const GRASS_PAINT_RING_GLSL = `
             // uCarpetGround (blade_width_zone_core.ts): a zone look may swap the
             // pale floor for a darker meadow tone; 0 is the shipped floor exactly
             vec3 wocCarpetFloor = mix(mix(vec3(0.92), grassAlb, 0.35) * wocPlainGrain,
-              grassAlb * ${CARPET_GROUND_DARK.toFixed(2)}, uCarpetGround);
+              grassAlb * vec3(${CARPET_GROUND_DARK.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround);
             grassAlb = mix(wocCarpetFloor, grassAlb, wocPaintT);
           }`;
 

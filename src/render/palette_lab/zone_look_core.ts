@@ -137,6 +137,17 @@ export interface LookRender {
   bladeNear: number;
   /** Ground under the near carpet: 0 the shipped pale floor, 1 a darker meadow floor. */
   carpetGround: number;
+  /** Windswept comb: world direction (x, z), lean strength and droop; 0 lean is upright. */
+  combX: number;
+  combZ: number;
+  combLean: number;
+  combDroop: number;
+  /** Painted field: broad light and dark patch strength, and warm-tip strength. */
+  paintPatch: number;
+  paintTip: number;
+  /** Meadow blade height and cluster spread scales (1, 1 is the shipped cluster). */
+  bladeHeight: number;
+  bladeSpread: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -156,6 +167,14 @@ export const STOCK_RENDER: LookRender = {
   bladeBase: 1,
   bladeNear: 1,
   carpetGround: 0,
+  combX: 0,
+  combZ: 0,
+  combLean: 0,
+  combDroop: 0,
+  paintPatch: 0,
+  paintTip: 0,
+  bladeHeight: 1,
+  bladeSpread: 1,
 };
 
 export interface ZoneLook {

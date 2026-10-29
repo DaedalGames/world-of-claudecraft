@@ -73,11 +73,13 @@ export const BLADE_NEAR_GLSL = `#ifdef USE_COLOR
 // The ground UNDER the near carpet: terrain.ts paints a pale near-grey floor
 // inside the carpet ring (GRASS_PAINT_RING_GLSL), which shows between thin
 // blades as light ground. A zone look can swap that floor toward a darker
-// meadow tone (the meadow paint times CARPET_GROUND_DARK). 0 is the shipped
+// meadow tone (the meadow paint times CARPET_GROUND_DARK, an RGB multiplier). 0 is the shipped
 // pale floor exactly; 1 is the full darker meadow floor.
 
-/** How dark the meadow floor under the carpet goes at full strength. */
-export const CARPET_GROUND_DARK = 0.72;
+/** The meadow floor under the carpet at full strength, as an RGB multiplier
+ *  on the grass paint: dark and cool, so a gap between tufts reads as shadow
+ *  in the grass, never as olive ground. */
+export const CARPET_GROUND_DARK: readonly [number, number, number] = [0.36, 0.52, 0.36];
 
 /** The shared uniform the terrain binds (`uCarpetGround`). */
 export const CARPET_GROUND_UNIFORM: { value: number } = { value: 0 };
@@ -86,3 +88,80 @@ export const CARPET_GROUND_UNIFORM: { value: number } = { value: 0 };
 export function setCarpetGroundZone(value: number): void {
   CARPET_GROUND_UNIFORM.value = Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
 }
+
+// The windswept comb and the painted field (the art bible's meadow): every
+// blade bends toward ONE world direction, so the field reads as combed grass
+// lying over itself and closes over the ground; and the field takes large
+// light and dark patches plus a warm yellow-green tip, the way a painter lays
+// a meadow in broad strokes. Both run at zero at stock (the shipped blades).
+
+/** x,z: world comb direction (normalised in the shader); y: lean strength
+ *  (tip offset in cluster units per unit height squared); w: droop (how far
+ *  the tip sinks as it leans). Zeros are the shipped upright blades. */
+export const BLADE_COMB_VALUES = new Float32Array([0, 0, 0, 0]);
+/** x: field patch strength (0..0.5); y: warm-tip strength (0..1); zw reserved. */
+export const BLADE_PAINT_VALUES = new Float32Array([0, 0, 0, 0]);
+
+/** Shared uniforms both blade materials bind (typed arrays reach every clone). */
+export const BLADE_COMB_UNIFORM: { value: Float32Array } = { value: BLADE_COMB_VALUES };
+export const BLADE_PAINT_UNIFORM: { value: Float32Array } = { value: BLADE_PAINT_VALUES };
+
+/** Set the comb: world direction (x, z), lean strength and droop. Non-finite
+ *  values restore the upright blade. */
+export function setBladeCombZone(dirX: number, dirZ: number, lean: number, droop: number): void {
+  const ok = [dirX, dirZ, lean, droop].every(Number.isFinite);
+  BLADE_COMB_VALUES[0] = ok ? dirX : 0;
+  BLADE_COMB_VALUES[1] = ok ? Math.min(2, Math.max(0, lean)) : 0;
+  BLADE_COMB_VALUES[2] = ok ? dirZ : 0;
+  BLADE_COMB_VALUES[3] = ok ? Math.min(1, Math.max(0, droop)) : 0;
+}
+
+/** Set the painted field: patch strength and warm-tip strength (clamped). */
+export function setBladePaintZone(patch: number, tip: number): void {
+  BLADE_PAINT_VALUES[0] = Number.isFinite(patch) ? Math.min(0.5, Math.max(0, patch)) : 0;
+  BLADE_PAINT_VALUES[1] = Number.isFinite(tip) ? Math.min(1, Math.max(0, tip)) : 0;
+}
+
+/** x: blade height scale, y: cluster spread scale (1, 1 is the shipped
+ *  cluster); zw reserved. The carpet's placement no longer reads the palette
+ *  lab's meadowHeight/Width (meadow_fullness_core.ts is orphaned), so blade
+ *  size is set here, in the shader, for both meadow layers. */
+export const BLADE_SIZE_VALUES = new Float32Array([1, 1, 0, 0]);
+export const BLADE_SIZE_UNIFORM: { value: Float32Array } = { value: BLADE_SIZE_VALUES };
+
+/** Set the blade size: height and spread scales, clamped to 0.3..1.6. */
+export function setBladeSizeZone(height: number, spread: number): void {
+  const clamp = (v: number): number => (Number.isFinite(v) ? Math.min(1.6, Math.max(0.3, v)) : 1);
+  BLADE_SIZE_VALUES[0] = clamp(height);
+  BLADE_SIZE_VALUES[1] = clamp(spread);
+}
+
+/** begin_vertex block (after the width pull, before any fade): comb and paint.
+ *  Reads instanceMatrix directly, so it needs no locals from either material. */
+export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
+        transformed.xz *= uBladeSize.y;
+        #ifdef USE_INSTANCING
+        {
+          vec2 wocCombXZ = instanceMatrix[3].xz;
+          float wocCombJit = fract(sin(dot(wocCombXZ, vec2(12.9898, 78.233))) * 43758.5453);
+          float wocCombH = max(position.y, 0.0) * uBladeSize.x;
+          if (uBladeComb.y > 0.0) {
+            // the world comb direction in this cluster's own (yawed) frame
+            vec3 wocCombD = normalize(vec3(uBladeComb.x, 0.0, uBladeComb.z) * mat3(instanceMatrix));
+            float wocCombK = wocCombH * wocCombH * (0.75 + 0.5 * wocCombJit);
+            transformed += wocCombD * (uBladeComb.y * wocCombK);
+            transformed.y -= uBladeComb.w * wocCombK;
+          }
+          #ifdef USE_COLOR
+          if (uBladePaint.x > 0.0 || uBladePaint.y > 0.0) {
+            // broad painted patches: two crossed warped sines over the world
+            float wocPatch = sin(wocCombXZ.x * 0.17 + sin(wocCombXZ.y * 0.11) * 2.1)
+              * sin(wocCombXZ.y * 0.15 + sin(wocCombXZ.x * 0.09) * 1.8);
+            vColor.rgb *= 1.0 + uBladePaint.x * wocPatch;
+            // warm yellow-green tips over the cooler body
+            vColor.rgb *= mix(vec3(1.0), vec3(1.3, 1.2, 0.7),
+              uBladePaint.y * smoothstep(0.35, 1.0, wocCombH));
+          }
+          #endif
+        }
+        #endif`;

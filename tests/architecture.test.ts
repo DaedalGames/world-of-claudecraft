@@ -1434,6 +1434,8 @@ const RENDER_PURE_CORES = [
   'src/render/cel_ramp_soft_zone_core.ts',
   // Cosmetic meadow stone placement (meadow_stones.ts paints it).
   'src/render/meadow_stones_core.ts',
+  // Per-zone meadow coverage floor (the painterly Eastbrook carpet).
+  'src/render/meadow_zone_density_core.ts',
   'src/render/post_bloom_shader_core.ts',
   'src/render/dynamic_resolution_core.ts',
   'src/render/post_plan_core.ts',

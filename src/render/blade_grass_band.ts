@@ -43,6 +43,10 @@ import { buildBladeSectorPool } from './blade_grass_sector_pool';
 import {
   BLADE_BASE_GLSL,
   BLADE_BASE_UNIFORM,
+  BLADE_COMB_GLSL,
+  BLADE_COMB_UNIFORM,
+  BLADE_PAINT_UNIFORM,
+  BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
 } from './blade_width_zone_core';
@@ -85,6 +89,7 @@ import {
   meadowClusterScale,
   meadowCoverage,
 } from './meadow_tuning';
+import { zoneMeadowCoverage } from './meadow_zone_density_core';
 import { bladeSectorAxis, renderLayerDisabled } from './render_dev_flags';
 import { groundGrassColorAt, groundLushnessAt } from './terrain_chunk_build';
 
@@ -169,6 +174,9 @@ export function buildBladeGrassBand(
     attachGrassInteractionUniforms(sh.uniforms);
     sh.uniforms.uBladeWidth = BLADE_WIDTH_UNIFORM;
     sh.uniforms.uBladeBase = BLADE_BASE_UNIFORM;
+    sh.uniforms.uBladeComb = BLADE_COMB_UNIFORM;
+    sh.uniforms.uBladePaint = BLADE_PAINT_UNIFORM;
+    sh.uniforms.uBladeSize = BLADE_SIZE_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -181,7 +189,10 @@ export function buildBladeGrassBand(
         uniform vec3 uBaseSink;
         attribute vec3 aBladeSide;
         uniform float uBladeWidth;
-        uniform float uBladeBase;`,
+        uniform float uBladeBase;
+        uniform vec4 uBladeComb;
+        uniform vec4 uBladePaint;
+        uniform vec4 uBladeSize;`,
       )
       .replace(
         '#include <color_vertex>',
@@ -201,6 +212,7 @@ export function buildBladeGrassBand(
         '#include <begin_vertex>',
         `#include <begin_vertex>
         ${BLADE_WIDTH_GLSL}
+        ${BLADE_COMB_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer fade by scale collapse over the outer band fraction, and
@@ -283,7 +295,11 @@ export function buildBladeGrassBand(
     if (ok) {
       const lush = groundLushnessAt(x, z, seed);
       const biomeDensity = GRASS_BIOME_DENSITY[zoneBiomeAt(x, z)] ?? 1;
-      const baseCoverage = meadowCoverage(lush) * Math.min(biomeDensity, 1.2);
+      const baseCoverage = zoneMeadowCoverage(
+        x,
+        z,
+        meadowCoverage(lush) * Math.min(biomeDensity, 1.2),
+      );
       const rd = roadDistance(x, z);
       ok = r1 < baseCoverage;
       if (ok) ok = rd > GRASS_ROAD_INNER_RADIUS;

@@ -123,7 +123,7 @@ const ISLAND_SKY = {
 // The art bible's Eastbrook (storybook-meadow): a deep painted zenith over a
 // pale horizon, with the painted cumulus layer on.
 const STORYBOOK_SKY = {
-  zenith: 0x3f86d8,
+  zenith: 0x4a88cc,
   horizon: 0xb4d4ee,
   amount: 0.95,
   cloudKeep: 0.4,
@@ -142,23 +142,32 @@ const STORYBOOK_MEADOW_GRADE = {
   highlightTint: 0xffe8c0,
   highlightAmt: 0.06,
   lift: 0.014,
-  greenHue: -8,
-  greenSat: 0.96,
+  greenHue: -13,
+  greenSat: 0.93,
   greenVal: 1.0,
 };
 const STORYBOOK_MEADOW_RENDER = {
   rim: 0.3,
   shadowStrength: 0.8,
   meadowCoverage: 1,
-  meadowHeight: 0.5,
-  meadowWidth: 0.8,
+  meadowHeight: 0.38,
+  meadowWidth: 1.35,
   canopyLift: 1.35,
   ink: 0,
-  bladeWidth: 0.45,
+  bladeWidth: 0.6,
   rampSoft: 0.8,
-  bladeBase: 0.55,
-  bladeNear: 0.54,
+  bladeBase: 0.45,
+  bladeNear: 0.7,
   carpetGround: 1,
+  // windswept toward screen-right as seen down the vale road
+  combX: 0.9,
+  combZ: -0.1,
+  combLean: 0.62,
+  combDroop: 0.22,
+  paintPatch: 0.18,
+  paintTip: 1,
+  bladeHeight: 0.6,
+  bladeSpread: 1.35,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
@@ -193,9 +202,9 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
       name: 'Storybook Meadow',
       note: 'Painterly vale: deep blue painted sky, big cumulus, olive-lime meadow, blue distance.',
       ground: {
-        grass: 0x88b24e,
-        grassDark: 0x6a9a46,
-        grassYellow: 0xa6c05e,
+        grass: 0x72ac4a,
+        grassDark: 0x4e8a3c,
+        grassYellow: 0x98bc56,
         dirt: 0xa88c62,
         sand: 0xddcca0,
       },

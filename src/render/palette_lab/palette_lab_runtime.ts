@@ -41,7 +41,10 @@ import { recolorLiveBladeGrassView } from '../blade_grass';
 import { recolorLiveBladeGrassBandView } from '../blade_grass_band';
 import {
   setBladeBaseZoneShade,
+  setBladeCombZone,
   setBladeNearZoneShade,
+  setBladePaintZone,
+  setBladeSizeZone,
   setBladeWidthZoneScale,
   setCarpetGroundZone,
 } from '../blade_width_zone_core';
@@ -132,6 +135,9 @@ const LIVE = {
   bladeBase: 47,
   bladeNear: 48,
   carpetGround: 49,
+  comb: 50,
+  paint: 54,
+  bladeSize: 56,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -586,6 +592,9 @@ class PaletteLabRuntime implements PaletteLabApi {
     setBladeBaseZoneShade(v[LIVE.bladeBase]);
     setBladeNearZoneShade(v[LIVE.bladeNear]);
     setCarpetGroundZone(v[LIVE.carpetGround]);
+    setBladeCombZone(v[LIVE.comb], v[LIVE.comb + 1], v[LIVE.comb + 2], v[LIVE.comb + 3]);
+    setBladePaintZone(v[LIVE.paint], v[LIVE.paint + 1]);
+    setBladeSizeZone(v[LIVE.bladeSize], v[LIVE.bladeSize + 1]);
 
     // Water is one shared material for every sheet, so it wears the look of
     // the zone the player is in (the water in view is almost always local).
@@ -723,6 +732,14 @@ class PaletteLabRuntime implements PaletteLabApi {
       look.render.bladeBase,
       look.render.bladeNear,
       look.render.carpetGround,
+      look.render.combX,
+      look.render.combZ,
+      look.render.combLean,
+      look.render.combDroop,
+      look.render.paintPatch,
+      look.render.paintTip,
+      look.render.bladeHeight,
+      look.render.bladeSpread,
     ];
     this.targetCache.set(look, flat);
     return flat;
