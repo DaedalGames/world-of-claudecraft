@@ -12,7 +12,8 @@ import { groundHeight } from '../src/sim/world';
 // Skulduggery rogue chained the 4 sec stun as fast as Energy allowed: Gut
 // Punch between Low Blows, topped up by Quickened Blood, Ghostfoot Gambit and
 // the Gloam veil, held a passive player stunned ~98% of a 120 sec duel. The
-// talent now carries a 10 sec Gut Punch cooldown (stun length unchanged).
+// talent now carries a 10 sec Gut Punch cooldown (stun length unchanged) and,
+// with the cooldown as the limiter, Gut Punch costs no Energy under it.
 //
 // This suite runs that stunlock rotation in a REAL duel (two players, the live
 // cast gates, the live energy economy) and pins the measured stun uptime and
@@ -36,7 +37,7 @@ const STUNLOCK_ROWS = {
   20: 'rog_r20_deathmark',
 };
 
-type AbilityMod = { ability: string; cooldownFlat?: number };
+type AbilityMod = { ability: string; cooldownFlat?: number; costPct?: number };
 
 function cheapTrickOption() {
   for (const row of CHOICE_ROWS.rogue.rows) {
@@ -52,12 +53,22 @@ function cheapTrickGutPunchMod(): AbilityMod {
   return mod;
 }
 
-// The pre-fix arm strips the cooldown off the live row option for one run, so
-// the baseline exercises the exact talent bake the shipped build used to make.
-const originalCooldown = cheapTrickGutPunchMod().cooldownFlat;
+// The pre-fix arm strips the cooldown and the free cost off the live row option
+// for one run, so the baseline exercises the exact talent bake the shipped build
+// used to make.
+const originalMod = { ...cheapTrickGutPunchMod() };
 afterEach(() => {
-  cheapTrickGutPunchMod().cooldownFlat = originalCooldown;
+  const mod = cheapTrickGutPunchMod();
+  mod.cooldownFlat = originalMod.cooldownFlat;
+  mod.costPct = originalMod.costPct;
 });
+
+function resolvedGutPunch(rows: Record<number, string>) {
+  const mods = computeTalentModifiers('rogue', { spec: null, rows }, 20);
+  const known = abilitiesKnownAt('rogue', 20, mods).find((k) => k.def.id === 'cheap_shot');
+  if (!known) throw new Error('cheap_shot missing from the level 20 rogue kit');
+  return known;
+}
 
 function teleport(sim: Sim, e: Entity, x: number, z: number): void {
   e.pos.x = x;
@@ -105,6 +116,8 @@ function runStunlock(): StunlockResult {
   sim.castAbility('stealth', a);
   sim.tick();
 
+  // What a Gut Punch costs this build (the energy cooldowns fire only to cover it).
+  const gutPunchCost = resolvedGutPunch(STUNLOCK_ROWS).cost;
   let gutPunches = 0;
   let stunnedTicks = 0;
   let chain = 0;
@@ -126,17 +139,17 @@ function runStunlock(): StunlockResult {
         sim.castAbility('kidney_shot', a);
       } else if (cdGutPunch <= 0) {
         const before = rogue.resource;
-        if (before < 60) {
+        if (before < gutPunchCost) {
           sim.castAbility('adrenaline_rush', a);
-          if (rogue.resource < 60) sim.castAbility('evasion', a);
-          if (rogue.resource < 60) sim.castAbility('vanish', a);
+          if (rogue.resource < gutPunchCost) sim.castAbility('evasion', a);
+          if (rogue.resource < gutPunchCost) sim.castAbility('vanish', a);
           // Smokefade drops the current target; pick the dummy straight back up.
           sim.targetEntity(b, a);
         }
         sim.castAbility('cheap_shot', a);
         if (stunRemaining(target) > remaining) gutPunches++;
       }
-    } else if (remaining > GCD + 0.25 && rogue.resource >= 35 + 60) {
+    } else if (remaining > GCD + 0.25 && rogue.resource >= 35 + gutPunchCost) {
       // While the target is held, build combo points with Red Ribbon only if
       // the next Gut Punch stays affordable.
       sim.castAbility('hemorrhage', a);
@@ -159,25 +172,23 @@ function runStunlock(): StunlockResult {
 }
 
 describe('Cheap Trick Gut Punch cooldown', () => {
-  it('resolves Gut Punch onto a 10 sec cooldown only with Cheap Trick, stun unchanged', () => {
-    const gutPunch = (rows: Record<number, string>) => {
-      const mods = computeTalentModifiers('rogue', { spec: null, rows }, 20);
-      const known = abilitiesKnownAt('rogue', 20, mods).find((k) => k.def.id === 'cheap_shot');
-      if (!known) throw new Error('cheap_shot missing from the level 20 rogue kit');
-      return known;
-    };
-    const talented = gutPunch({ 11: 'rog_r11_cheap_trick' });
+  it('resolves a free Gut Punch on a 10 sec cooldown only with Cheap Trick, stun unchanged', () => {
+    const talented = resolvedGutPunch({ 11: 'rog_r11_cheap_trick' });
     expect(talented.cooldown).toBe(10);
+    expect(talented.cost).toBe(0);
     expect(talented.ignoreStealthRequirement).toBe(true);
     expect(talented.effects).toContainEqual({ type: 'stun', duration: 4 });
 
-    const plain = gutPunch({});
+    const plain = resolvedGutPunch({});
     expect(plain.cooldown).toBe(0);
+    expect(plain.cost).toBe(60);
     expect(plain.effects).toContainEqual({ type: 'stun', duration: 4 });
   });
 
   it('reproduces the stunlock without the cooldown (the pre-fix build)', () => {
-    cheapTrickGutPunchMod().cooldownFlat = undefined;
+    const mod = cheapTrickGutPunchMod();
+    mod.cooldownFlat = undefined;
+    mod.costPct = undefined;
     const before = runStunlock();
     // Measured 98% stunned with a 70+ sec unbroken chain on this seed.
     expect(before.uptime).toBeGreaterThan(0.9);
@@ -188,7 +199,8 @@ describe('Cheap Trick Gut Punch cooldown', () => {
     const after = runStunlock();
     // Gut Punch every 10 sec plus Low Blow every 20 sec is at most 4 + 4 + 6 = 14
     // stunned seconds per 20 sec cycle (70%), with a guaranteed gap each cycle.
-    // Measured 67% stunned, longest chain 9.9 sec, on this seed.
+    // Measured 61% stunned, longest chain 9.9 sec, on this seed: a Gut Punch the
+    // target dodges or parries still spends the cooldown, so real fights sit below 70%.
     expect(after.uptime).toBeLessThanOrEqual(0.72);
     expect(after.longestChainSeconds).toBeLessThanOrEqual(14.5);
     // One Gut Punch per cooldown window at most over the fight.
