@@ -88,9 +88,11 @@ interface StunlockResult {
   uptime: number;
   longestChainSeconds: number;
   gutPunches: number;
+  gutPunchCastTicks: number[];
+  lowBlowCastTicks: number[];
 }
 
-function runStunlock(): StunlockResult {
+function duelRig() {
   const sim = new Sim({ seed: 42, playerClass: 'rogue', noPlayer: true, world: DUEL_WORLD });
   const a = sim.addPlayer('rogue', 'Rogue', { autoEquip: true });
   const b = sim.addPlayer('warrior', 'Dummy', { autoEquip: true });
@@ -112,6 +114,11 @@ function runStunlock(): StunlockResult {
   expect(duels.get(a)?.state).toBe('active');
 
   sim.targetEntity(b, a);
+  return { sim, a, b, rogue, target };
+}
+
+function runStunlock(): StunlockResult {
+  const { sim, a, b, rogue, target } = duelRig();
   rogue.resource = rogue.maxResource;
   sim.castAbility('stealth', a);
   sim.tick();
@@ -122,12 +129,16 @@ function runStunlock(): StunlockResult {
   let stunnedTicks = 0;
   let chain = 0;
   let longestChain = 0;
+  const gutPunchCastTicks: number[] = [];
+  const lowBlowCastTicks: number[] = [];
   const totalTicks = FIGHT_SECONDS * TICKS_PER_SECOND;
   for (let t = 0; t < totalTicks; t++) {
     // A passive punching bag: never dies, never fights back.
     target.hp = target.maxHp;
     rogue.autoAttack = false;
     rogue.facing = 0;
+    const gutPunchCooldownBefore = rogue.cooldowns.get('cheap_shot') ?? 0;
+    const lowBlowCooldownBefore = rogue.cooldowns.get('kidney_shot') ?? 0;
 
     const remaining = stunRemaining(target);
     if (remaining <= DT * 1.5) {
@@ -156,6 +167,14 @@ function runStunlock(): StunlockResult {
     }
 
     sim.tick();
+    // Track committed casts, including misses and GCD-queued casts, by their
+    // newly armed cooldown rather than by whether the target gained a stun.
+    if ((rogue.cooldowns.get('cheap_shot') ?? 0) > gutPunchCooldownBefore) {
+      gutPunchCastTicks.push(t);
+    }
+    if ((rogue.cooldowns.get('kidney_shot') ?? 0) > lowBlowCooldownBefore) {
+      lowBlowCastTicks.push(t);
+    }
     if (stunRemaining(target) > 0) {
       stunnedTicks++;
       chain++;
@@ -168,6 +187,8 @@ function runStunlock(): StunlockResult {
     uptime: stunnedTicks / totalTicks,
     longestChainSeconds: longestChain / TICKS_PER_SECOND,
     gutPunches,
+    gutPunchCastTicks,
+    lowBlowCastTicks,
   };
 }
 
@@ -181,9 +202,77 @@ describe('Cheap Trick Gut Punch cooldown', () => {
 
     const plain = resolvedGutPunch({});
     expect(plain.cooldown).toBe(0);
-    expect(plain.cost).toBe(60);
+    expect(plain.cost).toBe(50);
+    expect(plain.ignoreStealthRequirement).not.toBe(true);
     expect(plain.effects).toContainEqual({ type: 'stun', duration: 4 });
   });
+
+  it.each(['open', 'stealth', 'gloam'] as const)(
+    'casts at zero Energy but cannot bypass the cooldown with %s access',
+    (access) => {
+      const { sim, a, b, rogue, target } = duelRig();
+      rogue.resource = 0;
+      sim.castAbility('cheap_shot', a);
+      expect(rogue.cooldowns.get('cheap_shot')).toBe(10);
+      expect(rogue.resource).toBe(0);
+      expect(stunRemaining(target)).toBe(4);
+      expect(rogue.comboPoints).toBe(2);
+
+      for (let i = 0; i < Math.ceil(GCD / DT) + 1; i++) {
+        rogue.autoAttack = false;
+        sim.tick();
+      }
+      if (access === 'stealth') {
+        sim.castAbility('vanish', a);
+        sim.targetEntity(b, a);
+        expect(rogue.auras.some((aura) => aura.kind === 'stealth')).toBe(true);
+      } else if (access === 'gloam') {
+        rogue.auras = rogue.auras.filter((aura) => aura.id !== 'gloam');
+        rogue.auras.push({
+          id: 'gloam',
+          name: 'Gloam',
+          kind: 'gloam',
+          remaining: 60,
+          duration: 60,
+          value: 0,
+          sourceId: rogue.id,
+          school: 'physical',
+          stacks: 3,
+        });
+      }
+      const remaining = stunRemaining(target);
+      const cooldown = rogue.cooldowns.get('cheap_shot');
+      expect(cooldown).toBeGreaterThan(0);
+      rogue.resource = 0;
+      sim.castAbility('cheap_shot', a);
+      expect(rogue.cooldowns.get('cheap_shot')).toBe(cooldown);
+      expect(stunRemaining(target)).toBe(remaining);
+      expect(rogue.comboPoints).toBe(2);
+      if (access === 'gloam') {
+        expect(rogue.auras.find((aura) => aura.id === 'gloam')?.stacks).toBe(3);
+      }
+
+      for (
+        let tick = 0;
+        tick < 10 * TICKS_PER_SECOND && rogue.cooldowns.has('cheap_shot');
+        tick++
+      ) {
+        rogue.autoAttack = false;
+        sim.tick();
+      }
+      expect(rogue.cooldowns.has('cheap_shot')).toBe(false);
+      rogue.resource = 0;
+      sim.castAbility('cheap_shot', a);
+      expect(rogue.cooldowns.get('cheap_shot')).toBe(10);
+      expect(rogue.resource).toBe(0);
+      expect(stunRemaining(target)).toBe(4);
+      expect(rogue.comboPoints).toBe(4);
+      if (access === 'gloam') {
+        expect(rogue.auras.some((aura) => aura.id === 'gloam')).toBe(false);
+        expect(rogue.auras.some((aura) => aura.id === 'veilstrike')).toBe(true);
+      }
+    },
+  );
 
   it('reproduces the stunlock without the cooldown (the pre-fix build)', () => {
     const mod = cheapTrickGutPunchMod();
@@ -197,12 +286,31 @@ describe('Cheap Trick Gut Punch cooldown', () => {
 
   it('breaks the stunlock with the cooldown: bounded uptime and real gaps', () => {
     const after = runStunlock();
-    // Gut Punch every 10 sec plus Low Blow every 20 sec is at most 4 + 4 + 6 = 14
-    // stunned seconds per 20 sec cycle (70%), with a guaranteed gap each cycle.
-    // Measured 61% stunned, longest chain 9.9 sec, on this seed: a Gut Punch the
-    // target dodges or parries still spends the cooldown, so real fights sit below 70%.
-    expect(after.uptime).toBeLessThanOrEqual(0.72);
-    expect(after.longestChainSeconds).toBeLessThanOrEqual(14.5);
+    // The accepted base has a SEVEN-second five-point Low Blow (2 + 5),
+    // rather than the contributor branch's six seconds (1 + 5). Pin that
+    // independent premise before using the 4 + 7 + 4 = 15 sec control budget.
+    const mods = computeTalentModifiers('rogue', { spec: 'subtlety', rows: STUNLOCK_ROWS }, 20);
+    const lowBlow = abilitiesKnownAt('rogue', 20, mods).find((k) => k.def.id === 'kidney_shot');
+    expect(lowBlow?.cooldown).toBe(20);
+    expect(lowBlow?.effects).toContainEqual({ type: 'finisherStun', base: 2, perCombo: 1 });
+    // Over this 120 sec fight: at most twelve 4 sec Gut Punches and six
+    // 7 sec Low Blows cover 90 sec (75%). No chain can bridge the remaining
+    // gap before Low Blow returns. Allow one observation tick on chain length.
+    // Measured here: 73.4167% uptime and a 14.85 sec longest chain.
+    expect(after.uptime).toBeLessThanOrEqual(0.75);
+    expect(after.longestChainSeconds).toBeLessThanOrEqual(15 + DT);
+    expect(after.gutPunchCastTicks.length).toBeGreaterThan(0);
+    expect(after.gutPunchCastTicks.length).toBeLessThanOrEqual(FIGHT_SECONDS / 10);
+    expect(after.lowBlowCastTicks.length).toBeGreaterThan(0);
+    expect(after.lowBlowCastTicks.length).toBeLessThanOrEqual(FIGHT_SECONDS / 20);
+    for (const [ticks, seconds] of [
+      [after.gutPunchCastTicks, 10],
+      [after.lowBlowCastTicks, 20],
+    ] as const) {
+      for (let i = 1; i < ticks.length; i++) {
+        expect(ticks[i] - ticks[i - 1]).toBeGreaterThanOrEqual(seconds * TICKS_PER_SECOND);
+      }
+    }
     // One Gut Punch per cooldown window at most over the fight.
     expect(after.gutPunches).toBeLessThanOrEqual(FIGHT_SECONDS / 10 + 1);
   });
