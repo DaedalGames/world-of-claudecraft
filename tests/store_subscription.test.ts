@@ -252,7 +252,7 @@ describe('subscription store section', () => {
     const annual = document.querySelector<HTMLButtonElement>(
       '[data-subscription-checkout-plan="game_annual"]',
     )!;
-    expect(annual.textContent).toBe('Add 12 months');
+    expect(annual.textContent).toBe('Upgrade to 12 months');
     annual.click();
     await vi.waitFor(() =>
       expect(link).toHaveBeenCalledWith('checkout', expect.any(String), 'game_annual'),

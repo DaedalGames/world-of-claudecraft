@@ -1385,6 +1385,7 @@ export const tr_TR: EnTranslations = {
         "subscribe": "Abone ol",
         "addMonth": "1 ay ekle",
         "addYear": "12 ay ekle",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Ödeme şimdi alınır. Süre, mevcut üyeliğinin sonuna eklenir; ardından üyeliğin bu planla yenilenir.",
         "stackCapped": "Bir seferde en fazla 2 yıllık üyelik süresi biriktirebilirsin. Yenileme tarihin yaklaştığında tekrar dene.",
         "stackUnavailable": "Üyelik süresi ekleme şu anda kullanılamıyor. Kısa süre sonra tekrar dene.",

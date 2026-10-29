@@ -1385,6 +1385,7 @@ export const it_IT: EnTranslations = {
         "subscribe": "Abbonati",
         "addMonth": "Aggiungi 1 mese",
         "addYear": "Aggiungi 12 mesi",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Pagamento immediato. Il tempo viene aggiunto alla fine dell'abbonamento attuale, che poi si rinnova con questo piano.",
         "stackCapped": "Puoi accumulare fino a 2 anni di abbonamento alla volta. Riprova quando si avvicina la data di rinnovo.",
         "stackUnavailable": "Al momento non è possibile aggiungere tempo all'abbonamento. Riprova tra poco.",

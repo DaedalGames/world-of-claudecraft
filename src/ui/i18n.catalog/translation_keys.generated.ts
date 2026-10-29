@@ -19002,6 +19002,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.wocStore.subscription.tokenTerms'
   | 'hudChrome.wocStore.subscription.tokenTitle'
   | 'hudChrome.wocStore.subscription.trialTerms'
+  | 'hudChrome.wocStore.subscription.upgradeAnnual'
   | 'hudChrome.wocStore.tabsLabel'
   | 'hudChrome.wocStore.title'
   | 'hudChrome.wocStore.tryOn'

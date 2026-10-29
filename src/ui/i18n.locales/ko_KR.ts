@@ -495,6 +495,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wocStore.subscription.subscribe': '구독하기',
   'hudChrome.wocStore.subscription.addMonth': '1개월 추가',
   'hudChrome.wocStore.subscription.addYear': '12개월 추가',
+  'hudChrome.wocStore.subscription.upgradeAnnual': '12개월로 업그레이드',
   'hudChrome.wocStore.subscription.stackTerms':
     '지금 결제합니다. 기간이 현재 멤버십 종료일 뒤에 추가되고 이후 이 요금제로 갱신됩니다.',
   'hudChrome.wocStore.subscription.stackCapped':

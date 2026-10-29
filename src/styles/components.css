@@ -4146,6 +4146,10 @@
   .membership-badge-benefits {
     margin: 0;
     padding-left: 18px;
+    list-style: disc;
+  }
+  .membership-badge-benefits li + li {
+    margin-top: 4px;
   }
   .membership-badge-action {
     display: flex;
@@ -28278,6 +28282,18 @@
   .purchase-loot-name {
     flex: 1;
     font-weight: 600;
+  }
+  .purchase-loot-name[data-quality="uncommon"] {
+    color: var(--color-quality-uncommon);
+  }
+  .purchase-loot-name[data-quality="rare"] {
+    color: var(--color-quality-rare);
+  }
+  .purchase-loot-name[data-quality="epic"] {
+    color: var(--color-quality-epic);
+  }
+  .purchase-loot-name[data-quality="legendary"] {
+    color: var(--color-quality-legendary);
   }
   .purchase-loot-count {
     color: var(--color-text-muted);

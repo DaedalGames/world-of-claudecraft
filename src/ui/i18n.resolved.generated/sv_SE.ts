@@ -1385,6 +1385,7 @@ export const sv_SE: EnTranslations = {
         "subscribe": "Prenumerera",
         "addMonth": "Lägg till 1 månad",
         "addYear": "Lägg till 12 månader",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Betalningen sker nu. Tiden läggs till efter ditt nuvarande medlemskap, som sedan förnyas enligt denna plan.",
         "stackCapped": "Du kan samla upp till 2 års medlemskap åt gången. Försök igen närmare ditt förnyelsedatum.",
         "stackUnavailable": "Det går inte att lägga till medlemstid just nu. Försök igen om en stund.",

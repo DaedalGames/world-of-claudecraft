@@ -507,6 +507,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wocStore.subscription.subscribe': '定期購入する',
   'hudChrome.wocStore.subscription.addMonth': '1か月追加',
   'hudChrome.wocStore.subscription.addYear': '12か月追加',
+  'hudChrome.wocStore.subscription.upgradeAnnual': '12か月にアップグレード',
   'hudChrome.wocStore.subscription.stackTerms':
     '今すぐお支払い。期間は現在のメンバーシップの終了日に追加され、その後このプランで更新されます。',
   'hudChrome.wocStore.subscription.stackCapped':

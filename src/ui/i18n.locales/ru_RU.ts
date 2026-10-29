@@ -2262,6 +2262,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wocStore.subscription.subscribe': 'Подписаться',
   'hudChrome.wocStore.subscription.addMonth': 'Добавить 1 месяц',
   'hudChrome.wocStore.subscription.addYear': 'Добавить 12 месяцев',
+  'hudChrome.wocStore.subscription.upgradeAnnual': 'Перейти на 12 месяцев',
   'hudChrome.wocStore.subscription.stackTerms':
     'Оплата сейчас. Срок добавляется к концу текущего членства, затем подписка продлевается по этому тарифу.',
   'hudChrome.wocStore.subscription.stackCapped':

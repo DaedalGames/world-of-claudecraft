@@ -1385,6 +1385,7 @@ export const fr_CA: EnTranslations = {
         "subscribe": "S'abonner",
         "addMonth": "Ajouter 1 mois",
         "addYear": "Ajouter 12 mois",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Paiement immédiat. La durée est ajoutée à la fin de votre abonnement actuel, puis celui-ci se renouvelle selon cette formule.",
         "stackCapped": "Vous pouvez cumuler jusqu'à 2 ans d'abonnement à la fois. Réessayez à l'approche de votre date de renouvellement.",
         "stackUnavailable": "L'ajout de temps d'abonnement est indisponible pour le moment. Réessayez dans quelques instants.",

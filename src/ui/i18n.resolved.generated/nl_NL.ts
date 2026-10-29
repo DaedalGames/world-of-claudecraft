@@ -1385,6 +1385,7 @@ export const nl_NL: EnTranslations = {
         "subscribe": "Abonneren",
         "addMonth": "1 maand toevoegen",
         "addYear": "12 maanden toevoegen",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Je betaalt nu. De tijd wordt toegevoegd aan het einde van je huidige lidmaatschap, waarna het volgens dit plan wordt verlengd.",
         "stackCapped": "Je kunt maximaal 2 jaar lidmaatschap tegelijk opbouwen. Probeer het opnieuw wanneer je verlengingsdatum dichterbij is.",
         "stackUnavailable": "Lidmaatschapstijd toevoegen is momenteel niet mogelijk. Probeer het over even opnieuw.",

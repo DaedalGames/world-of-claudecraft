@@ -27,7 +27,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "es_ES": [
     "hudChrome.membershipWelcome.body",
@@ -47,7 +48,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "fr_FR": [
     "hudChrome.membershipWelcome.body",
@@ -67,7 +69,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "fr_CA": [
     "hudChrome.membershipWelcome.body",
@@ -87,7 +90,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "en_CA": [],
   "it_IT": [
@@ -108,7 +112,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "de_DE": [
     "hudChrome.membershipWelcome.body",
@@ -128,7 +133,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -152,7 +158,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "ru_RU": [],
   "cs_CZ": [
@@ -173,7 +180,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "nl_NL": [
     "hudChrome.membershipWelcome.body",
@@ -193,7 +201,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "pl_PL": [
     "hudChrome.membershipWelcome.body",
@@ -213,7 +222,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "id_ID": [
     "hudChrome.membershipWelcome.body",
@@ -233,7 +243,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "tr_TR": [
     "hudChrome.membershipWelcome.body",
@@ -253,7 +264,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "sv_SE": [
     "hudChrome.membershipWelcome.body",
@@ -273,7 +285,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "vi_VN": [
     "hudChrome.membershipWelcome.body",
@@ -293,7 +306,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ],
   "da_DK": [
     "hudChrome.membershipWelcome.body",
@@ -313,6 +327,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.subscription.monthlyArtAlt",
     "hudChrome.wocStore.subscription.tokenArriving",
     "hudChrome.wocStore.subscription.tokenArtAlt",
-    "hudChrome.wocStore.subscription.tokenDescription"
+    "hudChrome.wocStore.subscription.tokenDescription",
+    "hudChrome.wocStore.subscription.upgradeAnnual"
   ]
 };

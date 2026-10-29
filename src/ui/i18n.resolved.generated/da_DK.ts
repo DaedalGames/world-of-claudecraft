@@ -1385,6 +1385,7 @@ export const da_DK: EnTranslations = {
         "subscribe": "Abonner",
         "addMonth": "Tilføj 1 måned",
         "addYear": "Tilføj 12 måneder",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Betaling sker nu. Tiden lægges til i slutningen af dit nuværende medlemskab, som derefter fornys med denne plan.",
         "stackCapped": "Du kan samle op til 2 års medlemskab ad gangen. Prøv igen tættere på din fornyelsesdato.",
         "stackUnavailable": "Det er ikke muligt at tilføje medlemstid lige nu. Prøv igen om lidt.",

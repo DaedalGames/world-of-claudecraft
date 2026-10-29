@@ -1385,6 +1385,7 @@ export const vi_VN: EnTranslations = {
         "subscribe": "Đăng Ký",
         "addMonth": "Thêm 1 tháng",
         "addYear": "Thêm 12 tháng",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Thanh toán ngay. Thời gian được cộng vào cuối kỳ thành viên hiện tại, sau đó tư cách thành viên sẽ được gia hạn theo gói này.",
         "stackCapped": "Bạn có thể tích lũy tối đa 2 năm thành viên cùng lúc. Vui lòng thử lại khi gần đến ngày gia hạn.",
         "stackUnavailable": "Hiện không thể thêm thời gian thành viên. Vui lòng thử lại sau ít phút.",

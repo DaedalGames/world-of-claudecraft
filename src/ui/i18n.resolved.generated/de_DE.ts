@@ -1385,6 +1385,7 @@ export const de_DE: EnTranslations = {
         "subscribe": "Abonnieren",
         "addMonth": "1 Monat hinzufügen",
         "addYear": "12 Monate hinzufügen",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Die Zahlung erfolgt sofort. Die Zeit wird an deine aktuelle Mitgliedschaft angehängt. Danach verlängert sie sich mit diesem Tarif.",
         "stackCapped": "Du kannst bis zu 2 Jahre Mitgliedschaft auf einmal ansammeln. Versuche es näher an deinem Verlängerungsdatum erneut.",
         "stackUnavailable": "Das Hinzufügen von Mitgliedschaftszeit ist derzeit nicht verfügbar. Versuche es in Kürze erneut.",

@@ -1385,6 +1385,7 @@ export const zh_TW: EnTranslations = {
         "subscribe": "訂閱",
         "addMonth": "增加1個月",
         "addYear": "增加12個月",
+        "upgradeAnnual": "升級為12個月",
         "stackTerms": "立即付款。時長將追加到目前會員的結束時間之後，之後按此方案續訂。",
         "stackCapped": "會員時長最多可同時持有2年。請在接近續訂日期時再試。",
         "stackUnavailable": "目前無法增加會員時長。請稍後再試。",

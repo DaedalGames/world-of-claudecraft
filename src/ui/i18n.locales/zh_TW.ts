@@ -2104,6 +2104,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.wocStore.subscription.subscribe': '訂閱',
   'hudChrome.wocStore.subscription.addMonth': '增加1個月',
   'hudChrome.wocStore.subscription.addYear': '增加12個月',
+  'hudChrome.wocStore.subscription.upgradeAnnual': '升級為12個月',
   'hudChrome.wocStore.subscription.stackTerms':
     '立即付款。時長將追加到目前會員的結束時間之後，之後按此方案續訂。',
   'hudChrome.wocStore.subscription.stackCapped':

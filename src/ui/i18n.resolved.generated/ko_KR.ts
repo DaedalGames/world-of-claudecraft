@@ -1385,6 +1385,7 @@ export const ko_KR: EnTranslations = {
         "subscribe": "구독하기",
         "addMonth": "1개월 추가",
         "addYear": "12개월 추가",
+        "upgradeAnnual": "12개월로 업그레이드",
         "stackTerms": "지금 결제합니다. 기간이 현재 멤버십 종료일 뒤에 추가되고 이후 이 요금제로 갱신됩니다.",
         "stackCapped": "멤버십은 한 번에 최대 2년까지 보유할 수 있습니다. 갱신일이 가까워지면 다시 시도하세요.",
         "stackUnavailable": "지금은 멤버십 기간을 추가할 수 없습니다. 잠시 후 다시 시도하세요.",

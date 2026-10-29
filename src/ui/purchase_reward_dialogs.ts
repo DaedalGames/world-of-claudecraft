@@ -14,11 +14,16 @@ import {
   mergePurchaseParcels,
   purchaseLootRows,
 } from './purchase_reward_view';
-import { releaseStorePromptHost, resolveStorePromptHost } from './store_prompt_host';
+import {
+  MODAL_PROMPT_SELECTOR,
+  releaseStorePromptHost,
+  resolveStorePromptHost,
+} from './store_prompt_host';
 
-/** The window blocked behind a purchase dialog: the WOC Store, where purchases start. */
+/** The window blocked behind a purchase dialog: the WOC Store, where purchases start.
+ *  A page without it blocks nothing (never the body, which holds the dialog itself). */
 function storeWindow(): HTMLElement {
-  return document.getElementById('daily-rewards-window') ?? document.body;
+  return document.getElementById('daily-rewards-window') ?? document.createElement('div');
 }
 
 interface OpenDialog {
@@ -40,6 +45,7 @@ function mountDialog(
   prompt.className = `prompt panel ui-window purchase-reward-prompt ${className}`;
   prompt.innerHTML = html;
   let dismissed = false;
+  const root = storeWindow();
   const handle = installPromptDialog(
     prompt,
     null,
@@ -50,9 +56,11 @@ function mountDialog(
       // A Store decision may share the host: keep the lift while any prompt remains.
       if (!host.querySelector('.prompt')) host.classList.remove('store-decision-active');
       releaseStorePromptHost(host);
+      // Another modal (the other purchase dialog, a Store decision) still blocks the store.
+      if (document.querySelector(MODAL_PROMPT_SELECTOR)) root.inert = true;
       onClose();
     },
-    { inertRoot: storeWindow(), idPrefix },
+    { inertRoot: root, idPrefix },
   );
   host.classList.add('store-decision-active');
   host.append(prompt);
@@ -113,7 +121,7 @@ export class PurchaseRewardDialogs {
         (row) =>
           '<li class="purchase-loot-row">' +
           (row.image ? `<img src="${esc(row.image)}" alt="" width="40" height="40">` : '') +
-          `<span class="purchase-loot-name q-${row.quality}">${esc(row.name)}</span>` +
+          `<span class="purchase-loot-name" data-quality="${row.quality}">${esc(row.name)}</span>` +
           (row.count ? `<span class="purchase-loot-count">${esc(row.count)}</span>` : '') +
           '</li>',
       )

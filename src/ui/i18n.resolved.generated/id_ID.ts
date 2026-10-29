@@ -1385,6 +1385,7 @@ export const id_ID: EnTranslations = {
         "subscribe": "Berlangganan",
         "addMonth": "Tambah 1 bulan",
         "addYear": "Tambah 12 bulan",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Dibayar sekarang. Waktunya ditambahkan setelah masa keanggotaanmu saat ini berakhir, lalu keanggotaan diperpanjang dengan paket ini.",
         "stackCapped": "Kamu dapat mengakumulasi hingga 2 tahun keanggotaan sekaligus. Coba lagi mendekati tanggal perpanjanganmu.",
         "stackUnavailable": "Penambahan waktu keanggotaan tidak tersedia saat ini. Coba lagi sebentar lagi.",

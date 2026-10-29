@@ -85,7 +85,8 @@ describe('membership plan badges', () => {
     };
     const html = subscriptionOffersHtml(state, false, false, false, '', NOW);
     expect(badge(html, 'game_monthly')).toContain('Add 1 month');
-    expect(badge(html, 'game_annual')).toContain('Add 12 months');
+    // A monthly member's annual purchase reads as the upgrade it is.
+    expect(badge(html, 'game_annual')).toContain('Upgrade to 12 months');
     expect(html).toContain('added to the end of your current membership');
     expect(html).toContain('Renews on');
     expect(html).toContain('data-subscription-action="portal"');
@@ -113,6 +114,7 @@ describe('membership plan badges', () => {
     const html = subscriptionOffersHtml(state, false, false, false, '', NOW);
     expect(badge(html, 'game_annual')).toMatch(/data-subscription-action="checkout"[^>]*disabled/);
     expect(badge(html, 'game_annual')).toContain('up to 2 years of membership');
+    expect(badge(html, 'game_annual')).toContain('Add 12 months');
     expect(badge(html, 'game_monthly')).not.toContain('disabled');
   });
 

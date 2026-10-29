@@ -77,7 +77,7 @@ describe('purchase loot window', () => {
     expect(prompt.getAttribute('role')).toBe('dialog');
     expect(prompt.textContent).toContain('Your purchase has arrived');
     expect(prompt.querySelectorAll('.purchase-loot-row')).toHaveLength(2);
-    expect(prompt.querySelector('.purchase-loot-name')?.classList.contains('q-epic')).toBe(true);
+    expect(prompt.querySelector('.purchase-loot-name')?.getAttribute('data-quality')).toBe('epic');
     expect(prompt.textContent).toContain('kept as overflow');
     expect(store().inert).toBe(true);
     prompt.querySelector<HTMLButtonElement>('.purchase-reward-collect')!.click();
@@ -107,6 +107,18 @@ describe('purchase loot window', () => {
     loot.offer([TOKEN]);
     showMembershipWelcome(null);
     expect(document.querySelector('.purchase-reward-prompt')).toBeNull();
+  });
+});
+
+describe('overlapping purchase dialogs', () => {
+  it('keeps the store blocked until the last dialog closes', () => {
+    new PurchaseRewardDialogs(vi.fn()).offer([TOKEN]);
+    showMembershipWelcome(null);
+    expect(dialogs()).toHaveLength(2);
+    document.querySelector<HTMLButtonElement>('.purchase-reward-ok')!.click();
+    expect(store().inert).toBe(true);
+    document.querySelector<HTMLButtonElement>('.purchase-reward-later')!.click();
+    expect(store().inert).toBe(false);
   });
 });
 

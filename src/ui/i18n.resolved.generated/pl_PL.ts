@@ -1385,6 +1385,7 @@ export const pl_PL: EnTranslations = {
         "subscribe": "Subskrybuj",
         "addMonth": "Dodaj 1 miesiąc",
         "addYear": "Dodaj 12 miesięcy",
+        "upgradeAnnual": "Upgrade to 12 months",
         "stackTerms": "Płatność następuje teraz. Czas zostanie dodany na koniec obecnego członkostwa, które następnie odnowi się zgodnie z tym planem.",
         "stackCapped": "Możesz zgromadzić maksymalnie 2 lata członkostwa naraz. Spróbuj ponownie bliżej daty odnowienia.",
         "stackUnavailable": "Dodawanie czasu członkostwa jest obecnie niedostępne. Spróbuj ponownie za chwilę.",

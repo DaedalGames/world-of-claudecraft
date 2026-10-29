@@ -1385,6 +1385,7 @@ export const ja_JP: EnTranslations = {
         "subscribe": "定期購入する",
         "addMonth": "1か月追加",
         "addYear": "12か月追加",
+        "upgradeAnnual": "12か月にアップグレード",
         "stackTerms": "今すぐお支払い。期間は現在のメンバーシップの終了日に追加され、その後このプランで更新されます。",
         "stackCapped": "メンバーシップは一度に最大2年分まで保持できます。更新日が近づいてから再度お試しください。",
         "stackUnavailable": "現在メンバーシップ期間を追加できません。しばらくしてから再度お試しください。",

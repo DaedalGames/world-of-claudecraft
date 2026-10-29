@@ -157,7 +157,9 @@ function planBadgeHtml(
           ? 'hudChrome.wocStore.subscription.startTrial'
           : 'hudChrome.wocStore.subscription.subscribe'
         : annual
-          ? 'hudChrome.wocStore.subscription.addYear'
+          ? state.plan === 'game_monthly'
+            ? 'hudChrome.wocStore.subscription.upgradeAnnual'
+            : 'hudChrome.wocStore.subscription.addYear'
           : 'hudChrome.wocStore.subscription.addMonth';
     action = `<button type="button" class="ui-btn ui-btn--lg" data-subscription-action="checkout" data-subscription-checkout-plan="${offer.plan}"${focusKeyAttr(`subscription-${offer.plan}`)}${busy || purchase === 'capped' ? ' disabled' : ''}>${esc(t(label))}</button>`;
   }

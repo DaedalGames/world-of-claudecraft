@@ -917,6 +917,8 @@ export const hudChromeStrings = {
       // is added onto the end of their current membership.
       addMonth: 'Add 1 month',
       addYear: 'Add 12 months',
+      // A monthly member's annual purchase: switches to yearly renewal after the added year.
+      upgradeAnnual: 'Upgrade to 12 months',
       stackTerms:
         'Paid now. The time is added to the end of your current membership, then it renews on this plan.',
       stackCapped:
