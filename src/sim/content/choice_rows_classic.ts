@@ -866,7 +866,7 @@ export const ROGUE_CHOICE_ROWS: ClassChoiceRows = {
           icon: 'cheap_shot',
           // PvP stuns carry no diminishing returns (src/sim/stun_dr.ts), so a
           // stealth-free Gut Punch with no cooldown chained a 4 sec stun as fast
-          // as Energy allowed (measured ~97% stun uptime). The cooldown restores
+          // as Energy allowed (measured ~98% stun uptime). The cooldown restores
           // a real gap; pinned by tests/cheap_trick_stunlock.test.ts.
           effect: {
             ability: [{ ability: 'cheap_shot', ignoreStealthRequirement: true, cooldownFlat: 10 }],

@@ -11,7 +11,7 @@ import { groundHeight } from '../src/sim/world';
 // no PvP diminishing returns (src/sim/stun_dr.ts), so with no cooldown a
 // Skulduggery rogue chained the 4 sec stun as fast as Energy allowed: Gut
 // Punch between Low Blows, topped up by Quickened Blood, Ghostfoot Gambit and
-// the Gloam veil, held a passive player stunned ~97% of a 120 sec duel. The
+// the Gloam veil, held a passive player stunned ~98% of a 120 sec duel. The
 // talent now carries a 10 sec Gut Punch cooldown (stun length unchanged).
 //
 // This suite runs that stunlock rotation in a REAL duel (two players, the live
@@ -28,7 +28,7 @@ const DUEL_WORLD: WorldContent = {
 const FIGHT_SECONDS = 120;
 const TICKS_PER_SECOND = Math.round(1 / DT);
 
-// The screenshot's simulated rows (rows 5 and 8 were not simulated there).
+// The reported stunlock build's rows 11 to 20 (rows 5 and 8 do not feed the chain).
 const STUNLOCK_ROWS = {
   11: 'rog_r11_cheap_trick',
   14: 'rog_r14_dusk_economy',
