@@ -91,11 +91,18 @@ export class PurchaseRewardDialogs {
 
   /** A parcel landed or still waits: open the loot window, or add it to the open one. */
   offer(parcels: readonly PurchaseParcelView[]): void {
-    this.parcels = mergePurchaseParcels(this.parcels, parcels);
-    if (this.parcels.length === 0) return;
+    const merged = mergePurchaseParcels(this.parcels, parcels);
+    // The arrival emit and a login re-announce can repeat a parcel: never re-mount
+    // (and re-take focus) for one already on screen.
+    if (this.open && merged.length === this.parcels.length) return;
+    if (merged.length === 0) return;
     this.open?.dismiss();
+    this.parcels = merged;
     this.open = mountDialog('purchase-loot-prompt', this.lootHtml(), 'purchase-loot-title', () => {
+      // Every close (Collect, Later, Escape) forgets the offer; the mailbox keeps the
+      // parcel and the next login offers it again.
       this.open = null;
+      this.parcels = [];
     });
     if (!this.open) return;
     const { prompt, dismiss } = this.open;

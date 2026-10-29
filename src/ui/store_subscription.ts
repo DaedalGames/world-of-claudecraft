@@ -49,10 +49,8 @@ export class StoreSubscription {
     mint: mintIntentKey,
   });
   private annualDelivered = false;
-  /** Accounts whose owed annual reward was already looked up by this panel. */
+  /** Annual members whose owed reward was already looked up by this panel. */
   private annualChecked = new Set<number | undefined>();
-  /** Token intent keys already claimed on store entry (a completed checkout retries its own). */
-  private tokenChecked = new Set<string>();
   /** Repaints the store once an embedded checkout completes (webhooks settle shortly after). */
   private checkoutCompleted: () => void = () => {};
   constructor(private readonly hooks: () => SubscriptionStoreHooks | undefined) {}
@@ -113,22 +111,20 @@ export class StoreSubscription {
           this.intents.complete('game_monthly');
         // Return/reload only retries reward delivery; it never creates a paid checkout.
         // Rewards arrive in a loot window (purchase_reward_dialogs.ts), so there is no
-        // collect button: a pending purchase retries on every entry, and an owed annual
-        // reward bought on another device or before a plan change is looked up once.
-        if (
-          state.available &&
-          hooks?.annualMountClaim &&
-          (this.intents.pending('game_annual') ||
-            ((state.canManage || state.plan === 'game_annual') &&
-              !this.annualChecked.has(state.accountId)))
-        ) {
-          this.annualChecked.add(state.accountId);
-          await this.collectAnnual(hooks).catch(() => false);
+        // collect button: a paid purchase retries on every store entry until it delivers,
+        // and an annual member's reward bought on another device is looked up once.
+        if (state.available && hooks?.annualMountClaim) {
+          if (this.intents.pending('game_annual'))
+            await this.collectAnnual(hooks).catch(() => false);
+          else if (state.plan === 'game_annual' && !this.annualChecked.has(state.accountId)) {
+            await hooks
+              .annualMountClaim()
+              .then(() => this.annualChecked.add(state.accountId))
+              .catch(() => {});
+          }
         }
-        if (this.tokenPending() && !this.tokenChecked.has(this.tokenKey) && hooks?.tokenClaim) {
-          this.tokenChecked.add(this.tokenKey);
+        if (this.tokenPending() && hooks?.tokenClaim)
           await this.claimToken(hooks).catch(() => false);
-        }
       })
       .catch(() => {
         this.state = { ...SUBSCRIPTION_OFF };
@@ -317,15 +313,22 @@ export class StoreSubscription {
         | 'hudChrome.wocStore.subscription.error'
         | null = null;
       try {
-        try {
-          localStorage.setItem('woc.membership-token.pending', this.tokenKey);
-        } catch {
-          /* Storage unavailable. */
-        }
+        const markPending = () => {
+          try {
+            localStorage.setItem('woc.membership-token.pending', this.tokenKey);
+          } catch {
+            /* Storage unavailable. */
+          }
+        };
         const result = subscriptionLink(await hooks.tokenCheckout(this.tokenKey), 'checkout');
         if (hooks !== this.hooks() || !result.ok) throw new Error('token checkout unavailable');
+        // A hosted tab never reports completion, so it is claimed on later store entries;
+        // an embedded checkout is only pending once it is paid, so closing it unpaid
+        // leaves nothing to claim.
+        if (!result.stripe) markPending();
         // Paid: the token arrives in a loot window once the payment settles.
         await this.openCheckout(result, () => {
+          markPending();
           const status = body.querySelector<HTMLElement>('[data-membership-token-status]');
           if (status) status.textContent = t('hudChrome.wocStore.subscription.tokenArriving');
           this.retryDelivery(hooks, () => this.claimToken(hooks));

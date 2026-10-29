@@ -30,7 +30,7 @@ function panelWith(hooks: SubscriptionStoreHooks) {
   return new StoreSubscription(() => hooks);
 }
 describe('subscription store section', () => {
-  it('discovers an owed annual reward without a saved key after changing plans or devices', async () => {
+  it("discovers an annual member's owed reward without a saved key, once and silently", async () => {
     const annualMountClaim = vi.fn(async () => ({ delivered: true }));
     const link = vi.fn();
     const panel = panelWith({
@@ -38,7 +38,7 @@ describe('subscription store section', () => {
         ...SUBSCRIPTION_OFF,
         available: true,
         accountId: 41,
-        plan: 'game_monthly',
+        plan: 'game_annual',
         status: 'active',
         canManage: true,
         plans: Object.values(GAME_SUBSCRIPTION_PLANS),
@@ -48,12 +48,13 @@ describe('subscription store section', () => {
     });
     // No collect button: entering the store looks the owed reward up once.
     await panel.refresh();
-    expect(annualMountClaim).toHaveBeenCalledExactlyOnceWith(undefined);
+    expect(annualMountClaim).toHaveBeenCalledExactlyOnceWith();
     await panel.refresh();
     expect(annualMountClaim).toHaveBeenCalledOnce();
     document.body.innerHTML = panel.html();
     expect(document.querySelector('[data-subscription-mount-claim]')).toBeNull();
-    expect(document.body.textContent).toContain('Your mount reins have arrived');
+    // A delivered receipt may be an old one: a new parcel opens its own loot window.
+    expect(document.body.textContent).not.toContain('Your mount reins have arrived');
     expect(link).not.toHaveBeenCalled();
     expect(localStorage.getItem('woc.subscription.41.game_annual.pending')).toBeNull();
   });
@@ -523,15 +524,40 @@ describe('subscription store section', () => {
     expect(localStorage.getItem('woc.membership-token.pending')).toBe(key);
     document.body.innerHTML = panel.html();
     expect(document.body.textContent).toContain('Your token appears in a loot window');
-    // Once per panel: a repaint refresh does not hammer the claim.
-    await panel.refresh();
-    expect(tokenClaim).toHaveBeenCalledTimes(1);
+    // Every store entry retries until the paid token delivers.
     panel = panelWith(hooks);
+    await panel.refresh();
+    expect(tokenClaim).toHaveBeenCalledTimes(2);
     await panel.refresh();
     expect(tokenClaim).toHaveBeenCalledTimes(2);
     expect(tokenClaim).toHaveBeenLastCalledWith(key);
     expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
     expect(tokenCheckout).toHaveBeenCalledTimes(1);
+  });
+  it('leaves nothing pending when an embedded token checkout closes unpaid', async () => {
+    const intent = { clientSecret: 'cs_test_4_secret_x', publishableKey: 'pk_test_1' };
+    const tokenClaim = vi.fn(async () => ({ delivered: false }));
+    const panel = panelWith({
+      snapshot: async () => ({ ...SUBSCRIPTION_OFF }),
+      link: vi.fn(),
+      tokenOffer: async () => ({
+        available: true,
+        canCheckout: true,
+        days: 30,
+        price: { currency: 'usd', unitAmount: 500 },
+      }),
+      tokenCheckout: async () => ({ ok: true, url: null, stripe: intent }),
+      tokenClaim,
+    });
+    await panel.refresh();
+    document.body.innerHTML = panel.html();
+    panel.bind(document.body);
+    document.querySelector<HTMLButtonElement>('[data-membership-purchase-action="buy"]')!.click();
+    await vi.waitFor(() => expect(stripe.open).toHaveBeenCalledOnce());
+    expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
+    await panel.refresh();
+    expect(tokenClaim).not.toHaveBeenCalled();
+    expect(panel.html()).not.toContain('Your token appears in a loot window');
   });
   it('claims a token and an annual mount while the embedded payment settles', async () => {
     vi.useFakeTimers();
