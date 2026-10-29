@@ -532,8 +532,7 @@ import { livingSecondaryPet } from './hud/pet_bar_core';
 import { CARD_POSES } from './hud/player_card/player_card';
 import { PlayerCardController } from './hud/player_card/player_card_controller';
 import { commissionOrderResultLine } from './hud/professions/commission_order_feedback';
-import { buildCommissionOrderBoardModel } from './hud/professions/commission_order_view';
-import { renderCommissionOrderWindow } from './hud/professions/commission_order_window';
+import { CommissionOrderBoardPainter } from './hud/professions/commission_order_window';
 import { cookingCatchHintKey } from './hud/professions/cooking_catch_hint_view';
 import {
   buildCraftCastSession,
@@ -650,6 +649,7 @@ import { buildCrucibleVendorView } from './hud/vendor/crucible_vendor_view';
 import { renderCrucibleVendorWindow } from './hud/vendor/crucible_vendor_window';
 import { buildHeroicVendorView } from './hud/vendor/heroic_vendor_view';
 import { renderHeroicVendorWindow } from './hud/vendor/heroic_vendor_window';
+import { ServiceWindowRefresh } from './hud/vendor/service_window_refresh';
 import { TrainLearnTracker } from './hud/vendor/train_learn_core';
 import { buildTrainView, isRecipeKnownForViewer } from './hud/vendor/train_view';
 import { renderTrainWindow } from './hud/vendor/train_window';
@@ -1785,6 +1785,7 @@ export class Hud {
   // #2342): begin on click (the double-submit guard), resolve on the
   // trainResult event, read surfaces consumed by buildTrainView.
   private readonly trainLearns = new TrainLearnTracker();
+  private readonly serviceLatch = new ServiceWindowRefresh(() => this.repaintOpenServiceWindows());
   // Standalone trapping window (the professions/mailbox shape, NOT the
   // vendor's docked bags pairing): capture the opener + install the Tab trap
   // at open, return focus on close (src/ui/CLAUDE.md focus contract).
@@ -1911,6 +1912,7 @@ export class Hud {
   private commissionBoardOpen = false;
   private readonly commissionBoardFocus = this.windowFocus('#commission-board-window');
   private commissionBoardOpenerFocus: HTMLElement | null = null;
+  private readonly commissionBoardPainter = new CommissionOrderBoardPainter(() => this.sim);
   private readonly delveBoard: DelveBoardController;
   private readonly delveTracker: DelveTrackerController;
   private readonly riftTracker: RiftFloorTrackerController;
@@ -5832,6 +5834,7 @@ export class Hud {
       localStorage.setItem('chatClock', clock);
     },
   });
+  private readonly keyboardPopout = this.optionsWindow.keyboardPopout;
   // Leaderboard window painter (leaderboard_view.ts async-free core + leaderboard_
   // window.ts painter). It owns the page index + focus opener and the one
   // consumed-new signature: it awaits the paged leaderboard() and renders the page
@@ -6825,7 +6828,9 @@ export class Hud {
     // Covers the three unit frames and every frame the interface toggle governs.
     this.interfaceUnlock.relocalize();
     this.targetAurasWindow.relocalize();
-    if (this.questlogWindow.isOpen) this.questlogWindow.render();
+    this.questlogWindow.relocalize();
+    this.talentsWindow.relocalize();
+    this.treasureMapWindow.relocalize();
     if ($('#bags').style.display !== 'none') this.renderBags();
     this.repaintOpenServiceWindows();
     // The Town Focus signature is text-independent (the allocation, the budget
@@ -6844,6 +6849,7 @@ export class Hud {
     this.lootWindow.relocalize();
     this.harvestJournalWindow.relocalize();
     this.plantSheetWindow.relocalize();
+    this.commissionBoardPainter.relocalize();
     // The Perfecting window's repaint signature is ids/ranks/counts, all
     // text-independent, so a language switch alone never moves it; the arm
     // forces one rebuild (self-gated on its own open check).
@@ -9313,6 +9319,7 @@ export class Hud {
       const p = this.sim.player;
       if (!riftForgeInReach(p, this.sim.entities.values(), NPC_WINDOW_CLOSE_RANGE))
         this.riftForgeWindow.close();
+      else this.riftForgeWindow.refreshIfChanged();
     }
     // The mailbox closes itself when the mail mirror goes null (walked away).
     if (slowHud && this.mailboxWindow.isOpen) this.mailboxWindow.refreshIfChanged();
@@ -9329,6 +9336,7 @@ export class Hud {
     // ClientWorld purse diff gets there first via onInventoryChanged. The window owns
     // the latch and repaints only its .money footer, never the whole grid.
     if (slowHud) this.bagsWindow.refreshIfChanged();
+    if (slowHud) this.serviceLatch.refreshIfChanged(this.sim, this.trainLearns, now);
     if (slowHud && this.deedsWindow.isOpen) this.deedsWindow.refreshIfChanged();
     if (slowHud && this.reliquaryWindow.isOpen) this.reliquaryWindow.refreshIfChanged();
     if (slowHud && this.cosmeticsWindow.isOpen) this.cosmeticsWindow.refreshIfChanged();
@@ -9336,6 +9344,7 @@ export class Hud {
     if (slowHud) this.refreshCharSheetIfChanged();
     if (slowHud && this.professionsWindow.isOpen) this.professionsWindow.refreshIfChanged();
     if (slowHud) this.plantSheetWindow.refreshIfChanged();
+    if (slowHud && this.commissionBoardOpen) this.commissionBoardPainter.refreshIfChanged();
     // The gossip dialog's intro hint row watches the same online cprof edge:
     // attunement retires it, and no quest event fires for that flip.
     if (slowHud) this.questDialog.refreshIfChanged();
@@ -9356,6 +9365,10 @@ export class Hud {
     // Re-seat the tracker stack under the minimap column (bounded layout read).
     if (slowHud) this.trackerStackAnchor.apply();
     if (slowHud && this.calendarWindow.isOpen) this.calendarWindow.refreshIfChanged();
+    if (slowHud && this.questlogWindow.isOpen) this.questlogWindow.refreshIfChanged();
+    if (slowHud && this.talentsWindow.isOpen) this.talentsWindow.refreshIfChanged();
+    if (slowHud && this.treasureMapWindow.isOpen) this.treasureMapWindow.refreshIfChanged();
+    if (slowHud && this.keyboardPopout.isOpen) this.keyboardPopout.refreshIfChanged();
     if (slowHud && this.weeklyQuestsWindow.isOpen) this.weeklyQuestsWindow.refreshIfChanged();
     if (slowHud && this.guildHallWindow.isOpen) this.guildHallWindow.refreshIfChanged();
     if (slowHud) this.updateMailIndicator();
@@ -15313,31 +15326,21 @@ export class Hud {
 
   private renderCommissionBoard(): void {
     if (!this.commissionBoardOpen) return;
-    // The "open a new order" picker is the CUSTOMER side of the board: the
-    // sim accepts a commission for any commission-eligible recipe, whether
-    // or not the requester knows it themselves (that is the crafter's job).
-    // Pass the full recipe catalog, not craftingIdentity.knownRecipes (the
-    // crafting window's own recipe-book gate); buildCommissionOrderBoardModel
-    // narrows it to commission-eligible outputs itself.
-    renderCommissionOrderWindow(
-      $('#commission-board-window'),
-      buildCommissionOrderBoardModel(this.sim.commissionOrders, this.sim.recipeList, ITEMS),
-      {
-        ...this.presentationBag,
-        hideTooltip: () => this.hideTooltip(),
-        onOpen: (recipeId, scope, crafterName) => {
-          this.sim.openCommissionOrder(recipeId, scope, crafterName);
-        },
-        onCancel: (orderId) => this.sim.cancelCommissionOrder(orderId),
-        onAccept: (orderId) => this.sim.acceptCommissionOrder(orderId),
-        onDeliver: (orderId) => this.sim.deliverCommissionOrder(orderId),
-        // The gathering goal Track control (Intentional Gathering PR4):
-        // renders only on a row this viewer accepted to craft (canDeliver),
-        // so no separate accepted-mine check is needed here.
-        onTrack: (orderId) => this.gatheringGoalController.onTrack(orderId),
-        onClose: () => this.closeCommissionBoard(),
+    this.commissionBoardPainter.render($('#commission-board-window'), {
+      ...this.presentationBag,
+      hideTooltip: () => this.hideTooltip(),
+      onOpen: (recipeId, scope, crafterName) => {
+        this.sim.openCommissionOrder(recipeId, scope, crafterName);
       },
-    );
+      onCancel: (orderId) => this.sim.cancelCommissionOrder(orderId),
+      onAccept: (orderId) => this.sim.acceptCommissionOrder(orderId),
+      onDeliver: (orderId) => this.sim.deliverCommissionOrder(orderId),
+      // The gathering goal Track control (Intentional Gathering PR4):
+      // renders only on a row this viewer accepted to craft (canDeliver),
+      // so no separate accepted-mine check is needed here.
+      onTrack: (orderId) => this.gatheringGoalController.onTrack(orderId),
+      onClose: () => this.closeCommissionBoard(),
+    });
   }
 
   closeCommissionBoard(): void {
@@ -15709,6 +15712,7 @@ export class Hud {
       this.renderVendor();
     if (this.openHeroicVendorNpcId !== null && $('#vendor-window').style.display === 'block')
       this.renderHeroicVendor();
+    if (this.openCrucibleVendorNpcId !== null) this.renderCrucibleVendor();
     if (this.openWarfareVendorNpcId !== null && $('#warfare-window').style.display === 'block')
       this.renderWarfareVendor();
     if (this.openTrainNpcId !== null && $('#train-window').style.display === 'block')
@@ -15716,6 +15720,7 @@ export class Hud {
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
     if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
+    this.serviceLatch.relatch(this.sim, this.trainLearns, performance.now());
   }
 
   onCosmeticsChanged(): void {
@@ -15896,13 +15901,14 @@ export class Hud {
     // applyState at character load, when no window can be open.)
   }
 
-  // The progression-block sibling of refreshOpenProfessionSurfacesIfChanged:
-  // the sheet's title line, border badge row, and Reliquary pair are readouts
-  // on a cold window, and no surface that moves them repaints an already open
-  // sheet (the deeds picker repaints only itself; a relic fill, the tracker).
+  // The whole-sheet sibling of refreshOpenProfessionSurfacesIfChanged: the
+  // stats (buffs, procs, level), header, progression block and the visible
+  // tab's readouts sit on a cold window, and no surface that moves them
+  // repaints an already open sheet (char_sheet_sig_core.ts says what it signs).
   //
   // Computed even when closed, like the sibling, with the cost stated rather
-  // than waved through: three size reads are O(1), and Sim.ownedMounts() pays
+  // than waved through: the reads are scalars plus one aura and one worn-item
+  // walk, the size reads are O(1), and Sim.ownedMounts() pays
   // one merged bags-plus-bank allocation per 2 Hz tick (the read the Reliquary
   // tracker defers behind a thunk). Microseconds against a 500 ms band,
   // ACCEPTED so the warm signature stops a reopen from being followed by a
@@ -15916,7 +15922,7 @@ export class Hud {
   // synchronous; online the atitle/aborder echo and the snapshot's ownership
   // fields land well inside one band), and render() rebuilds every row fresh.
   private refreshCharSheetIfChanged(): void {
-    const sig = charSheetRefreshSigFor(this.sim);
+    const sig = charSheetRefreshSigFor(this.sim, this.charWindow.activeSidebarTab, Date.now());
     if (sig === this.lastCharSheetSig) return;
     this.lastCharSheetSig = sig;
     this.charWindow.renderIfOpen();

@@ -3287,6 +3287,9 @@ const UI_DOM_MODULES = [
   'src/ui/world_quest_ley_fx_controller.ts',
   'src/ui/hud/vendor/buy_quantity_prompt_window.ts',
   'src/ui/hud/vendor/heroic_vendor_window.ts',
+  // The service-window refresh latch: reads the shown roots and the open
+  // buy prompt / confirm dialog off the document before a slow-band rebuild.
+  'src/ui/hud/vendor/service_window_refresh.ts',
   'src/ui/hud/vendor/crucible_vendor_window.ts',
   'src/ui/hud/vendor/train_window.ts',
   'src/ui/hud/vendor/unbind_window.ts',
