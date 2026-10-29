@@ -148,6 +148,9 @@ export interface LookRender {
   /** Meadow blade height and cluster spread scales (1, 1 is the shipped cluster). */
   bladeHeight: number;
   bladeSpread: number;
+  /** Extra finer blades on (1) or off (0), and the share of tufts showing a flower. */
+  bladeExtra: number;
+  flowerShare: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -175,6 +178,8 @@ export const STOCK_RENDER: LookRender = {
   paintTip: 0,
   bladeHeight: 1,
   bladeSpread: 1,
+  bladeExtra: 0,
+  flowerShare: 0,
 };
 
 export interface ZoneLook {

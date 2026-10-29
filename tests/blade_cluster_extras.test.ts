@@ -1,0 +1,31 @@
+import { describe, expect, it } from 'vitest';
+import { clusterGeometry, mulberry32 } from '../src/render/blade_grass';
+
+describe('blade cluster extras (finer blades and a flower)', () => {
+  it('leaves the shipped nine blades byte-identical when extras are on', () => {
+    const stock = clusterGeometry(mulberry32(7));
+    const extras = clusterGeometry(mulberry32(7), 3, true);
+    const a = stock.getAttribute('position').array as Float32Array;
+    const b = extras.getAttribute('position').array as Float32Array;
+    expect(b.length).toBeGreaterThan(a.length);
+    expect(Array.from(b.slice(0, a.length))).toEqual(Array.from(a));
+    expect(stock.getAttribute('aBladeKind')).toBeUndefined();
+  });
+
+  it('tags every vertex: shipped blades 0, extra blades 1, the flower 2', () => {
+    const geo = clusterGeometry(mulberry32(7), 3, true);
+    const kinds = Array.from(geo.getAttribute('aBladeKind').array as Float32Array);
+    const shipped = clusterGeometry(mulberry32(7)).getAttribute('position').count;
+    expect(kinds.slice(0, shipped).every((k) => k === 0)).toBe(true);
+    expect(kinds.slice(shipped).some((k) => k === 1)).toBe(true);
+    expect(kinds.filter((k) => k === 2).length).toBeGreaterThan(3);
+    expect(kinds.length).toBe(geo.getAttribute('position').count);
+  });
+
+  it('builds extras for the two-segment band tuft too', () => {
+    const geo = clusterGeometry(mulberry32(3), 2, true);
+    const kinds = Array.from(geo.getAttribute('aBladeKind').array as Float32Array);
+    expect(kinds).toContain(1);
+    expect(kinds).toContain(2);
+  });
+});

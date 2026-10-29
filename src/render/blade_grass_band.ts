@@ -45,6 +45,8 @@ import {
   BLADE_BASE_UNIFORM,
   BLADE_COMB_GLSL,
   BLADE_COMB_UNIFORM,
+  BLADE_EXTRA_GLSL,
+  BLADE_EXTRA_UNIFORM,
   BLADE_PAINT_UNIFORM,
   BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
@@ -139,7 +141,7 @@ export function buildBladeGrassBand(
   const POOL = GRID_W * GRID_W;
 
   const rng = mulberry32(seed ^ 0x6b1a);
-  const geo = clusterGeometry(rng, 2);
+  const geo = clusterGeometry(rng, 2, true);
   const mat = new THREE.MeshStandardMaterial({
     vertexColors: true,
     roughness: 0.92,
@@ -177,6 +179,7 @@ export function buildBladeGrassBand(
     sh.uniforms.uBladeComb = BLADE_COMB_UNIFORM;
     sh.uniforms.uBladePaint = BLADE_PAINT_UNIFORM;
     sh.uniforms.uBladeSize = BLADE_SIZE_UNIFORM;
+    sh.uniforms.uBladeExtra = BLADE_EXTRA_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -192,7 +195,9 @@ export function buildBladeGrassBand(
         uniform float uBladeBase;
         uniform vec4 uBladeComb;
         uniform vec4 uBladePaint;
-        uniform vec4 uBladeSize;`,
+        uniform vec4 uBladeSize;
+        uniform vec4 uBladeExtra;
+        attribute float aBladeKind;`,
       )
       .replace(
         '#include <color_vertex>',
@@ -231,6 +236,7 @@ export function buildBladeGrassBand(
           // once the fade has collapsed the blade
           ${bladeSwayGlsl(classicSway)}
           ${grassBladeInteractionGlsl()}
+          ${BLADE_EXTRA_GLSL}
         #endif`,
       );
     sh.vertexShader = patchConstantUpNormalVertexShader(sh.vertexShader);

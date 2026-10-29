@@ -165,3 +165,31 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
           #endif
         }
         #endif`;
+
+// Extra blades and flowers (blade_grass.ts clusterGeometry `extras`): the
+// carpet and band tufts carry six finer blades and one tiny daisy, tagged by
+// `aBladeKind` (1 extra blade, 2 flower). They collapse to the root unless a
+// zone look turns them on, so stock tufts render the shipped nine blades.
+
+/** x: extra blades on (> 0.5); y: share of tufts that show their flower (0..1). */
+export const BLADE_EXTRA_VALUES = new Float32Array([0, 0, 0, 0]);
+export const BLADE_EXTRA_UNIFORM: { value: Float32Array } = { value: BLADE_EXTRA_VALUES };
+
+/** Set the extras: blades 0..1 (on above 0.5) and the flower share 0..1. */
+export function setBladeExtraZone(blades: number, flowers: number): void {
+  BLADE_EXTRA_VALUES[0] = Number.isFinite(blades) ? Math.min(1, Math.max(0, blades)) : 0;
+  BLADE_EXTRA_VALUES[1] = Number.isFinite(flowers) ? Math.min(1, Math.max(0, flowers)) : 0;
+}
+
+/** Last in the instancing block (after sway, so nothing re-inflates a
+ *  collapsed vertex): hide disabled extras and give a shown flower its own
+ *  colours instead of the ground tint. */
+export const BLADE_EXTRA_GLSL = `if (aBladeKind > 0.5) {
+            float wocExtraHash = fract(sin(dot(instanceMatrix[3].xz, vec2(41.31, 17.77))) * 23421.631);
+            bool wocFlower = aBladeKind > 1.5;
+            bool wocShow = wocFlower ? wocExtraHash < uBladeExtra.y : uBladeExtra.x > 0.5;
+            if (!wocShow) transformed = vec3(0.0);
+            #ifdef USE_COLOR
+            if (wocFlower) vColor.rgb = color.rgb;
+            #endif
+          }`;

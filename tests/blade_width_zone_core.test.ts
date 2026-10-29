@@ -5,6 +5,8 @@ import {
   BLADE_BASE_UNIFORM,
   BLADE_COMB_GLSL,
   BLADE_COMB_VALUES,
+  BLADE_EXTRA_GLSL,
+  BLADE_EXTRA_VALUES,
   BLADE_NEAR_GLSL,
   BLADE_NEAR_MIN,
   BLADE_NEAR_UNIFORM,
@@ -17,6 +19,7 @@ import {
   CARPET_GROUND_UNIFORM,
   setBladeBaseZoneShade,
   setBladeCombZone,
+  setBladeExtraZone,
   setBladeNearZoneShade,
   setBladePaintZone,
   setBladeSizeZone,
@@ -134,5 +137,27 @@ describe('windswept comb, painted field and blade size (zone look arms)', () => 
     expect(BLADE_COMB_GLSL).toContain('if (uBladeComb.y > 0.0)');
     expect(BLADE_COMB_GLSL).toContain('if (uBladePaint.x > 0.0 || uBladePaint.y > 0.0)');
     expect(BLADE_COMB_GLSL.startsWith('transformed.y *= uBladeSize.x;')).toBe(true);
+  });
+});
+
+describe('extra blades and flowers (zone look arm)', () => {
+  afterEach(() => setBladeExtraZone(0, 0));
+
+  it('starts with every extra hidden (the shipped nine-blade tuft)', () => {
+    expect([...BLADE_EXTRA_VALUES]).toEqual([0, 0, 0, 0]);
+  });
+
+  it('clamps the switches and restores hidden extras on a non-finite value', () => {
+    setBladeExtraZone(4, 0.22);
+    expect(BLADE_EXTRA_VALUES[0]).toBe(1);
+    expect(BLADE_EXTRA_VALUES[1]).toBeCloseTo(0.22, 6);
+    setBladeExtraZone(Number.NaN, Number.NaN);
+    expect([...BLADE_EXTRA_VALUES]).toEqual([0, 0, 0, 0]);
+  });
+
+  it('collapses a hidden extra AFTER sway, so nothing re-inflates it', () => {
+    expect(BLADE_EXTRA_GLSL).toContain('if (!wocShow) transformed = vec3(0.0);');
+    expect(BLADE_EXTRA_GLSL).toContain('uBladeExtra.x > 0.5');
+    expect(BLADE_EXTRA_GLSL).toContain('< uBladeExtra.y');
   });
 });

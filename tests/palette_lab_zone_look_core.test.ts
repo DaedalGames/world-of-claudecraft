@@ -350,6 +350,8 @@ describe('painterly render arms stay off outside Eastbrook', () => {
       expect(look.render.paintTip, `${zoneId}/${lookId}`).toBe(0);
       expect(look.render.bladeHeight, `${zoneId}/${lookId}`).toBe(1);
       expect(look.render.bladeSpread, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.bladeExtra, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.flowerShare, `${zoneId}/${lookId}`).toBe(0);
     }
   });
 });

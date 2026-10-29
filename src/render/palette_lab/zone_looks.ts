@@ -168,6 +168,8 @@ const STORYBOOK_MEADOW_RENDER = {
   paintTip: 1,
   bladeHeight: 0.6,
   bladeSpread: 1.35,
+  bladeExtra: 1,
+  flowerShare: 0.22,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
