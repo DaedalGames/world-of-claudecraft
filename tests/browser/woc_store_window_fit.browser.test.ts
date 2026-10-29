@@ -46,7 +46,12 @@ const SLACK = 1;
 const mounted: DailyRewardsWindow[] = [];
 let teardownResize: (() => void) | null = null;
 
-async function mountStore(width: number, height: number, uiScale: number): Promise<HTMLElement> {
+async function mountStore(
+  width: number,
+  height: number,
+  uiScale: number,
+  storeEnabled = true,
+): Promise<HTMLElement> {
   await page.viewport(width, height);
   const style = document.documentElement.style;
   style.setProperty('--app-vw', `${width}px`);
@@ -82,12 +87,17 @@ async function mountStore(width: number, height: number, uiScale: number): Promi
     closeOthers: () => undefined,
     captureFocus: () => null,
     restoreFocus: () => undefined,
-    storeEnabled: () => true,
+    storeEnabled: () => storeEnabled,
     storeSnapshot: async () => ({ available: true, balance: 5_000, items: [] }),
     spendStoreItem: async () => ({ granted: false, balance: 5_000, costClaudium: 0, reason: null }),
   };
   const win = new DailyRewardsWindow(deps);
   mounted.push(win);
+  if (!storeEnabled) {
+    // Rewards-only mode: the shell (title + body) paints synchronously on open.
+    win.toggle();
+    return root;
+  }
   win.openStore();
   await vi.waitFor(() => {
     expect(root.querySelector('[data-armory-skin]')).not.toBeNull();
@@ -188,4 +198,18 @@ describe('WOC Store window fits the screen', () => {
       expect(last.getBoundingClientRect().bottom).toBeLessThanOrEqual(after.bottom + SLACK);
     },
   );
+
+  it('rewards-only mode keeps one 8px gap under the title', async () => {
+    // With no tab strip the title and body are adjacent. Block flow collapsed
+    // their two 8px margins into one; the flex column does not collapse, so one
+    // margin is dropped to keep the gap the window always had.
+    const root = await mountStore(1920, 1080, 1, false);
+    const title = root.querySelector<HTMLElement>('.panel-title');
+    expect(title, 'the rewards title never rendered').not.toBeNull();
+    expect(root.querySelector('.woc-store-tabs')).toBeNull();
+    const gap =
+      body(root).getBoundingClientRect().top -
+      (title as HTMLElement).getBoundingClientRect().bottom;
+    expect(gap).toBeCloseTo(8, 0);
+  });
 });
