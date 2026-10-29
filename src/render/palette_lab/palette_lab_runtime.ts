@@ -40,11 +40,14 @@ import { type BiomeHazePreset, hazeLightLevel } from '../biome_haze_field_core';
 import { recolorLiveBladeGrassView } from '../blade_grass';
 import { recolorLiveBladeGrassBandView } from '../blade_grass_band';
 import {
+  hexToLinear,
   setBladeBaseZoneShade,
+  setBladeCloudZone,
   setBladeCombZone,
   setBladeExtraZone,
   setBladeNearZoneShade,
   setBladePaintZone,
+  setBladeRampZone,
   setBladeSizeZone,
   setBladeWidthZoneScale,
   setCarpetGroundZone,
@@ -141,6 +144,7 @@ const LIVE = {
   bladeSize: 56,
   bladeExtra: 58,
   bladeClump: 60,
+  ramp: 62,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -598,6 +602,13 @@ class PaletteLabRuntime implements PaletteLabApi {
     setBladeCombZone(v[LIVE.comb], v[LIVE.comb + 1], v[LIVE.comb + 2], v[LIVE.comb + 3]);
     setBladePaintZone(v[LIVE.paint], v[LIVE.paint + 1], v[LIVE.bladeClump]);
     setBladeSizeZone(v[LIVE.bladeSize], v[LIVE.bladeSize + 1], v[LIVE.bladeClump + 1]);
+    setBladeRampZone(
+      [v[LIVE.ramp], v[LIVE.ramp + 1], v[LIVE.ramp + 2]],
+      [v[LIVE.ramp + 3], v[LIVE.ramp + 4], v[LIVE.ramp + 5]],
+      v[LIVE.ramp + 6],
+      v[LIVE.ramp + 7],
+    );
+    setBladeCloudZone(v[LIVE.ramp + 8]);
     setBladeExtraZone(v[LIVE.bladeExtra], v[LIVE.bladeExtra + 1]);
 
     // Water is one shared material for every sheet, so it wears the look of
@@ -748,6 +759,11 @@ class PaletteLabRuntime implements PaletteLabApi {
       look.render.flowerShare,
       look.render.bladeClump,
       look.render.bladeWiden,
+      ...hexToLinear(look.render.rampShadow),
+      ...hexToLinear(look.render.rampLight),
+      look.render.rampStrength,
+      look.render.bladeSide,
+      look.render.cloudShadow,
     ];
     this.targetCache.set(look, flat);
     return flat;

@@ -144,7 +144,7 @@ const STORYBOOK_MEADOW_GRADE = {
   lift: 0.014,
   greenHue: -13,
   greenSat: 0.93,
-  greenVal: 1.0,
+  greenVal: 1.1,
 };
 const STORYBOOK_MEADOW_RENDER = {
   rim: 0.3,
@@ -156,8 +156,8 @@ const STORYBOOK_MEADOW_RENDER = {
   ink: 0,
   bladeWidth: 0.6,
   rampSoft: 0.8,
-  bladeBase: 0.45,
-  bladeNear: 0.55,
+  bladeBase: 0.72,
+  bladeNear: 0.72,
   carpetGround: 1,
   // windswept toward screen-right as seen down the vale road
   combX: 0.9,
@@ -172,6 +172,11 @@ const STORYBOOK_MEADOW_RENDER = {
   flowerShare: 0.22,
   bladeClump: 0.6,
   bladeWiden: 0.3,
+  rampShadow: 0x347e4a,
+  rampLight: 0xa4cc6c,
+  rampStrength: 0.75,
+  bladeSide: 0.7,
+  cloudShadow: 0.24,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,

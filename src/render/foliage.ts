@@ -110,6 +110,7 @@ import {
   barkAlbedoLift,
   foliageMeshBoundsOr,
   foliageSpotsBounds,
+  LEAF_FLUTTER_GLSL,
   recordFoliageMeshBounds,
   resolveTreeLeafColor,
   sculptFoliageTreeGeometry,
@@ -866,7 +867,8 @@ function addWind(mat: THREE.Material, strength: number, upNormalBlend = 0): void
         float windAmt = (sin(uTime * 1.7 + windPhase) + 0.5 * sin(uTime * 3.1 + windPhase * 1.3))
           * windGust * uWindStrength * smoothstep(0.0, 1.0, transformed.y);
         transformed.x += windAmt;
-        transformed.z += windAmt * 0.6;`,
+        transformed.z += windAmt * 0.6;
+        ${LEAF_FLUTTER_GLSL}`,
       );
     sh.fragmentShader = sh.fragmentShader
       .replace(

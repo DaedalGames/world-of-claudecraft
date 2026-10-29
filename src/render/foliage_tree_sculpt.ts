@@ -108,6 +108,19 @@ const BARK_TONE_SLENDER: readonly [number, number, number] = [0.96, 1.1, 1.3];
 // LEAF_DENSITY and its card size by LEAF_SIZE (about the same canopy cover).
 const LEAF_DENSITY = 1.7;
 const LEAF_SIZE = 0.74;
+// Per-leaf value jitter range and the sunlit tip highlight on outer cards.
+const LEAF_JITTER_MIN = 0.84;
+const LEAF_JITTER_SPAN = 0.32;
+const LEAF_TIP_HIGHLIGHT = 0.42;
+
+/** Leaf flutter (foliage.ts addWind, leaf materials only): each leaf card
+ *  shivers on its own phase on top of the whole-tree sway, so a canopy
+ *  twinkles in the breeze. Off wherever the tree wind is off. */
+export const LEAF_FLUTTER_GLSL = `if (uUpNormalBlend > 0.0 && uWindStrength > 0.0) {
+          float wocLeafPh = dot(position, vec3(3.1, 2.3, 2.7)) + windPhase * 3.0;
+          float wocLeaf = sin(uTime * 4.7 + wocLeafPh) * 0.6 + sin(uTime * 7.9 + wocLeafPh * 1.7) * 0.3;
+          transformed += vec3(0.55, 0.85, 0.4) * (wocLeaf * 0.045 * windGust * smoothstep(0.5, 2.2, transformed.y));
+        }`;
 
 // Albedo lift for the barks the sculpt does not rebuild (no vertex tones):
 // the twisted and dead tree barks ship a near-black atlas that reads as ink
@@ -614,6 +627,17 @@ function buildGenshinBroadleafCanopy(variantIdx: number, lean = false): THREE.Bu
           );
           const innerAo = isInner ? 0.68 : 0.9 + row * 0.12;
           const crownLift = 0.82 + crownT * 0.24;
+          // Per-leaf highlight (art bible: painted leaves catch light one by
+          // one): every card takes its own value jitter, and an outer card
+          // facing the sun lights its tip row, so individual leaves read.
+          const leafHash = Math.sin(cardCursor * 12.9898 + variantIdx * 78.233) * 43758.5453;
+          const leafJit = LEAF_JITTER_MIN + (leafHash - Math.floor(leafHash)) * LEAF_JITTER_SPAN;
+          const sunFace = THREE.MathUtils.smoothstep(
+            dVec.y * 0.6 + (dVec.x - dVec.z) * 0.4,
+            0.05,
+            0.75,
+          );
+          const leafLight = leafJit * (1 + (isInner ? 0 : LEAF_TIP_HIGHLIGHT * sunFace * row));
 
           const rMid = THREE.MathUtils.lerp(0.42, 0.86, lowerT);
           const gMid = THREE.MathUtils.lerp(0.48, 0.92, lowerT);
@@ -623,9 +647,9 @@ function buildGenshinBroadleafCanopy(variantIdx: number, lean = false): THREE.Bu
           const gCol = THREE.MathUtils.lerp(gMid, 1.2, upperT) * innerAo * crownLift;
           const bCol = THREE.MathUtils.lerp(bMid, 0.96, upperT) * innerAo * crownLift;
 
-          colors[vi * 3] = rCol;
-          colors[vi * 3 + 1] = gCol;
-          colors[vi * 3 + 2] = bCol;
+          colors[vi * 3] = rCol * leafLight;
+          colors[vi * 3 + 1] = gCol * leafLight;
+          colors[vi * 3 + 2] = bCol * leafLight;
         }
       }
 

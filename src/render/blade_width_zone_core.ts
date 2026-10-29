@@ -101,7 +101,8 @@ export function setCarpetGroundZone(value: number): void {
 export const BLADE_COMB_VALUES = new Float32Array([0, 0, 0, 0]);
 /** x: field patch strength (0..0.5); y: warm-tip strength (0..1); z: clumping
  *  (0..1, blades in a clump share a comb direction, lean, height and shade, the
- *  way Ghost of Tsushima-style fields break into tussocks); w reserved. */
+ *  way Ghost of Tsushima-style fields break into tussocks); w: cloud-shadow
+ *  strength (setBladeCloudZone). */
 export const BLADE_PAINT_VALUES = new Float32Array([0, 0, 0, 0]);
 
 /** Shared uniforms both blade materials bind (typed arrays reach every clone). */
@@ -222,3 +223,75 @@ export const BLADE_EXTRA_GLSL = `if (aBladeKind > 0.5) {
             if (wocFlower) vColor.rgb = color.rgb;
             #endif
           }`;
+
+// The painted meadow's colour and light (the art bible's Eastbrook):
+// - one hue family: each blade keeps its value but its hue is pulled onto a
+//   ramp from a cool shadow green to a warm light yellow-green, so no lime and
+//   emerald blades fight in the same field;
+// - side light: the near edge of a blade toward the sun lifts and the far
+//   edge drops, so a flat strip reads as a rounded blade;
+// - cloud shadows: broad, slowly drifting soft shadows over the field, the
+//   large light shapes a painter blocks in first.
+// All three are off at stock (strength 0).
+
+/** rgb: shadow end of the ramp (linear); w: ramp strength 0..1. */
+export const BLADE_RAMP_LO_VALUES = new Float32Array([0, 0, 0, 0]);
+/** rgb: light end of the ramp (linear); w: side-light strength 0..1. */
+export const BLADE_RAMP_HI_VALUES = new Float32Array([1, 1, 1, 0]);
+export const BLADE_RAMP_LO_UNIFORM: { value: Float32Array } = { value: BLADE_RAMP_LO_VALUES };
+export const BLADE_RAMP_HI_UNIFORM: { value: Float32Array } = { value: BLADE_RAMP_HI_VALUES };
+
+/** sRGB hex to linear rgb, the space vColor lives in. */
+export function hexToLinear(hex: number): [number, number, number] {
+  const c = (v: number): number => {
+    const s01 = v / 255;
+    return s01 <= 0.04045 ? s01 / 12.92 : ((s01 + 0.055) / 1.055) ** 2.4;
+  };
+  return [c((hex >> 16) & 255), c((hex >> 8) & 255), c(hex & 255)];
+}
+
+/** Set the ramp ends (linear rgb), ramp strength and side-light strength. */
+export function setBladeRampZone(
+  shadow: readonly [number, number, number],
+  light: readonly [number, number, number],
+  strength: number,
+  side: number,
+): void {
+  const ok = [...shadow, ...light, strength, side].every(Number.isFinite);
+  BLADE_RAMP_LO_VALUES.set(ok ? [shadow[0], shadow[1], shadow[2]] : [0, 0, 0]);
+  BLADE_RAMP_HI_VALUES.set(ok ? [light[0], light[1], light[2]] : [1, 1, 1]);
+  BLADE_RAMP_LO_VALUES[3] = ok ? Math.min(1, Math.max(0, strength)) : 0;
+  BLADE_RAMP_HI_VALUES[3] = ok ? Math.min(1, Math.max(0, side)) : 0;
+}
+
+/** Set the cloud-shadow strength (0..0.6; stored in uBladePaint.w). */
+export function setBladeCloudZone(strength: number): void {
+  BLADE_PAINT_VALUES[3] = Number.isFinite(strength) ? Math.min(0.6, Math.max(0, strength)) : 0;
+}
+
+/** After the comb (begin_vertex, instancing on): ramp, side light, clouds. */
+export const BLADE_LIGHT_GLSL = `#if defined( USE_INSTANCING ) && defined( USE_COLOR )
+        {
+          vec2 wocLightXZ = instanceMatrix[3].xz;
+          if (uBladeRampLo.w > 0.0) {
+            float wocLum = dot(vColor.rgb, vec3(0.2126, 0.7152, 0.0722));
+            vec3 wocRamp = mix(uBladeRampLo.rgb, uBladeRampHi.rgb, smoothstep(0.03, 0.42, wocLum));
+            float wocRampLum = max(dot(wocRamp, vec3(0.2126, 0.7152, 0.0722)), 1e-3);
+            vColor.rgb = mix(vColor.rgb, wocRamp * (wocLum / wocRampLum), uBladeRampLo.w);
+          }
+          if (uBladeRampHi.w > 0.0) {
+            vec3 wocSideW = mat3(instanceMatrix) * aBladeSide;
+            float wocSideLen = length(wocSideW.xz);
+            if (wocSideLen > 1e-5) {
+              float wocSun = dot(wocSideW.xz / wocSideLen, normalize(vec2(-0.55, -0.83)));
+              vColor.rgb *= 1.0 + uBladeRampHi.w * 0.35 * wocSun;
+            }
+          }
+          if (uBladePaint.w > 0.0) {
+            vec2 wocCloudP = wocLightXZ * 0.018 + vec2(uTime * 0.012, uTime * 0.005);
+            float wocCloudF = sin(wocCloudP.x * 2.3 + sin(wocCloudP.y * 1.7) * 1.6)
+              * sin(wocCloudP.y * 2.1 + sin(wocCloudP.x * 1.3) * 2.0);
+            vColor.rgb *= 1.0 - uBladePaint.w * smoothstep(0.05, 0.55, wocCloudF);
+          }
+        }
+        #endif`;

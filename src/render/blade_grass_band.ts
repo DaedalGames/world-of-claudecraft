@@ -47,7 +47,10 @@ import {
   BLADE_COMB_UNIFORM,
   BLADE_EXTRA_GLSL,
   BLADE_EXTRA_UNIFORM,
+  BLADE_LIGHT_GLSL,
   BLADE_PAINT_UNIFORM,
+  BLADE_RAMP_HI_UNIFORM,
+  BLADE_RAMP_LO_UNIFORM,
   BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
@@ -180,6 +183,8 @@ export function buildBladeGrassBand(
     sh.uniforms.uBladePaint = BLADE_PAINT_UNIFORM;
     sh.uniforms.uBladeSize = BLADE_SIZE_UNIFORM;
     sh.uniforms.uBladeExtra = BLADE_EXTRA_UNIFORM;
+    sh.uniforms.uBladeRampLo = BLADE_RAMP_LO_UNIFORM;
+    sh.uniforms.uBladeRampHi = BLADE_RAMP_HI_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
         '#include <common>',
@@ -197,6 +202,8 @@ export function buildBladeGrassBand(
         uniform vec4 uBladePaint;
         uniform vec4 uBladeSize;
         uniform vec4 uBladeExtra;
+        uniform vec4 uBladeRampLo;
+        uniform vec4 uBladeRampHi;
         attribute float aBladeKind;`,
       )
       .replace(
@@ -218,6 +225,7 @@ export function buildBladeGrassBand(
         `#include <begin_vertex>
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
+        ${BLADE_LIGHT_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer fade by scale collapse over the outer band fraction, and

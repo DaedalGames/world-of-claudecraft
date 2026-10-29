@@ -154,6 +154,13 @@ export interface LookRender {
   /** Clumping 0..1 (tussocks sharing lean, height, shade) and view-space widening 0..2. */
   bladeClump: number;
   bladeWiden: number;
+  /** One-hue ramp: shadow and light ends (sRGB hex) and strength 0..1 (0 is stock). */
+  rampShadow: number;
+  rampLight: number;
+  rampStrength: number;
+  /** Blade side-light 0..1 and drifting cloud-shadow strength 0..0.6. */
+  bladeSide: number;
+  cloudShadow: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -185,6 +192,11 @@ export const STOCK_RENDER: LookRender = {
   flowerShare: 0,
   bladeClump: 0,
   bladeWiden: 0,
+  rampShadow: 0x000000,
+  rampLight: 0xffffff,
+  rampStrength: 0,
+  bladeSide: 0,
+  cloudShadow: 0,
 };
 
 export interface ZoneLook {

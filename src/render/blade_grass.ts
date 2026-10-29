@@ -23,9 +23,12 @@ import {
   BLADE_COMB_UNIFORM,
   BLADE_EXTRA_GLSL,
   BLADE_EXTRA_UNIFORM,
+  BLADE_LIGHT_GLSL,
   BLADE_NEAR_GLSL,
   BLADE_NEAR_UNIFORM,
   BLADE_PAINT_UNIFORM,
+  BLADE_RAMP_HI_UNIFORM,
+  BLADE_RAMP_LO_UNIFORM,
   BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
@@ -120,8 +123,8 @@ export function recolorLiveBladeGrassView(): void {
 
 // The finer blades and the flower the carpet and band carry for zone looks
 // that turn them on (clusterGeometry's `extras`).
-const EXTRA_BLADES = 6;
-const EXTRA_BLADE_WIDTH = 0.7;
+const EXTRA_BLADES = 16;
+const EXTRA_BLADE_WIDTH = 0.5;
 const FLOWER_PETALS = 6;
 const FLOWER_RADIUS = 0.13;
 
@@ -413,6 +416,8 @@ export function buildBladeGrass(
     sh.uniforms.uBladePaint = BLADE_PAINT_UNIFORM;
     sh.uniforms.uBladeSize = BLADE_SIZE_UNIFORM;
     sh.uniforms.uBladeExtra = BLADE_EXTRA_UNIFORM;
+    sh.uniforms.uBladeRampLo = BLADE_RAMP_LO_UNIFORM;
+    sh.uniforms.uBladeRampHi = BLADE_RAMP_HI_UNIFORM;
     sh.uniforms.uBladeNear = BLADE_NEAR_UNIFORM;
     sh.vertexShader = sh.vertexShader
       .replace(
@@ -429,6 +434,8 @@ export function buildBladeGrass(
         uniform vec4 uBladePaint;
         uniform vec4 uBladeSize;
         uniform vec4 uBladeExtra;
+        uniform vec4 uBladeRampLo;
+        uniform vec4 uBladeRampHi;
         attribute float aBladeKind;
         uniform float uBladeNear;`,
       )
@@ -442,6 +449,7 @@ export function buildBladeGrass(
         `#include <begin_vertex>
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
+        ${BLADE_LIGHT_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer-ring fade by collapse: alpha would need transparency and a
