@@ -10,6 +10,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import { buildCommissionOrderBoardModel } from '../src/ui/hud/professions/commission_order_view';
 import {
+  CommissionOrderBoardPainter,
   type CommissionOrderWindowDeps,
   renderCommissionOrderWindow,
 } from '../src/ui/hud/professions/commission_order_window';
@@ -324,5 +325,156 @@ describe('the crafter record line', () => {
     );
     expect(el.querySelector('.ccr-values')?.textContent).toBe('傑作12点、伝説の品1点');
     expect(el.querySelector('.commission-order-row')?.textContent).not.toContain(' · ');
+  });
+});
+
+// The live board: other players accept, deliver, cancel and post orders, and
+// online the viewer's own commissionOrderResult can beat the corder mirror, so
+// the Hud's slow band polls the painter. A moved board repaints the row
+// sections only; the order form (picked recipe, scope radios, typed crafter
+// name, focus inside it) survives untouched.
+describe('CommissionOrderBoardPainter: live refresh', () => {
+  const OTHER_RECIPE = 'recipe_test_other';
+  let world: {
+    commissionOrders: CommissionOrderView[];
+    recipeList: { id: string; resultItemId: string }[];
+  };
+
+  function setup(orders: CommissionOrderView[] = [order()]) {
+    document.body.innerHTML = '<div id="commission-board-window"></div>';
+    const el = document.getElementById('commission-board-window') as HTMLElement;
+    world = {
+      commissionOrders: orders,
+      recipeList: [
+        { id: SWORD_RECIPE, resultItemId: SWORD },
+        // A second commissionable recipe so the select has a non-default pick.
+        { id: OTHER_RECIPE, resultItemId: SWORD },
+      ],
+    };
+    const painter = new CommissionOrderBoardPainter(() => world as never);
+    const d = deps();
+    painter.render(el, d);
+    return { el, painter, d };
+  }
+
+  const rowText = (el: HTMLElement) =>
+    [...el.querySelectorAll('.commission-order-row')].map((r) => r.textContent ?? '');
+
+  function fillForm(el: HTMLElement): HTMLInputElement {
+    (el.querySelector('#cob-recipe') as HTMLSelectElement).value = OTHER_RECIPE;
+    const crafterRadio = el.querySelector('input[value="crafter"]') as HTMLInputElement;
+    crafterRadio.checked = true;
+    crafterRadio.dispatchEvent(new Event('change'));
+    const name = el.querySelector('#cob-crafter-name') as HTMLInputElement;
+    name.value = 'Borin';
+    return name;
+  }
+
+  it('an accept by another player shows on the next poll without touching the form', () => {
+    const { el, painter, d } = setup();
+    expect(rowText(el).join('')).not.toContain('Borin');
+    const name = fillForm(el);
+    name.focus();
+    const form = el.querySelector('.commission-board-form');
+    world.commissionOrders = [order({ status: 'accepted', acceptedByName: 'Borin' })];
+    painter.refreshIfChanged();
+    expect(rowText(el).join('')).toContain('Borin');
+    // The form node, its values and focus are the same ones the player left.
+    expect(el.querySelector('.commission-board-form')).toBe(form);
+    expect((el.querySelector('#cob-recipe') as HTMLSelectElement).value).toBe(OTHER_RECIPE);
+    expect((el.querySelector('input[value="crafter"]') as HTMLInputElement).checked).toBe(true);
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('Borin');
+    expect(document.activeElement).toBe(name);
+    expect(d.hideTooltip).toHaveBeenCalledTimes(2); // the render, then the one repaint
+  });
+
+  it('a new posting and a delivery both move the board', () => {
+    const { el, painter } = setup([]);
+    expect(el.querySelectorAll('.commission-order-row')).toHaveLength(0);
+    world.commissionOrders = [order({ id: 11 })];
+    painter.refreshIfChanged();
+    expect(el.querySelectorAll('.commission-order-row')).toHaveLength(1);
+    world.commissionOrders = [order({ id: 11, status: 'delivered', acceptedByName: 'Borin' })];
+    painter.refreshIfChanged();
+    expect(rowText(el)[0]).toContain('Delivered');
+  });
+
+  it('an unchanged poll writes nothing, and render re-latches the signature', () => {
+    const { el, painter, d } = setup();
+    const row = el.querySelector('.commission-order-row');
+    painter.refreshIfChanged();
+    painter.refreshIfChanged();
+    expect(el.querySelector('.commission-order-row')).toBe(row);
+    expect(d.hideTooltip).toHaveBeenCalledTimes(1);
+    // A fresh array with identical content is not a move either.
+    world.commissionOrders = [order()];
+    painter.refreshIfChanged();
+    expect(el.querySelector('.commission-order-row')).toBe(row);
+    // An explicit render (the own-action result) latches the moved board, so
+    // the next poll does not rebuild a second time.
+    world.commissionOrders = [order({ status: 'cancelled', mine: true })];
+    painter.render(el, d);
+    const rendered = el.querySelector('.commission-order-row');
+    painter.refreshIfChanged();
+    expect(el.querySelector('.commission-order-row')).toBe(rendered);
+  });
+
+  it('a closed board is never repainted by the poll or the language arm', () => {
+    const { el, painter } = setup();
+    el.style.display = 'none';
+    const row = el.querySelector('.commission-order-row');
+    world.commissionOrders = [order({ status: 'accepted', acceptedByName: 'Borin' })];
+    painter.refreshIfChanged();
+    painter.relocalize();
+    expect(el.querySelector('.commission-order-row')).toBe(row);
+  });
+
+  it('a focused row button keeps focus by its key, and degrades to Close when its action left', () => {
+    const { el, painter } = setup([order({ id: 8 }), order({ id: 9 })]);
+    const accept9 = () =>
+      [...el.querySelectorAll<HTMLButtonElement>('.commission-order-btn')].find(
+        (b) => b.dataset.focusKey === 'cob:accept:9',
+      );
+    accept9()?.focus();
+    expect(document.activeElement).toBe(accept9());
+    world.commissionOrders = [
+      order({ id: 8, status: 'accepted', acceptedByName: 'Borin' }),
+      order({ id: 9 }),
+    ];
+    painter.refreshIfChanged();
+    expect(document.activeElement).toBe(accept9());
+    world.commissionOrders = [order({ id: 8, status: 'accepted', acceptedByName: 'Borin' })];
+    painter.refreshIfChanged();
+    expect(document.activeElement).toBe(el.querySelector('[data-close]'));
+  });
+
+  it('a full repaint of an open board (own result, relocalize) carries the form across', () => {
+    const { el, painter, d } = setup();
+    const name = fillForm(el);
+    name.focus();
+    world.commissionOrders = [order({ status: 'accepted', acceptedByName: 'Borin' })];
+    painter.render(el, d);
+    expect(rowText(el).join('')).toContain('Borin');
+    expect((el.querySelector('#cob-recipe') as HTMLSelectElement).value).toBe(OTHER_RECIPE);
+    expect((el.querySelector('input[value="crafter"]') as HTMLInputElement).checked).toBe(true);
+    expect((el.querySelector('#cob-crafter-field') as HTMLElement).style.display).toBe('');
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('Borin');
+    expect((document.activeElement as HTMLElement | null)?.id).toBe('cob-crafter-name');
+    painter.relocalize();
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('Borin');
+    // relocalize re-latched: the next poll does not rebuild again.
+    const row = el.querySelector('.commission-order-row');
+    painter.refreshIfChanged();
+    expect(el.querySelector('.commission-order-row')).toBe(row);
+  });
+
+  it('opening a closed board starts the form clean', () => {
+    const { el, painter, d } = setup();
+    fillForm(el);
+    el.style.display = 'none';
+    painter.render(el, d);
+    expect((el.querySelector('#cob-recipe') as HTMLSelectElement).value).toBe(SWORD_RECIPE);
+    expect((el.querySelector('input[value="open"]') as HTMLInputElement).checked).toBe(true);
+    expect((el.querySelector('#cob-crafter-name') as HTMLInputElement).value).toBe('');
   });
 });
