@@ -4,9 +4,12 @@
 // casting stands it down.
 
 import { describe, expect, it } from 'vitest';
-import { BUILTIN_WORLD } from '../src/sim/data';
+import { anchorProbeInOpenField } from '../scripts/probe_anchor';
+import { BUILTIN_WORLD, MOBS } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
 import { petPickTarget, updatePet } from '../src/sim/pet/pet_ai';
 import {
+  expireStalePetAssistCast,
   isPetMode,
   notePetAssistCast,
   PET_MODES,
@@ -154,87 +157,6 @@ describe('an assisting pet in the sim', () => {
     expect(pet.aggroTargetId).toBeNull();
   });
 
-  // Field report (Thunzharr, the Waking Peak): a world boss evades and resets on a
-  // wipe without dying, so it keeps its entity id. The cast record from the last
-  // attempt used to survive the wipe, and merely selecting the boss again sent the
-  // pet in with no fresh cast.
-  it('forgets the cast once the owner leaves combat, so a reselect alone does nothing', () => {
-    const { sim, pid, owner, pet, a, meta } = setup();
-    owner.targetId = a.id;
-    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
-    sim.castAbility('raptor_strike', pid);
-    expect(meta.petAssistTargetId).toBe(a.id);
-
-    // The fight ends (wipe, evade, or walking away) and the owner drops combat.
-    owner.targetId = null;
-    owner.inCombat = false;
-    owner.castingAbility = null;
-    pet.aggroTargetId = null;
-    sim.tickCount += 200;
-    updatePet(sim.ctx, pet);
-    expect(meta.petAssistTargetId ?? null).toBeNull();
-
-    // Selecting the same enemy again, without casting, leaves the pet at heel.
-    owner.targetId = a.id;
-    updatePet(sim.ctx, pet);
-    expect(pet.aggroTargetId).toBeNull();
-  });
-
-  // One pet tick per sim tick, the way locomotion drives a live pet.
-  function stepPet(sim: Sim, pet: Entity, ticks: number): void {
-    for (let i = 0; i < ticks; i++) {
-      sim.tickCount += 1;
-      updatePet(sim.ctx, pet);
-    }
-  }
-
-  it('keeps an opener through the 2 sec grace before combat registers, then drops it', () => {
-    const { sim, pid, owner, pet, a, meta } = setup();
-    owner.targetId = a.id;
-    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
-    sim.castAbility('raptor_strike', pid);
-    owner.inCombat = false; // the hit has not registered combat yet
-    owner.castingAbility = null;
-    pet.petMode = 'passive'; // hold the pet back so only the record is under test
-    stepPet(sim, pet, 40);
-    expect(meta.petAssistTargetId).toBe(a.id);
-    stepPet(sim, pet, 1);
-    expect(meta.petAssistTargetId ?? null).toBeNull();
-  });
-
-  it('keeps the cast through a mid-fight target switch while the owner stays in combat', () => {
-    const { sim, owner, pet, a, b, meta } = setup();
-    meta.petAssistTargetId = a.id;
-    meta.petAssistCastTick = sim.tickCount;
-    owner.inCombat = true;
-    owner.targetId = b.id;
-    stepPet(sim, pet, 400);
-    expect(pet.aggroTargetId).toBeNull();
-    owner.targetId = a.id;
-    stepPet(sim, pet, 1);
-    expect(pet.aggroTargetId).toBe(a.id);
-  });
-
-  it('forgets the cast across a stretch with no pet ticking, even if the owner is back in combat', () => {
-    const { sim, pid, owner, pet, a, meta } = setup();
-    owner.targetId = a.id;
-    owner.facing = Math.atan2(a.pos.x - owner.pos.x, a.pos.z - owner.pos.z);
-    sim.castAbility('raptor_strike', pid);
-    owner.inCombat = true;
-    stepPet(sim, pet, 1);
-    expect(meta.petAssistTargetId).toBe(a.id);
-
-    // The pet dies in the wipe: no pet ticks while the owner runs back. They are
-    // already in a new fight on the same boss when the pet is revived.
-    pet.aggroTargetId = null;
-    sim.tickCount += 600;
-    owner.inCombat = true;
-    owner.targetId = a.id;
-    updatePet(sim.ctx, pet);
-    expect(meta.petAssistTargetId ?? null).toBeNull();
-    expect(pet.aggroTargetId).toBeNull();
-  });
-
   it('switches stance through the command, and refuses an unknown one', () => {
     const { sim, pid, pet } = setup();
     sim.setPetMode('defensive', pid);
@@ -243,5 +165,138 @@ describe('an assisting pet in the sim', () => {
     expect(pet.petMode).toBe('assist');
     sim.setPetMode('follow' as never, pid);
     expect(pet.petMode).toBe('assist');
+  });
+});
+
+describe('the cast record expires with its fight', () => {
+  type Rec = {
+    petAssistTargetId?: number | null;
+    petAssistCastTick?: number;
+    petAssistLiveTick?: number;
+  };
+  const idle = { inCombat: false, castingAbility: null };
+
+  it('stays live while the owner is in combat or casting, however long', () => {
+    const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 0 };
+    expireStalePetAssistCast({ inCombat: true, castingAbility: null }, meta, 500);
+    expect(meta.petAssistTargetId).toBe(2);
+    expireStalePetAssistCast({ inCombat: false, castingAbility: 'aimed_shot' }, meta, 900);
+    expect(meta.petAssistTargetId).toBe(2);
+    expect(meta.petAssistLiveTick).toBe(900);
+  });
+
+  it('drops the record 2 sec after the last live tick, not before', () => {
+    const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 0, petAssistLiveTick: 900 };
+    expireStalePetAssistCast(idle, meta, 940);
+    expect(meta.petAssistTargetId).toBe(2);
+    expireStalePetAssistCast(idle, meta, 941);
+    expect(meta.petAssistTargetId).toBeNull();
+  });
+
+  it('counts the grace from the cast when the owner was never live after it', () => {
+    const meta: Rec = { petAssistTargetId: 2, petAssistCastTick: 300, petAssistLiveTick: 10 };
+    expireStalePetAssistCast(idle, meta, 340);
+    expect(meta.petAssistTargetId).toBe(2);
+    expireStalePetAssistCast(idle, meta, 341);
+    expect(meta.petAssistTargetId).toBeNull();
+  });
+});
+
+// Field report (Thunzharr, the Waking Peak): a world boss resets on a wipe without
+// dying and keeps its entity id, so the cast record from the last attempt let a
+// plain reselect send the pet in. These run the real tick, cast and projectile path.
+describe('an assisting pet across a real fight', () => {
+  function fight() {
+    const sim = new Sim({ seed: 4501, playerClass: 'hunter', autoEquip: true });
+    sim.setPlayerLevel(20);
+    sim.applyTalents({ spec: 'marksmanship', rows: {} });
+    anchorProbeInOpenField(sim);
+    const owner = sim.player;
+    owner.facing = 0;
+    owner.resource = owner.maxResource;
+    const add = (id: string, dx: number, dz: number) => {
+      const m = createMob(
+        sim.nextId++,
+        expectDefined(MOBS[id]),
+        20,
+        sim.groundPos(owner.pos.x + dx, owner.pos.z + dz),
+      );
+      sim.addEntity(m);
+      return m;
+    };
+    const a = add('training_dummy', 0, 30);
+    a.hostile = true;
+    a.moveSpeed = 0;
+    a.maxHp = 1e6;
+    a.hp = 1e6;
+    const pet = add('forest_wolf', 1, 0);
+    pet.ownerId = owner.id;
+    pet.hostile = false;
+    pet.petMode = 'assist';
+    const meta = expectDefined(sim.meta(owner.id));
+    owner.targetId = a.id;
+    for (let i = 0; i < 3; i++) sim.tick();
+    return { sim, owner, a, pet, meta };
+  }
+
+  // Clear and reselect the target mid-fight: the pet drops it, then may take it
+  // back only while the cast record still stands.
+  function reselect(sim: Sim, owner: Entity, id: number): void {
+    owner.targetId = null;
+    sim.tick();
+    owner.targetId = id;
+    sim.tick();
+  }
+
+  it('keeps a cast-time opener through its flight, so a reselect mid-fight re-engages', () => {
+    const { sim, owner, a, pet, meta } = fight();
+    sim.castAbility('aimed_shot');
+    expect(owner.castingAbility).toBe('aimed_shot');
+    for (let i = 0; i < 80; i++) sim.tick();
+    expect(owner.inCombat).toBe(true);
+    reselect(sim, owner, a.id);
+    expect(meta.petAssistTargetId).toBe(a.id);
+    expect(pet.aggroTargetId).toBe(a.id);
+  });
+
+  it('keeps the record while the pet is stunned mid-fight', () => {
+    const { sim, owner, a, pet, meta } = fight();
+    sim.castAbility('arcane_shot');
+    for (let i = 0; i < 30; i++) sim.tick();
+    expect(owner.inCombat).toBe(true);
+    pet.auras.push({
+      id: 'test_stun',
+      name: 'Test Stun',
+      kind: 'stun',
+      remaining: 3,
+      duration: 3,
+      value: 0,
+      sourceId: a.id,
+    } as Entity['auras'][number]);
+    for (let i = 0; i < 70; i++) sim.tick();
+    reselect(sim, owner, a.id);
+    expect(meta.petAssistTargetId).toBe(a.id);
+    expect(pet.aggroTargetId).toBe(a.id);
+  });
+
+  it('forgets the cast once the fight is over, so reselecting the same enemy does nothing', () => {
+    const { sim, owner, a, pet, meta } = fight();
+    sim.castAbility('arcane_shot');
+    for (let i = 0; i < 30; i++) sim.tick();
+    expect(meta.petAssistTargetId).toBe(a.id);
+
+    // The fight ends (the boss resets, everyone disengages) and nobody re-casts.
+    owner.autoAttack = false;
+    owner.targetId = null;
+    a.threat.clear();
+    a.aggroTargetId = null;
+    pet.aggroTargetId = null;
+    for (let i = 0; i < 200; i++) sim.tick();
+    expect(owner.inCombat).toBe(false);
+    expect(meta.petAssistTargetId ?? null).toBeNull();
+
+    owner.targetId = a.id;
+    for (let i = 0; i < 10; i++) sim.tick();
+    expect(pet.aggroTargetId).toBeNull();
   });
 });

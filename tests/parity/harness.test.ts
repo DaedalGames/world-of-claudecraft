@@ -255,7 +255,7 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'pendingSkinItemId',
       'pendingSkinRank',
       'petAssistCastTick',
-      'petAssistCheckTick',
+      'petAssistLiveTick',
       'petAssistTargetId',
       'skin',
       'skinCatalog',
@@ -285,7 +285,7 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'lastWhisperFrom',
       'petAssistTargetId',
       'petAssistCastTick',
-      'petAssistCheckTick',
+      'petAssistLiveTick',
     ]);
     for (const k of ENTITY_EXCLUDE) {
       if (!optionalEntity.has(k)) expect(k in entity, `Entity.${k} missing (renamed?)`).toBe(true);

@@ -5,13 +5,14 @@
 // an enemy that attacks the owner or the pet (unlike defensive), and never
 // picks a fight on its own (unlike aggressive). Switching target without
 // casting stands it down until the owner casts on the new target. The cast lasts
-// for the fight it opened: once the owner is out of combat the record is
-// forgotten, so a fresh fight (even on the same boss after a wipe) needs a fresh
-// cast.
+// for the fight it opened: once the owner has been out of combat (and not
+// casting) for 2 sec the record is forgotten, so a fresh fight, even on the same
+// boss after a wipe, needs a fresh cast.
 //
 // The owner's half is recorded at the one point a cast becomes certain
-// (casting_lifecycle.castAbility, after every refusal has cleared); the pet's
-// half is read by pet_ai (petPickTarget and updatePet's target retention).
+// (casting_lifecycle.castAbility, after every refusal has cleared) and expired by
+// the sim's per-player engaged pass; the pet's half is read by pet_ai
+// (petPickTarget and updatePet's target retention).
 // `src/sim`-pure and rng-free.
 
 import type { PlayerMeta } from '../sim';
@@ -47,30 +48,27 @@ export function notePetAssistCast(
   meta.petAssistCastTick = ctx.tickCount;
 }
 
-/** Forget the recorded cast once its fight is over: the owner is out of combat,
- *  not casting, and past the opener grace. A world boss resets on a wipe without
- *  dying and keeps its id, so a record that outlived the fight let a plain
- *  reselect send the pet in. Run every pet tick, before the pet picks a target.
- *
- *  Only a ticking pet runs this, so a gap in the checks (the pet dead, dismissed,
- *  stunned, or the owner in a vehicle) is read as "the fight may have ended":
- *  without it, a pet revived straight into a NEW fight on the same boss would
- *  find the old record still standing. */
+/** Forget the recorded cast once its fight is over. Run once per player per tick
+ *  from the sim's engaged pass, right after `inCombat` is settled, so it never
+ *  depends on a pet ticking (a dead, dismissed or crowd-controlled pet skips
+ *  updatePet). While the owner is in combat or casting the record stays live; it
+ *  is dropped after PET_ASSIST_OPENER_GRACE_TICKS of neither, counted from the
+ *  later of the cast and the last live tick, which covers an opener still in
+ *  flight after its cast bar ends. A world boss resets on a wipe without dying and
+ *  keeps its id, so a record that outlived the fight let a plain reselect send the
+ *  pet in. */
 export function expireStalePetAssistCast(
   owner: Pick<Entity, 'inCombat' | 'castingAbility'>,
-  meta:
-    | Pick<PlayerMeta, 'petAssistTargetId' | 'petAssistCastTick' | 'petAssistCheckTick'>
-    | undefined,
+  meta: Pick<PlayerMeta, 'petAssistTargetId' | 'petAssistCastTick' | 'petAssistLiveTick'>,
   tickCount: number,
 ): void {
-  if (!meta) return;
-  const lastCheck = meta.petAssistCheckTick;
-  meta.petAssistCheckTick = tickCount;
   if (meta.petAssistTargetId == null) return;
-  if (tickCount - (meta.petAssistCastTick ?? 0) <= PET_ASSIST_OPENER_GRACE_TICKS) return;
-  const unwatched = lastCheck === undefined || tickCount - lastCheck > 1;
-  if (!unwatched && (owner.inCombat || owner.castingAbility)) return;
-  meta.petAssistTargetId = null;
+  if (owner.inCombat || owner.castingAbility) {
+    meta.petAssistLiveTick = tickCount;
+    return;
+  }
+  const lastLive = Math.max(meta.petAssistCastTick ?? 0, meta.petAssistLiveTick ?? 0);
+  if (tickCount - lastLive > PET_ASSIST_OPENER_GRACE_TICKS) meta.petAssistTargetId = null;
 }
 
 /** The owner's active target, when it is the enemy they last cast on: the only
