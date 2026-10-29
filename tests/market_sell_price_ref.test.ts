@@ -53,6 +53,8 @@ interface Harness {
   window: MarketWindow;
   /** Swap what the window reads next, simulating a snapshot arriving. */
   setInfo(next: MarketInfo | null): void;
+  /** Swap the carried bags, simulating a listing escrow or a loot landing. */
+  setBags(next: { itemId: string; count: number }[]): void;
 }
 
 function harness(initial: MarketInfo): Harness {
@@ -61,7 +63,7 @@ function harness(initial: MarketInfo): Harness {
   const world = {
     marketInfo: initial as MarketInfo | null,
     marketCollectPending: false,
-    inventory: [{ itemId: ITEM, count: 3 }],
+    inventory: [{ itemId: ITEM, count: 3 }] as { itemId: string; count: number }[],
     marketSearch: () => {},
     marketSellPriceCheck: () => {},
     marketList: () => {},
@@ -92,6 +94,9 @@ function harness(initial: MarketInfo): Harness {
     window: new MarketWindow(deps),
     setInfo: (next) => {
       world.marketInfo = next;
+    },
+    setBags: (next) => {
+      world.inventory = next;
     },
   };
 }
@@ -181,5 +186,97 @@ describe('market_window: the Sell tab price reference repaints on the async echo
     h.window.close();
     h.window.open();
     expect(h.root.querySelector('.mkt-sell-price-ref')).toBeNull();
+  });
+});
+
+describe('market_window: the Sell tab stock and listing count stay live (world market listed-count report)', () => {
+  // Player report: "world market won't update the number of items you listed
+  // when selling". The Sell tab is excluded from the general rebuild (it holds
+  // typed inputs), so before this fix only the price reference ever repainted:
+  // the "of N" label, the quantity cap, and the note's used/max listing count
+  // all froze at whatever the form was opened with.
+  const qtyOf = (root: HTMLElement): string => root.querySelector('.mkt-qty-of')?.textContent ?? '';
+  const qtyInput = (root: HTMLElement): HTMLInputElement | null =>
+    root.querySelector<HTMLInputElement>('#mkt-qty');
+  const note = (root: HTMLElement): string => root.querySelector('.mkt-note')?.textContent ?? '';
+
+  it('patches the "of N" label and the quantity max when the staged stack changes, keeping typed input', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    expect(qtyInput(h.root)?.max).toBe('3');
+    const qty = qtyInput(h.root);
+    const gold = h.root.querySelector<HTMLInputElement>('#mkt-g');
+    if (qty) qty.value = '2';
+    if (gold) gold.value = '7';
+
+    h.setBags([{ itemId: ITEM, count: 5 }]);
+    h.window.refreshIfChanged();
+
+    // Patched in place: the same nodes survive, with the typed values intact.
+    expect(qtyInput(h.root)).toBe(qty);
+    expect(qtyInput(h.root)?.max).toBe('5');
+    expect(qtyInput(h.root)?.value).toBe('2');
+    expect(h.root.querySelector<HTMLInputElement>('#mkt-g')?.value).toBe('7');
+    expect(qtyOf(h.root)).toContain('5');
+  });
+
+  it('rebuilds once (carrying the typed price) when the stock no longer needs a quantity row', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    const gold = h.root.querySelector<HTMLInputElement>('#mkt-g');
+    if (gold) gold.value = '9';
+
+    h.setBags([{ itemId: ITEM, count: 1 }]);
+    h.window.refreshIfChanged();
+
+    expect(qtyInput(h.root)).toBeNull();
+    expect(h.root.querySelector<HTMLInputElement>('#mkt-g')?.value).toBe('9');
+  });
+
+  it('drops to the pick-empty state once the staged stack is gone from the bags', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    h.setBags([]);
+    h.window.refreshIfChanged();
+    expect(h.root.querySelector('#mkt-g')).toBeNull();
+    expect(h.root.querySelector('.mkt-sell-pick')?.textContent).toBe(
+      t('itemUi.market.sellPickEmpty'),
+    );
+  });
+
+  it('patches the note listing count when the snapshot echoes a new listing', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    expect(note(h.root)).not.toContain('4');
+    h.setInfo(info({ myListingCount: 4 }));
+    h.window.refreshIfChanged();
+    expect(note(h.root)).toContain('4');
+  });
+
+  it('an unchanged repeat poll writes nothing (no rebuild, no patch)', () => {
+    const h = harness(info({ sellPriceItemId: ITEM, sellLowestPrice: 50 }));
+    openOnSellTab(h);
+    h.window.refreshIfChanged(); // settle any first-poll latch
+    const before = h.root.querySelector('#market-body')?.firstElementChild;
+    const writes: MutationRecord[] = [];
+    const obs = new MutationObserver((m) => writes.push(...m));
+    obs.observe(h.root, { subtree: true, childList: true, attributes: true, characterData: true });
+    h.window.refreshIfChanged();
+    h.window.refreshIfChanged();
+    writes.push(...obs.takeRecords());
+    obs.disconnect();
+    expect(writes).toEqual([]);
+    expect(h.root.querySelector('#market-body')?.firstElementChild).toBe(before);
+  });
+
+  it('paints the form once market data arrives after a no-data Sell paint', () => {
+    const h = harness(info());
+    openOnSellTab(h);
+    h.setInfo(null);
+    h.window.render();
+    expect(h.root.querySelector('#mkt-g')).toBeNull();
+    h.setInfo(info());
+    h.window.refreshIfChanged();
+    expect(h.root.querySelector('#mkt-g')).not.toBeNull();
   });
 });

@@ -164,3 +164,49 @@ describe('mailbox: the typeable parcel quantity field', () => {
     expect(qtyInput(root).value).toBe('3');
   });
 });
+
+describe('mailbox: the Send tab parcel row follows the bags while the letter is open', () => {
+  // refreshIfChanged used to return early on the Send tab, so a staged chip's
+  // quantity limits froze at whatever the bags held when it was attached.
+  const qtyInput = (root: HTMLElement): HTMLInputElement | null =>
+    root.querySelector<HTMLInputElement>('.mail-parcel-qty-input');
+
+  it('repaints only the parcel row when the staged stack changes, keeping the typed letter', () => {
+    const fang: InvSlot = { itemId: 'wolf_fang', count: 4 };
+    const { win, root } = openSendTab([fang]);
+    win.stageParcel('wolf_fang');
+    expect(qtyInput(root)?.max).toBe('4');
+    const to = root.querySelector<HTMLInputElement>('#mail-to') as HTMLInputElement;
+    to.value = 'Mira';
+
+    fang.count = 7; // looted more under the open letter
+    win.refreshIfChanged();
+
+    expect(qtyInput(root)?.max).toBe('7');
+    expect(to.isConnected).toBe(true);
+    expect(to.value).toBe('Mira');
+  });
+
+  it('an unchanged repeat poll does not rebuild the parcel row', () => {
+    const { win, root } = openSendTab([{ itemId: 'wolf_fang', count: 4 }]);
+    win.stageParcel('wolf_fang');
+    const before = root.querySelector('.mail-parcel-chip');
+    win.refreshIfChanged();
+    win.refreshIfChanged();
+    expect(root.querySelector('.mail-parcel-chip')).toBe(before);
+  });
+
+  it('holds off while a chip quantity field has focus, then catches up', () => {
+    const fang: InvSlot = { itemId: 'wolf_fang', count: 4 };
+    const { win, root } = openSendTab([fang]);
+    win.stageParcel('wolf_fang');
+    const qty = qtyInput(root) as HTMLInputElement;
+    qty.focus();
+    fang.count = 9;
+    win.refreshIfChanged();
+    expect(qtyInput(root)).toBe(qty); // not rebuilt under the caret
+    qty.blur();
+    win.refreshIfChanged();
+    expect(qtyInput(root)?.max).toBe('9');
+  });
+});
