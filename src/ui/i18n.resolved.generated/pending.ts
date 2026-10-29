@@ -16,48 +16,61 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.currencies.lanternSealNote"
   ],
   "fr_FR": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "fr_CA": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "en_CA": [],
   "it_IT": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "de_DE": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "ru_RU": [],
   "cs_CZ": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "nl_NL": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "pl_PL": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "id_ID": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "tr_TR": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "sv_SE": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "vi_VN": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ],
   "da_DK": [
-    "hudChrome.currencies.lanternSealNote"
+    "hudChrome.currencies.lanternSealNote",
+    "hudChrome.trinkets.equip.lastStandFlat"
   ]
 };
