@@ -161,6 +161,10 @@ export interface LookRender {
   /** Blade side-light 0..1 and drifting cloud-shadow strength 0..0.6. */
   bladeSide: number;
   cloudShadow: number;
+  /** Distance thickening 0..3 (far tufts spread wider; 0 is stock). */
+  bladeFar: number;
+  /** Rounded-blade lighting 0..1 (lit spine, shaded edges; 0 is stock). */
+  bladeRound: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -197,6 +201,8 @@ export const STOCK_RENDER: LookRender = {
   rampStrength: 0,
   bladeSide: 0,
   cloudShadow: 0,
+  bladeFar: 0,
+  bladeRound: 0,
 };
 
 export interface ZoneLook {

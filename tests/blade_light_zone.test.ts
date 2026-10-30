@@ -1,12 +1,20 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
+  BLADE_COMB_GLSL,
+  BLADE_EXTRA_VALUES,
   BLADE_LIGHT_GLSL,
   BLADE_PAINT_VALUES,
   BLADE_RAMP_HI_VALUES,
   BLADE_RAMP_LO_VALUES,
+  BLADE_ROUND_FRAGMENT_GLSL,
+  BLADE_ROUND_VERTEX_GLSL,
+  BLADE_SIZE_VALUES,
+  CARPET_GROUND_FAR,
   hexToLinear,
   setBladeCloudZone,
+  setBladeExtraZone,
   setBladeRampZone,
+  setBladeSizeZone,
 } from '../src/render/blade_width_zone_core';
 import { LEAF_FLUTTER_GLSL } from '../src/render/foliage_tree_sculpt';
 
@@ -57,5 +65,39 @@ describe('painted meadow light: one-hue ramp, side light, cloud shadows', () => 
 describe('leaf flutter', () => {
   it('only moves leaf materials, and only where the tree wind is on', () => {
     expect(LEAF_FLUTTER_GLSL).toContain('uUpNormalBlend > 0.0 && uWindStrength > 0.0');
+  });
+});
+
+describe('distance thickening, rounded blades and the far ground tint', () => {
+  afterEach(() => {
+    setBladeSizeZone(1, 1, 0, 0);
+    setBladeExtraZone(0, 0, 0);
+  });
+
+  it('defaults both arms off and clamps them', () => {
+    setBladeSizeZone(1, 1);
+    expect(BLADE_SIZE_VALUES[3]).toBe(0);
+    setBladeSizeZone(1, 1, 0, 9);
+    expect(BLADE_SIZE_VALUES[3]).toBe(3);
+    setBladeExtraZone(1, 0.2);
+    expect(BLADE_EXTRA_VALUES[2]).toBe(0);
+    setBladeExtraZone(1, 0.2, 4);
+    expect(BLADE_EXTRA_VALUES[2]).toBe(1);
+  });
+
+  it('branches out at zero and fades warm tips only when thickening is on', () => {
+    expect(BLADE_COMB_GLSL).toContain(
+      'if (uBladeSize.w > 0.0) transformed.xz *= 1.0 + uBladeSize.w * wocFarT;',
+    );
+    expect(BLADE_COMB_GLSL).toContain('step(0.0001, uBladeSize.w)');
+    expect(BLADE_ROUND_FRAGMENT_GLSL).toContain('if (uBladeExtra.z > 0.0)');
+    expect(BLADE_ROUND_VERTEX_GLSL).toBe('vBladeAcross = aBladeAcross;');
+  });
+
+  it('tints the far ground darker than the near floor is bright, every channel below 1', () => {
+    for (const c of CARPET_GROUND_FAR) {
+      expect(c).toBeGreaterThan(0);
+      expect(c).toBeLessThan(1);
+    }
   });
 });

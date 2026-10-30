@@ -145,6 +145,8 @@ const LIVE = {
   bladeExtra: 58,
   bladeClump: 60,
   ramp: 62,
+  bladeFar: 71,
+  bladeRound: 72,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -601,7 +603,12 @@ class PaletteLabRuntime implements PaletteLabApi {
     setCarpetGroundZone(v[LIVE.carpetGround]);
     setBladeCombZone(v[LIVE.comb], v[LIVE.comb + 1], v[LIVE.comb + 2], v[LIVE.comb + 3]);
     setBladePaintZone(v[LIVE.paint], v[LIVE.paint + 1], v[LIVE.bladeClump]);
-    setBladeSizeZone(v[LIVE.bladeSize], v[LIVE.bladeSize + 1], v[LIVE.bladeClump + 1]);
+    setBladeSizeZone(
+      v[LIVE.bladeSize],
+      v[LIVE.bladeSize + 1],
+      v[LIVE.bladeClump + 1],
+      v[LIVE.bladeFar],
+    );
     setBladeRampZone(
       [v[LIVE.ramp], v[LIVE.ramp + 1], v[LIVE.ramp + 2]],
       [v[LIVE.ramp + 3], v[LIVE.ramp + 4], v[LIVE.ramp + 5]],
@@ -609,7 +616,7 @@ class PaletteLabRuntime implements PaletteLabApi {
       v[LIVE.ramp + 7],
     );
     setBladeCloudZone(v[LIVE.ramp + 8]);
-    setBladeExtraZone(v[LIVE.bladeExtra], v[LIVE.bladeExtra + 1]);
+    setBladeExtraZone(v[LIVE.bladeExtra], v[LIVE.bladeExtra + 1], v[LIVE.bladeRound]);
 
     // Water is one shared material for every sheet, so it wears the look of
     // the zone the player is in (the water in view is almost always local).
@@ -764,6 +771,8 @@ class PaletteLabRuntime implements PaletteLabApi {
       look.render.rampStrength,
       look.render.bladeSide,
       look.render.cloudShadow,
+      look.render.bladeFar,
+      look.render.bladeRound,
     ];
     this.targetCache.set(look, flat);
     return flat;

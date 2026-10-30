@@ -24,6 +24,7 @@ import {
   biomeHazeUniforms,
   hasBiomeHazeField,
 } from './biome_haze_field';
+import { CARPET_GROUND_FAR, CARPET_GROUND_UNIFORM } from './blade_width_zone_core';
 import { NIGHT_AMBIENT_FLOOR } from './day_night_core';
 import { stoneDetailNormal } from './detail_normals';
 import {
@@ -373,6 +374,8 @@ export function buildFarTerrain(
       shader.uniforms.uFarDetailAmt = farDetailAmt;
     }
     if (grassBake) shader.uniforms.uGrassBake = { value: grassBake.texture };
+    // the zone look's painted-meadow ground tint (blade_width_zone_core.ts)
+    if (grassBake) shader.uniforms.uCarpetGround = CARPET_GROUND_UNIFORM;
     shader.vertexShader = shader.vertexShader
       .replace(
         '#include <common>',
@@ -401,7 +404,7 @@ export function buildFarTerrain(
           shippedGrid ? '' : '\nuniform vec4 uFarGrid;'
         }\nuniform vec3 uFarNightFloor;\nuniform float uFarNightDim;${
           detailArm ? '\nuniform sampler2D uFarDetail;\nuniform float uFarDetailAmt;' : ''
-        }${grassBake ? '\nvarying float vGrassW;\nuniform sampler2D uGrassBake;' : ''}`,
+        }${grassBake ? '\nvarying float vGrassW;\nuniform sampler2D uGrassBake;\nuniform float uCarpetGround;' : ''}`,
       )
       .replace(
         'void main() {',
@@ -445,7 +448,8 @@ export function buildFarTerrain(
         if (vGrassW > 0.0) {
           diffuseColor.rgb *= mix(vec3(1.0),
             texture2D(uGrassBake, vFarXZ * ${(1 / GRASS_BAKE_PATCH_YARDS).toFixed(6)}).rgb
-              * ${GRASS_PAINT_GAIN.toFixed(4)},
+              * ${GRASS_PAINT_GAIN.toFixed(4)}
+              * mix(vec3(1.0), vec3(${CARPET_GROUND_FAR.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround),
             vGrassW);
         }`
             : ''

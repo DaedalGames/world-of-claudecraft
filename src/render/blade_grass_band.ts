@@ -51,6 +51,8 @@ import {
   BLADE_PAINT_UNIFORM,
   BLADE_RAMP_HI_UNIFORM,
   BLADE_RAMP_LO_UNIFORM,
+  BLADE_ROUND_FRAGMENT_GLSL,
+  BLADE_ROUND_VERTEX_GLSL,
   BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
@@ -204,7 +206,9 @@ export function buildBladeGrassBand(
         uniform vec4 uBladeExtra;
         uniform vec4 uBladeRampLo;
         uniform vec4 uBladeRampHi;
-        attribute float aBladeKind;`,
+        attribute float aBladeKind;
+        attribute float aBladeAcross;
+        varying float vBladeAcross;`,
       )
       .replace(
         '#include <color_vertex>',
@@ -226,6 +230,7 @@ export function buildBladeGrassBand(
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
         ${BLADE_LIGHT_GLSL}
+        ${BLADE_ROUND_VERTEX_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer fade by scale collapse over the outer band fraction, and
@@ -248,13 +253,19 @@ export function buildBladeGrassBand(
         #endif`,
       );
     sh.vertexShader = patchConstantUpNormalVertexShader(sh.vertexShader);
-    sh.fragmentShader = sh.fragmentShader.replace(
-      '#include <normal_fragment_begin>',
-      `#include <normal_fragment_begin>
+    sh.fragmentShader = sh.fragmentShader
+      .replace(
+        '#include <common>',
+        '#include <common>\nuniform vec4 uBladeExtra;\nvarying float vBladeAcross;',
+      )
+      .replace(
+        '#include <normal_fragment_begin>',
+        `${BLADE_ROUND_FRAGMENT_GLSL}
+      #include <normal_fragment_begin>
       #ifdef DOUBLE_SIDED
         normal *= faceDirection;
       #endif`,
-    );
+      );
   };
 
   // the carpet's sector split, verbatim: one mesh per sector of the slot grid,

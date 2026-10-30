@@ -81,6 +81,11 @@ export const BLADE_NEAR_GLSL = `#ifdef USE_COLOR
  *  in the grass, never as olive ground. */
 export const CARPET_GROUND_DARK: readonly [number, number, number] = [0.36, 0.52, 0.36];
 
+/** The painted ground PAST the carpet ring at full strength, as an RGB
+ *  multiplier on the grass paint: pulled down to the blade field's own average
+ *  so a gap between distant tufts reads as more meadow, not pale flat ground. */
+export const CARPET_GROUND_FAR: readonly [number, number, number] = [0.74, 0.82, 0.68];
+
 /** The shared uniform the terrain binds (`uCarpetGround`). */
 export const CARPET_GROUND_UNIFORM: { value: number } = { value: 0 };
 
@@ -135,12 +140,16 @@ export function setBladePaintZone(patch: number, tip: number, clump = 0): void {
 export const BLADE_SIZE_VALUES = new Float32Array([1, 1, 0, 0]);
 export const BLADE_SIZE_UNIFORM: { value: Float32Array } = { value: BLADE_SIZE_VALUES };
 
-/** Set the blade size: height and spread scales (0.3..1.6) and widening (0..2). */
-export function setBladeSizeZone(height: number, spread: number, widen = 0): void {
+/** Set the blade size: height and spread scales (0.3..1.6), view-space
+ *  widening (0..2) and distance thickening (0..3: tufts far from the camera
+ *  spread wider, so fewer of them still close the field, after the Ghost of
+ *  Tsushima grass talk; their warm tips also fade so they stop speckling). */
+export function setBladeSizeZone(height: number, spread: number, widen = 0, far = 0): void {
   const clamp = (v: number): number => (Number.isFinite(v) ? Math.min(1.6, Math.max(0.3, v)) : 1);
   BLADE_SIZE_VALUES[0] = clamp(height);
   BLADE_SIZE_VALUES[1] = clamp(spread);
   BLADE_SIZE_VALUES[2] = Number.isFinite(widen) ? Math.min(2, Math.max(0, widen)) : 0;
+  BLADE_SIZE_VALUES[3] = Number.isFinite(far) ? Math.min(3, Math.max(0, far)) : 0;
 }
 
 /** begin_vertex block (after the width pull, before any fade): comb and paint.
@@ -150,6 +159,9 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
         #ifdef USE_INSTANCING
         {
           vec2 wocCombXZ = instanceMatrix[3].xz;
+          // distance thickening: 0 near, 1 by mid-field
+          float wocFarT = smoothstep(18.0, 90.0, distance(instanceMatrix[3].xyz, cameraPosition));
+          if (uBladeSize.w > 0.0) transformed.xz *= 1.0 + uBladeSize.w * wocFarT;
           float wocCombJit = fract(sin(dot(wocCombXZ, vec2(12.9898, 78.233))) * 43758.5453);
           float wocCombH = max(position.y, 0.0) * uBladeSize.x;
           // clumps: a smooth world field (tussocks a couple of yards across)
@@ -190,7 +202,7 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
             vColor.rgb *= 1.0 + uBladePaint.x * wocPatch + wocClump * 0.1 * wocClumpA * wocClumpB;
             // warm yellow-green tips over the cooler body
             vColor.rgb *= mix(vec3(1.0), vec3(1.3, 1.2, 0.7),
-              uBladePaint.y * smoothstep(0.35, 1.0, wocCombH));
+              uBladePaint.y * smoothstep(0.35, 1.0, wocCombH) * (1.0 - 0.75 * wocFarT * step(0.0001, uBladeSize.w)));
           }
           #endif
         }
@@ -201,12 +213,15 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
 // `aBladeKind` (1 extra blade, 2 flower). They collapse to the root unless a
 // zone look turns them on, so stock tufts render the shipped nine blades.
 
-/** x: extra blades on (> 0.5); y: share of tufts that show their flower (0..1). */
+/** x: extra blades on (> 0.5); y: share of tufts that show their flower (0..1);
+ *  z: rounded-blade lighting 0..1 (lit spine, shaded edges); w reserved. */
 export const BLADE_EXTRA_VALUES = new Float32Array([0, 0, 0, 0]);
 export const BLADE_EXTRA_UNIFORM: { value: Float32Array } = { value: BLADE_EXTRA_VALUES };
 
-/** Set the extras: blades 0..1 (on above 0.5) and the flower share 0..1. */
-export function setBladeExtraZone(blades: number, flowers: number): void {
+/** Set the extras: blades 0..1 (on above 0.5), the flower share 0..1 and the
+ *  rounded-blade lighting 0..1. */
+export function setBladeExtraZone(blades: number, flowers: number, round = 0): void {
+  BLADE_EXTRA_VALUES[2] = Number.isFinite(round) ? Math.min(1, Math.max(0, round)) : 0;
   BLADE_EXTRA_VALUES[0] = Number.isFinite(blades) ? Math.min(1, Math.max(0, blades)) : 0;
   BLADE_EXTRA_VALUES[1] = Number.isFinite(flowers) ? Math.min(1, Math.max(0, flowers)) : 0;
 }
@@ -288,10 +303,19 @@ export const BLADE_LIGHT_GLSL = `#if defined( USE_INSTANCING ) && defined( USE_C
             }
           }
           if (uBladePaint.w > 0.0) {
-            vec2 wocCloudP = wocLightXZ * 0.018 + vec2(uTime * 0.012, uTime * 0.005);
+            vec2 wocCloudP = wocLightXZ * 0.05 + vec2(uTime * 0.03, uTime * 0.012);
             float wocCloudF = sin(wocCloudP.x * 2.3 + sin(wocCloudP.y * 1.7) * 1.6)
               * sin(wocCloudP.y * 2.1 + sin(wocCloudP.x * 1.3) * 2.0);
             vColor.rgb *= 1.0 - uBladePaint.w * smoothstep(0.05, 0.55, wocCloudF);
           }
         }
         #endif`;
+
+/** Vertex: pass the across-blade position on (extras geometry only). */
+export const BLADE_ROUND_VERTEX_GLSL = 'vBladeAcross = aBladeAcross;';
+/** Fragment: a lit spine and shaded edges, so a flat strip reads as a rounded
+ *  blade and its outline sits lower in contrast against the field behind. */
+export const BLADE_ROUND_FRAGMENT_GLSL = `if (uBladeExtra.z > 0.0) {
+          float wocEdge = abs(vBladeAcross);
+          diffuseColor.rgb *= mix(1.0, mix(1.12, 0.78, wocEdge * wocEdge), uBladeExtra.z);
+        }`;

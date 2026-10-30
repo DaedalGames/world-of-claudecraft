@@ -28,4 +28,11 @@ describe('blade cluster extras (finer blades and a flower)', () => {
     expect(kinds).toContain(1);
     expect(kinds).toContain(2);
   });
+
+  it('marks each vertex across the blade: -1 and +1 edges, 0 at the tip spine', () => {
+    const geo = clusterGeometry(mulberry32(7), 3, true);
+    const across = Array.from(geo.getAttribute('aBladeAcross').array as Float32Array);
+    expect(across.length).toBe(geo.getAttribute('position').count);
+    expect(new Set(across)).toEqual(new Set([-1, 0, 1]));
+  });
 });

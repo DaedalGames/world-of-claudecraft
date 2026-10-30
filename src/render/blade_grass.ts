@@ -29,6 +29,8 @@ import {
   BLADE_PAINT_UNIFORM,
   BLADE_RAMP_HI_UNIFORM,
   BLADE_RAMP_LO_UNIFORM,
+  BLADE_ROUND_FRAGMENT_GLSL,
+  BLADE_ROUND_VERTEX_GLSL,
   BLADE_SIZE_UNIFORM,
   BLADE_WIDTH_GLSL,
   BLADE_WIDTH_UNIFORM,
@@ -168,6 +170,9 @@ export function clusterGeometry(
   // blade in the vertex shader (blade_width_zone_core.ts)
   const sides: number[] = [];
   const kinds: number[] = [];
+  // signed position across the blade (-1 edge, 0 spine, +1 edge), so the
+  // fragment shader can light a rounded blade (blade_width_zone_core.ts)
+  const across: number[] = [];
   const indices: number[] = [];
   const BLADES = 9;
   const total = extras ? BLADES + EXTRA_BLADES : BLADES;
@@ -196,6 +201,7 @@ export function clusterGeometry(
       const lean = (tilt * t + bow * t * t) * len;
       positions.push(ox + px * wx + cos * lean, len * t, oz + pz * wx + sin * lean);
       sides.push(px * wx, 0, pz * wx);
+      across.push(wx === 0 ? 0 : Math.sign(wx));
       kinds.push(extra ? 1 : 0);
       // all-up normals: blades take the terrain's lighting response, the
       // same trick the card tufts use, so the carpet never shades apart
@@ -266,6 +272,7 @@ export function clusterGeometry(
       positions.push(fx + rx, fy + ty, fz + rz);
       colors.push(r, g, bl);
       sides.push(0, 0, 0);
+      across.push(0);
       kinds.push(2);
     };
     put(0, 0, 1.3, 1.05, 0.35);
@@ -281,7 +288,10 @@ export function clusterGeometry(
   geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
   geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
   geo.setAttribute('aBladeSide', new THREE.BufferAttribute(new Float32Array(sides), 3));
-  if (extras) geo.setAttribute('aBladeKind', new THREE.BufferAttribute(new Float32Array(kinds), 1));
+  if (extras) {
+    geo.setAttribute('aBladeKind', new THREE.BufferAttribute(new Float32Array(kinds), 1));
+    geo.setAttribute('aBladeAcross', new THREE.BufferAttribute(new Float32Array(across), 1));
+  }
   geo.setIndex(indices);
   return geo;
 }
@@ -437,6 +447,8 @@ export function buildBladeGrass(
         uniform vec4 uBladeRampLo;
         uniform vec4 uBladeRampHi;
         attribute float aBladeKind;
+        attribute float aBladeAcross;
+        varying float vBladeAcross;
         uniform float uBladeNear;`,
       )
       .replace(
@@ -450,6 +462,7 @@ export function buildBladeGrass(
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
         ${BLADE_LIGHT_GLSL}
+        ${BLADE_ROUND_VERTEX_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
           // outer-ring fade by collapse: alpha would need transparency and a
@@ -468,13 +481,19 @@ export function buildBladeGrass(
         #endif`,
       );
     sh.vertexShader = patchConstantUpNormalVertexShader(sh.vertexShader);
-    sh.fragmentShader = sh.fragmentShader.replace(
-      '#include <normal_fragment_begin>',
-      `#include <normal_fragment_begin>
+    sh.fragmentShader = sh.fragmentShader
+      .replace(
+        '#include <common>',
+        '#include <common>\nuniform vec4 uBladeExtra;\nvarying float vBladeAcross;',
+      )
+      .replace(
+        '#include <normal_fragment_begin>',
+        `${BLADE_ROUND_FRAGMENT_GLSL}
+      #include <normal_fragment_begin>
       #ifdef DOUBLE_SIDED
         normal *= faceDirection;
       #endif`,
-    );
+      );
   };
   const uPlayerPos = { value: new THREE.Vector2(1e9, 1e9) };
 

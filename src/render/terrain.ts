@@ -25,7 +25,11 @@ import {
   biomeHazeUniforms,
   hasBiomeHazeField,
 } from './biome_haze_field';
-import { CARPET_GROUND_DARK, CARPET_GROUND_UNIFORM } from './blade_width_zone_core';
+import {
+  CARPET_GROUND_DARK,
+  CARPET_GROUND_FAR,
+  CARPET_GROUND_UNIFORM,
+} from './blade_width_zone_core';
 import { runBoundedLane } from './build_lane_core';
 import { isCanvasDrawableImage } from './canvas_drawable';
 import { type ChunkGrid, type GroundPendingAt, orderCellsForEntry } from './chunk_residency_core';
@@ -959,7 +963,9 @@ const GRASS_PAINT_RING_GLSL = `
             // pale floor for a darker meadow tone; 0 is the shipped floor exactly
             vec3 wocCarpetFloor = mix(mix(vec3(0.92), grassAlb, 0.35) * wocPlainGrain,
               grassAlb * vec3(${CARPET_GROUND_DARK.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround);
-            grassAlb = mix(wocCarpetFloor, grassAlb, wocPaintT);
+            vec3 wocFarPaint = grassAlb * mix(vec3(1.0),
+              vec3(${CARPET_GROUND_FAR.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround);
+            grassAlb = mix(wocCarpetFloor, wocFarPaint, wocPaintT);
           }`;
 
 // The meadow-continuum grass layer: when the ground bake exists, the grass
