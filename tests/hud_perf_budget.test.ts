@@ -1216,8 +1216,7 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
     // on that rebuild only (replaceStoreBody, which elides whole on unchanged
     // markup), never on a frame and never on either interval below. The count is
     // what makes a THIRD read a conscious act.
-    // Membership status changes preserve the same body scroll with one more pair.
-    reflowAllow: { '.scrollTop': 4 },
+    reflowAllow: { '.scrollTop': 2 },
     driverAllow: { setInterval: 2 },
     drivers: [
       {
@@ -1253,6 +1252,8 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
       },
     ],
   },
+  // Membership paints preserve body scroll only when the resolved markup changes.
+  { file: 'store_membership_controller.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   { file: 'deeds_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   // The Harvest Journal's countdown clock: ONE 1 Hz interval armed on open and
   // cleared on close, the finest resolution any line in that window renders. It
