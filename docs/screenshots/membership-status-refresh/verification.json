@@ -5,7 +5,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": true
+    "hasPaymentWarning": true,
+    "brokenImages": 0
   },
   {
     "name": "desktop",
@@ -13,7 +14,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": true,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   },
   {
     "name": "desktop",
@@ -21,7 +23,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   },
   {
     "name": "mobile",
@@ -29,7 +32,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": true
+    "hasPaymentWarning": true,
+    "brokenImages": 0
   },
   {
     "name": "mobile",
@@ -37,7 +41,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": true,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   },
   {
     "name": "mobile",
@@ -45,7 +50,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   },
   {
     "name": "landscape",
@@ -53,7 +59,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": true
+    "hasPaymentWarning": true,
+    "brokenImages": 0
   },
   {
     "name": "landscape",
@@ -61,7 +68,8 @@
     "errors": [],
     "overflow": false,
     "hasPending": true,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   },
   {
     "name": "landscape",
@@ -69,6 +77,7 @@
     "errors": [],
     "overflow": false,
     "hasPending": false,
-    "hasPaymentWarning": false
+    "hasPaymentWarning": false,
+    "brokenImages": 0
   }
 ]

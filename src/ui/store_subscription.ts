@@ -40,6 +40,8 @@ export class StoreSubscription {
     }
   }
   private flight: Promise<void> | null = null;
+  private flightStatusOnly = false;
+  private entryRefresh: Promise<void> | null = null;
   private busy = false;
   private owner: SubscriptionStoreHooks | undefined;
   private readonly intents = new SubscriptionCheckoutIntents({
@@ -105,9 +107,22 @@ export class StoreSubscription {
   }
 
   refresh(statusOnly = false): Promise<void> {
-    if (this.flight) return this.flight;
+    if (this.flight) {
+      // A foreground entry must still fetch offers and deliver rewards when it
+      // arrives during a cheaper status-only read. Coalesce repeated entries.
+      if (!statusOnly && this.flightStatusOnly) {
+        this.entryRefresh ??= this.flight
+          .then(() => this.refresh())
+          .finally(() => {
+            this.entryRefresh = null;
+          });
+        return this.entryRefresh;
+      }
+      return this.flight;
+    }
     if (statusOnly && this.busy) return Promise.resolve();
     const hooks = this.hooks();
+    this.flightStatusOnly = statusOnly;
     this.flight = Promise.resolve()
       .then(async () => {
         const [state, tokenState] = await Promise.all([

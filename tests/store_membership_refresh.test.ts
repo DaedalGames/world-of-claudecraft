@@ -46,8 +46,9 @@ function harness() {
   const snapshot = vi.fn(async () => state);
   const tokenOffer = vi.fn();
   const annualMountClaim = vi.fn();
+  const tokenClaim = vi.fn();
   const link = vi.fn();
-  let hooks: SubscriptionStoreHooks = { snapshot, tokenOffer, annualMountClaim, link };
+  let hooks: SubscriptionStoreHooks = { snapshot, tokenOffer, annualMountClaim, tokenClaim, link };
   const root = document.createElement('div');
   document.body.append(root);
   const store = new DailyRewardsWindow({
@@ -67,6 +68,7 @@ function harness() {
     snapshot,
     tokenOffer,
     annualMountClaim,
+    tokenClaim,
     link,
     setState: (next: Partial<SubscriptionSnapshot>) => {
       state = { ...state, ...next };
@@ -90,17 +92,60 @@ describe('Memberships status refresh', () => {
     for (let i = 0; i < 20; i++) await vi.advanceTimersByTimeAsync(15_000);
     h.setState({
       status: 'trialing',
+      plan: 'game_monthly',
       canStack: true,
       stackLimit: 2_000_000_000,
       currentPeriodEnd: 1_900_000_000,
     });
     await vi.advanceTimersByTimeAsync(15_000);
-    expect(h.root.textContent).toContain('Add 12 months');
+    expect(h.root.textContent).toContain('Upgrade to 12 months');
     expect(h.root.textContent).not.toContain('Checkout pending');
     expect(h.snapshot).toHaveBeenCalledTimes(22);
     expect(h.tokenOffer).toHaveBeenCalledTimes(1);
     expect(h.annualMountClaim).toHaveBeenCalledTimes(1);
     expect(h.link).not.toHaveBeenCalled();
+  });
+
+  it('keeps annual discovery and pending token delivery on entry, outside status polls', async () => {
+    localStorage.setItem('woc.membership-token.pending', 'pending-token-intent');
+    const h = harness();
+    h.setState({ status: 'active', plan: 'game_annual', canStack: true });
+    h.annualMountClaim.mockResolvedValue({ delivered: false });
+    h.tokenClaim.mockResolvedValue({ delivered: false });
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    expect(h.annualMountClaim).toHaveBeenCalledExactlyOnceWith();
+    expect(h.tokenClaim).toHaveBeenCalledExactlyOnceWith('pending-token-intent');
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(h.snapshot).toHaveBeenCalledTimes(5);
+    expect(h.annualMountClaim).toHaveBeenCalledTimes(1);
+    expect(h.tokenClaim).toHaveBeenCalledTimes(1);
+  });
+
+  it('performs a full entry refresh after reopening during an outstanding status poll', async () => {
+    localStorage.setItem('woc.subscription.41.game_annual.pending', 'pending-annual-intent');
+    const h = harness();
+    h.annualMountClaim.mockResolvedValue({ delivered: false });
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    let resolve!: (state: SubscriptionSnapshot) => void;
+    h.snapshot.mockImplementationOnce(
+      () =>
+        new Promise((done) => {
+          resolve = done;
+        }),
+    );
+    await vi.advanceTimersByTimeAsync(15_000);
+    h.store.close();
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    resolve({ ...SUBSCRIPTION_OFF, available: true, accountId: 41 });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(h.snapshot).toHaveBeenCalledTimes(3);
+    expect(h.tokenOffer).toHaveBeenCalledTimes(2);
+    expect(h.annualMountClaim).toHaveBeenCalledTimes(2);
   });
 
   it('keeps identical DOM, keyboard focus and scroll across unchanged polls and failed reads', async () => {

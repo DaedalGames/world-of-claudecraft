@@ -20,7 +20,7 @@ describe('membership plan badges', () => {
     (status) => {
       const state = { ...SUBSCRIPTION_OFF, available: true, status, plans, canManage: true };
       expect(subscriptionPurchase(state, 'game_monthly', NOW)).toBe('pending');
-      const html = subscriptionOffersHtml(state, false, false, false, false, '', NOW);
+      const html = subscriptionOffersHtml(state, false, false, false, '', NOW);
       expect(html).toContain('Checkout pending');
       expect(html).not.toContain('Update your payment details');
       expect(html).not.toContain('Not subscribed');
