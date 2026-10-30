@@ -555,6 +555,48 @@ describe('subscription store section', () => {
     expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
     expect(tokenCheckout).toHaveBeenCalledTimes(1);
   });
+  it('starts a fresh token intent when the saved checkout expired unpaid', async () => {
+    localStorage.setItem('woc.membership-token.pending', 'expired-token-intent');
+    localStorage.setItem('woc.membership-token.paid', 'expired-token-intent');
+    const tokenCheckout = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: false, url: null })
+      .mockResolvedValueOnce({ ok: false, url: null, retryWithNewKey: true })
+      .mockResolvedValueOnce({ ok: true, url: 'https://checkout.stripe.com/c/pay/token' });
+    const panel = panelWith({
+      snapshot: async () => ({ ...SUBSCRIPTION_OFF }),
+      link: vi.fn(),
+      tokenOffer: async () => ({
+        available: true,
+        canCheckout: true,
+        days: 30,
+        price: { currency: 'usd', unitAmount: 500 },
+      }),
+      tokenCheckout,
+    });
+    const open = vi.spyOn(window, 'open').mockReturnValue({} as Window);
+    await panel.refresh();
+    document.body.innerHTML = panel.html();
+    panel.bind(document.body);
+    const button = document.querySelector<HTMLButtonElement>(
+      '[data-membership-purchase-action="buy"]',
+    )!;
+    // An uncertain failure keeps the saved key for the paid-token claim.
+    button.click();
+    await vi.waitFor(() => expect(tokenCheckout).toHaveBeenCalledTimes(1));
+    await vi.waitFor(() => expect(button.disabled).toBe(false));
+    expect(localStorage.getItem('woc.membership-token.pending')).toBe('expired-token-intent');
+    expect(open).not.toHaveBeenCalled();
+    // The explicit expiry retires it and the same click opens a fresh checkout.
+    button.click();
+    await vi.waitFor(() => expect(tokenCheckout).toHaveBeenCalledTimes(3));
+    await vi.waitFor(() => expect(open).toHaveBeenCalledOnce());
+    const keys = tokenCheckout.mock.calls.map((call) => call[0]);
+    expect(keys.slice(0, 2)).toEqual(['expired-token-intent', 'expired-token-intent']);
+    expect(keys[2]).not.toBe('expired-token-intent');
+    expect(localStorage.getItem('woc.membership-token.pending')).toBe(keys[2]);
+    expect(localStorage.getItem('woc.membership-token.paid')).toBe(keys[2]);
+  });
   it('keeps the token recovery key from before an embedded checkout, silently', async () => {
     const intent = { clientSecret: 'cs_test_4_secret_x', publishableKey: 'pk_test_1' };
     const tokenClaim = vi.fn(async () => ({ delivered: false }));

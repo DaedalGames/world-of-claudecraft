@@ -294,16 +294,19 @@ export class StoreSubscription {
   private async claimToken(hooks: SubscriptionStoreHooks): Promise<boolean> {
     const key = this.tokenKey;
     if (!(await hooks.tokenClaim?.(key))?.delivered || hooks !== this.hooks()) return false;
-    if (this.tokenKey === key) {
-      this.tokenKey = mintIntentKey();
-      try {
-        localStorage.removeItem('woc.membership-token.pending');
-        localStorage.removeItem('woc.membership-token.paid');
-      } catch {
-        /* Storage unavailable. */
-      }
-    }
+    if (this.tokenKey === key) this.retireTokenKey();
     return true;
+  }
+
+  /** The next token checkout starts a fresh intent; nothing is left to claim. */
+  private retireTokenKey(): void {
+    this.tokenKey = mintIntentKey();
+    try {
+      localStorage.removeItem('woc.membership-token.pending');
+      localStorage.removeItem('woc.membership-token.paid');
+    } catch {
+      /* Storage unavailable. */
+    }
   }
 
   private tokenHtml(): string {
@@ -335,8 +338,18 @@ export class StoreSubscription {
         | 'hudChrome.wocStore.subscription.error'
         | null = null;
       try {
-        const result = subscriptionLink(await hooks.tokenCheckout(this.tokenKey), 'checkout');
-        if (hooks !== this.hooks() || !result.ok) throw new Error('token checkout unavailable');
+        const key = this.tokenKey;
+        let result = subscriptionLink(await hooks.tokenCheckout(key), 'checkout');
+        if (hooks !== this.hooks()) throw new Error('account changed');
+        // The saved intent's checkout expired unpaid: only this explicit answer retires
+        // the key (an uncertain failure keeps it for the paid-token claim), and the
+        // click goes straight on with a fresh intent.
+        if (result.retryWithNewKey && this.tokenKey === key) {
+          this.retireTokenKey();
+          result = subscriptionLink(await hooks.tokenCheckout(this.tokenKey), 'checkout');
+          if (hooks !== this.hooks()) throw new Error('account changed');
+        }
+        if (!result.ok) throw new Error('token checkout unavailable');
         // Every store entry claims with the saved key until it delivers. A hosted tab
         // never reports completion, so it shows "arriving" at once; an embedded checkout
         // shows it only once paid, so closing it unpaid shows nothing.
