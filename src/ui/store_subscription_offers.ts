@@ -7,6 +7,7 @@ import {
 import { esc } from './esc';
 import { focusKeyAttr } from './focus_restore';
 import { formatDateTime, formatNumber, t } from './i18n';
+import type { TranslationKeyFlat } from './i18n.catalog/translation_keys.generated';
 import { usdText } from './usd_text';
 
 /** Every membership grants the same benefits; the badges list them under each price. */
@@ -51,30 +52,77 @@ export function subscriptionPurchase(
   return ['active', 'trialing'].includes(state.status) ? 'unavailable' : 'billing';
 }
 
+/** Card art under public/ui/store/membership: the membership armour for the monthly
+ *  plan, the armour and the Nightwing Chimaera for the annual bundle, the token. */
+export const MEMBERSHIP_ART_DIR = '/ui/store/membership';
+export type MembershipBadgeId = GameSubscriptionPlan | 'membership_token';
+const BADGE_ART: Record<MembershipBadgeId, { file: string; alt: TranslationKeyFlat }> = {
+  game_monthly: { file: 'monthly.webp', alt: 'hudChrome.wocStore.subscription.monthlyArtAlt' },
+  game_annual: { file: 'annual.webp', alt: 'hudChrome.wocStore.subscription.annualArtAlt' },
+  membership_token: { file: 'token.webp', alt: 'hudChrome.wocStore.subscription.tokenArtAlt' },
+};
+
 interface BadgeParts {
-  id: string;
+  id: MembershipBadgeId;
   title: string;
   price: string;
-  lines: string[];
-  benefits: readonly string[];
+  /** The purchase controls and their notes, directly under the art and price. */
   action: string;
+  /** Under the benefits heading; empty for no list. */
+  benefits: readonly string[];
+  /** Terms and description paragraphs beneath the benefits. */
+  lines: string[];
   current?: boolean;
 }
 
+/** One membership column: art, title and price, the purchase controls, then what it gives. */
 export function membershipBadgeHtml(badge: BadgeParts): string {
+  const art = BADGE_ART[badge.id];
   return (
     `<article class="membership-badge${badge.current ? ' membership-badge--current' : ''}" data-membership-badge="${badge.id}">` +
+    `<img class="membership-badge-art" src="${MEMBERSHIP_ART_DIR}/${art.file}" alt="${esc(t(art.alt))}" width="640" height="400" loading="lazy" decoding="async">` +
     `<header class="membership-badge-head"><h3>${esc(badge.title)}</h3><p class="membership-badge-price">${esc(badge.price)}</p></header>` +
-    badge.lines.map((line) => `<p>${esc(line)}</p>`).join('') +
+    `<div class="membership-badge-action">${badge.action}</div>` +
+    '<div class="membership-badge-details">' +
     (badge.benefits.length
       ? `<h4>${esc(t('hudChrome.wocStore.subscription.benefitsTitle'))}</h4><ul class="membership-badge-benefits">${badge.benefits.map((line) => `<li>${esc(line)}</li>`).join('')}</ul>`
       : '') +
-    `<div class="membership-badge-action">${badge.action}</div></article>`
+    badge.lines.map((line) => `<p>${esc(line)}</p>`).join('') +
+    '</div></article>'
   );
 }
 
 export function membershipBenefits(): string[] {
   return MEMBERSHIP_BENEFIT_KEYS.map((key) => t(`hudChrome.wocStore.subscription.${key}`));
+}
+
+/** The annual price spread over its 12 months, and its saving against 12 monthly payments
+ *  (both from the advertised offers, never a hardcoded figure). */
+export function annualMonthlyValue(
+  annualCents: number,
+  monthlyCents: number,
+): { perMonthCents: number; saving: number } {
+  const months = PLAN_MONTHS.game_annual;
+  return {
+    perMonthCents: Math.round(annualCents / months),
+    saving: monthlyCents > 0 ? Math.max(0, 1 - annualCents / (monthlyCents * months)) : 0,
+  };
+}
+
+/** The annual column: everything monthly gives, the cheaper monthly rate, the mount. */
+function annualBenefits(state: SubscriptionSnapshot, annualCents: number): string[] {
+  const monthly =
+    state.plans?.find((offer) => offer.plan === 'game_monthly') ??
+    GAME_SUBSCRIPTION_PLANS.game_monthly;
+  const value = annualMonthlyValue(annualCents, monthly.price.unitAmount);
+  return [
+    t('hudChrome.wocStore.subscription.annualAllBenefits'),
+    t('hudChrome.wocStore.subscription.annualPerMonth', {
+      price: usdText(value.perMonthCents),
+      percent: formatNumber(value.saving, { style: 'percent', maximumFractionDigits: 0 }),
+    }),
+    t('hudChrome.wocStore.subscription.annualMountInfo'),
+  ];
 }
 
 function planBadgeHtml(
@@ -100,8 +148,7 @@ function planBadgeHtml(
         price,
       }),
     );
-  const benefits = membershipBenefits();
-  if (annual) benefits.push(t('hudChrome.wocStore.subscription.annualMount'));
+  const benefits = annual ? annualBenefits(state, offer.price.unitAmount) : membershipBenefits();
   let action = '';
   if (purchase === 'new' || purchase === 'stack' || purchase === 'capped') {
     const label =
@@ -110,7 +157,9 @@ function planBadgeHtml(
           ? 'hudChrome.wocStore.subscription.startTrial'
           : 'hudChrome.wocStore.subscription.subscribe'
         : annual
-          ? 'hudChrome.wocStore.subscription.addYear'
+          ? state.plan === 'game_monthly'
+            ? 'hudChrome.wocStore.subscription.upgradeAnnual'
+            : 'hudChrome.wocStore.subscription.addYear'
           : 'hudChrome.wocStore.subscription.addMonth';
     action = `<button type="button" class="ui-btn ui-btn--lg" data-subscription-action="checkout" data-subscription-checkout-plan="${offer.plan}"${focusKeyAttr(`subscription-${offer.plan}`)}${busy || purchase === 'capped' ? ' disabled' : ''}>${esc(t(label))}</button>`;
   }
@@ -165,14 +214,13 @@ function statusLine(state: SubscriptionSnapshot): string {
   );
 }
 
-/** The Memberships tab: one badge per plan (plus the token badge the caller owns), then the
- *  account's membership status, billing management and the annual mount collection. */
+/** The Memberships tab: one column per plan (plus the token column the caller owns), then
+ *  the account's membership status, billing management and the annual mount delivery note. */
 export function subscriptionOffersHtml(
   state: SubscriptionSnapshot,
   busy: boolean,
   pendingAnnual: boolean,
   deliveredAnnual: boolean,
-  canDiscoverAnnual: boolean,
   tokenBadge: string,
   nowSeconds: number,
 ): string {
@@ -188,10 +236,7 @@ export function subscriptionOffersHtml(
     (state.canManage
       ? `<button type="button" class="ui-btn ui-btn--lg" data-subscription-action="portal"${focusKeyAttr('subscription-manage')}${busy ? ' disabled' : ''}>${esc(t('hudChrome.wocStore.subscription.manage'))}</button>`
       : '') +
-    (pendingAnnual || canDiscoverAnnual
-      ? `<button type="button" class="ui-btn ui-btn--lg" data-subscription-mount-claim${focusKeyAttr('subscription-mount-claim')}${busy || deliveredAnnual ? ' disabled' : ''}>${esc(t('hudChrome.wocStore.subscription.annualClaim'))}</button>`
-      : '') +
-    `<p data-subscription-mount-status role="status">${deliveredAnnual ? esc(t('hudChrome.wocStore.subscription.annualDelivered')) : pendingAnnual ? esc(t('hudChrome.wocStore.subscription.annualPending')) : ''}</p>` +
+    `<p data-subscription-mount-status role="status">${deliveredAnnual ? esc(t('hudChrome.wocStore.subscription.annualArrived')) : pendingAnnual ? esc(t('hudChrome.wocStore.subscription.annualArriving')) : ''}</p>` +
     `<p>${esc(t('hudChrome.wocStore.subscription.benefitExpiry'))}</p>` +
     `<p data-subscription-error role="status"></p></div></section>`
   );

@@ -219,6 +219,9 @@ const UI_PURE_CORES = [
   'src/ui/graphics_choice_core.ts',
   'src/ui/frame_menu_core.ts',
   'src/ui/loot_quality_view.ts',
+  // The store purchase loot window and membership congratulation (painter:
+  // purchase_reward_dialogs.ts).
+  'src/ui/purchase_reward_view.ts',
   // The tracked epic/legendary copy's history lines (origin, every later
   // hand); the right-click Item history dialog renders them.
   'src/ui/item_history_view.ts',
@@ -3443,6 +3446,7 @@ const UI_DOM_MODULES = [
   'src/ui/weekly_reward_loot_catalog_controller.ts',
   'src/ui/weekly_reward_loot_focus_controller.ts',
   'src/ui/weekly_rewards_ready_prompt.ts',
+  'src/ui/purchase_reward_dialogs.ts',
   'src/ui/weekly_vault_reveal_controller.ts',
   'src/ui/wiki_link.ts',
   'src/ui/window_drag.ts',
