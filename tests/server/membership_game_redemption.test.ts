@@ -27,7 +27,6 @@ function fixture() {
   const host: ConstructorParameters<typeof MembershipGameServices>[0] = {
     sim: {
       ctx: { trades: new Map(), onInventoryChangedForQuests: vi.fn(), emit: vi.fn() },
-      postOffice: { announcePurchaseParcels: vi.fn() },
       meta: () => meta,
       entities: new Map([[1, { membershipActive: true }]]),
       setMembership: vi.fn(),
@@ -83,13 +82,6 @@ describe('live membership redemption', () => {
       expiresAt: 12345,
       pid: 1,
     });
-  });
-
-  it('re-offers waiting purchase parcels when a character joins', () => {
-    const { host, session, service } = fixture();
-    service.onJoin(session);
-    expect(host.sim.postOffice.announcePurchaseParcels).toHaveBeenCalledExactlyOnceWith(1);
-    service.onLeave(session);
   });
 
   it('does not consume or acknowledge a proven rollback', async () => {

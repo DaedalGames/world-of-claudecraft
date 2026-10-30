@@ -1038,12 +1038,11 @@ export class PostOffice {
   }
 
   // Re-offers the loot window for every store purchase still waiting in this
-  // player's mailbox (a login after the parcel landed). One indexed bucket read.
-  announcePurchaseParcels(pid: number): void {
-    const meta = this.ctx.players.get(pid);
-    if (!meta) return;
+  // player's mailbox (Sim.addPlayer, so every login after the parcel landed).
+  // One indexed bucket read per join.
+  announcePurchaseParcels(meta: PlayerMeta): void {
     const parcels = this.deliveredFor(meta).flatMap((m) => purchaseParcelView(m) ?? []);
-    if (parcels.length > 0) this.ctx.emit({ type: 'purchaseParcels', parcels, pid });
+    if (parcels.length > 0) this.ctx.emit({ type: 'purchaseParcels', parcels, pid: meta.entityId });
   }
 
   // True when a custody parcel with this broker reference is in the book

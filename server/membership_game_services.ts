@@ -372,7 +372,6 @@ export class MembershipGameServices {
     }
     group.sessions.add(session);
     this.requestRefresh(session.accountId);
-    this.host.sim.postOffice.announcePurchaseParcels(session.pid);
   }
   onLeave(session: ClientSession): void {
     this.redemptionArmourClaims.delete(session);

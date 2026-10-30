@@ -53,7 +53,7 @@ function fixture(count: number) {
     deadlines.set(pid, Date.now() + seconds * 1000);
   });
   const host = {
-    sim: { setMembership: stamp, postOffice: { announcePurchaseParcels: vi.fn() } },
+    sim: { setMembership: stamp },
     session: (id: number) => sessions.get(id) ?? null,
     kick,
     send: vi.fn(),

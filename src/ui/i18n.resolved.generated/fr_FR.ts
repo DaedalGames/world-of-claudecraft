@@ -1360,7 +1360,7 @@ export const fr_FR: EnTranslations = {
         "annualArtAlt": "A knight in membership armour beside the Nightwing Chimaera mount",
         "tokenArtAlt": "A golden membership token",
         "annualAllBenefits": "All the benefits of a monthly membership.",
-        "annualPerMonth": "Works out to {price} per month, {percent} cheaper than paying monthly.",
+        "annualPerMonth": "Just {price} per month, saving {percent} compared with paying monthly.",
         "annualMountInfo": "Includes the Nightwing Chimaera mount for every character on your account. Its soulbound reins arrive in a loot window on the character that buys it. One per account, and it stays yours after membership ends.",
         "annualArriving": "Your mount reins appear in a loot window on this character once the paid charge settles. If the trial is active, they arrive after the first payment.",
         "annualArrived": "Your mount reins have arrived. Collect them from the loot window.",

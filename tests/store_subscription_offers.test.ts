@@ -47,7 +47,7 @@ describe('membership plan badges', () => {
     expect(badge(html, 'game_annual')).not.toContain('Unlock 10 additional character slots.');
     expect(badge(html, 'game_annual')).toContain('All the benefits of a monthly membership.');
     expect(badge(html, 'game_annual')).toContain(
-      'Works out to $4.17 per month, 17% cheaper than paying monthly.',
+      'Just $4.17 per month, saving 17% compared with paying monthly.',
     );
     for (const id of ['game_monthly', 'game_annual'])
       expect(badge(html, id)).toContain('Start 7-day free trial');

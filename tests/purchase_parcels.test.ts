@@ -94,7 +94,7 @@ describe('store purchase parcels', () => {
     expect(parcel.items).toEqual([]);
     expect(parcel.read).toBe(true);
     // Taken: a later login offers nothing.
-    sim.postOffice.announcePurchaseParcels(pid);
+    sim.postOffice.announcePurchaseParcels(meta);
     expect(purchaseEvents(drain(sim))).toEqual([]);
   });
 
@@ -129,6 +129,7 @@ describe('store purchase parcels', () => {
 
   it('re-offers every waiting purchase on login, once each', () => {
     const { sim, pid, recipient } = fixture();
+    const state = JSON.parse(JSON.stringify(sim.serializeCharacter(pid)));
     sim.mailSystemParcel(
       recipient,
       MEMBERSHIP_TOKEN_LETTER,
@@ -142,10 +143,13 @@ describe('store purchase parcels', () => {
       'membership-test:b',
     );
     drain(sim);
-    sim.postOffice.announcePurchaseParcels(pid);
-    const [event, ...rest] = purchaseEvents(drain(sim));
+    // The character logs in again on a restarted realm with the same mail book.
+    const restored = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+    restored.loadMail(JSON.parse(JSON.stringify(sim.serializeMail())));
+    const next = restored.addPlayer('warrior', 'Member', { characterId: 77, state });
+    const [event, ...rest] = purchaseEvents(restored.drainEvents());
     expect(rest).toEqual([]);
-    expect(event.pid).toBe(pid);
+    expect(event.pid).toBe(next);
     expect(event.parcels.map((p) => p.items[0].itemId).sort()).toEqual(
       ['membership_token', REINS].sort(),
     );
