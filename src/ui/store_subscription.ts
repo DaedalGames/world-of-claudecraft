@@ -117,9 +117,11 @@ export class StoreSubscription {
           if (this.intents.pending('game_annual'))
             await this.collectAnnual(hooks).catch(() => false);
           else if (state.plan === 'game_annual' && !this.annualChecked.has(state.accountId)) {
+            // Only a confirmed delivery stops the lookup: a failure or an unsettled
+            // receipt retries on the next store entry.
             await hooks
               .annualMountClaim()
-              .then(() => this.annualChecked.add(state.accountId))
+              .then((r) => r?.delivered === true && this.annualChecked.add(state.accountId))
               .catch(() => {});
           }
         }
@@ -261,11 +263,30 @@ export class StoreSubscription {
     next();
   }
 
+  // The recovery key is saved before any checkout opens, so a reload between payment
+  // and the embedded onComplete still claims the paid token; the paid marker only
+  // drives the "arriving" status.
   private tokenPending(): boolean {
+    return this.tokenStored('woc.membership-token.pending');
+  }
+
+  private tokenPaid(): boolean {
+    return this.tokenStored('woc.membership-token.paid');
+  }
+
+  private tokenStored(name: string): boolean {
     try {
-      return localStorage.getItem('woc.membership-token.pending') === this.tokenKey;
+      return localStorage.getItem(name) === this.tokenKey;
     } catch {
       return false;
+    }
+  }
+
+  private storeToken(name: string): void {
+    try {
+      localStorage.setItem(name, this.tokenKey);
+    } catch {
+      /* Storage unavailable. */
     }
   }
 
@@ -277,6 +298,7 @@ export class StoreSubscription {
       this.tokenKey = mintIntentKey();
       try {
         localStorage.removeItem('woc.membership-token.pending');
+        localStorage.removeItem('woc.membership-token.paid');
       } catch {
         /* Storage unavailable. */
       }
@@ -295,7 +317,7 @@ export class StoreSubscription {
       benefits: [],
       action:
         `<button type="button" class="ui-btn ui-btn--lg" data-membership-purchase-action="buy"${focusKeyAttr('membership-token-buy')}${this.busy || !this.tokenState.canCheckout ? ' disabled' : ''}>${esc(t('hudChrome.wocStore.subscription.tokenBuy'))}</button>` +
-        `<p data-membership-token-status role="status">${this.tokenPending() ? esc(t('hudChrome.wocStore.subscription.tokenArriving')) : ''}</p>`,
+        `<p data-membership-token-status role="status">${this.tokenPaid() ? esc(t('hudChrome.wocStore.subscription.tokenArriving')) : ''}</p>`,
     });
   }
 
@@ -313,22 +335,16 @@ export class StoreSubscription {
         | 'hudChrome.wocStore.subscription.error'
         | null = null;
       try {
-        const markPending = () => {
-          try {
-            localStorage.setItem('woc.membership-token.pending', this.tokenKey);
-          } catch {
-            /* Storage unavailable. */
-          }
-        };
         const result = subscriptionLink(await hooks.tokenCheckout(this.tokenKey), 'checkout');
         if (hooks !== this.hooks() || !result.ok) throw new Error('token checkout unavailable');
-        // A hosted tab never reports completion, so it is claimed on later store entries;
-        // an embedded checkout is only pending once it is paid, so closing it unpaid
-        // leaves nothing to claim.
-        if (!result.stripe) markPending();
+        // Every store entry claims with the saved key until it delivers. A hosted tab
+        // never reports completion, so it shows "arriving" at once; an embedded checkout
+        // shows it only once paid, so closing it unpaid shows nothing.
+        this.storeToken('woc.membership-token.pending');
+        if (!result.stripe) this.storeToken('woc.membership-token.paid');
         // Paid: the token arrives in a loot window once the payment settles.
         await this.openCheckout(result, () => {
-          markPending();
+          this.storeToken('woc.membership-token.paid');
           const status = body.querySelector<HTMLElement>('[data-membership-token-status]');
           if (status) status.textContent = t('hudChrome.wocStore.subscription.tokenArriving');
           this.retryDelivery(hooks, () => this.claimToken(hooks));

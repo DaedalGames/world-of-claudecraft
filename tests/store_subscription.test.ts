@@ -30,6 +30,27 @@ function panelWith(hooks: SubscriptionStoreHooks) {
   return new StoreSubscription(() => hooks);
 }
 describe('subscription store section', () => {
+  it('retries annual reward discovery until a delivery is confirmed', async () => {
+    const annualMountClaim = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('offline'))
+      .mockResolvedValueOnce({ delivered: false })
+      .mockResolvedValue({ delivered: true });
+    const panel = panelWith({
+      snapshot: async () => ({
+        ...SUBSCRIPTION_OFF,
+        available: true,
+        accountId: 41,
+        plan: 'game_annual',
+        status: 'active',
+        plans: Object.values(GAME_SUBSCRIPTION_PLANS),
+      }),
+      link: vi.fn(),
+      annualMountClaim,
+    });
+    for (let i = 0; i < 4; i++) await panel.refresh();
+    expect(annualMountClaim).toHaveBeenCalledTimes(3);
+  });
   it("discovers an annual member's owed reward without a saved key, once and silently", async () => {
     const annualMountClaim = vi.fn(async () => ({ delivered: true }));
     const link = vi.fn();
@@ -534,7 +555,7 @@ describe('subscription store section', () => {
     expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
     expect(tokenCheckout).toHaveBeenCalledTimes(1);
   });
-  it('leaves nothing pending when an embedded token checkout closes unpaid', async () => {
+  it('keeps the token recovery key from before an embedded checkout, silently', async () => {
     const intent = { clientSecret: 'cs_test_4_secret_x', publishableKey: 'pk_test_1' };
     const tokenClaim = vi.fn(async () => ({ delivered: false }));
     const panel = panelWith({
@@ -554,9 +575,19 @@ describe('subscription store section', () => {
     panel.bind(document.body);
     document.querySelector<HTMLButtonElement>('[data-membership-purchase-action="buy"]')!.click();
     await vi.waitFor(() => expect(stripe.open).toHaveBeenCalledOnce());
-    expect(localStorage.getItem('woc.membership-token.pending')).toBeNull();
-    await panel.refresh();
-    expect(tokenClaim).not.toHaveBeenCalled();
+    // Saved before checkout: a reload between payment and onComplete still claims it.
+    const key = localStorage.getItem('woc.membership-token.pending');
+    expect(key).toEqual(expect.any(String));
+    const reloaded = panelWith({
+      snapshot: async () => ({ ...SUBSCRIPTION_OFF }),
+      link: vi.fn(),
+      tokenClaim,
+    });
+    await reloaded.refresh();
+    expect(tokenClaim).toHaveBeenCalledExactlyOnceWith(key);
+    // Unpaid or unsettled: nothing claims it is arriving, and the key stays for retry.
+    expect(localStorage.getItem('woc.membership-token.pending')).toBe(key);
+    expect(localStorage.getItem('woc.membership-token.paid')).toBeNull();
     expect(panel.html()).not.toContain('Your token appears in a loot window');
   });
   it('claims a token and an annual mount while the embedded payment settles', async () => {
