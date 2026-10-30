@@ -120,6 +120,78 @@ const ISLAND_SKY = {
   cloudKeep: 1,
   intensity: 1.32,
 };
+// The art bible's Eastbrook (storybook-meadow): a deep painted zenith over a
+// pale horizon, with the painted cumulus layer on.
+const STORYBOOK_SKY = {
+  zenith: 0x4a88cc,
+  horizon: 0xb4d4ee,
+  amount: 0.95,
+  cloudKeep: 0.4,
+  intensity: 1.0,
+  clouds: 1,
+  band: 0.12,
+};
+const STORYBOOK_MEADOW_GRADE = {
+  exposure: 1.0,
+  temperature: 0.06,
+  contrast: 1.07,
+  saturation: 0.98,
+  vibrance: 0.12,
+  shadowTint: 0x3c5c9a,
+  shadowAmt: 0.12,
+  highlightTint: 0xffe8c0,
+  highlightAmt: 0.06,
+  lift: 0.014,
+  greenHue: -13,
+  greenSat: 1.02,
+  greenVal: 0.96,
+};
+// The art bible's painted meadow arms (blade shape, wind, colour, extras, no
+// ink and a soft ramp), shared by Storybook Meadow and the shipped Painted Vale
+// so both draw one meadow. carpetGround and canopyLift stay per look.
+const STORYBOOK_MEADOW_ARMS = {
+  meadowCoverage: 1,
+  meadowHeight: 0.38,
+  meadowWidth: 1.35,
+  ink: 0,
+  bladeWidth: 0.6,
+  rampSoft: 0.8,
+  bladeBase: 0.72,
+  bladeNear: 0.62,
+  // windswept toward screen-right as seen down the vale road
+  combX: 0.9,
+  combZ: -0.1,
+  combLean: 0.62,
+  combDroop: 0.22,
+  paintPatch: 0.1,
+  paintTip: 0.55,
+  bladeHeight: 0.6,
+  bladeSpread: 1.35,
+  bladeExtra: 1,
+  flowerShare: 0.22,
+  bladeClump: 0.6,
+  bladeWiden: 0.3,
+  rampShadow: 0x2c7442,
+  rampLight: 0x8ec462,
+  rampStrength: 0.75,
+  bladeSide: 0.7,
+  cloudShadow: 0.24,
+  bladeFar: 3,
+  bladeRound: 0.8,
+  bandFade: 0.85,
+};
+// The art bible's blue aerial distance: a sky-blue haze that starts close in.
+const STORYBOOK_FOG = { color: 0xa8c6ea, near: 18, far: 230 };
+// The look's own tree brightness (canopyLift).
+const STORYBOOK_CANOPY_LIFT = 1.35;
+const STORYBOOK_BLOOM = { strength: 0.28, threshold: 1.38 };
+const STORYBOOK_MEADOW_RENDER = {
+  rim: 0.3,
+  shadowStrength: 0.8,
+  canopyLift: STORYBOOK_CANOPY_LIFT,
+  carpetGround: 1,
+  ...STORYBOOK_MEADOW_ARMS,
+};
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,
   horizon: 0xf6cf9e,
@@ -166,10 +238,6 @@ const PAINTED_VALE_GROUND = {
   dirt: 0x968066,
   sand: 0xd8c496,
 };
-const PAINTED_LAKE = { deep: 0x0f4a66, shallow: 0x2a9a92, sky: 0x9cbcc8, scatter: 0x1f8c84 };
-// The meadow arms stay at the shipped formulas (STOCK_RENDER) while the grass
-// distribution is reworked in code, so this look never stretches the carpet.
-const STOCK_MEADOW_RENDER = { meadowCoverage: 0, meadowHeight: 1, meadowWidth: 1 };
 // The sky gradient arm stays OFF (amount 0): the dome shows its own painted
 // sky, never a gradient repainted over it.
 const PAINTED_SKY_OFF = { amount: 0 };
@@ -178,11 +246,16 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
   // ---------------------------------------------------------------- vale ---
   eastbrook_vale: [
     {
+      // The graphics-upgrade integration of the two art-bible passes: this
+      // look's painted sky, light, grade, ground palette and warm rim, with
+      // Storybook Meadow's blue haze, tree brightness, bloom, the lagoon water
+      // and its whole meadow (STORYBOOK_MEADOW_ARMS) over the painted grass
+      // ground (carpetGround off). God rays and the AO tint stay stock.
       id: 'painted-vale',
       name: 'Painted Vale',
-      note: 'Moody hand-painted vale: warm golden key, deep cool blue-teal shade, earthy greens, soft blue-teal haze.',
+      note: 'Moody hand-painted vale: warm golden key, deep cool blue-teal shade, earthy ground, blue aerial distance, a windswept painted meadow.',
       ground: PAINTED_VALE_GROUND,
-      fog: { color: 0x9cbcc8, near: 110, far: 660 },
+      fog: STORYBOOK_FOG,
       // By-eye pass in game (Ultra, /daynight day, town square and vale road):
       // the model-derived first values were still high-key, so the fill drops
       // (hemiScale 3.4 to 2.0, envScale 2.2 to 1.5) and the warm key rises
@@ -198,9 +271,8 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
         hemiScale: 2.2,
         envScale: 1.5,
       },
-      godRays: 0.7,
       sky: PAINTED_SKY_OFF,
-      water: PAINTED_LAKE,
+      water: LAGOON,
       grade: {
         exposure: 0.91,
         temperature: 0.12,
@@ -217,19 +289,18 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
         greenSat: 0.86,
         greenVal: 0.96,
       },
-      bloom: { strength: 0.3, threshold: 1.25 },
+      bloom: STORYBOOK_BLOOM,
       // A small warm rim so actors read against the deeper shade.
       render: {
         rim: 0.22,
         rimPower: 3.2,
         rimColor: 0xffd29a,
-        aoTint: 0x22405e,
-        aoScale: 1,
         // 20 percent lighter than a full cut (two user passes in game:
         // full-strength sun shadows read as hard black on the ground).
         shadowStrength: 0.8,
-        ...STOCK_MEADOW_RENDER,
-        canopyLift: 0.94,
+        canopyLift: STORYBOOK_CANOPY_LIFT,
+        carpetGround: 0,
+        ...STORYBOOK_MEADOW_ARMS,
       },
     },
     {
@@ -243,7 +314,7 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
       name: 'Painted Vale Night',
       note: 'Moonlit deep-blue vale with warm lamp highlights; lifted shade keeps night readable, never crushed black.',
       ground: PAINTED_VALE_GROUND,
-      fog: { color: 0x8eaed0, near: 110, far: 660 },
+      fog: { color: 0x8eaed0, near: STORYBOOK_FOG.near, far: STORYBOOK_FOG.far },
       // The moon key, the fill and the IBL all 15 percent under the first pass
       // (1.1, 4.4, 2.6): a darker night, while the sky, the lamps and the grade's
       // lift are untouched so it never crushes black.
@@ -259,7 +330,7 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
       },
       godRays: 0,
       sky: PAINTED_SKY_OFF,
-      water: PAINTED_LAKE,
+      water: LAGOON,
       grade: {
         exposure: 1.05,
         temperature: -0.05,
@@ -285,9 +356,39 @@ const CURATED: Readonly<Record<string, readonly LookPatch[]>> = {
         aoScale: 1,
         // Two 10 percent steps lighter than the first pass, matching the day look.
         shadowStrength: 0.73,
-        ...STOCK_MEADOW_RENDER,
-        canopyLift: 1,
+        canopyLift: STORYBOOK_CANOPY_LIFT,
+        carpetGround: 0,
+        ...STORYBOOK_MEADOW_ARMS,
       },
+    },
+    {
+      // The art bible's target (docs/design/art-direction.md): a painterly
+      // world under a deep painted sky, soft olive-lime grass that darkens
+      // toward the camera, blue aerial distance, and no ink on the world.
+      id: 'storybook-meadow',
+      name: 'Storybook Meadow',
+      note: 'Painterly vale: deep blue painted sky, big cumulus, olive-lime meadow, blue distance.',
+      ground: {
+        grass: 0x72ac4a,
+        grassDark: 0x4e8a3c,
+        grassYellow: 0x98bc56,
+        dirt: 0xa88c62,
+        sand: 0xddcca0,
+      },
+      fog: STORYBOOK_FOG,
+      light: {
+        hemiSky: 0xcfe2f6,
+        hemiGround: 0x6e8a50,
+        sun: 0xfff0d6,
+        sunScale: 1.0,
+        hemiScale: 3.85,
+        envScale: 1.5,
+      },
+      sky: STORYBOOK_SKY,
+      water: LAGOON,
+      grade: STORYBOOK_MEADOW_GRADE,
+      bloom: STORYBOOK_BLOOM,
+      render: STORYBOOK_MEADOW_RENDER,
     },
     {
       id: 'windrise-meadow',

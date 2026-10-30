@@ -13,7 +13,9 @@
 // feathered border whose line wanders. Nothing is laid on a grid or a straight
 // line: the field is three octaves of seeded value noise (a stretched drift, a
 // clump and a fraying tuft octave), each rotated off the world axes, the first
-// two domain-warped.
+// two domain-warped. That is the `clumps` layout; the shipped layout
+// (MEADOW_PATCH_LAYOUT) is the continuous `carpet`, which keeps only the bare
+// roads, town ground, cobbles and bases and leaves blade shape to the zone look.
 //
 // Outside the scope every sample is the stock carpet exactly (cover 1, unit
 // size and tint, the stock verge taper), so the other zones draw as shipped.
@@ -167,6 +169,18 @@ export const MEADOW_LITTER_SHORTEN = 0.3;
 export const MEADOW_COBBLE_START = 0.08;
 export const MEADOW_COBBLE_FULL = 0.3;
 
+/**
+ * How the open meadow inside the scope is laid out. `carpet` is one continuous
+ * combed meadow (the art bible's Storybook carpet): every open cell grows at
+ * stock size, lean and tint, so the zone look's blade arms shape and colour it,
+ * while roads, paths, town ground, cobbles, wall bases and the ground under
+ * rocks, trunks and bushes stay bare exactly as in `clumps`. `clumps` is the
+ * painted-ground layout: soft clumps and drifts over mostly bare ground, taller
+ * growth hugging edges, thinned on leaf litter and earth, tinted per clump.
+ */
+export type MeadowPatchLayout = 'carpet' | 'clumps';
+export const MEADOW_PATCH_LAYOUT: MeadowPatchLayout = 'carpet';
+
 /** The largest height or width multiplier a sample can return: a carpet widens
  *  its culling bound by this inside the scope so a tall clump never pops at a
  *  sector edge. */
@@ -303,6 +317,7 @@ interface TownLot {
 export interface MeadowPatchContext {
   readonly scope: MeadowScope | null;
   readonly seed: number;
+  readonly layout: MeadowPatchLayout;
   readonly structures: GrassClearanceIndex | null;
   readonly rings: ReadonlyMap<number, readonly RingBody[]>;
   readonly town: readonly TownLot[];
@@ -348,10 +363,14 @@ function indexRings(bodies: readonly RingBody[]): Map<number, RingBody[]> {
 }
 
 const EMPTY_RINGS: ReadonlyMap<number, readonly RingBody[]> = new Map();
-const contextCache = new WeakMap<MeadowScope, MeadowPatchContext>();
+const contextCache: Record<MeadowPatchLayout, WeakMap<MeadowScope, MeadowPatchContext>> = {
+  carpet: new WeakMap(),
+  clumps: new WeakMap(),
+};
 const STOCK_CONTEXT: MeadowPatchContext = {
   scope: null,
   seed: 0,
+  layout: MEADOW_PATCH_LAYOUT,
   structures: null,
   rings: EMPTY_RINGS,
   town: [],
@@ -365,15 +384,17 @@ const STOCK_CONTEXT: MeadowPatchContext = {
  * built-edge clearance index, the ring bodies and the town lots. Built once per
  * scope and shared, so the carpet, the band and the tuft ring pay it once (and a
  * graphics rebuild pays nothing). Outside the built-in world it is the stock
- * context, whose every sample is the shipped carpet.
+ * context, whose every sample is the shipped carpet. `layout` defaults to the
+ * shipped MEADOW_PATCH_LAYOUT; each layout keeps its own shared context.
  */
 export function meadowPatchContext(
   seed: number,
   content: WorldContent = getActiveWorldContent(),
+  layout: MeadowPatchLayout = MEADOW_PATCH_LAYOUT,
 ): MeadowPatchContext {
   const scope = meadowScopeFor(seed, content);
   if (!scope) return STOCK_CONTEXT;
-  const cached = contextCache.get(scope);
+  const cached = contextCache[layout].get(scope);
   if (cached) return cached;
   const townExclusions = eastbrookGrassExclusions(
     content.props.buildings,
@@ -422,6 +443,7 @@ export function meadowPatchContext(
   const ctx: MeadowPatchContext = {
     scope,
     seed,
+    layout,
     structures,
     rings: indexRings(bodies),
     town,
@@ -430,7 +452,7 @@ export function meadowPatchContext(
     groundVersion: -1,
   };
   syncPaintedGround(ctx);
-  contextCache.set(scope, ctx);
+  contextCache[layout].set(scope, ctx);
   return ctx;
 }
 
@@ -644,11 +666,14 @@ export function sampleMeadowPatch(
   if (w <= 0) return stockSample(out);
   const seed = ctx.seed;
   const town = meadowTownWeight(ctx, x, z);
+  const carpet = ctx.layout === 'carpet';
 
-  // open ground: soft clumps and drifts, all but gone on the town ground
-  const field = meadowPatchField(seed, x, z);
-  const openCover = meadowClumpCover(field) * (1 - MEADOW_TOWN_OPEN_CUT * town);
-  const openHeight = openCover > 0 ? meadowClumpHeight(field, meadowClumpPeak(seed, x, z)) : 1;
+  // open ground: soft clumps and drifts (or the whole carpet), all but gone on
+  // the town ground
+  const field = carpet ? 0 : meadowPatchField(seed, x, z);
+  const openCover = (carpet ? 1 : meadowClumpCover(field)) * (1 - MEADOW_TOWN_OPEN_CUT * town);
+  const openHeight =
+    !carpet && openCover > 0 ? meadowClumpHeight(field, meadowClumpPeak(seed, x, z)) : 1;
 
   // edges: the toe that keeps a feathered border bare, and the growth past it
   const state = edgeState;
@@ -662,15 +687,19 @@ export function sampleMeadowPatch(
   if (state.clear > 0) ringEdge(state, ctx, x, z, town);
 
   // the painted ground agrees: no blade on its cobbles, few on its leaf litter
-  // and bare earth (the terrain's own masks, read only where a blade could grow)
+  // and bare earth (the terrain's own masks, read only where a blade could grow;
+  // the carpet covers the litter instead of thinning on it)
   let litter = 0;
   syncPaintedGround(ctx);
   const ground = ctx.ground;
   if (ground && state.clear > 0 && (openCover > 0 || state.edge > 0)) {
     const masks = coverMasksAt(x, z, 1, ground.sampler, ground.stats);
-    litter = smoothstep01(
-      (masks.leaf + masks.earth - MEADOW_LITTER_START) / (MEADOW_LITTER_FULL - MEADOW_LITTER_START),
-    );
+    if (!carpet) {
+      litter = smoothstep01(
+        (masks.leaf + masks.earth - MEADOW_LITTER_START) /
+          (MEADOW_LITTER_FULL - MEADOW_LITTER_START),
+      );
+    }
     const cobble = townCobbleAt(x, z, ground.towns, masks.repeatZ, ground.lanes);
     if (cobble > 0) {
       const hub = ctx.scope?.hub;
@@ -681,6 +710,15 @@ export function sampleMeadowPatch(
     }
   }
   const cover = state.clear * Math.max(openCover, state.edge) * (1 - MEADOW_LITTER_THIN * litter);
+
+  // the carpet keeps only the bare ground: every blade it grows is the stock
+  // blade, so the zone look's blade arms alone decide its shape and colour
+  if (carpet) {
+    stockSample(out);
+    out.scope = w;
+    out.cover = 1 + (cover - 1) * w;
+    return out;
+  }
 
   // height: the cover-weighted blend of the clump and the edge profile (edge
   // growth starts short at its toe); taller clumps spread a touch wider

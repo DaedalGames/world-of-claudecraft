@@ -280,6 +280,39 @@ describe('curated look data', () => {
   });
 });
 
+/** The art bible's meadow arms Painted Vale wears from Storybook Meadow
+ *  (zone_looks.ts STORYBOOK_MEADOW_ARMS). */
+const STORYBOOK_MEADOW_ARM_KEYS = [
+  'meadowCoverage',
+  'meadowHeight',
+  'meadowWidth',
+  'ink',
+  'bladeWidth',
+  'rampSoft',
+  'bladeBase',
+  'bladeNear',
+  'combX',
+  'combZ',
+  'combLean',
+  'combDroop',
+  'paintPatch',
+  'paintTip',
+  'bladeHeight',
+  'bladeSpread',
+  'bladeExtra',
+  'flowerShare',
+  'bladeClump',
+  'bladeWiden',
+  'rampShadow',
+  'rampLight',
+  'rampStrength',
+  'bladeSide',
+  'cloudShadow',
+  'bladeFar',
+  'bladeRound',
+  'bandFade',
+] as const;
+
 describe('Eastbrook Vale painted look', () => {
   const stock = stockLookFor('vale', WATER, BLOOM);
   const eastbrook = (id: string): ZoneLook => {
@@ -290,6 +323,7 @@ describe('Eastbrook Vale painted look', () => {
   const day = eastbrook('painted-vale');
   const night = eastbrook('painted-vale-night');
   const highKey = eastbrook('skyward-isles');
+  const storybook = eastbrook('storybook-meadow');
   const luminance = (hex: number): number => {
     const [r, g, b] = hexToLinear(hex);
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -401,27 +435,43 @@ describe('Eastbrook Vale painted look', () => {
     expect(hue(day.ground.grassDark)).toBeLessThan(170);
     expect(hue(day.ground.dirt)).toBeGreaterThan(20);
     expect(hue(day.ground.dirt)).toBeLessThan(45);
-    // A soft blue-teal haze, a painted horizon's distance.
-    expect(hue(day.fog.color)).toBeGreaterThan(175);
-    expect(hue(day.fog.color)).toBeLessThan(215);
-    expect(day.fog.near).toBeGreaterThanOrEqual(90);
-    expect(day.fog.near).toBeLessThanOrEqual(120);
-    expect(day.fog.far).toBeGreaterThanOrEqual(600);
-    expect(day.fog.far).toBeLessThanOrEqual(700);
+    // Storybook Meadow's blue aerial distance: a sky-blue haze that starts close in.
+    expect(day.fog).toEqual(storybook.fog);
+    expect(hue(day.fog.color)).toBeGreaterThan(200);
+    expect(hue(day.fog.color)).toBeLessThan(225);
+    expect(day.fog.near).toBeLessThanOrEqual(30);
+    expect(day.fog.far).toBeLessThanOrEqual(250);
   });
 
-  it('leaves the painted sky and the meadow to their own work, with a small warm rim', () => {
+  it('keeps the painted sky and wears the Storybook meadow over the painted grass ground', () => {
     for (const look of [day, night]) {
-      // The gradient arm at zero: the dome's painted sky is never repainted.
+      // The gradient arm, its cumulus and its band all off: the dome's painted
+      // sky and its drifting cloud layer are the one sky, never painted over.
       expect(look.sky.amount, look.id).toBe(0);
-      expect(look.render.meadowCoverage, look.id).toBe(STOCK_RENDER.meadowCoverage);
-      expect(look.render.meadowHeight, look.id).toBe(STOCK_RENDER.meadowHeight);
-      expect(look.render.meadowWidth, look.id).toBe(STOCK_RENDER.meadowWidth);
+      expect(look.sky.clouds, look.id).toBe(0);
+      expect(look.sky.band, look.id).toBe(0);
+      // Every meadow arm is Storybook Meadow's, so day and night draw one meadow.
+      for (const key of STORYBOOK_MEADOW_ARM_KEYS) {
+        expect(look.render[key], `${look.id} ${key}`).toBe(storybook.render[key]);
+      }
+      // The painted grass texture shows between the blades, not the carpet floor.
+      expect(look.render.carpetGround, look.id).toBe(0);
+      expect(storybook.render.carpetGround).toBe(1);
+      expect(look.render.canopyLift, look.id).toBe(storybook.render.canopyLift);
+      expect(look.water, look.id).toEqual(storybook.water);
       expect(look.render.rim, look.id).toBeGreaterThan(0);
       expect(look.render.rim, look.id).toBeLessThanOrEqual(0.35);
     }
     expect(day.render.rimColor).not.toBeNull();
     expect(warmth(day.render.rimColor ?? 0)).toBeGreaterThan(1.5);
+    // The meadow is the art bible's, not the stock carpet.
+    expect(day.render.bladeExtra).toBeGreaterThan(STOCK_RENDER.bladeExtra);
+    expect(day.render.meadowCoverage).not.toBe(STOCK_RENDER.meadowCoverage);
+    // Bloom, god rays and the AO tint are the high-key look's, never retuned.
+    expect(day.bloom).toEqual(storybook.bloom);
+    expect(day.godRays).toBe(storybook.godRays);
+    expect(day.render.aoTint).toBe(storybook.render.aoTint);
+    expect(day.render.aoScale).toBe(storybook.render.aoScale);
   });
 
   it('switches to night without a re-bake, a water snap or a grass re-place', () => {
@@ -458,7 +508,7 @@ describe('lookToPatchSnippet (paste a tuned look back into zone_looks.ts)', () =
     new Function(`return ${snippet.trim().replace(/,$/, '')};`)() as LookPatch;
 
   it('round-trips a curated look exactly, every field resolved', () => {
-    for (const id of ['painted-vale', 'painted-vale-night']) {
+    for (const id of ['painted-vale', 'painted-vale-night', 'storybook-meadow']) {
       const patch = (ZONE_LOOKS.eastbrook_vale ?? []).find((l) => l.id === id);
       expect(patch, id).toBeDefined();
       const look = applyLookPatch(stock, patch as LookPatch);
@@ -482,5 +532,97 @@ describe('lookToPatchSnippet (paste a tuned look back into zone_looks.ts)', () =
     expect(back).toEqual(look);
     expect(back.fog.sceneColor).toBe(BIOME_FOG.vale.color);
     expect(back.name).toBe("Jo's Look");
+  });
+});
+
+describe('Storybook Meadow (Eastbrook, the art bible look)', () => {
+  const stock = stockLookFor('vale', WATER, BLOOM);
+
+  it('stays selectable in Eastbrook beside the shipped Painted Vale', () => {
+    const ids = (ZONE_LOOKS.eastbrook_vale ?? []).map((l) => l.id);
+    expect(ids).toContain('storybook-meadow');
+    expect(DEFAULT_ZONE_SELECTIONS.eastbrook_vale).toBe('painted-vale');
+    expect(
+      resolveZoneLookId(
+        'eastbrook_vale',
+        DEFAULT_ZONE_SELECTIONS,
+        DEFAULT_ZONE_NIGHT_SELECTIONS,
+        true,
+      ),
+    ).toBe('painted-vale-night');
+  });
+
+  it('draws no world ink, paints cumulus and lowers the dome horizon band', () => {
+    const patch = (ZONE_LOOKS.eastbrook_vale ?? []).find((l) => l.id === 'storybook-meadow');
+    expect(patch).toBeDefined();
+    const look = applyLookPatch(stock, patch!);
+    expect(look.render.ink).toBe(0);
+    expect(look.sky.clouds).toBeGreaterThan(0);
+    expect(look.sky.band).toBeGreaterThan(0);
+    expect(look.sky.band).toBeLessThan(0.36);
+    const sky = skyUniformValues(look.sky, lookDisplayModel(look, 1));
+    expect(sky.clouds).toBe(look.sky.clouds);
+    expect(sky.band).toBe(look.sky.band);
+  });
+
+  it('leaves the stock look and every other zone default on the shipped ink, clouds and band', () => {
+    expect(stock.render.ink).toBe(1);
+    expect(stock.sky.clouds).toBe(0);
+    expect(stock.sky.band).toBe(0);
+    for (const [zoneId, lookId] of Object.entries(DEFAULT_ZONE_SELECTIONS)) {
+      if (zoneId === 'eastbrook_vale') continue;
+      const patch = (ZONE_LOOKS[zoneId] ?? []).find((l) => l.id === lookId);
+      const look = applyLookPatch(stock, patch!);
+      expect(look.render.ink, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.sky.clouds, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.sky.band, `${zoneId}/${lookId}`).toBe(0);
+    }
+  });
+});
+
+describe('painterly render arms stay off outside Eastbrook', () => {
+  const stock = stockLookFor('vale', WATER, BLOOM);
+
+  it('stock is the shipped blade, ramp and ink', () => {
+    expect(stock.render.bladeWidth).toBe(1);
+    expect(stock.render.bladeBase).toBe(1);
+    expect(stock.render.rampSoft).toBe(0);
+    expect(stock.render.ink).toBe(1);
+  });
+
+  it('Storybook Meadow thins and deepens the blades and softens the ramp', () => {
+    const patch = (ZONE_LOOKS.eastbrook_vale ?? []).find((l) => l.id === 'storybook-meadow');
+    const look = applyLookPatch(stock, patch!);
+    expect(look.render.bladeWidth).toBeLessThan(1);
+    expect(look.render.bladeBase).toBeLessThan(1);
+    expect(look.render.rampSoft).toBeGreaterThan(0);
+  });
+
+  it('every other zone default keeps the shipped blade and ramp', () => {
+    for (const [zoneId, lookId] of Object.entries(DEFAULT_ZONE_SELECTIONS)) {
+      if (zoneId === 'eastbrook_vale') continue;
+      const patch = (ZONE_LOOKS[zoneId] ?? []).find((l) => l.id === lookId);
+      const look = applyLookPatch(stock, patch!);
+      expect(look.render.bladeWidth, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.bladeBase, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.rampSoft, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeNear, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.carpetGround, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.combLean, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.paintPatch, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.paintTip, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeHeight, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.bladeSpread, `${zoneId}/${lookId}`).toBe(1);
+      expect(look.render.bladeExtra, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.flowerShare, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeClump, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeWiden, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.rampStrength, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeSide, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.cloudShadow, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeFar, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bladeRound, `${zoneId}/${lookId}`).toBe(0);
+      expect(look.render.bandFade, `${zoneId}/${lookId}`).toBe(0);
+    }
   });
 });

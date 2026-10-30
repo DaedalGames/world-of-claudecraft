@@ -12,12 +12,14 @@ import {
   MEADOW_LITTER_SHORTEN,
   MEADOW_LITTER_START,
   MEADOW_LITTER_THIN,
+  MEADOW_PATCH_LAYOUT,
   MEADOW_PATCH_MAX_STRETCH,
   MEADOW_PATCH_SOFTNESS,
   MEADOW_PATCH_THRESHOLD,
   MEADOW_ROAD_CLEAR,
   MEADOW_ROAD_TOE,
   MEADOW_ROAD_WANDER,
+  MEADOW_TOWN_OPEN_CUT,
   type MeadowPatchContext,
   meadowClumpCover,
   meadowClumpHeight,
@@ -57,7 +59,9 @@ afterEach(() => {
   clearPaintedGroundMacro();
 });
 
-const ctx = (): MeadowPatchContext => meadowPatchContext(WORLD_SEED, BUILTIN_WORLD);
+// these suites pin the `clumps` layout (the painted-ground meadow); the shipped
+// `carpet` has its own suite at the end
+const ctx = (): MeadowPatchContext => meadowPatchContext(WORLD_SEED, BUILTIN_WORLD, 'clumps');
 
 /** Open vale ground: inside the scope, off every road, out of town and clear of
  *  every rock, trunk, bush and built edge, so only the clump field speaks. */
@@ -498,7 +502,11 @@ describe('meadow patch core: scope and fairness', () => {
 
   it('shares one context across the grass layers and gates with the shared sample', () => {
     const c = ctx();
-    expect(meadowPatchContext(WORLD_SEED, BUILTIN_WORLD)).toBe(c);
+    expect(meadowPatchContext(WORLD_SEED, BUILTIN_WORLD, 'clumps')).toBe(c);
+    // the shipped layout shares one context of its own
+    expect(meadowPatchContext(WORLD_SEED, BUILTIN_WORLD)).toBe(
+      meadowPatchContext(WORLD_SEED, BUILTIN_WORLD, MEADOW_PATCH_LAYOUT),
+    );
     let grew = 0;
     for (let x = -100; x < 100; x += 2.1) {
       const rd = roadDistance(x, 30);
@@ -710,5 +718,105 @@ describe('meadow patch core: the painted ground agrees', () => {
       }
     }
     expect(offTown).toBeGreaterThan(10);
+  });
+});
+
+describe('meadow patch core: the continuous carpet (the shipped layout)', () => {
+  const carpet = (): MeadowPatchContext => meadowPatchContext(WORLD_SEED, BUILTIN_WORLD, 'carpet');
+
+  it('ships the carpet', () => {
+    expect(MEADOW_PATCH_LAYOUT).toBe('carpet');
+    expect(meadowPatchContext(WORLD_SEED, BUILTIN_WORLD).layout).toBe('carpet');
+    expect(ctx().layout).toBe('clumps');
+  });
+
+  it('grows the whole open meadow at the stock blade, where the clumps leave most of it bare', () => {
+    const cells = openGroundCells(1.5);
+    expect(cells.length).toBeGreaterThan(5000);
+    const c = carpet();
+    const k = ctx();
+    const sample = createMeadowPatchSample();
+    let carpetCover = 0;
+    let clumpCover = 0;
+    for (const cell of cells) {
+      clumpCover += sampleMeadowPatch(k, cell.x, cell.z, cell.rd, sample).cover;
+      const s = sampleMeadowPatch(c, cell.x, cell.z, cell.rd, sample);
+      carpetCover += s.cover;
+      // every blade is the stock blade: the zone look's arms shape and colour it
+      expect(s.height).toBe(1);
+      expect(s.width).toBe(1);
+      expect(s.lean).toBe(1);
+      expect([s.tintR, s.tintG, s.tintB]).toEqual([1, 1, 1]);
+    }
+    expect(carpetCover / cells.length).toBeGreaterThan(0.97);
+    expect(clumpCover / cells.length).toBeLessThan(0.4);
+  });
+
+  it('keeps roads, paths and the town ground as bare as the clumps do', () => {
+    const c = carpet();
+    const k = ctx();
+    const sample = createMeadowPatchSample();
+    let inside = 0;
+    for (let x = -170; x < 170; x += 1.1) {
+      for (let z = -170; z < 170; z += 1.1) {
+        const rd = roadDistance(x, z);
+        if (rd >= MEADOW_ROAD_CLEAR - MEADOW_ROAD_WANDER) continue;
+        if (meadowScopeWeight(c.scope, x, z) < 1) continue;
+        expect(sampleMeadowPatch(c, x, z, rd, sample).cover).toBe(0);
+        inside++;
+      }
+    }
+    expect(inside).toBeGreaterThan(1000);
+    // on the town ground the carpet adds at most the town's own open trace
+    const hub = { x: -14, z: -100 };
+    let n = 0;
+    let cover = 0;
+    for (let x = hub.x - 60; x < hub.x + 60; x += 1.3) {
+      for (let z = hub.z - 45; z < hub.z + 55; z += 1.3) {
+        if (meadowTownWeight(c, x, z) < 1) continue;
+        const rd = roadDistance(x, z);
+        const ours = sampleMeadowPatch(c, x, z, rd, sample).cover;
+        const theirs = sampleMeadowPatch(k, x, z, rd, sample).cover;
+        expect(ours - theirs).toBeGreaterThanOrEqual(-1e-12);
+        expect(ours - theirs).toBeLessThanOrEqual(1 - MEADOW_TOWN_OPEN_CUT + 1e-12);
+        cover += ours;
+        n++;
+      }
+    }
+    expect(n).toBeGreaterThan(1500);
+    expect(cover / n).toBeLessThan(0.1);
+  });
+
+  it('covers leaf litter instead of thinning on it, and keeps every blade off the cobbles', () => {
+    const stats = macroStatsOf(syntheticMacroReadback(), 4);
+    const macro = paintedGroundMacro();
+    if (!macro) throw new Error('macro expected');
+    const sampler = (u: number, v: number) => samplePaintedGroundMacro(macro, u, v);
+    const c = carpet();
+    const scope = c.scope;
+    if (!scope) throw new Error('scope expected');
+    const sample = createMeadowPatchSample();
+    let litter = 0;
+    for (const cell of openGroundCells(1.7)) {
+      const m = coverMasksAt(cell.x, cell.z, 1, sampler, stats);
+      if (m.leaf + m.earth < MEADOW_LITTER_FULL) continue;
+      expect(sampleMeadowPatch(c, cell.x, cell.z, cell.rd, sample).cover).toBe(1);
+      litter++;
+    }
+    expect(litter).toBeGreaterThan(50);
+    const towns = resolveCobbleTowns(BUILTIN_WORLD.zones);
+    let onCobble = 0;
+    for (let x = scope.hub.x - 50; x < scope.hub.x + 50; x += 0.6) {
+      for (let z = scope.hub.z - 50; z < scope.hub.z + 50; z += 0.6) {
+        const rd = roadDistance(x, z);
+        const hubDist = Math.hypot(x - scope.hub.x, z - scope.hub.z);
+        const m = coverMasksAt(x, z, 1, sampler, stats);
+        const lane = townCobbleAt(x, z, towns, m.repeatZ) * paintedDirtWeight(rd, hubDist);
+        if (lane < MEADOW_COBBLE_FULL) continue;
+        expect(sampleMeadowPatch(c, x, z, rd, sample).cover).toBe(0);
+        onCobble++;
+      }
+    }
+    expect(onCobble).toBeGreaterThan(200);
   });
 });
