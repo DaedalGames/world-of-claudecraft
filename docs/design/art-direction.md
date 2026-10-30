@@ -23,17 +23,17 @@ real-time render, so match their rules, not their pixels.
 
 ## Where the game is today
 
-This doc describes the target. Two shipped systems already point in its direction and
-two parts of them change:
+This doc describes the target. The first slice toward it (Eastbrook Vale) has landed in
+these shipped systems:
 
-| Shipped today | Source | What this doc changes |
+| Shipped today | Source | Where it stands against this doc |
 |---|---|---|
-| A cel light ramp on the sun for every lit material, on by default in browsers (`?cel=off` disables it) | `src/render/cel_shading.ts`, `CEL_SHADING_DEFAULTS` in `src/render/cel_shading_core.ts` | The hard two-band cut becomes a soft ramp for the world and a crisper one for actors (sections 2 and 3) |
-| Depth-based ink outlines, drawn in the output grade pass on tiers with one and inside materials elsewhere | `src/render/post_cel_ink_glsl.ts`, `celNeedsGradePass` in `src/render/gfx.ts` | Retired: no ink on the world or on actors |
-| Per-zone curated looks (palette, fog, sky, water, grade), on by default (`?palette=off` disables them) | `DEFAULT_ZONE_SELECTIONS` and `DEFAULT_ZONE_NIGHT_SELECTIONS` in `src/render/palette_lab/zone_look_core.ts`, looks in `zone_looks.ts` | Kept as the zone palette system; each default is reviewed against section 5 |
-
-Note that some code comments (the headers of `cel_shading_core.ts` and the palette lab's
-`CLAUDE.md`) still describe both systems as opt-in; the defaults above are what ships.
+| A cel light ramp on the sun for every lit material, on by default in browsers (`?cel=off` disables it) | `src/render/cel_shading.ts`, `CEL_SHADING_DEFAULTS` in `src/render/cel_shading_core.ts` | Now a soft accent: 10 percent of the banded ramp over smooth lighting (`celmix`, `celsoft`). A crisper actor ramp (section 3) is still to come |
+| Depth-based ink outlines | `src/render/post_cel_ink_glsl.ts`, `celInkSettings` in `src/render/cel_shading.ts` | Retired by default (ink 0 builds no depth taps or material ink); `celink` stays as an A/B knob |
+| Per-zone curated looks (palette, fog, sky, water, grade), on by default (`?palette=off` disables them) | `DEFAULT_ZONE_SELECTIONS` and `DEFAULT_ZONE_NIGHT_SELECTIONS` in `src/render/palette_lab/zone_look_core.ts`, looks in `zone_looks.ts` | Kept as the zone palette system. Eastbrook Vale ships Painted Vale and Painted Vale Night; the other defaults are still to be reviewed against section 5 |
+| Painted terrain splat layers (grass, dirt, rock, town cobbles, leaf litter) with height-blended ragged edges | `src/render/terrain_painted_ground_core.ts`, sources and prompts in `scripts/assets/painted_ground/` | The section 2 and 6 terrain rule, on every splat tier; Low and iOS keep their procedural ground |
+| A painted day and night sky for the vale | `src/render/sky_painted_core.ts`, `skies_in/vale_painted_*.png` | Answers open question 2 for the vale: a painted LDR panorama, not a graded photo HDRI |
+| Painted WOC armour: every class set's colour atlas repainted with its light in it (painted key, cool shade, tinted crease occlusion, crisp edge highlights, painted steel, brushwork), under a light runtime layer (metal at 40 percent, a touch of key, shade, cavity and edge off the live pose) | `scripts/assets/painted_armor/paint_armor.mjs`, `src/render/characters/woc_armor_paint_core.ts` | The section 3 painted albedo, painted over the Tripo atlases; the normal and ORM maps still ship beside it (section 6 asks for the albedo alone) |
 
 ## 1. Pillars
 
@@ -125,7 +125,7 @@ shade, horizon-matched haze, and lifted rather than crushed blacks.
 | Zone | Ships today (day, night if different) | Signature hue to keep |
 |---|---|---|
 | The Proving Shore | Skyward Isles | Pale cyan air, white clouds, cobalt water |
-| Eastbrook Vale | Skyward Isles | Pale cyan air, fresh greens, gold canopies |
+| Eastbrook Vale | Painted Vale, night Painted Vale Night | Warm golden key, blue-teal shade, olive greens, gold canopies |
 | The Farshore | Tropic Lagoon | Jade grass, coral sand, glowing lagoon |
 | Mirefen Marsh | Jade Wetland | Sunlit meadow reeds, clear lagoon water |
 | Thornpeak Heights | Alpine Clear, night Sky Island Gold | Deep blue sky, cool stone |
