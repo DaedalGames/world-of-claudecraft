@@ -1214,7 +1214,8 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
     // on that rebuild only (replaceStoreBody, which elides whole on unchanged
     // markup), never on a frame and never on either interval below. The count is
     // what makes a THIRD read a conscious act.
-    reflowAllow: { '.scrollTop': 2 },
+    // Membership status changes preserve the same body scroll with one more pair.
+    reflowAllow: { '.scrollTop': 4 },
     driverAllow: { setInterval: 2 },
     drivers: [
       {

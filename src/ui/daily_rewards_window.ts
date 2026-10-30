@@ -30,7 +30,13 @@ import {
 import { dailyRewardsWalletCardHtml } from './daily_rewards_wallet_card_view';
 import { markDialogRoot } from './dialog_root';
 import { esc } from './esc';
-import { captureFocusKey, findFocusKey, focusedWithin, focusKeyAttr } from './focus_restore';
+import {
+  captureFocusKey,
+  findFocusKey,
+  focusedWithin,
+  focusKeyAttr,
+  restoreFirstEnabled,
+} from './focus_restore';
 import { formatNumber, t } from './i18n';
 import { MountInspect } from './mount_inspect_controller';
 import { hydratePortraits } from './portrait_chip';
@@ -156,6 +162,7 @@ export class DailyRewardsWindow {
   private storePriceChanged = false;
   private paintedStoreBody: HTMLElement | null = null;
   private paintedStoreMarkup: string | null = null;
+  private paintedMembershipMarkup: string | null = null;
   private charterSection = emptyCharterSection();
   private charterNotice: CharterNotice | null = null;
   private charterAnnounceSeq = 0;
@@ -505,38 +512,59 @@ export class DailyRewardsWindow {
     if (this.storeRequestIsCurrent(generation)) this.paintStore(body, opts);
   }
 
-  /** The Memberships tab: a cold section that refreshes on entry and after a checkout
-   *  completes, never on the store's background poll. */
+  /** Reuse the store's 15-second poll for status only. Reward claims stay on entry
+   *  and explicit actions; unchanged status preserves the existing DOM. */
   private async renderMemberships(
     focus: 'open' | null,
     opts: { background?: boolean } = {},
   ): Promise<void> {
+    if (!this.isOpen || this.tab !== 'memberships') return;
+    if (
+      opts.background &&
+      (document.visibilityState === 'hidden' || this.subscription.refreshBlocked)
+    )
+      return;
     const root = this.deps.root();
     const body = root.querySelector<HTMLElement>('.dr-body');
     if (!body) return;
     if (focus === 'open')
       root.querySelector<HTMLButtonElement>('[data-woc-store-tab="memberships"]')?.focus();
-    if (opts.background) return;
     const seq = ++this.renderSeq;
-    this.storeLoading = true;
-    this.storeRuntime.setLoading(this.storeLoading);
+    if (!opts.background) {
+      this.storeLoading = true;
+      this.storeRuntime.setLoading(this.storeLoading);
+    }
     try {
-      await this.subscription.refresh();
+      await this.subscription.refresh(opts.background === true);
     } finally {
-      if (seq === this.renderSeq) {
+      if (!opts.background && seq === this.renderSeq) {
         this.storeLoading = false;
         this.storeRuntime.setLoading(this.storeLoading);
       }
     }
     if (!this.isOpen || this.tab !== 'memberships' || seq !== this.renderSeq) return;
-    const focusKey = captureFocusKey(body);
-    // Not store markup: returning to the Cosmetic Store tab must repaint it.
-    this.paintedStoreBody = null;
-    body.innerHTML =
+    if (opts.background && this.subscription.refreshBlocked) return;
+    const markup =
       this.subscription.html() ||
       `<div class="dr-empty" role="status">${esc(t('hudChrome.wocStore.membershipsUnavailable'))}</div>`;
+    if (markup === this.paintedMembershipMarkup) return;
+    const focusKey = captureFocusKey(body);
+    const scrollTop = body.scrollTop;
+    // Not store markup: returning to the Cosmetic Store tab must repaint it.
+    this.paintedStoreBody = null;
+    body.innerHTML = markup;
+    this.paintedMembershipMarkup = markup;
     this.subscription.bind(body, () => void this.renderMemberships(null));
-    if (focusKey) findFocusKey(body, focusKey)?.focus();
+    const announcement = root.querySelector<HTMLElement>('[data-membership-announcement]');
+    const summary = body.querySelector('[data-membership-summary]')?.textContent ?? '';
+    if (announcement && announcement.textContent !== summary) announcement.textContent = summary;
+    if (focusKey)
+      restoreFirstEnabled([
+        findFocusKey(body, focusKey),
+        findFocusKey(body, 'subscription-manage'),
+        root.querySelector<HTMLButtonElement>('[data-woc-store-tab="memberships"]'),
+      ]);
+    body.scrollTop = scrollTop;
   }
 
   private storeRequestIsCurrent(generation: number): boolean {
@@ -550,6 +578,7 @@ export class DailyRewardsWindow {
   /** Invalidate Store snapshot/spend and Rewards body writes together; prompt
    *  teardown also clears inert and runs the decision's cancel policy. */
   private invalidateStoreSurface(): void {
+    this.paintedMembershipMarkup = null;
     this.renderSeq += 1;
     this.storeRuntime.invalidateSurface();
     this.storeLoading = false;
