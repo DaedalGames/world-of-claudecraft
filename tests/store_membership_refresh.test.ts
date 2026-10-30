@@ -103,6 +103,32 @@ describe('Memberships status refresh', () => {
     expect(h.link).not.toHaveBeenCalled();
   });
 
+  it('performs a full entry refresh after reopening during an outstanding status poll', async () => {
+    localStorage.setItem('woc.subscription.41.game_annual.pending', 'pending-annual-intent');
+    const h = harness();
+    h.annualMountClaim.mockResolvedValue({ delivered: false });
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    let resolve!: (state: SubscriptionSnapshot) => void;
+    h.snapshot.mockImplementationOnce(
+      () =>
+        new Promise((done) => {
+          resolve = done;
+        }),
+    );
+    await vi.advanceTimersByTimeAsync(15_000);
+    h.store.close();
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    h.store.openStore('memberships');
+    await vi.advanceTimersByTimeAsync(0);
+    resolve({ ...SUBSCRIPTION_OFF, available: true, accountId: 41 });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(h.snapshot).toHaveBeenCalledTimes(3);
+    expect(h.tokenOffer).toHaveBeenCalledTimes(2);
+    expect(h.annualMountClaim).toHaveBeenCalledTimes(2);
+  });
+
   it('keeps identical DOM, keyboard focus and scroll across unchanged polls and failed reads', async () => {
     const h = harness();
     h.store.openStore('memberships');
