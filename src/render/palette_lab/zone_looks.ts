@@ -177,8 +177,9 @@ const STORYBOOK_MEADOW_RENDER = {
   rampStrength: 0.75,
   bladeSide: 0.7,
   cloudShadow: 0.24,
-  bladeFar: 1.6,
+  bladeFar: 3,
   bladeRound: 0.8,
+  bandFade: 0.85,
 };
 const PLAINS_DUSK_SKY = {
   zenith: 0x5aa2dc,

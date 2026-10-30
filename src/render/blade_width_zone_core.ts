@@ -84,7 +84,7 @@ export const CARPET_GROUND_DARK: readonly [number, number, number] = [0.36, 0.52
 /** The painted ground PAST the carpet ring at full strength, as an RGB
  *  multiplier on the grass paint: pulled down to the blade field's own average
  *  so a gap between distant tufts reads as more meadow, not pale flat ground. */
-export const CARPET_GROUND_FAR: readonly [number, number, number] = [0.74, 0.82, 0.68];
+export const CARPET_GROUND_FAR: readonly [number, number, number] = [0.66, 0.76, 0.6];
 
 /** The shared uniform the terrain binds (`uCarpetGround`). */
 export const CARPET_GROUND_UNIFORM: { value: number } = { value: 0 };
@@ -160,7 +160,7 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
         {
           vec2 wocCombXZ = instanceMatrix[3].xz;
           // distance thickening: 0 near, 1 by mid-field
-          float wocFarT = smoothstep(18.0, 90.0, distance(instanceMatrix[3].xyz, cameraPosition));
+          float wocFarT = smoothstep(14.0, 70.0, distance(instanceMatrix[3].xyz, cameraPosition));
           if (uBladeSize.w > 0.0) transformed.xz *= 1.0 + uBladeSize.w * wocFarT;
           float wocCombJit = fract(sin(dot(wocCombXZ, vec2(12.9898, 78.233))) * 43758.5453);
           float wocCombH = max(position.y, 0.0) * uBladeSize.x;
@@ -214,13 +214,17 @@ export const BLADE_COMB_GLSL = `transformed.y *= uBladeSize.x;
 // zone look turns them on, so stock tufts render the shipped nine blades.
 
 /** x: extra blades on (> 0.5); y: share of tufts that show their flower (0..1);
- *  z: rounded-blade lighting 0..1 (lit spine, shaded edges); w reserved. */
+ *  z: rounded-blade lighting 0..1 (lit spine, shaded edges); w: the mid band's
+ *  fade start as a fraction of its radius (0 keeps the shipped 0.5; higher keeps
+ *  distant tufts at full size longer, at the same instance count). */
 export const BLADE_EXTRA_VALUES = new Float32Array([0, 0, 0, 0]);
 export const BLADE_EXTRA_UNIFORM: { value: Float32Array } = { value: BLADE_EXTRA_VALUES };
 
 /** Set the extras: blades 0..1 (on above 0.5), the flower share 0..1 and the
  *  rounded-blade lighting 0..1. */
-export function setBladeExtraZone(blades: number, flowers: number, round = 0): void {
+export function setBladeExtraZone(blades: number, flowers: number, round = 0, bandFade = 0): void {
+  BLADE_EXTRA_VALUES[3] =
+    Number.isFinite(bandFade) && bandFade > 0 ? Math.min(0.95, Math.max(0.3, bandFade)) : 0;
   BLADE_EXTRA_VALUES[2] = Number.isFinite(round) ? Math.min(1, Math.max(0, round)) : 0;
   BLADE_EXTRA_VALUES[0] = Number.isFinite(blades) ? Math.min(1, Math.max(0, blades)) : 0;
   BLADE_EXTRA_VALUES[1] = Number.isFinite(flowers) ? Math.min(1, Math.max(0, flowers)) : 0;
@@ -319,3 +323,42 @@ export const BLADE_ROUND_FRAGMENT_GLSL = `if (uBladeExtra.z > 0.0) {
           float wocEdge = abs(vBladeAcross);
           diffuseColor.rgb *= mix(1.0, mix(1.12, 0.78, wocEdge * wocEdge), uBladeExtra.z);
         }`;
+
+/**
+ * Painted grass strokes for the ground past the blades (the art bible's
+ * distant meadow reads as fine combed brush strokes, not flat colour). GLSL
+ * statements declaring `float <out>`: a brightness multiplier around 1 over
+ * world `xz`, streaked along the zone comb direction (uBladeComb), strongest
+ * where uCarpetGround is on, and faded out wherever the strokes would shimmer
+ * below a pixel (fwidth). 1.0 exactly when uCarpetGround is 0.
+ */
+export function meadowStrokeGlsl(xz: string, out: string): string {
+  return `float ${out} = 1.0;
+          if (uCarpetGround > 0.0) {
+            vec2 wocStD = normalize(vec2(uBladeComb.x, uBladeComb.z) + vec2(1e-4, 0.0));
+            vec2 wocStN = vec2(-wocStD.y, wocStD.x);
+            float wocStA = dot(${xz}, wocStD) * 0.55;
+            float wocStB = dot(${xz}, wocStN) * 4.2 + sin(wocStA * 1.7) * 1.3;
+            float wocStroke = sin(wocStB + sin(wocStA * 0.9 + wocStB * 0.31) * 2.2)
+              * (0.6 + 0.4 * sin(wocStA * 2.3 + wocStB * 0.17));
+            float wocStFade = 1.0 - smoothstep(0.35, 1.1, fwidth(wocStB));
+            // a coarser stroke octave that survives into the distance
+            float wocStB2 = wocStB * 0.28 + sin(wocStA * 0.6) * 0.8;
+            float wocStroke2 = sin(wocStB2 + sin(wocStA * 0.35 + wocStB2 * 0.5) * 1.8);
+            float wocStFade2 = 1.0 - smoothstep(0.35, 1.1, fwidth(wocStB2));
+            float wocStBroad = sin(dot(${xz}, vec2(0.11, 0.07)) + sin(${xz}.y * 0.05) * 2.0);
+            ${out} = 1.0 + uCarpetGround * (0.22 * wocStroke * wocStFade
+              + 0.2 * wocStroke2 * wocStFade2 + 0.07 * wocStBroad);
+          }`;
+}
+
+/** Distant blades blend into the painted field: past mid-field a tuft's
+ *  colour eases toward the ramp's mid tone, so lone tufts stop popping out of
+ *  the ground. Rides the ramp strength (0 at stock). */
+export const BLADE_FAR_BLEND_GLSL = `#if defined( USE_INSTANCING ) && defined( USE_COLOR )
+          if (uBladeRampLo.w > 0.0) {
+            float wocBlendT = smoothstep(14.0, 48.0, distance(instanceMatrix[3].xyz, cameraPosition));
+            vec3 wocMid = mix(uBladeRampLo.rgb, uBladeRampHi.rgb, 0.6);
+            vColor.rgb = mix(vColor.rgb, wocMid, 0.85 * wocBlendT * uBladeRampLo.w);
+          }
+        #endif`;

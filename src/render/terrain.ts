@@ -26,9 +26,11 @@ import {
   hasBiomeHazeField,
 } from './biome_haze_field';
 import {
+  BLADE_COMB_UNIFORM,
   CARPET_GROUND_DARK,
   CARPET_GROUND_FAR,
   CARPET_GROUND_UNIFORM,
+  meadowStrokeGlsl,
 } from './blade_width_zone_core';
 import { runBoundedLane } from './build_lane_core';
 import { isCanvasDrawableImage } from './canvas_drawable';
@@ -963,7 +965,8 @@ const GRASS_PAINT_RING_GLSL = `
             // pale floor for a darker meadow tone; 0 is the shipped floor exactly
             vec3 wocCarpetFloor = mix(mix(vec3(0.92), grassAlb, 0.35) * wocPlainGrain,
               grassAlb * vec3(${CARPET_GROUND_DARK.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround);
-            vec3 wocFarPaint = grassAlb * mix(vec3(1.0),
+            ${meadowStrokeGlsl('vWPos.xz', 'wocNearStroke')}
+            vec3 wocFarPaint = grassAlb * wocNearStroke * mix(vec3(1.0),
               vec3(${CARPET_GROUND_FAR.map((c) => c.toFixed(2)).join(', ')}), uCarpetGround);
             grassAlb = mix(wocCarpetFloor, wocFarPaint, wocPaintT);
           }`;
@@ -1463,6 +1466,7 @@ function buildSplatMaterial(
       // blown-out ground.
       sh.uniforms.uCarpetRing = sharedUniforms.uCarpetRing;
       sh.uniforms.uCarpetGround = CARPET_GROUND_UNIFORM;
+      sh.uniforms.uBladeComb = BLADE_COMB_UNIFORM;
       sh.uniforms.uPlainLift = { value: plainGrassLift(albedo.grassMean, grassBake.mean) };
     }
     // The live terrain-detail shed level (terrain_detail_shed_core.ts), by shared reference.
@@ -1524,7 +1528,7 @@ function buildSplatMaterial(
         uniform sampler2DArray uAlb;
         uniform sampler2DArray uNrm;
         uniform sampler2D uMacro, uGroundAO;
-        ${grassBake ? 'uniform sampler2D uGrassBake;\n        uniform vec3 uCarpetRing;\n        uniform vec3 uPlainLift;\n        uniform float uCarpetGround;' : ''}
+        ${grassBake ? 'uniform sampler2D uGrassBake;\n        uniform vec3 uCarpetRing;\n        uniform vec3 uPlainLift;\n        uniform float uCarpetGround;\n        uniform vec4 uBladeComb;' : ''}
         ${hasPaint ? PAINT_LAYER_UNIFORMS_GLSL : ''}
         ${terrainReliefLevel() >= 2 ? 'uniform float uReliefSteps;' : ''}
         ${SPLAT_ALBEDO_GLSL}

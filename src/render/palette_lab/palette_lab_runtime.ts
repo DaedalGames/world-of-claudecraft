@@ -147,6 +147,7 @@ const LIVE = {
   ramp: 62,
   bladeFar: 71,
   bladeRound: 72,
+  bandFade: 73,
 } as const;
 // Leaf and bush materials the canopy lift brightens (GLB material names), and
 // the far sprites that stand in for them, which must move together or the
@@ -616,7 +617,12 @@ class PaletteLabRuntime implements PaletteLabApi {
       v[LIVE.ramp + 7],
     );
     setBladeCloudZone(v[LIVE.ramp + 8]);
-    setBladeExtraZone(v[LIVE.bladeExtra], v[LIVE.bladeExtra + 1], v[LIVE.bladeRound]);
+    setBladeExtraZone(
+      v[LIVE.bladeExtra],
+      v[LIVE.bladeExtra + 1],
+      v[LIVE.bladeRound],
+      v[LIVE.bandFade],
+    );
 
     // Water is one shared material for every sheet, so it wears the look of
     // the zone the player is in (the water in view is almost always local).
@@ -773,6 +779,7 @@ class PaletteLabRuntime implements PaletteLabApi {
       look.render.cloudShadow,
       look.render.bladeFar,
       look.render.bladeRound,
+      look.render.bandFade,
     ];
     this.targetCache.set(look, flat);
     return flat;

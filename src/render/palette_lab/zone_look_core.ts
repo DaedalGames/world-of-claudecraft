@@ -165,6 +165,8 @@ export interface LookRender {
   bladeFar: number;
   /** Rounded-blade lighting 0..1 (lit spine, shaded edges; 0 is stock). */
   bladeRound: number;
+  /** Mid band fade start as a fraction of its radius (0 keeps the shipped 0.5). */
+  bandFade: number;
 }
 
 export const STOCK_RENDER: LookRender = {
@@ -203,6 +205,7 @@ export const STOCK_RENDER: LookRender = {
   cloudShadow: 0,
   bladeFar: 0,
   bladeRound: 0,
+  bandFade: 0,
 };
 
 export interface ZoneLook {

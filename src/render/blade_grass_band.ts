@@ -47,6 +47,7 @@ import {
   BLADE_COMB_UNIFORM,
   BLADE_EXTRA_GLSL,
   BLADE_EXTRA_UNIFORM,
+  BLADE_FAR_BLEND_GLSL,
   BLADE_LIGHT_GLSL,
   BLADE_PAINT_UNIFORM,
   BLADE_RAMP_HI_UNIFORM,
@@ -230,6 +231,7 @@ export function buildBladeGrassBand(
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
         ${BLADE_LIGHT_GLSL}
+        ${BLADE_FAR_BLEND_GLSL}
         ${BLADE_ROUND_VERTEX_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
@@ -237,7 +239,8 @@ export function buildBladeGrassBand(
           // the same collapse against the residency-clamped horizon: alpha
           // would need transparency and a sort; shrinking toward the root
           // is invisible in motion
-          float bgFade = 1.0 - smoothstep(uBandFar * ${MEADOW_BAND_FADE_START.toFixed(2)},
+          // a zone look may hold the band at full size further out (uBladeExtra.w)
+          float bgFade = 1.0 - smoothstep(uBandFar * (uBladeExtra.w > 0.0 ? uBladeExtra.w : ${MEADOW_BAND_FADE_START.toFixed(2)}),
             uBandFar, distance(bgOrigin.xz, uPlayerPos));
           transformed *= bgFade;
           // camera-near collapse: blades within a few yards of the eye shrink

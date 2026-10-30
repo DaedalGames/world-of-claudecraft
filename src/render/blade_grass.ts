@@ -23,6 +23,7 @@ import {
   BLADE_COMB_UNIFORM,
   BLADE_EXTRA_GLSL,
   BLADE_EXTRA_UNIFORM,
+  BLADE_FAR_BLEND_GLSL,
   BLADE_LIGHT_GLSL,
   BLADE_NEAR_GLSL,
   BLADE_NEAR_UNIFORM,
@@ -462,6 +463,7 @@ export function buildBladeGrass(
         ${BLADE_WIDTH_GLSL}
         ${BLADE_COMB_GLSL}
         ${BLADE_LIGHT_GLSL}
+        ${BLADE_FAR_BLEND_GLSL}
         ${BLADE_ROUND_VERTEX_GLSL}
         #ifdef USE_INSTANCING
           vec3 bgOrigin = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);

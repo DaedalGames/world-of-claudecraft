@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   BLADE_COMB_GLSL,
   BLADE_EXTRA_VALUES,
+  BLADE_FAR_BLEND_GLSL,
   BLADE_LIGHT_GLSL,
   BLADE_PAINT_VALUES,
   BLADE_RAMP_HI_VALUES,
@@ -11,6 +12,7 @@ import {
   BLADE_SIZE_VALUES,
   CARPET_GROUND_FAR,
   hexToLinear,
+  meadowStrokeGlsl,
   setBladeCloudZone,
   setBladeExtraZone,
   setBladeRampZone,
@@ -99,5 +101,32 @@ describe('distance thickening, rounded blades and the far ground tint', () => {
       expect(c).toBeGreaterThan(0);
       expect(c).toBeLessThan(1);
     }
+  });
+});
+
+describe('distant meadow: band reach, painted strokes, far blend', () => {
+  afterEach(() => setBladeExtraZone(0, 0, 0, 0));
+
+  it('keeps the shipped band fade unless a look asks, and clamps the ask', () => {
+    setBladeExtraZone(1, 0.2, 0.5);
+    expect(BLADE_EXTRA_VALUES[3]).toBe(0);
+    setBladeExtraZone(1, 0.2, 0.5, 0.85);
+    expect(BLADE_EXTRA_VALUES[3]).toBeCloseTo(0.85, 6);
+    setBladeExtraZone(1, 0.2, 0.5, 5);
+    expect(BLADE_EXTRA_VALUES[3]).toBeCloseTo(0.95, 6);
+    setBladeExtraZone(1, 0.2, 0.5, Number.NaN);
+    expect(BLADE_EXTRA_VALUES[3]).toBe(0);
+  });
+
+  it('paints strokes only where the ground tint is on, fading them before they shimmer', () => {
+    const glsl = meadowStrokeGlsl('vWPos.xz', 'wocTest');
+    expect(glsl.startsWith('float wocTest = 1.0;')).toBe(true);
+    expect(glsl).toContain('if (uCarpetGround > 0.0)');
+    expect(glsl).toContain('fwidth(wocStB)');
+    expect(glsl).toContain('fwidth(wocStB2)');
+  });
+
+  it('blends distant tufts toward the ramp mid tone only with the ramp on', () => {
+    expect(BLADE_FAR_BLEND_GLSL).toContain('if (uBladeRampLo.w > 0.0)');
   });
 });
