@@ -878,8 +878,9 @@ export const hudChromeStrings = {
       annualDelivered: 'Your bundle mount key has been delivered by mail.',
       // Memberships tab columns (src/ui/store_subscription_offers.ts): art, purchase,
       // then the description.
-      monthlyArtAlt: 'A knight in membership armour',
-      annualArtAlt: 'A knight in membership armour beside the Nightwing Chimaera mount',
+      monthlyArtAlt: 'A knight in membership armour beside the winged courier donkey',
+      annualArtAlt:
+        'A knight in membership armour with the courier donkey and the Nightwing Chimaera mount',
       tokenArtAlt: 'A golden membership token',
       annualAllBenefits: 'All the benefits of a monthly membership.',
       annualPerMonth: 'Just {price} per month, saving {percent} compared with paying monthly.',

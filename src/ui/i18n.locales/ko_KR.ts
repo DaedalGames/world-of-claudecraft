@@ -444,9 +444,10 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountDepositLead': '아이템을 클릭하면 {name}의 은행으로 보냅니다.',
   'hudChrome.bank.accountBankEmpty': '이 은행은 비어 있습니다.',
   'hudChrome.bank.accountBagsEmpty': '가방이 비어 있습니다.',
-  'hudChrome.wocStore.subscription.monthlyArtAlt': '멤버십 방어구를 입은 기사',
+  'hudChrome.wocStore.subscription.monthlyArtAlt':
+    '멤버십 방어구를 입은 기사와 날개 달린 배달 당나귀',
   'hudChrome.wocStore.subscription.annualArtAlt':
-    '멤버십 방어구를 입은 기사와 나이트윙 키메라 탈것',
+    '멤버십 방어구를 입은 기사, 배달 당나귀, 나이트윙 키메라 탈것',
   'hudChrome.wocStore.subscription.tokenArtAlt': '황금 멤버십 토큰',
   'hudChrome.wocStore.subscription.annualAllBenefits': '월간 멤버십의 모든 혜택.',
   'hudChrome.wocStore.subscription.annualPerMonth':

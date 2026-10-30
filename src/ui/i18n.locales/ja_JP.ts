@@ -456,9 +456,10 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.accountDepositLead': 'アイテムをクリックすると{name}の銀行に送ります。',
   'hudChrome.bank.accountBankEmpty': 'この銀行は空です。',
   'hudChrome.bank.accountBagsEmpty': 'バッグは空です。',
-  'hudChrome.wocStore.subscription.monthlyArtAlt': 'メンバーシップ防具をまとった騎士',
+  'hudChrome.wocStore.subscription.monthlyArtAlt':
+    'メンバーシップ防具をまとった騎士と翼のある配達ロバ',
   'hudChrome.wocStore.subscription.annualArtAlt':
-    'メンバーシップ防具をまとった騎士とナイトウィング・キメラのマウント',
+    'メンバーシップ防具をまとった騎士、配達ロバ、ナイトウィング・キメラのマウント',
   'hudChrome.wocStore.subscription.tokenArtAlt': '金色のメンバーシップトークン',
   'hudChrome.wocStore.subscription.annualAllBenefits': '月額メンバーシップのすべての特典。',
   'hudChrome.wocStore.subscription.annualPerMonth':

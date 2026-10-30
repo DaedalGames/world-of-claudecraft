@@ -158,8 +158,8 @@ describe('membership plan badges', () => {
       NOW,
     );
     const columns: [string, string, string][] = [
-      ['game_monthly', 'monthly.webp', 'A knight in membership armour"'],
-      ['game_annual', 'annual.webp', 'beside the Nightwing Chimaera mount'],
+      ['game_monthly', 'monthly.webp', 'beside the winged courier donkey'],
+      ['game_annual', 'annual.webp', 'with the courier donkey and the Nightwing Chimaera mount'],
     ];
     for (const [id, art, alt] of columns) {
       const column = badge(html, id);
